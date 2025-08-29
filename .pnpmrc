@@ -1,0 +1,6 @@
+# Configuration pnpm spécifique
+auto-install-peers=true
+strict-peer-dependencies=false
+shamefully-hoist=true
+prefer-frozen-lockfile=true
+node-linker=hoisted

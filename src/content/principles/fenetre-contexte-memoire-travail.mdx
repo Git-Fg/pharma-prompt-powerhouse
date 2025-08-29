@@ -1,0 +1,37 @@
+---
+title: "Fenêtre de Contexte = Mémoire de Travail"
+description: "Comprendre les limitations de mémoire des modèles d'IA et comment optimiser l'utilisation de la fenêtre de contexte."
+---
+
+Un modèle d'IA a une mémoire limitée (la "fenêtre de contexte"). Comme un clinicien qui ne peut retenir qu'une quantité limitée d'informations sur un patient à un instant T, l'IA oubliera les informations les plus anciennes si le dialogue devient trop long.
+
+## Le Phénomène "Lost-in-the-Middle"
+
+Les modèles d'IA accordent plus d'importance aux informations situées au début et à la fin d'un long texte. Les détails cruciaux perdus au milieu d'un long prompt risquent d'être ignorés.
+
+## Stratégie d'Optimisation
+
+Structurez vos prompts longs de cette manière :
+1. **(Début) Instructions générales et rôle :** 
+   `Tu es un expert en... Ta mission est de...`
+2. **(Milieu) Contexte et données :** 
+   `Voici les notes de cours... Voici les articles...`
+3. **(Fin) Tâche précise :** 
+   `Maintenant, en te basant sur tout ce qui précède, crée une fiche de révision sur [sujet précis].`
+
+## Techniques pour Étendre la Mémoire Effective
+
+- **Résumer les informations précédentes** dans les nouveaux prompts
+- **Utiliser des références externes** ("Comme indiqué précédemment...")
+- **Segmenter les tâches complexes** en plusieurs prompts plus courts
+- **Répéter les informations cruciales** à intervalles réguliers
+
+## Limites Pratiques
+
+La taille de la fenêtre de contexte varie selon les modèles :
+- GPT-3.5 : environ 4,000 tokens
+- GPT-4 : jusqu'à 32,000 tokens (version étendue)
+- Claude 2 : jusqu'à 100,000 tokens
+- Gemini : jusqu'à 1,000,000 tokens
+
+Adaptez vos stratégies en fonction du modèle utilisé.

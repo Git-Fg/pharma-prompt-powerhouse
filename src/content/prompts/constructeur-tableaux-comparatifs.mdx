@@ -1,0 +1,47 @@
+---
+title: "Constructeur de Tableaux Comparatifs"
+description: "Créez des prompts pour générer des tableaux comparatifs clairs et efficaces, essentiels pour l'étude en pharmacie."
+promptDescription: "La comparaison est au cœur de l'apprentissage en pharmacie (comparer des médicaments d'une même classe, des pathologies, etc.). Cet outil guide l'utilisateur pour créer des prompts qui génèrent des tableaux comparatifs clairs et efficaces. L'utilisateur entre le sujet principal de la comparaison (ex: Les différentes classes d'antihypertenseurs). Il liste les éléments à comparer (ex: IEC, ARA II, Bêta-bloquants, Inhibiteurs calciques). Il liste les critères de comparaison, qui deviendront les lignes ou colonnes du tableau (ex: Mécanisme d'action, Chef de file, Effets indésirables typiques, Contre-indications majeures). L'outil assemble ces informations en un prompt structuré. Cet outil enseigne comment demander des informations structurées pour une analyse comparative, est idéal pour créer des fiches de synthèse visuelles et denses en information, et facilite la mémorisation par la comparaison systématique."
+category: analysis
+difficulty: beginner
+targetTool: chatgpt
+estimatedTime: "2-3 minutes"
+tags: ["tableaux", "comparaison", "structuration", "analyse"]
+variables: ["comparison_subject", "elements_to_compare", "comparison_criteria"]
+---
+
+# Constructeur de Tableaux Comparatifs
+
+## Prompt
+
+Tu es un expert en pharmacologie.
+
+Crée un tableau comparatif détaillé au format Markdown sur le sujet spécifié.
+
+Le tableau doit être clair, complet et facile à lire.
+
+Utilise des informations précises et à jour.
+
+## Sujet de Comparaison
+
+{comparison_subject}
+
+## Éléments à Comparer
+
+{elements_to_compare}
+
+## Critères de Comparaison
+
+{comparison_criteria}
+
+## Instructions
+
+- Assure-toi que chaque cellule du tableau contient des informations pertinentes et comparables
+- Utilise des symboles ou abréviations standard quand c'est approprié
+- Rends le tableau facile à suivre et à mémoriser
+
+## Format de Sortie
+
+- Tableau au format Markdown avec des en-têtes de colonnes clairs
+- Lignes bien organisées et faciles à suivre
+- Informations concises mais complètes

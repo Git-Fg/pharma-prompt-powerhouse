@@ -1,0 +1,40 @@
+---
+title: "Hallucination = Effet Indésirable"
+description: "Comprendre et gérer les hallucinations, ces erreurs factuelles générées par l'IA."
+---
+
+Une hallucination est une erreur factuelle générée par l'IA, qui semble plausible mais est incorrecte. C'est un effet indésirable prévisible lorsque la créativité (température) est élevée.
+
+## Causes des Hallucinations
+
+- Température trop élevée
+- Contexte insuffisant ou ambigu
+- Conflit dans les instructions
+- Manque de connaissances sur le sujet
+- Tentative de "combler les trous" avec des informations plausibles mais incorrectes
+
+## Réduction des Hallucinations
+
+### 1. Ajuster la Température
+Baissez la température pour augmenter la précision, surtout pour les informations critiques.
+
+### 2. Fournir un Contexte Clair et Délimité
+Utilisez des délimiteurs clairs pour séparer vos instructions du contexte :
+```
+Analyse le texte suivant :
+"""
+[contexte]
+"""
+```
+
+### 3. Demander un Raisonnement Étape par Étape
+Ajoutez "Réfléchis étape par étape" pour forcer l'IA à exposer son raisonnement.
+
+### 4. Vérification Systématique
+Toujours vérifier les informations critiques (posologies, interactions) avec des sources officielles.
+
+## Détection des Hallucinations
+
+- Demander à l'IA de citer ses sources
+- Utiliser la technique du consensus (plusieurs réponses)
+- Vérifier les faits qui semblent "trop parfaits" ou inattendus

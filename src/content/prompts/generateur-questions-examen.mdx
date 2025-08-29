@@ -1,0 +1,69 @@
+---
+title: "Générateur de Questions d'Examen"
+description: "Transformez la révision passive en révision active en générant des questions de type examen à partir de vos supports de cours."
+promptDescription: "Transformer la révision passive (lecture de cours) en révision active (se tester). Cet outil permet de générer des questions de type examen (QCM, questions ouvertes, etc.) à partir d'un support de cours, pour s'auto-évaluer. L'utilisateur colle un extrait de son cours. Il choisit les types de questions à générer via des cases à cocher (ex: 5 QCM, 2 questions ouvertes, 3 Vrai/Faux). Cet outil encourage l'apprentissage actif (active recall), permet de créer des supports d'entraînement illimités et personnalisés, et aide à identifier les points de cours qui nécessitent une révision approfondie."
+category: analysis
+difficulty: intermediate
+targetTool: chatgpt
+estimatedTime: "3-5 minutes"
+tags: ["examen", "questions", "évaluation", "révision"]
+variables:
+  ["course_content", "question_types", "difficulty_level", "question_count"]
+---
+
+# Générateur de Questions d'Examen
+
+## Prompt
+
+Agis en tant que concepteur de sujets d'examen pour le concours de l'internat en pharmacie.
+
+Ton expertise réside dans la création de questions pertinentes et non ambiguës qui testent la compréhension profonde d'un sujet.
+
+En te basant exclusivement sur le texte de cours fourni ci-dessous, génère le matériel d'évaluation demandé.
+
+Les questions doivent être progressives en difficulté et couvrir les aspects essentiels du cours.
+
+## Texte de Cours
+
+```
+{course_content}
+```
+
+## Tâche
+
+Crée {question_count} questions d'évaluation selon les spécifications suivantes :
+
+{question_types}
+
+Niveau de difficulté : {difficulty_level}
+
+## Types de Questions
+
+### QCM
+
+- Questions à Choix Multiples (QCM) avec 4 propositions de réponse (A, B, C, D)
+- Une seule réponse correcte par question
+- Indique clairement la bonne réponse après chaque question
+
+### Questions Ouvertes
+
+- Questions ouvertes nécessitant une réponse développée
+- Chaque question doit tester un concept différent
+- Fournis des éléments de réponse attendus
+
+### Vrai/Faux
+
+- Questions Vrai/Faux avec justification
+- Chaque question doit avoir une justification claire
+- Indique la réponse correcte et explique pourquoi
+
+### Mixte
+
+- Mélange équilibré de QCM, questions ouvertes et Vrai/Faux
+- Répartis équitablement les différents types
+- Adapte la difficulté selon le type de question
+
+## Format de Sortie
+
+Présente les questions de manière claire et structurée, avec des numéros et des titres explicites.
+Inclus les réponses et justifications appropriées.

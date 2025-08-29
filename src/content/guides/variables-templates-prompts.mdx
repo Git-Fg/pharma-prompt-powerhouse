@@ -1,0 +1,592 @@
+---
+title: "Variables et Templates dans les Prompts Pharmaceutiques"
+description: "Maîtrisez l'utilisation des variables pour créer des prompts réutilisables et personnalisables en sciences pharmaceutiques"
+category: "prompting"
+difficulty: "beginner"
+estimatedTime: "40 minutes"
+tags:
+  [
+    "variables",
+    "templates",
+    "reutilisabilite",
+    "personnalisation",
+    "efficacite",
+  ]
+---
+
+# Variables et Templates dans les Prompts Pharmaceutiques
+
+## Objectifs d'apprentissage
+
+À la fin de ce guide, vous serez capable de :
+
+- Comprendre comment utiliser des variables pour personnaliser vos prompts
+- Créer des prompts réutilisables avec des informations qui changent
+- Maîtriser la syntaxe des variables selon votre outil d'IA
+- Organiser vos prompts de manière efficace et professionnelle
+
+## Prérequis
+
+- Avoir lu le guide "Structuration de Prompts avec XML pour la Pharmacie"
+- Comprendre les concepts de base de l'ingénierie de prompts
+- Avoir une expérience pratique avec au moins un modèle d'IA
+
+## Concepts clés
+
+### Qu'est-ce qu'une variable ?
+
+Une variable est un "placeholder" dans votre prompt qui sera remplacé par une valeur spécifique à chaque utilisation. C'est comme un formulaire que vous remplissez avec les informations du patient.
+
+**Exemple simple :**
+
+```
+{{NOM_MEDICAMENT}}=Minoxidil
+{{AGE_PATIENT}}=45
+{{POIDS_PATIENT}}=70
+
+---
+
+Analyse les interactions médicamenteuses pour {{NOM_MEDICAMENT}} chez un patient de {{AGE_PATIENT}} ans pesant {{POIDS_PATIENT}} kg.
+```
+
+### Pourquoi utiliser des variables ?
+
+Les variables vous permettent de :
+
+- **Réutiliser** le même prompt pour différents patients
+- **Personnaliser** vos analyses selon le contexte
+- **Standardiser** vos approches tout en gardant la flexibilité
+- **Accélérer** la création de nouveaux prompts
+
+## Syntaxe des variables selon les outils
+
+### **Claude (Anthropic)**
+
+```
+{{VARIABLE}}          # Format standard recommandé
+{{PATIENT_ID}}        # Identifiant du patient
+{{MEDICAMENT_LISTE}}  # Liste des médicaments
+```
+
+### **ChatGPT (OpenAI)**
+
+```
+{VARIABLE}            # Format standard
+{PATIENT_ID}          # Identifiant du patient
+{MEDICAMENT_LISTE}    # Liste des médicaments
+```
+
+### **Gemini (Google)**
+
+```
+{{VARIABLE}}            # Format standard recommandé
+{{PATIENT_ID}}          # Identifiant du patient
+{{MEDICAMENT_LISTE}}    # Liste des médicaments
+```
+
+## Comment utiliser les variables dans vos prompts
+
+### Étape 1 : Définir vos variables au début
+
+Commencez toujours par définir toutes vos variables au début du prompt :
+
+```
+{{NOM_MEDICAMENT}}=Atorvastatine
+{{DOSE}}=20mg
+{{AGE_PATIENT}}=67
+{{POIDS_PATIENT}}=75
+{{FONCTION_RENALE}}=Clairance créatinine 35ml/min
+{{ALLERGIES}}=Aucune connue
+{{INDICATION}}=Hypercholestérolémie
+
+---
+```
+
+### Étape 2 : Utiliser les variables dans votre prompt
+
+Ensuite, utilisez ces variables dans votre demande :
+
+```
+Analyse la posologie de {{NOM_MEDICAMENT}} {{DOSE}} pour un patient de {{AGE_PATIENT}} ans pesant {{POIDS_PATIENT}} kg.
+
+Considère que :
+- La fonction rénale est : {{FONCTION_RENALE}}
+- Les allergies sont : {{ALLERGIES}}
+- L'indication est : {{INDICATION}}
+
+Propose des ajustements si nécessaire et recommande un monitoring adapté.
+```
+
+## Exemples pratiques
+
+### Exemple 1 : Analyse d'interactions médicamenteuses
+
+```
+{{MEDICAMENT_1}}=Warfarine
+{{DOSE_1}}=5mg/jour
+{{MEDICAMENT_2}}=Amiodarone
+{{DOSE_2}}=200mg/jour
+{{AGE_PATIENT}}=72
+{{POIDS_PATIENT}}=68
+{{FONCTION_RENALE}}=Clairance créatinine 35ml/min
+
+---
+
+Analyse les interactions potentielles entre {{MEDICAMENT_1}} {{DOSE_1}} et {{MEDICAMENT_2}} {{DOSE_2}}.
+
+Contexte du patient :
+- Âge : {{AGE_PATIENT}} ans
+- Poids : {{POIDS_PATIENT}} kg
+- Fonction rénale : {{FONCTION_RENALE}}
+
+Instructions :
+1. Identifie le type d'interaction (pharmacocinétique/pharmacodynamique)
+2. Évalue le niveau de risque
+3. Propose des ajustements de posologie
+4. Recommande un monitoring adapté
+5. Suggère des alternatives si nécessaire
+
+Structure ta réponse de manière claire et organisée.
+```
+
+### Exemple 2 : Analyse de posologie pédiatrique
+
+```
+{{NOM_MEDICAMENT}}=Paracétamol
+{{AGE_ENFANT}}=8
+{{POIDS_ENFANT}}=25
+{{FORME}}=Sirop
+{{CONCENTRATION}}=24mg/ml
+{{INDICATION}}=Fièvre 39.2°C
+
+---
+
+Calcule la posologie pédiatrique optimale pour {{NOM_MEDICAMENT}}.
+
+Informations du patient :
+- Âge : {{AGE_ENFANT}} ans
+- Poids : {{POIDS_ENFANT}} kg
+- Forme : {{FORME}} {{CONCENTRATION}}
+- Indication : {{INDICATION}}
+
+Instructions :
+1. Calcule la posologie selon le poids et l'âge
+2. Vérifie les limites de sécurité
+3. Propose un schéma posologique adapté
+4. Donne des conseils d'administration
+5. Précise les précautions à prendre
+
+Structure ta réponse de manière claire et organisée.
+```
+
+### Exemple 3 : Template d'analyse de cas clinique
+
+```
+{{SYMPTOMES_PRINCIPAUX}}=[Liste des symptômes principaux]
+{{SIGNE_VITAUX}}=[Signes vitaux : TA, FC, Temp, etc.]
+{{ANTECEDENTS}}=[Antécédents médicaux]
+{{TRAITEMENT_ACTUEL}}=[Traitements en cours]
+{{EXAMENS_COMPLEMENTAIRES}}=[Résultats d'examens]
+
+---
+
+Analyse ce cas clinique complexe.
+
+Cas clinique :
+- Symptômes principaux : {{SYMPTOMES_PRINCIPAUX}}
+- Signes vitaux : {{SIGNE_VITAUX}}
+- Antécédents : {{ANTECEDENTS}}
+- Traitement actuel : {{TRAITEMENT_ACTUEL}}
+- Examens complémentaires : {{EXAMENS_COMPLEMENTAIRES}}
+
+Instructions :
+1. Formule les hypothèses diagnostiques principales
+2. Identifie les examens complémentaires prioritaires
+3. Propose une conduite à tenir immédiate
+4. Évalue les risques et complications potentielles
+5. Recommande un suivi adapté
+
+Structure ta réponse de manière claire et organisée.
+```
+
+## Création de templates avancés
+
+### Template 1 : Analyse d'interactions médicamenteuses
+
+```
+{{MEDICAMENT_1}}=[Nom du premier médicament]
+{{DOSE_1}}=[Dose du premier médicament]
+{{MEDICAMENT_2}}=[Nom du second médicament]
+{{DOSE_2}}=[Dose du second médicament]
+{{AGE_PATIENT}}=[Âge du patient]
+{{POIDS_PATIENT}}=[Poids du patient]
+{{FONCTION_RENALE}}=[Fonction rénale]
+{{ALLERGIES}}=[Allergies connues]
+
+---
+
+Analyse les interactions potentielles entre {{MEDICAMENT_1}} {{DOSE_1}} et {{MEDICAMENT_2}} {{DOSE_2}}.
+
+Contexte du patient :
+- Âge : {{AGE_PATIENT}} ans
+- Poids : {{POIDS_PATIENT}} kg
+- Fonction rénale : {{FONCTION_RENALE}}
+- Allergies : {{ALLERGIES}}
+
+Instructions :
+1. Identifie le type d'interaction (pharmacocinétique/pharmacodynamique)
+2. Évalue le niveau de risque (Faible/Modéré/Élevé)
+3. Propose des ajustements de posologie si nécessaire
+4. Recommande un monitoring adapté
+5. Suggère des alternatives thérapeutiques si nécessaire
+
+Structure ta réponse de manière claire et organisée.
+```
+
+### Template 2 : Optimisation de posologie
+
+```
+{{NOM_MEDICAMENT}}=[Nom du médicament]
+{{DOSE_ACTUELLE}}=[Dose actuelle]
+{{AGE_PATIENT}}=[Âge du patient]
+{{POIDS_PATIENT}}=[Poids du patient]
+{{FONCTION_RENALE}}=[Fonction rénale]
+{{FONCTION_HEPATIQUE}}=[Fonction hépatique]
+{{INDICATION}}=[Indication du traitement]
+
+---
+
+Optimise la posologie de {{NOM_MEDICAMENT}} {{DOSE_ACTUELLE}} pour ce patient.
+
+Profil du patient :
+- Âge : {{AGE_PATIENT}} ans
+- Poids : {{POIDS_PATIENT}} kg
+- Fonction rénale : {{FONCTION_RENALE}}
+- Fonction hépatique : {{FONCTION_HEPATIQUE}}
+- Indication : {{INDICATION}}
+
+Instructions :
+1. Évalue l'adéquation de la posologie actuelle
+2. Identifie les facteurs nécessitant un ajustement
+3. Propose une posologie optimisée
+4. Recommande un monitoring adapté
+5. Précise les critères de réévaluation
+
+Structure ta réponse de manière claire et organisée.
+```
+
+## Exercices pratiques
+
+### Exercice 1 : Créer un prompt avec variables
+
+Créez un prompt pour analyser la posologie d'un médicament chez un patient pédiatrique.
+
+<details>
+<summary>Solution</summary>
+
+```
+{{NOM_MEDICAMENT}}=Ibuprofène
+{{AGE_ENFANT}}=6
+{{POIDS_ENFANT}}=20
+{{FORME}}=Sirop
+{{CONCENTRATION}}=100mg/5ml
+{{INDICATION}}=Fièvre 38.5°C
+{{ALLERGIES}}=Aucune
+
+---
+
+Analyse la posologie pédiatrique pour {{NOM_MEDICAMENT}}.
+
+Informations du patient :
+- Âge : {{AGE_ENFANT}} ans
+- Poids : {{POIDS_ENFANT}} kg
+- Forme : {{FORME}} {{CONCENTRATION}}
+- Indication : {{INDICATION}}
+- Allergies : {{ALLERGIES}}
+
+Instructions :
+1. Calcule la posologie recommandée selon le poids
+2. Vérifie la dose maximale quotidienne
+3. Propose un schéma posologique adapté
+4. Donne des conseils d'administration
+5. Précise les précautions à prendre
+
+Structure ta réponse de manière claire et organisée.
+```
+
+</details>
+
+### Exercice 2 : Template d'analyse de cas clinique
+
+Créez un template pour analyser des cas cliniques avec des variables.
+
+<details>
+<summary>Solution</summary>
+
+```
+{{SYMPTOMES_PRINCIPAUX}}=[Liste des symptômes principaux]
+{{SIGNE_VITAUX}}=[Signes vitaux : TA, FC, Temp, etc.]
+{{ANTECEDENTS}}=[Antécédents médicaux]
+{{TRAITEMENT_ACTUEL}}=[Traitements en cours]
+{{EXAMENS_COMPLEMENTAIRES}}=[Résultats d'examens]
+
+---
+
+Analyse ce cas clinique complexe.
+
+Cas clinique :
+- Symptômes principaux : {{SYMPTOMES_PRINCIPAUX}}
+- Signes vitaux : {{SIGNE_VITAUX}}
+- Antécédents : {{ANTECEDENTS}}
+- Traitement actuel : {{TRAITEMENT_ACTUEL}}
+- Examens complémentaires : {{EXAMENS_COMPLEMENTAIRES}}
+
+Instructions :
+1. Formule les hypothèses diagnostiques principales
+2. Identifie les examens complémentaires prioritaires
+3. Propose une conduite à tenir immédiate
+4. Évalue les risques et complications potentielles
+5. Recommande un suivi adapté
+
+Structure ta réponse de manière claire et organisée.
+```
+
+</details>
+
+## Bonnes pratiques
+
+### 1. Organisation des variables
+
+- **Groupez par catégorie** : Données patient, médicaments, contexte
+- **Utilisez des noms clairs** : `AGE_PATIENT` plutôt que `age`
+- **Maintenez la cohérence** : Même format partout
+- **Séparez clairement** : Utilisez `---` pour séparer variables et instructions
+
+### 2. Nommage des variables
+
+- **Utilisez des noms explicites** : `{{MEDICAMENT_DOSE}}` plutôt que `{{dose}}`
+- **Évitez les abréviations** : `{{FONCTION_RENALE}}` plutôt que `{{FR}}`
+- **Utilisez des underscores** : `{{SURFACE_CORPORELLE}}` plutôt que `{{SURFACECORPORELLE}}`
+
+### 3. Documentation des variables
+
+- **Décrivez clairement** le rôle de chaque variable
+- **Spécifiez le format** : mg, kg, années, etc.
+- **Indiquez si c'est requis** ou optionnel
+- **Fournissez des exemples** de valeurs valides
+
+## Templates réutilisables
+
+### Template 1 : Analyse d'interactions
+
+```
+{{MEDICAMENT_1}}=[Nom du premier médicament]
+{{DOSE_1}}=[Dose du premier médicament]
+{{MEDICAMENT_2}}=[Nom du second médicament]
+{{DOSE_2}}=[Dose du second médicament]
+{{AGE_PATIENT}}=[Âge en années]
+{{POIDS_PATIENT}}=[Poids en kg]
+{{FONCTION_RENALE}}=[Fonction rénale]
+
+---
+
+Analyse l'interaction entre {{MEDICAMENT_1}} {{DOSE_1}} et {{MEDICAMENT_2}} {{DOSE_2}}.
+
+Patient : {{AGE_PATIENT}} ans, {{POIDS_PATIENT}} kg
+Fonction rénale : {{FONCTION_RENALE}}
+
+Instructions :
+1. Identifie le type d'interaction
+2. Évalue le niveau de risque
+3. Propose des ajustements
+4. Recommande un monitoring
+5. Suggère des alternatives si nécessaire
+
+Structure ta réponse de manière claire et organisée.
+```
+
+### Template 2 : Calcul de posologie
+
+```
+{{NOM_MEDICAMENT}}=[Nom du médicament]
+{{AGE_PATIENT}}=[Âge en années]
+{{POIDS_PATIENT}}=[Poids en kg]
+{{FORME_GALENIQUE}}=[Forme : comprimé, sirop, etc.]
+{{CONCENTRATION}}=[Concentration si applicable]
+{{INDICATION}}=[Indication du traitement]
+
+---
+
+Calcule la posologie optimale pour {{NOM_MEDICAMENT}}.
+
+Patient : {{AGE_PATIENT}} ans, {{POIDS_PATIENT}} kg
+Forme : {{FORME_GALENIQUE}} {{CONCENTRATION}}
+Indication : {{INDICATION}}
+
+Instructions :
+1. Calcule la posologie selon le poids et l'âge
+2. Vérifie les limites de sécurité
+3. Propose un schéma posologique pratique
+4. Donne des conseils d'administration
+
+Structure ta réponse de manière claire et organisée.
+```
+
+## Exercices pratiques
+
+### Exercice 1 : Créer un prompt avec variables
+
+Créez un prompt pour analyser la posologie d'un médicament chez un patient pédiatrique.
+
+<details>
+<summary>Solution</summary>
+
+```
+{{NOM_MEDICAMENT}}=Ibuprofène
+{{AGE_ENFANT}}=6
+{{POIDS_ENFANT}}=20
+{{FORME}}=Sirop
+{{CONCENTRATION}}=100mg/5ml
+{{INDICATION}}=Fièvre 38.5°C
+{{ALLERGIES}}=Aucune
+
+---
+
+Analyse la posologie pédiatrique pour {{NOM_MEDICAMENT}}.
+
+Informations du patient :
+- Âge : {{AGE_ENFANT}} ans
+- Poids : {{POIDS_ENFANT}} kg
+- Forme : {{FORME}} {{CONCENTRATION}}
+- Indication : {{INDICATION}}
+- Allergies : {{ALLERGIES}}
+
+Instructions :
+1. Calcule la posologie recommandée selon le poids
+2. Vérifie la dose maximale quotidienne
+3. Propose un schéma posologique adapté
+4. Donne des conseils d'administration
+5. Précise les précautions à prendre
+
+Structure ta réponse de manière claire et organisée.
+```
+
+</details>
+
+### Exercice 2 : Template d'analyse de cas clinique
+
+Créez un template pour analyser des cas cliniques avec des variables.
+
+<details>
+<summary>Solution</summary>
+
+```
+{{SYMPTOMES_PRINCIPAUX}}=[Liste des symptômes principaux]
+{{SIGNE_VITAUX}}=[Signes vitaux : TA, FC, Temp, etc.]
+{{ANTECEDENTS}}=[Antécédents médicaux]
+{{TRAITEMENT_ACTUEL}}=[Traitements en cours]
+{{EXAMENS_COMPLEMENTAIRES}}=[Résultats d'examens]
+
+---
+
+Analyse ce cas clinique complexe.
+
+Cas clinique :
+- Symptômes principaux : {{SYMPTOMES_PRINCIPAUX}}
+- Signes vitaux : {{SIGNE_VITAUX}}
+- Antécédents : {{ANTECEDENTS}}
+- Traitement actuel : {{TRAITEMENT_ACTUEL}}
+- Examens complémentaires : {{EXAMENS_COMPLEMENTAIRES}}
+
+Instructions :
+1. Formule les hypothèses diagnostiques principales
+2. Identifie les examens complémentaires prioritaires
+3. Propose une conduite à tenir immédiate
+4. Évalue les risques et complications potentielles
+5. Recommande un suivi adapté
+
+Structure ta réponse de manière claire et organisée.
+```
+
+</details>
+
+## Pièges à éviter
+
+### 1. Variables mal nommées
+
+**À éviter :**
+
+```
+{{a}}=45
+{{m}}=Atorvastatine
+{{d}}=20mg
+```
+
+**Préférer :**
+
+```
+{{AGE_PATIENT}}=45
+{{NOM_MEDICAMENT}}=Atorvastatine
+{{DOSE}}=20mg
+```
+
+### 2. Oubli de définir les variables
+
+**À éviter :**
+
+```
+Analyse les interactions pour {{NOM_MEDICAMENT}} chez un patient de {{AGE_PATIENT}} ans.
+```
+
+**Préférer :**
+
+```
+{{NOM_MEDICAMENT}}=Warfarine
+{{AGE_PATIENT}}=67
+
+---
+
+Analyse les interactions pour {{NOM_MEDICAMENT}} chez un patient de {{AGE_PATIENT}} ans.
+```
+
+### 3. Variables trop complexes
+
+**À éviter :**
+
+```
+{{PATIENT_DONNEES_COMPLETES_AVEC_ANTECEDENTS_ET_TRAITEMENTS}}=[Tout le dossier patient]
+```
+
+**Préférer :**
+
+```
+{{AGE_PATIENT}}=67
+{{ANTECEDENTS}}=HTA, diabète
+{{TRAITEMENTS}}=Lisinopril, metformine
+```
+
+## Ressources complémentaires
+
+- [Guide : Structuration de Prompts avec XML pour la Pharmacie](./xml-prompting-pharma)
+- [Guide : Tree-of-Thought pour les Cas Cliniques](./tree-of-thought-clinique)
+- [Guide : Anatomie d'un Prompt Parfait](./anatomie-prompt-parfait)
+
+## Prochaines étapes
+
+- **Pratiquez avec vos cas** : Créez des prompts variables pour vos situations courantes
+- **Développez vos templates** : Construisez une bibliothèque de prompts réutilisables
+- **Partagez avec vos collègues** : Échangez vos meilleurs templates
+- **Explorez les techniques avancées** : Découvrez le Tree-of-Thought et l'optimisation par modèle
+
+## Conclusion
+
+Les variables transforment vos prompts en outils puissants et réutilisables. En maîtrisant cette technique simple, vous pourrez :
+
+1. **Accélérer votre travail** en réutilisant des structures éprouvées
+2. **Standardiser vos approches** tout en gardant la flexibilité
+3. **Réduire les erreurs** grâce à une organisation claire
+4. **Collaborer efficacement** en partageant des templates validés
+
+Commencez par créer des prompts simples avec quelques variables, puis progressez vers des structures plus complexes. N'oubliez pas que la clé du succès réside dans la clarté et l'organisation de vos variables.
+
+**Rappel important** : Adaptez toujours la syntaxe de vos variables à l'outil d'IA que vous utilisez pour optimiser les performances.
