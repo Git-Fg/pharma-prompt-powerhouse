@@ -7,6 +7,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
   	extend: {
@@ -56,9 +57,58 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		// Système d'espacement amélioré pour la responsivité
+  		spacing: {
+  		  'safe-top': 'env(safe-area-inset-top)',
+  		  'safe-bottom': 'env(safe-area-inset-bottom)',
+  		  'safe-left': 'env(safe-area-inset-left)',
+  		  'safe-right': 'env(safe-area-inset-right)',
+  		},
+  		// Nouvelles unités viewport dynamiques
+  		height: {
+  		  'screen-safe': '100svh',
+  		  'screen-dynamic': '100dvh',
+  		},
+  		minHeight: {
+  		  'screen-safe': '100svh',
+  		  'screen-dynamic': '100dvh',
+  		},
+  		// Container queries breakpoints
+  		container: {
+  		  '2xs': '16rem',
+  		  'xs': '20rem',
+  		  'sm': '24rem',
+  		  'md': '28rem',
+  		  'lg': '32rem',
+  		  'xl': '36rem',
+  		  '2xl': '42rem',
+  		  '3xl': '48rem',
+  		  '4xl': '56rem',
+  		  '5xl': '64rem',
+  		  '6xl': '72rem',
+  		  '7xl': '80rem',
   		}
   	}
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [
+    tailwindcssAnimate,
+    // Plugin pour les container queries
+    function({ addVariant }) {
+      // Container query variants
+      addVariant('container-xs', '@container (min-width: 20rem)');
+      addVariant('container-sm', '@container (min-width: 24rem)');
+      addVariant('container-md', '@container (min-width: 28rem)');
+      addVariant('container-lg', '@container (min-width: 32rem)');
+      addVariant('container-xl', '@container (min-width: 36rem)');
+      
+      // Container query shorthand
+      addVariant('cq-xs', '@container (min-width: 20rem)');
+      addVariant('cq-sm', '@container (min-width: 24rem)');
+      addVariant('cq-md', '@container (min-width: 28rem)');
+      addVariant('cq-lg', '@container (min-width: 32rem)');
+      addVariant('cq-xl', '@container (min-width: 36rem)');
+    }
+  ],
 };
 export default config;

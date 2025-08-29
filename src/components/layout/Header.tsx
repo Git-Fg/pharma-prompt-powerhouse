@@ -100,7 +100,7 @@ export function Header() {
 
             <div className="flex items-center space-x-2">
               {/* Search */}
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="touch-target focus-ring">
                 <Search className="w-4 h-4" />
               </Button>
 
@@ -109,13 +109,14 @@ export function Header() {
                 variant="ghost" 
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="touch-target focus-ring"
               >
                 <Sun className="w-4 h-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute w-4 h-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </Button>
 
               {/* User Profile */}
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="touch-target focus-ring">
                 <User className="w-4 h-4" />
               </Button>
             </div>
@@ -127,6 +128,7 @@ export function Header() {
               variant="ghost" 
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="touch-target focus-ring"
             >
               <Sun className="w-4 h-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute w-4 h-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -134,11 +136,11 @@ export function Header() {
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="touch-target focus-ring">
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[320px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[min(90vw,400px)] h-screen-dynamic">
                 <div className="flex flex-col h-full">
                   {/* Header du menu mobile */}
                   <div className="flex items-center justify-between pb-6 border-b border-border/50">
@@ -151,17 +153,18 @@ export function Header() {
                   </div>
 
                   {/* Navigation principale */}
-                  <div className="flex-1 py-6">
+                  <div className="flex-1 py-6 overflow-y-auto">
                     <div className="space-y-3">
-                      {navigation.map((item) => (
+                      {navigation.map((item, index) => (
                         <Link
                           key={item.name}
                           href={item.href}
                           onClick={() => setIsOpen(false)}
                           className={cn(
-                            "flex items-start space-x-4 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground group",
+                            "flex items-start space-x-4 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground group animate-slide-in-left touch-target",
                             pathname === item.href && "bg-accent text-accent-foreground shadow-sm"
                           )}
+                          style={{animationDelay: `${index * 0.1}s`}}
                         >
                           <div className={cn(
                             "w-10 h-10 rounded-lg flex items-center justify-center transition-colors",
@@ -181,7 +184,7 @@ export function Header() {
                   </div>
 
                   {/* Actions secondaires */}
-                  <div className="border-t border-border/50 pt-6 space-y-3">
+                  <div className="border-t border-border/50 pt-6 pb-safe-bottom space-y-3">
                     <div className="px-6">
                       <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
                         Actions rapides
@@ -189,7 +192,7 @@ export function Header() {
                     </div>
                     
                     <div className="space-y-2">
-                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
+                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left touch-target focus-ring">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                           <Search className="w-5 h-5" />
                         </div>
@@ -199,7 +202,7 @@ export function Header() {
                         </div>
                       </button>
                       
-                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
+                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left touch-target focus-ring">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                           <User className="w-5 h-5" />
                         </div>

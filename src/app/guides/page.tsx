@@ -103,13 +103,13 @@ export default function GuidesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen-dynamic bg-gradient-to-br from-background via-background to-muted/20">
       {/* Header */}
       <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Mes Fiches & Méthodes</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <div className="container-fluid py-section-sm">
+          <div className="text-center mb-8 container-tight">
+            <h1 className="mb-4">Mes Fiches & Méthodes</h1>
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-none">
               Voici les fiches de synthèse que j'ai créées au fil de mes
               révisions. Elles représentent ma méthodologie de structuration de
               l'information. J'espère qu'elles vous seront utiles, et je vous
@@ -119,14 +119,14 @@ export default function GuidesPage() {
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col lg:flex-row gap-4 max-w-4xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-4xl mx-auto">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
                 placeholder="Rechercher un guide..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 focus-ring touch-target"
               />
             </div>
 
@@ -134,7 +134,7 @@ export default function GuidesPage() {
               value={selectedCategory}
               onValueChange={setSelectedCategory}
             >
-              <SelectTrigger className="w-full lg:w-48">
+              <SelectTrigger className="w-full sm:w-48 touch-target focus-ring">
                 <SelectValue placeholder="Catégorie" />
               </SelectTrigger>
               <SelectContent>
@@ -151,7 +151,7 @@ export default function GuidesPage() {
               value={selectedDifficulty}
               onValueChange={setSelectedDifficulty}
             >
-              <SelectTrigger className="w-full lg:w-48">
+              <SelectTrigger className="w-full sm:w-48 touch-target focus-ring">
                 <SelectValue placeholder="Difficulté" />
               </SelectTrigger>
               <SelectContent>
@@ -166,28 +166,29 @@ export default function GuidesPage() {
       </div>
 
       {/* Results */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container-fluid py-section-sm">
         <div className="flex items-center justify-between mb-6">
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             {filteredGuides.length} guide{filteredGuides.length > 1 ? "s" : ""}{" "}
             trouvé{filteredGuides.length > 1 ? "s" : ""}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredGuides.map((guide) => {
+        <div className="grid-cards">
+          {filteredGuides.map((guide, index) => {
             const IconComponent = getCategoryIcon(guide.category);
             return (
               <Card
                 key={guide._meta.path}
-                className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="hover-lift animate-fade-in-up"
+                style={{animationDelay: `${index * 0.1}s`}}
               >
                 <CardHeader>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-4">
                     <div
                       className={`w-12 h-12 ${getCategoryColor(
                         guide.category
-                      )} rounded-lg flex items-center justify-center`}
+                      )} rounded-lg flex items-center justify-center shadow-sm`}
                     >
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
@@ -197,54 +198,52 @@ export default function GuidesPage() {
                       </Badge>
                     </div>
                   </div>
-                  <CardTitle className="text-lg font-semibold group-hover:text-blue-600 transition-colors">
+                  <CardTitle className="group-hover:text-primary transition-colors duration-200">
                     {guide.title}
                   </CardTitle>
-                  <CardDescription className="text-sm text-gray-600 line-clamp-2">
+                  <CardDescription className="line-clamp-3">
                     {guide.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4" />
-                        <span>{guide.estimatedTime}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <BookOpen className="w-4 h-4" />
-                        <span>{guide.estimatedTime}</span>
-                      </div>
-                    </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {guide.tags &&
-                        guide.tags.slice(0, 3).map((tag, index) => (
-                          <Badge
-                            key={index}
-                            variant="outline"
-                            className="text-xs"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      {guide.tags && guide.tags.length > 3 && (
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      <span>{guide.readingTime} minutes</span>
+                    </div>
+                    <div className="flex items-center">
+                      <PlayCircle className="w-4 h-4 mr-1" />
+                      <span>{guide.duration} minutes</span>
+                    </div>
+                  </div>
+                  
+                  {guide.tags && guide.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {guide.tags.slice(0, 3).map((tag) => (
+                        <Badge
+                          key={tag}
+                          variant="outline"
+                          className="text-xs"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                      {guide.tags.length > 3 && (
                         <Badge variant="outline" className="text-xs">
                           +{guide.tags.length - 3}
                         </Badge>
                       )}
                     </div>
+                  )}
 
-                    <Button
-                      className="w-full group-hover:bg-blue-600 transition-colors"
-                      asChild
-                    >
-                      <a href={`/guides/${guide._meta.path}`}>
-                        Commencer
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </Button>
-                  </div>
+                  <Button
+                    className="w-full group focus-ring"
+                    onClick={() => window.location.href = `/guides/${guide.slug}`}
+                  >
+                    Commencer
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
                 </CardContent>
               </Card>
             );
@@ -253,16 +252,28 @@ export default function GuidesPage() {
 
         {filteredGuides.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-muted-foreground" />
+            <div className="w-24 h-24 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
+              <Search className="w-12 h-12 text-muted-foreground" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
-            <p className="text-muted-foreground">
-              Essayez de modifier vos filtres ou votre recherche.
+            <p className="text-muted-foreground mb-4 max-w-md mx-auto">
+              Essayez de modifier vos critères de recherche ou parcourez tous les guides disponibles.
             </p>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("all");
+                setSelectedDifficulty("all");
+              }}
+              className="focus-ring"
+            >
+              Réinitialiser les filtres
+            </Button>
           </div>
         )}
       </div>
     </div>
   );
 }
+
