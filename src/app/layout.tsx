@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { SkipLink } from "@/components/ui/skip-link";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -49,9 +50,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SkipLink href="#main-content">Aller au contenu principal</SkipLink>
           <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="flex-1">
+            <main id="main-content" className="flex-1">
               {children}
             </main>
             <Footer />

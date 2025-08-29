@@ -227,3 +227,4 @@ export { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 // Composants personnalisés
 export { CopyButton } from "./copy-button";
 export { CodeBlock } from "./code-block";
+export { SkipLink } from "./skip-link";
