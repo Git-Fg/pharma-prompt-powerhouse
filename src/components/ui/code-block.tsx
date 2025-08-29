@@ -29,7 +29,23 @@ export function CodeBlock({
       setHasCopied(true);
       setTimeout(() => setHasCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      // Fallback for browsers that don't support clipboard API
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+        setHasCopied(true);
+        setTimeout(() => setHasCopied(false), 2000);
+      } catch {
+        // Silent fail - we don't want to break the UI for copy functionality
+      }
     }
   };
 
