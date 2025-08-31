@@ -184,7 +184,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
           description: promptToLoad.description || "",
           category: promptToLoad.category,
           difficulty: promptToLoad.difficulty || "débutant",
-          targetTool: promptToLoad.targetTool,
+          targetTool: promptToLoad.targetTool || "",
           content: promptToLoad.content,
           variables: [], // On initialise avec un tableau vide pour l'instant
           createdAt: new Date().toISOString(),

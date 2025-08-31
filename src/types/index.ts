@@ -1,13 +1,18 @@
 /**
- * Point d'entrée principal pour tous les types de l'application
- *
- * Ce fichier ré-exporte les types organisés par responsabilité :
- * - content.ts : Types générés par content-collections
- * - app.ts : Types partagés spécifiques à l'application
+ * Point d'entrée pour les types de contenu générés par Content Collections.
+ * C'est la source de vérité unique pour les types de données de notre contenu.
+ * NE PAS AJOUTER DE TYPES MANUELS ICI. La logique est dans `content-collections.ts`.
  */
+export type {
+  Concept,
+  Guide,
+ Prompt,
+  ExternalTool,
+} from "content-collections";
 
-// Types de contenu (MDX, guides, etc.)
-export * from './content';
-
-// Types applicatifs partagés
-export * from './app';
+// Type global pour représenter n'importe quel élément de nos collections.
+export type AnyContent = 
+  | import("content-collections").Concept 
+  | import("content-collections").Guide 
+  | import("content-collections").Prompt 
+  | import("content-collections").ExternalTool;

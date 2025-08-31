@@ -152,10 +152,7 @@ export default async function ConceptDetailPage({
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {relatedPrompts.map((prompt) => (
-                <Link
-                  href={`/prompts/${prompt.slug}`}
-                  key={prompt.slug}
-                >
+                <Link href={`/prompts/${prompt.slug}`} key={prompt.slug}>
                   <Card className="h-full hover:bg-accent/50 transition-colors">
                     <CardHeader>
                       <CardTitle>{prompt.title}</CardTitle>

@@ -4,7 +4,7 @@ import type {
   PromptVariable,
   VariableValue,
   PromptGenerationResult,
-} from '@/types/app';
+} from './usePromptGeneration.types';
 
 interface UsePromptGenerationProps {
   template: string;

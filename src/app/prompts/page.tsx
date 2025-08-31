@@ -45,6 +45,12 @@ const toolLabels = {
   claude: "Claude",
   perplexity: "Perplexity",
   "ai.dev": "AI.dev",
+  "z.ai": "Z.ai",
+  gemini: "Gemini",
+  "gemini-deep-research": "Gemini Deep Research",
+  "vertex-ai": "Vertex AI",
+  notebooklm: "NotebookLM",
+  "glass-ia": "Glass IA",
 };
 
 const getCategoryIcon = (category: string) => {
@@ -233,7 +239,11 @@ export default function PromptsPage() {
                       </div>
                       <div className="flex items-center space-x-2">
                         <FileText className="w-4 h-4" />
-                        <span>{toolLabels[prompt.targetTool]}</span>
+                        <span>
+                          {toolLabels[
+                            prompt.targetTool as keyof typeof toolLabels
+                          ] || prompt.targetTool}
+                        </span>
                       </div>
                     </div>
 

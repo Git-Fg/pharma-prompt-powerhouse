@@ -1,11 +1,10 @@
 ---
 title: "Google AI Studio"
-description: "Interface web gratuite de Google pour interagir avec les modèles Gemini 2.5"
+description: "Interface web gratuite de Google pour expérimenter avec les modèles Gemini. Idéal pour l'apprentissage et le prototypage de prompts."
 url: "https://aistudio.google.com"
 category: "LLM Généraliste"
 pricing: "Gratuit"
-capabilities: ["Prompting", "Structured Output", "Code Execution", "Grounding", "Paramètres avancés"]
-guideSlug: "ressources/google-ai-studio-pharmacie"
+capabilities: ["Prompting", "Structured Output", "Paramètres avancés", "Tests"]
 tags: ["prompting", "google", "gemini", "outil:google-ai-studio"]
 keyTakeaways:
   - "Google AI Studio est l'interface gratuite et accessible pour expérimenter directement avec les derniers modèles Gemini."
@@ -13,29 +12,43 @@ keyTakeaways:
   - "Privilégiez cet outil pour l'expérimentation et la création de prompts structurés avant de les utiliser en production."
 ---
 
-Google AI Studio est l'interface web officielle de Google pour interagir avec les modèles Gemini 2.5. C'est l'outil parfait pour les étudiants en pharmacie qui veulent maîtriser l'ingénierie de prompts sans configuration complexe.
+## Mon Guide Pratique pour Google AI Studio
 
-## Points forts
+Google AI Studio est mon terrain de jeu favori pour tester et affiner des prompts. C'est une interface web simple, gratuite, qui donne un accès direct à la puissance des modèles Gemini de Google. Pour nous, étudiants en pharmacie, c'est l'outil parfait pour apprendre sans se soucier de l'infrastructure cloud.
 
-- **Gratuit et accessible** : Aucun compte Google Cloud requis
-- **Modèles Gemini 2.5** : Accès aux dernières avancées en IA
-- **Interface intuitive** : Conçue pour les débutants
-- **Paramètres avancés** : Contrôle précis du comportement des modèles
-- **Outils spécialisés** : Structured Output, Code Execution, Grounding
+### Pourquoi je l'utilise ?
 
-## Utilisation recommandée
+1.  **Accès direct aux modèles Gemini :** On peut tester les dernières versions (comme Gemini 2.5 Pro) dès leur sortie.
+2.  **Contrôle total des paramètres :** C'est ici que l'on peut vraiment "sentir" l'effet de la **température**, du **Top-K** ou du **Top-P**. C'est essentiel pour comprendre comment doser la créativité de l'IA.
+3.  **Pas de barrière à l'entrée :** Un simple compte Google suffit. Pas besoin de projet Google Cloud ou de configuration complexe.
 
-Google AI Studio est idéal pour :
+### Cas d'usage en pharmacie
 
-- L'apprentissage de l'ingénierie de prompts
-- L'expérimentation avec différents paramètres
-- La création de prompts structurés pour la pharmacie
-- L'analyse de cas cliniques complexes
+-   **Prototypage de prompts :** Avant d'intégrer un prompt dans un outil plus complexe, je le teste et l'affine ici.
+-   **Génération de sorties structurées :** L'outil permet de forcer une sortie JSON, ce qui est très pratique pour créer des fiches de données.
+-   **Apprentissage par l'expérimentation :** C'est le meilleur endroit pour voir concrètement l'impact d'un changement de formulation dans un prompt.
 
-## Alternative à
+### Mon premier prompt dans AI Studio
 
-- Vertex AI Studio (plus complexe, orienté entreprise)
-- ChatGPT (moins de contrôle sur les paramètres)
-- Claude (interface différente, moins d'intégration Google)
+Quand vous arrivez sur l'interface, choisissez "Create new prompt". Voici un prompt simple pour commencer :
 
-Consultez notre [guide complet](/guides/ressources/google-ai-studio-pharmacie) pour maîtriser cet outil en pharmacie.
+```markdown
+[ROLE]
+Tu es un tuteur en pharmacologie.
+
+[TÂCHE]
+Explique le mécanisme d'action des IEC (Inhibiteurs de l'Enzyme de Conversion) de manière simple pour un patient.
+
+[FORMAT]
+Utilise une analogie claire et facile à comprendre. Limite ta réponse à 3 phrases.
+```
+
+Jouez ensuite avec le curseur "Temperature" sur la droite.
+-   **À 0.1 :** La réponse sera très factuelle et directe.
+-   **À 0.9 :** L'analogie sera probablement beaucoup plus créative, mais potentiellement moins précise.
+
+C'est en faisant ces tests qu'on intègre vraiment l'importance de ces paramètres.
+
+### Conclusion
+
+Google AI Studio est l'équivalent du "laboratoire de paillasse" pour le prompt engineering. C'est là que l'on fait nos expériences, qu'on se trompe et qu'on apprend. C'est un passage obligé pour quiconque veut sérieusement maîtriser l'interaction avec les IA modernes.

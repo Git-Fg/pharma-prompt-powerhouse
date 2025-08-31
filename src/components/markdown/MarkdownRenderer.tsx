@@ -16,14 +16,8 @@ interface MarkdownRendererProps {
 }
 
 // Composant de coloration syntaxique personnalisé avec bouton de copie
-const CodeHighlight = ({
-  className,
-  children,
-  ...props
-}: {
-  className?: string;
-  children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLElement>) => {
+const CodeHighlight: React.FC<React.HTMLAttributes<HTMLElement> & { children?: React.ReactNode; className?: string; node?: unknown }> = (props) => {
+  const {children, className, node: _node, ...rest} = props;
   const code = String(children).trim();
   const match = className?.match(/language-(\w+)/);
   const language = match ? match[1] : "text";
@@ -31,7 +25,7 @@ const CodeHighlight = ({
   const isInline = !className || !className.includes("language-");
 
   return !isInline ? (
-    <CodeBlock language={language} className="my-4">
+    <CodeBlock language={language || "text"} className="my-4">
       {code}
     </CodeBlock>
   ) : (
@@ -40,7 +34,7 @@ const CodeHighlight = ({
         "bg-muted px-1.5 py-0.5 rounded text-sm font-mono",
         className || ""
       )}
-      {...props}
+      {...rest}
     >
       {children}
     </code>

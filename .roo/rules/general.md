@@ -1,7 +1,3 @@
----
-alwaysApply: true
----
-
 <context>
 Projet étudiant spécialisé en ingénierie de prompts pharmaceutiques avec Next.js 15, React 19, shadcn/ui 3.0 et TypeScript. Conçu pour aider d'autres étudiants à apprendre l'ingénierie de prompts à travers des guides, principes, prompts et outils interactifs.
 Le projet doit être en Français, mais n'hésite pas à utiliser des anglicisme lorsque cela décrit plus précisément certains concepts (comme token, prompt engineering, context engineering...)

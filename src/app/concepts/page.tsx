@@ -24,20 +24,19 @@ const getIcon = (
 
 export default function ConceptsPage() {
   const categories = ["Fondamentaux", "Techniques Avancées", "Méthodologie"];
-  
-  const conceptsByCategory = categories.map(category => ({
+
+  const conceptsByCategory = categories.map((category) => ({
     category,
-    concepts: allConcepts.filter(c => c.category === category),
+    concepts: allConcepts.filter((c) => c.category === category),
   }));
-
-
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="text-4xl font-bold">Hub de Concepts</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Chaque concept est un dossier complet reliant la théorie, la pratique et les outils. Choisissez un concept pour commencer.
+          Chaque concept est un dossier complet reliant la théorie, la pratique
+          et les outils. Choisissez un concept pour commencer.
         </p>
       </div>
 
@@ -70,12 +69,16 @@ export default function ConceptsPage() {
       <div className="space-y-12">
         {conceptsByCategory.map(({ category, concepts }) => {
           if (concepts.length === 0) return null;
-          const conceptsWithStats = concepts.map(c => {
-             const guideCount = allGuides.filter(g => g.concepts?.includes(c.slug)).length;
-             const promptCount = allPrompts.filter(p => p.concepts?.includes(c.slug)).length;
-             return { ...c, guideCount, promptCount };
+          const conceptsWithStats = concepts.map((c) => {
+            const guideCount = allGuides.filter((g) =>
+              g.concepts?.includes(c.slug)
+            ).length;
+            const promptCount = allPrompts.filter((p) =>
+              p.concepts?.includes(c.slug)
+            ).length;
+            return { ...c, guideCount, promptCount };
           });
-          
+
           return (
             <section key={category}>
               <h2 className="text-2xl font-semibold mb-6">{category}</h2>
@@ -83,22 +86,38 @@ export default function ConceptsPage() {
                 {conceptsWithStats.map((concept) => {
                   const Icon = getIcon(concept.icon);
                   return (
-                    <Link href={`/concepts/${concept.slug}`} key={concept.slug} className="block">
+                    <Link
+                      href={`/concepts/${concept.slug}`}
+                      key={concept.slug}
+                      className="block"
+                    >
                       <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
                         <CardHeader>
                           <div className="flex items-center gap-4 mb-3">
                             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
                               <Icon className="w-6 h-6 text-primary" />
                             </div>
-                            <CardTitle className="group-hover:text-primary transition-colors">{concept.title}</CardTitle>
+                            <CardTitle className="group-hover:text-primary transition-colors">
+                              {concept.title}
+                            </CardTitle>
                           </div>
-                          <CardDescription>{concept.description}</CardDescription>
+                          <CardDescription>
+                            {concept.description}
+                          </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                <span><Badge variant="secondary">{concept.guideCount} Guides</Badge></span>
-                                <span><Badge variant="secondary">{concept.promptCount} Prompts</Badge></span>
-                            </div>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <span>
+                              <Badge variant="secondary">
+                                {concept.guideCount} Guides
+                              </Badge>
+                            </span>
+                            <span>
+                              <Badge variant="secondary">
+                                {concept.promptCount} Prompts
+                              </Badge>
+                            </span>
+                          </div>
                         </CardContent>
                       </Card>
                     </Link>

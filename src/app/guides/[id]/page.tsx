@@ -8,6 +8,7 @@ import { allGuides } from "content-collections";
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
+import type { Guide } from "@/types";
 
 const categoryLabels = {
   prompting: "Prompting 🎯",
@@ -41,7 +42,7 @@ export default async function GuideDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const guide = allGuides.find((g) => g.slug === id);
+  const guide: Guide | undefined = allGuides.find((g) => g.slug === id);
 
   if (!guide) {
     notFound();

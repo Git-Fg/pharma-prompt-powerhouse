@@ -143,7 +143,9 @@ export default async function PromptDetailPage({
                   <p className="text-sm text-muted-foreground">Catégorie</p>
                   <Badge variant="outline">
                     {foundPrompt?.category
-                      ? categoryLabels[foundPrompt.category]
+                      ? categoryLabels[
+                          foundPrompt.category as keyof typeof categoryLabels
+                        ] || foundPrompt.category
                       : "Non spécifiée"}
                   </Badge>
                 </div>
@@ -155,7 +157,9 @@ export default async function PromptDetailPage({
                   <p className="text-sm text-muted-foreground">Difficulté</p>
                   <Badge variant="secondary">
                     {foundPrompt?.difficulty
-                      ? difficultyLabels[foundPrompt.difficulty]
+                      ? difficultyLabels[
+                          foundPrompt.difficulty as keyof typeof difficultyLabels
+                        ] || foundPrompt.difficulty
                       : "Non spécifiée"}
                   </Badge>
                 </div>
@@ -176,7 +180,9 @@ export default async function PromptDetailPage({
                   <p className="text-sm text-muted-foreground">Outil cible</p>
                   <span className="font-medium">
                     {foundPrompt?.targetTool
-                      ? toolLabels[foundPrompt.targetTool]
+                      ? toolLabels[
+                          foundPrompt.targetTool as keyof typeof toolLabels
+                        ] || foundPrompt.targetTool
                       : "Non spécifié"}
                   </span>
                 </div>

@@ -19,18 +19,56 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       "lucide-react",
       "@radix-ui/react-icons",
-      "react-markdown", // Bonne idée d'optimiser les dépendances MDX
+      "react-markdown",
+      "@content-collections/core",
     ],
+    // Support MDX natif de Next.js
+    mdxRs: true,
   },
+
   // Image optimization
   images: {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60,
+    // Optimisations pour Vercel
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+
   // Compression
   compress: true,
+
   // Optimisations de performance
   poweredByHeader: false,
+
+  // Configuration des extensions de pages pour MDX
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
+  // Optimisations pour Vercel
+  // swcMinify: true, // Supprimé car activé par défaut dans Next.js 15
+
+  // Headers de sécurité
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withContentCollections(nextConfig);
