@@ -1,0 +1,208 @@
+---
+title: "Guide Pratique : Optimiser le Contexte de vos Prompts"
+description: "Apprenez à compresser et structurer de longs documents pour les rendre compréhensibles par l'IA, en évitant l'effet 'lost-in-the-middle'."
+category: "fondamentaux"
+difficulty: "intermédiaire"
+estimatedTime: "20 minutes"
+tags: ["context-engineering", "fenêtre-contexte", "optimisation", "mémoire-ia"]
+concepts: ["context-engineering", "memoire-ia"]
+keyTakeaways:
+  - "La 'fenêtre de contexte' est la mémoire de travail limitée de l'IA ; optimisez-la en étant concis et pertinent."
+  - "Contournez l'effet 'lost-in-the-middle' en plaçant vos instructions et informations critiques au début et à la fin du prompt."
+  - "Utilisez des techniques de compression (résumés, tableaux, points clés) pour fournir un maximum d'informations avec un minimum de tokens."
+---
+
+# Guide Pratique : Optimiser le Contexte de vos Prompts
+
+Vous avez un cours de 20 pages et l'IA semble ignorer la moitié des informations ? C'est normal. Ce guide vous montre **comment** appliquer le concept de **[Context Engineering](/concepts/context-engineering)** pour transformer un texte brut en un contexte optimisé que l'IA peut réellement utiliser.
+
+## Le Problème : Le Dossier Patient de 300 Pages
+
+Donner un texte trop long à une IA, c'est comme donner un dossier patient de 300 pages à un confrère en lui disant "fais-moi un résumé". Il sera submergé. La mémoire de l'IA (sa "fenêtre de contexte") est limitée et elle est sensible à l'effet "lost-in-the-middle" : elle oublie les informations situées au centre d'un long texte.
+
+## Workflow d'Optimisation en 3 Étapes
+
+### Étape 1 : Compresser l'Information
+
+Avant de donner le texte à l'IA pour la tâche finale, utilisez une première passe pour le compresser.
+
+**Cas d'usage :** Transformer un long texte sur la warfarine.
+
+**Prompt de Compression :**
+
+```markdown
+[ROLE]
+Tu es un assistant expert en synthèse d'informations pharmaceutiques.
+
+[TÂCHE]
+Extrais les informations critiques du texte suivant sous forme de points clés. Ignore l'historique et les détails superflus.
+
+[CONTEXTE]
+"""
+[Coller ici les 1500 mots sur la warfarine]
+"""
+
+[FORMAT]
+
+- **Mécanisme :** ...
+- **Interactions Critiques :** ... (liste)
+- **Monitoring :** ...
+- **Adaptations Posologiques Clés :** ...
+```
+
+**Résultat :** Vous passez de 1500 tokens de texte brut à ~100 tokens d'informations essentielles.
+
+### Étape 2 : Hiérarchiser le Contexte
+
+Organisez les informations extraites par ordre d'importance.
+
+- **Critique :** Ce que l'IA DOIT savoir (ex: interactions mortelles, CI absolues).
+- **Important :** Ce qu'elle devrait savoir (ex: effets indésirables fréquents).
+- **Utile :** Informations de fond (ex: mécanisme d'action détaillé).
+
+### Étape 3 : Structurer le Prompt Final
+
+Utilisez le contexte optimisé en respectant la règle "le plus important au début et à la fin".
+
+**Prompt Final Optimisé :**
+
+```markdown
+[INSTRUCTIONS PRINCIPALES]
+Analyse l'ordonnance ci-dessous en te basant sur le contexte critique fourni.
+
+[CONTEXTE CRITIQUE - DÉBUT]
+
+- Patient : 75 ans, ClCr 35 mL/min, 6 médicaments
+- Interactions majeures warfarine : amiodarone (augmente effet x2), fluconazole (augmente effet x2)
+- Monitoring : INR cible 2-3
+
+[CONTEXTE SECONDAIRE - MILIEU]
+
+- Mécanisme warfarine : inhibition vitamine K
+- Ordonnance : [Liste des médicaments du patient]
+
+[INSTRUCTIONS FINALES & FORMAT]
+Identifie les problèmes par ordre de priorité et propose une action pour chacun dans un tableau Markdown : Problème | Risque | Action.
+```
+
+Avec cette méthode, vous garantissez que l'IA se concentre sur les éléments cruciaux, tout en ayant accès aux détails si nécessaire. C'est la clé pour des résultats fiables sur des tâches complexes.
+
+## Application Pratique : Optimiser un Cours sur les Antibiotiques
+
+### Le Défi
+
+Vous avez un cours de 3000 mots sur les antibiotiques et vous voulez que l'IA crée un QCM ciblé sur les points les plus importants.
+
+### Solution en 3 Prompts
+
+**Prompt 1 - Extraction :**
+
+```markdown
+[ROLE] Expert en synthèse pharmaceutique
+[TÂCHE] Extrais les 10 points clés les plus importants de ce cours sur les antibiotiques
+[CONTEXTE] [Cours de 3000 mots]
+[FORMAT] Liste numérotée simple
+```
+
+**Prompt 2 - Hiérarchisation :**
+
+```markdown
+[ROLE] Professeur de pharmacologie
+[TÂCHE] Classe ces 10 points par importance pour un examen
+[CONTEXTE] [Sortie du Prompt 1]
+[FORMAT] 3 niveaux : Critique/Important/Utile
+```
+
+**Prompt 3 - Création du QCM :**
+
+```markdown
+[ROLE] Concepteur de QCM
+[TÂCHE] Crée 5 QCM basés sur les points critiques identifiés
+[CONTEXTE] [Sortie du Prompt 2]
+[FORMAT] QCM avec 4 propositions, justification de la réponse
+```
+
+## Techniques de Compression Avancées
+
+### 1. Résumé en Couches
+
+- **Couche 1 :** Faits bruts (noms, doses, CI)
+- **Couche 2 :** Relations et mécanismes
+- **Couche 3 :** Applications cliniques
+
+### 2. Tableaux de Synthèse
+
+Transformez des paragraphes en tableaux structurés :
+
+```
+| Classe | Mécanisme | Spectre | Risque Principal |
+|--------|-----------|---------|------------------|
+| Bêta-lactamines | Inhibition paroi | Gram+/- | Allergie |
+| Aminosides | Inhibition protéines | Gram- | Néphrotoxicité |
+```
+
+### 3. Points Clés Numérotés
+
+Remplacez les explications par des listes :
+
+```
+1. Mécanisme : inhibition paroi bactérienne
+2. Spectre : Gram+ et Gram-
+3. Résistance : bêta-lactamases
+4. Monitoring : fonction rénale
+```
+
+## Éviter l'Effet "Lost-in-the-Middle"
+
+### Règle d'Or : Sandwich d'Informations
+
+```
+[INSTRUCTIONS CRITIQUES]
+[CONTEXTE SECONDAIRE]
+[INSTRUCTIONS CRITIQUES + FORMAT]
+```
+
+### Exemple Concret
+
+**❌ Mauvais (instructions perdues au milieu) :**
+
+```
+Analyse cette ordonnance.
+[1000 mots de contexte]
+Fais un tableau.
+```
+
+**✅ Bon (instructions encadrent le contexte) :**
+
+```
+[ROLE] Tu es un pharmacien clinicien
+[TÂCHE] Analyse cette ordonnance et identifie les problèmes
+[CONTEXTE] [500 mots optimisés]
+[FORMAT] Tableau avec colonnes : Problème | Risque | Action
+[VALIDATION] Vérifie que chaque problème a une action associée
+```
+
+## Mesurer l'Efficacité
+
+### Métriques de Compression
+
+- **Ratio de compression :** Nombre de tokens avant/après
+- **Fidélité :** L'IA utilise-t-elle bien le contexte fourni ?
+- **Complétude :** Aucune information critique n'est-elle perdue ?
+
+### Test de Validation
+
+Après optimisation, testez votre contexte avec un prompt simple :
+
+```
+[ROLE] Expert en validation
+[TÂCHE] Vérifie que ce contexte contient toutes les informations nécessaires pour [votre tâche]
+[CONTEXTE] [Votre contexte optimisé]
+[FORMAT] Liste des éléments manquants ou redondants
+```
+
+## Conclusion
+
+Le Context Engineering n'est pas une théorie abstraite, c'est un **workflow pratique** qui transforme vos documents longs en outils de travail efficaces. En maîtrisant ces techniques, vous multipliez par 3-5 l'efficacité de vos prompts et vous obtenez des résultats plus fiables et cohérents.
+
+**Prochaine étape :** Apprenez à utiliser ces contextes optimisés avec des techniques avancées comme le Tree-of-Thought et l'XML Prompting.

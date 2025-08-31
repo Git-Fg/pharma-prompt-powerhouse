@@ -1,81 +1,62 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
+import { extractSlug } from "@/lib/content-utils";
 
 // ============================================================================
 // SCHÉMAS CENTRALISÉS - Source unique de vérité
 // ============================================================================
 
-// Schéma de base commun pour tous les types de contenu
-const baseContentSchema = z.object({
+// Schéma de base unifié et enrichi pour tous les types de contenu
+const baseSchema = z.object({
   title: z.string(),
   description: z.string(),
-  slug: z.string().optional(),
-  date: z.string().optional(),
-  isFavorite: z.boolean().optional(),
-  author: z.string().optional(),
-  readingTime: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  content: z.string().optional(), // Rendu optionnel pour la compatibilité
+  date: z.string().optional(), // Validation plus simple
+  tags: z.array(z.string()).default([]), // Valeur par défaut
+  isFavorite: z.boolean().default(false), // Valeur par défaut
+  // Champs communs uniformisés - rendus optionnels pour la flexibilité
+  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]).optional(),
+  estimatedTime: z.string().optional(),
+  concepts: z.array(z.string()).default([]), // NOUVEAU : Lien vers les concepts
+
+  // NOUVEL AJOUT : Points clés à retenir
+  keyTakeaways: z
+    .array(z.string())
+    .max(3, { message: "Il ne peut y avoir plus de 3 points clés." })
+    .optional(),
 });
 
-// Schéma pour les guides
-export const guideSchema = baseContentSchema.extend({
-  content: z.string(),
+// Schéma pour les guides, étendant la base avec ses champs spécifiques
+export const guideSchema = baseSchema.extend({
   category: z.enum([
     "prompting",
-    "methodology",
+    "methodologie",
     "tools",
     "security",
     "optimization",
     "ia-modernes",
     "cas-pratiques",
-  ]),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]),
-  estimatedTime: z.string(),
+    "ressources",
+    "fondamentaux",
+    "techniques-avancees",
+  ]), // Suppression de .optional() - maintenant obligatoire
   progress: z.number().optional(),
-  relatedPrompts: z.array(z.string()).optional(),
-  relatedTools: z.array(z.string()).optional(),
-  targetAudience: z.array(z.string()).optional(),
-  prerequisites: z.array(z.string()).optional(),
+  targetAudience: z.array(z.string()).default([]),
 });
 
-// Schéma pour la philosophie
-export const philosophySchema = baseContentSchema.extend({
-  content: z.string(),
-  principles: z.array(z.string()).optional(),
-  relatedConcepts: z.array(z.string()).optional(),
-  category: z.enum(["fondements", "applications", "methodologie"]).optional(),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]).optional(),
-  estimatedTime: z.string().optional(),
-});
-
-// Schéma pour les principes
-export const principleSchema = baseContentSchema.extend({
-  content: z.string(),
-  analogy: z.string().optional(),
-  practicalApplications: z.array(z.string()).optional(),
-  category: z
-    .enum(["techniques", "methodologiques", "fondamentaux"])
-    .optional(),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]).optional(),
-  estimatedTime: z.string().optional(),
-});
-
-// Schéma pour les prompts
-export const promptSchema = baseContentSchema.extend({
-  content: z.string(),
-  promptDescription: z.string().optional(),
+// Schéma pour les prompts - ÉPURÉ
+export const promptSchema = baseSchema.extend({
   category: z.enum([
-    "technical",
-    "analysis",
-    "creative",
+    "technique",
+    "analyse",
+    "créatif",
     "documentation",
-    "research",
+    "recherche",
     "pharmacologie",
     "cas-cliniques",
-    "revision",
+    "révision",
     "diagnostic",
   ]),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]),
   targetTool: z.enum([
     "chatgpt",
     "claude",
@@ -86,27 +67,26 @@ export const promptSchema = baseContentSchema.extend({
     "gemini-deep-research",
     "vertex-ai",
     "notebooklm",
-    "glass-ai",
+    "glass-ia",
   ]),
-  estimatedTime: z.string(),
   variables: z.array(z.string()).optional(),
   domain: z
     .enum([
-      "general",
+      "général",
       "pharmacologie",
-      "chimie-medicinale",
-      "pharmacie-hospitaliere",
+      "chimie-médicinale",
+      "pharmacie-hospitalière",
       "officine",
       "recherche",
     ])
     .optional(),
   useCase: z.string().optional(),
   example: z.string().optional(),
+  // Le champ difficulty est hérité de baseSchema et sera donc disponible
 });
 
-// Schéma pour les outils externes
-export const externalToolSchema = baseContentSchema.extend({
-  content: z.string(),
+// Schéma pour les outils externes - MIS À JOUR
+export const externalToolSchema = baseSchema.extend({
   url: z.string().url(),
   category: z.enum([
     "Moteur de Recherche IA",
@@ -117,34 +97,37 @@ export const externalToolSchema = baseContentSchema.extend({
   ]),
   pricing: z.enum(["Gratuit", "Freemium", "Payant", "Étudiant"]),
   capabilities: z.array(z.string()),
-  guideSlug: z.string().optional(),
-  difficulty: z.enum(["beginner", "intermediate", "advanced"]).optional(),
-  estimatedTime: z.string().optional(),
+  slug: z.string().optional(), // Ajouté automatiquement par la fonction transform
+  // Le champ 'content' est maintenant hérité de baseSchema et sera rempli par le corps du MDX
+});
+
+// ============================================================================
+// Schéma pour les Concepts (pivot central)
+// ============================================================================
+export const conceptSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  icon: z.string().optional(), // Nom de l'icône Lucide
+  content: z.string(),
+  keyTakeaways: z
+    .array(z.string())
+    .max(3, { message: "Il ne peut y avoir plus de 3 points clés." })
+    .optional(),
+
+  // NOUVEAUX CHAMPS
+  mainGuideSlug: z.string().optional(), // Slug du guide principal pour ce concept
+  category: z
+    .enum(["Fondamentaux", "Techniques Avancées", "Méthodologie"])
+    .optional(),
 });
 
 // ============================================================================
 // TYPES GÉNÉRÉS AUTOMATIQUEMENT - Pas de duplication !
 // ============================================================================
-
-// Types principaux
 export type Guide = z.infer<typeof guideSchema>;
-export type Philosophy = z.infer<typeof philosophySchema>;
-export type Principle = z.infer<typeof principleSchema>;
 export type Prompt = z.infer<typeof promptSchema>;
 export type ExternalTool = z.infer<typeof externalToolSchema>;
-
-// Types d'entrée (pour la création/modification)
-export type GuideInput = z.input<typeof guideSchema>;
-export type PhilosophyInput = z.input<typeof philosophySchema>;
-export type PrincipleInput = z.input<typeof principleSchema>;
-export type PromptInput = z.input<typeof promptSchema>;
-export type ExternalToolInput = z.input<typeof externalToolSchema>;
-
-// Types utilitaires
-export type DifficultyLevel = "beginner" | "intermediate" | "advanced";
-export type GuideCategory = z.infer<typeof guideSchema>["category"];
-export type PromptCategory = z.infer<typeof promptSchema>["category"];
-export type TargetTool = z.infer<typeof promptSchema>["targetTool"];
+export type Concept = z.infer<typeof conceptSchema>;
 
 // ============================================================================
 // DÉFINITION DES COLLECTIONS
@@ -153,22 +136,15 @@ export type TargetTool = z.infer<typeof promptSchema>["targetTool"];
 export const guides = defineCollection({
   name: "guides",
   directory: "src/content/guides",
-  include: "*.mdx",
+  include: "*.mdx", // Changement de "**/*.mdx" à "*.mdx" pour ne chercher que dans le dossier racine
   schema: guideSchema,
-});
-
-export const philosophy = defineCollection({
-  name: "philosophy",
-  directory: "src/content/philosophy",
-  include: "*.mdx",
-  schema: philosophySchema,
-});
-
-export const principles = defineCollection({
-  name: "principles",
-  directory: "src/content/principles",
-  include: "*.mdx",
-  schema: principleSchema,
+  transform: ({ _meta, ...data }) => {
+    // Simplification totale de la transformation
+    return {
+      ...data,
+      slug: extractSlug(_meta.path), // Le slug est maintenant plat
+    };
+  },
 });
 
 export const prompts = defineCollection({
@@ -176,6 +152,10 @@ export const prompts = defineCollection({
   directory: "src/content/prompts",
   include: "*.mdx",
   schema: promptSchema,
+  transform: ({ _meta, ...data }) => ({
+    ...data,
+    slug: extractSlug(_meta.path),
+  }),
 });
 
 export const externalTools = defineCollection({
@@ -183,8 +163,31 @@ export const externalTools = defineCollection({
   directory: "src/content/external-tools",
   include: "*.mdx",
   schema: externalToolSchema,
+  // On ajoute une transformation pour créer un slug propre
+  transform: ({ _meta, ...data }) => {
+    const path = _meta?.path || "";
+    return {
+      ...data,
+      slug: extractSlug(path), // Ex: gemini-deep-research
+    };
+  },
+});
+
+// ============================================================================
+// Définition de la collection "concepts" (pivot central)
+// ============================================================================
+export const concepts = defineCollection({
+  name: "concepts",
+  directory: "src/content/concepts",
+  include: "*.mdx",
+  schema: conceptSchema,
+  transform: ({ _meta, ...data }) => ({
+    ...data,
+    slug: extractSlug(_meta.path),
+  }),
 });
 
 export default defineConfig({
-  collections: [guides, philosophy, principles, prompts, externalTools],
+  // SUPPRESSION de 'principles' de la liste
+  collections: [guides, prompts, externalTools, concepts],
 });

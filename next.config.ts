@@ -4,17 +4,23 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
-    ignoreBuildErrors: true,
+    // Réactiver la validation TypeScript pour la qualité du code
+    ignoreBuildErrors: false,
   },
   reactStrictMode: true,
   eslint: {
-    // Build time ESLint errors are ignored
-    ignoreDuringBuilds: true,
+    // Réactiver le linting pour maintenir la qualité
+    ignoreDuringBuilds: false,
   },
+
   // React Compiler pour les optimisations automatiques
   experimental: {
     reactCompiler: true,
-    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+    optimizePackageImports: [
+      "lucide-react",
+      "@radix-ui/react-icons",
+      "react-markdown", // Bonne idée d'optimiser les dépendances MDX
+    ],
   },
   // Image optimization
   images: {

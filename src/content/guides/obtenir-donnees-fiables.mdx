@@ -1,0 +1,275 @@
+---
+title: "Guide de Précision : Obtenir des Données Fiables avec XML et Température Basse"
+description: "Apprenez à combiner la structuration XML et un contrôle strict de la créativité pour extraire des données factuelles sans hallucination."
+category: "techniques-avancees"
+difficulty: "avancé"
+estimatedTime: "20 minutes"
+tags: ["fiabilité", "données", "xml", "température", "hallucination"]
+concepts:
+  ["xml-prompting", "température-dosage", "hallucination-effet-indesirable"]
+keyTakeaways:
+  - "Pour extraire des données factuelles, combinez une structure de sortie stricte (XML/YAML) avec une température très basse (≤ 0.2)."
+  - "Une température élevée est l'ennemie de la fiabilité ; elle encourage l'IA à 'inventer' des informations pour remplir les vides."
+  - "Cette méthode est essentielle pour des tâches comme la compilation de données médicamenteuses ou l'analyse de protocoles."
+---
+
+# Guide de Précision : Obtenir des Données Fiables avec XML et Température Basse
+
+Ce guide vous montre la méthode la plus fiable pour forcer une IA à se comporter comme un outil d'extraction de données et non comme un assistant créatif. Nous combinerons les concepts de **[XML Prompting](/concepts/xml-prompting)** et de **[Température = Dosage](/concepts/température-dosage)**.
+
+## Le Problème : L'IA est un Menteur Créatif
+
+Par défaut, les IA sont conçues pour être "utiles" et "créatives". Si elles ne connaissent pas une information, elles peuvent en inventer une qui semble plausible. Pour la pharmacie, c'est extrêmement dangereux.
+
+**Notre objectif :** "menotter" la créativité de l'IA pour qu'elle ne rapporte QUE les faits, et rien que les faits.
+
+## L'Expérience : Comparaison de deux approches
+
+Nous voulons extraire les informations clés du RCP de l'atorvastatine.
+
+### Tentative n°1 : L'approche naïve (Haute Température, Prompt Vague)
+
+**Prompt :**
+
+```
+Température : 0.8
+Résume-moi les infos importantes sur l'atorvastatine.
+```
+
+**Résultat Possible (dangereux) :**
+
+> L'atorvastatine est un médicament très efficace, généralement prescrit à 20mg. Il est crucial de surveiller les enzymes hépatiques **tous les mois**. L'interaction principale est avec le jus de pamplemousse qui peut **doubler** sa concentration. Il est aussi utilisé pour prévenir les AVC chez les patients à **faible risque**.
+
+_Analyse :_ Plusieurs informations sont des hallucinations plausibles mais fausses (la surveillance mensuelle n'est plus recommandée, le "doublement" est une simplification excessive, l'indication est pour le haut risque).
+
+### Tentative n°2 : L'approche de Précision (Basse Température, Structure Stricte)
+
+**Prompt :**
+
+```xml
+<!-- Température : 0.1 -->
+<role>
+  Tu es un système d'extraction de données pharmaceutiques. Tu ne dois extraire que les informations explicitement présentes dans le texte fourni. Si une information n'est pas présente, tu dois écrire "Non spécifié".
+</role>
+
+<contexte>
+  <rcp_atorvastatine>
+  """
+  [Coller ici le texte du RCP de l'atorvastatine]
+  """
+  </rcp_atorvastatine>
+</contexte>
+
+<instructions>
+  Extrais les informations suivantes et retourne-les UNIQUEMENT au format YAML ci-dessous.
+</instructions>
+
+<format_sortie>
+atorvastatine_info:
+  posologie_usuelle: "..."
+  monitoring_hepatique: "..."
+  interaction_pamplemousse: "..."
+  prevention_avc: "..."
+</format_sortie>
+```
+
+**Résultat Attendu (fiable) :**
+
+```yaml
+atorvastatine_info:
+  posologie_usuelle: "La plage posologique se situe entre 10 et 80 mg en une seule prise par jour."
+  monitoring_hepatique: "Il est recommandé de pratiquer des épreuves fonctionnelles hépatiques avant l'instauration du traitement et périodiquement par la suite."
+  interaction_pamplemousse: "La consommation d'importantes quantités de jus de pamplemousse peut entraîner une augmentation des concentrations plasmatiques d'atorvastatine."
+  prevention_avc: "Prévention des événements cardiovasculaires chez les patients considérés à haut risque de survenue d'un premier événement cardiovasculaire."
+```
+
+## Conclusion
+
+Pour passer du mode "assistant créatif" au mode "extracteur de données fiable", la recette est simple :
+
+**Structure Stricte (XML/YAML) + Température Très Basse (≤ 0.2)**
+
+C'est la seule méthode pour garantir que l'IA ne se base que sur le contexte que vous lui fournissez, ce qui est une compétence de sécurité fondamentale pour toute utilisation en pharmacie.
+
+## Application Pratique : Compiler des Données d'Interactions
+
+### Le Défi
+
+Vous voulez créer une base de données fiable des interactions médicamenteuses à partir de plusieurs RCP.
+
+### Solution : Prompt d'Extraction Structuré
+
+```xml
+<!-- Température : 0.1 -->
+<role>
+Tu es un système d'extraction de données d'interactions médicamenteuses. Tu ne dois extraire QUE les informations explicitement documentées dans les RCP fournis.
+
+<instructions>
+Extrais toutes les interactions médicamenteuses documentées pour la warfarine et présente-les dans un format structuré.
+
+<contexte>
+<rcp_warfarine>
+"""
+[Coller ici le RCP de la warfarine]
+"""
+</rcp_warfarine>
+
+<rcp_amiodarone>
+"""
+[Coller ici le RCP de l'amiodarone]
+"""
+</rcp_amiodarone>
+</contexte>
+
+<format_sortie>
+interactions_warfarine:
+  - medicament: "Amiodarone"
+    effet: "Augmentation de l'effet anticoagulant"
+    mecanisme: "Inhibition du métabolisme de la warfarine"
+    recommandation: "Réduire la posologie de warfarine de 30-50%"
+    niveau_preuve: "Documenté"
+    reference: "RCP Amiodarone"
+
+  - medicament: "Fluconazole"
+    effet: "Augmentation de l'effet anticoagulant"
+    mecanisme: "Inhibition du CYP2C9"
+    recommandation: "Surveillance renforcée de l'INR"
+    niveau_preuve: "Documenté"
+    reference: "RCP Fluconazole"
+</format_sortie>
+
+<validation>
+- Vérifie que chaque interaction est explicitement mentionnée dans les RCP
+- Si une information est absente, écris "Non spécifié"
+- Ne fais aucune déduction ou interprétation
+</validation>
+```
+
+## Techniques de Validation Avancées
+
+### 1. **Double Vérification**
+
+Après extraction, utilisez un second prompt pour valider :
+
+```xml
+<!-- Température : 0.0 -->
+<role>
+Tu es un validateur de données pharmaceutiques.
+
+<tache>
+Vérifie que chaque interaction listée ci-dessous est explicitement documentée dans les RCP fournis.
+
+<donnees_a_valider>
+[Coller la sortie du premier prompt]
+</donnees_a_valider>
+
+<rcp_source>
+[Coller les RCP originaux]
+</rcp_source>
+
+<format_sortie>
+validation:
+  - interaction: "Warfarine + Amiodarone"
+    statut: "Validé" ou "Non trouvé" ou "Partiellement documenté"
+    localisation: "Ligne X du RCP Amiodarone"
+    commentaire: "..."
+
+  - interaction: "Warfarine + Fluconazole"
+    statut: "Validé" ou "Non trouvé" ou "Partiellement documenté"
+    localisation: "Ligne Y du RCP Fluconazole"
+    commentaire: "..."
+</format_sortie>
+```
+
+### 2. **Contrôle de Cohérence**
+
+Vérifiez que les données extraites sont cohérentes entre elles :
+
+```xml
+<!-- Température : 0.1 -->
+<role>
+Tu es un analyste de cohérence de données.
+
+<tache>
+Identifie les incohérences potentielles dans cette base de données d'interactions.
+
+<donnees>
+[Coller la base de données validée]
+</donnees>
+
+<recherche_incoherences>
+- Mécanismes contradictoires pour la même interaction
+- Recommandations opposées
+- Niveaux de preuve incohérents
+- Dosages recommandés contradictoires
+</recherche_incoherences>
+
+<format_sortie>
+incoherences_detectees:
+  - type: "Mécanisme contradictoire"
+    interaction: "Warfarine + [Médicament]"
+    description: "Mécanisme A dans RCP 1, Mécanisme B dans RCP 2"
+    action: "Vérifier la source la plus récente"
+
+  - type: "Recommandation opposée"
+    interaction: "Warfarine + [Médicament]"
+    description: "Réduire dose vs Augmenter dose"
+    action: "Contacter le laboratoire pour clarification"
+</format_sortie>
+```
+
+## Conseils d'Implémentation
+
+### 1. **Choisissez la Bonne Température**
+
+- **0.0-0.1 :** Extraction pure de données (recommandé)
+- **0.2-0.3 :** Extraction avec légère interprétation
+- **0.4+ :** Éviter pour l'extraction de données
+
+### 2. **Structurez Rigoureusement**
+
+- Utilisez des formats stricts (XML, YAML, JSON)
+- Définissez des champs obligatoires
+- Imposez des valeurs par défaut pour les champs manquants
+
+### 3. **Validez Systématiquement**
+
+- Vérifiez toujours les données extraites
+- Utilisez des sources multiples quand possible
+- Documentez les incertitudes et limitations
+
+## Pièges à Éviter
+
+### 1. **Température Trop Élevée**
+
+```
+❌ Température : 0.8
+"Extrais les interactions de la warfarine"
+
+✅ Température : 0.1
+"Extrais UNIQUEMENT les interactions explicitement documentées"
+```
+
+### 2. **Instructions Trop Vagues**
+
+```
+❌ "Donne-moi les informations importantes"
+
+✅ "Extrais les champs suivants : nom, posologie, CI, interactions"
+```
+
+### 3. **Oubli de Validation**
+
+```
+❌ Utiliser directement les données extraites
+
+✅ Valider avec une seconde passe
+✅ Vérifier la cohérence
+✅ Contrôler avec des sources externes
+```
+
+## Conclusion
+
+L'extraction de données fiables est une compétence de sécurité fondamentale en pharmacie. En combinant une structure stricte avec une température très basse, vous transformez l'IA d'un "assistant créatif" en un "extracteur de données fiable".
+
+**Prochaine étape :** Maîtrisez l'art de la validation et de la vérification pour créer des bases de données pharmaceutiques de référence.

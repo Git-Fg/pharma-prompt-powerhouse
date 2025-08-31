@@ -1,36 +1,56 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+
     "allowJs": true,
     "skipLibCheck": true,
+
+    // Sécurité de type - Mode strict complet
     "strict": true,
-    "noEmit": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false, // Gardé false pour la flexibilité du projet étudiant
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+
+    // Options de sécurité supplémentaires pour 2025
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Modules et résolution
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    // JSX et Next.js
     "jsx": "preserve",
     "incremental": true,
+    "noEmit": true,
+
+    // Options avancées pour 2025
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+
+    // Plugins et chemins
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "content-collections": [
-        "./.content-collections/generated"
-      ]
-    },
-    "resolveJsonModule": true
+      "@/*": ["./src/*"],
+      "content-collections": ["./.content-collections/generated"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -39,7 +59,5 @@
     ".next/types/**/*.ts",
     ".content-collections/generated/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

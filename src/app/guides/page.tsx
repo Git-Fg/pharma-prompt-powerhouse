@@ -22,7 +22,6 @@ import {
   Search,
   BookOpen,
   Clock,
-  Star,
   ArrowRight,
   FileText,
   GraduationCap,
@@ -30,28 +29,38 @@ import {
   Target,
   CheckCircle,
   PlayCircle,
+  Brain,
+  Zap,
+  Heart,
 } from "lucide-react";
 import { allGuides } from "content-collections";
+import { useFavorites } from "@/hooks/useFavorites";
+import { cn } from "@/lib/utils";
 
-const categoryLabels = {
+const _categoryLabels = {
   prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
+  methodologie: "Méthodologie 🔬",
   tools: "Outils 🛠️",
   optimization: "Optimisation ⚡",
   security: "Sécurité 🔒",
+  "ia-modernes": "IA Modernes 🤖",
+  "cas-pratiques": "Cas Pratiques 💼",
+  ressources: "Ressources 📚",
+  fondamentaux: "Fondamentaux 🧠",
+  "techniques-avancees": "Techniques Avancées ⚡",
 };
 
 const difficultyLabels = {
-  beginner: "Débutant",
-  intermediate: "Intermédiaire",
-  advanced: "Avancé",
+  débutant: "Débutant",
+  intermédiaire: "Intermédiaire",
+  avancé: "Avancé",
 };
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
     case "prompting":
       return BookOpen;
-    case "methodology":
+    case "methodologie":
       return GraduationCap;
     case "tools":
       return FileText;
@@ -59,6 +68,16 @@ const getCategoryIcon = (category: string) => {
       return Target;
     case "security":
       return CheckCircle;
+    case "ia-modernes":
+      return Lightbulb;
+    case "cas-pratiques":
+      return PlayCircle;
+    case "ressources":
+      return FileText;
+    case "fondamentaux":
+      return Brain;
+    case "techniques-avancees":
+      return Zap;
     default:
       return BookOpen;
   }
@@ -68,7 +87,7 @@ const getCategoryColor = (category: string) => {
   switch (category) {
     case "prompting":
       return "bg-blue-500";
-    case "methodology":
+    case "methodologie":
       return "bg-green-500";
     case "tools":
       return "bg-purple-500";
@@ -76,6 +95,16 @@ const getCategoryColor = (category: string) => {
       return "bg-orange-500";
     case "security":
       return "bg-red-500";
+    case "ia-modernes":
+      return "bg-indigo-500";
+    case "cas-pratiques":
+      return "bg-teal-500";
+    case "ressources":
+      return "bg-purple-500";
+    case "fondamentaux":
+      return "bg-blue-600";
+    case "techniques-avancees":
+      return "bg-orange-600";
     default:
       return "bg-gray-500";
   }
@@ -85,6 +114,7 @@ export default function GuidesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
+  const { toggleFavorite, isFavorite } = useFavorites("favoriteGuides");
 
   const filteredGuides = allGuides.filter((guide) => {
     const matchesSearch =
@@ -139,11 +169,18 @@ export default function GuidesPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Toutes catégories</SelectItem>
+                <SelectItem value="fondamentaux">Fondamentaux</SelectItem>
+                <SelectItem value="methodologie">Méthodologie</SelectItem>
+                <SelectItem value="ressources">Ressources</SelectItem>
+                <SelectItem value="techniques-avancees">
+                  Techniques Avancées
+                </SelectItem>
+                <SelectItem value="cas-pratiques">Cas Pratiques</SelectItem>
                 <SelectItem value="prompting">Prompting</SelectItem>
-                <SelectItem value="methodology">Méthodologie</SelectItem>
                 <SelectItem value="tools">Outils</SelectItem>
                 <SelectItem value="optimization">Optimisation</SelectItem>
                 <SelectItem value="security">Sécurité</SelectItem>
+                <SelectItem value="ia-modernes">IA Modernes</SelectItem>
               </SelectContent>
             </Select>
 
@@ -156,9 +193,9 @@ export default function GuidesPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Tous niveaux</SelectItem>
-                <SelectItem value="beginner">Débutant</SelectItem>
-                <SelectItem value="intermediate">Intermédiaire</SelectItem>
-                <SelectItem value="advanced">Avancé</SelectItem>
+                <SelectItem value="débutant">Débutant</SelectItem>
+                <SelectItem value="intermédiaire">Intermédiaire</SelectItem>
+                <SelectItem value="avancé">Avancé</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -176,25 +213,47 @@ export default function GuidesPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGuides.map((guide) => {
-            const IconComponent = getCategoryIcon(guide.category);
+            const IconComponent = getCategoryIcon(
+              guide.category || "prompting"
+            );
             return (
               <Card
-                key={guide._meta.path}
+                key={guide.slug}
                 className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div
                       className={`w-12 h-12 ${getCategoryColor(
-                        guide.category
+                        guide.category || "prompting"
                       )} rounded-lg flex items-center justify-center`}
                     >
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge variant="secondary" className="text-xs">
-                        {difficultyLabels[guide.difficulty]}
+                        {guide.difficulty
+                          ? difficultyLabels[guide.difficulty]
+                          : "Non spécifié"}
                       </Badge>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-8 h-8"
+                        onClick={(e) => {
+                          e.preventDefault(); // Empêche la navigation si la carte est un lien
+                          toggleFavorite(guide.slug);
+                        }}
+                      >
+                        <Heart
+                          className={cn(
+                            "w-5 h-5",
+                            isFavorite(guide.slug)
+                              ? "text-red-500 fill-red-500"
+                              : "text-muted-foreground"
+                          )}
+                        />
+                      </Button>
                     </div>
                   </div>
                   <CardTitle className="text-lg font-semibold group-hover:text-blue-600 transition-colors">
@@ -209,11 +268,11 @@ export default function GuidesPage() {
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <div className="flex items-center space-x-2">
                         <Clock className="w-4 h-4" />
-                        <span>{guide.estimatedTime}</span>
+                        <span>{guide.estimatedTime || "Non spécifié"}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <BookOpen className="w-4 h-4" />
-                        <span>{guide.estimatedTime}</span>
+                        <span>{guide.category || "Non spécifié"}</span>
                       </div>
                     </div>
 
@@ -239,7 +298,7 @@ export default function GuidesPage() {
                       className="w-full group-hover:bg-blue-600 transition-colors"
                       asChild
                     >
-                      <a href={`/guides/${guide._meta.path}`}>
+                      <a href={`/guides/${guide.slug}`}>
                         Commencer
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </a>

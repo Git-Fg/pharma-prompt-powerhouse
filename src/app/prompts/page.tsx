@@ -18,10 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Search,
-  Filter,
   Copy,
   Eye,
   Code,
@@ -30,23 +28,16 @@ import {
   BookOpen,
   Microscope,
   Clock,
-  Star,
-  ArrowRight,
 } from "lucide-react";
 import { allPrompts } from "content-collections";
-
-const categoryLabels = {
-  technical: "Technique ⚙️",
-  analysis: "Analyse 🔍",
-  creative: "Créatif ✨",
-  documentation: "Documentation 📝",
-  research: "Recherche 🔬",
-};
+// Unused imports - keeping them for potential future use
+// import { getPromptsByCategory, getPromptsByTool } from "@/lib/content-utils";
+import Link from "next/link";
 
 const difficultyLabels = {
-  beginner: "Débutant",
-  intermediate: "Intermédiaire",
-  advanced: "Avancé",
+  débutant: "Débutant",
+  intermédiaire: "Intermédiaire",
+  avancé: "Avancé",
 };
 
 const toolLabels = {
@@ -58,15 +49,15 @@ const toolLabels = {
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
-    case "technical":
+    case "technique":
       return Code;
-    case "analysis":
+    case "analyse":
       return Microscope;
-    case "creative":
+    case "créatif":
       return PenTool;
     case "documentation":
       return BookOpen;
-    case "research":
+    case "recherche":
       return Microscope;
     default:
       return FileText;
@@ -75,15 +66,15 @@ const getCategoryIcon = (category: string) => {
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case "technical":
+    case "technique":
       return "bg-blue-500";
-    case "analysis":
+    case "analyse":
       return "bg-green-500";
-    case "creative":
+    case "créatif":
       return "bg-purple-500";
     case "documentation":
       return "bg-orange-500";
-    case "research":
+    case "recherche":
       return "bg-red-500";
     default:
       return "bg-gray-500";
@@ -152,11 +143,11 @@ export default function PromptsPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Toutes catégories</SelectItem>
-                <SelectItem value="technical">Technique</SelectItem>
-                <SelectItem value="analysis">Analyse</SelectItem>
-                <SelectItem value="creative">Créatif</SelectItem>
+                <SelectItem value="technique">Technique</SelectItem>
+                <SelectItem value="analyse">Analyse</SelectItem>
+                <SelectItem value="créatif">Créatif</SelectItem>
                 <SelectItem value="documentation">Documentation</SelectItem>
-                <SelectItem value="research">Recherche</SelectItem>
+                <SelectItem value="recherche">Recherche</SelectItem>
               </SelectContent>
             </Select>
 
@@ -169,9 +160,9 @@ export default function PromptsPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Tous niveaux</SelectItem>
-                <SelectItem value="beginner">Débutant</SelectItem>
-                <SelectItem value="intermediate">Intermédiaire</SelectItem>
-                <SelectItem value="advanced">Avancé</SelectItem>
+                <SelectItem value="débutant">Débutant</SelectItem>
+                <SelectItem value="intermédiaire">Intermédiaire</SelectItem>
+                <SelectItem value="avancé">Avancé</SelectItem>
               </SelectContent>
             </Select>
 
@@ -206,7 +197,7 @@ export default function PromptsPage() {
             const IconComponent = getCategoryIcon(prompt.category);
             return (
               <Card
-                key={prompt._meta.path}
+                key={prompt.slug}
                 className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <CardHeader>
@@ -220,7 +211,9 @@ export default function PromptsPage() {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge variant="secondary" className="text-xs">
-                        {difficultyLabels[prompt.difficulty]}
+                        {prompt.difficulty
+                          ? difficultyLabels[prompt.difficulty]
+                          : "Non spécifié"}
                       </Badge>
                     </div>
                   </div>
@@ -269,20 +262,21 @@ export default function PromptsPage() {
                         className="flex-1 group-hover:border-blue-600 transition-colors"
                         asChild
                       >
-                        <a href={`/prompts/${prompt._meta.path}`}>
+                        <Link href={`/prompts/${prompt.slug}`}>
                           <Eye className="w-4 h-4 mr-2" />
                           Voir
-                        </a>
+                        </Link>
                       </Button>
                       <Button
                         size="sm"
                         className="flex-1 group-hover:bg-blue-600 transition-colors"
-                        asChild
+                        onClick={() => {
+                          navigator.clipboard.writeText(prompt.content || "");
+                          // Optionnel : ajouter un toast de confirmation
+                        }}
                       >
-                        <a href={`/prompts/${prompt._meta.path}`}>
-                          <Copy className="w-4 h-4 mr-2" />
-                          Copier
-                        </a>
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copier
                       </Button>
                     </div>
                   </div>

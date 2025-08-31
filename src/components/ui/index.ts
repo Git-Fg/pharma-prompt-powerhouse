@@ -1,19 +1,19 @@
 // Composants de base
-export { Button } from "./button";
-export { Input } from "./input";
-export { Label } from "./label";
-export { Textarea } from "./textarea";
+export { Button } from './button';
+export { Input } from './input';
+export { Label } from './label';
+export { Textarea } from './textarea';
 export {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
-export { Checkbox } from "./checkbox";
-export { RadioGroup, RadioGroupItem } from "./radio-group";
-export { Switch } from "./switch";
-export { Slider } from "./slider";
+} from './select';
+export { Checkbox } from './checkbox';
+export { RadioGroup, RadioGroupItem } from './radio-group';
+export { Switch } from './switch';
+export { Slider } from './slider';
 
 // Composants de mise en page
 export {
@@ -23,16 +23,16 @@ export {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./card";
-export { Badge } from "./badge";
-export { Separator } from "./separator";
-export { AspectRatio } from "./aspect-ratio";
-export { ScrollArea } from "./scroll-area";
+} from './card';
+export { Badge } from './badge';
+export { Separator } from './separator';
+export { AspectRatio } from './aspect-ratio';
+export { ScrollArea } from './scroll-area';
 export {
   ResizablePanel,
   ResizablePanelGroup,
   ResizableHandle,
-} from "./resizable";
+} from './resizable';
 
 // Composants de navigation
 export {
@@ -43,7 +43,7 @@ export {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from "./navigation-menu";
+} from './navigation-menu';
 export {
   Breadcrumb,
   BreadcrumbItem,
@@ -51,19 +51,19 @@ export {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "./breadcrumb";
-export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+} from './breadcrumb';
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./accordion";
+} from './accordion';
 export {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "./collapsible";
+} from './collapsible';
 
 // Composants de dialogue
 export {
@@ -74,7 +74,7 @@ export {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./dialog";
+} from './dialog';
 export {
   AlertDialog,
   AlertDialogAction,
@@ -85,15 +85,15 @@ export {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./alert-dialog";
-export { Popover, PopoverContent, PopoverTrigger } from "./popover";
-export { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
+} from './alert-dialog';
+export { Popover, PopoverContent, PopoverTrigger } from './popover';
+export { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card';
 export {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./tooltip";
+} from './tooltip';
 export {
   Sheet,
   SheetContent,
@@ -102,20 +102,12 @@ export {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./sheet";
-export { Drawer } from "./drawer";
+} from './sheet';
+export { Drawer } from './drawer';
 
 // Composants de formulaire
-export {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./form";
-export { InputOTP, InputOTPGroup, InputOTPSlot } from "./input-otp";
+// Form component removed - using React 19 useActionState instead
+export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp';
 
 // Composants de données
 export {
@@ -126,7 +118,7 @@ export {
   TableHead,
   TableHeader,
   TableRow,
-} from "./table";
+} from './table';
 export {
   Pagination,
   PaginationContent,
@@ -135,10 +127,10 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "./pagination";
+} from './pagination';
 
 // Composants de feedback
-export { Alert, AlertDescription, AlertTitle } from "./alert";
+export { Alert, AlertDescription, AlertTitle } from './alert';
 export {
   Toast,
   ToastAction,
@@ -147,21 +139,21 @@ export {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "./toast";
-export { Toaster } from "./toaster";
-export { Progress } from "./progress";
-export { Skeleton } from "./skeleton";
+} from './toast';
+export { Toaster } from './toaster';
+export { Progress } from './progress';
+export { Skeleton } from './skeleton';
 
 // Composants d'interface
-export { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-export { Calendar } from "./calendar";
+export { Avatar, AvatarFallback, AvatarImage } from './avatar';
+export { Calendar } from './calendar';
 export {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./carousel";
+} from './carousel';
 export {
   Command,
   CommandDialog,
@@ -172,7 +164,7 @@ export {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "./command";
+} from './command';
 export {
   ContextMenu,
   ContextMenuContent,
@@ -186,7 +178,7 @@ export {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "./context-menu";
+} from './context-menu';
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -203,7 +195,7 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "./dropdown-menu";
+} from './dropdown-menu';
 export {
   Menubar,
   MenubarCheckboxItem,
@@ -221,9 +213,8 @@ export {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "./menubar";
-export { ToggleGroup, ToggleGroupItem } from "./toggle-group";
+} from './menubar';
+export { ToggleGroup, ToggleGroupItem } from './toggle-group';
 
 // Composants personnalisés
-export { CopyButton } from "./copy-button";
-export { CodeBlock } from "./code-block";
+export { CodeBlock } from './code-block';

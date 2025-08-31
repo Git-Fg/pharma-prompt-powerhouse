@@ -1,669 +1,223 @@
 ---
-title: "Tree-of-Thought : Résolution de Cas Cliniques Complexes"
-description: "Maîtrisez la technique Tree-of-Thought pour explorer systématiquement les hypothèses diagnostiques et thérapeutiques en pharmacie"
-category: "methodology"
-difficulty: "intermediate"
-estimatedTime: "60 minutes"
-tags:
-  [
-    "tree-of-thought",
-    "tot",
-    "raisonnement",
-    "cas-cliniques",
-    "hypotheses",
-    "diagnostic",
-  ]
+title: "Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought"
+description: "Apprenez à construire et utiliser un prompt Tree-of-Thought pour analyser un cas clinique avec plusieurs hypothèses diagnostiques."
+category: "ressources"
+difficulty: "avancé"
+estimatedTime: "30 minutes"
+tags: ["tree-of-thought", "cas-cliniques", "analyse", "raisonnement", "xml"]
+concepts: ['tree-of-thought', 'recherche-analyse', 'xml-prompting']
+keyTakeaways:
+  - "Utilisez le Tree-of-Thought pour forcer l'IA à évaluer plusieurs hypothèses en parallèle, idéal pour le diagnostic différentiel."
+  - "Structurez votre prompt en XML avec une balise `<thinking_process>` contenant plusieurs balises `<branch>` pour chaque hypothèse."
+  - "Imposez à l'IA de justifier et de noter chaque branche pour obtenir une analyse comparative claire et argumentée."
 ---
 
-# Tree-of-Thought : Résolution de Cas Cliniques Complexes
+# Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought
 
-## Objectifs d'apprentissage
+Ce guide est un tutoriel pratique pour appliquer le concept de **[Tree-of-Thought](/concepts/tree-of-thought)** à la résolution de cas cliniques complexes. Nous n'allons pas redéfinir la théorie ici, mais vous montrer **comment** construire un prompt ToT efficace, étape par étape.
 
-À la fin de ce guide, vous serez capable de :
+## Le Problème : Le Raisonnement Linéaire de l'IA
 
-- Comprendre le concept et les avantages du Tree-of-Thought prompting
-- Structurer vos prompts pour explorer multiple hypothèses simultanément
-- Évaluer systématiquement les différentes branches de raisonnement
-- Sélectionner la solution optimale basée sur l'analyse comparative
-- Appliquer cette technique aux cas cliniques pharmaceutiques complexes
+Face à un cas complexe, une IA standard suivra souvent le premier chemin de raisonnement plausible, ignorant d'autres diagnostics potentiels. Le ToT résout ce problème en la forçant à agir comme un clinicien expérimenté : explorer plusieurs pistes, les évaluer, puis conclure.
 
-## Prérequis
+## Workflow de Construction d'un Prompt ToT
 
-- Avoir lu le guide "Structuration de Prompts avec XML pour la Pharmacie"
-- Maîtriser l'utilisation des variables et templates
-- Comprendre les concepts de base du raisonnement clinique
-- Avoir une expérience avec les modèles Claude 4 ou équivalents
+### Étape 1 : Structurer les Données Cliniques en XML
 
-## Concepts clés
-
-### Qu'est-ce que le Tree-of-Thought ?
-
-Le Tree-of-Thought (ToT) est une technique de prompting avancée qui permet au modèle d'explorer multiple chemins de raisonnement simultanément, comme un arbre de décision, plutôt que de suivre un simple raisonnement linéaire.
-
-**Principe fondamental :**
-
-- **Exploration multiple** : Le modèle explore plusieurs hypothèses en parallèle
-- **Évaluation systématique** : Chaque branche est évaluée selon des critères clairs
-- **Sélection optimale** : La meilleure solution est choisie après analyse comparative
-- **Transparence** : Le processus de raisonnement est visible et traçable
-
-### Pourquoi utiliser ToT en pharmacie ?
-
-Les cas cliniques pharmaceutiques sont souvent complexes avec :
-
-- **Multiples hypothèses diagnostiques** possibles
-- **Interactions médicamenteuses** complexes
-- **Facteurs de risque** multiples
-- **Alternatives thérapeutiques** variées
-- **Urgences** nécessitant une prise de décision rapide
-
-## Méthodologie
-
-### Étape 1 : Structurer le cas clinique
-
-Organisez les informations du patient de manière claire et structurée :
+La clarté est essentielle. Commencez par formater les données du patient dans des balises XML sémantiques.
 
 ```xml
 <cas_clinique>
   <patient>
-    <identité>
-      <age>{{AGE_PATIENT}}</age>
-      <sexe>{{SEXE_PATIENT}}</sexe>
-      <poids>{{POIDS_PATIENT}}</poids>
-    </identité>
-
-    <symptômes>
-      <symptôme>
-        <description>{{SYMPTOME_1}}</description>
-        <début>{{DEBUT_SYMPTOME_1}}</début>
-        <intensité>{{INTENSITE_1}}</intensité>
-      </symptôme>
-      <!-- Autres symptômes... -->
-    </symptômes>
-
-    <signes_vitaux>
-      <tension_artérielle>{{TA}}</tension_artérielle>
-      <fréquence_cardiaque>{{FC}}</fréquence_cardiaque>
-      <température>{{TEMP}}</température>
-      <saturation>{{SAT}}</saturation>
-    </signes_vitaux>
-
-    <antécédents>{{ANTECEDENTS}}</antécédents>
-    <traitement_actuel>{{TRAITEMENT_ACTUEL}}</traitement_actuel>
+    <age>78</age>
+    <sexe>F</sexe>
+    <antécédents>HTA, Fibrillation Atriale, Insuffisance Rénale (ClCr 40ml/min)</antécédents>
   </patient>
+  <traitement>
+    <medicament nom="Amiodarone" dose="200mg/j" />
+    <medicament nom="Apixaban" dose="2.5mg x2/j" />
+    <medicament nom="Furosémide" dose="40mg/j" />
+  </traitement>
+  <presentation_clinique>
+    <symptome>Asthénie intense depuis 48h</symptome>
+    <signe_vital>Fréquence cardiaque à 45 bpm</signe_vital>
+  </presentation_clinique>
 </cas_clinique>
 ```
 
-### Étape 2 : Définir les branches d'hypothèses
+### Étape 2 : Définir les Branches d'Analyse
 
-Créez une structure pour explorer les différentes hypothèses :
-
-```xml
-<thinking_process>
-  <branch id="1">
-    <hypothesis>Hypothèse diagnostique principale</hypothesis>
-    <evidence>
-      - Élément de preuve 1
-      - Élément de preuve 2
-      - Élément de preuve 3
-    </evidence>
-    <confidence>0.8</confidence>
-    <next_steps>
-      Actions à entreprendre pour confirmer
-    </next_steps>
-  </branch>
-
-  <branch id="2">
-    <hypothesis>Hypothèse alternative 1</hypothesis>
-    <evidence>
-      - Élément de preuve 1
-      - Élément de preuve 2
-    </evidence>
-    <confidence>0.6</confidence>
-    <next_steps>
-      Actions à entreprendre pour confirmer
-    </next_steps>
-  </branch>
-
-  <branch id="3">
-    <hypothesis>Hypothèse alternative 2</hypothesis>
-    <evidence>
-      - Élément de preuve 1
-      - Élément de preuve 2
-    </evidence>
-    <confidence>0.4</confidence>
-    <next_steps>
-      Actions à entreprendre pour confirmer
-    </next_steps>
-  </branch>
-</thinking_process>
-```
-
-### Étape 3 : Évaluer et comparer les branches
-
-Définissez des critères d'évaluation clairs :
+C'est le cœur du ToT. Vous demandez à l'IA d'explorer plusieurs hypothèses.
 
 ```xml
-<critères_évaluation>
-  <critère nom="probabilité_clinique" poids="0.3">
-    Compatibilité avec la présentation clinique
-  </critère>
-  <critère nom="évidence_scientifique" poids="0.25">
-    Support par la littérature médicale
-  </critère>
-  <critère nom="risque_patient" poids="0.2">
-    Risque pour le patient
-  </critère>
-  <critère nom="faisabilité" poids="0.15">
-    Possibilité de mise en œuvre
-  </critère>
-  <critère nom="coût_efficacité" poids="0.1">
-    Rapport coût-bénéfice
-  </critère>
-</critères_évaluation>
-```
-
-## Exemples pratiques
-
-### Exemple 1 : Cas d'insuffisance cardiaque aiguë
-
-```xml
-<task>
-  Résoudre un cas d'insuffisance cardiaque aiguë complexe
-</task>
-
-<problem>
-  <patient>
-    <symptômes>
-      Douleur thoracique, dyspnée, fatigue, œdèmes des membres inférieurs
-    </symptômes>
-    <signes_vitaux>
-      TA: 160/95, FC: 110, Temp: 37.2°C, Sat: 92%
-    </signes_vitaux>
-    <antécédents>
-      HTA, Diabète type 2, Tabagisme actif
-    </antécédents>
-    <traitement>
-      Lisinopril 20mg/jour, Metformine 850mg 2x/jour
-    </traitement>
-  </patient>
-</problem>
-
-<thinking_process>
-  <branch id="1">
-    <hypothesis>Insuffisance cardiaque aiguë décompensée</hypothesis>
-    <evidence>
-      - Symptômes compatibles (dyspnée, fatigue, œdèmes)
-      - Facteurs de risque présents (HTA, diabète, tabagisme)
-      - Signes vitaux altérés (TA élevée, FC rapide, Sat basse)
-    </evidence>
-    <confidence>0.8</confidence>
-    <next_steps>
-      - BNP/NT-proBNP
-      - Échocardiographie en urgence
-      - Radiographie thoracique
-    </next_steps>
-    <traitement_suggéré>
-      - Diurétiques de l'anse (Furosémide)
-      - Inhibiteurs de l'ECA
-      - Bêta-bloquants si stable
-    </traitement_suggéré>
-  </branch>
-
-  <branch id="2">
-    <hypothesis>Embolie pulmonaire</hypothesis>
-    <evidence>
-      - Douleur thoracique soudaine
-      - Dyspnée proportionnelle
-      - Facteurs de risque thrombotiques (diabète, tabagisme)
-    </evidence>
-    <confidence>0.6</confidence>
-    <next_steps>
-      - D-dimères
-      - Scanner thoracique avec injection
-      - Échographie cardiaque
-    </next_steps>
-    <traitement_suggéré>
-      - Anticoagulation curative
-      - Thrombolyse si instable
-    </traitement_suggéré>
-  </branch>
-
-  <branch id="3">
-    <hypothesis>Péricardite aiguë</hypothesis>
-    <evidence>
-      - Douleur thoracique position-dépendante
-      - Fatigue associée
-      - Fièvre modérée
-    </evidence>
-    <confidence>0.4</confidence>
-    <next_steps>
-      - Électrocardiogramme
-      - Échocardiogramme
-      - Marqueurs inflammatoires
-    </next_steps>
-    <traitement_suggéré>
-      - Anti-inflammatoires non stéroïdiens
-      - Colchicine
-    </traitement_suggéré>
-  </branch>
-</thinking_process>
-
 <instructions>
-  1. Évaluer chaque hypothèse indépendamment selon les critères définis
-  2. Attribuer un score de probabilité final
-  3. Recommander les examens prioritaires
-  4. Proposer un plan de prise en charge immédiate
-  5. Définir les critères de réévaluation
+Analyse ce cas en explorant les 3 hypothèses suivantes dans des branches de raisonnement séparées.
+
+<thinking_process>
+  <branch id="1">
+    <hypothesis>Surdosage en bêta-bloquant ou bradycardisant</hypothesis>
+    <questions_a_explorer>
+      - Quels médicaments actuels ont un effet bradycardisant ?
+      - La posologie est-elle adaptée à la fonction rénale et à l'âge ?
+      - Y a-t-il une interaction qui potentialise cet effet ?
+    </questions_a_explorer>
+  </branch>
+
+  <branch id="2">
+    <hypothesis>Trouble de la conduction cardiaque intrinsèque</hypothesis>
+    <questions_a_explorer>
+      - Les symptômes sont-ils typiques d'un bloc auriculo-ventriculaire ?
+      - Y a-t-il des facteurs de risque non médicamenteux ?
+    </questions_a_explorer>
+  </branch>
+
+  <branch id="3">
+    <hypothesis>Cause métabolique (ex: dysthyroïdie)</hypothesis>
+    <questions_a_explorer>
+      - L'amiodarone peut-elle induire une dysthyroïdie ?
+      - Quels examens biologiques seraient pertinents ?
+    </questions_a_explorer>
+  </branch>
+</thinking_process>
 </instructions>
+```
 
+### Étape 3 : Exiger une Évaluation et une Synthèse
+
+Pour finir, forcez l'IA à comparer ses propres raisonnements et à conclure.
+
+```xml
 <format_sortie>
-  <analyse_comparative>
-    <évaluation_branches>
-      <branche id="1">
-        <score_final>0.85</score_final>
-        <justification>Meilleure compatibilité clinique et facteurs de risque</justification>
-      </branche>
-      <branche id="2">
-        <score_final>0.65</score_final>
-        <justification>Possible mais moins probable que l'IC</justification>
-      </branche>
-      <branche id="3">
-        <score_final>0.35</score_final>
-        <justification>Peu probable vu le contexte</justification>
-      </branche>
-    </évaluation_branches>
+Après avoir exploré chaque branche, fournis une synthèse finale :
 
-    <diagnostic_probable>
-      Insuffisance cardiaque aiguë décompensée
-    </diagnostic_probable>
-
-    <examens_prioritaires>
-      - BNP/NT-proBNP
-      - Échocardiographie
-      - Radiographie thoracique
-    </examens_prioritaires>
-
-    <traitement_immédiat>
-      - Furosémide 40mg IV
-      - Monitoring cardiaque continu
-      - Oxygénothérapie si nécessaire
-    </traitement_immédiat>
-  </analyse_comparative>
+<analyse_finale>
+  <evaluation_branches>
+    <branche id="1" probabilité="[0-1]" justification="..." />
+    <branche id="2" probabilité="[0-1]" justification="..." />
+    <branche id="3" probabilité="[0-1]" justification="..." />
+  </evaluation_branches>
+  <diagnostic_le_plus_probable>...</diagnostic_le_plus_probable>
+  <plan_action_immediat>
+    1. Action 1...
+    2. Action 2...
+  </plan_action_immediat>
+</analyse_finale>
 </format_sortie>
 ```
 
-### Exemple 2 : Cas d'interaction médicamenteuse complexe
+En combinant ces trois blocs, vous obtenez un prompt ToT robuste qui guide l'IA à travers un processus de diagnostic différentiel structuré, fiable et transparent.
+
+## Application Pratique : Cas de Pharmacovigilance
+
+### Le Scénario
+Un patient de 65 ans présente une hépatite aiguë après 2 semaines de traitement par un nouveau médicament. Vous devez analyser les causes possibles.
+
+### Prompt ToT Complet
 
 ```xml
-<task>
-  Analyser une interaction médicamenteuse complexe avec Tree-of-Thought
-</task>
+<role>
+Tu es un expert en pharmacovigilance avec 15 ans d'expérience dans l'analyse des signaux de sécurité.
 
-<contexte>
-  <patient>
-    <age>72</age>
-    <poids>68kg</poids>
-    <clairance_créatinine>35 ml/min</clairance_créatinine>
-  </patient>
+<tache>
+Analyse ce cas d'hépatite aiguë en explorant toutes les causes possibles et propose un plan d'action.
 
-  <médicaments_actuels>
-    <médicament>
-      <nom>Warfarine</nom>
-      <dose>5mg/jour</dose>
-      <inr_cible>2.0-3.0</inr_cible>
-    </médicament>
-    <médicament>
-      <nom>Amiodarone</nom>
-      <dose>200mg/jour</dose>
-      <indication>Fibrillation auriculaire</indication>
-    </médicament>
-    <médicament>
-      <nom>Simvastatine</nom>
-      <dose>40mg/jour</dose>
-      <indication>Hypercholestérolémie</indication>
-    </médicament>
-  </médicaments>
-
-  <nouveau_médicament>
-    <nom>Clopidogrel</nom>
-    <dose>75mg/jour</dose>
-    <indication>Prévention secondaire post-SCA</indication>
-  </nouveau_médicament>
-</contexte>
+<cas_clinique>
+<patient>
+  <age>65</age>
+  <sexe>M</sexe>
+  <antecedents>HTA, Diabète type 2, Dyslipidémie</antecedents>
+  <traitement_habituel>Metformine, Atorvastatine, Ramipril</traitement_habituel>
+</patient>
+<evenement>
+  <medicament_suspect>Novamab (nouveau médicament)</medicament_suspect>
+  <delai_apparition>14 jours après initiation</delai_apparition>
+  <symptomes>Ictère, asthénie, nausées</symptomes>
+  <biologie>ASAT 800 UI/L, ALAT 1200 UI/L, Bilirubine 45 µmol/L</biologie>
+</evenement>
+</cas_clinique>
 
 <thinking_process>
-  <branch id="1">
-    <hypothesis>Interaction Warfarine-Clopidogrel : Risque hémorragique élevé</hypothesis>
-    <evidence>
-      - Double antiagrégation + anticoagulation
-      - Risque hémorragique majoré documenté
-      - Patient âgé avec fonction rénale altérée
-    </evidence>
-    <confidence>0.9</confidence>
-    <risque>Élevé</risque>
-    <recommandation>
-      Éviter l'association, privilégier l'anticoagulation seule
-    </recommandation>
-  </branch>
+<branch id="1">
+  <hypothesis>Hépatotoxicité intrinsèque du Novamab</hypothesis>
+  <analyse>
+    - Le délai de 14 jours est compatible avec une hépatotoxicité médicamenteuse
+    - Aucun autre facteur évident identifié
+    - Nécessite une recherche dans la littérature et les essais cliniques
+  </analyse>
+  <probabilite>0.7</probabilite>
+</branch>
 
-  <branch id="2">
-    <hypothesis>Interaction Amiodarone-Simvastatine : Risque de rhabdomyolyse</hypothesis>
-    <evidence>
-      - Amiodarone inhibe le CYP3A4
-      - Simvastatine métabolisée par CYP3A4
-      - Risque de toxicité musculaire
-    </evidence>
-    <confidence>0.8</confidence>
-    <risque>Moyen</risque>
-    <recommandation>
-      Réduire la dose de simvastatine ou changer pour pravastatine
-    </recommandation>
-  </branch>
+<branch id="2">
+  <hypothesis>Interaction médicamenteuse</hypothesis>
+  <analyse>
+    - Le patient prend 3 médicaments métabolisés par le foie
+    - Possibilité d'inhibition enzymatique par le Novamab
+    - Vérifier les voies métaboliques et interactions potentielles
+  </analyse>
+  <probabilite>0.2</probabilite>
+</branch>
 
-  <branch id="3">
-    <hypothesis>Interaction Amiodarone-Clopidogrel : Inhibition du métabolisme</hypothesis>
-    <evidence>
-      - Amiodarone inhibe le CYP2C19
-      - Clopidogrel est un prodrogue activé par CYP2C19
-      - Risque de diminution d'efficacité
-    </evidence>
-    <confidence>0.7</confidence>
-    <risque>Moyen</risque>
-    <recommandation>
-      Surveiller l'efficacité antiagrégante, considérer le prasugrel
-    </recommandation>
-  </branch>
-
-  <branch id="4">
-    <hypothesis>Interaction Simvastatine-Clopidogrel : Aucune interaction significative</hypothesis>
-    <evidence>
-      - Voies métaboliques différentes
-      - Pas d'interaction documentée
-      - Association possible
-    </evidence>
-    <confidence>0.9</confidence>
-    <risque>Faible</risque>
-    <recommandation>
-      Aucun ajustement nécessaire
-    </recommandation>
-  </branch>
+<branch id="3">
+  <hypothesis>Cause non médicamenteuse</hypothesis>
+  <analyse>
+    - Hépatite virale à exclure (sérologies)
+    - Hépatite auto-immune possible
+    - Stéatose hépatique préexistante aggravée
+  </analyse>
+  <probabilite>0.1</probabilite>
+</branch>
 </thinking_process>
 
-<instructions>
-  1. Évaluer chaque interaction selon le niveau de risque
-  2. Identifier les interactions critiques nécessitant une action immédiate
-  3. Proposer des alternatives thérapeutiques
-  4. Définir un plan de monitoring adapté
-  5. Établir des priorités d'action
-</instructions>
-
 <format_sortie>
-  <analyse_interactions>
-    <interactions_critiques>
-      <interaction>
-        <médicaments>Warfarine + Clopidogrel</médicaments>
-        <niveau_risque>Élevé</niveau_risque>
-        <action>Contre-indiquée</action>
-        <alternative>Anticoagulation seule avec monitoring INR renforcé</alternative>
-      </interaction>
-    </interactions_critiques>
+<conclusion>
+<diagnostic_probable>Hépatotoxicité intrinsèque du Novamab</diagnostic_probable>
+<justification>Délai compatible, absence d'autre cause évidente, probabilité la plus élevée</justification>
+</conclusion>
 
-    <interactions_modérées>
-      <interaction>
-        <médicaments>Amiodarone + Simvastatine</médicaments>
-        <niveau_risque>Moyen</niveau_risque>
-        <action>Réduire simvastatine à 20mg/jour</action>
-        <monitoring>CPK régulier, surveillance des symptômes musculaires</monitoring>
-      </interaction>
-      <interaction>
-        <médicaments>Amiodarone + Clopidogrel</médicaments>
-        <niveau_risque>Moyen</niveau_risque>
-        <action>Surveiller l'efficacité antiagrégante</action>
-        <monitoring>Tests de fonction plaquettaire</monitoring>
-      </interaction>
-    </interactions_modérées>
-
-    <plan_action>
-      <priorité_1>Arrêter le clopidogrel</priorité_1>
-      <priorité_2>Réduire la simvastatine</priorité_2>
-      <priorité_3>Surveiller l'efficacité de l'amiodarone</priorité_3>
-    </plan_action>
-  </analyse_interactions>
+<plan_action>
+1. **Immédiat :** Arrêt du Novamab, surveillance biologique renforcée
+2. **Court terme :** Recherche bibliographique sur l'hépatotoxicité du Novamab
+3. **Moyen terme :** Signalement à l'ANSM, analyse des autres cas
+</plan_action>
 </format_sortie>
 ```
 
-## Bonnes pratiques
+## Avantages du ToT en Clinique
 
-### 1. Structuration des branches
+### 1. **Diagnostic Différentiel Structuré**
+- Force l'exploration systématique de toutes les hypothèses
+- Évite le biais de confirmation
+- Garantit une analyse exhaustive
 
-- **Limitez le nombre** : 3-5 branches maximum pour éviter la confusion
-- **Hiérarchisez** : Commencez par l'hypothèse la plus probable
-- **Standardisez** : Utilisez la même structure pour toutes les branches
-- **Numérotez** : Facilitez la référence et la comparaison
+### 2. **Transparence du Raisonnement**
+- Chaque branche est documentée et justifiée
+- Facilite la validation par un expert humain
+- Améliore la traçabilité des décisions
 
-### 2. Évaluation des hypothèses
+### 3. **Plan d'Action Priorisé**
+- Actions classées par urgence et importance
+- Justification claire de chaque recommandation
+- Facilite la communication avec l'équipe soignante
 
-- **Définissez des critères clairs** : Probabilité, risque, faisabilité
-- **Attribuez des scores** : Utilisez une échelle cohérente (0-1 ou 0-100%)
-- **Justifiez les scores** : Expliquez le raisonnement derrière chaque évaluation
-- **Considérez le contexte** : Adaptez l'évaluation au patient spécifique
+## Conseils d'Implémentation
 
-### 3. Gestion des incertitudes
+### 1. **Limitez le Nombre de Branches**
+- Maximum 3-4 hypothèses pour éviter la dispersion
+- Chaque branche doit être distincte et plausible
+- Évitez les hypothèses trop spéculatives
 
-- **Reconnaissez les limites** : Identifiez les informations manquantes
-- **Proposez des examens** : Définissez les tests pour réduire l'incertitude
-- **Planifiez la réévaluation** : Définissez quand et comment réévaluer
-- **Documentez les doutes** : Gardez une trace des incertitudes
+### 2. **Structurez Rigoureusement**
+- Utilisez des balises XML cohérentes
+- Numérotez les branches pour faciliter la référence
+- Imposez un format de sortie strict
 
-### 4. Communication des résultats
-
-- **Soyez clair** : Présentez les résultats de manière structurée
-- **Priorisez** : Identifiez clairement les actions prioritaires
-- **Justifiez** : Expliquez le raisonnement derrière vos recommandations
-- **Planifiez** : Définissez les prochaines étapes et le suivi
-
-## Pièges à éviter
-
-### 1. Trop de branches
-
-```xml
-<!-- À éviter - trop complexe -->
-<thinking_process>
-  <branch id="1">...</branch>
-  <branch id="2">...</branch>
-  <branch id="3">...</branch>
-  <branch id="4">...</branch>
-  <branch id="5">...</branch>
-  <branch id="6">...</branch>
-</thinking_process>
-
-<!-- Préférer - plus simple -->
-<thinking_process>
-  <branch id="1">Hypothèse principale</branch>
-  <branch id="2">Hypothèse alternative 1</branch>
-  <branch id="3">Hypothèse alternative 2</branch>
-</thinking_process>
-```
-
-### 2. Évaluation subjective
-
-```xml
-<!-- À éviter - trop subjectif -->
-<confidence>Très élevée</confidence>
-<risque>Important</risque>
-
-<!-- Préférer - plus objectif -->
-<confidence>0.85</confidence>
-<risque>Élevé (score 8/10)</risque>
-```
-
-### 3. Oubli du suivi
-
-- **Définissez toujours** les critères de réévaluation
-- **Planifiez** les examens de contrôle
-- **Précisez** les signes d'alerte
-- **Établissez** un calendrier de suivi
-
-## Exercices pratiques
-
-### Exercice 1 : Cas de fièvre inexpliquée
-
-Créez un prompt Tree-of-Thought pour un cas de fièvre inexpliquée chez un patient immunodéprimé.
-
-<details>
-<summary>Solution</summary>
-
-```xml
-<task>
-  Analyser un cas de fièvre inexpliquée chez un patient immunodéprimé
-</task>
-
-<contexte>
-  <patient>
-    <age>45</age>
-    <immunodépression>Chimiothérapie pour lymphome</immunodépression>
-    <neutropénie>Neutrophiles 0.5 G/L</neutropénie>
-    <symptômes>Fièvre 39.5°C, frissons, fatigue</symptômes>
-    <durée>48h</durée>
-  </patient>
-</contexte>
-
-<thinking_process>
-  <branch id="1">
-    <hypothesis>Infection bactérienne</hypothesis>
-    <evidence>
-      - Neutropénie sévère
-      - Fièvre élevée avec frissons
-      - Contexte de chimiothérapie
-    </evidence>
-    <confidence>0.8</confidence>
-    <action>Antibiothérapie probabiliste large spectre</action>
-  </branch>
-
-  <branch id="2">
-    <hypothesis>Infection fongique</hypothesis>
-    <evidence>
-      - Immunodépression prolongée
-      - Fièvre persistante
-      - Facteur de risque
-    </evidence>
-    <confidence>0.6</confidence>
-    <action>Antifongique si persistance sous antibiothérapie</action>
-  </branch>
-
-  <branch id="3">
-    <hypothesis>Fièvre d'origine tumorale</hypothesis>
-    <evidence>
-      - Lymphome actif
-      - Fièvre isolée
-      - Pas de foyer infectieux évident
-    </evidence>
-    <confidence>0.3</confidence>
-    <action>Éliminer les causes infectieuses d'abord</action>
-  </branch>
-</thinking_process>
-
-<instructions>
-  1. Évaluer chaque hypothèse selon la probabilité
-  2. Proposer une stratégie diagnostique
-  3. Définir le traitement empirique
-  4. Planifier le suivi et la réévaluation
-</instructions>
-```
-
-</details>
-
-### Exercice 2 : Cas de toxicité médicamenteuse
-
-Créez un prompt Tree-of-Thought pour analyser une toxicité médicamenteuse suspecte.
-
-<details>
-<summary>Solution</summary>
-
-```xml
-<task>
-  Analyser une toxicité médicamenteuse suspecte
-</task>
-
-<contexte>
-  <patient>
-    <age>58</age>
-    <symptômes>Ictère, nausées, fatigue</symptômes>
-    <début>7 jours après début d'un nouveau traitement</début>
-    <médicaments>Atorvastatine 40mg/jour, Amlodipine 10mg/jour</médicaments>
-    <examens>Bilirubine totale 85 µmol/L, ALAT 180 U/L, ASAT 120 U/L</examens>
-  </patient>
-</contexte>
-
-<thinking_process>
-  <branch id="1">
-    <hypothesis>Hépatite médicamenteuse à l'atorvastatine</hypothesis>
-    <evidence>
-      - Atorvastatine connue pour hépatotoxicité
-      - Chronologie compatible
-      - Cytolyse hépatique
-    </evidence>
-    <confidence>0.8</confidence>
-    <action>Arrêter l'atorvastatine, surveillance biologique</action>
-  </branch>
-
-  <branch id="2">
-    <hypothesis>Hépatite médicamenteuse à l'amlodipine</hypothesis>
-    <evidence>
-      - Amlodipine rarement hépatotoxique
-      - Chronologie compatible
-      - Cytolyse modérée
-    </evidence>
-    <confidence>0.4</confidence>
-    <action>Surveillance, arrêt si aggravation</action>
-  </branch>
-
-  <branch id="3">
-    <hypothesis>Autre cause (virale, auto-immune)</hypothesis>
-    <evidence>
-      - Contexte médicamenteux
-      - Pas d'antécédent
-      - Nécessite investigations
-    </evidence>
-    <confidence>0.3</confidence>
-    <action>Investigations complémentaires</action>
-  </branch>
-</thinking_process>
-
-<instructions>
-  1. Évaluer la causalité selon l'algorithme de Naranjo
-  2. Proposer une conduite à tenir
-  3. Définir le monitoring biologique
-  4. Planifier la réintroduction si nécessaire
-</instructions>
-```
-
-</details>
-
-## Ressources complémentaires
-
-- [Guide : Structuration de Prompts avec XML pour la Pharmacie](./xml-prompting-pharma)
-- [Guide : Variables et Templates dans les Prompts](./variables-templates-prompts)
-- [Guide : Self-Consistency pour les Décisions Thérapeutiques](./self-consistency-therapeutique)
-- [Documentation sur le Tree-of-Thought prompting](https://arxiv.org/abs/2305.10601)
-
-## Prochaines étapes
-
-- **Maîtrisez le Self-Consistency** : Découvrez comment améliorer la précision avec des chemins multiples
-- **Explorez les techniques avancées** : Découvrez le Chain-of-Thought et le ReAct
-- **Pratiquez avec des cas complexes** : Appliquez ToT à des situations cliniques réelles
-- **Créez vos propres templates** : Développez des structures ToT personnalisées
+### 3. **Validez les Résultats**
+- Vérifiez la cohérence entre les probabilités
+- Assurez-vous que le plan d'action couvre tous les cas
+- Demandez une justification pour chaque recommandation
 
 ## Conclusion
 
-Le Tree-of-Thought prompting représente une avancée majeure dans l'ingénierie de prompts en 2025. Cette technique vous permet de :
+Le Tree-of-Thought transforme l'IA d'un "diagnostiqueur linéaire" en un "clinicien méthodique" qui explore systématiquement toutes les pistes. En maîtrisant cette technique, vous obtenez des analyses cliniques plus robustes, plus transparentes et plus fiables.
 
-1. **Explorer systématiquement** toutes les hypothèses possibles
-2. **Évaluer objectivement** chaque option selon des critères clairs
-3. **Prendre des décisions éclairées** basées sur une analyse comparative
-4. **Documenter votre raisonnement** pour la traçabilité et l'apprentissage
-
-En maîtrisant cette approche, vous transformerez vos prompts en véritables outils de raisonnement clinique, capables de traiter les cas les plus complexes avec rigueur et méthode.
-
-**Rappel important** : Le Tree-of-Thought est particulièrement efficace avec les modèles Claude 4 qui ont des capacités de réflexion intégrées. Adaptez toujours la complexité de vos arbres à la capacité du modèle utilisé.
+**Prochaine étape :** Combinez le ToT avec d'autres techniques avancées comme l'XML Prompting et le Context Engineering pour des prompts ultra-sophistiqués.

@@ -1,0 +1,153 @@
+---
+title: "Hallucination : Effet Indésirable"
+description: "Comprendre et prévenir les hallucinations de l'IA comme des effets indésirables prévisibles"
+icon: "AlertTriangle"
+category: "Fondamentaux"
+mainGuideSlug: "fondamentaux-prompting-pharmaceutique"
+keyTakeaways:
+  - "Une hallucination est une erreur factuelle plausible, un 'effet indésirable' prévisible de l'IA."
+  - "Réduisez le risque en baissant la 'température' (créativité) et en fournissant un contexte clair et délimité."
+  - "Vérifiez systématiquement les informations critiques générées avec des sources officielles."
+---
+
+# Hallucination : Effet Indésirable
+
+## Qu'est-ce qu'une hallucination ?
+
+Une **hallucination** est une erreur factuelle plausible générée par l'IA. Contrairement à une simple erreur, l'hallucination est crédible et peut tromper même des experts. C'est l'équivalent d'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante.
+
+## Pourquoi les hallucinations surviennent-elles ?
+
+### Mécanismes d'action
+
+1. **Température élevée** : L'IA devient trop "créative" et invente des informations
+2. **Contexte insuffisant** : L'IA comble les vides avec des données plausibles mais fausses
+3. **Instructions ambiguës** : L'IA interprète mal vos demandes
+4. **Limitations du modèle** : L'IA n'a pas accès à des informations récentes ou spécialisées
+
+### Facteurs de risque
+
+- **Température > 0.7** : Risque élevé d'hallucination
+- **Prompts vagues** : "Parle-moi des IEC" vs "Listez les IEC disponibles en France en 2025"
+- **Contexte insuffisant** : L'IA doit deviner ce que vous voulez
+- **Tâches complexes** : Plus la tâche est complexe, plus le risque augmente
+
+## Prévention et traitement
+
+### Stratégies de prévention
+
+#### 1. Contrôle de la température
+
+```
+❌ Température : 0.9 (risque élevé)
+"Inventez une nouvelle molécule pour traiter l'hypertension"
+
+✅ Température : 0.2 (risque faible)
+"Listez les molécules antihypertensives disponibles en 2025"
+```
+
+#### 2. Contexte clair et délimité
+
+```
+❌ Prompt vague
+"Analyse cette ordonnance"
+
+✅ Prompt précis
+"Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.
+Si une information n'est pas dans le texte, indique 'Non précisé'."
+```
+
+#### 3. Instructions de validation
+
+```
+"Avant de répondre, vérifie que toutes les informations que tu donnes
+sont directement dérivées du contexte fourni. Si tu n'es pas sûr,
+indique-le clairement."
+```
+
+### Traitement des hallucinations
+
+#### Détection
+
+- **Informations trop précises** sans source
+- **Citations inexistantes** d'études
+- **Données numériques** fantaisistes
+- **Réponses trop parfaites** pour être vraies
+
+#### Actions correctives
+
+1. **Réduire la température** immédiatement
+2. **Demander des sources** pour chaque affirmation
+3. **Utiliser des prompts de vérification**
+4. **Vérifier avec des sources officielles**
+
+## Applications en pharmacie
+
+### Cas 1 : Analyse d'interaction médicamenteuse
+
+```
+❌ Prompt risqué
+"Dis-moi tout sur l'interaction warfarine-amiodarone"
+
+✅ Prompt sécurisé
+"Basé sur les référentiels fournis, liste les interactions
+documentées entre warfarine et amiodarone. Indique le niveau
+de preuve pour chaque interaction."
+```
+
+### Cas 2 : Calcul de dose
+
+```
+❌ Prompt risqué
+"Calcule la dose de digoxine pour ce patient"
+
+✅ Prompt sécurisé
+"Utilise la formule de Cockcroft-Gault fournie pour calculer
+la clairance de créatinine, puis applique les recommandations
+de dosage de la HAS pour la digoxine."
+```
+
+### Cas 3 : Recherche bibliographique
+
+```
+❌ Prompt risqué
+"Trouve les dernières études sur les nouveaux anticoagulants"
+
+✅ Prompt sécurisé
+"Recherche dans PubMed les études publiées entre 2020 et 2025
+sur les anticoagulants oraux directs. Limite aux essais
+cliniques randomisés."
+```
+
+## Monitoring et surveillance
+
+### Signes d'alerte
+
+- **Réponses trop détaillées** sans contexte suffisant
+- **Citations d'études** que vous ne connaissez pas
+- **Données numériques** qui semblent trop parfaites
+- **Informations contradictoires** dans la même réponse
+
+### Tests de validation
+
+1. **Test de cohérence** : Posez la même question plusieurs fois
+2. **Test de source** : Demandez toujours les références
+3. **Test de plausibilité** : Vérifiez si la réponse semble réaliste
+4. **Test de vérification** : Confrontez avec des sources fiables
+
+## Bénéfices de cette approche
+
+1. **Sécurité accrue** : Moins de risques d'erreurs factuelles
+2. **Fiabilité** : Réponses plus prévisibles et vérifiables
+3. **Confiance** : Vous savez quand faire confiance à l'IA
+4. **Apprentissage** : Vous améliorez vos techniques de prompting
+
+## Règles d'or
+
+1. **Jamais 100% de confiance** : L'IA peut toujours halluciner
+2. **Toujours vérifier** : Les informations critiques doivent être validées
+3. **Contexte d'abord** : Plus le contexte est clair, moins le risque est élevé
+4. **Température adaptée** : Utilisez la température la plus basse possible
+5. **Instructions précises** : Évitez l'ambiguïté dans vos prompts
+
+En traitant les hallucinations comme des effets indésirables prévisibles, vous transformez l'IA en un outil plus sûr et plus fiable, exactement comme un bon pharmacien gère les effets indésirables de ses prescriptions.

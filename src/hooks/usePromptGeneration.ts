@@ -1,7 +1,10 @@
-"use client";
-
-import { useState, useCallback } from "react";
-import { PromptVariable, VariableValue, PromptGenerationResult } from "@/types";
+'use client';
+import { useState, useOptimistic, useTransition } from 'react';
+import type {
+  PromptVariable,
+  VariableValue,
+  PromptGenerationResult,
+} from '@/types/app';
 
 interface UsePromptGenerationProps {
   template: string;
@@ -12,26 +15,54 @@ export const usePromptGeneration = ({
   template,
   variables,
 }: UsePromptGenerationProps) => {
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isGenerating, startTransition] = useTransition();
   const [generatedPrompt, setGeneratedPrompt] =
     useState<PromptGenerationResult | null>(null);
+  const [optimisticPrompt, addOptimisticPrompt] = useOptimistic<
+    PromptGenerationResult | null,
+    Record<string, string | number | boolean>
+  >(generatedPrompt, (state, values) => {
+    if (!state) return null;
 
-  const generatePrompt = useCallback(
-    async (values: Record<string, string | number | boolean>) => {
-      setIsGenerating(true);
+    let filledTemplate = template;
+    const variableValues: VariableValue[] = [];
 
+    variables.forEach(variable => {
+      const value = values[variable.name] || '';
+      const placeholder = `{{${variable.name}}}`;
+      filledTemplate = filledTemplate.replace(
+        new RegExp(placeholder, 'g'),
+        String(value)
+      );
+      variableValues.push({ name: variable.name, value });
+    });
+
+    return {
+      filledTemplate,
+      variableValues,
+      timestamp: new Date().toISOString(),
+    };
+  });
+
+  const generatePrompt = async (
+    values: Record<string, string | number | boolean>
+  ) => {
+    // Ajouter le prompt optimiste immédiatement
+    addOptimisticPrompt(values);
+
+    startTransition(async () => {
       try {
         // Simuler un délai de génération
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         let filledTemplate = template;
         const variableValues: VariableValue[] = [];
 
-        variables.forEach((variable) => {
-          const value = values[variable.name] || "";
+        variables.forEach(variable => {
+          const value = values[variable.name] || '';
           const placeholder = `{{${variable.name}}}`;
           filledTemplate = filledTemplate.replace(
-            new RegExp(placeholder, "g"),
+            new RegExp(placeholder, 'g'),
             String(value)
           );
           variableValues.push({ name: variable.name, value });
@@ -45,30 +76,27 @@ export const usePromptGeneration = ({
 
         setGeneratedPrompt(result);
       } catch (error) {
-        console.error("Erreur lors de la génération du prompt:", error);
-      } finally {
-        setIsGenerating(false);
+        console.error('Erreur lors de la génération du prompt:', error);
       }
-    },
-    [template, variables]
-  );
+    });
+  };
 
-  const resetPrompt = useCallback(() => {
+  const resetPrompt = () => {
     setGeneratedPrompt(null);
-  }, []);
+  };
 
-  const copyToClipboard = useCallback(async (text: string) => {
+  const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       return true;
     } catch (error) {
-      console.error("Erreur lors de la copie:", error);
+      console.error('Erreur lors de la copie:', error);
       return false;
     }
-  }, []);
+  };
 
   return {
-    generatedPrompt,
+    generatedPrompt: optimisticPrompt || generatedPrompt,
     isGenerating,
     generatePrompt,
     resetPrompt,

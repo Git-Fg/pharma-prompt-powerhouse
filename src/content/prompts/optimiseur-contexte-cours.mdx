@@ -1,13 +1,13 @@
 ---
-title: "Optimiseur de Contexte pour Cours"
+title: 'Optimiseur de Contexte pour Cours'
 description: "Aide à transformer des notes de cours désorganisées en format structuré et optimisé pour l'IA."
-promptDescription: "Les notes de cours sont souvent désorganisées, pleines d'abréviations et difficiles à utiliser directement comme contexte pour une IA. Cet outil aide l'utilisateur à créer un prompt qui demandera à une IA externe de transformer ce chaos en un format structuré et optimisé, appliquant le principe de Qualité des entrées = Qualité des sorties. L'utilisateur colle ses notes de cours brutes dans une zone de texte. Il sélectionne le format de sortie désiré dans une liste : fiche de révision synthétique (listes à puces), tableau Markdown comparatif, mind map (format texte indenté), ou série de flashcards (Recto/Verso). Si un tableau est choisi, des champs apparaissent pour que l'utilisateur nomme les colonnes (ex: Molécule, Classe, EI Majeur). L'outil génère un prompt de reformatage avancé qui démontre que la structuration des données est une étape clé avant le prompting et fournit des modèles de prompts pour des tâches de reformatage complexes."
-category: analysis
-difficulty: beginner
-targetTool: chatgpt
-estimatedTime: "2-4 minutes"
-tags: ["cours", "structuration", "optimisation", "notes"]
-variables: ["course_notes", "output_format", "table_columns"]
+category: 'analyse'
+difficulty: 'débutant'
+targetTool: 'chatgpt'
+estimatedTime: '2-4 minutes'
+tags: ['cours', 'structuration', 'optimisation', 'notes']
+concepts: ['context-engineering']
+variables: ['course_notes', 'output_format', 'table_columns']
 ---
 
 # Optimiseur de Contexte pour Cours
@@ -35,15 +35,19 @@ L'objectif est de rendre ces informations plus faciles à mémoriser et à révi
 ## Instructions par Format
 
 ### Fiche de Révision
+
 Reformule ces notes en une fiche de révision synthétique avec des listes à puces organisées par thèmes.
 
 ### Tableau
+
 Reformule ces notes en un tableau Markdown avec les colonnes suivantes : {table_columns}. Assure-toi que chaque information est placée dans la colonne appropriée.
 
 ### Mind Map
+
 Transforme ces notes en une structure de mind map au format texte indenté, organisant les concepts de manière hiérarchique.
 
 ### Flashcards
+
 Transforme ces notes en une série de flashcards au format Recto/Verso, en identifiant les concepts clés et leurs définitions.
 
 ## Format de Sortie

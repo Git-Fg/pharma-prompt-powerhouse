@@ -1,0 +1,120 @@
+---
+title: "Comment Construire un Prompt Pharmaceutique Efficace"
+description: "Apprenez à construire un prompt fiable en suivant la méthode des 5 piliers : Rôle, Tâche, Contexte, Format et Exemples."
+category: "fondamentaux"
+difficulty: "débutant"
+estimatedTime: "25 minutes"
+tags: ["prompting", "structuration", "bonnes-pratiques"]
+concepts:
+  ["prompt-prescription", "context-engineering", "structuration-contenu"]
+keyTakeaways:
+  - "Structurez chaque prompt comme une prescription en définissant clairement le Rôle, la Tâche, le Contexte, le Format et les Exemples."
+  - "Placez toujours vos instructions les plus importantes au début et à la fin de vos prompts pour maximiser leur prise en compte par l'IA."
+  - "Utilisez des formats de sortie stricts (tableaux, XML, YAML) pour obtenir des réponses cohérentes et exploitables."
+---
+
+# Comment Construire un Prompt Pharmaceutique Efficace
+
+Ce guide est votre point de départ. Il vous apprend à construire un prompt fiable, étape par étape, en appliquant des principes simples dérivés de notre pratique en pharmacie.
+
+L'objectif n'est pas de simplement "poser une question" à l'IA, mais de lui donner une **instruction de travail complète et sans ambiguïté**, comme on rédigerait une prescription détaillée. Cette méthode met en pratique les concepts de [Prompt = Prescription](/concepts/prompt-prescription) et de [Context Engineering](/concepts/context-engineering).
+
+## Le Workflow en 5 Piliers
+
+Chaque prompt de qualité que vous rédigerez doit contenir ces cinq éléments.
+
+### 1. **Définir le Rôle** (La Molécule)
+
+Ne soyez pas vague. Précisez l'expertise exacte que vous attendez de l'IA.
+
+- **Mauvais :** `Tu es un expert.`
+- **Bon :** `Tu es un pharmacien clinicien spécialisé en gériatrie, habitué à optimiser des ordonnances complexes pour des patients polymédiqués en EHPAD.`
+
+### 2. **Formuler la Tâche** (La Posologie)
+
+Utilisez un verbe d'action clair pour décrire le résultat final que vous souhaitez.
+
+- **Mauvais :** `Parle-moi des IEC.`
+- **Bon :** `Crée une fiche de révision synthétique sur la classe des IEC, adaptée à un étudiant en L3 de pharmacie.`
+
+### 3. **Fournir le Contexte** (Les Antécédents)
+
+Donnez à l'IA toutes les données nécessaires. C'est le dossier patient de votre prompt.
+
+- **Mauvais :** `Analyse cette ordonnance.`
+- **Bon :** `Voici l'ordonnance d'un patient de 75 ans avec une insuffisance rénale (ClCr 40 mL/min). Analyse-la en te basant UNIQUEMENT sur les informations fournies.`
+
+### 4. **Spécifier le Format** (La Voie d'Administration)
+
+La manière la plus simple de fiabiliser une réponse est de dicter sa structure.
+
+- **Mauvais :** `Fais une liste des effets.`
+- **Bon :** `Présente les effets indésirables dans un tableau Markdown à 3 colonnes : "Effet", "Fréquence (RCP)", et "Gestion/Conseil".`
+
+### 5. **Donner un Exemple** (Le Cas Clinique de Référence)
+
+Pour les tâches complexes, montrez à l'IA un exemple du résultat attendu (_few-shot prompting_).
+
+- **Bon :** `Transforme ces infos en carte Anki. Voici le format attendu : Recto: "Question ?" / Verso: "Réponse.". Maintenant, applique ce format à...`
+
+## Application Pratique : Construire un Prompt d'Analyse
+
+Mettons ces piliers en action pour analyser une interaction médicamenteuse.
+
+```markdown
+[ROLE]
+Tu es un pharmacien d'officine expérimenté, spécialisé dans le conseil patient.
+
+[TÂCHE]
+Analyse l'interaction potentielle entre les deux médicaments suivants et rédige un conseil court et clair pour le patient.
+
+[CONTEXTE]
+
+- Médicament 1 : Fluconazole 150 mg
+- Médicament 2 : Atorvastatine 20 mg
+- Contexte patient : Prise ponctuelle du Fluconazole.
+
+[FORMAT]
+Réponds en utilisant la structure suivante :
+
+1.  **Niveau de Risque :** (ex: Faible, Modéré, Élevé)
+2.  **Mécanisme Simplifié :** (en une phrase simple)
+3.  **Conseil au Patient :** (maximum 30 mots, langage accessible)
+
+[EXEMPLE DE CONSEIL]
+"Attention, ce nouveau médicament peut augmenter les effets du traitement pour le cholestérol. Soyez attentif à d'éventuelles douleurs musculaires inhabituelles."
+```
+
+## 🚀 Tactiques de Clarté Avancées
+
+### Prompting Positif et Structuré
+
+- **Dites ce qu'il faut faire** plutôt que ce qu'il ne faut pas faire
+- **Spécifiez la longueur** : "en un seul paragraphe", "en 5 points clés"
+- **Utilisez des listes numérotées** pour les instructions complexes
+- **Ajoutez des conditions** : "Si le patient a une insuffisance rénale, alors..."
+
+### Gestion des Cas Limites
+
+```markdown
+[CONDITIONS]
+
+- Si le patient a une ClCr < 30 mL/min : adapter la posologie
+- Si association avec spironolactone : surveillance K+ renforcée
+- Si grossesse : contre-indication absolue
+```
+
+## 📊 Mesure de la Qualité
+
+### Métriques d'Évaluation
+
+- **Clarté** : Le prompt est-il compréhensible en une lecture ?
+- **Complétude** : Tous les éléments nécessaires sont-ils présents ?
+- **Précision** : Le format de sortie est-il sans ambiguïté ?
+- **Efficacité** : Le contexte est-il optimisé pour la mémoire de l'IA ?
+
+## Conclusion
+
+Un prompt parfait n'est pas une question, c'est un **protocole thérapeutique** pour votre IA. En structurant vos demandes selon ces 5 piliers et en appliquant les techniques de context engineering 2025, vous transformez un "stagiaire brillant mais naïf" en un "expert spécialisé" qui vous livre exactement ce dont vous avez besoin.
+
+**Prochaine étape :** Maîtrisez les techniques avancées de fiabilisation et d'optimisation des coûts dans le guide suivant.

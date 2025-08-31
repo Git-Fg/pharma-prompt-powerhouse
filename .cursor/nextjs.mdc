@@ -1,539 +1,407 @@
 ---
-description: Règles de développement complètes pour pharma-prompt-powerhouse - une application Next.js 15 avec React 19, Tailwind CSS v4, shadcn/ui et TypeScript, spécialisée en ingénierie de prompts pharmaceutiques avec accent sur la simplicité et modernité
 alwaysApply: true
 ---
 
 <context>
-Dans ce projet, j'ai créé une application spécialisée pour l'ingénierie de prompts pharmaceutiques et des sciences de la santé en utilisant **Next.js 15** avec App Router, **React 19** avec ses hooks modernes, **Tailwind CSS v4** avec configuration CSS-first, et **shadcn/ui** comme bibliothèque de composants. C'est un projet étudiant conçu pour aider d'autres étudiants à apprendre l'ingénierie de prompts à travers des guides, la philosophie, des prompts et des outils interactifs.
+Projet étudiant spécialisé en ingénierie de prompts pharmaceutiques avec Next.js 15, React 19, shadcn/ui 3.0 et TypeScript. Conçu pour aider d'autres étudiants à apprendre l'ingénierie de prompts à travers des guides, principes, prompts et outils interactifs.
+Le projet doit être en Français, mais n'hésite pas à utiliser des anglicisme lorsque cela décrit plus précisément certains concepts (comme token, prompt engineering, context engineering...)
 
-Le projet utilise **TypeScript** pour la sécurité des types, **pnpm** comme gestionnaire de packages, et suit une architecture de composants côté client avec des directives "use client". J'ai privilégié la simplicité et la modernité tout au long, en évitant les complexités inutiles tout en maintenant la fonctionnalité.
+Technologies clés:
 
-**IMPORTANT** : C'est un projet éducatif créé par un étudiant pour les étudiants. Je crois en garder les choses simples, abordables et concentrées sur la valeur d'apprentissage réelle plutôt que sur la complexité technique. Tout le code doit privilégier la clarté, la maintenabilité et l'accessibilité tout en adhérant aux modèles modernes de React 19 et Next.js 15.
+- Next.js 15 avec App Router (pas de cache par défaut, APIs async)
+- React 19 (Actions, useOptimistic, useActionState, use())
+- shadcn/ui 3.0 (registres namespacés, MCP Server)
+- eslint 9 avec flat config
+- Content Collections avec schémas Zod
+- TypeScript pour la sécurité des types
 
-**NOUVEAUX ÉLÉMENTS 2025** :
-
-- **React Compiler** : Expérimental mais prometteur pour l'optimisation automatique
-- **Actions React 19** : Pour une gestion simplifiée des formulaires et mutations
-- **Tailwind CSS v4** : Configuration CSS-first avec moteur Oxide haute performance
-- **shadcn/ui 3.0** : Support des registres namespacés et CLI améliorée
-- **Next.js 15** : Changements de sémantique de cache et support de React 19
-- **Content Collections** : Intégration native avec Next.js pour la gestion de contenu MDX
-
-Vous DEVEZ écrire tout le contenu en français et NE JAMAIS le traduire en anglais.
+Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non-développeurs.
 </context>
 
-<tone_and_voice_guidelines>
-**1. Style de communication :**
-
-- **DO** : Utiliser la première personne ("je") lorsque j'explique mes décisions ou partage des insights personnels, car c'est un projet étudiant
-- **DO** : Maintenir un ton professionnel mais abordable - ni trop décontracté, ni trop formel
-- **DO** : Écrire comme si j'expliquais à un étudiant qui apprend à mes côtés
-- **DO** : Utiliser un langage clair et simple qui privilégie la compréhension plutôt que le jargon technique
-- **DO** : Être encourageant et supportif dans les commentaires et la documentation
-- **DO NOT** : Utiliser une terminologie excessivement complexe sans explication
-- **DO NOT** : Avoir un ton autoritaire ou prescriptif - c'est un parcours d'apprentissage
-- **DO NOT** : Utiliser de l'argot ou un langage trop décontracté qui pourrait nuire au professionnalisme
-
-**2. Approche de documentation :**
-
-- **DO** : Écrire des commentaires qui expliquent le "pourquoi" derrière les décisions, pas seulement le "quoi"
-- **DO** : Utiliser des exemples et des analogies qui ont du sens pour les étudiants apprennant des concepts pharmaceutiques
-- **DO** : Reconnaître quand quelque chose pourrait être confus et offrir des clarifications
-- **DO** : Garder la documentation concise mais utile
-- **DO NOT** : Écrire des romans dans les commentaires - soyez bref mais significatif
-- **DO NOT** : Supposer des connaissances préalables sans fournir de contexte
-- **DO NOT** : Utiliser des commentaires pour énoncer l'évident - se concentrer sur les insights
-
-**3. Communication du code :**
-
-- **DO** : Utiliser des noms de variables et de fonctions descriptifs qui racontent une histoire
-- **DO** : Structurer le code d'une manière qui se lit comme un récit
-- **DO** : Utiliser des modèles cohérents qui rendent la base de code prévisible
-- **DO** : Privilégier la lisibilité plutôt que la finesse
-- **DO NOT** : Utiliser des abréviations ou des noms peu clairs
-- **DO NOT** : Écrire du code "intelligent" qui sacrifie la clarté
-- **DO NOT** : Créer des abstractions inutiles qui rendent le code plus difficile à suivre
-  </tone_and_voice_guidelines>
-
-<simplicity_principles>
-**1. Philosophie de base :**
-
-- **DO** : Suivre le principe YAGNI (You Aren't Gonna Need It) - ne construire que ce qui est nécessaire maintenant
-- **DO** : Commencer par la solution la plus simple possible et n'évoluer que lorsque nécessaire
-- **DO** : Privilégier la clarté et la compréhension plutôt que la sophistication technique
-- **DO** : Choisir des solutions faciles à expliquer et à maintenir
-- **DO** : Utiliser l'outil le plus simple qui fait le travail efficacement
-- **DO NOT** : Construire pour des exigences futures hypothétiques
-- **DO NOT** : Ajouter des couches d'abstraction sans bénéfice immédiat
-- **DO NOT** : Utiliser des modèles complexes quand des modèles simples suffisent
-
-**2. Éviter le sur-ingénierie :**
-
-- **DO** : Utiliser les fonctionnalités intégrées de React (useState, useContext) avant de recourir à des bibliothèques externes
-- **DO** : Écrire des composants simples qui font bien une seule chose
-- **DO** : Garder les hiérarchies de composants plates et éviter les imbrications inutiles
-- **DO** : Utiliser la composition plutôt que l'héritage et les modèles complexes
-- **DO** : Éviter l'optimisation prématurée - n'optimiser que lorsque des problèmes de performance surviennent
-- **DO NOT** : Créer des solutions de gestion d'état complexes pour des applications simples
-- **DO NOT** : Utiliser plusieurs bibliothèques quand une seule suffirait
-- **DO NOT** : Construire des solutions génériques pour des problèmes spécifiques
-
-**3. Simplicité moderne :**
-
-- **DO** : Tirer parti des optimisations intégrées de React 19 (Compiler, Actions) plutôt que des optimisations manuelles
-- **DO** : Utiliser le nouveau hook `use()` pour une gestion asynchrone plus simple des données
-- **DO** : Faire confiance aux optimisations automatiques de React 19 plutôt qu'à la mémoïsation manuelle
-- **DO** : Utiliser des modèles modernes qui réduisent le code répétitif et la complexité
-- **DO** : Tirer parti de la configuration simplifiée de Tailwind CSS v4
-- **DO NOT** : Implémenter manuellement des fonctionnalités que React 19 fournit automatiquement
-- **DO NOT** : Utiliser des modèles obsolètes lorsque des alternatives modernes et plus simples existent
-- **DO NOT** : Lutter contre le framework - travailler avec ses conventions
-  </simplicity_principles>
-
-<react19_simplicity_rules>
-**1. Confiance dans le React Compiler :**
-
-- **DO** : Faire entièrement confiance au React Compiler - écrire un code simple et lisible
-- **DO** : Laisser le compiler gérer la mémoïsation automatiquement
-- **DO** : Se concentrer sur l'écriture de composants clairs et déclaratifs
-- **DO** : Utiliser les Actions de React 19 pour la gestion des formulaires - elles sont plus simples que l'état de formulaire manuel
-- **DO** : Utiliser `useOptimistic` pour un retour UI immédiat - plus simple que les mises à jour optimistes manuelles
-- **DO** : Utiliser `useActionState` pour la gestion d'état de formulaire - réduit le code répétitif
-- **DO NOT** : Utiliser manuellement `useMemo` ou `useCallback` sans besoins de performance spécifiques
-- **DO NOT** : Écrire du code d'optimisation complexe que le compiler peut gérer
-
-**2. Gestion des données simplifiée :**
-
-- **DO** : Utiliser le nouveau hook `use()` pour lire les promesses et le contexte - plus simple que les modèles useEffect
-- **DO** : Combiner `use()` avec Suspense pour un code asynchrone plus propre
-- **DO** : Utiliser les Actions pour les mutations de données - plus simples que la gestion asynchrone manuelle
-- **DO** : Garder la logique de récupération des données simple et proche de là où elle est utilisée
-- **DO** : Utiliser les limites d'erreur standard pour la gestion des erreurs
-- **DO NOT** : Créer des abstractions de récupération de données complexes pour des besoins simples
-- **DO NOT** : Mélanger plusieurs modèles asynchrones inutilement
-- **DO NOT** : Sur-compliquer la gestion des erreurs avec des solutions personnalisées
-
-**3. Simplicité des composants :**
-
-- **DO** : Écrire des composants petits et concentrés qui font bien une seule chose
-- **DO** : Utiliser des composants fonctionnels avec des hooks - plus simples que les composants de classe
-- **DO** : Utiliser la composition avec la prop `children` pour une UI flexible
-- **DO** : Garder les interfaces de props simples et concentrées
-- **DO** : Utiliser les props par défaut et les props optionnelles pour réduire la complexité
-- **DO NOT** : Créer des hiérarchies de composants complexes
-- **DO NOT** : Utiliser des composants d'ordre supérieur ou des render props lorsque des alternatives plus simples existent
-- **DO NOT** : Créer des composants qui essaient de faire trop de choses
-
-**4. Simplicité de la gestion d'état :**
-
-- **DO** : Commencer avec `useState` pour l'état local des composants
-- **DO** : Utiliser `useReducer` uniquement lorsque la logique d'état devient complexe
-- **DO** : Utiliser `useContext` pour partager l'état entre les composants proches
-- **DO** : Envisager Zustand uniquement lorsque l'état doit être partagé entre de nombreux composants
-- **DO** : Garder l'état aussi proche que possible de là où il est utilisé
-- **DO NOT** : Se tourner vers Redux ou une gestion d'état complexe pour des applications simples
-- **DO NOT** : Créer un état global pour les besoins locaux des composants
-- **DO NOT** : Sur-compliquer la gestion d'état avec des abstractions inutiles
-
-**5. Nouvelles fonctionnalités React 19 :**
-
-- **DO** : Utiliser les Actions pour les mutations asynchrones dans les transitions
-- **DO** : Tirer parti du support natif des métadonnées de document (title, meta, link)
-- **DO** : Utiliser le support intégré des feuilles de style avec la propriété `precedence`
-- **DO** : Expérimenter avec le React Compiler pour l'optimisation automatique
-- **DO** : Utiliser `useOptimistic` pour les mises à jour optimistes simplifiées
-- **DO NOT** : Utiliser des bibliothèques externes pour les métadonnées ou les styles lorsque React 19 fournit un support natif
-- **DO NOT** : Ignorer les nouvelles fonctionnalités qui peuvent simplifier le code
-  </react19_simplicity_rules>
-
-<nextjs15_simplicity_rules>
-**1. Simplicité de l'App Router :**
-
-- **DO** : Utiliser l'App Router avec ses conventions simples basées sur les fichiers
-- **DO** : Suivre le modèle de route existant : `src/app/[feature]/page.tsx`
-- **DO** : Utiliser des composants client (`"use client"`) pour les éléments interactifs
-- **DO** : Garder la structure des routes plate et intuitive
-- **DO** : Utiliser des routes dynamiques (`[id]`) uniquement lorsque nécessaire
-- **DO NOT** : Créer des configurations de routage complexes
-- **DO NOT** : Utiliser le Pages Router pour les nouveaux développements
-- **DO NOT** : Sur-ingénier les structures de routes
-
-**2. Simplicité des données et du contenu :**
-
-- **DO** : Utiliser Content Collections pour une gestion de contenu MDX moderne et typée
-- **DO** : Configurer Content Collections avec `@content-collections/next` pour une intégration transparente
-- **DO** : Utiliser le schéma Zod pour la validation du contenu et la sécurité des types
-- **DO** : Stocker le contenu dans des fichiers MDX avec frontmatter structuré
-- **DO** : Utiliser la génération statique pour le contenu qui ne change pas fréquemment
-- **DO NOT** : Créer des couches de récupération de données complexes
-- **DO NOT** : Utiliser des bases de données ou des backends complexes lorsque des données statiques suffisent
-- **DO NOT** : Sur-compliquer la gestion du contenu
-
-**3. Simplicité de performance :**
-
-- **DO** : Utiliser les optimisations intégrées de Next.js 15
-- **DO** : Comprendre les nouvelles sémantiques de cache : les requêtes `fetch`, les Route Handlers `GET` et les navigations client ne sont plus mises en cache par défaut
-- **DO** : Utiliser le composant Image avec une configuration de base
-- **DO** : Utiliser le fractionnement de code uniquement pour les grands composants rarement utilisés
-- **DO** : Se concentrer sur les problèmes de performance réels, pas sur l'optimisation prématurée
-- **DO** : Utiliser les exportations statiques lorsque possible - plus simples que les déploiements serveur
-- **DO NOT** : Créer des configurations de surveillance de performance complexes
-- **DO NOT** : Sur-optimiser les composants qui fonctionnent bien
-- **DO NOT** : Utiliser des configurations de build complexes
-
-**4. Organisation des assets et fichiers :**
-
-- **DO** : Suivre la structure de projet existante de manière cohérente
-- **DO** : Garder les assets dans le répertoire public avec des chemins simples
-- **DO** : Utiliser des chemins relatifs pour la liaison interne
-- **DO** : Organiser les composants par fonctionnalité, pas par type
-- **DO** : Garder les noms de fichiers descriptifs et cohérents
-- **DO** : Utiliser `next.config.ts` pour la configuration TypeScript
-- **DO NOT** : Créer des structures de dossiers profondément imbriquées
-- **DO NOT** : Éparpiller les fichiers dans tout le projet
-- **DO NOT** : Utiliser des systèmes de gestion d'assets complexes
-
-**5. Nouvelles fonctionnalités Next.js 15 :**
-
-- **DO** : Utiliser `@next/codemod` pour les mises à niveau automatisées
-- **DO** : Comprendre et utiliser les nouvelles API de requêtes asynchrones
-- **DO** : Utiliser l'API `instrumentation.js` stable pour l'observabilité du cycle de vie serveur
-- **DO** : Expérimenter avec l'API `unstable_after` pour exécuter du code après la fin du streaming de réponse
-- **DO** : Utiliser les formulaires améliorés (`next/form`) pour la navigation côté client
-- **DO NOT** : Ignorer les nouvelles API qui peuvent simplifier le développement
-- **DO NOT** : Utiliser des approches obsolètes lorsque de nouvelles alternatives existent
-  </nextjs15_simplicity_rules>
-
-<tailwind_v4_simplicity_rules>
-**1. Simplicité de configuration :**
-
-- **DO** : Utiliser la configuration CSS-first de Tailwind CSS v4
-- **DO** : Importer Tailwind avec `@import "tailwindcss";` - c'est tout ce dont vous avez besoin
-- **DO** : Utiliser le bloc `@theme` pour les personnalisations directement en CSS
-- **DO** : Laisser Tailwind gérer la détection de contenu automatiquement
-- **DO** : Utiliser le système de couleurs et les design tokens intégrés
-- **DO** : Profiter du nouveau moteur Oxide pour des builds jusqu'à 5x plus rapides
-- **DO NOT** : Créer de fichiers tailwind.config.js complexes
-- **DO NOT** : Configurer manuellement les chemins de contenu
-- **DO NOT** : Remplacer les valeurs par défaut de Tailwind inutilement
-
-**2. Simplicité du style :**
-
-- **DO** : Utiliser les classes d'utilitaires directement en HTML/JSX
-- **DO** : Utiliser les échelles d'espacement et de couleurs par défaut
-- **DO** : Utiliser les préfixes réactifs uniquement lorsque nécessaire
-- **DO** : Utiliser les composants shadcn/ui pour un style cohérent
-- **DO** : Garder le style proche des composants qui l'utilisent
-- **DO** : Utiliser les nouvelles valeurs d'utilitaires dynamiques et variantes
-- **DO** : Profiter des API de gradient étendues (radiales, coniques)
-- **DO NOT** : Créer de fichiers CSS personnalisés pour des besoins de style simples
-- **DO NOT** : Utiliser `@apply` pour les styles de composants
-- **DO NOT** : Créer des utilitaires personnalisés complexes
-
-**3. Simplicité du thème et du design :**
-
-- **DO** : Utiliser le système de thème sombre/clair intégré
-- **DO** : Utiliser les variables CSS pour le thème lorsque nécessaire
-- **DO** : Garder les palettes de couleurs simples et cohérentes
-- **DO** : Utiliser la palette de couleurs P3 modernisée pour des couleurs plus vives
-- **DO** : Utiliser l'échelle de typographie par défaut
-- **DO** : Utiliser un espacement cohérent dans toute l'application
-- **DO** : Utiliser les requêtes conteneur intégrées pour un style responsive basé sur la taille du conteneur
-- **DO NOT** : Créer des configurations de thème complexes
-- **DO NOT** : Utiliser trop de couleurs ou de styles différents
-- **DO NOT** : Sur-personnaliser le système de design
-
-**4. Nouvelles fonctionnalités Tailwind CSS v4 :**
-
-- **DO** : Utiliser `@starting-style` pour les transitions d'entrée et de sortie sans JavaScript
-- **DO** : Expérimenter avec les nouvelles utilités de transformation 3D
-- **DO** : Utiliser la variante `not-*` pour une logique de style plus complexe
-- **DO** : Profiter des améliorations de performance du moteur Oxide
-- **DO** : Utiliser la détection automatique de contenu sans configuration
-- **DO NOT** : Ignorer les nouvelles fonctionnalités qui peuvent améliorer l'expérience de développement
-- **DO NOT** : Utiliser des approches obsolètes lorsque de nouvelles alternatives plus performantes existent
-  </tailwind_v4_simplicity_rules>
-
-<shadcn_ui_simplicity_rules>
-**1. Simplicité d'utilisation des composants :**
-
-- **DO** : Utiliser les composants shadcn/ui tels quels - ne pas sur-personnaliser
-- **DO** : Suivre les modèles d'importation de composants existants
-- **DO** : Utiliser les variantes et le style par défaut
-- **DO** : Combiner les composants simplement avec la composition
-- **DO** : Utiliser les fonctionnalités d'accessibilité intégrées
-- **DO** : Utiliser shadcn/ui CLI 3.0 avec ses nouvelles fonctionnalités (registres namespacés, recherche et découverte)
-- **DO NOT** : Créer des versions fortement personnalisées des composants shadcn/ui
-- **DO NOT** : Envelopper les composants shadcn/ui dans des abstractions inutiles
-- **DO NOT** : Mélanger shadcn/ui avec d'autres bibliothèques UI
-
-**2. Simplicité des formulaires et entrées :**
-
-- **DO** : Utiliser les composants de formulaire shadcn/ui pour des formulaires cohérents
-- **DO** : Utiliser les modèles de validation intégrés
-- **DO** : Garder la logique de formulaire simple et proche du formulaire
-- **DO** : Utiliser les Actions de React 19 pour la soumission de formulaire
-- **DO** : Utiliser les hooks d'état de formulaire pour une meilleure UX
-- **DO** : Profiter des nouveaux composants et améliorations de shadcn/ui 3.0
-- **DO NOT** : Créer des abstractions de formulaire complexes
-- **DO NOT** : Sur-compliquer la validation des formulaires
-- **DO NOT** : Utiliser plusieurs bibliothèques de formulaires
-
-**3. Simplicité de la mise en page et de la structure :**
-
-- **DO** : Utiliser les composants de mise en page shadcn/ui pour une structure cohérente
-- **DO** : Garder les mises en page simples et responsives
-- **DO** : Utiliser les utilitaires de grille et de flexbox pour la mise en page
-- **DO** : Utiliser le composant card pour les sections de contenu
-- **DO** : Garder la navigation simple et intuitive
-- **DO** : Utiliser les composants new-york mis à jour pour un look moderne
-- **DO NOT** : Créer des systèmes de mise en page complexes
-- **DO NOT** : Sur-utiliser les composants de mise en page
-- **DO NOT** : Créer des structures de composants profondément imbriquées
-
-**4. Nouvelles fonctionnalités shadcn/ui 3.0 :**
-
-- **DO** : Utiliser les registres namespacés pour organiser les composants (`@registry/name`)
-- **DO** : Configurer plusieurs registres dans `components.json` pour une meilleure organisation
-- **DO** : Utiliser les nouvelles commandes de recherche et découverte
-- **DO** : Profiter des améliorations de performance du moteur de registre réécrit
-- **DO** : Utiliser le serveur MCP pour une meilleure intégration avec les outils d'IA
-- **DO NOT** : Ignorer les nouvelles fonctionnalités de CLI qui peuvent améliorer le flux de travail
-- **DO NOT** : Utiliser des approches obsolètes lorsque de nouvelles alternatives plus efficaces existent
-  </shadcn_ui_simplicity_rules>
-
-<content_collections_simplicity_rules>
-**1. Simplicité de configuration :**
-
-- **DO** : Utiliser `@content-collections/next` pour une intégration transparente avec Next.js
-- **DO** : Configurer le plugin Content Collections comme dernier plugin dans la chaîne
-- **DO** : Utiliser des schémas Zod pour la validation et la sécurité des types du contenu
-- **DO** : Organiser le contenu dans des répertoires par type (guides, philosophy, prompts, etc.)
-- **DO** : Utiliser des fichiers MDX avec frontmatter structuré pour le contenu
-- **DO NOT** : Créer des configurations complexes pour la gestion de contenu
-- **DO NOT** : Ignorer la validation de type pour le contenu
-- **DO NOT** : Utiliser des structures de contenu incohérentes
-
-**2. Simplicité des schémas de contenu :**
-
-- **DO** : Créer des schémas simples et réutilisables avec Zod
-- **DO** : Utiliser un schéma de base commun pour tous les types de contenu
-- **DO** : Étendre le schéma de base avec des propriétés spécifiques au type de contenu
-- **DO** : Utiliser des énumérations pour les valeurs catégorielles
-- **DO** : Garder les schémas plats et faciles à comprendre
-- **DO NOT** : Créer des schémas excessivement complexes avec des imbrications profondes
-- **DO NOT** : Répéter la même logique de validation dans plusieurs schémas
-- **DO NOT** : Utiliser des types avancés de Zod sans besoin clair
-
-**3. Simplicité de l'organisation du contenu :**
-
-- **DO** : Organiser le contenu par fonctionnalité, pas par type technique
-- **DO** : Utiliser des noms de fichiers descriptifs et cohérents
-- **DO** : Garder la structure des répertoires plate et intuitive
-- **DO** : Utiliser des variables et des remplacements dans le contenu MDX pour la flexibilité
-- **DO** : Utiliser le système de collections pour regrouper le contenu connexe
-- **DO NOT** : Créer des structures de répertoires profondément imbriquées
-- **DO NOT** : Éparpiller le contenu dans tout le projet
-- **DO NOT** : Utiliser des conventions de nommage incohérentes
-
-**4. Intégration avec le rendu Markdown :**
-
-- **DO** : Utiliser `react-markdown` avec `remark-gfm` pour le rendu GitHub Flavored Markdown
-- **DO** : Créer un composant MarkdownRenderer réutilisable avec support pour :
-  - Tables, tâches, strikethrough (via remark-gfm)
-  - Mathématiques (via remark-math et rehype-katex)
-  - Highlighting de code syntaxique
-  - Thème sombre/clair
-- **DO** : Utiliser des composants personnalisés pour les éléments Markdown courants
-- **DO** : Garder la configuration du rendu Markdown simple et maintenable
-- **DO NOT** : Créer des configurations complexes pour le rendu Markdown
-- **DO NOT** : Ignorer l'accessibilité dans le rendu Markdown
-- **DO NOT** : Utiliser des approches obsolètes pour le rendu Markdown
-  </content_collections_simplicity_rules>
-
-<typescript_simplicity_rules>
-**1. Simplicité de la sécurité des types :**
-
-- **DO** : Utiliser TypeScript pour la sécurité des types de base
-- **DO** : Créer des interfaces simples pour les structures de données
-- **DO** : Utiliser l'inférence de type lorsque cela est possible
-- **DO** : Utiliser les types d'union pour les variantes simples
-- **DO** : Garder les types proches de là où ils sont utilisés
-- **DO** : Centraliser les types communs dans `src/types/` avec des exports clairs
-- **DO NOT** : Créer des types génériques excessivement complexes
-- **DO NOT** : Utiliser des fonctionnalités avancées de TypeScript sans besoin clair
-- **DO NOT** : Créer des fichiers de type séparés pour des types simples
-
-**2. Simplicité du typage des composants :**
-
-- **DO** : Utiliser des interfaces de props simples
-- **DO** : Utiliser les props optionnelles avec des valeurs par défaut
-- **DO** : Utiliser le type `React.FC` uniquement lorsque nécessaire
-- **DO** : Typer simplement les gestionnaires d'événements
-- **DO** : Utiliser des types en ligne pour les props simples
-- **DO** : Utiliser les types utilitaires intégrés (Partial, Required, Omit, etc.)
-- **DO NOT** : Créer des types de composants génériques complexes
-- **DO NOT** : Sur-typer les composants simples
-- **DO NOT** : Utiliser le type `any` - utiliser des types appropriés ou `unknown`
-
-**3. Simplicité du typage des données :**
-
-- **DO** : Créer des interfaces simples pour les modèles de données
-- **DO** : Utiliser les types de base : string, number, boolean, arrays
-- **DO** : Utiliser des propriétés optionnelles pour les données optionnelles
-- **DO** : Garder les types de données plats et simples
-- **DO** : Utiliser des alias de type pour les types répétés
-- **DO** : Valider les données externes avec Zod et les transformer en types TypeScript
-- **DO NOT** : Créer des structures de types complexes et imbriquées
-- **DO NOT** : Utiliser des fonctionnalités de type avancées inutilement
-- **DO NOT** : Créer des types difficiles à comprendre
-
-**4. Organisation des types :**
-
-- **DO** : Organiser les types par domaine fonctionnel (content, prompts, variables, etc.)
-- **DO** : Utiliser un fichier `index.ts` dans chaque dossier de types pour les exports
-- **DO** : Garder les types proches de leur utilisation quand c'est approprié
-- **DO** : Utiliser des namespaces ou des modules pour regrouper les types connexes
-- **DO** : Documenter les types complexes avec des commentaires JSDoc
-- **DO NOT** : Créer une hiérarchie de types profonde et complexe
-- **DO NOT** : Mélanger différents domaines de types dans le même fichier
-- **DO NOT** : Ignorer la documentation des types importants
-  </typescript_simplicity_rules>
-
-<pnpm_simplicity_rules>
-**1. Simplicité de la gestion des packages :**
-
-- **DO** : Utiliser pnpm pour toutes les opérations de packages
-- **DO** : Garder les dépendances minimales
-- **DO** : Utiliser `pnpm add` pour ajouter des dépendances
-- **DO** : Mettre régulièrement à jour les dépendances avec `pnpm update`
-- **DO** : Utiliser `pnpm audit` pour les vérifications de sécurité
-- **DO** : Utiliser le fichier `.pnpmrc` pour la configuration spécifique à pnpm
-- **DO NOT** : Ajouter des dépendances sans besoin clair
-- **DO NOT** : Utiliser plusieurs gestionnaires de packages
-- **DO NOT** : Ignorer les mises à jour de dépendances
-
-**2. Simplicité de l'espace de travail :**
-
-- **DO** : Utiliser la configuration simple `pnpm-workspace.yaml`
-- **DO** : Garder la structure de l'espace de travail plate
-- **DO** : Utiliser les dépendances partagées uniquement lorsque nécessaire
-- **DO** : Utiliser les commandes `pnpm` de manière cohérente
-- **DO** : Utiliser `node-linker=hoisted` pour une meilleure compatibilité
-- **DO** : Activer `auto-install-peers=true` pour une gestion plus simple
-- **DO NOT** : Créer des configurations d'espace de travail complexes
-- **DO NOT** : Sur-ingénier le partage de dépendances
-- **DO NOT** : Utiliser les fonctionnalités d'espace de travail inutilement
-
-**3. Bonnes pratiques pnpm spécifiques :**
-
-- **DO** : Utiliser `prefer-frozen-lockfile=true` pour des builds reproductibles
-- **DO** : Utiliser `strict-peer-dependencies=false` pour une meilleure compatibilité
-- **DO** : Utiliser `shamefully-hoist=true` pour éviter les problèmes de modules
-- **DO** : Documenter les dépendances importantes dans le README
-- **DO** : Utiliser `pnpm why` pour comprendre les dépendances
-- **DO NOT** : Modifier manuellement le fichier pnpm-lock.yaml
-- **DO NOT** : Ignorer les avertissements de dépendances
-- **DO NOT** : Utiliser des versions de dépendances instables sans nécessité
-  </pnpm_simplicity_rules>
-
-<project_specific_simplicity_rules>
-**1. Simplicité de la structure et de l'organisation :**
-
-- **DO** : Suivre exactement la structure de projet existante
-- **DO** : Garder l'organisation par fonctionnalités : guides, philosophy, prompts, tools
-- **DO** : Utiliser le modèle de routage simple basé sur les ID
-- **DO** : Garder les fichiers de données simples et plats
-- **DO** : Utiliser des conventions de nommage cohérentes
-- **DO** : Utiliser Content Collections pour la gestion du contenu MDX
-- **DO NOT** : Créer de nouveaux modèles d'organisation
-- **DO NOT** : Éparpiller les fichiers aléatoirement
-- **DO NOT** : Créer des hiérarchies de dossiers complexes
-
-**2. Simplicité de la gestion du contenu :**
-
-- **DO** : Garder les structures de données de contenu simples
-- **DO** : Utiliser des interfaces TypeScript de base pour le contenu
-- **DO** : Stocker le contenu dans des tableaux ou objets simples
-- **DO** : Utiliser le modèle de suivi de progression existant
-- **DO** : Garder le contenu concentré et valuable
-- **DO** : Utiliser des variables et des templates pour les prompts réutilisables
-- **DO NOT** : Créer des systèmes de gestion de contenu complexes
-- **DO NOT** : Sur-structurer les données de contenu
-- **DO NOT** : Ajouter des métadonnées inutiles
-
-**3. Simplicité du développement de fonctionnalités :**
-
-- **DO** : Construire les fonctionnalités de manière incrémentale
-- **DO** : Commencer par la fonctionnalité minimale viable
-- **DO** : Ajouter de la complexité uniquement lorsque nécessaire
-- **DO** : Garder les fonctionnalités concentrées sur la valeur utilisateur
-- **DO** : Utiliser les modèles existants pour les nouvelles fonctionnalités
-- **DO** : Prioriser l'accessibilité pour les non-développeurs
-- **DO NOT** : Construire des fonctionnalités complexes sans besoin
-- **DO NOT** : Ajouter des fonctionnalités juste parce qu'elles sont possibles
-- **DO NOT** : Sur-ingénier l'implémentation des fonctionnalités
-
-**4. Simplicité du focus pharmaceutique :**
-
-- **DO** : Garder le contenu pharmaceutique précis et clair
-- **DO** : Utiliser un langage simple et accessible pour les concepts médicaux
-- **DO** : Se concentrer sur les applications pratiques de l'ingénierie de prompts
-- **DO** : Garder les exemples pertinents et compréhensibles
-- **DO** : Prioriser la valeur éducative sur la complexité technique
-- **DO** : Créer des interfaces guidées pour les utilisateurs non-développeurs
-- **DO** : Documenter chaque variable et template avec des exemples concrets
-- **DO NOT** : Inclure du jargon médical inutile
-- **DO NOT** : Sur-compliquer les concepts pharmaceutiques
-- **DO NOT** : Sacrifier la clarté pour la sophistication technique
-
-**5. Spécifique aux prompts et variables :**
-
-- **DO** : Standardiser le format des variables (`{{nom_variable}}`)
-- **DO** : Créer des interfaces guidées pour la saisie des variables
-- **DO** : Documenter chaque variable avec des descriptions claires
-- **DO** : Utiliser des types de variables cohérents (texte, nombre, sélection, zone de texte)
-- **DO** : Fournir des exemples concrets pour chaque type de prompt
-- **DO** : Créer des templates réutilisables pour les cas d'usage courants
-- **DO NOT** : Utiliser des formats de variables incohérents
-- **DO NOT** : Laisser les variables sans documentation
-- **DO NOT** : Créer des templates trop génériques
-  </project_specific_simplicity_rules>
-
-<general_simplicity_rules>
-
-- **Philosophie de base** : Toujours choisir la solution la plus simple qui fonctionne. Prioriser la compréhension et la maintenabilité plutôt que la sophistication technique. Se rappeler que c'est un outil d'apprentissage, pas une application d'entreprise de production.
-- **Composants UI** : Utiliser les composants shadcn/ui directement et simplement. Ne pas sur-personnaliser ou les envelopper inutilement. Utiliser les variantes et le style par défaut.
-- **Gestion d'état** : Commencer avec useState et useContext. Ne recourir à des bibliothèques externes que lorsque absolument nécessaire. Garder l'état proche de là où il est utilisé.
-- **Gestion des données** : Utiliser des structures de données simples et des interfaces TypeScript. Garder la logique de récupération des données simple et proche des composants.
-- **Style** : Utiliser les classes d'utilitaires Tailwind CSS v4 directement. Ne pas créer de fichiers CSS complexes ou d'utilitaires personnalisés. Utiliser le système de thème intégré.
-- **Structure du projet** : Suivre les modèles existants exactement. Ne pas créer de nouvelles structures organisationnelles sans bonne raison.
-- **Communication** : Écrire des commentaires simples et clairs qui expliquent le "pourquoi" derrière les décisions. Utiliser des noms descriptifs qui racontent une histoire.
-- **Performance** : Faire confiance aux optimisations automatiques de React 19. N'optimiser que lorsque des problèmes de performance surviennent réellement.
-- **Dépendances** : Garder les dépendances minimales. N'ajouter des bibliothèques que lorsqu'elles résolvent un problème réel qui ne peut être résolu avec des fonctionnalités intégrées.
-- **Tests** : Se concentrer sur les tests manuels et les retours utilisateurs. Ne pas sur-investir dans des configurations de test complexes pour un projet d'apprentissage.
-- **Documentation** : Garder la documentation simple et concentrée sur l'aide aux autres étudiants à comprendre et à apprendre du projet.
-- **Accessibilité** : Concevoir pour les non-développeurs en premier. Créer des interfaces guidées et intuitives qui ne nécessitent pas de connaissances techniques.
-- **Contenu** : Prioriser la qualité et la clarté du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pertinents pour les étudiants en pharmacie.
-  </general_simplicity_rules>
+<react19_rules>
+**Compiler et optimisation:**
+
+- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément
+- Écrire du code simple et lisible que le compiler peut optimiser
+- Éviter useMemo/useCallback manuels sauf besoins spécifiques
+
+**Actions et formulaires:**
+
+- Utiliser Actions React 19 pour la gestion des formulaires
+- Préférer useActionState pour la gestion d'état des formulaires
+- Utiliser useOptimistic pour les mises à jour optimistes
+- Utiliser useFormStatus dans les composants de design pour accéder à l'état du formulaire parent
+
+**Gestion des données:**
+
+- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement)
+- Combiner `use()` avec Suspense pour un code asynchrone propre
+- Ne pas utiliser `use()` avec des promesses créées dans le render
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants
+- Utiliser les stylesheets natifs avec la propriété `precedence`
+  </react19_rules>
+
+<nextjs15_rules>
+**App Router:**
+
+- Utiliser exclusivement l'App Router avec structure basée sur les fichiers
+- Modèle de route: `src/app/[feature]/page.tsx`
+- Utiliser `"use client"` uniquement pour les composants interactifs
+
+**Cache (IMPORTANT):**
+
+- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut
+- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire
+- Configurer explicitement le cache pour les données qui doivent être mises en cache
+
+**APIs Async:**
+
+- Utiliser `await` pour cookies(), headers(), draftMode(), params, searchParams
+- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser `@next/codemod` pour les mises à niveau automatisées
+- Expérimenter avec `unstable_after` pour exécuter du code après le streaming
+- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur
+- Utiliser `next.config.ts` pour la configuration TypeScript
+  </nextjs15_rules>
+
+<shadcn_ui_rules>
+**Version 3.0:**
+
+- Utiliser les registres namespacés: `@registry/name`
+- Configurer plusieurs registres dans `components.json`
+- Profiter du MCP Server pour l'intégration avec les outils d'IA
+- Utiliser les nouvelles commandes de recherche et découverte
+
+**Utilisation des composants:**
+
+- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation
+- Combiner les composants simplement avec la composition
+- Utiliser les fonctionnalités d'accessibilité intégrées
+
+**Formulaires:**
+
+- Utiliser les composants de formulaire shadcn/ui
+- Intégrer avec les Actions React 19 pour la soumission
+- Garder la logique de validation simple et proche du formulaire
+  </shadcn_ui_rules>
+
+<content_collections_rules>
+**Configuration:**
+
+- Utiliser `@content-collections/next` pour l'intégration
+- Configurer des schémas Zod pour la validation et le typage
+- Organiser le contenu par fonctionnalité dans des répertoires MDX
+
+**Schémas:**
+
+- Créer un schéma de base commun pour tous les types de contenu
+- Étendre avec des propriétés spécifiques par type de contenu
+- Garder les schémas simples et plats
+
+**Rendu Markdown:**
+
+- Utiliser `react-markdown` avec `remark-gfm`
+- Supporter tables, tâches, mathématiques, et highlighting de code
+- Créer un composant MarkdownRenderer réutilisable
+  </content_collections_rules>
+
+<typescript_rules>
+**Sécurité des types:**
+
+- Utiliser TypeScript pour la sécurité des types de base
+- Créer des interfaces simples pour les structures de données
+- En cas de problème de type relié à des éléments de content-library, vérifie toujours s'il n'est pas possible de les corriger simplement avec `pnpm build` pour générer/actualiser les types de cette librairie.
+
+**Typage des composants:**
+
+- Utiliser des interfaces de props simples
+- Préférer les props optionnelles avec valeurs par défaut
+- Utiliser les types utilitaires intégrés (Partial, Required, Omit)
+
+  </typescript_rules>
+
+<general_rules>
+**Philosophie:**
+
+- Toujours choisir la solution la plus simple qui fonctionne
+- Prioriser la compréhension et la maintenabilité plutôt que la sophistication
+- Suivre le principe YAGNI (You Aren't Gonna Need It)
+- C'est un projet d'apprentissage, pas une application d'entreprise
+
+**Code:**
+
+- Écrire des composants petits et concentrés qui font bien une seule chose
+- Utiliser des noms descriptifs qui racontent une histoire
+- Structurer le code pour qu'il se lise comme un récit
+- Privilégier la lisibilité plutôt que la finesse
+
+**Gestion d'état:**
+
+- Commencer avec useState pour l'état local
+- Utiliser useContext pour partager l'état entre composants proches
+- Utiliser useReducer uniquement pour la logique d'état complexe
+- Éviter les solutions de gestion d'état complexes pour des besoins simples
+
+**Performance:**
+
+- Faire confiance aux optimisations automatiques de React 19
+- N'optimiser que lorsque des problèmes de performance surviennent réellement
+- Éviter l'optimisation prématurée
+
+**Dépendances:**
+
+- Garder les dépendances minimales
+- N'ajouter des bibliothèques que lorsqu'elles résolvent un problème réel
+- Préférer les fonctionnalités intégrées aux solutions externes
+
+**Documentation:**
+
+- Écrire des commentaires qui expliquent le "pourquoi" derrière les décisions
+- Garder la documentation concise mais utile
+- Documenter chaque variable et template avec des exemples concrets
+
+**Accessibilité:**
+
+- Concevoir pour les non-développeurs en premier
+- Créer des interfaces guidées et intuitives
+- Utiliser les fonctionnalités d'accessibilité intégrées de shadcn/ui
+
+**Contenu:**
+
+- Prioriser la qualité et la clarté du contenu pharmaceutique
+- Utiliser des exemples réels et des cas pratiques pertinents
+- Standardiser le format des variables: `{{nom_variable}}`
+  </general_rules>
 
 <instructions>
-DO se rappeler que c'est un projet étudiant créé pour aider d'autres étudiants à apprendre. Prioriser la simplicité et la clarté plutôt que la sophistication technique.
-DO utiliser la première personne ("je") lorsque j'explique des décisions ou partage des insights, mais maintenir un ton professionnel et abordable.
-DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant, pas pour des exigences futures hypothétiques.
-DO faire confiance aux optimisations automatiques de React 19 plutôt qu'aux techniques d'optimisation manuelles.
-DO garder les composants petits, concentrés et faciles à comprendre.
-DO utiliser l'outil le plus simple qui fait le travail efficacement.
-DO écrire du code facile à expliquer aux autres étudiants.
-DO utiliser Content Collections pour une gestion moderne et typée du contenu MDX.
-DO implémenter GitHub Flavored Markdown avec react-markdown et remark-gfm pour un rendu riche du contenu.
-DO concevoir des interfaces guidées pour les utilisateurs non-développeurs, avec une documentation claire des variables et templates.
-DO NOT sur-ingénier les solutions ou ajouter une complexité inutile.
-DO NOT utiliser des modèles complexes lorsque des modèles simples suffisent.
-DO NOT construire pour des exigences futures hypothétiques.
-DO NOT sacrifier la clarté pour la sophistication technique.
-DO NOT créer d'abstractions sans bénéfice immédiat.
-DO NOT ignorer les nouvelles fonctionnalités des bibliothèques qui peuvent simplifier le développement.
-DO se référer à la documentation officielle en cas de doute : React 19, Next.js 15, Tailwind CSS v4, shadcn/ui, Content Collections.
-DO demander des conseils face à la complexité - se rappeler que c'est un parcours d'apprentissage.
+DO utiliser la première personne ("je") pour les explications personnelles
+DO maintenir un ton professionnel mais abordable
+DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant
+DO expérimenter avec le React Compiler mais reconnaître son statut expérimental
+DO utiliser les Actions React 19, useOptimistic, et useActionState pour les formulaires
+DO comprendre que Next.js 15 ne met plus rien en cache par défaut
+DO utiliser les APIs async pour cookies, headers, params dans Next.js 15
+DO utiliser shadcn/ui 3.0 avec les registres namespacés
+DO utiliser Content Collections avec schémas Zod pour le contenu MDX
+DO concevoir des interfaces guidées pour les non-développeurs
+DO écrire du code facile à expliquer aux autres étudiants
+
+DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
+DO NOT utiliser des modèles complexes lorsque des modèles simples suffisent
+DO NOT construire pour des exigences futures hypothétiques
+DO NOT sacrifier la clarté pour la sophistication technique
+DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
+DO NOT créer d'abstractions sans bénéfice immédiat
+DO NOT ignorer les nouvelles fonctionnalités qui peuvent simplifier le développement
+
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, shadcn/ui et Content Collections.
+</instructions>
+<context>
+Projet étudiant spécialisé en ingénierie de prompts pharmaceutiques avec Next.js 15, React 19, shadcn/ui 3.0 et TypeScript. Conçu pour aider d'autres étudiants à apprendre l'ingénierie de prompts à travers des guides, principes, prompts et outils interactifs.
+
+Technologies clés:
+
+- Next.js 15 avec App Router (pas de cache par défaut, APIs async)
+- React 19 (Actions, useOptimistic, useActionState, use())
+- shadcn/ui 3.0 (registres namespacés, MCP Server)
+- Content Collections avec schémas Zod
+- TypeScript pour la sécurité des types
+
+Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non-développeurs.
+</context>
+
+<react19_rules>
+**Compiler et optimisation:**
+
+- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément
+- Écrire du code simple et lisible que le compiler peut optimiser
+- Éviter useMemo/useCallback manuels sauf besoins spécifiques
+
+**Actions et formulaires:**
+
+- Utiliser Actions React 19 pour la gestion des formulaires
+- Préférer useActionState pour la gestion d'état des formulaires
+- Utiliser useOptimistic pour les mises à jour optimistes
+- Utiliser useFormStatus dans les composants de design pour accéder à l'état du formulaire parent
+
+**Gestion des données:**
+
+- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement)
+- Combiner `use()` avec Suspense pour un code asynchrone propre
+- Ne pas utiliser `use()` avec des promesses créées dans le render
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants
+- Utiliser les stylesheets natifs avec la propriété `precedence`
+  </react19_rules>
+
+<nextjs15_rules>
+**App Router:**
+
+- Utiliser exclusivement l'App Router avec structure basée sur les fichiers
+- Modèle de route: `src/app/[feature]/page.tsx`
+- Utiliser `"use client"` uniquement pour les composants interactifs
+
+**Cache (IMPORTANT):**
+
+- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut
+- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire
+- Configurer explicitement le cache pour les données qui doivent être mises en cache
+
+**APIs Async:**
+
+- Utiliser `await` pour cookies(), headers(), draftMode(), params, searchParams
+- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser `@next/codemod` pour les mises à niveau automatisées
+- Expérimenter avec `unstable_after` pour exécuter du code après le streaming
+- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur
+- Utiliser `next.config.ts` pour la configuration TypeScript
+  </nextjs15_rules>
+
+<shadcn_ui_rules>
+**Version 3.0:**
+
+- Utiliser les registres namespacés: `@registry/name`
+- Configurer plusieurs registres dans `components.json`
+- Profiter du MCP Server pour l'intégration avec les outils d'IA
+- Utiliser les nouvelles commandes de recherche et découverte
+
+**Utilisation des composants:**
+
+- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation
+- Combiner les composants simplement avec la composition
+- Utiliser les fonctionnalités d'accessibilité intégrées
+
+**Formulaires:**
+
+- Utiliser les composants de formulaire shadcn/ui
+- Intégrer avec les Actions React 19 pour la soumission
+- Garder la logique de validation simple et proche du formulaire
+  </shadcn_ui_rules>
+
+<content_collections_rules>
+**Configuration:**
+
+- Utiliser `@content-collections/next` pour l'intégration
+- Configurer des schémas Zod pour la validation et le typage
+- Organiser le contenu par fonctionnalité dans des répertoires MDX
+
+**Schémas:**
+
+- Créer un schéma de base commun pour tous les types de contenu
+- Étendre avec des propriétés spécifiques par type de contenu
+- Garder les schémas simples et plats
+
+**Rendu Markdown:**
+
+- Utiliser `react-markdown` avec `remark-gfm`
+- Supporter tables, tâches, mathématiques, et highlighting de code
+- Créer un composant MarkdownRenderer réutilisable
+  </content_collections_rules>
+
+<typescript_rules>
+**Sécurité des types:**
+
+- Utiliser TypeScript pour la sécurité des types de base
+- Créer des interfaces simples pour les structures de données
+- Centraliser les types communs dans `src/types/`
+
+**Typage des composants:**
+
+- Utiliser des interfaces de props simples
+- Préférer les props optionnelles avec valeurs par défaut
+- Utiliser les types utilitaires intégrés (Partial, Required, Omit)
+
+**Organisation:**
+
+- Organiser les types par domaine fonctionnel
+- Utiliser un fichier `index.ts` dans chaque dossier pour les exports
+- Documenter les types complexes avec des commentaires JSDoc
+  </typescript_rules>
+
+<general_rules>
+**Philosophie:**
+
+- Toujours choisir la solution la plus simple qui fonctionne
+- Prioriser la compréhension et la maintenabilité plutôt que la sophistication
+- Suivre le principe YAGNI (You Aren't Gonna Need It)
+- C'est un projet d'apprentissage, pas une application d'entreprise
+
+**Code:**
+
+- Écrire des composants petits et concentrés qui font bien une seule chose
+- Utiliser des noms descriptifs qui racontent une histoire
+- Structurer le code pour qu'il se lise comme un récit
+- Privilégier la lisibilité plutôt que la finesse
+
+**Gestion d'état:**
+
+- Commencer avec useState pour l'état local
+- Utiliser useContext pour partager l'état entre composants proches
+- Utiliser useReducer uniquement pour la logique d'état complexe
+- Éviter les solutions de gestion d'état complexes pour des besoins simples
+
+**Performance:**
+
+- Faire confiance aux optimisations automatiques de React 19
+- N'optimiser que lorsque des problèmes de performance surviennent réellement
+- Éviter l'optimisation prématurée
+
+**Dépendances:**
+
+- Garder les dépendances minimales
+- N'ajouter des bibliothèques que lorsqu'elles résolvent un problème réel
+- Préférer les fonctionnalités intégrées aux solutions externes
+
+**Documentation:**
+
+- Écrire des commentaires qui expliquent le "pourquoi" derrière les décisions
+- Garder la documentation concise mais utile
+- Documenter chaque variable et template avec des exemples concrets
+
+**Accessibilité:**
+
+- Concevoir pour les non-développeurs en premier
+- Créer des interfaces guidées et intuitives
+- Utiliser les fonctionnalités d'accessibilité intégrées de shadcn/ui
+
+**Contenu:**
+
+- Prioriser la qualité et la clarté du contenu pharmaceutique
+- Utiliser des exemples réels et des cas pratiques pertinents
+- Standardiser le format des variables: `{{nom_variable}}`
+  </general_rules>
+
+<instructions>
+DO utiliser la première personne ("je") pour les explications personnelles
+DO maintenir un ton professionnel mais abordable
+DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant
+DO expérimenter avec le React Compiler mais reconnaître son statut expérimental
+DO utiliser les Actions React 19, useOptimistic, et useActionState pour les formulaires
+DO comprendre que Next.js 15 ne met plus rien en cache par défaut
+DO utiliser les APIs async pour cookies, headers, params dans Next.js 15
+DO utiliser shadcn/ui 3.0 avec les registres namespacés
+DO utiliser Content Collections avec schémas Zod pour le contenu MDX
+DO concevoir des interfaces guidées pour les non-développeurs
+DO écrire du code facile à expliquer aux autres étudiants
+
+DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
+DO NOT utiliser des modèles complexes lorsque des modèles simples suffisent
+DO NOT construire pour des exigences futures hypothétiques
+DO NOT sacrifier la clarté pour la sophistication technique
+DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
+DO NOT créer d'abstractions sans bénéfice immédiat
+DO NOT ignorer les nouvelles fonctionnalités qui peuvent simplifier le développement
+
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, shadcn/ui et Content Collections.
 </instructions>

@@ -6,41 +6,41 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { 
+import {
   NavigationMenu,
-  NavigationMenuContent,
+  NavigationMenuContent as _NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
+  NavigationMenuTrigger as _NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { 
-  Menu, 
-  X, 
-  BookOpen, 
-  Brain, 
-  Lightbulb, 
-  Wrench, 
-  Moon, 
+import {
+  Menu,
+  BookOpen,
+  Brain,
+  Lightbulb,
+  Wrench,
+  ExternalLink,
+  Moon,
   Sun,
   User,
-  Search
+  Search,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const navigation = [
   {
+    name: "Concepts",
+    href: "/concepts",
+    icon: Brain,
+    description: "Point de départ : chaque concept est un dossier complet",
+  },
+  {
     name: "Guides",
     href: "/guides",
     icon: BookOpen,
-    description: "Apprendre les bases du prompting",
-  },
-  {
-    name: "Philosophie",
-    href: "/philosophy",
-    icon: Brain,
-    description: "Comprendre les principes fondamentaux",
+    description: "Parcourir la bibliothèque de tutoriels",
   },
   {
     name: "Prompts",
@@ -52,7 +52,13 @@ const navigation = [
     name: "Ma Boîte à Outils",
     href: "/boite-a-outils",
     icon: Wrench,
-    description: "Outils interactifs",
+    description: "Mes outils interactifs",
+  },
+  {
+    name: "Outils Externes",
+    href: "/outils-externes",
+    icon: ExternalLink,
+    description: "Mes analyses et guides sur les outils IA",
   },
 ];
 
@@ -81,11 +87,12 @@ export function Header() {
               <NavigationMenuList>
                 {navigation.map((item) => (
                   <NavigationMenuItem key={item.name}>
-                    <NavigationMenuLink 
+                    <NavigationMenuLink
                       asChild
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        pathname === item.href && "bg-accent text-accent-foreground"
+                        pathname === item.href &&
+                          "bg-accent text-accent-foreground"
                       )}
                     >
                       <Link href={item.href}>
@@ -105,8 +112,8 @@ export function Header() {
               </Button>
 
               {/* Theme Toggle */}
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               >
@@ -123,8 +130,8 @@ export function Header() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
@@ -142,7 +149,11 @@ export function Header() {
                 <div className="flex flex-col h-full">
                   {/* Header du menu mobile */}
                   <div className="flex items-center justify-between pb-6 border-b border-border/50">
-                    <Link href="/" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
+                    <Link
+                      href="/"
+                      className="flex items-center space-x-3"
+                      onClick={() => setIsOpen(false)}
+                    >
                       <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                         <Brain className="w-6 h-6 text-primary-foreground" />
                       </div>
@@ -160,20 +171,27 @@ export function Header() {
                           onClick={() => setIsOpen(false)}
                           className={cn(
                             "flex items-start space-x-4 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground group",
-                            pathname === item.href && "bg-accent text-accent-foreground shadow-sm"
+                            pathname === item.href &&
+                              "bg-accent text-accent-foreground shadow-sm"
                           )}
                         >
-                          <div className={cn(
-                            "w-10 h-10 rounded-lg flex items-center justify-center transition-colors",
-                            pathname === item.href 
-                              ? "bg-primary text-primary-foreground" 
-                              : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
-                          )}>
+                          <div
+                            className={cn(
+                              "w-10 h-10 rounded-lg flex items-center justify-center transition-colors",
+                              pathname === item.href
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                            )}
+                          >
                             <item.icon className="w-5 h-5" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="font-semibold text-base mb-1">{item.name}</div>
-                            <div className="text-xs text-muted-foreground leading-relaxed">{item.description}</div>
+                            <div className="font-semibold text-base mb-1">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-muted-foreground leading-relaxed">
+                              {item.description}
+                            </div>
                           </div>
                         </Link>
                       ))}
@@ -187,7 +205,7 @@ export function Header() {
                         Actions rapides
                       </h3>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
@@ -195,17 +213,21 @@ export function Header() {
                         </div>
                         <div>
                           <div className="font-medium">Rechercher</div>
-                          <div className="text-xs text-muted-foreground">Trouver du contenu</div>
+                          <div className="text-xs text-muted-foreground">
+                            Trouver du contenu
+                          </div>
                         </div>
                       </button>
-                      
+
                       <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                           <User className="w-5 h-5" />
                         </div>
                         <div>
                           <div className="font-medium">Profil</div>
-                          <div className="text-xs text-muted-foreground">Gérer votre compte</div>
+                          <div className="text-xs text-muted-foreground">
+                            Gérer votre compte
+                          </div>
                         </div>
                       </button>
                     </div>

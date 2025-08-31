@@ -1,0 +1,174 @@
+---
+title: "Température : Dosage"
+description: "La température est le dosage de la créativité de l'IA, à ajuster selon vos besoins"
+icon: "Thermometer"
+category: "Fondamentaux"
+mainGuideSlug: "fondamentaux-prompting-pharmaceutique"
+keyTakeaways:
+  - "La 'température' est le 'dosage' de la créativité de l'IA : plus elle est élevée, plus le risque d'hallucination augmente."
+  - "Pour les tâches factuelles en pharmacie (calculs de dose, interactions), utilisez une température basse (0.0 à 0.3)."
+  - "Un dosage modéré (0.4 à 0.7) offre un bon équilibre pour la rédaction et la synthèse."
+---
+
+# Température : Dosage
+
+## Qu'est-ce que la température ?
+
+La **température** est un paramètre qui contrôle la "créativité" et la "prévisibilité" des réponses de l'IA. C'est l'équivalent du dosage d'un médicament : trop peu et l'effet est insuffisant, trop et les effets indésirables apparaissent.
+
+## L'analogie pharmacologique
+
+### Température = Dosage de créativité
+
+- **Température basse (0.0 - 0.3)** = Posologie conservatrice, effets prévisibles
+- **Température modérée (0.4 - 0.7)** = Posologie standard, équilibre bénéfice/risque
+- **Température élevée (0.8 - 1.0)** = Posologie élevée, effets puissants mais risques accrus
+
+## Guide de dosage par type de tâche
+
+### 1. Tâches Factuelles (Température 0.0 - 0.3)
+
+**Quand l'utiliser :**
+
+- Calculs de dose
+- Vérification d'interactions médicamenteuses
+- Recherche d'informations dans des bases de données
+- Analyse de protocoles
+
+**Exemple de prompt :**
+
+```
+Température : 0.1
+Calculez la dose de warfarine pour un patient de 70 ans,
+70 kg, avec une clairance de créatinine de 35 ml/min.
+```
+
+**Résultat attendu :** Réponse précise, reproductible, basée sur des formules validées.
+
+### 2. Tâches de Synthèse (Température 0.4 - 0.7)
+
+**Quand l'utiliser :**
+
+- Rédaction de fiches de révision
+- Synthèse de littérature
+- Création de protocoles
+- Explication de concepts
+
+**Exemple de prompt :**
+
+```
+Température : 0.5
+Créez une fiche de révision sur les inhibiteurs de l'enzyme
+de conversion, adaptée à un étudiant en L3 de pharmacie.
+```
+
+**Résultat attendu :** Contenu structuré, créatif dans la présentation, mais factuellement correct.
+
+### 3. Tâches Créatives (Température 0.8 - 1.0)
+
+**Quand l'utiliser :**
+
+- Génération d'analogies
+- Création de mnémoniques
+- Développement de scénarios d'apprentissage
+- Brainstorming de solutions innovantes
+
+**Exemple de prompt :**
+
+```
+Température : 0.9
+Inventez une analogie créative pour expliquer le mécanisme
+d'action des statines à un patient.
+```
+
+**Résultat attendu :** Réponses originales, surprenantes, mais avec un risque d'hallucination accru.
+
+## Gestion des effets indésirables
+
+### Hallucinations (effet indésirable principal)
+
+**Symptômes :**
+
+- Informations factuellement incorrectes
+- Citations inexistantes
+- Données numériques fantaisistes
+- Références à des études inexistantes
+
+**Traitement :**
+
+- Réduire la température
+- Ajouter des instructions de validation
+- Demander des sources
+- Utiliser des prompts de vérification
+
+### Rigidité excessive (effet indésirable de température trop basse)
+
+**Symptômes :**
+
+- Réponses trop littérales
+- Manque de créativité dans la présentation
+- Difficulté à adapter le ton au contexte
+
+**Traitement :**
+
+- Augmenter légèrement la température
+- Ajouter des instructions de style
+- Préciser le niveau de créativité souhaité
+
+## Protocoles de dosage en pharmacie
+
+### Protocole 1 : Analyse d'interaction médicamenteuse
+
+```
+1. Température : 0.1 (recherche factuelle)
+2. Prompt : "Recherchez les interactions entre [médicament A] et [médicament B]"
+3. Température : 0.3 (synthèse structurée)
+4. Prompt : "Organisez les résultats en tableau avec risques et recommandations"
+```
+
+### Protocole 2 : Création de fiche de révision
+
+```
+1. Température : 0.2 (extraction des faits)
+2. Prompt : "Extrayez les points clés de ce cours"
+3. Température : 0.5 (organisation créative)
+4. Prompt : "Créez une fiche structurée et mémorisable"
+```
+
+### Protocole 3 : Résolution de cas clinique
+
+```
+1. Température : 0.1 (analyse factuelle)
+2. Prompt : "Analysez les données cliniques de ce patient"
+3. Température : 0.4 (raisonnement clinique)
+4. Prompt : "Proposez un plan de traitement structuré"
+```
+
+## Monitoring et ajustement
+
+### Signes de bonne adaptation
+
+- Réponses cohérentes avec vos attentes
+- Équilibre entre créativité et précision
+- Moins d'itérations nécessaires
+
+### Signes de surdosage
+
+- Hallucinations fréquentes
+- Réponses trop créatives pour le contexte
+- Incohérences factuelles
+
+### Signes de sous-dosage
+
+- Réponses trop rigides
+- Manque d'adaptation au contexte
+- Difficulté à générer des solutions innovantes
+
+## Bénéfices de cette approche
+
+1. **Prévisibilité** : Vous savez à quoi vous attendre selon la température
+2. **Contrôle qualité** : Moins de surprises et d'erreurs
+3. **Efficacité** : Moins d'itérations pour obtenir le bon résultat
+4. **Adaptabilité** : Vous pouvez ajuster selon le contexte et les besoins
+
+En maîtrisant le dosage de la température, vous transformez l'IA en un outil thérapeutique précis et contrôlable, exactement comme un bon pharmacien ajuste ses prescriptions.

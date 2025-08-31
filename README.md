@@ -53,14 +53,17 @@ Je suis étudiant en pharmacie et voici mon projet : **Mon Carnet de Prompts**. 
 ```
 src/
 ├── app/                    # Mes pages
-│   ├── guides/           # Mes méthodes
-│   ├── philosophy/       # Mon approche
-│   ├── prompts/          # Ma collection
-│   └── boite-a-outils/   # Mes outils
-├── components/            # Mes composants réutilisables
-├── content/               # Mon contenu (guides, prompts, etc.)
-└── lib/                   # Mes utilitaires
+│   ├── concepts/          # Mon hub de concepts (cœur du projet)
+│   ├── guides/            # Mes méthodes et guides pratiques
+│   ├── prompts/           # Ma collection de prompts
+│   ├── boite-a-outils/    # Mes outils personnalisés
+│   └── outils-externes/   # Mes recommandations d'outils
+├── components/             # Mes composants réutilisables
+├── content/                # Mon contenu organisé (concepts, guides, prompts)
+└── lib/                    # Mes utilitaires
 ```
+
+**Approche "Concept-First"** : Les concepts sont le cœur de mon projet. Chaque concept pharmaceutique est documenté avec ses prompts associés, ses guides pratiques et ses outils. Cette architecture permet une navigation intuitive et une cohérence parfaite entre le contenu théorique et ses applications pratiques.
 
 ## 🚀 Comment l'utiliser
 

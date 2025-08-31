@@ -2,60 +2,34 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { 
-  Brain, 
-  Github, 
-  Twitter, 
-  Mail, 
-  BookOpen, 
-  Users, 
-  Shield,
-  ExternalLink
-} from "lucide-react";
+import { Brain, BookOpen, Shield, ExternalLink, Wrench } from "lucide-react";
 
 const footerSections = [
   {
     title: "Apprentissage",
     links: [
+      { name: "Concepts", href: "/concepts", icon: BookOpen },
       { name: "Guides", href: "/guides", icon: BookOpen },
-      { name: "Philosophie", href: "/philosophy", icon: Brain },
       { name: "Prompts", href: "/prompts", icon: BookOpen },
-      { name: "Ma Boîte à Outils", href: "/boite-a-outils", icon: Users },
     ],
   },
   {
-    title: "Outils IA",
+    title: "Outils",
     links: [
-      { name: "Vertex AI Studio", href: "/guides/vertex-ai-studio-pharmacie", icon: ExternalLink },
-      { name: "Z.ai", href: "/guides/z-ai-etudes-pharmaceutiques", icon: ExternalLink },
-      { name: "Gemini Deep Research", href: "/guides/gemini-deep-research-pharmacie", icon: ExternalLink },
-      { name: "ChatGPT", href: "/guides/chatgpt", icon: ExternalLink },
-    ],
-  },
-  {
-    title: "Ressources",
-    links: [
-      { name: "Documentation", href: "/docs", icon: BookOpen },
-      { name: "API", href: "/api", icon: ExternalLink },
-      { name: "Blog", href: "/blog", icon: BookOpen },
-      { name: "Communauté", href: "/community", icon: Users },
+      { name: "Ma Boîte à Outils", href: "/boite-a-outils", icon: Wrench },
+      { name: "Outils Externes", href: "/outils-externes", icon: ExternalLink },
     ],
   },
   {
     title: "Légal",
     links: [
-      { name: "Confidentialité", href: "/philosophy/confidentialite-securite", icon: Shield },
-      { name: "Conditions", href: "/terms", icon: Shield },
-      { name: "Cookies", href: "/cookies", icon: Shield },
-      { name: "Mentions légales", href: "/legal", icon: Shield },
+      {
+        name: "Confidentialité",
+        href: "/guides/confidentialite-securite",
+        icon: Shield,
+      },
     ],
   },
-];
-
-const socialLinks = [
-  { name: "GitHub", href: "https://github.com", icon: Github },
-  { name: "Twitter", href: "https://twitter.com", icon: Twitter },
-  { name: "Email", href: "mailto:contact@pharmaprompt.com", icon: Mail },
 ];
 
 export function Footer() {
@@ -72,23 +46,10 @@ export function Footer() {
               <span className="font-bold text-xl">Pharma Prompt</span>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
-              Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, 
-              partagé avec la communauté pour contribuer à l'innovation pédagogique.
+              Mon carnet de notes personnel pour travailler avec l'IA en
+              pharmacie, partagé avec la communauté pour contribuer à
+              l'innovation pédagogique.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <social.icon className="w-5 h-5" />
-                  <span className="sr-only">{social.name}</span>
-                </Link>
-              ))}
-            </div>
           </div>
 
           {/* Footer Sections */}
@@ -107,7 +68,9 @@ export function Footer() {
                         link.icon === ExternalLink && "inline-flex"
                       )}
                     >
-                      {link.icon !== ExternalLink && <link.icon className="w-4 h-4" />}
+                      {link.icon !== ExternalLink && (
+                        <link.icon className="w-4 h-4" />
+                      )}
                       <span>{link.name}</span>
                       {link.icon === ExternalLink && (
                         <link.icon className="w-3 h-3 ml-1" />
@@ -128,7 +91,8 @@ export function Footer() {
             </p>
             <div className="flex items-center space-x-4 mt-4 md:mt-0">
               <p className="text-sm text-muted-foreground">
-                Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+                Mon carnet de notes, partagé avec ❤️ pour la communauté
+                pharmaceutique.
               </p>
             </div>
           </div>

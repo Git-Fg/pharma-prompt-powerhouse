@@ -5,10 +5,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import ShikiHighlighter, { isInlineCode } from "react-shiki";
+import _ShikiHighlighter from "react-shiki";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-import { CopyButton } from "@/components/ui/copy-button";
+import { CodeBlock } from "@/components/ui/code-block";
 
 interface MarkdownRendererProps {
   content: string;
@@ -19,42 +19,26 @@ interface MarkdownRendererProps {
 const CodeHighlight = ({
   className,
   children,
-  node,
   ...props
 }: {
   className?: string;
   children?: React.ReactNode;
-  node?: any;
-  [key: string]: any;
-}) => {
+} & React.HTMLAttributes<HTMLElement>) => {
   const code = String(children).trim();
   const match = className?.match(/language-(\w+)/);
-  const language = match ? match[1] : undefined;
-  const isInline = node ? isInlineCode(node) : undefined;
+  const language = match ? match[1] : "text";
+  // Vérification simple pour déterminer si c'est du code inline
+  const isInline = !className || !className.includes("language-");
 
   return !isInline ? (
-    <div className="group relative">
-      <ShikiHighlighter
-        language={language}
-        theme={{
-          light: "github-light",
-          dark: "github-dark",
-        }}
-        defaultColor="light"
-        showLanguage
-        addDefaultStyles
-        className="rounded-lg overflow-hidden"
-        {...props}
-      >
-        {code}
-      </ShikiHighlighter>
-      <CopyButton text={code} />
-    </div>
+    <CodeBlock language={language} className="my-4">
+      {code}
+    </CodeBlock>
   ) : (
     <code
       className={cn(
         "bg-muted px-1.5 py-0.5 rounded text-sm font-mono",
-        className
+        className || ""
       )}
       {...props}
     >
@@ -67,7 +51,7 @@ export default function MarkdownRenderer({
   content,
   className,
 }: MarkdownRendererProps) {
-  const { theme } = useTheme();
+  const { theme: _theme } = useTheme();
 
   return (
     <div
