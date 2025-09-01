@@ -95,7 +95,10 @@ export function Header() {
                           "bg-accent text-accent-foreground"
                       )}
                     >
-                      <Link href={item.href}>
+                      <Link 
+                        href={item.href} 
+                        data-testid={`nav-${item.name.toLowerCase()}`}
+                      >
                         <item.icon className="w-4 h-4 mr-2" />
                         {item.name}
                       </Link>
@@ -169,6 +172,7 @@ export function Header() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setIsOpen(false)}
+                          data-testid={`mobile-nav-${item.name.toLowerCase()}`}
                           className={cn(
                             "flex items-start space-x-4 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground group",
                             pathname === item.href &&

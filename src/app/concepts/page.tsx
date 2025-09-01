@@ -80,6 +80,7 @@ export default function ConceptsPage() {
                       href={`/concepts/${concept.slug}`}
                       key={concept.slug}
                       className="block"
+                      data-testid="concept-card"
                     >
                       <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
                         <CardHeader>

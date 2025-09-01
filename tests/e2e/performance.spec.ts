@@ -60,11 +60,18 @@ test.describe('Content Accessibility and Performance', () => {
     const guideCount = await guideLinks.count();
     expect(guideCount).toBeGreaterThan(10);
     
-    // Prompts page - check for prompt cards with action buttons (not individual pages)
+    // Prompts page - check for prompt cards with action buttons using data-testid
     await page.goto('/prompts');
-    const promptCards = page.locator('button:has-text("Utiliser ce prompt"), button:has-text("Copier le prompt")');
-    const promptCardsCount = await promptCards.count();
-    expect(promptCardsCount).toBeGreaterThan(3);
+    const promptButtons = page.locator('[data-testid="use-prompt-button"], [data-testid="copy-prompt-button"]');
+    const buttonCount = await promptButtons.count();
+    if (buttonCount === 0) {
+      // Fallback to text-based selectors
+      const fallbackButtons = page.locator('button:has-text("Utiliser ce prompt"), button:has-text("Copier le prompt")');
+      const fallbackCount = await fallbackButtons.count();
+      expect(fallbackCount).toBeGreaterThan(3);
+    } else {
+      expect(buttonCount).toBeGreaterThan(3);
+    }
     
     // External tools page
     await page.goto('/outils-externes');

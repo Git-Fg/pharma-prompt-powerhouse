@@ -63,7 +63,10 @@ export const PromptCard: React.FC<PromptCardProps> = ({
   };
 
   return (
-    <Card className='h-full flex flex-col hover:shadow-lg transition-shadow'>
+    <Card 
+      className='h-full flex flex-col hover:shadow-lg transition-shadow'
+      data-testid="prompt-card"
+    >
       <CardHeader>
         <div className='flex justify-between items-start'>
           <div className="flex items-center gap-3">
@@ -125,7 +128,11 @@ export const PromptCard: React.FC<PromptCardProps> = ({
 
         <div className='mt-auto space-y-2'>
           <div className='flex gap-2'>
-            <Button onClick={onUse} className='flex-1'>
+            <Button 
+              onClick={onUse} 
+              className='flex-1'
+              data-testid="use-prompt-button"
+            >
               Utiliser ce prompt
             </Button>
             <Button
@@ -134,6 +141,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({
               onClick={copyToClipboard}
               className='px-3'
               aria-label='Copier le prompt'
+              data-testid="copy-prompt-button"
             >
               {copied ? (
                 <Check className='h-4 w-4 text-green-600' />
