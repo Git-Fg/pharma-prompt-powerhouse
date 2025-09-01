@@ -5,7 +5,6 @@ import { z } from "zod";
 // SCHÉMAS ZOD & TYPES INFERES
 // ============================================================================
 
-// Schéma de base réutilisable pour tous nos contenus.
 const baseSchema = z.object({
   title: z.string().min(1, "Le titre est requis."),
   description: z
@@ -13,23 +12,20 @@ const baseSchema = z.object({
     .min(10, "La description doit faire au moins 10 caractères."),
   tags: z.array(z.string()).default([]),
   isFavorite: z.boolean().default(false),
-  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]).optional(),
+  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]), // Rendu obligatoire
   keyTakeaways: z.array(z.string()).optional(),
-  // On rend les champs relationnels optionnels, car ils seront ajoutés par `transform`.
   conceptSlugs: z.array(z.string()).default([]),
 });
 
-// Inférence des types AVANT transformation. C'est crucial pour la sécurité de type dans `transform`.
 type BaseDoc = z.infer<typeof baseSchema>;
 
-// Type pour les métadonnées
 type Meta = {
   path: string;
   fileName: string;
   directory: string;
   filePath: string;
   extension: string;
-  mtime?: number; // Rendre mtime optionnel
+  mtime?: number;
   content: string;
 };
 
@@ -38,14 +34,13 @@ type Meta = {
 // ============================================================================
 
 const TAG_TAXONOMY = {
-  // Techniques et concepts clés
   technique: [
     "prompting",
     "context-engineering",
     "xml-prompting",
     "chain-of-thought",
     "tree-of-thought",
-    "rag", // Retrieval-Augmented Generation
+    "rag",
     "self-consistency",
     "auto-critique",
     "template",
@@ -59,7 +54,6 @@ const TAG_TAXONOMY = {
     "multimodal",
     "opensource",
   ],
-  // Domaine d'application
   domaine: [
     "pharmacie",
     "clinique",
@@ -69,9 +63,7 @@ const TAG_TAXONOMY = {
     "geriatrie",
     "cardiologie",
   ],
-  // Niveau de difficulté ou de complexité
   niveau: ["debutant", "intermediaire", "avance"],
-  // Type de contenu ou de tâche
   format: [
     "guide",
     "tutoriel",
@@ -85,7 +77,6 @@ const TAG_TAXONOMY = {
     "comparatif",
     "exemple-code",
   ],
-  // Outils logiciels mentionnés
   outils: [
     "chatgpt",
     "claude",
@@ -97,7 +88,6 @@ const TAG_TAXONOMY = {
     "qwen",
     "alibaba",
   ],
-  // Concepts pharmaceutiques spécifiques
   pharma: [
     "posologie",
     "effets-indesirables",
@@ -112,26 +102,20 @@ const TAG_TAXONOMY = {
 // ============================================================================
 
 type ValidationError = {
-  document: string; // Chemin du document contenant l'erreur (doc._meta.path)
-  field: string; // Nom du champ problématique
-  value: string; // Valeur du champ problématique
-  message: string; // Message d'erreur détaillé
+  document: string;
+  field: string;
+  value: string;
+  message: string;
 };
 
 const validationErrors: ValidationError[] = [];
 
-/**
- * Valide les références croisées dans un document de la collection `concepts`.
- * Vérifie que `mainGuideSlug` pointe vers un guide existant.
- */
 const validateConceptReferences = async (
   doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
   ctx: Context
 ) => {
-  // --- Validation de mainGuideSlug ---
   if (doc.mainGuideSlug) {
     const allGuides = await ctx.documents(guides);
-    // Trouver un guide dont le path (sera utilisé comme slug) correspond à mainGuideSlug
     const linkedGuide = allGuides.find(
       (g) => g._meta.path === doc.mainGuideSlug
     );
@@ -140,7 +124,7 @@ const validateConceptReferences = async (
         document: doc._meta.path,
         field: "mainGuideSlug",
         value: doc.mainGuideSlug,
-        message: `Le guide référencé '${doc.mainGuideSlug}' n\'existe pas dans la collection \'guides\'.`,
+        message: `Le guide référencé '${doc.mainGuideSlug}' n'existe pas dans la collection 'guides'.`,
       });
     }
   }
@@ -150,37 +134,20 @@ const validateConceptReferences = async (
 // FONCTIONS D'ENRICHISSEMENT (TRANSFORM HELPERS)
 // ============================================================================
 
-/**
- * Ajoute des champs calculés communs à tous les documents (temps de lecture, slug...).
- * C'est notre fonction "boilerplate killer".
- */
 const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: string }) => {
   const content = doc.content || "";
   const wordCount = content.trim().split(/\s+/).length || 0;
-  const readingTime = Math.ceil(wordCount / 200); // 200 mots par minute
-
-  // Calcul de la complexité basé sur le nombre de mots
-  const complexity =
-    wordCount > 2000
-      ? "avancé"
-      : wordCount > 1000
-        ? "intermédiaire"
-        : "débutant";
+  const readingTime = Math.ceil(wordCount / 200);
 
   return {
     ...doc,
     slug: doc._meta.path,
     wordCount,
     readingTime: `${Math.max(1, readingTime)} min`,
-    complexity,
     hasKeyTakeaways: (doc.keyTakeaways?.length || 0) > 0,
   };
 };
 
-/**
- * Résout les relations avec les concepts.
- * Remplace un tableau de slugs `string[]` par un tableau d'objets `Concept[]`.
- */
 const resolveConceptRelations = async (
   doc: { conceptSlugs?: string[] },
   ctx: Context
@@ -202,14 +169,6 @@ const resolveConceptRelations = async (
   return { concepts: relatedConcepts };
 };
 
-// ============================================================================
-// FONCTIONS UTILITAIRES SIMPLIFIÉES POUR LES TAGS
-// ============================================================================
-
-/**
- * Valide et enrichit les tags manuels fournis dans le frontmatter.
- * Transforme un tableau de strings en un tableau d'objets structurés.
- */
 const processTags = (doc: { tags?: string[] }) => {
   if (!doc.tags || doc.tags.length === 0) {
     return { tags: [] };
@@ -217,7 +176,6 @@ const processTags = (doc: { tags?: string[] }) => {
 
   const processedTags = doc.tags.map((tagName) => {
     let category: string = "inconnu";
-    // Trouve la catégorie du tag dans notre taxonomie
     for (const cat in TAG_TAXONOMY) {
       if (
         TAG_TAXONOMY[cat as keyof typeof TAG_TAXONOMY].includes(
@@ -231,7 +189,6 @@ const processTags = (doc: { tags?: string[] }) => {
     return {
       name: tagName,
       category: category,
-      // On valide si le tag est bien dans notre taxonomie
       isValid: category !== "inconnu",
     };
   });
@@ -290,19 +247,12 @@ const guides = defineCollection({
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
 
-    const complexity =
-      computed.wordCount > 5000
-        ? "avancé"
-        : computed.wordCount > 2000
-          ? "intermédiaire"
-          : "débutant";
-
     return {
+      ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       ...relations,
       content: doc.content || "",
-      complexity,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
       estimatedReadingTime: doc.estimatedTime || computed.readingTime,
@@ -333,19 +283,12 @@ const prompts = defineCollection({
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
 
-    const complexity =
-      computed.wordCount > 1000
-        ? "avancé"
-        : computed.wordCount > 500
-          ? "intermédiaire"
-          : "débutant";
-
     return {
+      ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       ...relations,
       content: doc.content || "",
-      complexity,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
@@ -359,8 +302,8 @@ const externalToolSchema = baseSchema.extend({
   category: z.string(),
   pricing: z.string().optional(),
   capabilities: z.array(z.string()).default([]),
-  use_cases: z.array(z.string()).optional(), // Champ ajouté
-  color: z.string().optional(),             // Champ ajouté
+  use_cases: z.array(z.string()).optional(),
+  color: z.string().optional(),
 });
 type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta; content?: string };
 
@@ -374,7 +317,6 @@ const externalTools = defineCollection({
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
 
-    // ✅ ACTION 2: Ajouter la logique de préparation des données
     let use_cases: string[] = [];
     let color = "bg-gray-500";
     switch (doc._meta.path) {
@@ -404,8 +346,8 @@ const externalTools = defineCollection({
       isFree:
         doc.pricing?.toLowerCase().includes("gratuit") ||
         doc.pricing?.toLowerCase().includes("free"),
-      use_cases, // Renvoyer le champ
-      color,     // Renvoyer le champ
+      use_cases,
+      color,
     };
   },
 });
@@ -421,7 +363,7 @@ export default defineConfig({
       validationErrors.forEach((error) => {
         console.error(`📄 Document: ${error.document}`);
         console.error(`🔧 Champ: ${error.field}`);
-        console.error(`💬 Valeur: \"${error.value}\"`);
+        console.error(`💬 Valeur: "${error.value}"`);
         console.error(`❌ ${error.message}`);
         console.error("---");
       });
