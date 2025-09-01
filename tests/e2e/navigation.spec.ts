@@ -13,10 +13,16 @@ test.describe('Core Site Navigation', () => {
     // Check main title is present - use the actual title
     await expect(page).toHaveTitle(/Pharma Prompt Powerhouse/i);
     
-    // Check main navigation elements - be more flexible
-    const navTexts = ['Concepts', 'Guides', 'Prompts', 'Outils Externes'];
-    for (const navText of navTexts) {
-      await expect(page.locator(`text=${navText}`).first()).toBeVisible({ timeout: 10000 });
+    // Check main navigation elements using data-testid
+    const navElements = ['concepts', 'guides', 'prompts', 'outils externes'];
+    for (const navItem of navElements) {
+      const navElement = page.locator(`[data-testid="nav-${navItem}"]`);
+      if (await navElement.count() > 0) {
+        await expect(navElement).toBeVisible({ timeout: 10000 });
+      } else {
+        // Fallback to text-based selector
+        await expect(page.locator(`text=${navItem}`).first()).toBeVisible({ timeout: 10000 });
+      }
     }
     
     await page.screenshot({ path: 'test-results/homepage.png', fullPage: true });
@@ -28,11 +34,9 @@ test.describe('Core Site Navigation', () => {
     // Should show concepts listing
     await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Concepts');
     
-    // Should have concept cards
-    const conceptCards = page.locator('[data-testid="concept-card"], .concept-card, [class*="concept"], [class*="card"]');
-    if (await conceptCards.count() > 0) {
-      await expect(conceptCards.first()).toBeVisible();
-    }
+    // Should have concept cards using data-testid
+    const conceptCards = page.locator('[data-testid="concept-card"]');
+    await expect(conceptCards.first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/concepts-page.png', fullPage: true });
   });
