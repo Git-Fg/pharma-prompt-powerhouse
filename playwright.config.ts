@@ -21,7 +21,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'pnpm build && pnpm start',
+    command: 'npm run build && npm run start',
     port: 3000,
     timeout: 300_000, // 5 minutes
     reuseExistingServer: true,

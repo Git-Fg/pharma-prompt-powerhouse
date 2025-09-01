@@ -10,27 +10,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search } from 'lucide-react';
+import { Search, FileText } from 'lucide-react';
 import { PromptCard } from '@/components/prompts/PromptCard';
+import { Button } from '@/components/ui/button';
+import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
 type Prompt = (typeof allPrompts)[0];
 
 interface PromptListProps {
   initialPrompts: Prompt[];
 }
-
-const categoryLabels: { [key: string]: string } = {
-  'rédaction-médicale': 'Rédaction Médicale',
-  'analyse-de-données': 'Analyse de Données',
-  'formation-et-éducation': 'Formation et Éducation',
-  'optimisation-de-processus': 'Optimisation de Processus',
-};
-
-const difficultyLabels: { [key: string]: string } = {
-  débutant: 'Débutant',
-  intermédiaire: 'Intermédiaire',
-  avancé: 'Avancé',
-};
 
 export function PromptListClient({ initialPrompts }: PromptListProps) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -59,6 +48,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
 
   return (
     <>
+      {/* Search and Filter Controls */}
       <div className="flex flex-col lg:flex-row gap-4 max-w-4xl mx-auto mb-8">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -78,7 +68,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
               <SelectItem key={category} value={category}>
                 {category === 'all'
                   ? 'Toutes les catégories'
-                  : categoryLabels[category] || category}
+                  : categoryLabels[category as keyof typeof categoryLabels] || category}
               </SelectItem>
             ))}
           </SelectContent>
@@ -95,28 +85,56 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
               <SelectItem key={difficulty} value={difficulty}>
                 {difficulty === 'all'
                   ? 'Toutes les difficultés'
-                  : difficultyLabels[difficulty] || difficulty}
+                  : difficultyLabels[difficulty as keyof typeof difficultyLabels] || difficulty}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPrompts.map(prompt => (
-          <PromptCard
-            key={prompt.slug}
-            slug={prompt.slug}
-            title={prompt.title}
-            description={prompt.description}
-            difficulty={prompt.difficulty}
-            estimatedTime={prompt.estimatedTime || 'N/A'}
-            tags={prompt.tags.map(t => t.name)}
-            icon={prompt.icon}
-            promptContent={prompt.promptContent}
-          />
-        ))}
-      </div>
+      {/* Empty State */}
+      {filteredPrompts.length === 0 && (
+        <div className="text-center py-16">
+          <div className="mx-auto mb-4 w-16 h-16 bg-muted rounded-full flex items-center justify-center">
+            <FileText className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">Aucun prompt trouvé</h3>
+          <p className="text-muted-foreground mb-4 max-w-md mx-auto">
+            {searchTerm 
+              ? `Aucun prompt ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
+              : 'Aucun prompt ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}
+          </p>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              setSearchTerm('');
+              setSelectedCategory('all');
+              setSelectedDifficulty('all');
+            }}
+          >
+            Réinitialiser les filtres
+          </Button>
+        </div>
+      )}
+
+      {/* Prompts Grid */}
+      {filteredPrompts.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPrompts.map(prompt => (
+            <PromptCard
+              key={prompt.slug}
+              slug={prompt.slug}
+              title={prompt.title}
+              description={prompt.description}
+              difficulty={prompt.difficulty}
+              estimatedTime={prompt.estimatedTime || 'N/A'}
+              tags={prompt.tags.map(t => t.name)}
+              icon={prompt.icon}
+              promptContent={prompt.promptContent}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
