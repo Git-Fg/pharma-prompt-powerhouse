@@ -45,6 +45,8 @@ const TAG_TAXONOMY = {
     "rag", // Retrieval-Augmented Generation
     "self-consistency",
     "auto-critique",
+    "template",
+    "variables",
   ],
   // Domaine d'application
   domaine: [
@@ -70,6 +72,7 @@ const TAG_TAXONOMY = {
     "mnemonique",
     "synthese",
     "comparatif",
+    "exemple-code",
   ],
   // Outils logiciels mentionnés
   outils: [
@@ -79,6 +82,14 @@ const TAG_TAXONOMY = {
     "perplexity",
     "z-ai",
     "aistudio",
+  ],
+  // Concepts pharmaceutiques spécifiques
+  pharma: [
+    "posologie",
+    "effets-indesirables",
+    "monitoring",
+    "observance",
+    "interactions",
   ],
 };
 
