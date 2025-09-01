@@ -3,17 +3,13 @@ title: "Constructeur de Tableaux Comparatifs"
 description: "Générez des tableaux comparatifs clairs et efficaces, un outil essentiel pour les révisions en pharmacie."
 category: "creation"
 difficulty: "débutant"
-targetTool: "Google AI Studio"
+recommendedTool: "Google AI Studio"
 tags: ["comparatif", "exemple-code", "pedagogie", "pharmacie", "prompting", "tableau", "template", "variables"]
 conceptSlugs: ["structuration-contenu"]
 variables: ["sujet_comparaison", "elements_a_comparer", "criteres_comparaison"]
-promptContent: |
-  <!-- À mettre dans le champ "System Prompt" de AI Studio -->
-  <system_prompt>
+systemPromptContent: |
   Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
-  </system_prompt>
-
-  <!-- À mettre dans le champ "User Prompt" -->
+promptContent: |
   <tache>
   Crée un tableau comparatif détaillé.
   </tache>
@@ -33,19 +29,20 @@ promptContent: |
 
 ## Notes d'Utilisation
 
-Un tableau bien structuré est un gain de temps immense. **Google AI Studio** est excellent pour cette tâche car un `System Prompt` bien défini garantit la cohérence du format, même si vous modifiez les critères. Les balises XML sont très utiles ici pour structurer clairement votre demande.
+Ce prompt est optimisé pour les plateformes qui supportent un **"System Prompt"** (comme Google AI Studio ou OpenAI Playground). Le System Prompt définit le rôle de l'IA de manière persistante, tandis que le "User Prompt" contient la tâche spécifique.
 
--   **Sur AI Studio :** Utilisez le `System Prompt` pour définir le rôle et le format de sortie global.
--   **Sur ChatGPT/Claude :** L'approche sans `System Prompt` fonctionne aussi très bien car la tâche est bien définie.
+-   **Sur AI Studio :** Copiez le contenu du `System Prompt` dans le champ dédié, et le `User Prompt` dans la zone de saisie principale.
+-   **Sur ChatGPT/Claude :** Vous pouvez combiner les deux en commençant votre message par le contenu du System Prompt.
 
-### Adaptation pour ChatGPT / Claude
+### Adaptation pour ChatGPT / Claude (si besoin)
 
-```markdown
-Crée un tableau comparatif au format Markdown.
+'''markdown
+# Combinaison des deux prompts pour une interface de chat simple
+Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
+
+Crée un tableau comparatif détaillé.
 
 - **Sujet :** {sujet_comparaison}
 - **Éléments à comparer :** {elements_a_comparer}
 - **Critères de comparaison :** {criteres_comparaison}
-
-Le tableau doit être précis, synthétique et facile à mémoriser.
-```
+'''
