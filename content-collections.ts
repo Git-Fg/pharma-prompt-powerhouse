@@ -1,6 +1,7 @@
 import { defineCollection, defineConfig, Context } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
+import { isValidIcon } from "./src/types/icon-taxonomy";
 
 // ============================================================================
 // SCHÉMAS ZOD & TYPES INFERES
@@ -111,6 +112,17 @@ type ValidationError = {
 
 const validationErrors: ValidationError[] = [];
 
+const validateIconExists = (doc: { icon?: string; _meta: Meta }, _ctx: Context) => {
+  if (doc.icon && !isValidIcon(doc.icon)) {
+    validationErrors.push({
+      document: doc._meta.path,
+      field: "icon",
+      value: doc.icon,
+      message: `L'icône '${doc.icon}' n'existe pas dans Lucide React. Utilisez une icône valide de la taxonomie.`,
+    });
+  }
+};
+
 const validateConceptReferences = async (
   doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
   ctx: Context
@@ -206,7 +218,10 @@ const processTags = (doc: { tags?: string[] }) => {
 // ============================================================================
 
 const conceptSchema = baseSchema.extend({
-  icon: z.string().optional(),
+  icon: z.string().refine(
+    (val) => !val || isValidIcon(val), 
+    { message: "L'icône doit être un nom valide d'icône Lucide React" }
+  ).optional(),
   mainGuideSlug: z.string().optional(),
   category: z.string().optional(),
 });
@@ -220,6 +235,7 @@ const concepts = defineCollection({
   transform: async (doc: ConceptDoc, ctx: Context) => {
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
+    validateIconExists(doc, ctx);
     await validateConceptReferences(doc, ctx);
     
     // Compile MDX content at build time
@@ -235,6 +251,10 @@ const concepts = defineCollection({
 
 const guideSchema = baseSchema.extend({
   category: z.string(),
+  icon: z.string().refine(
+    (val) => !val || isValidIcon(val), 
+    { message: "L'icône doit être un nom valide d'icône Lucide React" }
+  ).optional(),
   progress: z.number().optional(),
   targetAudience: z.array(z.string()).default([]),
   estimatedTime: z.string().optional(),
@@ -250,6 +270,7 @@ const guides = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    validateIconExists(doc, ctx);
     
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
@@ -269,6 +290,10 @@ const guides = defineCollection({
 
 const promptSchema = baseSchema.extend({
   category: z.string(),
+  icon: z.string().refine(
+    (val) => !val || isValidIcon(val), 
+    { message: "L'icône doit être un nom valide d'icône Lucide React" }
+  ).optional(),
   targetTool: z.string().optional(),
   variables: z.array(z.string()).optional(),
   domain: z.string().optional(),
@@ -290,6 +315,7 @@ const prompts = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    validateIconExists(doc, ctx);
     
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });

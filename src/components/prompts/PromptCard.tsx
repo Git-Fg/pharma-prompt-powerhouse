@@ -11,6 +11,7 @@ import {
   Button,
 } from '@/components/ui';
 import { Clock, User, Star, Target, Tag, Copy, Check } from 'lucide-react';
+import { getIcon } from '@/types/icon-taxonomy';
 
 // Type co-localisé avec le composant
 export interface PromptCardProps {
@@ -23,6 +24,7 @@ export interface PromptCardProps {
   tags?: string[];
   category?: string;
   targetTool?: string;
+  icon?: string;
   onUse: () => void;
   onFavorite?: () => void;
 }
@@ -37,10 +39,12 @@ export const PromptCard: React.FC<PromptCardProps> = ({
   tags,
   category: _category,
   targetTool,
+  icon,
   onUse,
   onFavorite: _onFavorite,
 }) => {
   const [copied, setCopied] = useState(false);
+  const IconComponent = getIcon(icon);
 
   const difficultyLabels = {
     débutant: 'Débutant',
@@ -62,7 +66,12 @@ export const PromptCard: React.FC<PromptCardProps> = ({
     <Card className='h-full flex flex-col hover:shadow-lg transition-shadow'>
       <CardHeader>
         <div className='flex justify-between items-start'>
-          <CardTitle className='text-lg line-clamp-2'>{title}</CardTitle>
+          <div className="flex items-center gap-3">
+            <div className="bg-primary/10 p-2 rounded-lg">
+              <IconComponent className="w-5 h-5 text-primary" />
+            </div>
+            <CardTitle className='text-lg line-clamp-2'>{title}</CardTitle>
+          </div>
           {isFavorite && (
             <Star className='h-5 w-5 text-yellow-500 fill-current' />
           )}

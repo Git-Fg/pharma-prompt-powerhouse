@@ -2,22 +2,12 @@ import Link from "next/link";
 import { allConcepts } from "content-collections";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Network } from "lucide-react";
-import * as LucideIcons from "lucide-react";
-
-type IconName = keyof typeof LucideIcons;
+import { getIcon } from "@/types/icon-taxonomy";
 
 /**
  * Composant de base pour afficher les concepts liés à un contenu.
  * Utilisé par RelatedContent et peut être utilisé indépendamment.
  */
-const getIcon = (
-  name: string | undefined
-): React.ComponentType<{ className?: string }> => {
-  if (!name || !(name in LucideIcons)) return LucideIcons.BrainCircuit;
-  return LucideIcons[name as IconName] as React.ComponentType<{
-    className?: string;
-  }>;
-};
 
 interface RelatedConceptsProps {
   conceptSlugs: string[];

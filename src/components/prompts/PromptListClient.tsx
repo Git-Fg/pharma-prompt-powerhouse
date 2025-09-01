@@ -111,6 +111,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
             difficulty={prompt.difficulty}
             estimatedTime={prompt.estimatedTime || 'N/A'}
             tags={prompt.tags.map(t => t.name)}
+            icon={prompt.icon}
             onUse={() => {}}
           />
         ))}
