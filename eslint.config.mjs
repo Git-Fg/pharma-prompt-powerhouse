@@ -20,25 +20,26 @@ export default tseslint.config(
     ],
   },
 
-  // Configuration de base JavaScript
+  // Configurations de base
   js.configs.recommended,
-
-  // Configuration TypeScript de base
   ...tseslint.configs.recommended,
 
-  // Configuration Next.js 15
+  // >>> NOUVEAU : Intégration des règles recommandées de Next.js <<<
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: {
-      "@next/next": nextPlugin,
-    },
+    plugins: { "@next/next": nextPlugin },
     rules: {
-      // Règles personnalisées pour le projet
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+      // Règles personnalisées pour le projet qui peuvent écraser les recommandations
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
       "no-console": ["warn", { allow: ["warn", "error"] }],
-
-      // Gestion des variables non utilisées avec pattern _
+    },
+  },
+  
+  // Configuration générale pour les variables non utilisées
+  {
+    rules: {
       "no-unused-vars": "off", // Désactivé car géré par TypeScript
       "@typescript-eslint/no-unused-vars": [
         "warn",
@@ -48,8 +49,6 @@ export default tseslint.config(
           caughtErrorsIgnorePattern: "^_",
         },
       ],
-      
-      // Règles spécifiques React 19
       "prefer-const": "error",
     },
   },
