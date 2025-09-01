@@ -277,6 +277,7 @@ const promptSchema = baseSchema.extend({
   estimatedTime: z.string().optional(),
   promptContent: z.string().optional(),
   alternativeVersions: z.array(z.object({ name: z.string(), content: z.string() })).optional(),
+  systemPromptContent: z.string().optional(), // NOUVEAU CHAMP
 });
 type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta; content?: string };
 
@@ -303,6 +304,7 @@ const prompts = defineCollection({
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
       estimatedTokens: Math.ceil(computed.wordCount * 1.3),
+      hasSystemPrompt: !!doc.systemPromptContent, // NOUVEAU CHAMP CALCULE
     };
   },
 });

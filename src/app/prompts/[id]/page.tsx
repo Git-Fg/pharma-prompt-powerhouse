@@ -92,28 +92,79 @@ export default async function PromptDetailPage({
       {/* Contenu principal en lecture seule */}
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          {/* Prompt Principal - Isolé et facilement copiable */}
-          <Card className="border-2 border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-2">
-                🎯 Prompt Principal
-                <CopyButton 
-                  text={foundPrompt.promptContent || foundPrompt._meta.content || ""} 
-                  label="Copier"
-                />
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                <strong>Prêt à utiliser :</strong> Copiez ce prompt et collez-le dans votre outil IA préféré.
-              </p>
-              <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
-                <CodeBlock language="text" showLineNumbers={false}>
-                  {foundPrompt.promptContent || foundPrompt._meta.content || ""}
-                </CodeBlock>
-              </div>
-            </CardContent>
-          </Card>
+          {/* S'il y a un System Prompt, on affiche deux blocs distincts */}
+          {foundPrompt.hasSystemPrompt && (
+            <>
+              <Card className="border-2 border-blue-500/20">
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    🧠 System Prompt
+                    <CopyButton
+                      text={foundPrompt.systemPromptContent || ""}
+                      label="Copier"
+                    />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    <strong>Rôle de l'IA :</strong> Copiez ceci dans le champ "System Prompt" de votre outil (ex: AI Studio).
+                  </p>
+                  <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-blue-500">
+                    <CodeBlock language="text" showLineNumbers={false}>
+                      {foundPrompt.systemPromptContent || ""}
+                    </CodeBlock>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-2 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    🎯 User Prompt
+                    <CopyButton
+                      text={foundPrompt.promptContent || ""}
+                      label="Copier"
+                    />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    <strong>Votre instruction :</strong> C'est la tâche que vous demandez à l'IA d'exécuter.
+                  </p>
+                  <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
+                    <CodeBlock language="text" showLineNumbers={false}>
+                      {foundPrompt.promptContent || ""}
+                    </CodeBlock>
+                  </div>
+                </CardContent>
+              </Card>
+            </>
+          )}
+
+          {/* S'il n'y a pas de System Prompt, on affiche un seul bloc comme avant */}
+          {!foundPrompt.hasSystemPrompt && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <CardTitle className="text-2xl flex items-center gap-2">
+                  🎯 Prompt Principal
+                  <CopyButton
+                    text={foundPrompt.promptContent || foundPrompt._meta.content || ""}
+                    label="Copier"
+                  />
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  <strong>Prêt à utiliser :</strong> Copiez ce prompt et collez-le dans votre outil IA préféré.
+                </p>
+                <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
+                  <CodeBlock language="text" showLineNumbers={false}>
+                    {foundPrompt.promptContent || foundPrompt._meta.content || ""}
+                  </CodeBlock>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Versions Alternatives si disponibles */}
           {foundPrompt.alternativeVersions && foundPrompt.alternativeVersions.length > 0 && (
