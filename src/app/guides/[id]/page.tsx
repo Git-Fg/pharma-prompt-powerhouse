@@ -9,6 +9,7 @@ import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import type { Guide } from "@/types";
+import type { Metadata } from "next";
 
 const categoryLabels = {
   prompting: "Prompting 🎯",
@@ -34,6 +35,56 @@ export async function generateStaticParams() {
   return allGuides.map((guide) => ({
     id: guide.slug,
   }));
+}
+
+// Génération des métadonnées dynamiques pour le SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const guide = allGuides.find((g) => g.slug === id);
+
+  if (!guide) {
+    return {
+      title: "Guide non trouvé - Pharma Prompt Powerhouse",
+      description: "Le guide que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${guide.title} - Guides | Pharma Prompt Powerhouse`,
+    description: guide.description,
+    keywords: [
+      "pharmacie",
+      "prompt engineering",
+      "guide",
+      "tutoriel",
+      "formation",
+      guide.title,
+      guide.category,
+      ...(guide.tags?.map(t => t.name) || [])
+    ],
+    openGraph: {
+      title: guide.title,
+      description: guide.description,
+      type: "article",
+      images: [
+        {
+          url: "/og-guide.png",
+          width: 1200,
+          height: 630,
+          alt: guide.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: guide.title,
+      description: guide.description,
+    },
+  };
 }
 
 export default async function GuideDetailPage({

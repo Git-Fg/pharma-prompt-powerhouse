@@ -15,12 +15,61 @@ import {
 } from "lucide-react";
 import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
+import type { Metadata } from "next";
 
 // Génération des pages statiques au build
 export async function generateStaticParams() {
   return allConcepts.map((concept) => ({
     slug: concept.slug,
   }));
+}
+
+// Génération des métadonnées dynamiques pour le SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const concept = allConcepts.find((c) => c.slug === resolvedParams.slug);
+
+  if (!concept) {
+    return {
+      title: "Concept non trouvé - Pharma Prompt Powerhouse",
+      description: "Le concept que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${concept.title} - Concepts | Pharma Prompt Powerhouse`,
+    description: concept.description,
+    keywords: [
+      "pharmacie",
+      "prompt engineering",
+      "intelligence artificielle",
+      "formation",
+      concept.title,
+      ...(concept.tags?.map(t => t.name) || [])
+    ],
+    openGraph: {
+      title: concept.title,
+      description: concept.description,
+      type: "article",
+      images: [
+        {
+          url: "/og-concept.png", // You could create category-specific OG images
+          width: 1200,
+          height: 630,
+          alt: concept.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: concept.title,
+      description: concept.description,
+    },
+  };
 }
 
 export default async function ConceptDetailPage({
