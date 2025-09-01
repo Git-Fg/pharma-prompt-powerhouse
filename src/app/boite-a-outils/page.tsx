@@ -83,7 +83,7 @@ const toolsData = [
       "Export direct",
     ],
     status: "Disponible",
-    href: "#",
+    href: "/boite-a-outils/flashcards-generator",
   },
   {
     id: "document-prompt",
