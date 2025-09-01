@@ -143,12 +143,6 @@ J'ai plein d'idées pour enrichir ce carnet :
 - **Mes workflows** complets pour différents cas d'usage
 - **Mes analyses** d'outils IA émergents
 
-## 📞 Me contacter
-
-- **GitHub** : [Mon profil]
-- **Email** : [Mon email]
-- **Discussions** : Via les issues GitHub
-
 ---
 
 **Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.**
