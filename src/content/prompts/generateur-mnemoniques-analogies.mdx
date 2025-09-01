@@ -3,10 +3,18 @@ title: "Générateur de Mnémoniques et Analogies"
 description: "Créez des moyens mnémotechniques et des analogies pour mémoriser facilement les concepts pharmaceutiques les plus complexes."
 category: "apprentissage"
 difficulty: "débutant"
-recommendedTool: "Google AI Studio"
+targetTool: "Google AI Studio"
 tags: ["exemple-code", "mnemonique", "pedagogie", "pharmacie", "prompting", "template", "variables"]
 conceptSlugs: ["prompting-creatif", "temperature-dosage"]
 variables: ["elements_a_memoriser", "type_aide_memoire", "style_prefere"]
+promptContent: |
+  Tu es un tuteur en pharmacie extrêmement créatif, connu pour tes moyens mnémotechniques inoubliables.
+
+  Crée une aide-mémoire de type **{type_aide_memoire}** pour mémoriser la liste suivante.
+  Le style doit être **{style_prefere}**.
+
+  **Éléments à mémoriser :**
+  {elements_a_memoriser}
 ---
 
 ## Notes d'Utilisation
@@ -15,24 +23,6 @@ C'est une tâche créative. Le paramètre clé est la **température**. Je recom
 
 -   **Sur AI Studio :** Réglez la température entre `0.7` et `0.9` pour des résultats originaux. En dessous, les réponses seront trop convenues.
 -   **Sur ChatGPT/Claude :** Précisez explicitement le besoin de créativité dans le prompt, car vous ne pouvez pas contrôler la température.
-
-### Prompt Recommandé (pour Google AI Studio)
-
-Pas besoin de balises ici, le prompt est direct. L'important est le réglage des paramètres.
-
-```markdown
-# Réglages dans AI Studio
-# Température: 0.8
-
-# Prompt
-Tu es un tuteur en pharmacie extrêmement créatif, connu pour tes moyens mnémotechniques inoubliables.
-
-Crée une aide-mémoire de type **{type_aide_memoire}** pour mémoriser la liste suivante.
-Le style doit être **{style_prefere}**.
-
-**Éléments à mémoriser :**
-{elements_a_memoriser}
-```
 
 ### Adaptation pour ChatGPT / Claude
 
@@ -44,3 +34,4 @@ Le style doit être **{style_prefere}**.
 
 **Éléments à mémoriser :**
 {elements_a_memoriser}
+```

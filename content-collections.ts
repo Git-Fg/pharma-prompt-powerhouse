@@ -140,7 +140,7 @@ const validateConceptReferences = async (
         document: doc._meta.path,
         field: "mainGuideSlug",
         value: doc.mainGuideSlug,
-        message: `Le guide référencé '${doc.mainGuideSlug}' n'existe pas dans la collection 'guides'.`,
+        message: `Le guide référencé '${doc.mainGuideSlug}' n\'existe pas dans la collection \'guides\'.`,
       });
     }
   }
@@ -359,6 +359,8 @@ const externalToolSchema = baseSchema.extend({
   category: z.string(),
   pricing: z.string().optional(),
   capabilities: z.array(z.string()).default([]),
+  use_cases: z.array(z.string()).optional(), // Champ ajouté
+  color: z.string().optional(),             // Champ ajouté
 });
 type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta; content?: string };
 
@@ -372,24 +374,38 @@ const externalTools = defineCollection({
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
 
-    const complexity =
-      computed.wordCount > 2000
-        ? "avancé"
-        : computed.wordCount > 1000
-          ? "intermédiaire"
-          : "débutant";
+    // ✅ ACTION 2: Ajouter la logique de préparation des données
+    let use_cases: string[] = [];
+    let color = "bg-gray-500";
+    switch (doc._meta.path) {
+        case "google-ai-studio":
+            use_cases = ["Analyse clinique précise", "Test de prompts avancés", "Raisonnement multi-étapes"];
+            color = "bg-blue-500";
+            break;
+        case "claude-ai":
+            use_cases = ["Analyse de longs PDF", "Synthèse de cours", "Dialogue avec un document"];
+            color = "bg-orange-500";
+            break;
+        case "perplexity-ai":
+            use_cases = ["Recherche bibliographique", "Vérification de faits", "Veille scientifique"];
+            color = "bg-green-500";
+            break;
+        case "z-ai":
+            use_cases = ["Création de présentations", "Génération de schémas", "Projets créatifs"];
+            color = "bg-purple-500";
+            break;
+    }
 
     return {
       ...computed,
       ...processedTags,
       ...relations,
       content: doc.content || "",
-      complexity,
-      hasPricing: !!doc.pricing,
-      capabilityCount: doc.capabilities.length,
       isFree:
         doc.pricing?.toLowerCase().includes("gratuit") ||
         doc.pricing?.toLowerCase().includes("free"),
+      use_cases, // Renvoyer le champ
+      color,     // Renvoyer le champ
     };
   },
 });
@@ -405,7 +421,7 @@ export default defineConfig({
       validationErrors.forEach((error) => {
         console.error(`📄 Document: ${error.document}`);
         console.error(`🔧 Champ: ${error.field}`);
-        console.error(`💬 Valeur: "${error.value}"`);
+        console.error(`💬 Valeur: \"${error.value}\"`);
         console.error(`❌ ${error.message}`);
         console.error("---");
       });

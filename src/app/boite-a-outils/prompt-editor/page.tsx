@@ -1,15 +1,17 @@
+// src/app/boite-a-outils/prompt-editor/page.tsx
+
 'use client';
 
 import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { PromptEditor } from '@/components/prompts/PromptEditorSimplified';
+// ✅ MODIFICATION : Importer le bon composant
+import { PromptEditor } from '@/components/prompts/PromptEditor';
 
 function PromptEditorContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  // Récupérer le paramètre 'template' depuis l'URL directement sans useEffect
   const templateToLoad = searchParams.get('template');
 
   return (
@@ -27,11 +29,11 @@ function PromptEditorContent() {
               Retour aux outils
             </Button>
             <div className='flex-1'>
-              <h1 className='text-3xl font-bold'>✏️ Éditeur de Prompts Simplifié</h1>
+              <h1 className='text-3xl font-bold'>✏️ Éditeur de Prompts</h1>
               <p className='text-muted-foreground mt-2'>
                 {templateToLoad
-                  ? `Édition du prompt "${templateToLoad}"...`
-                  : 'Créez et personnalisez vos prompts facilement. Focus sur l\'essentiel : le prompt, les variables, et l\'utilisation !'}
+                  ? `Personnalisation du prompt "${templateToLoad}"...`
+                  : 'Choisissez un prompt depuis la bibliothèque pour commencer.'}
               </p>
             </div>
           </div>

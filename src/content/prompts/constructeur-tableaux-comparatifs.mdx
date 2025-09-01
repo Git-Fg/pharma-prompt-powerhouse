@@ -3,10 +3,32 @@ title: "Constructeur de Tableaux Comparatifs"
 description: "Générez des tableaux comparatifs clairs et efficaces, un outil essentiel pour les révisions en pharmacie."
 category: "creation"
 difficulty: "débutant"
-recommendedTool: "Google AI Studio"
+targetTool: "Google AI Studio"
 tags: ["comparatif", "exemple-code", "pedagogie", "pharmacie", "prompting", "tableau", "template", "variables"]
 conceptSlugs: ["structuration-contenu"]
 variables: ["sujet_comparaison", "elements_a_comparer", "criteres_comparaison"]
+promptContent: |
+  <!-- À mettre dans le champ "System Prompt" de AI Studio -->
+  <system_prompt>
+  Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
+  </system_prompt>
+
+  <!-- À mettre dans le champ "User Prompt" -->
+  <tache>
+  Crée un tableau comparatif détaillé.
+  </tache>
+
+  <sujet>
+  {sujet_comparaison}
+  </sujet>
+
+  <elements>
+  {elements_a_comparer}
+  </elements>
+
+  <criteres>
+  {criteres_comparaison}
+  </criteres>
 ---
 
 ## Notes d'Utilisation
@@ -15,32 +37,6 @@ Un tableau bien structuré est un gain de temps immense. **Google AI Studio** es
 
 -   **Sur AI Studio :** Utilisez le `System Prompt` pour définir le rôle et le format de sortie global.
 -   **Sur ChatGPT/Claude :** L'approche sans `System Prompt` fonctionne aussi très bien car la tâche est bien définie.
-
-### Prompt Recommandé (pour Google AI Studio)
-
-```xml
-<!-- À mettre dans le champ "System Prompt" de AI Studio -->
-<system_prompt>
-Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
-</system_prompt>
-
-<!-- À mettre dans le champ "User Prompt" -->
-<tache>
-Crée un tableau comparatif détaillé.
-</tache>
-
-<sujet>
-{sujet_comparaison}
-</sujet>
-
-<elements>
-{elements_a_comparer}
-</elements>
-
-<criteres>
-{criteres_comparaison}
-</criteres>
-```
 
 ### Adaptation pour ChatGPT / Claude
 
@@ -52,3 +48,4 @@ Crée un tableau comparatif au format Markdown.
 - **Critères de comparaison :** {criteres_comparaison}
 
 Le tableau doit être précis, synthétique et facile à mémoriser.
+```
