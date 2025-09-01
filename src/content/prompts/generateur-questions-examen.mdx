@@ -13,11 +13,11 @@ promptContent: |
   </role>
 
   <texte_de_cours>
-  {course_content}
+  {`{course_content}`}
   </texte_de_cours>
 
   <instructions>
-  En te basant exclusivement sur le texte de cours fourni, génère {question_count} questions de type "{question_types}" avec un niveau de difficulté "{difficulty_level}".
+  En te basant exclusivement sur le texte de cours fourni, génère {`{question_count}`} questions de type "{`{question_types}`}" avec un niveau de difficulté "{`{difficulty_level}`}".
   Pour les QCM, fournis la réponse correcte et une justification.
   Pour les questions ouvertes, fournis les points clés de la réponse attendue.
   </instructions>
@@ -37,9 +37,9 @@ promptContent: |
 Agis en tant que mon tuteur pour l'internat en pharmacie.
 Voici mon support de cours sur lequel je veux m'entraîner :
 """
-{course_content}
+{`{course_content}`}
 """
 
-Génère {question_count} questions de type "{question_types}" (difficulté : {difficulty_level}).
+Génère {`{question_count}`} questions de type "{`{question_types}`}" (difficulté : {`{difficulty_level}`}).
 Après chaque question que je réponds, donne-moi la correction et une explication détaillée.
 ```

@@ -8,7 +8,7 @@ tags: ["perplexity", "pharmacie", "prompting", "recherche", "template", "variabl
 conceptSlugs: ["recherche-analyse"]
 variables: ["research_topic", "specific_questions"]
 promptContent: |
-  Sujet: {research_topic}
+  Sujet: {`{research_topic}`}
 
   Instructions: Fournis une synthèse générale sur ce sujet, en te basant sur la littérature académique des 2 dernières années. Identifie les 3 sous-thèmes les plus importants.
 ---
@@ -25,17 +25,17 @@ Ce n'est pas un prompt unique, mais une **méthodologie de travail** pour **Perp
 
 ### Prompt 1 : Question Initiale
 
-> **Sujet :** {research_topic}
->
+> **Sujet :** {`{research_topic}`}
+
 > **Instructions :** Fournis une synthèse générale sur ce sujet, en te basant sur la littérature académique des 2 dernières années. Identifie les 3 sous-thèmes les plus importants.
 
 ### Prompt 2 : Questions de Suivi
 
-> **Sujet :** {research_topic}
+> **Sujet :** {`{research_topic}`}
 >
 > **Questions spécifiques :**
 > """
-> {specific_questions}
+> {`{specific_questions}`}
 > """
 >
 > **Instructions :** Réponds à chaque question de manière séparée, en citant systématiquement les sources pour chaque information clé.
