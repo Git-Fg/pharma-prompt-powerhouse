@@ -1,4 +1,5 @@
 // No import needed for MDXComponents type
+import React from 'react';
 import { CodeBlock } from "@/components/ui/code-block";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -41,35 +42,40 @@ export function useMDXComponents(): Record<string, any> {
         {children}
       </code>
     ),
-    pre: ({ children }: { children: React.ReactNode }) => {
-      // Convert children to string if it's not already a string
-      let codeString: string;
-      if (typeof children === 'string') {
-        codeString = children;
-      } else {
-        try {
-          // Try to stringify children, but handle circular references
-          const cache = new Set();
-          codeString = JSON.stringify(children, (key, value) => {
-            if (typeof value === 'object' && value !== null) {
-              if (cache.has(value)) {
-                // Circular reference found, return a placeholder
-                return '[Circular Reference]';
-              }
-              cache.add(value);
-            }
-            return value;
-          }, 2);
-        } catch (_error) {
-          // If stringify fails, convert to string directly
-          codeString = String(children);
-        }
+    pre: (props: React.HTMLAttributes<HTMLPreElement>) => {
+      try {
+        // Extract the code element from children
+        const codeElement = React.Children.only(props.children) as React.ReactElement<{
+          children?: React.ReactNode;
+          className?: string;
+        }>;
+        
+        // Extract the actual code content
+        const codeContent = typeof codeElement.props.children === 'string' 
+          ? codeElement.props.children 
+          : String(codeElement.props.children || '');
+          
+        // Extract language from className (e.g., "language-js" -> "js")
+        const className = codeElement.props.className || '';
+        const language = className.replace('language-', '') || 'text';
+        
+        return (
+          <CodeBlock 
+            className="mb-4 mt-4"
+            language={language}
+          >
+            {codeContent}
+          </CodeBlock>
+        );
+      } catch (error) {
+        // Fallback for edge cases
+        console.warn('Error processing code block:', error);
+        return (
+          <CodeBlock className="mb-4 mt-4">
+            {String(props.children || '')}
+          </CodeBlock>
+        );
       }
-      return (
-        <CodeBlock className="mb-4 mt-4">
-          {codeString}
-        </CodeBlock>
-      );
     },
     
     // Composants pour les alertes et notes

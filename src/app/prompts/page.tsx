@@ -249,7 +249,7 @@ export default function PromptsPage() {
 
                     <div className="flex flex-wrap gap-2">
                       {prompt.tags &&
-                        prompt.tags.slice(0, 3).map((tag, index) => (
+                        prompt.tags.slice(0, 3).map((tag) => (
                           <Badge
                             key={tag.name}
                             variant="outline"
