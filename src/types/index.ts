@@ -6,7 +6,7 @@
 export type {
   Concept,
   Guide,
- Prompt,
+  Prompt,
   ExternalTool,
 } from "content-collections";
 
