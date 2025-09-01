@@ -1,18 +1,49 @@
-<context>
-Projet étudiant spécialisé en ingénierie de prompts pharmaceutiques avec Next.js 15, React 19, shadcn/ui 3.0 et TypeScript. Conçu pour aider d'autres étudiants à apprendre l'ingénierie de prompts à travers des guides, principes, prompts et outils interactifs.
-Le projet doit être en Français, mais n'hésite pas à utiliser des anglicisme lorsque cela décrit plus précisément certains concepts (comme token, prompt engineering, context engineering...)
+<project_philosophy>
+**Philosophie du Projet : Simplicité et Apprentissage**
 
-Technologies clés:
+- **Simplicité avant tout :** Toujours choisir la solution la plus simple qui fonctionne. La clarté prime sur la sophistication.
+- **Objectif Pédagogique :** Ce projet est un outil d'apprentissage pour d'autres étudiants, pas une application d'entreprise complexe.
+- **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
+- **Maintenabilité :** Écrire du code et créer du contenu que n'importe qui dans l'équipe peut comprendre et modifier facilement.
+</project_philosophy>
 
-- Next.js 15 avec App Router (pas de cache par défaut, APIs async)
-- React 19 (Actions, useOptimistic, useActionState, use())
-- shadcn/ui 3.0 (registres namespacés, MCP Server)
-- eslint 9 avec flat config
-- Content Collections avec schémas Zod
-- TypeScript pour la sécurité des types
+<content_rules>
+**Règles du Contenu : Le Cœur du Projet**
 
-Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non-développeurs.
-</context>
+- **Public Cible : Non-Développeurs Uniquement.** Le jargon technique lié au développement (API, RAG, etc.) est à proscrire. Le focus est sur l'ingénierie de prompts pharmaceutiques.
+- **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
+- **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
+- **Clarté et Pertinence :** Prioriser la qualité du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pour illustrer les concepts.
+- **Standardisation :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts afin de garantir la cohérence.
+</content_rules>
+
+<coding_style_and_principles>
+**Principes et Style de Code**
+
+- **Composants Ciblés :** Écrire des composants petits et spécialisés qui n'ont qu'une seule responsabilité.
+- **Lisibilité du Code :** Utiliser des noms de variables et de fonctions descriptifs. Le code doit se lire comme une histoire et expliquer ses intentions.
+- **Gestion d'État Progressive :**
+  - Commencer avec `useState` pour l'état local.
+  - Utiliser `useContext` pour un partage simple entre composants.
+  - Réserver `useReducer` pour les logiques d'état réellement complexes.
+- **Performance Intelligente :**
+  - La meilleure optimisation est de **déplacer la logique vers le build** avec Content Collections.
+  - Faire confiance aux optimisations automatiques de React 19 et éviter l'optimisation prématurée.
+- **Dépendances Minimales :** N'ajouter une bibliothèque que si elle résout un problème réel qu'une fonctionnalité native ne peut pas couvrir.
+- **Documentation Utile :** Commenter le "pourquoi" derrière les choix de code complexes, pas le "comment".
+</coding_style_and_principles>
+
+<user_experience_and_accessibility>
+**Expérience Utilisateur et Accessibilité**
+
+- **Conception Centrée sur l'Utilisateur :** Concevoir chaque interface en pensant d'abord aux étudiants non-développeurs.
+- **Guidage et Intuitivité :** Créer des parcours et des outils interactifs qui sont simples à comprendre et à utiliser sans explication préalable.
+- **Tirer parti de l'Accessibilité Native :** Utiliser systématiquement les fonctionnalités d'accessibilité (ARIA, gestion du focus, etc.) intégrées dans shadcn/ui pour garantir que le site est utilisable par tous.
+</user_experience_and_accessibility>
+
+---
+### **Règles Techniques Spécifiques**
+---
 
 <react19_rules>
 **Compiler et optimisation:**
@@ -38,7 +69,7 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 
 - Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants
 - Utiliser les stylesheets natifs avec la propriété `precedence`
-  </react19_rules>
+</react19_rules>
 
 <nextjs15_rules>
 **App Router:**
@@ -64,7 +95,7 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 - Expérimenter avec `unstable_after` pour exécuter du code après le streaming
 - Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur
 - Utiliser `next.config.ts` pour la configuration TypeScript
-  </nextjs15_rules>
+</nextjs15_rules>
 
 <shadcn_ui_rules>
 **Version 3.0:**
@@ -85,7 +116,7 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 - Utiliser les composants de formulaire shadcn/ui
 - Intégrer avec les Actions React 19 pour la soumission
 - Garder la logique de validation simple et proche du formulaire
-  </shadcn_ui_rules>
+</shadcn_ui_rules>
 
 <content_collections_rules>
 **Philosophie : Le Build est la Source de Vérité**
@@ -113,7 +144,7 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 
 - Importer les collections directement depuis `"content-collections"`.
 - Faire confiance aux types générés : si `guide.concepts` est typé comme `Concept[]`, c'est un tableau d'objets, pas de `string`.
-  </content_collections_rules>
+</content_collections_rules>
 
 <typescript_rules>
 **Sécurité des Types :**
@@ -130,64 +161,7 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 
 - Utiliser des interfaces de props simples.
 - Importer les types (`Guide`, `Concept`, etc.) directement depuis `"content-collections"` ou `@/types` pour les props des composants.
-  </typescript_rules>
-
-<general_rules>
-**Philosophie:**
-
-- Toujours choisir la solution la plus simple qui fonctionne
-- Prioriser la compréhension et la maintenabilité plutôt que la sophistication
-- Suivre le principe YAGNI (You Aren't Gonna Need It)
-- C'est un projet d'apprentissage, pas une application d'entreprise
-
-**Code:**
-
-- Écrire des composants petits et concentrés qui font bien une seule chose
-- Utiliser des noms descriptifs qui racontent une histoire
-- Structurer le code pour qu'il se lise comme un récit
-- Privilégier la lisibilité plutôt que la finesse
-
-**Gestion d'état:**
-
-- Commencer avec useState pour l'état local
-- Utiliser useContext pour partager l'état entre composants proches
-- Utiliser useReducer uniquement pour la logique d'état complexe
-- Éviter les solutions de gestion d'état complexes pour des besoins simples
-
-**Performance:**
-
-- Faire confiance aux optimisations automatiques de React 19
-- **Déplacer la logique de données vers le build** (via `content-collections`) est la meilleure optimisation de performance pour ce projet.
-- Éviter l'optimisation prématurée.
-
-**Dépendances:**
-
-- Garder les dépendances minimales
-- N'ajouter des bibliothèques que lorsqu'elles résolvent un problème réel
-- Préférer les fonctionnalités intégrées aux solutions externes
-
-**Documentation:**
-
-- Écrire des commentaires qui expliquent le "pourquoi" derrière les décisions
-- Garder la documentation concise mais utile
-- Documenter chaque variable et template avec des exemples concrets
-
-**Accessibilité:**
-
-- Concevoir pour les non-développeurs en premier
-- Créer des interfaces guidées et intuitives
-- Utiliser les fonctionnalités d'accessibilité intégrées de shadcn/ui
-
-**Contenu:**
-
-- Prioriser la qualité et la clarté du contenu pharmaceutique.
-- **Concevoir tout le contenu pour un public non-développeur.** Le jargon technique lié au développement (API, RAG, etc.) doit être évité.
-- **Focaliser les guides sur l'utilisation d'interfaces web (WebUIs).** Aucun guide ne doit nécessiter d'écrire du code (Python, JS, etc.).
-- **Présenter les "Playgrounds" (OpenAI, Anthropic) et "Studios" (Google AI Studio) comme des outils avancés accessibles via une interface web.** Ils permettent d'explorer des concepts comme le `system prompt` ou la `température` sans coder.
-- Différencier les plateformes en fonction de leurs capacités (ex: simplicité de Gemini vs options avancées d'AI Studio ou de chat.z.ai).
-- Utiliser des exemples réels et des cas pratiques pertinents au domaine pharmaceutique.
-- Standardiser le format des variables: `{{nom_variable}}`.
-</general_rules>
+</typescript_rules>
 
 <instructions>
 DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
