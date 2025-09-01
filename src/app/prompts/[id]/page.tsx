@@ -97,7 +97,7 @@ export default async function PromptDetailPage({
               <CardTitle className="text-2xl flex items-center gap-2">
                 🎯 Prompt Principal
                 <CopyButton 
-                  text={foundPrompt.promptContent || foundPrompt.content || ""} 
+                  text={foundPrompt.promptContent || foundPrompt._meta.content || ""} 
                   label="Copier"
                 />
               </CardTitle>
@@ -108,7 +108,7 @@ export default async function PromptDetailPage({
               </p>
               <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
                 <CodeBlock language="text" showLineNumbers={false}>
-                  {foundPrompt.promptContent || foundPrompt.content || ""}
+                  {foundPrompt.promptContent || foundPrompt._meta.content || ""}
                 </CodeBlock>
               </div>
             </CardContent>
