@@ -14,7 +14,8 @@
 - **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
 - **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
 - **Clarté et Pertinence :** Prioriser la qualité du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pour illustrer les concepts.
-- **Standardisation :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts afin de garantir la cohérence.
+- **Standardisation Variables :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts (frontmatter ET contenu MDX). Dans le contenu MDX, utiliser des backticks pour éviter les conflits JSX : `{{variable}}`.
+- **Qualité du Contenu :** Chaque concept DOIT avoir des `keyTakeaways` pour l'apprentissage. Les `conceptSlugs` doivent référencer des concepts existants.
 </content_rules>
   
 <project_documentation_rules>
@@ -174,6 +175,8 @@ DO faire confiance aux types générés par Content Collections comme source de 
 DO relancer le build après avoir modifié `content-collections.ts`
 DO comprendre que Next.js 15 ne met plus rien en cache par défaut
 DO écrire du code facile à expliquer aux autres étudiants
+DO utiliser les attributs `data-testid` pour les tests E2E robustes
+DO maintenir la qualité du contenu avec keyTakeaways et conceptSlugs valides
 
 DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
 DO NOT effectuer de logique de liaison de données (ex: `guides.map(...)` pour trouver des concepts) au runtime. C'est le rôle du build.
