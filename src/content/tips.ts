@@ -1,22 +1,64 @@
-export const dailyTips = [
-  'Pensez à sauvegarder vos fiches de révision régulièrement !',
-  "Utilisez des moyens mnémotechniques pour mémoriser plus facilement les mécanismes d'action.",
-  "L'IA est comme un stagiaire motivé : guidez-la avec des instructions précises.",
-  'Pour de meilleurs résultats, convertissez vos PDFs en texte avant de les analyser.',
-  "Demandez à l'IA de critiquer et d'améliorer ses propres réponses pour une qualité optimale.",
-  "La règle 80/20 : demandez les 20% de connaissances qui répondent à 80% des questions d'examen.",
-  "Structurez vos fiches 'pour un étudiant avec TDAH' pour améliorer la clarté et la concision.",
-  "N'hésitez pas à itérer : la première réponse de l'IA n'est jamais la meilleure.",
-  'Vérifiez toujours les posologies et interactions avec des sources officielles avant toute application clinique.',
-  "Créez une bibliothèque de prompts personnalisés dans 'Mon Carnet' pour gagner du temps sur vos tâches récurrentes.",
-  'Placez vos instructions les plus importantes au début et à la fin de vos prompts longs.',
-  "Utilisez la technique du 'pas à pas' pour les calculs pharmacologiques complexes.",
-  'Pour les sujets importants, posez la même question à plusieurs reprises pour valider la cohérence des réponses.',
-  'Testez toujours vos prompts sur plusieurs exemples avant de les considérer comme fiables.',
-  'Utilisez des délimiteurs clairs (triples guillemets) pour séparer vos instructions du contexte.',
-  'Spécifiez toujours le format de sortie attendu (Markdown, tableau, JSON) pour éviter les surprises.',
-  "Privilégiez les instructions positives ('faites ceci') plutôt que négatives ('ne faites pas cela').",
-  "Constituez-vous un jeu de test personnel pour valider l'efficacité de vos prompts.",
-  "Utilisez des personas précises (ex: 'pharmacien hospitalier en oncologie') pour obtenir des réponses plus expertes.",
-  'Pour les documents longs, placez les instructions cruciales au début et à la fin du prompt.',
+import { DailyTip } from "@/types";
+
+export const dailyTips: DailyTip[] = [
+  {
+    text: "Pour une recherche d'information fiable et sourcée, privilégiez un moteur de réponse comme Perplexity AI. C'est votre meilleur allié contre les hallucinations.",
+    link: "/guides/obtenir-donnees-fiables",
+  },
+  {
+    text: "Vous voulez analyser 20 PDF de cours d'un coup ? Utilisez DeepSeek Chat pour sa capacité à traiter jusqu'à 50 fichiers en version gratuite.",
+    link: "/guides/annales-fiches-revision",
+  },
+  {
+    text: "Pour comprendre l'impact de la 'Température' sur la créativité de l'IA, utilisez un environnement d'expérimentation comme Google AI Studio.",
+    link: "/guides/choisir-son-environnement-d-experimentation-ia",
+  },
+  {
+    text: "Ne mettez jamais d'informations personnelles sur un patient dans une IA. En cas de doute, relisez notre guide sur la confidentialité.",
+    link: "/guides/confidentialite-securite",
+  },
+  {
+    text: "L'IA vous répond sans suivre le format demandé ? Apprenez à la contraindre avec les sorties structurées ou le XML prompting.",
+    link: "/guides/sorties-structurees",
+  },
+  {
+    text: "Utilisez les 'Instructions Personnalisées' de ChatGPT ou Claude.ai pour qu'ils se souviennent de qui vous êtes et comment vous voulez qu'ils répondent.",
+    link: "/guides/gestion-memoire-ia",
+  },
+  {
+    text: "La fenêtre de contexte de Gemini 2.5 Pro peut contenir 1 million de tokens. C'est l'équivalent de plusieurs gros livres !",
+    link: "/concepts/token-acide-amine",
+  },
+  {
+    text: "L'IA est comme un stagiaire brillant mais naïf. Guidez-la avec des instructions claires et précises pour en tirer le meilleur.",
+    link: "/guides/ia-stagiaire-brillant-naif",
+  },
+  {
+    text: "N'hésitez pas à itérer. La première réponse de l'IA est rarement la meilleure. Le dialogue est la clé.",
+    link: "/guides/art-iteration-dialogue-cle",
+  },
+  {
+    text: "Utilisez des personas précises (ex: 'pharmacien hospitalier en oncologie') pour obtenir des réponses plus expertes.",
+    link: "/concepts/prompt-prescription",
+  },
+  {
+    text: "Le XML prompting est une technique puissante pour forcer l'IA à structurer sa pensée et sa réponse. Essayez-le pour les tâches complexes.",
+    link: "/guides/xml-prompting-pharma",
+  },
+  {
+    text: "Créez des 'Générateurs de Mnémoniques' pour transformer des listes complexes en phrases faciles à retenir.",
+    link: "/prompts/generateur-mnemoniques-analogies",
+  },
+  {
+    text: "Le Tree of Thought (ToT) est idéal pour disséquer un cas clinique complexe étape par étape. Demandez à l'IA d'explorer plusieurs hypothèses.",
+    link: "/guides/tree-of-thought-clinique",
+  },
+  {
+    text: "Automatisez la création de vos fiches de révision en donnant vos PDF de cours à l'IA avec un prompt de synthèse structuré.",
+    link: "/guides/automatiser-fiches-de-revision",
+  },
+  {
+    text: "ChatGPT, Gemini, Claude... Lequel choisir pour vos révisions ? Notre guide comparatif des WebUIs de chat est là pour vous aider.",
+    link: "/guides/choisir-sa-webui-de-chat-en-2025",
+  },
 ];
