@@ -4,8 +4,8 @@ test.describe('MDX Components Functionality', () => {
   test('modernized concept with React components renders correctly', async ({ page }) => {
     await page.goto('/concepts/hallucination-effet-indesirable');
     
-    // Check main title
-    await expect(page.locator('h1')).toContainText('Hallucination');
+    // Check main title specifically in main content area
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hallucination');
     
     // Check for Alert components
     const alerts = page.locator('[role="alert"], .alert, [data-state="open"]');
@@ -31,15 +31,20 @@ test.describe('MDX Components Functionality', () => {
   test('prompt prescription concept with cards renders correctly', async ({ page }) => {
     await page.goto('/concepts/prompt-prescription');
     
-    await expect(page.locator('h1')).toContainText('Prompt');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Prompt');
     
-    // Should show the 5 elements as cards or structured content
-    const cardElements = page.locator('.card, [class*="card"], h3, h4');
-    await expect(cardElements.first()).toBeVisible();
+    // Check that the 5 elements are present in Cards (rendered as generic elements)
+    await expect(page.locator('text=1. Le Rôle (La Molécule)')).toBeVisible();
+    await expect(page.locator('text=2. La Tâche (La Posologie)')).toBeVisible();
+    await expect(page.locator('text=3. Le Contexte (Les Antécédents)')).toBeVisible();
+    await expect(page.locator("text=4. Le Format (La Voie d'Administration)")).toBeVisible();
+    await expect(page.locator('text=5. Les Exemples (Les Cas Cliniques de Référence)')).toBeVisible();
     
-    // Check for content about the 5 elements
-    await expect(page.locator('text=Rôle')).toBeVisible();
-    await expect(page.locator('text=Tâche')).toBeVisible();
+    // Check for Alert component
+    const alerts = page.locator('[role="alert"]');
+    if (await alerts.count() > 0) {
+      await expect(alerts.first()).toBeVisible();
+    }
     
     await page.screenshot({ path: 'test-results/prompt-prescription-concept.png', fullPage: true });
   });
@@ -47,7 +52,7 @@ test.describe('MDX Components Functionality', () => {
   test('memory concept with tabs renders correctly', async ({ page }) => {
     await page.goto('/concepts/memoire-ia');
     
-    await expect(page.locator('h1')).toContainText('Mémoire');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Mémoire');
     
     // Check for tabs or structured content about RAM vs Disk
     const structuredContent = page.locator('text=RAM, text=Disque, text=contexte, .tabs, [role="tablist"]');
@@ -61,19 +66,15 @@ test.describe('MDX Components Functionality', () => {
   test('security guide with alerts renders correctly', async ({ page }) => {
     await page.goto('/guides/confidentialite-securite');
     
-    await expect(page.locator('h1')).toContainText('Confidentialité');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Confidentialité');
     
-    // Should have critical security alerts
-    const alertElements = page.locator('.alert, [role="alert"], text=Règle absolue, text=JAMAIS');
-    if (await alertElements.count() > 0) {
-      await expect(alertElements.first()).toBeVisible();
-    }
+    // Should have critical security alert
+    await expect(page.locator('text=Règle absolue non négociable')).toBeVisible();
+    await expect(page.locator('[role="alert"]').first()).toBeVisible();
     
-    // Should have tabs for risk levels or structured content
-    const structuredElements = page.locator('.tabs, [role="tablist"], text=Risque, .card');
-    if (await structuredElements.count() > 0) {
-      await expect(structuredElements.first()).toBeVisible();
-    }
+    // Should have tabs for risk levels - be more specific
+    await expect(page.locator('[role="tablist"]').first()).toBeVisible();
+    await expect(page.locator('[role="tab"]').first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/security-guide.png', fullPage: true });
   });
@@ -81,13 +82,14 @@ test.describe('MDX Components Functionality', () => {
   test('external tool with contextual alerts renders correctly', async ({ page }) => {
     await page.goto('/outils-externes/deepseek-chat');
     
-    await expect(page.locator('h1')).toContainText('DeepSeek');
+    // Wait for page load
+    await page.waitForLoadState('networkidle');
+    
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('DeepSeek');
     
     // Should have warning alert about data privacy
-    const warningElements = page.locator('.alert, [role="alert"], text=Avertissement, text=confidentialité');
-    if (await warningElements.count() > 0) {
-      await expect(warningElements.first()).toBeVisible();
-    }
+    await expect(page.locator('text=Avertissement de Confidentialité')).toBeVisible();
+    await expect(page.locator('[role="alert"]').first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/deepseek-tool.png', fullPage: true });
   });
@@ -95,13 +97,14 @@ test.describe('MDX Components Functionality', () => {
   test('Google AI Studio advantage highlight renders correctly', async ({ page }) => {
     await page.goto('/outils-externes/google-ai-studio');
     
-    await expect(page.locator('h1')).toContainText('Google AI Studio');
+    // Wait for page load
+    await page.waitForLoadState('networkidle');
+    
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Google AI Studio');
     
     // Should have success/advantage alert
-    const advantageElements = page.locator('.alert, [role="alert"], text=Avantage, text=gratuit');
-    if (await advantageElements.count() > 0) {
-      await expect(advantageElements.first()).toBeVisible();
-    }
+    await expect(page.locator('text=Avantage Concurrentiel Majeur')).toBeVisible();
+    await expect(page.locator('[role="alert"]').first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/google-ai-studio-tool.png', fullPage: true });
   });
@@ -109,7 +112,7 @@ test.describe('MDX Components Functionality', () => {
   test('prompt with platform tabs renders correctly', async ({ page }) => {
     await page.goto('/prompts/generateur-mnemoniques-analogies');
     
-    await expect(page.locator('h1')).toContainText('Générateur');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Générateur');
     
     // Should have temperature guidance and platform-specific tabs
     const guidanceElements = page.locator('text=température, .tabs, [role="tablist"], text=AI Studio');
