@@ -59,11 +59,13 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
     let finalPrompt = promptTemplate.promptContent;
     let finalSystemPrompt = promptTemplate.systemPromptContent || '';
     
-    // Replace variables in both prompts
+    // Replace variables in both prompts using {{variable}} format
     for (const [key, value] of Object.entries(variableValues)) {
-      finalPrompt = finalPrompt.replaceAll(`{${key}}`, value || `[${key}]`);
+      const placeholder = `{{${key}}}`;
+      const replacement = value || `[${key}]`;
+      finalPrompt = finalPrompt.replaceAll(placeholder, replacement);
       if (finalSystemPrompt) {
-        finalSystemPrompt = finalSystemPrompt.replaceAll(`{${key}}`, value || `[${key}]`);
+        finalSystemPrompt = finalSystemPrompt.replaceAll(placeholder, replacement);
       }
     }
     
