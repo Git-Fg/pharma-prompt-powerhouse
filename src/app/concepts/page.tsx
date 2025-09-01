@@ -10,17 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import * as LucideIcons from "lucide-react";
-
-// Helper pour récupérer dynamiquement les icônes Lucide
-type IconName = keyof typeof LucideIcons;
-const getIcon = (
-  name: string | undefined
-): React.ComponentType<{ className?: string }> => {
-  if (!name || !(name in LucideIcons)) return LucideIcons.BrainCircuit; // Icône par défaut
-  return LucideIcons[name as IconName] as React.ComponentType<{
-    className?: string;
-  }>;
-};
+import { getIcon } from "@/types/icon-taxonomy";
 
 export default function ConceptsPage() {
   const categories = ["Fondamentaux", "Techniques Avancées", "Méthodologie"];

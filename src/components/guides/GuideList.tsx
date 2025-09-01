@@ -23,6 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Search, Clock, BookOpen, ArrowRight, Heart } from 'lucide-react';
 import { useFavorites } from '@/hooks/useFavorites';
 import { cn } from '@/lib/utils';
+import { getIcon } from '@/types/icon-taxonomy';
 
 type Guide = (typeof allGuides)[0];
 
@@ -116,7 +117,10 @@ export function GuideList({ initialGuides }: GuideListProps) {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredGuides.map(guide => (
+        {filteredGuides.map(guide => {
+          const IconComponent = getIcon(guide.icon);
+          
+          return (
           <Card
             key={guide.slug}
             className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
@@ -145,9 +149,14 @@ export function GuideList({ initialGuides }: GuideListProps) {
                   />
                 </Button>
               </div>
-              <CardTitle className="text-lg font-semibold">
-                {guide.title}
-              </CardTitle>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
+                  <IconComponent className="w-5 h-5 text-primary" />
+                </div>
+                <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors">
+                  {guide.title}
+                </CardTitle>
+              </div>
               <CardDescription className="text-sm">
                 {guide.description}
               </CardDescription>
@@ -171,7 +180,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
               </Button>
             </CardContent>
           </Card>
-        ))}
+        )})}
       </div>
     </>
   );
