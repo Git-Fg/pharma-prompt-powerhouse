@@ -1,0 +1,201 @@
+---
+title: "Anthropic Console (Claude Playground)"
+description: "Guide pour utiliser la Console Anthropic, l'interface développeur avancée de Claude avec contrôle des paramètres et accès aux derniers modèles."
+url: "https://console.anthropic.com"
+category: "interface-avancee"
+pricing: "Payant (crédit API requis)"
+capabilities: ["claude-3-5-sonnet", "claude-3-opus", "claude-3-haiku", "parametres-avances", "workbench", "system-prompts", "temperature-personnalisee"]
+tags: ["anthropic", "claude", "console", "workbench", "parametres-avances", "system-prompt"]
+conceptSlugs: ["temperature-dosage", "context-engineering", "prompt-prescription"]
+---
+
+## Qu'est-ce qu'Anthropic Console ?
+
+La Console Anthropic est l'interface **développeur avancée** qui vous donne accès à tous les modèles Claude avec un contrôle total des paramètres. Elle inclut le "Workbench", un environnement de test puissant pour optimiser vos prompts.
+
+## 🆚 Différences avec Claude Standard
+
+### Claude.ai (Standard)
+- ✅ **Gratuit** avec quotas généreux
+- ✅ Interface conversationnelle simple
+- ✅ Upload de fichiers PDF/images
+- ✅ Parfait pour l'usage quotidien
+- ❌ Un seul modèle accessible (généralement Claude-3.5-Sonnet)
+- ❌ Paramètres fixes
+
+### Anthropic Console (console.anthropic.com)
+- ⚠️ **Payant** (consomme des crédits API)
+- ✅ **Tous les modèles Claude** disponibles
+- ✅ **Workbench** pour tester et comparer
+- ✅ **System prompts** personnalisés
+- ✅ Température et autres paramètres ajustables
+- ✅ **Export/import** de configurations
+- ✅ Idéal pour **développer et optimiser** vos prompts
+
+## 🎯 Quand Utiliser la Console ?
+
+### Avantages Spécifiques pour la Pharmacie
+- **Tester plusieurs modèles** (Opus pour l'analyse complexe, Haiku pour la rapidité)
+- **System prompts persistants** pour définir le comportement
+- **Comparaison A/B** de différentes formulations
+- **Accès aux derniers modèles** dès leur sortie
+
+## 🛠️ Le Workbench : Votre Laboratoire de Prompts
+
+### Interface Workbench
+```
+┌─────────────────┬─────────────────────────────────┐
+│    MODÈLES      │         CONVERSATION            │
+├─────────────────┼─────────────────────────────────┤
+│ • Claude-3.5    │ System: [Votre prompt système]  │
+│   Sonnet        │                                │
+│ • Claude-3 Opus │ Human: [Votre question]        │
+│ • Claude-3      │                                │
+│   Haiku         │ Assistant: [Réponse générée]   │
+└─────────────────┴─────────────────────────────────┘
+│           PARAMÈTRES (Temperature, etc.)          │
+└───────────────────────────────────────────────────┘
+```
+
+## ⚙️ Paramètres Avancés
+
+### Choix des Modèles
+
+#### Claude-3.5-Sonnet
+- 🎯 **Usage :** Équilibre performance/coût optimal
+- 💰 **Coût :** Moyen
+- 📚 **Idéal pour :** Analyses générales, synthèses, QCM
+
+#### Claude-3-Opus  
+- 🧠 **Usage :** Raisonnement complexe, analyse approfondie
+- 💰 **Coût :** Le plus élevé
+- 📚 **Idéal pour :** Cas cliniques complexes, diagnostics différentiels
+
+#### Claude-3-Haiku
+- ⚡ **Usage :** Réponses rapides et économiques
+- 💰 **Coût :** Le plus bas
+- 📚 **Idéal pour :** Définitions, calculs simples, révisions rapides
+
+### System Prompts Personnalisés
+```xml
+<system>
+Tu es un pharmacien hospitalier expert en gériatrie.
+
+RÈGLES STRICTES :
+1. Base tes réponses sur les référentiels officiels
+2. Signale toujours les contre-indications importantes  
+3. Ne modifie jamais les prescriptions sans justification
+4. Utilise un langage pédagogique adapté aux étudiants
+
+STRUCTURE de réponse :
+1. Analyse pharmaceutique
+2. Points d'attention
+3. Recommandations pratiques
+</system>
+```
+
+## 📋 Guide Pratique pour Étudiants
+
+### 1. Créer un Compte Console
+1. Allez sur [console.anthropic.com](https://console.anthropic.com)
+2. Créez un compte avec votre email étudiant
+3. Ajoutez des crédits (10€ suffisent pour commencer)
+
+### 2. Configuration Recommandée
+
+**Pour l'Analyse Pharmaceutique :**
+```
+Modèle: Claude-3.5-Sonnet
+Temperature: 0.3
+Max tokens: 2000
+```
+
+**Pour la Créativité (mnémotechniques, analogies) :**
+```
+Modèle: Claude-3.5-Sonnet  
+Temperature: 0.8
+Max tokens: 1500
+```
+
+### 3. Exemple d'Usage : System Prompt pour Révisions
+
+**System Prompt :**
+```
+Tu es un assistant de révision en pharmacie.
+
+OBJECTIF : Aider les étudiants à réviser efficacement.
+
+STYLE :
+- Questions claires et progressives
+- Explications étape par étape  
+- Analogies quand c'est utile
+- Toujours positif et encourageant
+
+STRUCTURE :
+1. Concept principal
+2. Points clés à retenir
+3. Cas pratique simple
+4. Question de révision
+```
+
+**Prompt Utilisateur :**
+```
+Aide-moi à réviser les interactions médicamenteuses 
+avec les inhibiteurs de la pompe à protons (IPP).
+```
+
+## 💰 Optimisation des Coûts
+
+### Stratégie Économique
+1. **Développez sur Claude.ai gratuit** d'abord
+2. **Affinez sur Console** avec les paramètres
+3. **Utilisez Haiku** pour les tests rapides
+4. **Réservez Opus** aux analyses complexes
+
+### Estimation des Coûts (indicative)
+```
+Claude-3-Haiku    : ~0.01€ pour 10 analyses courtes
+Claude-3.5-Sonnet : ~0.05€ pour 10 analyses moyennes  
+Claude-3-Opus     : ~0.20€ pour 10 analyses détaillées
+```
+
+## 🔥 Fonctionnalités Avancées
+
+### Templates Réutilisables
+- Sauvegardez vos meilleures configurations
+- Partagez-les avec vos collègues d'étude
+- Créez des "presets" pour différents types d'exercices
+
+### Export/Import
+- Exportez vos conversations réussies
+- Importez des templates de prompts
+- Sauvegardez vos system prompts favoris
+
+## 🎓 Avantages Pédagogiques
+
+### Apprentissage Approfondi
+- **Comparez les modèles** : voyez comment chacun répond différemment
+- **Testez les paramètres** : comprenez l'impact de la température
+- **Itérez rapidement** : testez plusieurs formulations de prompts
+
+### Préparation aux Examens  
+- **System prompts spécialisés** pour chaque matière
+- **Templates de révision** réutilisables
+- **Analyse comparative** de vos réponses
+
+## ⚠️ Conseils d'Usage
+
+### Bonnes Pratiques
+1. **Commencez petit** : 10€ de crédit pour découvrir
+2. **Utilisez les system prompts** : ils sont la clé de la Console
+3. **Sauvegardez vos configurations** réussies
+4. **Expérimentez avec les modèles** selon vos besoins
+
+### À Éviter
+- ❌ Utiliser Opus pour des tâches simples
+- ❌ Oublier de définir un system prompt
+- ❌ Négliger le contrôle des coûts
+
+## 🚀 Pour Aller Plus Loin
+
+La Console Anthropic est un excellent investissement pour maîtriser l'IA en profondeur. Elle vous apprend à **penser comme un prompt engineer** tout en vous donnant les outils pour optimiser vos études en pharmacie.

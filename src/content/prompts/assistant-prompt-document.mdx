@@ -7,45 +7,44 @@ recommendedTool: "Claude"
 tags: ["claude", "exemple-code", "fiche-revision", "pharmacie", "prompting", "recherche", "synthese", "template", "variables"]
 conceptSlugs: ["context-engineering", "recherche-analyse"]
 variables: ["document_content", "user_question"]
+promptContent: |
+  <document>
+  {document_content}
+  </document>
+
+  <instructions>
+  En te basant EXCLUSIVEMENT sur le document fourni ci-dessus, réponds à la question suivante. Si l'information n'est pas présente dans le texte, réponds "L'information n'est pas disponible dans le document fourni."
+  </instructions>
+
+  <question>
+  {user_question}
+  </question>
+alternativeVersions:
+  - name: "Version ChatGPT"
+    content: |
+      ### Contexte
+      Voici un document :
+      """
+      {document_content}
+      """
+
+      ### Ma Question
+      En me basant uniquement sur le document ci-dessus, réponds à cette question : {user_question}
+
+      **Règle importante :** Si la réponse ne se trouve pas dans le document, dis-le explicitement.
 ---
 
 ## Notes d'Utilisation
 
 Ce prompt est conçu pour analyser un contenu textuel que vous fournissez. La meilleure plateforme pour cela est **Claude**, car elle permet de téléverser des fichiers PDF directement. Pour les autres outils, vous devrez copier-coller le texte du document.
 
--   **Sur Claude :** Utilisez l'icône trombone pour joindre votre fichier avant d'envoyer le prompt.
--   **Sur AI Studio / ChatGPT :** Copiez le texte du document et collez-le à la place de `{document_content}`.
+## Guide par Plateforme
 
-### Prompt Recommandé (pour Claude & AI Studio)
+### Sur Claude
+Utilisez l'icône trombone pour joindre votre fichier PDF avant d'envoyer le prompt. L'utilisation des balises `<document>` et `<question>` est particulièrement efficace sur Claude.
 
-L'utilisation de balises `<document>` et `<question>` est ici très pertinente pour bien séparer la source de vérité de l'instruction, ce qui réduit drastiquement le risque d'hallucination.
+### Sur AI Studio / ChatGPT
+Copiez le texte du document et collez-le à la place de `{document_content}`. ChatGPT répond mieux au format conversationnel (voir version alternative).
 
-```xml
-<document>
-{document_content}
-</document>
-
-<instructions>
-En te basant EXCLUSIVEMENT sur le document fourni ci-dessus, réponds à la question suivante. Si l'information n'est pas présente dans le texte, réponds "L'information n'est pas disponible dans le document fourni."
-</instructions>
-
-<question>
-{user_question}
-</question>
-```
-
-### Adaptation pour ChatGPT
-
-ChatGPT répond bien à un style plus direct et conversationnel.
-
-```markdown
-### Contexte
-Voici un document :
-"""
-{document_content}
-"""
-
-### Ma Question
-En me basant uniquement sur le document ci-dessus, réponds à cette question : {user_question}
-
-**Règle importante :** Si la réponse ne se trouve pas dans le document, dis-le explicitement.
+### Pourquoi cette structure ?
+L'utilisation de balises XML (`<document>`, `<instructions>`, `<question>`) sépare clairement la source de vérité de l'instruction, ce qui réduit drastiquement le risque d'hallucination.
