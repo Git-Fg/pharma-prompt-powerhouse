@@ -9,33 +9,89 @@ difficulty: "débutant"
 
 ## La Règle d'Or : Zéro Donnée Identifiable
 
-Avant même de parler d'outils ou de techniques, la règle absolue, non négociable, est simple : **Ne soumettez JAMAIS d'informations permettant d'identifier un patient (directement ou indirectement) à une IA grand public.**
-
-Violer cette règle n'est pas seulement une mauvaise pratique, c'est une violation potentielle du secret professionnel et des lois sur la protection des données (RGPD en Europe).
+<Alert type="destructive">
+  <AlertDescription>
+    **Règle absolue non négociable :** Ne soumettez JAMAIS d'informations permettant d'identifier un patient (directement ou indirectement) à une IA grand public. Violer cette règle est une violation du secret professionnel et des lois sur la protection des données (RGPD).
+  </AlertDescription>
+</Alert>
 
 ### Qu'est-ce qu'une Donnée Identifiable ?
 
 C'est plus large que vous ne le pensez.
 
-- **Informations directes (évidentes) :**
-  - Nom, prénom, initiales
-  - Date de naissance, âge précis si combiné à d'autres faits
-  - Adresse, numéro de téléphone, email
-  - Numéro de sécurité sociale
-
-- **Informations indirectes (le piège) :**
-  - Une combinaison de faits rares : `"Patient de 92 ans, ancien mineur, traité pour une pathologie X dans le service Y de l'hôpital Z"` peut rendre une personne identifiable.
-  - Un récit très détaillé d'un cas clinique avec des éléments de vie personnels.
+<Tabs defaultValue="directes">
+  <TabsList>
+    <TabsTrigger value="directes">Informations Directes</TabsTrigger>
+    <TabsTrigger value="indirectes">Informations Indirectes (Le Piège)</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="directes">
+    <Card>
+      <CardHeader>
+        <CardTitle>Informations directement identifiantes</CardTitle>
+        <CardDescription>Ces données sont évidentes et ne doivent JAMAIS être partagées</CardDescription>
+      </CardHeader>
+      <CardContent>
+        - **Nom, prénom, initiales**
+        - **Date de naissance, âge précis** si combiné à d'autres faits
+        - **Adresse, numéro de téléphone, email**
+        - **Numéro de sécurité sociale**
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="indirectes">
+    <Card>
+      <CardHeader>
+        <CardTitle>Informations indirectement identifiantes</CardTitle>
+        <CardDescription>Le danger caché : ces combinaisons peuvent rendre une personne identifiable</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Alert>
+          <AlertDescription>
+            **Exemple critique :** "Patient de 92 ans, ancien mineur, traité pour une pathologie X dans le service Y de l'hôpital Z" peut rendre une personne identifiable par croisement de données.
+          </AlertDescription>
+        </Alert>
+        
+        - Une **combinaison de faits rares**
+        - Un **récit très détaillé** d'un cas clinique avec éléments personnels
+        - Des **données géographiques précises** combinées à d'autres facteurs
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
 
 ### L'Anonymisation : Votre Réflexe Conditionné
 
-Avant de copier-coller un cas pour demander une analyse à l'IA, vous devez le "nettoyer".
-
-> **Exemple de cas NON-anonymisé (À NE JAMAIS FAIRE) :**
-> `"Analyse ce cas : Mme Durand, 82 ans, habitant près de l'Hôpital de la Croix-Rousse à Lyon, est admise le 15 mars pour une chute. Elle est sous Eliquis pour une fibrillation auriculaire connue. Son dossier mentionne une allergie à la pénicilline. Que faire ?"`
-
-> **Exemple du MÊME cas, correctement anonymisé :**
-> `"Analyse ce cas : Patiente de 80-85 ans, sexe féminin, admise pour une chute. Antécédents de fibrillation auriculaire traitée par un anticoagulant oral direct (apixaban). Allergie connue aux bêtalactamines. Quelles sont les options thérapeutiques à considérer pour la gestion de la douleur, en tenant compte du risque hémorragique ?"`
+<Card>
+  <CardHeader>
+    <CardTitle>Exemple de Transformation</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <Tabs defaultValue="mauvais">
+      <TabsList>
+        <TabsTrigger value="mauvais">❌ NON-Anonymisé (INTERDIT)</TabsTrigger>
+        <TabsTrigger value="bon">✅ Correctement Anonymisé</TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="mauvais">
+        <Alert type="destructive">
+          <AlertDescription>
+            "Analyse ce cas : Mme Durand, 82 ans, habitant près de l'Hôpital de la Croix-Rousse à Lyon, est admise le 15 mars pour une chute. Elle est sous Eliquis pour une fibrillation auriculaire connue. Son dossier mentionne une allergie à la pénicilline. Que faire ?"
+          </AlertDescription>
+        </Alert>
+      </TabsContent>
+      
+      <TabsContent value="bon">
+        <Alert>
+          <AlertDescription>
+            "Analyse ce cas : Patiente de 80-85 ans, sexe féminin, admise pour une chute. Antécédents de fibrillation auriculaire traitée par un anticoagulant oral direct (apixaban). Allergie connue aux bêtalactamines. Quelles sont les options thérapeutiques à considérer pour la gestion de la douleur, en tenant compte du risque hémorragique ?"
+          </AlertDescription>
+        </Alert>
+      </TabsContent>
+    </Tabs>
+  </CardContent>
+</Card>
 
 ## Comprendre où Vont vos Données : La Traçabilité
 
@@ -50,18 +106,90 @@ La politique de confidentialité de l'entreprise détermine ce qu'il advient de 
 
 ## Le Facteur Géographique : Toutes les Lois ne se Valent Pas
 
-La localisation des serveurs et le cadre légal de l'entreprise qui les opère ont un impact majeur sur la confidentialité réelle de vos données.
+<Alert>
+  <AlertDescription>
+    **Important :** La localisation des serveurs et le cadre légal de l'entreprise ont un impact majeur sur la confidentialité réelle de vos données.
+  </AlertDescription>
+</Alert>
 
 | Juridiction | Entreprises Concernées | Niveau de Risque (Données Sensibles Anonymisées) |
 | :--- | :--- | :--- |
-| **Union Européenne (RGPD)** | (Certains services Cloud pro, non grand public) | **Faible**. Le RGPD (Règlement Général sur la Protection des Données) est le cadre le plus strict au monde. Le consentement est explicite, les droits d'accès et de suppression sont forts. |
-| **États-Unis** | **OpenAI, Google, Anthropic, Perplexity** | **Modéré**. Ces entreprises ont des politiques de sécurité robustes. Cependant, la loi américaine (ex: CLOUD Act) peut permettre aux autorités d'accéder aux données stockées par des entreprises américaines, même si les serveurs sont en Europe. |
-| **Asie (Chine, etc.)** | **DeepSeek, Zhipu AI (Z.AI), Alibaba (Qwen)** | ⚠️ **Élevé à Très Élevé**. Les lois sur la protection des données sont souvent beaucoup plus souples ou alignées avec les intérêts de l'État. La transparence est moindre. Il est fortement déconseillé d'utiliser ces plateformes pour des données d'entreprise ou des informations même légèrement sensibles. |
+| **Union Européenne (RGPD)** | (Certains services Cloud pro, non grand public) | **Faible**. Le RGPD est le cadre le plus strict au monde. |
+| **États-Unis** | **OpenAI, Google, Anthropic, Perplexity** | **Modéré**. Politiques de sécurité robustes, mais soumis au CLOUD Act. |
+| **Asie (Chine, etc.)** | **DeepSeek, Zhipu AI (Z.AI), Alibaba (Qwen)** | ⚠️ **Élevé à Très Élevé**. Lois sur les données souples. |
 
-### Recommandations Pratiques
+### Recommandations par Niveau de Risque
 
-- **Pour des expérimentations sur des données publiques et non sensibles (articles scientifiques, cours...) :** Les plateformes gratuites et puissantes comme **[DeepSeek Chat](/external-tools/deepseek-chat)**, **[Qwen Chat](/external-tools/qwen-chat)** sont des outils d'apprentissage incroyables. **Considérez simplement que tout ce que vous y tapez devient public.**
-- **Pour le travail quotidien sur des cas anonymisés :** Les outils américains (ChatGPT, Gemini, Claude) offrent le meilleur compromis actuel entre performance de pointe et sécurité standard pour un usage responsable.
+<Tabs defaultValue="modere">
+  <TabsList>
+    <TabsTrigger value="eleve">Risque Élevé Accepté</TabsTrigger>
+    <TabsTrigger value="modere">Risque Modéré Géré</TabsTrigger>
+    <TabsTrigger value="faible">Risque Faible Maîtrisé</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="eleve">
+    <Card>
+      <CardHeader>
+        <CardTitle>🌏 Plateformes Asiatiques (DeepSeek, Qwen, Z.AI)</CardTitle>
+        <CardDescription>Usage : Expérimentations sur données publiques uniquement</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Alert type="destructive">
+          <AlertDescription>
+            **Considérez que tout ce que vous tapez devient public.** Idéales pour l'apprentissage sur des articles scientifiques publics, des cours, mais JAMAIS pour des données d'entreprise ou sensibles.
+          </AlertDescription>
+        </Alert>
+        
+        **Cas d'usage appropriés :**
+        - Articles scientifiques publics
+        - Exercices d'apprentissage
+        - Tests de capacités de l'IA
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="modere">
+    <Card>
+      <CardHeader>
+        <CardTitle>🇺🇸 Plateformes Américaines (ChatGPT, Claude, Gemini)</CardTitle>
+        <CardDescription>Usage : Travail quotidien sur cas anonymisés</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Alert>
+          <AlertDescription>
+            **Meilleur compromis actuel** entre performance de pointe et sécurité standard. Politiques de sécurité robustes mais soumises au droit américain (CLOUD Act).
+          </AlertDescription>
+        </Alert>
+        
+        **Cas d'usage appropriés :**
+        - Cas cliniques anonymisés
+        - Analyses d'ordonnances dépersonnalisées
+        - Formation et révisions
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="faible">
+    <Card>
+      <CardHeader>
+        <CardTitle>🏠 Hébergement Local (LM Studio, Ollama)</CardTitle>
+        <CardDescription>Usage : Données confidentielles de recherche</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Alert>
+          <AlertDescription>
+            **Seule solution pour une confidentialité à 100%.** Vos données ne quittent jamais votre ordinateur. Nécessite des compétences techniques et limite aux modèles open-source.
+          </AlertDescription>
+        </Alert>
+        
+        **Cas d'usage appropriés :**
+        - Données de recherche non publiées
+        - Informations stratégiques d'entreprise
+        - Prototypes confidentiels
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
 
 ## Le Seul Vrai Coffre-Fort : L'Hébergement Local
 

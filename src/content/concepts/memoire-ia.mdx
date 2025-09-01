@@ -6,43 +6,79 @@ date: "2024-08-22"
 difficulty: "intermédiaire"
 ---
 
-Pour interagir efficacement avec une IA, il faut comprendre comment elle "se souvient" des informations. On peut simplifier sa mémoire en deux catégories principales, très similaires au fonctionnement d'un ordinateur : la mémoire vive (RAM) et le disque dur.
+Pour interagir efficacement avec une IA, il faut comprendre comment elle "se souvient" des informations. On peut simplifier sa mémoire en deux catégories principales, très similaires au fonctionnement d'un ordinateur.
 
-## 1. La Fenêtre de Contexte : La Mémoire Vive (RAM)
+<Alert>
+  <AlertDescription>
+    **Analogie informatique :** La mémoire de l'IA fonctionne exactement comme un ordinateur : une mémoire vive (RAM) pour le travail immédiat et un disque dur pour la persistance.
+  </AlertDescription>
+</Alert>
 
-La forme de mémoire la plus directe d'une IA est sa **fenêtre de contexte**. C'est la quantité totale d'informations (votre prompt + les réponses précédentes de l'IA + les documents fournis) que le modèle peut "voir" et traiter à un instant T.
+<Tabs defaultValue="contexte">
+  <TabsList>
+    <TabsTrigger value="contexte">Mémoire de Contexte (RAM)</TabsTrigger>
+    <TabsTrigger value="persistante">Mémoire Persistante (Disque Dur)</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="contexte">
+    <Card>
+      <CardHeader>
+        <CardTitle>🧠 La Fenêtre de Contexte : La Mémoire Vive (RAM)</CardTitle>
+      </CardHeader>
+      <CardContent>
+        La forme de mémoire la plus directe d'une IA est sa **fenêtre de contexte**. C'est la quantité totale d'informations (votre prompt + les réponses précédentes de l'IA + les documents fournis) que le modèle peut "voir" et traiter à un instant T.
 
-- **Analogie :** C'est la **RAM** de l'IA, ou la taille de son **bureau de travail**. 
-- **Force :** Plus la fenêtre est grande, plus le bureau est grand. Vous pouvez y étaler de nombreux documents (PDFs, notes) et l'IA s'en souviendra parfaitement... tant que vous ne quittez pas le bureau.
-- **Évolution :** C'est là que les progrès sont les plus spectaculaires. Les premiers modèles avaient une fenêtre de quelques milliers de **[tokens](/concepts/token-acide-amine)** (quelques pages). Les modèles de 2025 comme **Gemini 2.5 Pro** atteignent **1 à 2 millions de tokens**, l'équivalent d'une vingtaine de gros livres posés ouverts sur le bureau !
-- **Faiblesse :** Cette mémoire est **volatile**. Dès que vous lancez une nouvelle conversation (ou que la conversation devient trop longue et que les informations les plus anciennes sont "poussées" hors du bureau), cette mémoire est entièrement effacée. C'est un nouveau bureau, vide.
+        ### Caractéristiques
 
-## 2. La Mémoire à Long Terme (Simulée) : Le Disque Dur
+        **Analogie :** C'est la **RAM** de l'IA, ou la taille de son **bureau de travail**.
 
-Par nature, une IA n'a pas de mémoire à long terme. Elle ne se souvient pas de vous entre deux conversations. Cependant, plusieurs techniques ont été développées pour **simuler un disque dur**, c'est-à-dire une mémoire persistante où l'on peut stocker des informations et des préférences pour les réutiliser plus tard.
+        **Force :** Plus la fenêtre est grande, plus le bureau est grand. Vous pouvez y étaler de nombreux documents (PDFs, notes) et l'IA s'en souviendra parfaitement... tant que vous ne quittez pas le bureau.
 
-### a) Les Instructions Personnalisées (Le "Post-it" sur l'Écran)
+        **Évolution :** C'est là que les progrès sont les plus spectaculaires. Les premiers modèles avaient une fenêtre de quelques milliers de **[tokens](/concepts/token-acide-amine)** (quelques pages). Les modèles de 2025 comme **Gemini 2.5 Pro** atteignent **1 à 2 millions de tokens**, l'équivalent d'une vingtaine de gros livres posés ouverts sur le bureau !
 
-C'est la forme la plus simple de mémoire à long terme. Disponible sur **ChatGPT** ou **Claude.ai**, cette fonctionnalité vous permet de donner des instructions qui seront automatiquement chargées dans la mémoire vive (le contexte) à **chaque nouvelle conversation**.
+        <Alert type="destructive">
+          <AlertDescription>
+            **Faiblesse critique :** Cette mémoire est **volatile**. Dès que vous lancez une nouvelle conversation, cette mémoire est entièrement effacée. C'est un nouveau bureau, vide.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  </TabsContent>
 
-- **Analogie :** C'est comme coller un **Post-it permanent** sur l'écran de l'IA avec vos préférences.
-- **Exemple :** Vous écrivez dans les instructions : *"Je suis étudiant en pharmacie, réponds toujours en citant la classe pharmacologique des médicaments."* Chaque nouvelle conversation commencera avec cette instruction déjà "collée" sur le bureau de l'IA.
-- **Usage :** Idéal pour définir votre persona et vos préférences de formatage générales.
+  <TabsContent value="persistante">
+    <Card>
+      <CardHeader>
+        <CardTitle>💾 La Mémoire à Long Terme (Simulée) : Le Disque Dur</CardTitle>
+      </CardHeader>
+      <CardContent>
+        Par nature, une IA n'a pas de mémoire à long terme. Elle ne se souvient pas de vous entre deux conversations. Cependant, plusieurs techniques ont été développées pour **simuler un disque dur**.
 
-### b) Les GPTs & Assistants (Les "Logiciels Spécialisés")
+        ### a) Instructions Personnalisées (Le "Post-it" sur l'Écran)
 
-Créer un **GPT (sur ChatGPT Plus)** ou un **Assistant (via l'API d'OpenAI)** est une forme de mémoire plus avancée. Vous lui fournissez une base de connaissances (des documents que vous uploadez) qui sert de **mémoire à long terme spécialisée**.
+        C'est la forme la plus simple de mémoire à long terme. Disponible sur **ChatGPT** ou **Claude.ai**.
 
-- **Analogie :** C'est comme installer un **logiciel spécialisé** sur le disque dur. Par exemple, un "Logiciel d'Analyse d'Antibiogrammes".
-- **Fonctionnement (RAG) :** Lorsque vous posez une question à ce GPT, il va d'abord chercher dans sa base de connaissances (son disque dur spécialisé) les documents les plus pertinents, puis il les place sur son bureau (mémoire vive) pour construire sa réponse. C'est un mini **[processus RAG](/guides/obtenir-donnees-fiables)** interne.
-- **Usage :** Parfait pour créer des experts sur des sujets de niche (ex: un GPT entraîné sur toutes les recommandations de l'HAS sur les vaccins).
+        - **Analogie :** C'est comme coller un **Post-it permanent** sur l'écran de l'IA avec vos préférences
+        - **Exemple :** *"Je suis étudiant en pharmacie, réponds toujours en citant la classe pharmacologique des médicaments."*
+        - **Usage :** Idéal pour définir votre persona et vos préférences générales
 
-### c) Les Projets & Workbenchs (Les "Dossiers Thématiques")
+        ### b) GPTs & Assistants (Les "Logiciels Spécialisés")
 
-Des plateformes comme **[Claude.ai (Pro)](/external-tools/claude-ai)** ou la **[Console Anthropic](/external-tools/anthropic-console)** permettent de regrouper conversations et documents dans des "Projets" ou "Workbenchs".
+        Créer un **GPT (sur ChatGPT Plus)** ou un **Assistant (via l'API d'OpenAI)** avec une base de connaissances.
 
-- **Analogie :** C'est comme organiser votre travail dans des **dossiers thématiques** sur votre disque dur. Quand vous travaillez dans le dossier `Cardiologie`, vous avez tous les fichiers et notes liés à portée de main.
-- **Usage :** Très utile pour les projets de recherche à long terme, pour garder un historique cohérent des interactions et des documents de référence sur un même sujet.
+        - **Analogie :** C'est comme installer un **logiciel spécialisé** sur le disque dur
+        - **Fonctionnement (RAG) :** L'IA cherche d'abord dans sa base de connaissances, puis place les documents pertinents dans sa mémoire vive
+        - **Usage :** Parfait pour créer des experts sur des sujets de niche
+
+        ### c) Projets & Workbenchs (Les "Dossiers Thématiques")
+
+        Des plateformes comme **[Claude.ai (Pro)](/external-tools/claude-ai)** permettent de regrouper conversations et documents.
+
+        - **Analogie :** Organiser votre travail dans des **dossiers thématiques** sur votre disque dur
+        - **Usage :** Très utile pour les projets de recherche à long terme
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
 
 ## Conclusion : Savoir sur quel "Disque" On Travaille
 
