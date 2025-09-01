@@ -83,9 +83,10 @@ export function useMDXComponents(): Record<string, any> {
     // Composants pour les alertes et notes
     Alert: ({ children, type = "info" }: { children: React.ReactNode; type?: "info" | "destructive" }) => (
       <Alert className="my-4" variant={type === "info" ? "default" : type}>
-        <AlertDescription>{children}</AlertDescription>
+        {children}
       </Alert>
     ),
+    AlertDescription,
     
     // Composants pour les onglets
     Tabs,
