@@ -23,19 +23,6 @@ export default tseslint.config(
   // Configurations de base
   js.configs.recommended,
   ...tseslint.configs.recommended,
-
-  // >>> NOUVEAU : Intégration des règles recommandées de Next.js <<<
-  {
-    plugins: { "@next/next": nextPlugin },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-      // Règles personnalisées pour le projet qui peuvent écraser les recommandations
-      "react/no-unescaped-entities": "off",
-      "@next/next/no-page-custom-font": "off",
-      "no-console": ["warn", { allow: ["warn", "error"] }],
-    },
-  },
   
   // Configuration générale pour les variables non utilisées
   {
