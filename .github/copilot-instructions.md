@@ -17,6 +17,14 @@
 - **Standardisation :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts afin de garantir la cohérence.
 </content_rules>
 
+<project_documentation_rules>
+**Stratégie de Documentation**
+
+- **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
+- **`/.github/copilot-instructions.md` :** La "Constitution" du projet. C'est la source de vérité pour les règles de développement, le style de code et la philosophie. Sert de contexte pour les développeurs et les assistants IA.
+- **`/docs/` :** La documentation d'architecture. Contient les documents de haut niveau qui expliquent les décisions de conception majeures (ex: "concept-hub-architecture.md"). Utile pour comprendre le "pourquoi" derrière la structure du projet.
+</project_documentation_rules>
+
 <coding_style_and_principles>
 **Principes et Style de Code**
 
@@ -48,97 +56,91 @@
 <react19_rules>
 **Compiler et optimisation:**
 
-- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément
-- Écrire du code simple et lisible que le compiler peut optimiser
-- Éviter useMemo/useCallback manuels sauf besoins spécifiques
+- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément.
+- Écrire du code simple et lisible que le compiler peut optimiser.
+- Éviter `useMemo`/`useCallback` manuels sauf besoins spécifiques.
 
 **Actions et formulaires:**
 
-- Utiliser Actions React 19 pour la gestion des formulaires
-- Préférer useActionState pour la gestion d'état des formulaires
-- Utiliser useOptimistic pour les mises à jour optimistes
-- Utiliser useFormStatus dans les composants de design pour accéder à l'état du formulaire parent
+- Pour les formulaires simples (soumission de données serveur), explorer les Actions React 19 pour centraliser la logique.
+- Pour les composants interactifs complexes côté client (ex: l'éditeur de prompts), une gestion d'état avec `useState` et `useTransition` est privilégiée pour une meilleure réactivité de l'interface.
+- Lors de l'utilisation d'Actions, `useActionState` est l'outil de choix pour gérer l'état (pending, error, data).
+- `useOptimistic` peut être utilisé pour améliorer l'UX lors des mutations de données serveur.
 
 **Gestion des données:**
 
-- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement)
-- Combiner `use()` avec Suspense pour un code asynchrone propre
-- Ne pas utiliser `use()` avec des promesses créées dans le render
+- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement).
+- Combiner `use()` avec Suspense pour un code asynchrone propre.
+- Ne pas utiliser `use()` avec des promesses créées dans le render.
 
 **Nouvelles fonctionnalités:**
 
-- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants
-- Utiliser les stylesheets natifs avec la propriété `precedence`
+- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants.
+- Utiliser les stylesheets natifs avec la propriété `precedence`.
 </react19_rules>
 
 <nextjs15_rules>
 **App Router:**
 
-- Utiliser exclusivement l'App Router avec structure basée sur les fichiers
-- Modèle de route: `src/app/[feature]/page.tsx`
-- Utiliser `"use client"` uniquement pour les composants interactifs
+- Utiliser exclusivement l'App Router avec structure basée sur les fichiers.
+- Modèle de route: `src/app/[feature]/page.tsx`.
+- Utiliser `"use client"` uniquement pour les composants interactifs.
 
 **Cache (IMPORTANT):**
 
-- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut
-- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire
-- Configurer explicitement le cache pour les données qui doivent être mises en cache
+- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut.
+- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire.
+- Configurer explicitement le cache pour les données qui doivent être mises en cache.
 
 **APIs Async:**
 
-- Utiliser `await` pour cookies(), headers(), draftMode(), params, searchParams
-- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone
+- Utiliser `await` pour `cookies()`, `headers()`, `draftMode()`, `params`, `searchParams`.
+- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone.
 
 **Nouvelles fonctionnalités:**
 
-- Utiliser `@next/codemod` pour les mises à niveau automatisées
-- Expérimenter avec `unstable_after` pour exécuter du code après le streaming
-- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur
-- Utiliser `next.config.ts` pour la configuration TypeScript
+- Utiliser `@next/codemod` pour les mises à niveau automatisées.
+- Expérimenter avec `unstable_after` pour exécuter du code après le streaming.
+- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
+- Utiliser `next.config.ts` pour la configuration TypeScript.
 </nextjs15_rules>
 
 <shadcn_ui_rules>
 **Version 3.0:**
 
-- Utiliser les registres namespacés: `@registry/name`
-- Configurer plusieurs registres dans `components.json`
-- Profiter du MCP Server pour l'intégration avec les outils d'IA
-- Utiliser les nouvelles commandes de recherche et découverte
+- Utiliser les registres namespacés: `@registry/name`.
+- Configurer plusieurs registres dans `components.json`.
+- Profiter du MCP Server pour l'intégration avec les outils d'IA.
+- Utiliser les nouvelles commandes de recherche et découverte.
 
 **Utilisation des composants:**
 
-- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation
-- Combiner les composants simplement avec la composition
-- Utiliser les fonctionnalités d'accessibilité intégrées
+- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation.
+- Combiner les composants simplement avec la composition.
+- Utiliser les fonctionnalités d'accessibilité intégrées.
 
 **Formulaires:**
 
-- Utiliser les composants de formulaire shadcn/ui
-- Intégrer avec les Actions React 19 pour la soumission
-- Garder la logique de validation simple et proche du formulaire
+- Utiliser les composants de formulaire shadcn/ui.
+- Intégrer avec les hooks React (`useState`, `useTransition`) ou les Actions React 19 selon le cas d'usage.
+- Garder la logique de validation simple et proche du formulaire.
 </shadcn_ui_rules>
 
 <content_collections_rules>
 **Philosophie : Le Build est la Source de Vérité**
 
 - Toute la logique de préparation des données (ajout de slugs, calculs, relations) DOIT se faire dans `content-collections.ts` via la fonction `transform`.
-- Les composants React doivent être "stupides" : ils consomment des données déjà prêtes et parfaitement typées, sans faire de transformations complexes (comme chercher des relations manuellement).
+- Les composants React doivent être "stupides" : ils consomment des données déjà prêtes et parfaitement typées, sans faire de transformations complexes.
 
 **Configuration (`content-collections.ts`):**
 
 - **Ordre des Dépendances :** Déclarer les collections sans dépendances (ex: `concepts`) AVANT les collections qui en dépendent (ex: `guides`).
-- **`transform` est la clé :** Utiliser systématiquement la fonction `transform` pour :
-  - Ajouter des champs calculés (ex: `slug`, `estimatedTime`).
-  - **Relier les collections** en utilisant `ctx.documents(collectionVariable)` pour remplacer les tableaux de slugs par des tableaux d'objets complets.
-- **Sécurité des Types dans `transform` :**
-  - Toujours typer les paramètres des fonctions `transform` (ex: `async (doc: DocType, ctx: Context) => ...`).
-  - Utiliser `z.infer<typeof schema>` pour créer des types TypeScript précis pour chaque collection avant la transformation.
+- **`transform` est la clé :** Utiliser systématiquement la fonction `transform` pour enrichir les données. Extraire la logique complexe dans des fonctions helpers pour garder le fichier principal lisible.
 - **Filtrage au Build :** Utiliser `ctx.skip("raison")` dans `transform` pour exclure des documents (ex: brouillons avec `draft: true`).
 
-**Schémas Zod:**
+**Validation et Qualité des Données:**
 
-- Créer un `baseSchema` réutilisable.
-- Rendre les champs calculés par `transform` (ex: `estimatedTime`) optionnels avec `.optional()` dans le schéma.
+- **Validation Stricte de la Taxonomie :** Le build DOIT échouer ou afficher un avertissement clair si un tag utilisé dans un fichier de contenu n'est pas défini dans la `TAG_TAXONOMY`. Cette vérification est implémentée dans le hook `onSuccess` de `content-collections.ts` pour garantir la cohérence des métadonnées.
 
 **Utilisation dans le Code :**
 
@@ -170,7 +172,6 @@ DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenan
 DO utiliser la fonction `transform` de Content Collections pour enrichir les données au build
 DO faire confiance aux types générés par Content Collections comme source de vérité
 DO relancer le build après avoir modifié `content-collections.ts`
-DO utiliser les Actions React 19, useOptimistic, et useActionState pour les formulaires
 DO comprendre que Next.js 15 ne met plus rien en cache par défaut
 DO écrire du code facile à expliquer aux autres étudiants
 
