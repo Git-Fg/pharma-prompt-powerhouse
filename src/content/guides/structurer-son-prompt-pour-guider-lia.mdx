@@ -1,0 +1,106 @@
+---
+title: "Structurer son Prompt pour Mieux Guider l'IA"
+description: "Apprenez à organiser vos prompts avec des sections, des séparateurs et des balises pour obtenir des réponses plus précises et fiables, sans écrire une seule ligne de code."
+date: "2024-08-15"
+tags: ["fondamentaux", "structuration", "fiabilité"]
+concepts: ["structuration-contenu", "structuration-par-balises", "ia-stagiaire-brillant-naif"]
+---
+
+## Pourquoi un Prompt Bien Structuré est-il Crucial ?
+
+Imaginez que vous briefez un stagiaire en pharmacie. Si vous lui donnez une liste de tâches désordonnée, oralement et sans contexte, vous risquez d'obtenir un travail incomplet ou erroné. Si, au contraire, vous lui fournissez une liste claire, avec des sections et des instructions précises, le résultat sera bien meilleur.
+
+Avec une IA, le principe est exactement le même. Un prompt bien structuré est la clé pour transformer des réponses moyennes en résultats exceptionnels.
+
+<KeyTakeaways>
+  - **Clarté avant tout** : Une structure claire élimine les ambiguïtés.
+  - **Fiabilité accrue** : Moins de chances que l'IA "hallucine" ou oublie une partie de votre demande.
+  - **Itération facile** : Un prompt structuré est plus simple à modifier et à améliorer.
+</KeyTakeaways>
+
+---
+
+## Technique 1 : La Hiérarchie Simple (Sections et Listes)
+
+La manière la plus simple de structurer un prompt est d'utiliser des titres et des listes, comme vous le feriez dans un e-mail professionnel.
+
+### Contexte
+
+Commencez toujours par donner le contexte. Que doit savoir l'IA avant de commencer ?
+
+```
+Contexte :
+Je suis un étudiant en 5ème année de pharmacie préparant un exposé sur les nouvelles thérapies contre le diabète de type 2. Je dois présenter les mécanismes d'action, les avantages et les inconvénients des trois classes de médicaments les plus récentes.
+```
+
+### Instructions
+
+Utilisez une liste (numérotée ou à puces) pour détailler vos attentes.
+
+```
+Instructions :
+1.  Identifie les 3 classes de médicaments les plus récentes pour le traitement du diabète de type 2.
+2.  Pour chaque classe, fournis les informations suivantes sous forme de liste à puces :
+    - Mécanisme d'action principal.
+    - Deux avantages cliniques majeurs.
+    - Un inconvénient ou effet secondaire notable.
+3.  Rédige une conclusion de deux phrases comparant brièvement ces trois classes.
+```
+
+Cette structure simple mais efficace segmente clairement votre demande, guidant l'IA pas à pas.
+
+---
+
+## Technique 2 : Les Séparateurs Visuels
+
+Lorsque votre prompt devient plus complexe, des séparateurs visuels peuvent aider l'IA à bien distinguer les différentes parties de votre demande.
+
+Vous pouvez utiliser des tirets (`---`), des astérisques (`***`) ou des dièses (`###`).
+
+**Exemple de prompt avec séparateurs :**
+
+```
+Je prépare une fiche de révision sur les anti-inflammatoires non stéroïdiens (AINS).
+
+### Contexte ###
+- Public cible : Étudiants en pharmacie (2ème année).
+- Objectif : Créer un mémo facile à retenir.
+- Source d'information à privilégier : Recommandations de la HAS.
+
+***
+
+### Tâche à réaliser ###
+Génère un tableau comparatif simple des 3 AINS les plus courants (Ibuprofène, Kétoprofène, Célécoxib) en te basant sur les colonnes suivantes :
+- DCI
+- Mécanisme (COX-1, COX-2, sélectif ou non)
+- Principale indication
+- Risque gastro-intestinal (Faible, Modéré, Élevé)
+
+***
+
+### Format de sortie attendu ###
+- Un tableau Markdown.
+- Ton : Pédagogique et direct.
+- Ne pas inclure de références bibliographiques complètes, juste mentionner les sources si nécessaire.
+```
+
+---
+
+## Technique 3 : La Structuration par Balises (Pour les Prompts Complexes)
+
+Pour des tâches très spécifiques, comme l'analyse de documents ou l'extraction d'informations précises, l'utilisation de balises de type XML peut grandement améliorer la fiabilité de l'IA. Cette méthode, bien que plus "technique" en apparence, ne requiert aucune compétence en code.
+
+Cette approche est particulièrement utile pour :
+- Fournir des documents ou des exemples longs.
+- Définir des étapes de raisonnement complexes.
+- Isoler des instructions spécifiques du reste du contenu.
+
+<RelatedContent
+  title="Apprendre la structuration par balises"
+  items={[
+    { type: 'concept', id: 'structuration-par-balises' },
+    { type: 'guide', id: 'xml-prompting-pharma' }
+  ]}
+/>
+
+En maîtrisant ces trois niveaux de structuration, vous prendrez le contrôle de vos interactions avec l'IA et obtiendrez systématiquement des résultats plus pertinents et exploitables dans votre pratique pharmaceutique.
