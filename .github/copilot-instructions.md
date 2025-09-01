@@ -180,14 +180,13 @@ Priorités: simplicité, clarté, maintenabilité et accessibilité pour les non
 
 **Contenu:**
 
-- Prioriser la qualité et la clarté du contenu pharmaceutique
-- Utiliser des exemples réels et des cas pratiques pertinents
-- Standardiser le format des variables: `{{nom_variable}}`
-
-L'ensemble de ces informations destinées à un public utilisant les outils tels que chatgpt/aistudio, et non pas développeur, il est ainsi inutile d'inclure des informations techniques comme le RAG. 
-Concernant le coût des IA, privilégie la recherche des informations sur les plateformes non-api : ils sont souvent gratuits, avec quota. Pour aistudio, chatgpt, chat.z.ai, gemini, anthropic et autres providers, assume que le contenu de ce projet parle des webui disponible et jamais des API. 
-
-Fais attention aux distinctions entre les plateformes, gemini permet par exemple d'utiliser des prompts simple, alors que aistudio permet de paramétrer system prompt, temperature et possède bien plus de fonctionnalité, tout en possédant également une webui avec quotas gratuits. chat.z.ai est possédé par les créateurs de glm-4.5 et propose gratuitement avec quota un accés à des outils avancés comme création de présentation, design, recherche. 
+- Prioriser la qualité et la clarté du contenu pharmaceutique.
+- **Concevoir tout le contenu pour un public non-développeur.** Le jargon technique lié au développement (API, RAG, etc.) doit être évité.
+- **Focaliser les guides sur l'utilisation d'interfaces web (WebUIs).** Aucun guide ne doit nécessiter d'écrire du code (Python, JS, etc.).
+- **Présenter les "Playgrounds" (OpenAI, Anthropic) et "Studios" (Google AI Studio) comme des outils avancés accessibles via une interface web.** Ils permettent d'explorer des concepts comme le `system prompt` ou la `température` sans coder.
+- Différencier les plateformes en fonction de leurs capacités (ex: simplicité de Gemini vs options avancées d'AI Studio ou de chat.z.ai).
+- Utiliser des exemples réels et des cas pratiques pertinents au domaine pharmaceutique.
+- Standardiser le format des variables: `{{nom_variable}}`.
 </general_rules>
 
 <instructions>
