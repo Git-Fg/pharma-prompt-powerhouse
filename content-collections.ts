@@ -1,4 +1,5 @@
 import { defineCollection, defineConfig, Context } from "@content-collections/core";
+import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 
 // ============================================================================
@@ -220,11 +221,14 @@ const concepts = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     await validateConceptReferences(doc, ctx);
+    
+    // Compile MDX content at build time
+    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
       ...computed,
       ...processedTags,
-      content: doc.content || "",
+      mdxCode,
     };
   },
 });
@@ -246,13 +250,16 @@ const guides = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    
+    // Compile MDX content at build time
+    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
       ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       ...relations,
-      content: doc.content || "",
+      mdxCode,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
       estimatedReadingTime: doc.estimatedTime || computed.readingTime,
@@ -282,13 +289,16 @@ const prompts = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    
+    // Compile MDX content at build time
+    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
       ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       ...relations,
-      content: doc.content || "",
+      mdxCode,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
@@ -316,6 +326,9 @@ const externalTools = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    
+    // Compile MDX content at build time
+    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     let use_cases: string[] = [];
     let color = "bg-gray-500";
@@ -342,7 +355,7 @@ const externalTools = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      content: doc.content || "",
+      mdxCode,
       isFree:
         doc.pricing?.toLowerCase().includes("gratuit") ||
         doc.pricing?.toLowerCase().includes("free"),

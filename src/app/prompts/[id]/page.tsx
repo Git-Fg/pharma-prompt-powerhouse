@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Target, BookOpen, Edit3 } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
 import { CopyButton } from "@/components/ui/copy-button";
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
+import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
@@ -146,7 +146,7 @@ export default async function PromptDetailPage({
               <CardTitle className="text-xl">📝 Notes d'Utilisation</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-              <MarkdownRenderer content={foundPrompt.content || ''} />
+              <MDXRenderer code={foundPrompt.mdxCode} />
             </CardContent>
           </Card>
 
