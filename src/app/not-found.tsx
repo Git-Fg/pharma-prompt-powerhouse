@@ -1,28 +1,35 @@
-// src/app/not-found.tsx
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Frown } from "lucide-react";
-import Link from "next/link";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Search } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="container mx-auto flex h-screen flex-col items-center justify-center px-4 py-8 text-center">
-      <Card className="max-w-lg">
-        <CardHeader>
-          <Frown className="mx-auto h-12 w-12 text-muted-foreground" />
-          <CardTitle className="mt-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
-            Page Introuvable
-          </CardTitle>
-          <CardDescription className="mt-4 text-base text-muted-foreground">
-            Désolé, nous n'avons pas trouvé la page que vous cherchez.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className='container mx-auto px-4 py-16 text-center'>
+      <div className='max-w-2xl mx-auto'>
+        <div className='w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-6'>
+          <Search className='w-8 h-8 text-muted-foreground' />
+        </div>
+
+        <h1 className='text-4xl font-bold tracking-tight text-foreground sm:text-5xl'>
+          Page non trouvée
+        </h1>
+
+        <p className='mt-6 text-lg leading-8 text-muted-foreground'>
+          Désolé, nous n'avons pas trouvé la page que vous recherchez.
+        </p>
+
+        <div className='mt-10 flex items-center justify-center gap-x-6'>
           <Button asChild>
-            <Link href="/">Retourner à l'accueil</Link>
+            <Link href='/'>
+              <ArrowLeft className='w-4 h-4 mr-2' />
+              Retour à l'accueil
+            </Link>
           </Button>
-        </CardContent>
-      </Card>
+          <Button variant='ghost' asChild>
+            <Link href='/guides'>Voir tous les guides</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
