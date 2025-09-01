@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Globe, Tag, DollarSign } from "lucide-react";
-import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 
@@ -84,7 +84,7 @@ export default async function ExternalToolDetailPage({
       {tool.keyTakeaways && <KeyTakeaways points={tool.keyTakeaways} />}
 
       <main className="prose prose-lg dark:prose-invert max-w-none">
-        <MDXRenderer code={tool.mdx} />
+        <MarkdownRenderer content={tool.content} />
       </main>
 
       {/* NOUVELLE SECTION : Contenu lié */}
