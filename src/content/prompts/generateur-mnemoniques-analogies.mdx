@@ -19,19 +19,65 @@ promptContent: |
 
 ## Notes d'Utilisation
 
-C'est une tâche créative. Le paramètre clé est la **température**. Je recommande **Google AI Studio** pour pouvoir la régler précisément.
+C'est une tâche créative. Le paramètre clé est la **température**.
 
--   **Sur AI Studio :** Réglez la température entre `0.7` et `0.9` pour des résultats originaux. En dessous, les réponses seront trop convenues.
--   **Sur ChatGPT/Claude :** Précisez explicitement le besoin de créativité dans le prompt, car vous ne pouvez pas contrôler la température.
+<Alert>
+  <AlertDescription>
+    **🌡️ Température Recommandée :** Réglez entre `0.7` et `0.9` dans les paramètres pour obtenir des résultats vraiment originaux et créatifs. En dessous, les réponses seront trop convenues.
+  </AlertDescription>
+</Alert>
 
-### Adaptation pour ChatGPT / Claude
-
-```markdown
-Tu es un tuteur en pharmacie extrêmement créatif. Sois très original et imaginatif.
-
-Crée une aide-mémoire de type **{`{type_aide_memoire}`}** pour mémoriser la liste suivante.
-Le style doit être **{`{style_prefere}`}**.
-
-**Éléments à mémoriser :**
-{`{elements_a_memoriser}`}
-```
+<Tabs defaultValue="aistudio">
+  <TabsList>
+    <TabsTrigger value="aistudio">Google AI Studio (Recommandé)</TabsTrigger>
+    <TabsTrigger value="chatgpt">ChatGPT / Claude</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="aistudio">
+    <Card>
+      <CardHeader>
+        <CardTitle>🔬 Google AI Studio - Contrôle Précis</CardTitle>
+        <CardDescription>Ajustez la température pour une créativité optimale</CardDescription>
+      </CardHeader>
+      <CardContent>
+        1. **Ouvrez les paramètres** du modèle (Settings/Paramètres)
+        2. **Réglez la température** entre `0.7` et `0.9`
+        3. **Utilisez le prompt principal** tel quel
+        
+        <Alert>
+          <AlertDescription>
+            **Pourquoi AI Studio :** Vous avez un contrôle granulaire sur la créativité via la température, essentiel pour cette tâche.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="chatgpt">
+    <Card>
+      <CardHeader>
+        <CardTitle>💬 ChatGPT / Claude - Créativité Explicite</CardTitle>
+        <CardDescription>Compensez l'absence de contrôle température par des instructions</CardDescription>
+      </CardHeader>
+      <CardContent>
+        **Version modifiée** (plus créative) :
+        
+        ```markdown
+        Tu es un tuteur en pharmacie extrêmement créatif. Sois très original et imaginatif.
+        
+        Crée une aide-mémoire de type **{type_aide_memoire}** pour mémoriser la liste suivante.
+        Le style doit être **{style_prefere}**.
+        
+        **Éléments à mémoriser :**
+        {elements_a_memoriser}
+        ```
+        
+        <Alert>
+          <AlertDescription>
+            **Note :** Précisez explicitement le besoin de créativité dans le prompt, car vous ne pouvez pas contrôler la température.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>

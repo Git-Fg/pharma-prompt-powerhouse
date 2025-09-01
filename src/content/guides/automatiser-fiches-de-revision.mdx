@@ -31,57 +31,124 @@ La capacité à traiter de longs documents est, encore une fois, essentielle.
 
 Voici un prompt détaillé, conçu pour être robuste et produire des fiches claires, pédagogiques et faciles à mémoriser. C'est le cœur de la méthode.
 
-> **Prompt de génération de fiche :**
-> "Tu agis en tant qu'ingénieur pédagogique et expert en sciences cognitives. Ta mission est de transformer le document PDF que je te fournis en une fiche de révision optimisée pour la mémorisation à long terme par un étudiant en pharmacie.
-> 
-> **Règle Absolue :** Ta seule et unique source d'information est le document fourni. N'invente, n'ajoute et n'extrapole aucune information.
-> 
-> **Objectif :** Créer une fiche de révision qui ne soit pas seulement un résumé, mais un véritable outil d'apprentissage. La fiche doit être structurée, visuellement claire et inciter à la réflexion.
-> 
-> **FORMAT OBLIGATOIRE DE LA FICHE :**
-> 
-> **1. TITRE :** `[Titre clair et concis du sujet]`
-> 
-> **2. LES 3 CONCEPTS FONDAMENTAUX À RETENIR :**
->    - En une liste à puces, extrais les 3 (et seulement 3) idées ou mécanismes les plus importants que l'étudiant doit absolument maîtriser. Chaque point doit être une phrase complète.
-> 
-> **3. SYNTHÈSE STRUCTURÉE :**
->    - Découpe le contenu en sections logiques avec des titres clairs (utilisant Markdown `##`).
->    - Au sein de chaque section, utilise des sous-titres (`###`) et des listes à puces pour hiérarchiser l'information.
->    - **Met en gras** tous les termes techniques, noms de molécules, et concepts essentiels. C'est non-négociable.
->    - Quand un mécanisme complexe est décrit, reformule-le avec des mots plus simples sous un sous-titre "En Clair :".
-> 
-> **4. TABLEAU COMPARATIF / RÉCAPITULATIF (si pertinent) :**
->    - Si le cours compare plusieurs médicaments, pathologies, ou mécanismes, crée un tableau Markdown pour synthétiser ces comparaisons. Choisis les colonnes les plus pertinentes (ex: Classe, Mécanisme, Effet clé, Contre-indication majeure).
->    - Si aucune comparaison n'est présente, ignore cette section.
-> 
-> **5. PONT VERS D'AUTRES DISCIPLINES :**
->    - Identifie un concept dans le cours qui a un lien direct avec une autre matière (ex: biochimie, immunologie, physiologie) et explique brièvement ce lien en une phrase pour encourager la vision d'ensemble.
-> 
-> **6. ASTUCE MNÉMOTECHNIQUE :**
->    - Propose une phrase, une analogie créative ou un acronyme pour aider à mémoriser une liste importante ou un point particulièrement ardu du cours.
-> 
-> **7. QUESTION D'AUTO-ÉVALUATION CRITIQUE :**
->    - Termine par une question ouverte qui ne demande pas de réciter le cours, mais de l'appliquer ou de le critiquer. (Ex: "Comment le mécanisme X pourrait-il être détourné pour traiter la pathologie Y ?" ou "Quelles sont les limites du traitement Z décrites dans le document ?").
-> 
-> Maintenant, applique rigoureusement cette structure au document fourni."
+<Card className="border-2 border-primary/20">
+  <CardHeader>
+    <CardTitle className="text-xl">
+      🎯 Prompt "Fiche de Révision Ultime" v2.0
+    </CardTitle>
+    <CardDescription>
+      Prêt à utiliser : Copiez ce prompt et uploadez votre document PDF dans votre outil d'IA préféré (DeepSeek, Gemini, Claude).
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
+      <div className="prose prose-sm max-w-none dark:prose-invert">
+        <blockquote>
+          **Prompt de génération de fiche :**
+          
+          "Tu agis en tant qu'ingénieur pédagogique et expert en sciences cognitives. Ta mission est de transformer le document PDF que je te fournis en une fiche de révision optimisée pour la mémorisation à long terme par un étudiant en pharmacie.
+          
+          **Règle Absolue :** Ta seule et unique source d'information est le document fourni. N'invente, n'ajoute et n'extrapole aucune information.
+          
+          **Objectif :** Créer une fiche de révision qui ne soit pas seulement un résumé, mais un véritable outil d'apprentissage. La fiche doit être structurée, visuellement claire et inciter à la réflexion.
+          
+          **FORMAT OBLIGATOIRE DE LA FICHE :**
+          
+          **1. TITRE :** `[Titre clair et concis du sujet]`
+          
+          **2. LES 3 CONCEPTS FONDAMENTAUX À RETENIR :**
+             - En une liste à puces, extrais les 3 (et seulement 3) idées ou mécanismes les plus importants que l'étudiant doit absolument maîtriser. Chaque point doit être une phrase complète.
+          
+          **3. SYNTHÈSE STRUCTURÉE :**
+             - Découpe le contenu en sections logiques avec des titres clairs (utilisant Markdown `##`).
+             - Au sein de chaque section, utilise des sous-titres (`###`) et des listes à puces pour hiérarchiser l'information.
+             - **Met en gras** tous les termes techniques, noms de molécules, et concepts essentiels. C'est non-négociable.
+             - Quand un mécanisme complexe est décrit, reformule-le avec des mots plus simples sous un sous-titre "En Clair :".
+          
+          **4. TABLEAU COMPARATIF / RÉCAPITULATIF (si pertinent) :**
+             - Si le cours compare plusieurs médicaments, pathologies, ou mécanismes, crée un tableau Markdown pour synthétiser ces comparaisons. Choisis les colonnes les plus pertinentes (ex: Classe, Mécanisme, Effet clé, Contre-indication majeure).
+             - Si aucune comparaison n'est présente, ignore cette section.
+          
+          **5. PONT VERS D'AUTRES DISCIPLINES :**
+             - Identifie un concept dans le cours qui a un lien direct avec une autre matière (ex: biochimie, immunologie, physiologie) et explique brièvement ce lien en une phrase pour encourager la vision d'ensemble.
+          
+          **6. ASTUCE MNÉMOTECHNIQUE :**
+             - Propose une phrase, une analogie créative ou un acronyme pour aider à mémoriser une liste importante ou un point particulièrement ardu du cours.
+          
+          **7. QUESTION D'AUTO-ÉVALUATION CRITIQUE :**
+             - Termine par une question ouverte qui ne demande pas de réciter le cours, mais de l'appliquer ou de le critiquer. (Ex: "Comment le mécanisme X pourrait-il être détourné pour traiter la pathologie Y ?" ou "Quelles sont les limites du traitement Z décrites dans le document ?").
+          
+          Maintenant, applique rigoureusement cette structure au document fourni."
+        </blockquote>
+      </div>
+    </div>
+  </CardContent>
+</Card>
 
 ## Workflow en 3 Étapes : De la Génération à l'Appropriation
 
-1.  **Génération (2 minutes) :**
-    - Uploadez le PDF de votre chapitre de cours dans votre outil d'IA préféré.
-    - Copiez-collez le prompt ci-dessus.
-    - Lancez la génération.
+<Tabs defaultValue="generation">
+  <TabsList>
+    <TabsTrigger value="generation">1. Génération (2 min)</TabsTrigger>
+    <TabsTrigger value="verification">2. Vérification (10 min)</TabsTrigger>
+    <TabsTrigger value="appropriation">3. Appropriation (15+ min)</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="generation">
+    <Card>
+      <CardHeader>
+        <CardTitle>⚡ Génération Automatisée</CardTitle>
+        <CardDescription>Laissez l'IA faire le gros du travail de synthèse</CardDescription>
+      </CardHeader>
+      <CardContent>
+        1. **Uploadez** le PDF de votre chapitre de cours dans votre outil d'IA préféré
+        2. **Copiez-collez** le prompt "Générateur de Fiche de Révision Ultime" ci-dessus
+        3. **Lancez** la génération et attendez le résultat
+        
+        <Alert>
+          <AlertDescription>
+            **Astuce :** Si vous avez plusieurs chapitres, traitez-les un par un pour une meilleure qualité de synthèse.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="verification">
+    <Card>
+      <CardHeader>
+        <CardTitle>🔍 Analyse et Vérification</CardTitle>
+        <CardDescription>L'IA est un excellent assistant, pas un oracle infaillible</CardDescription>
+      </CardHeader>
+      <CardContent>
+        **Lisez** la fiche générée en parallèle du cours original :
+        
+        - **✅ Vérifiez l'exactitude :** A-t-elle correctement retranscrit les dosages, les noms, les mécanismes ?
+        - **🔍 Identifiez les omissions :** Y a-t-il un point crucial que l'IA a considéré comme secondaire ? Rajoutez-le.
+        - **⚖️ Évaluez la pertinence :** Les 3 concepts fondamentaux sont-ils vraiment les plus importants selon vous ?
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="appropriation">
+    <Card>
+      <CardHeader>
+        <CardTitle>🎨 Personnalisation et Appropriation</CardTitle>
+        <CardDescription>L'étape la plus importante pour la mémorisation</CardDescription>
+      </CardHeader>
+      <CardContent>
+        - **📝 Reformulez avec vos mots :** Changez des phrases, remplacez des termes par ceux que vous utilisez naturellement
+        - **🎨 Ajoutez de la couleur :** Surlignez les points clés avec votre propre code couleur
+        - **✏️ Dessinez :** Faites un schéma, une flèche, un petit dessin à côté d'un mécanisme complexe
+        
+        <Alert>
+          <AlertDescription>
+            **Pourquoi cette étape est cruciale :** Le fait de dessiner et reformuler ancre l'information différemment dans votre cerveau. Vous transformez une fiche "générique" en VOTRE fiche.
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>
 
-2.  **Analyse et Vérification (10 minutes) :**
-    - Lisez la fiche générée en parallèle du cours. L'IA est un excellent assistant, pas un oracle infaillible.
-    - **Vérifiez l'exactitude :** A-t-elle correctement retranscrit les dosages, les noms, les mécanismes ?
-    - **Identifiez les omissions :** Y a-t-il un point que vous jugez crucial et que l'IA a considéré comme secondaire ? Rajoutez-le.
-
-3.  **Personnalisation et Appropriation (15+ minutes) :**
-    - C'est l'étape la plus importante pour la mémorisation.
-    - **Reformulez avec vos mots :** Changez des phrases, remplacez des termes par ceux que vous utilisez naturellement.
-    - **Ajoutez de la couleur :** Surlignez les points clés avec votre propre code couleur.
-    - **Dessinez :** Faites un schéma, une flèche, un petit dessin à côté d'un mécanisme complexe. Le fait de dessiner ancre l'information différemment dans votre cerveau.
-
-En moins de 30 minutes, vous avez transformé un processus passif et long en une tâche active, critique et rapide. Vous avez non seulement une fiche de révision, mais vous avez déjà commencé à apprendre en la créant.
+**Résultat :** En moins de 30 minutes, vous avez transformé un processus passif et long en une tâche active, critique et rapide. Vous avez non seulement une fiche de révision, mais vous avez déjà commencé à apprendre en la créant.

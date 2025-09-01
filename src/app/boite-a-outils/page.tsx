@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ import {
   BookOpen,
   PenTool,
   BarChart3,
+  ArrowRight,
 } from "lucide-react";
 
 // Données des outils avec statuts et catégories
@@ -152,9 +154,9 @@ export default function ToolboxPage() {
           {toolsData.map((tool) => (
             <Card
               key={tool.id}
-              className="h-full hover:shadow-lg transition-all duration-200 hover:scale-105"
+              className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              <CardHeader>
+              <CardHeader className="flex-grow">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-lg ${tool.color} text-white`}>
@@ -193,13 +195,17 @@ export default function ToolboxPage() {
                       </li>
                     ))}
                   </ul>
-                  {tool.href !== "#" && (
-                    <Link
-                      href={tool.href}
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:underline mt-3"
-                    >
-                      Essayer l'outil →
-                    </Link>
+                  {tool.href !== "#" ? (
+                    <Button asChild className="w-full">
+                      <Link href={tool.href}>
+                        Essayer l'outil
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button disabled className="w-full">
+                      Bientôt disponible
+                    </Button>
                   )}
                 </div>
               </CardContent>

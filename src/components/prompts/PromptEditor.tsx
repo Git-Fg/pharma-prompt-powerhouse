@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Copy, CheckCircle, Play, Sparkles } from 'lucide-react';
+import { Copy, CheckCircle, Play, Sparkles, Download } from 'lucide-react';
 import Link from 'next/link';
 
 interface PromptEditorProps {
@@ -22,6 +22,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
   const [promptTemplate, setPromptTemplate] = useState<PromptType | null>(null);
   const [variableValues, setVariableValues] = useState<Record<string, string>>({});
   const [generatedPrompt, setGeneratedPrompt] = useState('');
+  const [generatedSystemPrompt, setGeneratedSystemPrompt] = useState('');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
         });
         setVariableValues(initialValues);
         setGeneratedPrompt('');
+        setGeneratedSystemPrompt('');
       } else {
         toast({
           title: 'Erreur',
@@ -55,27 +57,65 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
     if (!promptTemplate?.promptContent) return;
 
     let finalPrompt = promptTemplate.promptContent;
+    let finalSystemPrompt = promptTemplate.systemPromptContent || '';
+    
+    // Replace variables in both prompts
     for (const [key, value] of Object.entries(variableValues)) {
-      // Utiliser replaceAll pour une syntaxe plus simple et éviter les problèmes d'échappement
       finalPrompt = finalPrompt.replaceAll(`{${key}}`, value || `[${key}]`);
+      if (finalSystemPrompt) {
+        finalSystemPrompt = finalSystemPrompt.replaceAll(`{${key}}`, value || `[${key}]`);
+      }
     }
+    
     setGeneratedPrompt(finalPrompt);
+    setGeneratedSystemPrompt(finalSystemPrompt);
+    
     toast({
       title: 'Prompt généré !',
       description: "Vous pouvez maintenant le copier et l'utiliser.",
     });
   };
 
-  const handleCopy = async () => {
-    if (!generatedPrompt) return;
+  const handleCopy = async (content: string, type: 'prompt' | 'system' = 'prompt') => {
+    if (!content) return;
     try {
-      await navigator.clipboard.writeText(generatedPrompt);
+      await navigator.clipboard.writeText(content);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      toast({ title: 'Copié !', description: 'Le prompt a été copié dans le presse-papiers.' });
-    } catch (_err) { // Renommer la variable pour indiquer qu'elle n'est pas utilisée
+      toast({ 
+        title: 'Copié !', 
+        description: `Le ${type === 'system' ? 'system prompt' : 'prompt'} a été copié dans le presse-papiers.`
+      });
+    } catch (_err) {
       toast({ title: 'Erreur', description: 'Impossible de copier.', variant: 'destructive' });
     }
+  };
+
+  const handleDownload = () => {
+    if (!generatedPrompt) return;
+    
+    let content = '';
+    if (generatedSystemPrompt) {
+      content += '=== SYSTEM PROMPT ===\n\n';
+      content += generatedSystemPrompt;
+      content += '\n\n=== USER PROMPT ===\n\n';
+    }
+    content += generatedPrompt;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${promptTemplate?.slug || 'prompt'}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast({ 
+      title: 'Téléchargé !', 
+      description: 'Le prompt a été téléchargé en tant que fichier texte.'
+    });
   };
 
   if (!promptTemplate) {
@@ -128,9 +168,27 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
       </div>
 
       <div className="lg:col-span-2 space-y-6">
+        {/* System Prompt if it exists */}
+        {promptTemplate.hasSystemPrompt && (
+          <Card>
+            <CardHeader>
+              <CardTitle>🧠 System Prompt</CardTitle>
+              <CardDescription>Le rôle et les instructions pour l'IA</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Textarea
+                value={promptTemplate.systemPromptContent || ''}
+                readOnly
+                className="min-h-[150px] font-mono bg-muted/50"
+              />
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Main Prompt */}
         <Card>
           <CardHeader>
-            <CardTitle>Prompt de base</CardTitle>
+            <CardTitle>🎯 {promptTemplate.hasSystemPrompt ? 'User Prompt' : 'Prompt Principal'}</CardTitle>
             <CardDescription>{promptTemplate.title}</CardDescription>
           </CardHeader>
           <CardContent>
@@ -142,25 +200,75 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
           </CardContent>
         </Card>
 
-        {generatedPrompt && (
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <CardTitle>Prompt Final Généré</CardTitle>
-                <Button variant="outline" size="sm" onClick={handleCopy}>
-                  {copied ? <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> : <Copy className="w-4 h-4 mr-2" />}
-                  {copied ? 'Copié !' : 'Copier'}
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <Textarea
-                value={generatedPrompt}
-                readOnly
-                className="min-h-[200px] font-mono"
-              />
-            </CardContent>
-          </Card>
+        {/* Generated content */}
+        {(generatedPrompt || generatedSystemPrompt) && (
+          <>
+            {generatedSystemPrompt && (
+              <Card className="border-blue-500/20">
+                <CardHeader>
+                  <div className="flex justify-between items-center">
+                    <CardTitle>🧠 System Prompt Généré</CardTitle>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => handleCopy(generatedSystemPrompt, 'system')}
+                    >
+                      {copied ? <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> : <Copy className="w-4 h-4 mr-2" />}
+                      {copied ? 'Copié !' : 'Copier'}
+                    </Button>
+                  </div>
+                  <CardDescription>
+                    À coller dans le champ "System Prompt" de votre outil IA
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={generatedSystemPrompt}
+                    readOnly
+                    className="min-h-[150px] font-mono"
+                  />
+                </CardContent>
+              </Card>
+            )}
+
+            {generatedPrompt && (
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <div className="flex justify-between items-center">
+                    <CardTitle>🎯 {generatedSystemPrompt ? 'User Prompt' : 'Prompt Final'} Généré</CardTitle>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => handleCopy(generatedPrompt)}
+                      >
+                        {copied ? <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> : <Copy className="w-4 h-4 mr-2" />}
+                        {copied ? 'Copié !' : 'Copier'}
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={handleDownload}
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Télécharger .txt
+                      </Button>
+                    </div>
+                  </div>
+                  <CardDescription>
+                    {generatedSystemPrompt ? 'Votre instruction principale' : 'Prêt à utiliser dans votre outil IA'}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={generatedPrompt}
+                    readOnly
+                    className="min-h-[200px] font-mono"
+                  />
+                </CardContent>
+              </Card>
+            )}
+          </>
         )}
       </div>
     </div>
