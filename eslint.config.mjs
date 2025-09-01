@@ -17,7 +17,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname
 });
 
-export default [...compat.extends("next/core-web-vitals", "next/typescript"), {
+const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript"), {
   ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
 }, // Fichiers à ignorer
 {
@@ -110,3 +110,5 @@ js.configs.recommended, // Configuration TypeScript
   files: ["**/*.{js,mjs,jsx}"],
   ...tseslint.configs.disableTypeChecked,
 }];
+
+export default eslintConfig;
