@@ -12,9 +12,6 @@ const baseSchema = z.object({
   description: z
     .string()
     .min(10, "La description doit faire au moins 10 caractères."),
-  content: z
-    .string()
-    .min(100, "Le contenu doit faire au moins 100 caractères."),
   tags: z.array(z.string()).default([]),
   isFavorite: z.boolean().default(false),
   difficulty: z.enum(["débutant", "intermédiaire", "avancé"]).optional(),
@@ -127,9 +124,8 @@ const validationErrors: ValidationError[] = [];
  */
 const validateConceptReferences = async (
   doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
-  ctx: any
+  ctx: unknown
 ) => {
-  // eslint-disable-line @typescript-eslint/no-explicit-any
   // --- Validation de mainGuideSlug ---
   if (doc.mainGuideSlug) {
     const allGuides = await ctx.documents(guides);
@@ -156,7 +152,7 @@ const validateConceptReferences = async (
  * Ajoute des champs calculés communs à tous les documents (temps de lecture, slug...).
  * C'est notre fonction "boilerplate killer".
  */
-const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta }) => {
+const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta, content: string }) => {
   const wordCount = doc.content?.trim().split(/\s+/).length || 0;
   const readingTime = Math.ceil(wordCount / 200); // 200 mots par minute
 
