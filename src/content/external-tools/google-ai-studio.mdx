@@ -4,7 +4,7 @@ description: "Mon guide pratique pour utiliser Google AI Studio, le laboratoire 
 url: "https://aistudio.google.com"
 category: "interface-avancee"
 pricing: "Gratuit (avec quotas)"
-capabilities: ["Prompting avancé", "Réglage des paramètres", "System Prompt", "Thinking Mode", "gemini-2.0-flash", "gemini-1.5-pro"]
+capabilities: ["Prompting avancé", "Réglage des paramètres", "System Prompt", "Thinking Mode", "gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite", "imagen-4", "veo-3", "structured-outputs", "function-calling", "multimodal", "url-context"]
 tags: ["aistudio", "exemple-code", "gemini", "guide", "pedagogie", "pharmacie", "prompting", "recherche", "parametres-avances"]
 conceptSlugs: ["temperature-dosage", "prompt-prescription"]
 keyTakeaways:
@@ -20,22 +20,26 @@ Google AI Studio est l'interface **développeur avancée** de Google pour les mo
 ## 🆚 Différences avec Gemini Standard
 
 ### Gemini (gemini.google.com)
-- ✅ **Gratuit** et simple d'utilisation
+- ✅ **Gratuit** : Gemini 2.5 Flash, limité à 32K tokens, 10 fichiers max 100Mo
 - ✅ Interface conversationnelle intuitive
 - ✅ Parfait pour l'usage quotidien
-- ✅ Upload d'images et fichiers
+- ✅ Upload d'images et fichiers PDF
 - ❌ Paramètres fixes (pas d'accès aux réglages)
-- ❌ Un seul modèle accessible
+- ❌ Un seul modèle accessible (Gemini 2.5 Flash)
 - ❌ Pas de system prompt personnalisé
+- **Payant (20€/mois)** : Gemini 2.5 Pro, 1M tokens, 100 requêtes/jour, Deep Research, Veo 3
 
 ### Google AI Studio (aistudio.google.com)
-- ✅ **Gratuit** avec quotas très généreux
-- ✅ **Tous les modèles Gemini** disponibles
+- ✅ **API gratuite avec quotas généreux** : 60 requêtes/min, 300K tokens/jour
+- ✅ **Tous les modèles Gemini** : 2.5 Pro, 2.5 Flash, 2.5 Flash-Lite, Imagen 4
 - ✅ **Contrôle total des paramètres** (température, top-k, top-p)
 - ✅ **System Prompt** personnalisé et persistant
-- ✅ **Thinking Mode** pour voir le raisonnement
-- ✅ **Sauvegarde et partage** de configurations
-- ✅ **Mode structured output** pour des formats précis
+- ✅ **Thinking Mode** pour voir le raisonnement (Gemini 2.5 Pro)
+- ✅ **Fonctionnalités avancées** : structured outputs, function calling, code execution
+- ✅ **Support multimodal** : texte, image, audio, vidéo, PDF
+- ✅ **URL context et search grounding**
+- ✅ **Caching support** pour optimiser les performances
+- ✅ **Aucune CB nécessaire** - idéal pour étudiants
 - ❌ Interface plus complexe
 
 ## 🎯 Pourquoi Choisir AI Studio ?
@@ -88,24 +92,45 @@ Activé, il force Gemini à "penser à voix haute" - essentiel pour valider ses 
 
 ### 1. Configuration Recommandée
 
-**Pour l'Analyse Pharmaceutique :**
+**Pour l'Analyse Pharmaceutique (Raisonnement approfondi) :**
 ```
-Modèle: Gemini 2.0 Flash Experimental
+Modèle: Gemini 2.5 Pro (modèle "pensant" le plus puissant)
 Temperature: 0.2
 Top-K: 20
 Top-P: 0.9
 Max tokens: 2048
 Thinking Mode: ✅ ACTIVÉ
+Context: 1M tokens (env. 750 Mo de texte)
 ```
 
-**Pour la Créativité (analogies, mnémotechniques) :**
+**Pour les Analyses Rapides et Efficaces :**
 ```
-Modèle: Gemini 1.5 Pro
+Modèle: Gemini 2.5 Flash (meilleur rapport prix/performance)
+Temperature: 0.3
+Top-K: 25
+Top-P: 0.9
+Max tokens: 1500
+Context: 1M tokens
+```
+
+**Pour la Créativité et Génération d'Images :**
+```
+Modèle: Gemini 2.5 Flash Image Preview
 Temperature: 0.8
 Top-K: 40
 Top-P: 0.95
 Max tokens: 1500
 Thinking Mode: ✅ ACTIVÉ
+```
+
+**Pour l'Optimisation Coût/Performance :**
+```
+Modèle: Gemini 2.5 Flash-Lite
+Temperature: 0.2-0.5
+Top-K: 30
+Top-P: 0.9
+Max tokens: 1000
+Context: 1M tokens
 ```
 
 ### 2. Workflow pour une Analyse de Cas Clinique
@@ -196,9 +221,9 @@ Parfait pour :
 - **Templates réutilisables** pour différents types de questions
 - **Raisonnement visible** pour apprendre la méthode
 
-## 🆓 Le Grand Avantage : C'est Gratuit !
+## 🆓 Le Grand Avantage : C'est Gratuit ET Sans CB !
 
-Contrairement à OpenAI Playground ou Anthropic Console, Google AI Studio offre **toutes ces fonctionnalités gratuitement**. Les quotas sont généreux et suffisants pour un usage intensif d'étudiant.
+Contrairement à OpenAI Playground ou Anthropic Console, Google AI Studio offre **toutes ces fonctionnalités gratuitement** sans nécessiter de carte bancaire pour l'inscription. Les quotas sont très généreux (60 requêtes/min, 300K tokens/jour) et suffisants pour un usage intensif d'étudiant. C'est l'outil privilégié quand on veut accéder aux meilleurs modèles d'IA sans sortir la carte de crédit !
 
 ## 🚀 Conclusion
 
