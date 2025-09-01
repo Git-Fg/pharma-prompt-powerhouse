@@ -100,29 +100,26 @@ Format : Tableau synthétique + recommandations détaillées"
 
 #### Étape 2 : Analyse du Cas avec Google AI Studio
 
-```python
-# Prompt pour l'analyse du cas
-def analyze_diabetes_case():
-    prompt = """
-    Analyse ce cas de diabète de type 2 :
+**Prompt direct à utiliser :**
 
-    PATIENT : Homme de 45 ans, IMC 32 kg/m², HbA1c 8.2%
-    TRAITEMENT ACTUEL : Metformine 1000 mg x2/j
-    OBJECTIF : HbA1c < 7%
+```
+Analyse ce cas de diabète de type 2 :
 
-    Considère :
-    1. Évaluation de l'observance et des effets indésirables
-    2. Stratégies d'intensification selon les guidelines 2025
-    3. Choix de la molécule additionnelle selon le profil
-    4. Plan de suivi et d'ajustement
+PATIENT : Homme de 45 ans, IMC 32 kg/m², HbA1c 8.2%
+TRAITEMENT ACTUEL : Metformine 1000 mg x2/j
+OBJECTIF : HbA1c < 7%
 
-    Fournis :
-    - Recommandations structurées
-    - Justification des choix
-    - Plan de monitoring
-    - Objectifs de suivi
-    """
-    return prompt
+Considère :
+1. Évaluation de l'observance et des effets indésirables
+2. Stratégies d'intensification selon les guidelines 2025
+3. Choix de la molécule additionnelle selon le profil
+4. Plan de suivi et d'ajustement
+
+Fournis :
+- Recommandations structurées
+- Justification des choix
+- Plan de monitoring
+- Objectifs de suivi
 ```
 
 #### Étape 3 : Génération de Plan avec Z.ai
@@ -155,111 +152,66 @@ def analyze_diabetes_case():
 
 #### Étape 1 : Définition des Besoins
 
-```python
-# Analyse des besoins avec IA
-def define_assistant_needs():
-    prompt = """
-    Analyse les besoins d'un assistant virtuel pour patients hospitalisés :
+**Prompt direct à utiliser sur AI Studio/Claude/ChatGPT :**
 
-    CONTEXTE : Service de pharmacie hospitalière
-    PATIENTS : Adultes hospitalisés, divers niveaux de compréhension
-    FONCTIONNALITÉS SOUHAITÉES :
-    - Réponses aux questions sur les médicaments
-    - Explications des effets indésirables
-    - Rappels de prise
-    - Conseils d'observance
+```
+Analyse les besoins d'un assistant virtuel pour patients hospitalisés :
 
-    Considère :
-    1. Types de questions fréquentes
-    2. Niveaux de complexité des réponses
-    3. Aspects de sécurité et validation
-    4. Intégration avec le système hospitalier
-    5. Formation du personnel
+CONTEXTE : Service de pharmacie hospitalière
+PATIENTS : Adultes hospitalisés, divers niveaux de compréhension
+FONCTIONNALITÉS SOUHAITÉES :
+- Réponses aux questions sur les médicaments
+- Explications des effets indésirables
+- Rappels de prise
+- Conseils d'observance
 
-    Fournis un cahier des charges structuré.
-    """
-    return prompt
+Considère :
+1. Types de questions fréquentes
+2. Niveaux de complexité des réponses
+3. Aspects de sécurité et validation
+4. Formation du personnel
+
+Fournis un cahier des charges structuré.
 ```
 
-#### Étape 2 : Développement du Prototype
+#### Étape 2 : Créer le Prompt Assistant Virtuel
 
-```python
-# Code pour l'assistant virtuel
-import vertexai
-from vertexai.language_models import TextGenerationModel
+Au lieu de développer du code, utilisez les WebUI existantes pour créer et tester votre assistant :
 
-def create_pharma_assistant():
-    vertexai.init(project="your-project-id", location="us-central1")
+**Prompt pour Claude/ChatGPT/Gemini :**
 
-    model = TextGenerationModel.from_pretrained("gemini-pro")
+```
+Tu es un assistant virtuel de pharmacie hospitalière.
 
-    system_prompt = """
-    Tu es un assistant virtuel de pharmacie hospitalière.
+RÈGLES STRICTES :
+1. Ne donne JAMAIS de conseils de modification de traitement
+2. Redirige vers le personnel soignant pour toute question médicale
+3. Informe sur les effets indésirables sans dramatiser
+4. Utilise un langage simple et accessible
+5. Valide toujours les informations avec le patient
 
-    RÈGLES STRICTES :
-    1. Ne donne JAMAIS de conseils de modification de traitement
-    2. Redirige vers le personnel soignant pour toute question médicale
-    3. Informe sur les effets indésirables sans dramatiser
-    4. Utilise un langage simple et accessible
-    5. Valide toujours les informations avec le patient
+FONCTIONS :
+- Expliquer le rôle des médicaments
+- Décrire les effets indésirables courants
+- Rappeler les horaires de prise
+- Donner des conseils d'observance
+- Rediriger vers le personnel si nécessaire
 
-    FONCTIONS :
-    - Expliquer le rôle des médicaments
-    - Décrire les effets indésirables courants
-    - Rappeler les horaires de prise
-    - Donner des conseils d'observance
-    - Rediriger vers le personnel si nécessaire
+TON : Bienveillant, rassurant, professionnel
 
-    TON : Bienveillant, rassurant, professionnel
-    """
+CONTEXTE PATIENT : {{contexte_patient}}
+QUESTION DU PATIENT : {{question_patient}}
 
-    return model, system_prompt
-
-def handle_patient_question(question, patient_context):
-    model, system_prompt = create_pharma_assistant()
-
-    full_prompt = f"""
-    {system_prompt}
-
-    CONTEXTE PATIENT : {patient_context}
-    QUESTION : {question}
-
-    Réponds de manière appropriée en respectant toutes les règles.
-    """
-
-    response = model.predict(full_prompt)
-    return response.text
+Réponds de manière appropriée en respectant toutes les règles.
 ```
 
-#### Étape 3 : Test et Validation
+#### Étape 3 : Test avec les WebUI
 
-```python
-# Tests de l'assistant
-def test_assistant():
-    test_cases = [
-        {
-            "question": "À quoi sert ce médicament ?",
-            "context": "Patient sous anticoagulant, niveau de compréhension : moyen"
-        },
-        {
-            "question": "Puis-je arrêter mon traitement ?",
-            "context": "Patient sous antihypertenseur, niveau de compréhension : élevé"
-        },
-        {
-            "question": "Quels sont les effets indésirables ?",
-            "context": "Patient sous antidiabétique, niveau de compréhension : faible"
-        }
-    ]
+Testez votre prompt avec différents scénarios sur votre plateforme préférée :
 
-    for test_case in test_cases:
-        response = handle_patient_question(
-            test_case["question"],
-            test_case["context"]
-        )
-        print(f"Question : {test_case['question']}")
-        print(f"Réponse : {response}")
-        print("-" * 50)
-```
+1. **Scénario 1 :** "À quoi sert ce médicament ?" (Patient sous anticoagulant)
+2. **Scénario 2 :** "Puis-je arrêter mon traitement ?" (→ redirection obligatoire)  
+3. **Scénario 3 :** "Quels sont les effets indésirables ?" (Patient anxieux)
 
 #### Étape 4 : Déploiement et Formation
 
@@ -281,25 +233,22 @@ def test_assistant():
 
 #### Étape 1 : Collecte et Structuration des Données
 
-```python
-# Script de collecte de données
-def collect_adverse_events():
-    prompt = """
-    Analyse ces données de pharmacovigilance pour [NOM_MEDICAMENT] :
+**Prompt direct pour Claude/ChatGPT/Gemini :**
 
-    DONNÉES BRUTES :
-    [COLLER_LES_DONNÉES]
+```
+Analyse ces données de pharmacovigilance pour [NOM_MEDICAMENT] :
 
-    STRUCTURE L'ANALYSE :
-    1. Profil des patients (âge, sexe, comorbidités)
-    2. Types d'effets indésirables
-    3. Gravité et évolution
-    4. Facteurs de risque identifiés
-    5. Comparaison avec la littérature
+DONNÉES BRUTES :
+[COLLER_LES_DONNÉES]
 
-    Fournis des tableaux synthétiques et des graphiques conceptuels.
-    """
-    return prompt
+STRUCTURE L'ANALYSE :
+1. Profil des patients (âge, sexe, comorbidités)
+2. Types d'effets indésirables
+3. Gravité et évolution
+4. Facteurs de risque identifiés
+5. Comparaison avec la littérature
+
+Fournis des tableaux synthétiques et des graphiques conceptuels.
 ```
 
 #### Étape 2 : Analyse avec Gemini Deep Research
@@ -343,26 +292,23 @@ Format : Rapport professionnel, 3-5 pages"
 
 #### Étape 1 : Évaluation des Besoins
 
-```python
-# Analyse des besoins de formation
-def assess_training_needs():
-    prompt = """
-    Analyse les besoins de formation continue pour une équipe pharmaceutique :
+**Prompt direct pour l'analyse :**
 
-    ÉQUIPE : 8 pharmaciens, niveaux d'expérience variables
-    CONTEXTE : Hôpital de niveau 2, activité variée
-    OBJECTIFS : Maintenir les compétences, intégrer les innovations
+```
+Analyse les besoins de formation continue pour une équipe pharmaceutique :
 
-    Considère :
-    1. Compétences techniques à maintenir
-    2. Nouvelles connaissances à acquérir
-    3. Besoins spécifiques par profil
-    4. Modalités de formation adaptées
-    5. Évaluation des acquis
+ÉQUIPE : 8 pharmaciens, niveaux d'expérience variables
+CONTEXTE : Hôpital de niveau 2, activité variée
+OBJECTIFS : Maintenir les compétences, intégrer les innovations
 
-    Propose un plan de formation structuré.
-    """
-    return prompt
+Considère :
+1. Compétences techniques à maintenir
+2. Nouvelles connaissances à acquérir
+3. Besoins spécifiques par profil
+4. Modalités de formation adaptées
+5. Évaluation des acquis
+
+Propose un plan de formation structuré.
 ```
 
 #### Étape 2 : Création de Contenu avec Z.ai
@@ -383,28 +329,25 @@ Format : Présentation + exercices pratiques"
 
 #### Étape 3 : Développement d'Outils Interactifs
 
-```python
-# Générateur de quiz avec IA
-def generate_quiz(topic, difficulty):
-    prompt = f"""
-    Crée un quiz de 10 questions sur {topic} pour pharmaciens de niveau {difficulty}.
+**Prompt pour générer un quiz avec Z.ai ou Claude :**
 
-    Chaque question doit avoir :
-    - Une question claire
-    - 4 réponses possibles (A, B, C, D)
-    - Une explication de la bonne réponse
-    - Un niveau de difficulté (1-5)
+```
+Crée un quiz de 10 questions sur [SUJET] pour pharmaciens de niveau [NIVEAU].
 
-    Sujets à couvrir :
-    - Mécanismes d'action
-    - Interactions médicamenteuses
-    - Posologies et ajustements
-    - Monitoring thérapeutique
-    - Cas cliniques
+Chaque question doit avoir :
+- Une question claire
+- 4 réponses possibles (A, B, C, D)
+- Une explication de la bonne réponse
+- Un niveau de difficulté (1-5)
 
-    Format : JSON structuré
-    """
-    return prompt
+Sujets à couvrir :
+- Mécanismes d'action
+- Interactions médicamenteuses
+- Posologies et ajustements
+- Monitoring thérapeutique
+- Cas cliniques
+
+Format : Markdown structuré
 ```
 
 #### Étape 4 : Évaluation et Suivi
@@ -510,21 +453,21 @@ Inclus les références et le niveau de preuve.
 4. **Formation des utilisateurs** : Développement des compétences
 5. **Évaluation périodique** : Révision trimestrielle
 
-## 🚀 Prochaines Étapes et Développements
+## 🚀 Prochaines Étapes dans Votre Apprentissage
 
-### Améliorations Techniques
+### Explorer de Nouveaux Outils
 
-- **Intégration multimodale** : Analyse d'images et de documents
-- **Collaboration en temps réel** : Outils partagés entre équipes
-- **Personnalisation avancée** : Adaptation automatique aux préférences
-- **Synchronisation** : Intégration avec les systèmes hospitaliers
+- **Nouveaux modèles** : Tester les dernières versions des modèles sur les interfaces web
+- **Fonctionnalités avancées** : Découvrir les nouvelles options (température, system prompts) 
+- **Outils spécialisés** : Explorer NotebookLM, Deep Research et autres outils gratuits
+- **Partage d'expérience** : Échanger avec d'autres étudiants en pharmacie
 
-### Développements Métier
+### Développer Vos Compétences
 
-- **Base de connaissances** : Cas cliniques documentés
-- **Communauté de pratique** : Partage d'expériences
-- **Formation certifiante** : Programmes accrédités
-- **Recherche collaborative** : Projets multi-sites
+- **Bibliothèque personnelle** : Construire votre collection de prompts pharmaceutiques
+- **Cas cliniques** : Documenter vos propres expériences d'apprentissage  
+- **Formations** : Suivre les évolutions des outils et techniques
+- **Communauté** : Rejoindre des groupes d'étudiants utilisant l'IA
 
 ## 🏁 Conclusion
 

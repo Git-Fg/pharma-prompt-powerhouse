@@ -1,11 +1,11 @@
 ---
 title: "Google AI Studio"
-description: "Mon guide pratique pour utiliser Google AI Studio, le laboratoire gratuit pour maîtriser les prompts avec les modèles Gemini."
+description: "Mon guide pratique pour utiliser Google AI Studio, le laboratoire gratuit pour maîtriser les prompts avec les modèles Gemini et leurs paramètres avancés."
 url: "https://aistudio.google.com"
-category: "LLM Généraliste"
+category: "interface-avancee"
 pricing: "Gratuit (avec quotas)"
-capabilities: ["Prompting avancé", "Réglage des paramètres", "System Prompt", "Thinking Mode"]
-tags: ["aistudio", "exemple-code", "gemini", "guide", "pedagogie", "pharmacie", "prompting", "recherche"]
+capabilities: ["Prompting avancé", "Réglage des paramètres", "System Prompt", "Thinking Mode", "gemini-2.0-flash", "gemini-1.5-pro"]
+tags: ["aistudio", "exemple-code", "gemini", "guide", "pedagogie", "pharmacie", "prompting", "recherche", "parametres-avances"]
 conceptSlugs: ["temperature-dosage", "prompt-prescription"]
 keyTakeaways:
   - "AI Studio est le 'laboratoire' gratuit pour tester les concepts avancés : température, system prompt, etc."
@@ -13,38 +13,195 @@ keyTakeaways:
   - "Activez le 'Thinking Mode' pour forcer Gemini 2.5 Pro à détailler son raisonnement, ce qui est essentiel pour valider une analyse clinique."
 ---
 
-## Mon Guide Pratique pour Google AI Studio
+## 🔬 Google AI Studio : Le Laboratoire Gratuit de Google
 
-Si le chat Gemini est le couteau suisse pour les questions rapides, Google AI Studio est notre paillasse de laboratoire. C'est une interface web gratuite qui donne un accès direct à toute la puissance des modèles Gemini, avec des réglages fins impossibles à trouver ailleurs.
+Google AI Studio est l'interface **développeur avancée** de Google pour les modèles Gemini. Contrairement au chat Gemini standard, c'est votre paillasse de laboratoire pour expérimenter avec tous les paramètres et fonctionnalités avancées.
 
-### Pourquoi je l'utilise ?
+## 🆚 Différences avec Gemini Standard
 
-1. **Le Contrôle Total :** C'est ici qu'on peut enfin jouer avec la **température**, le **Top-K** ou le **Top-P**. C'est essentiel pour comprendre comment "doser" la créativité de l'IA. Pour une analyse d'ordonnance, je la règle à `0.2` pour des faits. Pour créer une analogie, je monte à `0.8`.
-2.  **Le System Prompt :** C'est une instruction permanente. Je l'utilise pour définir le rôle de l'IA une bonne fois pour toutes. Par exemple : "Tu es un pharmacien clinicien expert en gériatrie. Tes réponses sont toujours basées sur les preuves et structurées."
-3.  **Le Thinking Mode :** La fonctionnalité la plus importante pour nous. En l'activant, Gemini 2.5 Pro nous montre son raisonnement étape par étape. C'est comme voir la réflexion d'un senior : on peut valider chaque étape et s'assurer que la conclusion est logique.
-4.  **Quotas Généreux :** L'utilisation est gratuite et les limites sont très élevées, parfait pour expérimenter sans stress.
+### Gemini (gemini.google.com)
+- ✅ **Gratuit** et simple d'utilisation
+- ✅ Interface conversationnelle intuitive
+- ✅ Parfait pour l'usage quotidien
+- ✅ Upload d'images et fichiers
+- ❌ Paramètres fixes (pas d'accès aux réglages)
+- ❌ Un seul modèle accessible
+- ❌ Pas de system prompt personnalisé
 
-### Mon Workflow pour une Analyse de Cas Clinique
+### Google AI Studio (aistudio.google.com)
+- ✅ **Gratuit** avec quotas très généreux
+- ✅ **Tous les modèles Gemini** disponibles
+- ✅ **Contrôle total des paramètres** (température, top-k, top-p)
+- ✅ **System Prompt** personnalisé et persistant
+- ✅ **Thinking Mode** pour voir le raisonnement
+- ✅ **Sauvegarde et partage** de configurations
+- ✅ **Mode structured output** pour des formats précis
+- ❌ Interface plus complexe
 
-1.  **Ouvrir AI Studio** et sélectionner le modèle `Gemini 2.5 Pro`.
-2.  **Rédiger le System Prompt** dans le champ dédié :
-    ```
-    Tu es un expert en pharmacovigilance. Ton analyse est systématique, rigoureuse et toujours justifiée par des mécanismes pharmacologiques. Tu hiérarchises les risques du plus élevé au plus faible.
-    ```
-3.  **Régler les Paramètres** sur la droite : `Température : 0.2`.
-4.  **Rédiger le Prompt Utilisateur** avec des balises pour la clarté :
-    ```xml
-    <cas>
-      <patient>Femme, 68 ans, insuffisance rénale modérée.</patient>
-      <traitement>Atorvastatine 40mg, Amlodipine 10mg.</traitement>
-      <nouveau_medicament>Clarithromycine 500mg x2/j pour une infection pulmonaire.</nouveau_medicament>
-    </cas>
-    <question>
-    Analyse l'interaction potentielle. Detaille le mécanisme, le risque clinique et propose un plan d'action.
-    </question>
-    ```
-5.  **Lancer et Analyser :** La réponse sera factuelle et le raisonnement (si Thinking Mode activé) permettra de valider la pertinence de l'analyse.
+## 🎯 Pourquoi Choisir AI Studio ?
 
-### Conclusion
+### Avantages Uniques pour la Pharmacie
+- **Control total du "dosage"** : ajustez la précision vs créativité
+- **System prompts persistants** : définissez une expertise une fois pour toutes
+- **Thinking Mode** : validez le raisonnement de l'IA étape par étape
+- **Accès aux derniers modèles** dès leur sortie
+- **Totalement gratuit** contrairement aux autres playgrounds
 
-Google AI Studio est un passage obligé pour quiconque veut sérieusement maîtriser l'interaction avec les IA modernes. C'est l'outil qui permet de mettre en pratique tous les concepts avancés de ce carnet.
+## ⚙️ Paramètres Clés à Maîtriser
+
+### Température (0.0 - 2.0)
+```
+❄️  Temperature = 0.0-0.2
+→ Maximum de précision et reproductibilité
+→ Idéal pour : calculs, diagnostics, analyses factuelles
+
+🌡️ Temperature = 0.3-0.7  
+→ Équilibre créativité/précision
+→ Idéal pour : explications, synthèses pédagogiques
+
+🔥 Temperature = 0.8-2.0
+→ Maximum de créativité
+→ Idéal pour : analogies, mnémotechniques, brainstorming
+```
+
+### System Prompt : Votre Expertise Permanente
+```xml
+<system>
+Tu es un pharmacien hospitalier expert en interactions médicamenteuses.
+
+MÉTHODE D'ANALYSE :
+1. Identification des mécanismes pharmacologiques
+2. Évaluation du risque clinique (faible/modéré/élevé)
+3. Recommandations pratiques avec alternatives
+
+STYLE DE RÉPONSE :
+- Pédagogique et structuré
+- Toujours justifié scientifiquement
+- Adapté aux étudiants en pharmacie
+</system>
+```
+
+### Thinking Mode : Le Raisonnement Visible
+Activé, il force Gemini à "penser à voix haute" - essentiel pour valider ses analyses.
+
+## 📋 Guide Pratique Étudiant
+
+### 1. Configuration Recommandée
+
+**Pour l'Analyse Pharmaceutique :**
+```
+Modèle: Gemini 2.0 Flash Experimental
+Temperature: 0.2
+Top-K: 20
+Top-P: 0.9
+Max tokens: 2048
+Thinking Mode: ✅ ACTIVÉ
+```
+
+**Pour la Créativité (analogies, mnémotechniques) :**
+```
+Modèle: Gemini 1.5 Pro
+Temperature: 0.8
+Top-K: 40
+Top-P: 0.95
+Max tokens: 1500
+Thinking Mode: ✅ ACTIVÉ
+```
+
+### 2. Workflow pour une Analyse de Cas Clinique
+
+**Étape 1 : System Prompt**
+```
+Tu es un expert en pharmacovigilance. 
+
+Ton analyse est systématique, rigoureuse et toujours justifiée par des mécanismes pharmacologiques. 
+
+Tu hiérarchises les risques du plus élevé au plus faible et proposes des alternatives pratiques.
+
+STRUCTURE OBLIGATOIRE :
+1. Analyse du risque
+2. Mécanisme impliqué  
+3. Recommandations pratiques
+```
+
+**Étape 2 : Prompt Utilisateur Structuré**
+```xml
+<cas>
+  <patient>Femme, 68 ans, insuffisance rénale modérée (DFG: 35 mL/min)</patient>
+  <traitement>Atorvastatine 40mg/j, Amlodipine 10mg/j</traitement>
+  <nouveau_medicament>Clarithromycine 500mg x2/j pour pneumonie</nouveau_medicament>
+</cas>
+
+<question>
+Analyse l'interaction potentielle. Détaille le mécanisme, évalue le risque clinique et propose un plan d'action.
+</question>
+```
+
+**Étape 3 : Validation du Raisonnement**
+Avec Thinking Mode activé, vous verrez le processus de réflexion de Gemini, permettant de valider chaque étape.
+
+## 🔥 Fonctionnalités Avancées
+
+### Structured Output
+Forcez Gemini à répondre dans un format JSON ou XML précis :
+```json
+{
+  "interaction": {
+    "medicaments": ["atorvastatine", "clarithromycine"],
+    "mecanisme": "Inhibition CYP3A4",
+    "risque": "élevé",
+    "symptomes": ["rhabdomyolyse", "myalgies"],
+    "recommandation": "Surveillance CPK + arrêt temporaire statine"
+  }
+}
+```
+
+### Prompt Library
+Sauvegardez vos meilleures configurations et partagez-les avec vos collègues d'étude.
+
+### Model Comparison
+Testez le même prompt sur différents modèles Gemini et comparez les réponses.
+
+## 💡 Astuces pour Optimiser vos Études
+
+### 1. Créez des System Prompts Spécialisés
+- Un pour la **pharmacologie** (mécanismes détaillés)
+- Un pour la **galénique** (formulations et stabilité)  
+- Un pour les **cas cliniques** (approche diagnostique)
+
+### 2. Utilisez les Balises XML
+Structure vos prompts pour plus de clarté :
+```xml
+<contexte>Cours de pharmacocinétique</contexte>
+<objectif>Comprendre la clairance rénale</objectif>
+<niveau>Étudiant 4ème année</niveau>
+<question>Explique l'impact de l'âge sur la clairance de la créatinine</question>
+```
+
+### 3. Exploitez le Thinking Mode
+Parfait pour :
+- Valider un raisonnement diagnostique
+- Comprendre la logique derrière une recommandation
+- Apprendre la démarche de résolution de problème
+
+## 🎓 Avantages Pédagogiques Uniques
+
+### Apprentissage Interactif
+- **Expérimentez** avec les paramètres : voyez l'impact de la température
+- **Comparez** les modèles : Gemini 2.0 Flash vs 1.5 Pro
+- **Validez** le raisonnement avec Thinking Mode
+
+### Préparation aux Examens
+- **System prompts** adaptés à chaque matière
+- **Templates réutilisables** pour différents types de questions
+- **Raisonnement visible** pour apprendre la méthode
+
+## 🆓 Le Grand Avantage : C'est Gratuit !
+
+Contrairement à OpenAI Playground ou Anthropic Console, Google AI Studio offre **toutes ces fonctionnalités gratuitement**. Les quotas sont généreux et suffisants pour un usage intensif d'étudiant.
+
+## 🚀 Conclusion
+
+Google AI Studio transforme Gemini d'un simple chatbot en un véritable assistant d'étude personnalisable. C'est l'outil parfait pour apprendre l'ingénierie de prompts sans débourser un centime, tout en ayant accès aux fonctionnalités les plus avancées.
+
+C'est votre premier pas vers la maîtrise professionnelle de l'IA en pharmacie !

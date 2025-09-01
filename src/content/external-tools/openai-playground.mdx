@@ -1,0 +1,138 @@
+---
+title: "OpenAI Playground"
+description: "Guide pour utiliser OpenAI Playground, l'interface avancée d'OpenAI pour tester et optimiser vos prompts avec des paramètres personnalisés."
+url: "https://platform.openai.com/playground"
+category: "interface-avancee"
+pricing: "Payant (crédit API requis)"
+capabilities: ["gpt-4", "gpt-3.5-turbo", "parametres-avances", "mode-chat", "mode-completion", "temperature-personnalisee"]
+tags: ["openai", "playground", "gpt-4", "parametres-avances", "temperature", "max-tokens"]
+conceptSlugs: ["temperature-dosage", "prompt-prescription"]
+---
+
+## Qu'est-ce qu'OpenAI Playground ?
+
+OpenAI Playground est l'interface **avancée** d'OpenAI qui vous permet de tester vos prompts avec un contrôle total sur tous les paramètres. Contrairement à ChatGPT standard, vous pouvez ajuster la température, la longueur maximale, et bien d'autres réglages.
+
+## 🆚 Différences avec ChatGPT Standard
+
+### ChatGPT (chat.openai.com)
+- ✅ **Gratuit** avec quota quotidien (Plus payant pour plus d'usage)
+- ✅ Interface simple et conversationnelle
+- ✅ Parfait pour une utilisation quotidienne
+- ❌ Paramètres fixes (pas d'accès aux réglages avancés)
+- ❌ Une seule conversation à la fois
+
+### OpenAI Playground (platform.openai.com/playground)
+- ⚠️ **Payant** (consomme des crédits API)
+- ✅ Contrôle total sur **tous les paramètres**
+- ✅ Modes Chat ET Completion
+- ✅ Température ajustable (0.0 à 2.0)
+- ✅ Longueur de réponse personnalisable
+- ✅ Système de messages pour contrôler le comportement
+- ✅ Idéal pour **tester et optimiser** vos prompts
+
+## 🎯 Quand Utiliser OpenAI Playground ?
+
+### Pour les Études Pharmaceutiques
+- **Analyser des cas cliniques** avec précision variable
+- **Générer des QCM** avec créativité contrôlée
+- **Tester différentes formulations** d'un même prompt
+- **Optimiser la température** pour des réponses cohérentes
+
+## 🔧 Paramètres Clés à Maîtriser
+
+### Temperature (0.0 - 2.0)
+```
+🔵 Temperature = 0.0-0.3
+→ Réponses précises, factuelles, reproductibles
+→ Idéal pour : diagnostics, calculs, révisions
+
+🟡 Temperature = 0.4-0.7  
+→ Équilibre créativité/précision
+→ Idéal pour : explications, synthèses
+
+🔴 Temperature = 0.8-2.0
+→ Réponses créatives, variées
+→ Idéal pour : brainstorming, analogies
+```
+
+### Max Tokens
+```
+📏 Contrôle la longueur maximale de la réponse
+• 50-100 tokens : Réponses courtes
+• 500-1000 tokens : Explications détaillées
+• 2000+ tokens : Analyses approfondies
+```
+
+### System Message
+```xml
+<system>
+Tu es un pharmacien spécialisé en gériatrie.
+Tes réponses sont toujours factuelles et sourcées.
+Tu ne donnes jamais de conseils de modification de traitement.
+</system>
+```
+
+## 📋 Mode d'Emploi Étudiant
+
+### 1. Accéder au Playground
+1. Créez un compte sur [platform.openai.com](https://platform.openai.com)
+2. Ajoutez des crédits (minimum ~5€ pour commencer)
+3. Allez sur **Playground** dans le menu
+
+### 2. Configuration Recommandée pour les Études
+```
+Model: gpt-4 (ou gpt-3.5-turbo pour économiser)
+Temperature: 0.2 (pour la précision)
+Max tokens: 1000
+Top-p: 1
+Frequency penalty: 0
+Presence penalty: 0
+```
+
+### 3. Exemple d'Usage : Analyse de Cas Clinique
+
+**System Message :**
+```
+Tu es un assistant pédagogique en pharmacie hospitalière. 
+Analyse les cas cliniques de manière structurée et pédagogique.
+```
+
+**User Message :**
+```
+Analyse ce cas clinique :
+Patient de 75 ans, insuffisance rénale chronique (DFG 35 mL/min), 
+sous metformine 1g x2/j depuis 5 ans.
+Que penses-tu de cette prescription ?
+```
+
+### 4. Tester Différentes Temperatures
+- **Temperature 0.1** : Réponse factuelle, toujours similaire
+- **Temperature 0.5** : Équilibre, légèrement variable  
+- **Temperature 1.0** : Plus créatif, explications variées
+
+## 💡 Astuces pour Économiser vos Crédits
+
+1. **Utilisez gpt-3.5-turbo** pour les tests, gpt-4 pour les analyses importantes
+2. **Limitez Max Tokens** à ce dont vous avez besoin
+3. **Testez sur ChatGPT gratuit** d'abord, puis affinez sur Playground
+4. **Sauvegardez vos meilleures configurations** avec le bouton "Save"
+
+## 🚨 Attention aux Coûts
+
+```
+💰 Exemple de coûts (indicatif) :
+• 100 questions courtes (gpt-3.5) ≈ 0.50€
+• 100 analyses détaillées (gpt-4) ≈ 5€
+• 1000 QCM générés (gpt-3.5) ≈ 2€
+```
+
+## 🎓 Avantage Pédagogique
+
+Playground vous permet de **comprendre comment l'IA fonctionne** en voyant l'impact de chaque paramètre. C'est un excellent outil d'apprentissage pour maîtriser l'ingénierie de prompts !
+
+## 🔗 Pour Aller Plus Loin
+
+- Explorez le **mode Completion** pour des tâches de génération spécifiques
+- Utilisez les **presets** pour sauvegarder vos configurations favorites  
+- Testez le **streaming** pour voir les réponses en temps réel

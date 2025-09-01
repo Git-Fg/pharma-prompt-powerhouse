@@ -299,6 +299,12 @@ const prompts = defineCollection({
         useCase: z.string().optional(),
         example: z.string().optional(),
         estimatedTime: z.string().optional(),
+        // Nouveaux champs pour séparer le prompt du contexte
+        promptContent: z.string().optional(),
+        alternativeVersions: z.array(z.object({
+            name: z.string(),
+            content: z.string()
+        })).optional(),
     }),
     transform: async (doc, ctx) => {
         // Compilation MDX au build

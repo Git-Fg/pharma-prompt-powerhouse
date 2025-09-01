@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { PromptEditor } from '@/components/prompts/PromptEditor';
+import { PromptEditor } from '@/components/prompts/PromptEditorSimplified';
 
 function PromptEditorContent() {
   const router = useRouter();
@@ -27,11 +27,11 @@ function PromptEditorContent() {
               Retour aux outils
             </Button>
             <div className='flex-1'>
-              <h1 className='text-3xl font-bold'>Éditeur de Prompts</h1>
+              <h1 className='text-3xl font-bold'>✏️ Éditeur de Prompts Simplifié</h1>
               <p className='text-muted-foreground mt-2'>
                 {templateToLoad
-                  ? `Chargement du prompt "${templateToLoad}"...`
-                  : 'Créez et personnalisez vos propres prompts avec notre éditeur avancé'}
+                  ? `Édition du prompt "${templateToLoad}"...`
+                  : 'Créez et personnalisez vos prompts facilement. Focus sur l\'essentiel : le prompt, les variables, et l\'utilisation !'}
               </p>
             </div>
           </div>
