@@ -48,6 +48,9 @@ export default tseslint.config(
           caughtErrorsIgnorePattern: "^_",
         },
       ],
+      
+      // Règles spécifiques React 19
+      "prefer-const": "error",
     },
   },
 
