@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Clock, BookOpen, Target } from "lucide-react";
 import { allGuides } from "content-collections";
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
+import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import type { Guide } from "@/types";
@@ -110,7 +110,7 @@ export default async function GuideDetailPage({
 
       {/* CONTENU PRINCIPAL */}
       <main className="prose prose-lg dark:prose-invert max-w-none">
-        <MarkdownRenderer content={guide.content} />
+        <MDXRenderer code={guide.mdxCode} />
       </main>
 
       <Separator className="my-12" />

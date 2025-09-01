@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Target,
 } from "lucide-react";
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
+import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 
 // Génération des pages statiques au build
@@ -108,7 +108,7 @@ export default async function ConceptDetailPage({
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert max-w-none">
-            <MarkdownRenderer content={concept.content} />
+            <MDXRenderer code={concept.mdxCode} />
           </div>
         </CardContent>
       </Card>
