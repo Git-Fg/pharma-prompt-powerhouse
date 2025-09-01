@@ -10,12 +10,62 @@ import { ArrowLeft, Globe, Tag, DollarSign } from "lucide-react";
 import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import { RelatedContent } from "@/components/shared/RelatedContent";
+import type { Metadata } from "next";
 
 // Cette fonction permet à Next.js de générer les pages statiques au moment du build
 export async function generateStaticParams() {
   return allExternalTools.map((tool) => ({
     slug: tool.slug,
   }));
+}
+
+// Génération des métadonnées dynamiques pour le SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const tool = allExternalTools.find((t) => t.slug === slug);
+
+  if (!tool) {
+    return {
+      title: "Outil non trouvé - Pharma Prompt Powerhouse",
+      description: "L'outil externe que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${tool.title} - Outils Externes | Pharma Prompt Powerhouse`,
+    description: tool.description,
+    keywords: [
+      "pharmacie",
+      "prompt engineering",
+      "outil IA",
+      "intelligence artificielle",
+      tool.title,
+      tool.category,
+      ...(tool.tags?.map(t => t.name) || [])
+    ],
+    openGraph: {
+      title: tool.title,
+      description: tool.description,
+      type: "article",
+      images: [
+        {
+          url: "/og-external-tool.png",
+          width: 1200,
+          height: 630,
+          alt: tool.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: tool.title,
+      description: tool.description,
+    },
+  };
 }
 
 export default async function ExternalToolDetailPage({
