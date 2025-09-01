@@ -8,7 +8,6 @@ import fs from 'fs';
 import path from 'path';
 
 describe('Build and Generation', () => {
-  const buildDir = path.join(process.cwd(), '.next');
   const contentCollectionsDir = path.join(process.cwd(), '.content-collections');
 
   describe('Content Collections Build', () => {
@@ -19,7 +18,7 @@ describe('Build and Generation', () => {
         // Try to run content-collections build
         try {
           execSync('pnpm build', { stdio: 'pipe', cwd: process.cwd() });
-        } catch (error) {
+        } catch (_error) {
           // Build might fail in test environment, but we can still check basic structure
         }
       }

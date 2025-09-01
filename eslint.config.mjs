@@ -32,6 +32,9 @@ const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript
     "tailwind.config.ts",
     "**/*.d.ts",
     "coverage/",
+    "playwright-report/",
+    "test-results/",
+    "**/*.min.js"
   ],
 }, // Configuration de base ESLint
 js.configs.recommended, // Configuration TypeScript
