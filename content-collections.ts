@@ -123,25 +123,7 @@ const validateIconExists = (doc: { icon?: string; _meta: Meta }, _ctx: Context) 
   }
 };
 
-const validateConceptReferences = async (
-  doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
-  ctx: Context
-) => {
-  if (doc.mainGuideSlug) {
-    const allGuides = await ctx.documents(guides);
-    const linkedGuide = allGuides.find(
-      (g) => g._meta.path === doc.mainGuideSlug
-    );
-    if (!linkedGuide) {
-      validationErrors.push({
-        document: doc._meta.path,
-        field: "mainGuideSlug",
-        value: doc.mainGuideSlug,
-        message: `Le guide référencé '${doc.mainGuideSlug}' n'existe pas dans la collection 'guides'.`,
-      });
-    }
-  }
-};
+// Note: validateConceptReferences will be defined after collections to avoid circular dependencies
 
 // ============================================================================
 // FONCTIONS D'ENRICHISSEMENT (TRANSFORM HELPERS)
@@ -180,6 +162,50 @@ const resolveConceptRelations = async (
     }));
 
   return { concepts: relatedConcepts };
+};
+
+const resolveRelatedContent = async (
+  doc: { conceptSlugs?: string[]; _meta: Meta },
+  ctx: Context
+): Promise<{ 
+  relatedGuides: Array<{ slug: string; title: string; description: string }>; 
+  relatedPrompts: Array<{ slug: string; title: string; description: string }>; 
+}> => {
+  if (!doc.conceptSlugs || doc.conceptSlugs.length === 0) {
+    return { relatedGuides: [], relatedPrompts: [] };
+  }
+
+  // Get all documents of each type
+  const allGuides = await ctx.documents(guides);
+  const allPrompts = await ctx.documents(prompts);
+
+  // Find related guides that share at least one concept
+  const relatedGuides = allGuides
+    .filter((guide: any) =>
+      guide._meta.path !== doc._meta.path &&
+      guide.conceptSlugs?.some((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug))
+    )
+    .slice(0, 2)
+    .map((guide: any) => ({
+      slug: guide._meta.path,
+      title: guide.title,
+      description: guide.description,
+    }));
+
+  // Find related prompts that share at least one concept
+  const relatedPrompts = allPrompts
+    .filter((prompt: any) =>
+      prompt._meta.path !== doc._meta.path &&
+      prompt.conceptSlugs?.some((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug))
+    )
+    .slice(0, 2)
+    .map((prompt: any) => ({
+      slug: prompt._meta.path,
+      title: prompt.title,
+      description: prompt.description,
+    }));
+
+  return { relatedGuides, relatedPrompts };
 };
 
 const processTags = (doc: { tags?: string[] }) => {
@@ -227,6 +253,27 @@ const conceptSchema = baseSchema.extend({
 });
 type ConceptDoc = z.infer<typeof conceptSchema> & { _meta: Meta; content?: string };
 
+// Define validateConceptReferences after collection definitions to avoid circular dependencies
+const validateConceptReferences = async (
+  doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
+  ctx: Context
+) => {
+  if (doc.mainGuideSlug) {
+    const allGuides = await ctx.documents(guides);
+    const linkedGuide = allGuides.find(
+      (g: any) => g._meta.path === doc.mainGuideSlug
+    );
+    if (!linkedGuide) {
+      validationErrors.push({
+        document: doc._meta.path,
+        field: "mainGuideSlug",
+        value: doc.mainGuideSlug,
+        message: `Le guide référencé '${doc.mainGuideSlug}' n'existe pas dans la collection 'guides'.`,
+      });
+    }
+  }
+};
+
 const concepts = defineCollection({
   name: "concepts",
   directory: "src/content/concepts",
@@ -270,6 +317,7 @@ const guides = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    const relatedContent = await resolveRelatedContent(doc, ctx);
     validateIconExists(doc, ctx);
     
     // Compile MDX content at build time
@@ -280,6 +328,7 @@ const guides = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
+      ...relatedContent,
       mdxCode,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
@@ -315,6 +364,7 @@ const prompts = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    const relatedContent = await resolveRelatedContent(doc, ctx);
     validateIconExists(doc, ctx);
     
     // Compile MDX content at build time
@@ -325,6 +375,7 @@ const prompts = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
+      ...relatedContent,
       mdxCode,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
@@ -340,8 +391,8 @@ const externalToolSchema = baseSchema.extend({
   category: z.string(),
   pricing: z.string().optional(),
   capabilities: z.array(z.string()).default([]),
-  use_cases: z.array(z.string()).optional(),
-  color: z.string().optional(),
+  use_cases: z.array(z.string()).min(1, "Au moins un cas d'usage est requis"),
+  color: z.string().min(1, "La couleur est requise"),
 });
 type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta; content?: string };
 
@@ -354,41 +405,22 @@ const externalTools = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
+    const relatedContent = await resolveRelatedContent(doc, ctx);
     
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
-
-    let use_cases: string[] = [];
-    let color = "bg-gray-500";
-    switch (doc._meta.path) {
-        case "google-ai-studio":
-            use_cases = ["Analyse clinique précise", "Test de prompts avancés", "Raisonnement multi-étapes"];
-            color = "bg-blue-500";
-            break;
-        case "claude-ai":
-            use_cases = ["Analyse de longs PDF", "Synthèse de cours", "Dialogue avec un document"];
-            color = "bg-orange-500";
-            break;
-        case "perplexity-ai":
-            use_cases = ["Recherche bibliographique", "Vérification de faits", "Veille scientifique"];
-            color = "bg-green-500";
-            break;
-        case "z-ai":
-            use_cases = ["Création de présentations", "Génération de schémas", "Projets créatifs"];
-            color = "bg-purple-500";
-            break;
-    }
 
     return {
       ...computed,
       ...processedTags,
       ...relations,
+      ...relatedContent,
       mdxCode,
       isFree:
         doc.pricing?.toLowerCase().includes("gratuit") ||
         doc.pricing?.toLowerCase().includes("free"),
-      use_cases,
-      color,
+      use_cases: doc.use_cases, // Now comes from frontmatter
+      color: doc.color, // Now comes from frontmatter
     };
   },
 });

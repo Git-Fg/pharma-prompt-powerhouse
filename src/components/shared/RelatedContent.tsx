@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { allGuides, allPrompts } from "content-collections";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { RelatedConcepts } from "./RelatedConcepts";
@@ -9,34 +8,22 @@ interface RelatedContentProps {
   currentItem: {
     slug: string;
     concepts?: Array<{ slug: string; title: string; icon?: string; category?: string }>;
+    relatedGuides?: Array<{ slug: string; title: string; description: string }>;
+    relatedPrompts?: Array<{ slug: string; title: string; description: string }>;
   };
 }
 
 /**
  * Composant unifié pour afficher le contenu lié basé sur les concepts partagés.
- * Remplace les anciens composants RelatedContent et RelatedGuides.
+ * Utilise maintenant des données pré-calculées au build-time pour optimiser les performances.
  */
 export function RelatedContent({ currentItem }: RelatedContentProps) {
   if (!currentItem.concepts || currentItem.concepts.length === 0) {
     return null;
   }
 
-  // Trouver d'autres guides et prompts qui partagent au moins un concept
-  const relatedGuides = allGuides
-    .filter(
-      (guide) =>
-        guide.slug !== currentItem.slug &&
-        guide.concepts?.some((c: { slug: string }) => currentItem.concepts?.some((cc: { slug: string }) => cc.slug === c.slug))
-    )
-    .slice(0, 2);
-
-  const relatedPrompts = allPrompts
-    .filter(
-      (prompt) =>
-        prompt.slug !== currentItem.slug &&
-        prompt.concepts?.some((c: { slug: string }) => currentItem.concepts?.some(cc => cc.slug === c.slug))
-    )
-    .slice(0, 2);
+  const relatedGuides = currentItem.relatedGuides || [];
+  const relatedPrompts = currentItem.relatedPrompts || [];
 
   // Si aucun contenu lié, afficher seulement les concepts
   if (relatedGuides.length === 0 && relatedPrompts.length === 0) {
