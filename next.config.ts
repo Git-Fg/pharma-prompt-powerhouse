@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       "lucide-react",
       "@radix-ui/react-icons",
-      "react-markdown",
       "@content-collections/core",
     ],
   },
