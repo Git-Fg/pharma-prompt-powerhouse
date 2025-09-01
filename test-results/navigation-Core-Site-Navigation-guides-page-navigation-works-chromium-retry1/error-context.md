@@ -1,0 +1,531 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Guides" [ref=e32] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e34]:
+                - link "Prompts" [ref=e35] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e37]:
+                - link "Ma Boîte à Outils" [ref=e38] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e40]:
+                - link "Outils Externes" [ref=e41] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e45]:
+            - button [ref=e46]:
+              - img
+            - button [ref=e47]:
+              - img
+            - button [ref=e48]:
+              - img
+    - main [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e53]:
+          - heading "Mes Fiches & Méthodes" [level=1] [ref=e54]
+          - paragraph [ref=e55]: Voici les fiches de synthèse que j'ai créées au fil de mes révisions. Elles représentent ma méthodologie de structuration de l'information.
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - textbox "Rechercher un guide..." [ref=e62]
+            - combobox [ref=e63]:
+              - generic: Toutes les catégories
+              - img
+            - combobox [ref=e64]:
+              - generic: Toutes les difficultés
+              - img
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]:
+                  - generic [ref=e69]: methodologie
+                  - button [ref=e70]:
+                    - img
+                - generic [ref=e71]: "De PDF Passif à Tuteur Actif : Réviser avec l'IA"
+                - generic [ref=e72]: Apprenez à utiliser l'IA pour transformer vos PDF de cours et d'annales en un tuteur personnel qui vous interroge, vous explique et vous pousse à réfléchir.
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]:
+                    - img [ref=e76]
+                    - text: Débutant
+                  - generic [ref=e78]:
+                    - img [ref=e79]
+                    - text: 5 min min
+                - link "Commencer" [ref=e82] [cursor=pointer]:
+                  - /url: /guides/annales-fiches-revision
+                  - text: Commencer
+                  - img
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic [ref=e85]:
+                  - generic [ref=e86]: methodologie
+                  - button [ref=e87]:
+                    - img
+                - generic [ref=e88]: "L'Art de l'Itération : Le Dialogue Clé"
+                - generic [ref=e89]: Maîtrisez l'art de l'amélioration continue de vos prompts grâce au dialogue et à l'auto-critique
+              - generic [ref=e90]:
+                - generic [ref=e91]:
+                  - generic [ref=e92]:
+                    - img [ref=e93]
+                    - text: Intermédiaire
+                  - generic [ref=e95]:
+                    - img [ref=e96]
+                    - text: 2 min min
+                - link "Commencer" [ref=e99] [cursor=pointer]:
+                  - /url: /guides/art-iteration-dialogue-cle
+                  - text: Commencer
+                  - img
+            - generic [ref=e100]:
+              - generic [ref=e101]:
+                - generic [ref=e102]:
+                  - generic [ref=e103]: methodologie
+                  - button [ref=e104]:
+                    - img
+                - generic [ref=e105]: Automatiser la Création de Fiches de Révision Efficaces
+                - generic [ref=e106]: Gagnez des heures en utilisant l'IA pour transformer vos cours en fiches de révision structurées. Apprenez à créer le prompt parfait pour une synthèse de haute qualité.
+              - generic [ref=e107]:
+                - generic [ref=e108]:
+                  - generic [ref=e109]:
+                    - img [ref=e110]
+                    - text: Intermédiaire
+                  - generic [ref=e112]:
+                    - img [ref=e113]
+                    - text: 6 min min
+                - link "Commencer" [ref=e116] [cursor=pointer]:
+                  - /url: /guides/automatiser-fiches-de-revision
+                  - text: Commencer
+                  - img
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]:
+                  - generic [ref=e120]: Cas pratiques
+                  - button [ref=e121]:
+                    - img
+                - generic [ref=e122]: "Cas Pratiques : IA en Pharmacie"
+                - generic [ref=e123]: Exemples concrets d'utilisation de l'IA pour résoudre des problèmes pharmaceutiques complexes
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - generic [ref=e126]:
+                    - img [ref=e127]
+                    - text: Intermédiaire
+                  - generic [ref=e129]:
+                    - img [ref=e130]
+                    - text: 11 min min
+                - link "Commencer" [ref=e133] [cursor=pointer]:
+                  - /url: /guides/cas-pratiques-pharmacie-ia
+                  - text: Commencer
+                  - img
+            - generic [ref=e134]:
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - generic [ref=e137]: outils
+                  - button [ref=e138]:
+                    - img
+                - generic [ref=e139]: "Choisir sa WebUI de Chat en 2025 : Le Guide pour la Santé"
+                - generic [ref=e140]: "ChatGPT vs Gemini vs Claude vs Perplexity : Quel est le meilleur assistant IA pour un étudiant ou un professionnel de santé en 2025 ?"
+              - generic [ref=e141]:
+                - generic [ref=e142]:
+                  - generic [ref=e143]:
+                    - img [ref=e144]
+                    - text: Débutant
+                  - generic [ref=e146]:
+                    - img [ref=e147]
+                    - text: 5 min min
+                - link "Commencer" [ref=e150] [cursor=pointer]:
+                  - /url: /guides/choisir-sa-webui-de-chat-en-2025
+                  - text: Commencer
+                  - img
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - generic [ref=e153]:
+                  - generic [ref=e154]: outils
+                  - button [ref=e155]:
+                    - img
+                - generic [ref=e156]: "WebUI Avancées : Choisir son Laboratoire d'IA en 2025"
+                - generic [ref=e157]: "Google AI Studio vs OpenAI Playground vs Anthropic Console : Quel est le meilleur environnement pour un non-développeur souhaitant maîtriser le prompt engineering ?"
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - generic [ref=e160]:
+                    - img [ref=e161]
+                    - text: Intermédiaire
+                  - generic [ref=e163]:
+                    - img [ref=e164]
+                    - text: 5 min min
+                - link "Commencer" [ref=e167] [cursor=pointer]:
+                  - /url: /guides/choisir-son-environnement-d-experimentation-ia
+                  - text: Commencer
+                  - img
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - generic [ref=e171]: bonnes-pratiques
+                  - button [ref=e172]:
+                    - img
+                - generic [ref=e173]: "Confidentialité et Sécurité : Le Serment d'Hippocrate de l'Ère Numérique"
+                - generic [ref=e174]: Comment utiliser les outils d'IA de manière responsable en protégeant les données. Les bonnes pratiques pour un usage éthique et légal en santé.
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - generic [ref=e177]:
+                    - img [ref=e178]
+                    - text: Débutant
+                  - generic [ref=e180]:
+                    - img [ref=e181]
+                    - text: 6 min min
+                - link "Commencer" [ref=e184] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - text: Commencer
+                  - img
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - generic [ref=e187]:
+                  - generic [ref=e188]: Fondamentaux
+                  - button [ref=e189]:
+                    - img
+                - generic [ref=e190]: Comment Construire un Prompt Pharmaceutique Efficace
+                - generic [ref=e191]: "Apprenez à construire un prompt fiable en suivant la méthode des 5 piliers : Rôle, Tâche, Contexte, Format et Exemples."
+              - generic [ref=e192]:
+                - generic [ref=e193]:
+                  - generic [ref=e194]:
+                    - img [ref=e195]
+                    - text: Débutant
+                  - generic [ref=e197]:
+                    - img [ref=e198]
+                    - text: 4 min min
+                - link "Commencer" [ref=e201] [cursor=pointer]:
+                  - /url: /guides/fondamentaux-prompting-pharmaceutique
+                  - text: Commencer
+                  - img
+            - generic [ref=e202]:
+              - generic [ref=e203]:
+                - generic [ref=e204]:
+                  - generic [ref=e205]: Technique
+                  - button [ref=e206]:
+                    - img
+                - generic [ref=e207]: "Gérer la Mémoire de l'IA : Le Guide Pratique"
+                - generic [ref=e208]: Devenez un pilote d'IA efficace en apprenant à gérer activement sa mémoire volatile (contexte) et sa mémoire persistante (instructions, GPTs).
+              - generic [ref=e209]:
+                - generic [ref=e210]:
+                  - generic [ref=e211]:
+                    - img [ref=e212]
+                    - text: Intermédiaire
+                  - generic [ref=e214]:
+                    - img [ref=e215]
+                    - text: 5 min min
+                - link "Commencer" [ref=e218] [cursor=pointer]:
+                  - /url: /guides/gestion-memoire-ia
+                  - text: Commencer
+                  - img
+            - generic [ref=e219]:
+              - generic [ref=e220]:
+                - generic [ref=e221]:
+                  - generic [ref=e222]: methodologie
+                  - button [ref=e223]:
+                    - img
+                - generic [ref=e224]: "IA : Stagiaire Brillant mais Naïf"
+                - generic [ref=e225]: Comprendre et gérer les limites de l'IA pour l'utiliser efficacement en pharmacie
+              - generic [ref=e226]:
+                - generic [ref=e227]:
+                  - generic [ref=e228]:
+                    - img [ref=e229]
+                    - text: Débutant
+                  - generic [ref=e231]:
+                    - img [ref=e232]
+                    - text: 2 min min
+                - link "Commencer" [ref=e235] [cursor=pointer]:
+                  - /url: /guides/ia-stagiaire-brillant-naif
+                  - text: Commencer
+                  - img
+            - generic [ref=e236]:
+              - generic [ref=e237]:
+                - generic [ref=e238]:
+                  - generic [ref=e239]: methodologie
+                  - button [ref=e240]:
+                    - img
+                - generic [ref=e241]: "Workflow d'Investigation : Analyser un Signal de Pharmacovigilance avec ToT"
+                - generic [ref=e242]: Apprenez à utiliser le Tree-of-Thought pour mener une investigation structurée et rigoureuse face à un signal de sécurité médicamenteuse.
+              - generic [ref=e243]:
+                - generic [ref=e244]:
+                  - generic [ref=e245]:
+                    - img [ref=e246]
+                    - text: Avancé
+                  - generic [ref=e248]:
+                    - img [ref=e249]
+                    - text: 2 min min
+                - link "Commencer" [ref=e252] [cursor=pointer]:
+                  - /url: /guides/investigation-pharmacovigilance-avec-tot
+                  - text: Commencer
+                  - img
+            - generic [ref=e253]:
+              - generic [ref=e254]:
+                - generic [ref=e255]:
+                  - generic [ref=e256]: methodologie
+                  - button [ref=e257]:
+                    - img
+                - generic [ref=e258]: Méthodologie des Cas Cliniques avec l'IA
+                - generic [ref=e259]: Guide complet pour créer et analyser des cas cliniques réalistes avec l'aide de l'IA
+              - generic [ref=e260]:
+                - generic [ref=e261]:
+                  - generic [ref=e262]:
+                    - img [ref=e263]
+                    - text: Intermédiaire
+                  - generic [ref=e265]:
+                    - img [ref=e266]
+                    - text: 5 min min
+                - link "Commencer" [ref=e269] [cursor=pointer]:
+                  - /url: /guides/methodologie-cas-cliniques
+                  - text: Commencer
+                  - img
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - generic [ref=e272]:
+                  - generic [ref=e273]: Technique
+                  - button [ref=e274]:
+                    - img
+                - generic [ref=e275]: "Fiabilité et Sources : Obtenir des Données Vérifiables avec l'IA"
+                - generic [ref=e276]: "Comment utiliser les IAs pour la recherche sans tomber dans le piège des hallucinations ? La clé : les outils spécialisés, la méthode RAG et un esprit critique."
+              - generic [ref=e277]:
+                - generic [ref=e278]:
+                  - generic [ref=e279]:
+                    - img [ref=e280]
+                    - text: Intermédiaire
+                  - generic [ref=e282]:
+                    - img [ref=e283]
+                    - text: 5 min min
+                - link "Commencer" [ref=e286] [cursor=pointer]:
+                  - /url: /guides/obtenir-donnees-fiables
+                  - text: Commencer
+                  - img
+            - generic [ref=e287]:
+              - generic [ref=e288]:
+                - generic [ref=e289]:
+                  - generic [ref=e290]: methodologie
+                  - button [ref=e291]:
+                    - img
+                - generic [ref=e292]: Optimisation Continue des Prompts
+                - generic [ref=e293]: Méthodologie pour améliorer systématiquement la qualité de vos prompts grâce à l'évaluation et l'itération
+              - generic [ref=e294]:
+                - generic [ref=e295]:
+                  - generic [ref=e296]:
+                    - img [ref=e297]
+                    - text: Avancé
+                  - generic [ref=e299]:
+                    - img [ref=e300]
+                    - text: 10 min min
+                - link "Commencer" [ref=e303] [cursor=pointer]:
+                  - /url: /guides/optimisation-continue-prompts
+                  - text: Commencer
+                  - img
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - generic [ref=e306]:
+                  - generic [ref=e307]: Techniques avancées
+                  - button [ref=e308]:
+                    - img
+                - generic [ref=e309]: Optimiser ses Quotas et son Temps avec l'IA
+                - generic [ref=e310]: Maîtrisez l'équilibre entre qualité, vitesse et utilisation de vos quotas gratuits dans vos interactions avec l'IA.
+              - generic [ref=e311]:
+                - generic [ref=e312]:
+                  - generic [ref=e313]:
+                    - img [ref=e314]
+                    - text: Intermédiaire
+                  - generic [ref=e316]:
+                    - img [ref=e317]
+                    - text: 3 min min
+                - link "Commencer" [ref=e320] [cursor=pointer]:
+                  - /url: /guides/optimisation-couts-latence
+                  - text: Commencer
+                  - img
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]:
+                  - generic [ref=e324]: Fondamentaux
+                  - button [ref=e325]:
+                    - img
+                - generic [ref=e326]: "Guide Pratique : Optimiser le Contexte de vos Prompts"
+                - generic [ref=e327]: Apprenez à compresser et structurer de longs documents pour les rendre compréhensibles par l'IA, en évitant l'effet 'lost-in-the-middle'.
+              - generic [ref=e328]:
+                - generic [ref=e329]:
+                  - generic [ref=e330]:
+                    - img [ref=e331]
+                    - text: Intermédiaire
+                  - generic [ref=e333]:
+                    - img [ref=e334]
+                    - text: 5 min min
+                - link "Commencer" [ref=e337] [cursor=pointer]:
+                  - /url: /guides/principes-context-engineering
+                  - text: Commencer
+                  - img
+            - generic [ref=e338]:
+              - generic [ref=e339]:
+                - generic [ref=e340]:
+                  - generic [ref=e341]: Fondamentaux
+                  - button [ref=e342]:
+                    - img
+                - generic [ref=e343]: Structurer son Prompt pour Mieux Guider l'IA
+                - generic [ref=e344]: Apprenez à organiser vos prompts avec des sections, des séparateurs et des balises pour obtenir des réponses plus précises et fiables, sans écrire une seule ligne de code.
+              - generic [ref=e345]:
+                - generic [ref=e346]:
+                  - generic [ref=e347]:
+                    - img [ref=e348]
+                    - text: Intermédiaire
+                  - generic [ref=e350]:
+                    - img [ref=e351]
+                    - text: 4 min min
+                - link "Commencer" [ref=e354] [cursor=pointer]:
+                  - /url: /guides/structurer-son-prompt-pour-guider-lia
+                  - text: Commencer
+                  - img
+            - generic [ref=e355]:
+              - generic [ref=e356]:
+                - generic [ref=e357]:
+                  - generic [ref=e358]: Techniques avancées
+                  - button [ref=e359]:
+                    - img
+                - generic [ref=e360]: Techniques de Fiabilisation des Réponses IA
+                - generic [ref=e361]: Maîtrisez les techniques avancées pour améliorer la fiabilité et la cohérence de vos interactions avec l'IA
+              - generic [ref=e362]:
+                - generic [ref=e363]:
+                  - generic [ref=e364]:
+                    - img [ref=e365]
+                    - text: Avancé
+                  - generic [ref=e367]:
+                    - img [ref=e368]
+                    - text: 10 min min
+                - link "Commencer" [ref=e371] [cursor=pointer]:
+                  - /url: /guides/techniques-avancees-fiabilisation
+                  - text: Commencer
+                  - img
+            - generic [ref=e372]:
+              - generic [ref=e373]:
+                - generic [ref=e374]:
+                  - generic [ref=e375]: ressources
+                  - button [ref=e376]:
+                    - img
+                - generic [ref=e377]: "Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought"
+                - generic [ref=e378]: Apprenez à construire et utiliser un prompt Tree-of-Thought pour analyser un cas clinique avec plusieurs hypothèses diagnostiques.
+              - generic [ref=e379]:
+                - generic [ref=e380]:
+                  - generic [ref=e381]:
+                    - img [ref=e382]
+                    - text: Avancé
+                  - generic [ref=e384]:
+                    - img [ref=e385]
+                    - text: 5 min min
+                - link "Commencer" [ref=e388] [cursor=pointer]:
+                  - /url: /guides/tree-of-thought-clinique
+                  - text: Commencer
+                  - img
+            - generic [ref=e389]:
+              - generic [ref=e390]:
+                - generic [ref=e391]:
+                  - generic [ref=e392]: ressources
+                  - button [ref=e393]:
+                    - img
+                - generic [ref=e394]: Variables et Templates de Prompts
+                - generic [ref=e395]: Créez des prompts réutilisables et personnalisables grâce aux variables et aux templates
+              - generic [ref=e396]:
+                - generic [ref=e397]:
+                  - generic [ref=e398]:
+                    - img [ref=e399]
+                    - text: Intermédiaire
+                  - generic [ref=e401]:
+                    - img [ref=e402]
+                    - text: 10 min min
+                - link "Commencer" [ref=e405] [cursor=pointer]:
+                  - /url: /guides/variables-templates-prompts
+                  - text: Commencer
+                  - img
+            - generic [ref=e406]:
+              - generic [ref=e407]:
+                - generic [ref=e408]:
+                  - generic [ref=e409]: Techniques avancées
+                  - button [ref=e410]:
+                    - img
+                - generic [ref=e411]: Structurer ses Prompts avec des Balises
+                - generic [ref=e412]: Apprenez à utiliser des balises simples (type XML) pour organiser vos prompts et obtenir des réponses plus fiables de l'IA.
+              - generic [ref=e413]:
+                - generic [ref=e414]:
+                  - generic [ref=e415]:
+                    - img [ref=e416]
+                    - text: Intermédiaire
+                  - generic [ref=e418]:
+                    - img [ref=e419]
+                    - text: 2 min min
+                - link "Commencer" [ref=e422] [cursor=pointer]:
+                  - /url: /guides/xml-prompting-pharma
+                  - text: Commencer
+                  - img
+    - contentinfo [ref=e423]:
+      - generic [ref=e424]:
+        - generic [ref=e425]:
+          - generic [ref=e426]:
+            - generic [ref=e427]:
+              - img [ref=e429]
+              - generic [ref=e437]: Pharma Prompt
+            - paragraph [ref=e438]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e439]:
+            - heading "Apprentissage" [level=3] [ref=e440]
+            - list [ref=e441]:
+              - listitem [ref=e442]:
+                - link "Concepts" [ref=e443] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e444] [cursor=pointer]
+                  - generic [ref=e446] [cursor=pointer]: Concepts
+              - listitem [ref=e447]:
+                - link "Guides" [ref=e448] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e449] [cursor=pointer]
+                  - generic [ref=e451] [cursor=pointer]: Guides
+              - listitem [ref=e452]:
+                - link "Prompts" [ref=e453] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e454] [cursor=pointer]
+                  - generic [ref=e456] [cursor=pointer]: Prompts
+          - generic [ref=e457]:
+            - heading "Outils" [level=3] [ref=e458]
+            - list [ref=e459]:
+              - listitem [ref=e460]:
+                - link "Ma Boîte à Outils" [ref=e461] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e462] [cursor=pointer]
+                  - generic [ref=e464] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e465]:
+                - link "Outils Externes" [ref=e466] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e467] [cursor=pointer]: Outils Externes
+                  - img [ref=e468] [cursor=pointer]
+          - generic [ref=e472]:
+            - heading "Légal" [level=3] [ref=e473]
+            - list [ref=e474]:
+              - listitem [ref=e475]:
+                - link "Confidentialité" [ref=e476] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e477] [cursor=pointer]
+                  - generic [ref=e479] [cursor=pointer]: Confidentialité
+        - generic [ref=e481]:
+          - paragraph [ref=e482]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e484]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e485]
+```

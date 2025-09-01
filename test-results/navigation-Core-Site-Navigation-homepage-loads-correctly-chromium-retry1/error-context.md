@@ -1,0 +1,179 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Guides" [ref=e32] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e34]:
+                - link "Prompts" [ref=e35] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e37]:
+                - link "Ma Boîte à Outils" [ref=e38] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e40]:
+                - link "Outils Externes" [ref=e41] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e45]:
+            - button [ref=e46]:
+              - img
+            - button [ref=e47]:
+              - img
+            - button [ref=e48]:
+              - img
+    - main [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - img
+            - text: Une approche pédagogique pour 2025
+          - heading "Pharma Prompt Powerhouse" [level=1] [ref=e53]
+          - paragraph [ref=e54]:
+            - text: Fini de jongler entre des guides théoriques et des listes de prompts. Ici, chaque concept clé est un
+            - strong [ref=e55]: dossier complet
+            - text: qui relie la théorie, la pratique et les outils.
+          - generic [ref=e56]:
+            - link "Commencer par un Concept" [ref=e57] [cursor=pointer]:
+              - /url: /concepts
+              - text: Commencer par un Concept
+              - img
+            - link "Voir tous les guides" [ref=e58] [cursor=pointer]:
+              - /url: /guides
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - img [ref=e63]
+            - generic [ref=e65]:
+              - generic [ref=e66]: Le conseil du jour
+              - generic [ref=e67]: "\"L'IA peut accélérer la recherche bibliographique en analysant et synthétisant de grandes quantités de documents scientifiques.\""
+          - 'link "Explorer le concept : Recherche et Analyse" [ref=e69] [cursor=pointer]':
+            - /url: /concepts/recherche-analyse
+            - text: "Explorer le concept : Recherche et Analyse"
+            - img
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - 'heading "Mon Approche : Simple et Efficace" [level=2] [ref=e72]'
+            - paragraph [ref=e73]: Une méthodologie structurée qui transforme l'IA en un outil de travail fiable pour nos études.
+          - generic [ref=e74]:
+            - generic [ref=e76]:
+              - img [ref=e78]
+              - generic [ref=e86]: 1. Choisissez un Concept
+              - generic [ref=e87]: Parcourez le Hub de Concepts et choisissez le sujet que vous voulez maîtriser.
+            - generic [ref=e89]:
+              - img [ref=e91]
+              - generic [ref=e93]: 2. Accédez au Dossier Complet
+              - generic [ref=e94]: Chaque page de concept centralise le guide principal, les prompts d'application et les ressources.
+            - generic [ref=e96]:
+              - img [ref=e98]
+              - generic [ref=e101]: 3. Mettez en Pratique
+              - generic [ref=e102]: Utilisez l'éditeur de prompts intégré pour tester et adapter les techniques apprises.
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - heading "Concepts Fondamentaux à Maîtriser" [level=2] [ref=e105]
+            - paragraph [ref=e106]: Commencez par ces dossiers essentiels pour construire des bases solides en prompt engineering.
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - img [ref=e111]
+                - generic [ref=e113]: Prompt = Prescription
+                - generic [ref=e114]: La méthode de base pour structurer chaque prompt comme une ordonnance claire et précise.
+              - link "Explorer le concept" [ref=e116] [cursor=pointer]:
+                - /url: /concepts/prompt-prescription
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - img [ref=e120]
+                - generic [ref=e125]: Context Engineering
+                - generic [ref=e126]: Apprenez à optimiser la 'mémoire' de l'IA pour des réponses plus pertinentes.
+              - link "Explorer le concept" [ref=e128] [cursor=pointer]:
+                - /url: /concepts/context-engineering
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - img [ref=e132]
+                - generic [ref=e135]: XML Prompting
+                - generic [ref=e136]: Utilisez des balises pour guider l'IA et obtenir des sorties parfaitement structurées.
+              - link "Explorer le concept" [ref=e138] [cursor=pointer]:
+                - /url: /concepts/xml-prompting
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - img [ref=e142]
+                - generic [ref=e146]: Tree of Thought
+                - generic [ref=e147]: Explorez plusieurs hypothèses pour résoudre des cas cliniques complexes.
+              - link "Explorer le concept" [ref=e149] [cursor=pointer]:
+                - /url: /concepts/tree-of-thought
+        - generic [ref=e152]:
+          - heading "Prêt à changer votre façon de réviser ?" [level=2] [ref=e153]
+          - paragraph [ref=e154]: Plongez dans le Hub de Concepts et découvrez une méthode de travail plus structurée et intuitive.
+          - link "Explorer tous les concepts" [ref=e155] [cursor=pointer]:
+            - /url: /concepts
+            - text: Explorer tous les concepts
+            - img
+    - contentinfo [ref=e156]:
+      - generic [ref=e157]:
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e160]:
+              - img [ref=e162]
+              - generic [ref=e170]: Pharma Prompt
+            - paragraph [ref=e171]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e172]:
+            - heading "Apprentissage" [level=3] [ref=e173]
+            - list [ref=e174]:
+              - listitem [ref=e175]:
+                - link "Concepts" [ref=e176] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e177] [cursor=pointer]
+                  - generic [ref=e179] [cursor=pointer]: Concepts
+              - listitem [ref=e180]:
+                - link "Guides" [ref=e181] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e182] [cursor=pointer]
+                  - generic [ref=e184] [cursor=pointer]: Guides
+              - listitem [ref=e185]:
+                - link "Prompts" [ref=e186] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e187] [cursor=pointer]
+                  - generic [ref=e189] [cursor=pointer]: Prompts
+          - generic [ref=e190]:
+            - heading "Outils" [level=3] [ref=e191]
+            - list [ref=e192]:
+              - listitem [ref=e193]:
+                - link "Ma Boîte à Outils" [ref=e194] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e195] [cursor=pointer]
+                  - generic [ref=e197] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e198]:
+                - link "Outils Externes" [ref=e199] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e200] [cursor=pointer]: Outils Externes
+                  - img [ref=e201] [cursor=pointer]
+          - generic [ref=e205]:
+            - heading "Légal" [level=3] [ref=e206]
+            - list [ref=e207]:
+              - listitem [ref=e208]:
+                - link "Confidentialité" [ref=e209] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e210] [cursor=pointer]
+                  - generic [ref=e212] [cursor=pointer]: Confidentialité
+        - generic [ref=e214]:
+          - paragraph [ref=e215]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e217]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e218]
+```

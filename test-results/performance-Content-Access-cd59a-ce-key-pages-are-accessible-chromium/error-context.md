@@ -1,0 +1,333 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Guides" [ref=e32] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e34]:
+                - link "Prompts" [ref=e35] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e37]:
+                - link "Ma Boîte à Outils" [ref=e38] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e40]:
+                - link "Outils Externes" [ref=e41] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e45]:
+            - button [ref=e46]:
+              - img
+            - button [ref=e47]:
+              - img
+            - button [ref=e48]:
+              - img
+    - main [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - link "Retour aux concepts" [ref=e52] [cursor=pointer]:
+            - /url: /concepts
+            - img
+            - text: Retour aux concepts
+          - generic [ref=e53]:
+            - generic [ref=e55]:
+              - 'heading "Hallucination : Effet Indésirable" [level=1] [ref=e56]'
+              - paragraph [ref=e57]: Comprendre et prévenir les hallucinations de l'IA comme des effets indésirables prévisibles
+            - generic [ref=e58]:
+              - generic [ref=e59]:
+                - generic [ref=e60]: "1"
+                - generic [ref=e61]: Ressources liées
+              - generic [ref=e62]:
+                - generic [ref=e63]: "1"
+                - generic [ref=e64]: Guides
+              - generic [ref=e65]:
+                - generic [ref=e66]: "0"
+                - generic [ref=e67]: Prompts
+        - generic [ref=e68]:
+          - generic [ref=e70]:
+            - img [ref=e71]
+            - text: À Retenir (TL;DR)
+          - list [ref=e74]:
+            - listitem [ref=e75]:
+              - img [ref=e76]
+              - paragraph [ref=e79]: Une hallucination est une erreur factuelle plausible, un 'effet indésirable' prévisible de l'IA.
+            - listitem [ref=e80]:
+              - img [ref=e81]
+              - paragraph [ref=e84]: Réduisez le risque en baissant la 'température' (créativité) et en fournissant un contexte clair et délimité.
+            - listitem [ref=e85]:
+              - img [ref=e86]
+              - paragraph [ref=e89]: Vérifiez systématiquement les informations critiques générées avec des sources officielles.
+        - generic [ref=e90]:
+          - generic [ref=e92]:
+            - img [ref=e93]
+            - text: À propos de ce concept
+          - generic [ref=e98]:
+            - 'heading "Hallucination : Effet Indésirable" [level=1] [ref=e99]'
+            - heading "Qu'est-ce qu'une hallucination ?" [level=2] [ref=e100]
+            - paragraph [ref=e101]:
+              - text: Une
+              - strong [ref=e102]: hallucination
+              - text: "est une erreur factuelle plausible générée par l'IA. Contrairement à une simple erreur, l'hallucination est crédible et peut tromper même des experts. C'est l'équivalent d'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante."
+            - heading "Pourquoi les hallucinations surviennent-elles ?" [level=2] [ref=e103]
+            - alert [ref=e104]:
+              - paragraph [ref=e106]:
+                - strong [ref=e107]: "Comprendre les mécanismes :"
+                - text: Comme pour un médicament, connaître les mécanismes d'action des hallucinations permet de mieux les prévenir et les traiter.
+            - heading "Mécanismes d'action" [level=3] [ref=e108]
+            - generic [ref=e109]:
+              - generic [ref=e111]: 🌡️ Température élevée
+              - paragraph [ref=e113]: L'IA devient trop "créative" et invente des informations plausibles mais inexactes
+            - generic [ref=e114]:
+              - generic [ref=e116]: 🔍 Contexte insuffisant
+              - paragraph [ref=e118]: L'IA comble les vides avec des données plausibles mais fausses, comme un diagnostique différentiel mal orienté
+            - generic [ref=e119]:
+              - generic [ref=e121]: ❓ Instructions ambiguës
+              - paragraph [ref=e123]: L'IA interprète mal vos demandes et répond à côté de la question
+            - generic [ref=e124]:
+              - generic [ref=e126]: 📚 Limitations du modèle
+              - paragraph [ref=e128]: L'IA n'a pas accès à des informations récentes ou très spécialisées
+            - heading "Facteurs de risque" [level=3] [ref=e129]
+            - alert [ref=e130]:
+              - paragraph [ref=e132]:
+                - strong [ref=e133]: "Attention :"
+                - text: Ces facteurs augmentent significativement le risque d'hallucination, comme des facteurs de risque d'effet indésirable.
+            - list [ref=e134]:
+              - listitem [ref=e135]:
+                - strong [ref=e136]: Température > 0.7
+                - text: ": Risque élevé d'hallucination"
+              - listitem [ref=e137]:
+                - strong [ref=e138]: Prompts vagues
+                - text: ": \"Parle-moi des IEC\" vs \"Listez les IEC disponibles en France en 2025\""
+              - listitem [ref=e139]:
+                - strong [ref=e140]: Contexte insuffisant
+                - text: ": L'IA doit deviner ce que vous voulez"
+              - listitem [ref=e141]:
+                - strong [ref=e142]: Tâches complexes
+                - text: ": Plus la tâche est complexe, plus le risque augmente"
+            - heading "Prévention et traitement" [level=2] [ref=e143]
+            - generic [ref=e144]:
+              - tablist [ref=e145]:
+                - tab "Stratégies de Prévention" [selected] [ref=e146]
+                - tab "Actions Correctives" [ref=e147]
+              - tabpanel "Stratégies de Prévention" [ref=e148]:
+                - generic [ref=e149]:
+                  - generic [ref=e151]: 1. Contrôle de la Température
+                  - generic [ref=e152]:
+                    - paragraph [ref=e153]: "Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque."
+                    - generic [ref=e154]:
+                      - generic [ref=e155]:
+                        - generic [ref=e156]:
+                          - img [ref=e157]
+                          - generic [ref=e162]: TEXT
+                        - button "Copier le code" [ref=e163]:
+                          - img
+                      - code [ref=e166]: "❌ Température : 0.9 (risque élevé) \"Inventez une nouvelle molécule pour traiter l'hypertension\" ✅ Température : 0.2 (risque faible) \"Listez les molécules antihypertensives disponibles en 2025\""
+                - generic [ref=e167]:
+                  - generic [ref=e169]: 2. Contexte Clair et Délimité
+                  - generic [ref=e170]:
+                    - paragraph [ref=e171]: Fournir un contexte précis et des limites claires aide l'IA à rester dans les faits.
+                    - generic [ref=e172]:
+                      - generic [ref=e173]:
+                        - generic [ref=e174]:
+                          - img [ref=e175]
+                          - generic [ref=e180]: TEXT
+                        - button "Copier le code" [ref=e181]:
+                          - img
+                      - code [ref=e184]: ❌ Prompt vague "Analyse cette ordonnance" ✅ Prompt précis "Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies. Si une information n'est pas dans le texte, indique 'Non précisé'."
+                - generic [ref=e185]:
+                  - generic [ref=e187]: 3. Instructions de Validation
+                  - generic [ref=e188]:
+                    - paragraph [ref=e189]: Demandez explicitement à l'IA de vérifier ses réponses avant de les donner.
+                    - generic [ref=e190]:
+                      - generic [ref=e191]:
+                        - generic [ref=e192]:
+                          - img [ref=e193]
+                          - generic [ref=e198]: TEXT
+                        - button "Copier le code" [ref=e199]:
+                          - img
+                      - code [ref=e202]: "\"Avant de répondre, vérifie que toutes les informations que tu donnes sont directement dérivées du contexte fourni. Si tu n'es pas sûr, indique-le clairement.\""
+            - heading "Applications en pharmacie" [level=2] [ref=e203]
+            - 'heading "Cas 1 : Analyse d''interaction médicamenteuse" [level=3] [ref=e204]'
+            - generic [ref=e205]:
+              - generic [ref=e206]:
+                - generic [ref=e207]:
+                  - img [ref=e208]
+                  - generic [ref=e213]: TEXT
+                - button "Copier le code" [ref=e214]:
+                  - img
+              - code [ref=e217]: ❌ Prompt risqué "Dis-moi tout sur l'interaction warfarine-amiodarone" ✅ Prompt sécurisé "Basé sur les référentiels fournis, liste les interactions documentées entre warfarine et amiodarone. Indique le niveau de preuve pour chaque interaction."
+            - 'heading "Cas 2 : Calcul de dose" [level=3] [ref=e218]'
+            - generic [ref=e219]:
+              - generic [ref=e220]:
+                - generic [ref=e221]:
+                  - img [ref=e222]
+                  - generic [ref=e227]: TEXT
+                - button "Copier le code" [ref=e228]:
+                  - img
+              - code [ref=e231]: ❌ Prompt risqué "Calcule la dose de digoxine pour ce patient" ✅ Prompt sécurisé "Utilise la formule de Cockcroft-Gault fournie pour calculer la clairance de créatinine, puis applique les recommandations de dosage de la HAS pour la digoxine."
+            - 'heading "Cas 3 : Recherche bibliographique" [level=3] [ref=e232]'
+            - generic [ref=e233]:
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - img [ref=e236]
+                  - generic [ref=e241]: TEXT
+                - button "Copier le code" [ref=e242]:
+                  - img
+              - code [ref=e245]: ❌ Prompt risqué "Trouve les dernières études sur les nouveaux anticoagulants" ✅ Prompt sécurisé "Recherche dans PubMed les études publiées entre 2020 et 2025 sur les anticoagulants oraux directs. Limite aux essais cliniques randomisés."
+            - heading "Monitoring et surveillance" [level=2] [ref=e246]
+            - heading "Signes d'alerte" [level=3] [ref=e247]
+            - list [ref=e248]:
+              - listitem [ref=e249]:
+                - strong [ref=e250]: Réponses trop détaillées
+                - text: sans contexte suffisant
+              - listitem [ref=e251]:
+                - strong [ref=e252]: Citations d'études
+                - text: que vous ne connaissez pas
+              - listitem [ref=e253]:
+                - strong [ref=e254]: Données numériques
+                - text: qui semblent trop parfaites
+              - listitem [ref=e255]:
+                - strong [ref=e256]: Informations contradictoires
+                - text: dans la même réponse
+            - heading "Tests de validation" [level=3] [ref=e257]
+            - list [ref=e258]:
+              - listitem [ref=e259]:
+                - strong [ref=e260]: Test de cohérence
+                - text: ": Posez la même question plusieurs fois"
+              - listitem [ref=e261]:
+                - strong [ref=e262]: Test de source
+                - text: ": Demandez toujours les références"
+              - listitem [ref=e263]:
+                - strong [ref=e264]: Test de plausibilité
+                - text: ": Vérifiez si la réponse semble réaliste"
+              - listitem [ref=e265]:
+                - strong [ref=e266]: Test de vérification
+                - text: ": Confrontez avec des sources fiables"
+            - heading "Bénéfices de cette approche" [level=2] [ref=e267]
+            - list [ref=e268]:
+              - listitem [ref=e269]:
+                - strong [ref=e270]: Sécurité accrue
+                - text: ": Moins de risques d'erreurs factuelles"
+              - listitem [ref=e271]:
+                - strong [ref=e272]: Fiabilité
+                - text: ": Réponses plus prévisibles et vérifiables"
+              - listitem [ref=e273]:
+                - strong [ref=e274]: Confiance
+                - text: ": Vous savez quand faire confiance à l'IA"
+              - listitem [ref=e275]:
+                - strong [ref=e276]: Apprentissage
+                - text: ": Vous améliorez vos techniques de prompting"
+            - heading "Règles d'or" [level=2] [ref=e277]
+            - list [ref=e278]:
+              - listitem [ref=e279]:
+                - strong [ref=e280]: Jamais 100% de confiance
+                - text: ": L'IA peut toujours halluciner"
+              - listitem [ref=e281]:
+                - strong [ref=e282]: Toujours vérifier
+                - text: ": Les informations critiques doivent être validées"
+              - listitem [ref=e283]:
+                - strong [ref=e284]: Contexte d'abord
+                - text: ": Plus le contexte est clair, moins le risque est élevé"
+              - listitem [ref=e285]:
+                - strong [ref=e286]: Température adaptée
+                - text: ": Utilisez la température la plus basse possible"
+              - listitem [ref=e287]:
+                - strong [ref=e288]: Instructions précises
+                - text: ": Évitez l'ambiguïté dans vos prompts"
+            - paragraph [ref=e289]: En traitant les hallucinations comme des effets indésirables prévisibles, vous transformez l'IA en un outil plus sûr et plus fiable, exactement comme un bon pharmacien gère les effets indésirables de ses prescriptions.
+        - main [ref=e290]:
+          - generic [ref=e291]:
+            - 'heading "Apprendre : Le Guide Fondamental" [level=2] [ref=e292]':
+              - img [ref=e293]
+              - text: "Apprendre : Le Guide Fondamental"
+            - 'link "Comment Construire un Prompt Pharmaceutique Efficace Apprenez à construire un prompt fiable en suivant la méthode des 5 piliers : Rôle, Tâche, Contexte, Format et Exemples. Lire le guide" [ref=e295] [cursor=pointer]':
+              - /url: /guides/fondamentaux-prompting-pharmaceutique
+              - generic [ref=e296] [cursor=pointer]:
+                - generic [ref=e297] [cursor=pointer]:
+                  - generic [ref=e298] [cursor=pointer]: Comment Construire un Prompt Pharmaceutique Efficace
+                  - paragraph [ref=e299] [cursor=pointer]: "Apprenez à construire un prompt fiable en suivant la méthode des 5 piliers : Rôle, Tâche, Contexte, Format et Exemples."
+                - button "Lire le guide" [ref=e301]:
+                  - text: Lire le guide
+                  - img
+          - generic [ref=e302]:
+            - 'heading "Essayer : Mettre en Pratique" [level=2] [ref=e303]':
+              - img [ref=e304]
+              - text: "Essayer : Mettre en Pratique"
+            - generic [ref=e307]:
+              - generic [ref=e308]:
+                - generic [ref=e309]: Prêt à tester ?
+                - paragraph [ref=e310]: Ouvrez l'éditeur pour expérimenter avec ce concept et adapter les prompts à vos besoins.
+              - link "Ouvrir l'Éditeur de Prompts" [ref=e311] [cursor=pointer]:
+                - /url: /boite-a-outils/prompt-editor
+                - text: Ouvrir l'Éditeur de Prompts
+                - img
+    - contentinfo [ref=e312]:
+      - generic [ref=e313]:
+        - generic [ref=e314]:
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - img [ref=e318]
+              - generic [ref=e326]: Pharma Prompt
+            - paragraph [ref=e327]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e328]:
+            - heading "Apprentissage" [level=3] [ref=e329]
+            - list [ref=e330]:
+              - listitem [ref=e331]:
+                - link "Concepts" [ref=e332] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e333] [cursor=pointer]
+                  - generic [ref=e335] [cursor=pointer]: Concepts
+              - listitem [ref=e336]:
+                - link "Guides" [ref=e337] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e338] [cursor=pointer]
+                  - generic [ref=e340] [cursor=pointer]: Guides
+              - listitem [ref=e341]:
+                - link "Prompts" [ref=e342] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e343] [cursor=pointer]
+                  - generic [ref=e345] [cursor=pointer]: Prompts
+          - generic [ref=e346]:
+            - heading "Outils" [level=3] [ref=e347]
+            - list [ref=e348]:
+              - listitem [ref=e349]:
+                - link "Ma Boîte à Outils" [ref=e350] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e351] [cursor=pointer]
+                  - generic [ref=e353] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e354]:
+                - link "Outils Externes" [ref=e355] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e356] [cursor=pointer]: Outils Externes
+                  - img [ref=e357] [cursor=pointer]
+          - generic [ref=e361]:
+            - heading "Légal" [level=3] [ref=e362]
+            - list [ref=e363]:
+              - listitem [ref=e364]:
+                - link "Confidentialité" [ref=e365] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e366] [cursor=pointer]
+                  - generic [ref=e368] [cursor=pointer]: Confidentialité
+        - generic [ref=e370]:
+          - paragraph [ref=e371]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e373]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e374]
+```

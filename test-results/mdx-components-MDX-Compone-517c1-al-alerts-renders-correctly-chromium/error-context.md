@@ -1,0 +1,208 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Guides" [ref=e32] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e34]:
+                - link "Prompts" [ref=e35] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e37]:
+                - link "Ma Boîte à Outils" [ref=e38] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e40]:
+                - link "Outils Externes" [ref=e41] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e45]:
+            - button [ref=e46]:
+              - img
+            - button [ref=e47]:
+              - img
+            - button [ref=e48]:
+              - img
+    - main [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - link "Retour aux outils" [ref=e52] [cursor=pointer]:
+            - /url: /outils-externes
+            - img
+            - text: Retour aux outils
+          - generic [ref=e53]:
+            - 'heading "DeepSeek Chat : L''IA Gratuite et Open-Source à la Pointe" [level=1] [ref=e54]'
+            - paragraph [ref=e55]: Découvrez DeepSeek Chat, une plateforme propulsée par des modèles open-source puissants, offrant des outils de raisonnement, de recherche et de développement sans frais.
+            - generic [ref=e56]:
+              - generic [ref=e57]:
+                - img [ref=e58]
+                - generic [ref=e61]:
+                  - text: "Catégorie :"
+                  - generic [ref=e62]: chatbot
+              - generic [ref=e63]:
+                - img [ref=e64]
+                - generic [ref=e66]: "Prix :"
+              - link "Visiter le site officiel" [ref=e68] [cursor=pointer]:
+                - /url: https://chat.deepseek.com/
+                - img [ref=e69] [cursor=pointer]
+                - generic [ref=e72] [cursor=pointer]: Visiter le site officiel
+        - main [ref=e73]:
+          - 'heading "DeepSeek Chat : L''IA Gratuite et Open-Source à la Pointe" [level=1] [ref=e74]'
+          - alert [ref=e75]:
+            - paragraph [ref=e77]:
+              - strong [ref=e78]: "⚠️ Avertissement de Confidentialité :"
+              - text: Cette plateforme est hébergée en Asie avec des lois sur les données souples. Considérez que tout ce que vous écrivez peut devenir public. À utiliser uniquement pour l'expérimentation sur des données publiques.
+          - heading "Qu'est-ce que DeepSeek Chat ?" [level=2] [ref=e79]
+          - paragraph [ref=e80]:
+            - text: DeepSeek Chat est une interface de conversation développée par DeepSeek AI, une entreprise qui se distingue par son engagement envers l'
+            - strong [ref=e81]: open-source
+            - text: . Elle donne accès gratuitement à une famille de modèles d'IA très performants, ce qui en fait une alternative extrêmement compétitive face aux géants comme OpenAI ou Google, surtout pour un public étudiant.
+          - paragraph [ref=e82]: La plateforme se démarque par ses capacités de raisonnement mathématique et de programmation, mais aussi par une suite d'outils intégrés très complète.
+          - heading "Les Modèles Disponibles (Prévisions 2025)" [level=2] [ref=e83]
+          - paragraph [ref=e84]: "DeepSeek Chat s'appuie sur ses propres modèles, dont les performances rivalisent avec les meilleurs du marché :"
+          - list [ref=e85]:
+            - listitem [ref=e86]:
+              - strong [ref=e87]: "DeepSeek V3.1 (Août 2025) :"
+              - text: Le cheval de bataille de la plateforme. Un modèle à architecture
+              - emphasis [ref=e88]: Mixture-of-Experts (MoE)
+              - text: très puissant, particulièrement doué en raisonnement, en mathématiques et en codage. Son contexte de
+              - strong [ref=e89]: 128K tokens
+              - text: permet de travailler sur des documents de taille conséquente.
+            - listitem [ref=e90]:
+              - strong [ref=e91]: "DeepSeek R1 (Reasoning) :"
+              - text: Un modèle spécialisé, activé via la fonctionnalité
+              - strong [ref=e92]: DeepThink
+              - text: ", conçu spécifiquement pour le raisonnement complexe et la logique étape par étape. Il est plus coûteux en ressources mais offre une profondeur d'analyse supérieure pour les problèmes ardus."
+          - heading "Une Boîte à Outils Gratuite et Complète" [level=2] [ref=e93]
+          - paragraph [ref=e94]: "L'un des plus grands atouts de DeepSeek Chat est la richesse de ses fonctionnalités, toutes accessibles gratuitement (en date d'août 2025) :"
+          - list [ref=e95]:
+            - listitem [ref=e96]:
+              - paragraph [ref=e97]:
+                - strong [ref=e98]: "DeepThink (R1) :"
+              - list [ref=e99]:
+                - listitem [ref=e100]:
+                  - text: Active le modèle de raisonnement spécialisé
+                  - strong [ref=e101]: DeepSeek R1
+                  - text: .
+                - listitem [ref=e102]: "Idéal pour résoudre des problèmes complexes qui nécessitent une analyse logique et structurée (ex: cas cliniques, analyse de protocoles)."
+                - listitem [ref=e103]:
+                  - text: Limité à
+                  - strong [ref=e104]: 50 messages par jour
+                  - text: en mode gratuit, ce qui est très généreux pour un usage étudiant.
+            - listitem [ref=e105]:
+              - paragraph [ref=e106]:
+                - strong [ref=e107]: "Recherche Web en Temps Réel :"
+              - list [ref=e108]:
+                - listitem [ref=e109]: Permet à l'IA d'accéder aux informations les plus récentes sur Internet, avec la possibilité de citer ses sources.
+            - listitem [ref=e110]:
+              - paragraph [ref=e111]:
+                - strong [ref=e112]: "Analyse de Fichiers Multi-formats :"
+              - list [ref=e113]:
+                - listitem [ref=e114]:
+                  - text: Uploadez jusqu'à
+                  - strong [ref=e115]: 50 fichiers simultanément
+                  - text: (100 Mo max par fichier).
+                - listitem [ref=e116]: "Formats supportés : PDF, Word, Excel, PowerPoint, texte, et même des images (JPEG, PNG)."
+                - listitem [ref=e117]: Parfait pour synthétiser des annales, des cours ou des articles scientifiques.
+            - listitem [ref=e118]:
+              - paragraph [ref=e119]:
+                - strong [ref=e120]: "Développement Web (DeepSite) :"
+              - list [ref=e121]:
+                - listitem [ref=e122]: Un outil impressionnant qui permet de créer un site web complet (HTML/CSS/JS) à partir d'une simple description en langage naturel. Un excellent moyen de visualiser des concepts ou de créer des présentations interactives sans coder.
+            - listitem [ref=e123]:
+              - paragraph [ref=e124]:
+                - strong [ref=e125]: "Génération d'Images (Janus-Pro) :"
+              - list [ref=e126]:
+                - listitem [ref=e127]: Un modèle de génération d'images très performant, capable de rivaliser avec DALL-E 3, pour créer des illustrations, des schémas ou des supports visuels.
+          - heading "Avantages et Inconvénients pour un Étudiant" [level=2] [ref=e128]
+          - paragraph [ref=e129]:
+            - text: "| Avantages | Inconvénients | | :--- | :--- | | ✅"
+            - strong [ref=e130]: "Totalement Gratuit :"
+            - text: Accès à des modèles de pointe sans aucun frais. | ⚠️
+            - strong [ref=e131]: "Confidentialité :"
+            - text: Comme pour la plupart des services gratuits hébergés en Asie, la prudence est de mise avec les données sensibles. | | ✅
+            - strong [ref=e132]: "Suite d'outils complète :"
+            - text: Recherche, analyse de fichiers, génération de site/image. | ⚠️
+            - strong [ref=e133]: "Limitation de DeepThink :"
+            - text: Les 50 messages/jour sont généreux, mais peuvent être une limite pour des projets très intensifs. | | ✅
+            - strong [ref=e134]: "Open-Source :"
+            - text: Les modèles sont publics et auditables, un gage de transparence. | ⚠️
+            - strong [ref=e135]: "Interface en Anglais/Mandarin :"
+            - text: L'interface et les performances sont optimisées pour ces langues. | | ✅
+            - strong [ref=e136]: "Haute performance :"
+            - text: Excellentes capacités en logique et raisonnement. | |
+          - heading "Conclusion" [level=2] [ref=e137]
+          - paragraph [ref=e138]:
+            - text: DeepSeek Chat est une option de premier choix pour les étudiants en pharmacie qui cherchent une alternative gratuite et puissante. Sa capacité à analyser de multiples documents, combinée à son mode de raisonnement avancé
+            - strong [ref=e139]: DeepThink
+            - text: ", en fait un outil redoutable pour la préparation d'examens, l'analyse de cas cliniques ou la recherche bibliographique."
+          - paragraph [ref=e140]: C'est la preuve que l'on peut accéder à des technologies de pointe sans avoir à sortir sa carte de crédit, à condition de rester vigilant sur la nature des données que l'on partage.
+    - contentinfo [ref=e141]:
+      - generic [ref=e142]:
+        - generic [ref=e143]:
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - img [ref=e147]
+              - generic [ref=e155]: Pharma Prompt
+            - paragraph [ref=e156]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e157]:
+            - heading "Apprentissage" [level=3] [ref=e158]
+            - list [ref=e159]:
+              - listitem [ref=e160]:
+                - link "Concepts" [ref=e161] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e162] [cursor=pointer]
+                  - generic [ref=e164] [cursor=pointer]: Concepts
+              - listitem [ref=e165]:
+                - link "Guides" [ref=e166] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e167] [cursor=pointer]
+                  - generic [ref=e169] [cursor=pointer]: Guides
+              - listitem [ref=e170]:
+                - link "Prompts" [ref=e171] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e172] [cursor=pointer]
+                  - generic [ref=e174] [cursor=pointer]: Prompts
+          - generic [ref=e175]:
+            - heading "Outils" [level=3] [ref=e176]
+            - list [ref=e177]:
+              - listitem [ref=e178]:
+                - link "Ma Boîte à Outils" [ref=e179] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e180] [cursor=pointer]
+                  - generic [ref=e182] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e183]:
+                - link "Outils Externes" [ref=e184] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e185] [cursor=pointer]: Outils Externes
+                  - img [ref=e186] [cursor=pointer]
+          - generic [ref=e190]:
+            - heading "Légal" [level=3] [ref=e191]
+            - list [ref=e192]:
+              - listitem [ref=e193]:
+                - link "Confidentialité" [ref=e194] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e195] [cursor=pointer]
+                  - generic [ref=e197] [cursor=pointer]: Confidentialité
+        - generic [ref=e199]:
+          - paragraph [ref=e200]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e202]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e203]
+```
