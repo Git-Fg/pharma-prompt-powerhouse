@@ -47,6 +47,14 @@ const TAG_TAXONOMY = {
     "auto-critique",
     "template",
     "variables",
+    "deep-research",
+    "image-edit",
+    "web-dev",
+    "raisonnement",
+    "confidentialite",
+    "deep-think",
+    "multimodal",
+    "opensource",
   ],
   // Domaine d'application
   domaine: [
@@ -82,6 +90,9 @@ const TAG_TAXONOMY = {
     "perplexity",
     "z-ai",
     "aistudio",
+    "deepseek",
+    "qwen",
+    "alibaba",
   ],
   // Concepts pharmaceutiques spécifiques
   pharma: [

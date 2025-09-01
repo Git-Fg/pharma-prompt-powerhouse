@@ -4,8 +4,8 @@ description: "Guide pour utiliser OpenAI Playground, l'interface avancée d'Open
 url: "https://platform.openai.com/playground"
 category: "interface-avancee"
 pricing: "Payant (crédit API requis)"
-capabilities: ["gpt-4", "gpt-3.5-turbo", "parametres-avances", "mode-chat", "mode-completion", "temperature-personnalisee"]
-tags: ["openai", "playground", "gpt-4", "parametres-avances", "temperature", "max-tokens"]
+capabilities: ["gpt-5", "gpt-4.1", "gpt-4o", "gpt-3.5-turbo", "parametres-avances", "mode-chat", "mode-completion", "temperature-personnalisee", "multimodal"]
+tags: ["openai", "playground", "gpt-5", "gpt-4.1", "gpt-4o", "parametres-avances", "temperature", "max-tokens", "multimodal"]
 conceptSlugs: ["temperature-dosage", "prompt-prescription"]
 ---
 
@@ -15,20 +15,25 @@ OpenAI Playground est l'interface **avancée** d'OpenAI qui vous permet de teste
 
 ## 🆚 Différences avec ChatGPT Standard
 
-### ChatGPT (chat.openai.com)
-- ✅ **Gratuit** avec quota quotidien (Plus payant pour plus d'usage)
+### ChatGPT (chatgpt.com)
+- ✅ **Gratuit** avec quota quotidien (20€/mois pour Plus avec accès étendu)
 - ✅ Interface simple et conversationnelle
+- ✅ Accès à GPT-4o, GPT-4o mini (gratuit), GPT-5 (payant)
+- ✅ Compréhension PDF native, Deep Research, génération d'images
 - ✅ Parfait pour une utilisation quotidienne
 - ❌ Paramètres fixes (pas d'accès aux réglages avancés)
 - ❌ Une seule conversation à la fois
 
 ### OpenAI Playground (platform.openai.com/playground)
-- ⚠️ **Payant** (consomme des crédits API)
+- ⚠️ **Payant** (consomme des crédits API, pas de quotas gratuit sans CB)
 - ✅ Contrôle total sur **tous les paramètres**
+- ✅ Accès à tous les modèles : **GPT-5**, **GPT-4.1**, **GPT-4o** et leurs variantes (mini/nano)
 - ✅ Modes Chat ET Completion
 - ✅ Température ajustable (0.0 à 2.0)
-- ✅ Longueur de réponse personnalisable
-- ✅ Système de messages pour contrôler le comportement
+- ✅ Longueur de réponse personnalisable (jusqu'à 400K tokens pour GPT-5)
+- ✅ Support multimodal (texte, image, audio)
+- ✅ Connecteurs et intégrations externes
+- ✅ Mode Agent pour tâches complexes
 - ✅ Idéal pour **tester et optimiser** vos prompts
 
 ## 🎯 Quand Utiliser OpenAI Playground ?
@@ -81,13 +86,31 @@ Tu ne donnes jamais de conseils de modification de traitement.
 3. Allez sur **Playground** dans le menu
 
 ### 2. Configuration Recommandée pour les Études
+
+**Pour l'Analyse Pharmaceutique Précise :**
 ```
-Model: gpt-4 (ou gpt-3.5-turbo pour économiser)
+Model: GPT-5 (contexte jusqu'à 400K tokens)
 Temperature: 0.2 (pour la précision)
-Max tokens: 1000
+Max tokens: 2048
 Top-p: 1
 Frequency penalty: 0
 Presence penalty: 0
+```
+
+**Pour l'Expérimentation et Tests :**
+```
+Model: GPT-4.1-mini ou GPT-5-mini (plus économique)
+Temperature: 0.2-0.5
+Max tokens: 1000
+Top-p: 1
+```
+
+**Pour la Créativité (mnémotechniques, analogies) :**
+```
+Model: GPT-4o (multimodal)
+Temperature: 0.7-1.0
+Max tokens: 1500
+Top-p: 0.9
 ```
 
 ### 3. Exemple d'Usage : Analyse de Cas Clinique
@@ -111,20 +134,24 @@ Que penses-tu de cette prescription ?
 - **Temperature 0.5** : Équilibre, légèrement variable  
 - **Temperature 1.0** : Plus créatif, explications variées
 
-## 💡 Astuces pour Économiser vos Crédits
+## 💡 Astuces pour Optimiser l'Usage
 
-1. **Utilisez gpt-3.5-turbo** pour les tests, gpt-4 pour les analyses importantes
-2. **Limitez Max Tokens** à ce dont vous avez besoin
-3. **Testez sur ChatGPT gratuit** d'abord, puis affinez sur Playground
-4. **Sauvegardez vos meilleures configurations** avec le bouton "Save"
+1. **Commencez avec GPT-4.1-mini** pour les tests, GPT-5 pour les analyses importantes
+2. **Exploitez la fenêtre contextuelle** : GPT-5 peut traiter jusqu'à 400K tokens (env. 300 000 mots)
+3. **Utilisez le mode multimodal** de GPT-4o pour analyser des images de documents
+4. **Limitez Max Tokens** à ce dont vous avez besoin pour économiser
+5. **Testez sur ChatGPT gratuit** d'abord, puis affinez sur Playground
+6. **Sauvegardez vos meilleures configurations** avec le bouton "Save"
+7. **Exploitez les connecteurs** pour intégrer avec d'autres outils
 
-## 🚨 Attention aux Coûts
+## 🚨 Attention aux Coûts (2025)
 
 ```
 💰 Exemple de coûts (indicatif) :
-• 100 questions courtes (gpt-3.5) ≈ 0.50€
-• 100 analyses détaillées (gpt-4) ≈ 5€
-• 1000 QCM générés (gpt-3.5) ≈ 2€
+• 100 questions courtes (GPT-4.1-mini) ≈ 0.30€
+• 100 analyses détaillées (GPT-5) ≈ 8€
+• 1000 QCM générés (GPT-4.1-mini) ≈ 1.50€
+• Analyse de documents longs (GPT-5) ≈ 0.10€/page
 ```
 
 ## 🎓 Avantage Pédagogique

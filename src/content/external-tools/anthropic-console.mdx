@@ -4,8 +4,8 @@ description: "Guide pour utiliser la Console Anthropic, l'interface développeur
 url: "https://console.anthropic.com"
 category: "interface-avancee"
 pricing: "Payant (crédit API requis)"
-capabilities: ["claude-3-5-sonnet", "claude-3-opus", "claude-3-haiku", "parametres-avances", "workbench", "system-prompts", "temperature-personnalisee"]
-tags: ["anthropic", "claude", "console", "workbench", "parametres-avances", "system-prompt"]
+capabilities: ["claude-opus-4.1", "claude-sonnet-4", "claude-haiku-4", "parametres-avances", "workbench", "evaluate", "system-prompts", "temperature-personnalisee", "prompt-caching", "batch-processing"]
+tags: ["anthropic", "claude", "console", "workbench", "parametres-avances", "system-prompt", "evaluate", "prompt-caching", "batch-processing"]
 conceptSlugs: ["temperature-dosage", "context-engineering", "prompt-prescription"]
 ---
 
@@ -16,18 +16,23 @@ La Console Anthropic est l'interface **développeur avancée** qui vous donne ac
 ## 🆚 Différences avec Claude Standard
 
 ### Claude.ai (Standard)
-- ✅ **Gratuit** avec quotas généreux
+- ✅ **Gratuit** : 50 messages/jour, personas prédéfinis
 - ✅ Interface conversationnelle simple
 - ✅ Upload de fichiers PDF/images
 - ✅ Parfait pour l'usage quotidien
-- ❌ Un seul modèle accessible (généralement Claude-3.5-Sonnet)
+- ❌ Un seul modèle accessible (généralement Claude Sonnet 4)
 - ❌ Paramètres fixes
+- **Payant ($18-25/mois)** : Usage illimité, personas personnalisés, Projects illimités
 
 ### Anthropic Console (console.anthropic.com)
 - ⚠️ **Payant** (consomme des crédits API)
-- ✅ **Tous les modèles Claude** disponibles
+- ✅ **Tous les modèles Claude** : Opus 4.1, Sonnet 4, Haiku 4
 - ✅ **Workbench** pour tester et comparer
+- ✅ **Evaluate** : Tests automatisés et génération de cas de test
+- ✅ **Générateur de prompts** automatique
 - ✅ **System prompts** personnalisés
+- ✅ **Prompt caching** : jusqu'à 90% d'économies
+- ✅ **Batch processing** : 50% d'économies
 - ✅ Température et autres paramètres ajustables
 - ✅ **Export/import** de configurations
 - ✅ Idéal pour **développer et optimiser** vos prompts
@@ -59,22 +64,27 @@ La Console Anthropic est l'interface **développeur avancée** qui vous donne ac
 
 ## ⚙️ Paramètres Avancés
 
-### Choix des Modèles
+### Choix des Modèles (2025)
 
-#### Claude-3.5-Sonnet
-- 🎯 **Usage :** Équilibre performance/coût optimal
-- 💰 **Coût :** Moyen
-- 📚 **Idéal pour :** Analyses générales, synthèses, QCM
-
-#### Claude-3-Opus  
-- 🧠 **Usage :** Raisonnement complexe, analyse approfondie
+#### Claude Opus 4.1 (Août 2025)
+- 🧠 **Usage :** Modèle le plus performant pour tâches complexes
 - 💰 **Coût :** Le plus élevé
-- 📚 **Idéal pour :** Cas cliniques complexes, diagnostics différentiels
+- 📊 **Performance :** 74.5% sur SWE-bench Verified
+- 🔍 **Contexte :** 200K tokens (env. 150 000 mots)
+- 📚 **Idéal pour :** Analyse approfondie, recherche, codebases complexes, diagnostics différentiels avancés
 
-#### Claude-3-Haiku
-- ⚡ **Usage :** Réponses rapides et économiques
+#### Claude Sonnet 4 (Mai 2025)
+- 🎯 **Usage :** Meilleur rapport performance/pratique
+- 💰 **Coût :** Moyen 
+- 📊 **Performance :** Faible hallucination, excellent pour bases de connaissances
+- 🔍 **Contexte :** 200K tokens (1M tokens en version bêta)
+- 📚 **Idéal pour :** Analyses générales, agents conversationnels, génération de code, synthèses
+
+#### Claude Haiku 4 (Mai 2025)
+- ⚡ **Usage :** Modèle rapide et économique
 - 💰 **Coût :** Le plus bas
-- 📚 **Idéal pour :** Définitions, calculs simples, révisions rapides
+- 🔍 **Contexte :** 200K tokens
+- 📚 **Idéal pour :** Réponses rapides, traitement haut volume, définitions, calculs simples
 
 ### System Prompts Personnalisés
 ```xml
@@ -103,18 +113,36 @@ STRUCTURE de réponse :
 
 ### 2. Configuration Recommandée
 
-**Pour l'Analyse Pharmaceutique :**
+**Pour l'Analyse Pharmaceutique (Complexe) :**
 ```
-Modèle: Claude-3.5-Sonnet
+Modèle: Claude Opus 4.1
+Temperature: 0.2
+Max tokens: 3000
+Context: 200K tokens
+```
+
+**Pour l'Usage Quotidien (Équilibré) :**
+```
+Modèle: Claude Sonnet 4
 Temperature: 0.3
 Max tokens: 2000
+Context: 200K tokens
+```
+
+**Pour les Tests Rapides (Économique) :**
+```
+Modèle: Claude Haiku 4
+Temperature: 0.4
+Max tokens: 1000
+Context: 200K tokens
 ```
 
 **Pour la Créativité (mnémotechniques, analogies) :**
 ```
-Modèle: Claude-3.5-Sonnet  
+Modèle: Claude Sonnet 4
 Temperature: 0.8
 Max tokens: 1500
+Context: 200K tokens
 ```
 
 ### 3. Exemple d'Usage : System Prompt pour Révisions
@@ -152,24 +180,63 @@ avec les inhibiteurs de la pompe à protons (IPP).
 3. **Utilisez Haiku** pour les tests rapides
 4. **Réservez Opus** aux analyses complexes
 
-### Estimation des Coûts (indicative)
+### Estimation des Coûts (2025)
 ```
-Claude-3-Haiku    : ~0.01€ pour 10 analyses courtes
-Claude-3.5-Sonnet : ~0.05€ pour 10 analyses moyennes  
-Claude-3-Opus     : ~0.20€ pour 10 analyses détaillées
+Claude Haiku 4     : ~0.008€ pour 10 analyses courtes
+Claude Sonnet 4    : ~0.04€ pour 10 analyses moyennes  
+Claude Opus 4.1    : ~0.15€ pour 10 analyses détaillées
+
+Avec Prompt Caching (économies) :
+Claude Sonnet 4    : ~0.02€ pour 10 analyses (système prompt long)
+Claude Opus 4.1    : ~0.08€ pour 10 analyses (documents référence)
+
+Batch Processing (économies) :
+Claude Sonnet 4    : ~0.02€ pour 10 analyses en lot
 ```
 
-## 🔥 Fonctionnalités Avancées
+## 🔥 Fonctionnalités Avancées (2025)
+
+### Evaluate : Tests et Validation
+- **Génération automatique** de cas de test pour vos prompts
+- **Tests A/B systématiques** pour comparer les performances
+- **Métriques de performance** intégrées
+- **Validation de la qualité** des réponses
+- **Idéal pour :** Optimisation de prompts cliniques et éducatifs
+
+### Workbench : Environnement de Développement
+- **Interface dédiée** pour le développement de prompts
+- **Comparaisons en temps réel** entre modèles
+- **Historique des versions** de vos prompts
+- **Collaboration d'équipe** sur les projets
+
+### Générateur de Prompts Automatique
+- **Création automatique** de prompts détaillés
+- **Optimisation basée** sur votre cas d'usage
+- **Suggestions intelligentes** d'amélioration
+- **Templates prêts** pour domaines spécifiques
+
+### Prompt Caching (Économies massives)
+- **Jusqu'à 90% d'économies** sur les prompts répétés
+- **Cache intelligent** des contextes longs
+- **Idéal pour :** System prompts longs, documents de référence
+- **Optimisation automatique** des coûts
+
+### Batch Processing
+- **50% d'économies** sur les traitements en lot
+- **Traitement asynchrone** de gros volumes
+- **Parfait pour :** Génération de QCM en masse, analyses multiples
 
 ### Templates Réutilisables
 - Sauvegardez vos meilleures configurations
 - Partagez-les avec vos collègues d'étude
 - Créez des "presets" pour différents types d'exercices
+- **Bibliothèque de templates** communautaire
 
-### Export/Import
-- Exportez vos conversations réussies
-- Importez des templates de prompts
-- Sauvegardez vos system prompts favoris
+### API Reference et Cookbooks
+- **Documentation complète** avec exemples de code
+- **Exemples pratiques** et meilleures pratiques
+- **Cookbooks spécialisés** par domaine d'application
+- **Intégrations** avec outils externes
 
 ## 🎓 Avantages Pédagogiques
 
