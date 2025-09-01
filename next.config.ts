@@ -22,8 +22,6 @@ const nextConfig: NextConfig = {
       "react-markdown",
       "@content-collections/core",
     ],
-    // Support MDX natif de Next.js
-    mdxRs: true,
   },
 
   // Image optimization
@@ -40,9 +38,6 @@ const nextConfig: NextConfig = {
 
   // Optimisations de performance
   poweredByHeader: false,
-
-  // Configuration des extensions de pages pour MDX
-  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   // Optimisations pour Vercel
   // swcMinify: true, // Supprimé car activé par défaut dans Next.js 15
