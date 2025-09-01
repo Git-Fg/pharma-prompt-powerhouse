@@ -1,6 +1,6 @@
-"use client";
-
 import Link from "next/link";
+import { allConcepts } from "content-collections";
+import { getRandomConceptTip } from "@/lib/tips-utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +19,7 @@ import {
   Code,
   GitBranch,
   Network,
+  Lightbulb
 } from "lucide-react";
 
 // Concepts fondamentaux à mettre en avant sur la page d'accueil
@@ -54,6 +55,8 @@ const featuredConcepts = [
 ];
 
 export default function HomePage() {
+  const dailyTip = getRandomConceptTip(allConcepts);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Section 1 : Le Héros - L'Accroche Principale */}
@@ -82,6 +85,33 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
+
+      {/* Section 1.5 : Le Conseil du Jour */}
+      {dailyTip && (
+        <section className="container mx-auto px-4 pb-16 -mt-8">
+          <Card className="max-w-4xl mx-auto bg-primary/5 border-primary/20 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <Lightbulb className="w-6 h-6 text-primary" />
+                </div>
+              <div>
+                <CardTitle className="text-primary">Le conseil du jour</CardTitle>
+                <CardDescription className="text-lg text-foreground/80 mt-2">
+                  "{dailyTip.text}"
+                </CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent>
+               <Button variant="link" asChild className="p-0 text-primary">
+                  <Link href={dailyTip.source.slug}>
+                    Explorer le concept : {dailyTip.source.title}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+            </CardContent>
+          </Card>
+        </section>
+      )}
 
       {/* Section 2 : L'Approche - Comment ça marche ? */}
       <section className="container mx-auto px-4 py-16">

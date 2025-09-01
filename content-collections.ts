@@ -281,7 +281,7 @@ const guides = defineCollection({
     
     // Ajustement de la complexité pour les guides
     const complexity =
-      computed.wordCount > 5000 ? "avancé" :
+      computed.wordCoun > 5000 ? "avancé" :
       computed.wordCount > 2000 ? "intermédiaire" :
       "débutant";
     
@@ -392,7 +392,7 @@ export default defineConfig({
   onSuccess: async (_allDocuments: any[]) => { // eslint-disable-line @typescript-eslint/no-explicit-any
     // Afficher les erreurs de validation
     if (validationErrors.length > 0) {
-      console.error("\n🚨 ERREURS DE VALIDATION DES RÉFÉRENCCES CROISÉES 🚨\n");
+      console.error("\n🚨 ERREURS DE VALIDATION DES RÉFÉRENCCCES CROISÉES 🚨\n");
       validationErrors.forEach(error => {
         console.error(`📄 Document: ${error.document}`);
         console.error(`🔧 Champ: ${error.field}`);
