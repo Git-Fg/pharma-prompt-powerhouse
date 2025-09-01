@@ -20,14 +20,57 @@ Une **hallucination** est une erreur factuelle plausible générée par l'IA. Co
 
 ## Pourquoi les hallucinations surviennent-elles ?
 
+<Alert type="info">
+  <AlertDescription>
+    **Comprendre les mécanismes :** Comme pour un médicament, connaître les mécanismes d'action des hallucinations permet de mieux les prévenir et les traiter.
+  </AlertDescription>
+</Alert>
+
 ### Mécanismes d'action
 
-1. **Température élevée** : L'IA devient trop "créative" et invente des informations
-2. **Contexte insuffisant** : L'IA comble les vides avec des données plausibles mais fausses
-3. **Instructions ambiguës** : L'IA interprète mal vos demandes
-4. **Limitations du modèle** : L'IA n'a pas accès à des informations récentes ou spécialisées
+<Card>
+  <CardHeader>
+    <CardTitle>🌡️ Température élevée</CardTitle>
+  </CardHeader>
+  <CardContent>
+    L'IA devient trop "créative" et invente des informations plausibles mais inexactes
+  </CardContent>
+</Card>
+
+<Card>
+  <CardHeader>
+    <CardTitle>🔍 Contexte insuffisant</CardTitle>
+  </CardHeader>
+  <CardContent>
+    L'IA comble les vides avec des données plausibles mais fausses, comme un diagnostique différentiel mal orienté
+  </CardContent>
+</Card>
+
+<Card>
+  <CardHeader>
+    <CardTitle>❓ Instructions ambiguës</CardTitle>
+  </CardHeader>
+  <CardContent>
+    L'IA interprète mal vos demandes et répond à côté de la question
+  </CardContent>
+</Card>
+
+<Card>
+  <CardHeader>
+    <CardTitle>📚 Limitations du modèle</CardTitle>
+  </CardHeader>
+  <CardContent>
+    L'IA n'a pas accès à des informations récentes ou très spécialisées
+  </CardContent>
+</Card>
 
 ### Facteurs de risque
+
+<Alert type="destructive">
+  <AlertDescription>
+    **Attention :** Ces facteurs augmentent significativement le risque d'hallucination, comme des facteurs de risque d'effet indésirable.
+  </AlertDescription>
+</Alert>
 
 - **Température > 0.7** : Risque élevé d'hallucination
 - **Prompts vagues** : "Parle-moi des IEC" vs "Listez les IEC disponibles en France en 2025"
@@ -36,9 +79,18 @@ Une **hallucination** est une erreur factuelle plausible générée par l'IA. Co
 
 ## Prévention et traitement
 
-### Stratégies de prévention
-
-#### 1. Contrôle de la température
+<Tabs defaultValue="prevention">
+  <TabsList>
+    <TabsTrigger value="prevention">Stratégies de Prévention</TabsTrigger>
+    <TabsTrigger value="traitement">Actions Correctives</TabsTrigger>
+  </TabsList>
+  <TabsContent value="prevention">
+    <Card>
+      <CardHeader>
+        <CardTitle>1. Contrôle de la Température</CardTitle>
+      </CardHeader>
+      <CardContent>
+        Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque.
 
 ```
 ❌ Température : 0.9 (risque élevé)
@@ -47,8 +99,15 @@ Une **hallucination** est une erreur factuelle plausible générée par l'IA. Co
 ✅ Température : 0.2 (risque faible)
 "Listez les molécules antihypertensives disponibles en 2025"
 ```
+      </CardContent>
+    </Card>
 
-#### 2. Contexte clair et délimité
+    <Card>
+      <CardHeader>
+        <CardTitle>2. Contexte Clair et Délimité</CardTitle>
+      </CardHeader>
+      <CardContent>
+        Fournir un contexte précis et des limites claires aide l'IA à rester dans les faits.
 
 ```
 ❌ Prompt vague
@@ -58,30 +117,47 @@ Une **hallucination** est une erreur factuelle plausible générée par l'IA. Co
 "Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.
 Si une information n'est pas dans le texte, indique 'Non précisé'."
 ```
+      </CardContent>
+    </Card>
 
-#### 3. Instructions de validation
+    <Card>
+      <CardHeader>
+        <CardTitle>3. Instructions de Validation</CardTitle>
+      </CardHeader>
+      <CardContent>
+        Demandez explicitement à l'IA de vérifier ses réponses avant de les donner.
 
 ```
 "Avant de répondre, vérifie que toutes les informations que tu donnes
 sont directement dérivées du contexte fourni. Si tu n'es pas sûr,
 indique-le clairement."
 ```
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="traitement">
+    <Alert type="destructive">
+      <AlertDescription>
+        **Action immédiate requise :** Face à une hallucination détectée, agissez rapidement pour corriger et prévenir la récidive.
+      </AlertDescription>
+    </Alert>
 
-### Traitement des hallucinations
+    ### Détection des signes d'alerte
 
-#### Détection
+    - **Informations trop précises** sans source
+    - **Citations inexistantes** d'études
+    - **Données numériques** fantaisistes
+    - **Réponses trop parfaites** pour être vraies
 
-- **Informations trop précises** sans source
-- **Citations inexistantes** d'études
-- **Données numériques** fantaisistes
-- **Réponses trop parfaites** pour être vraies
+    ### Plan d'action corrective
 
-#### Actions correctives
-
-1. **Réduire la température** immédiatement
-2. **Demander des sources** pour chaque affirmation
-3. **Utiliser des prompts de vérification**
-4. **Vérifier avec des sources officielles**
+    1. **Réduire la température** immédiatement
+    2. **Demander des sources** pour chaque affirmation
+    3. **Utiliser des prompts de vérification**
+    4. **Vérifier avec des sources officielles**
+  </TabsContent>
+</Tabs>
 
 ## Applications en pharmacie
 
