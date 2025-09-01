@@ -1,201 +1,50 @@
 ---
-title: "Token : Acide Aminé"
-description: "Le token est l'unité de base de l'IA, comme un acide aminé pour une protéine"
-icon: "Dna"
-category: "Fondamentaux"
-mainGuideSlug: "fondamentaux-prompting-pharmaceutique"
-keyTakeaways:
-  - "Le 'token' est l'unité de base de l'IA, comme un acide aminé pour une protéine ; il peut être un mot ou une partie de mot."
-  - "Le nombre de tokens influence le coût, la vitesse et la 'mémoire' (fenêtre de contexte) de l'IA."
-  - "Optimisez vos prompts en étant concis pour maximiser la densité d'information par token."
-tags: ["exemple-code", "guide", "pedagogie", "pharmacie"]
+title: "Le Token : L'Acide Aminé de l'IA"
+description: "Comprendre ce qu'est un token, l'unité de base que les modèles de langage utilisent pour lire, comprendre et générer du texte."
+icon: "dna"
+date: "2024-07-20"
 ---
 
-# Token : Acide Aminé
+## Définition : Qu'est-ce qu'un Token ?
 
-## Qu'est-ce qu'un token ?
+Dans le domaine des modèles de langage (LLMs), un **token** est l'unité de base du texte. C'est l'équivalent d'un acide aminé pour une protéine : un bloc fondamental que le modèle manipule.
 
-Un **token** est l'unité de base que l'IA utilise pour traiter le texte. C'est l'équivalent d'un acide aminé pour une protéine : la brique élémentaire qui, assemblée avec d'autres, forme des structures complexes et fonctionnelles.
+Un token n'est pas exactement un mot. Il peut être :
+- Un mot entier (`"pharmacie"`)
+- Un morceau de mot (`"phar"`, `"ma"`, `"cie"`)
+- Un signe de ponctuation (`"?"`)
+- Un espace ou un caractère spécial.
 
-## L'analogie biologique
+En moyenne, en français, **100 tokens représentent environ 75 mots**.
 
-### Acide aminé → Protéine
+`Cette phrase contient 7 mots, mais est probablement découpée en 9 ou 10 tokens par le modèle.`
 
-- **Acide aminé** : Unité de base (20 types différents)
-- **Chaîne peptidique** : Séquences d'acides aminés
-- **Protéine** : Structure 3D fonctionnelle
+## La Fenêtre de Contexte : La "Mémoire à Court Terme" de l'IA
 
-### Token → Texte
+Chaque modèle d'IA possède une **fenêtre de contexte** (ou *context window*), qui est la quantité maximale de tokens qu'il peut prendre en compte à un instant T. C'est sa mémoire de travail.
 
-- **Token** : Unité de base (peut être un mot, une syllabe, un caractère)
-- **Séquence** : Suite de tokens
-- **Texte** : Contenu sémantique complet
+Cette fenêtre inclut à la fois :
+1.  **Votre prompt** (les tokens que vous envoyez)
+2.  **La réponse de l'IA** (les tokens qu'elle génère)
 
-## Types de tokens
+Si la conversation dépasse cette limite, l'IA commence à "oublier" les informations les plus anciennes.
 
-### 1. Tokens complets
+### Exemples de Tailles de Fenêtre de Contexte (Prévisions 2025)
 
-- **Mots courts** : "le", "et", "de" → 1 token chacun
-- **Mots moyens** : "pharmacie", "médicament" → 1 token chacun
-- **Mots longs** : "pharmacocinétique" → 1 token
+La taille de la fenêtre de contexte a explosé, ce qui change radicalement ce qu'il est possible de faire :
 
-### 2. Tokens partiels
+- **Modèles Standards (anciens) :** 4 000 à 8 000 tokens (environ 10-20 pages de texte).
+- **Modèles de Génération 2024 (Ex: GPT-4, Claude 2) :** 128 000 à 200 000 tokens (un livre entier).
+- **Modèles de Génération 2025 :**
+  - **GPT-5 :** 400 000 tokens.
+  - **Gemini 2.5 Pro :** **1 000 000 de tokens** (l'équivalent de plusieurs gros livres ou d'un petit projet de codebase).
 
-- **Mots très longs** : "électrocardiographie" → 2-3 tokens
-- **Nombres** : "12345" → 1 token, "123456789" → 2-3 tokens
-- **Ponctuation** : "." → 1 token, "..." → 1 token
+## Pourquoi est-ce Important pour la Pharmacie ?
 
-### 3. Tokens spéciaux
+1.  **Analyse de Documents Longs :** Avec une fenêtre de 1M de tokens, vous pouvez soumettre un dossier patient complet, plusieurs études cliniques, ou l'intégralité d'un cours à l'IA et lui demander d'effectuer une analyse transversale sans qu'elle perde le fil.
 
-- **Caractères spéciaux** : "€", "©", "→" → 1 token chacun
-- **Emojis** : "💊", "🏥" → 1-2 tokens chacun
-- **Codes** : "HTML", "JSON" → 1 token chacun
+2.  **Coût d'Utilisation (API) :** Lorsque vous utilisez l'API (pour les développeurs), le coût est généralement calculé en fonction du nombre de tokens en entrée et en sortie. Optimiser la longueur de ses prompts peut donc avoir un impact financier.
 
-## Impact des tokens
+3.  **Qualité de la Réponse :** Un prompt bien formulé qui utilise efficacement les tokens disponibles (en étant concis et précis) obtiendra de meilleurs résultats qu'un prompt verbeux et mal structuré.
 
-### 1. Coût
-
-- **Plus de tokens = Plus cher** : Chaque token a un coût
-- **Modèles premium** : Plus chers par token mais plus efficaces
-- **Optimisation** : Réduire les tokens = Réduire les coûts
-
-### 2. Vitesse
-
-- **Moins de tokens = Plus rapide** : Traitement plus efficace
-- **Latence** : Moins de temps d'attente
-- **Productivité** : Plus de prompts traités par minute
-
-### 3. Mémoire (fenêtre de contexte)
-
-- **Limite fixe** : Chaque modèle a une limite de tokens
-- **Contexte** : Plus de tokens = Plus de contexte disponible
-- **Oubli** : L'IA oublie les tokens les plus anciens
-
-## Optimisation des tokens
-
-### Stratégies de compression
-
-#### 1. Concision
-
-```
-❌ Prompt verbeux (15 tokens)
-"Peux-tu s'il te plaît me donner une explication très détaillée
-et complète sur le mécanisme d'action des inhibiteurs de
-l'enzyme de conversion ?"
-
-✅ Prompt concis (8 tokens)
-"Explique le mécanisme d'action des IEC"
-```
-
-#### 2. Structure efficace
-
-```
-❌ Structure inefficace (12 tokens)
-"Voici les informations :
-- Nom du patient : Jean Dupont
-- Âge : 65 ans
-- Poids : 70 kg"
-
-✅ Structure efficace (8 tokens)
-"Patient: Jean Dupont, 65 ans, 70 kg"
-```
-
-#### 3. Format optimisé
-
-```
-❌ Format verbeux (20 tokens)
-"Crée un tableau avec les colonnes suivantes :
-- Nom de la molécule
-- Mécanisme d'action
-- Effets indésirables principaux"
-
-✅ Format concis (8 tokens)
-"Tableau: Molécule | Mécanisme | Effets indésirables"
-```
-
-### Techniques avancées
-
-#### 1. Abréviations standardisées
-
-- **IEC** au lieu de "Inhibiteurs de l'Enzyme de Conversion"
-- **AOD** au lieu de "Anticoagulants Oraux Directs"
-- **HTA** au lieu de "Hypertension Artérielle"
-
-#### 2. Élimination des mots vides
-
-- Supprimer "très", "beaucoup", "très important"
-- Remplacer "peux-tu s'il te plaît" par "crée"
-- Condenser "en ce qui concerne" en "pour"
-
-#### 3. Utilisation de symboles
-
-- "→" au lieu de "entraîne"
-- "=" au lieu de "est égal à"
-- "≠" au lieu de "n'est pas égal à"
-
-## Applications en pharmacie
-
-### Cas 1 : Analyse d'interaction
-
-```
-❌ Prompt long (25 tokens)
-"Peux-tu analyser l'interaction entre la warfarine et l'amiodarone
-en me donnant le mécanisme, les risques cliniques et les
-recommandations de monitoring ?"
-
-✅ Prompt optimisé (12 tokens)
-"Analyse interaction warfarine-amiodarone: mécanisme, risques, monitoring"
-```
-
-### Cas 2 : Calcul de dose
-
-```
-❌ Prompt long (20 tokens)
-"Calcule la dose de digoxine pour un patient de 70 ans pesant
-65 kg avec une clairance de créatinine de 40 ml/min"
-
-✅ Prompt optimisé (10 tokens)
-"Digoxine: 70 ans, 65 kg, ClCr 40 ml/min"
-```
-
-### Cas 3 : Création de fiche
-
-```
-❌ Prompt long (18 tokens)
-"Crée une fiche de révision sur les statines avec le mécanisme
-d'action, les indications et les effets indésirables"
-
-✅ Prompt optimisé (8 tokens)
-"Fiche statines: mécanisme, indications, effets indésirables"
-```
-
-## Monitoring et métriques
-
-### Indicateurs de performance
-
-- **Tokens par prompt** : Objectif < 15 tokens
-- **Efficacité** : Information utile / Nombre de tokens
-- **Coût par réponse** : Tokens × Prix par token
-
-### Outils de mesure
-
-- **Compteurs de tokens** : Intégrés dans la plupart des interfaces
-- **Analyse de prompts** : Identifier les mots superflus
-- **Benchmarks** : Comparer l'efficacité de différents formats
-
-## Bénéfices de l'optimisation
-
-1. **Économies** : Réduction significative des coûts
-2. **Efficacité** : Réponses plus rapides
-3. **Contexte** : Plus d'informations disponibles dans la fenêtre
-4. **Clarté** : Prompts plus directs et précis
-
-## Règles d'or
-
-1. **Concis d'abord** : Chaque mot doit apporter de la valeur
-2. **Structure claire** : Utilisez des formats optimisés
-3. **Abbreviations** : Adoptez un vocabulaire standardisé
-4. **Test et mesure** : Surveillez votre utilisation de tokens
-5. **Équilibre** : Concis mais pas incompréhensible
-
-En maîtrisant l'art de l'optimisation des tokens, vous transformez l'IA en un outil plus économique et plus efficace, exactement comme un bon pharmacien optimise ses prescriptions pour maximiser l'efficacité thérapeutique.
+Comprendre la notion de token et de fenêtre de contexte est la première étape pour passer d'un simple utilisateur à un véritable `prompt engineer` capable de tirer le meilleur parti de ces outils puissants.
