@@ -10,7 +10,7 @@ conceptSlugs: ["context-engineering", "recherche-analyse"]
 variables: ["document_content", "user_question"]
 promptContent: |
   <document>
-  {`{document_content}`}
+  {{document_content}}
   </document>
 
   <instructions>
@@ -18,7 +18,7 @@ promptContent: |
   </instructions>
 
   <question>
-  {`{user_question}`}
+  {{user_question}}
   </question>
 alternativeVersions:
   - name: "Version ChatGPT"
@@ -26,11 +26,11 @@ alternativeVersions:
       ### Contexte
       Voici un document :
       """
-      {`{document_content}`}
+      {{document_content}}
       """
 
       ### Ma Question
-      En me basant uniquement sur le document ci-dessus, réponds à cette question : {`{user_question}`}
+      En me basant uniquement sur le document ci-dessus, réponds à cette question : {{user_question}}
 
       **Règle importante :** Si la réponse ne se trouve pas dans le document, dis-le explicitement.
 ---
