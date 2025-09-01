@@ -281,7 +281,7 @@ export default function PromptsPage() {
                         size="sm"
                         className="flex-1 group-hover:bg-blue-600 transition-colors"
                         onClick={() => {
-                          navigator.clipboard.writeText(prompt.content || "");
+                          navigator.clipboard.writeText(prompt._meta.content || "");
                           // Optionnel : ajouter un toast de confirmation
                         }}
                       >

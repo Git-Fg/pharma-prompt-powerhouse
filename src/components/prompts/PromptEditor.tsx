@@ -211,7 +211,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
               category: promptToLoad.category,
               difficulty: promptToLoad.difficulty || "débutant",
               targetTool: promptToLoad.targetTool || "",
-              content: promptToLoad.content,
+              content: promptToLoad._meta.content,
               variables: [],
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),
@@ -958,7 +958,7 @@ Utilisez {{variable}} pour les variables dynamiques."
                                     category: prompt.category || "technique",
                                     difficulty: prompt.difficulty || "débutant",
                                     targetTool: prompt.targetTool || "chatgpt",
-                                    content: prompt.content || "",
+                                    content: prompt._meta.content || "",
                                     variables: (prompt.variables || []).map(
                                       (variable) => ({
                                         name: variable,

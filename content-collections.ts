@@ -1,5 +1,4 @@
 import { defineCollection, defineConfig, Context } from "@content-collections/core";
-import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 
 // ============================================================================
@@ -28,6 +27,8 @@ type Meta = {
   path: string;
   fileName: string;
   directory: string;
+  filePath: string;
+  extension: string;
   mtime?: number; // Rendre mtime optionnel
   content: string;
 };
@@ -130,9 +131,9 @@ const validateConceptReferences = async (
   // --- Validation de mainGuideSlug ---
   if (doc.mainGuideSlug) {
     const allGuides = await ctx.documents(guides);
-    // Trouver un guide dont le slug correspond à mainGuideSlug
+    // Trouver un guide dont le path (sera utilisé comme slug) correspond à mainGuideSlug
     const linkedGuide = allGuides.find(
-      (g) => g.slug === doc.mainGuideSlug
+      (g) => g._meta.path === doc.mainGuideSlug
     );
     if (!linkedGuide) {
       validationErrors.push({
@@ -153,8 +154,9 @@ const validateConceptReferences = async (
  * Ajoute des champs calculés communs à tous les documents (temps de lecture, slug...).
  * C'est notre fonction "boilerplate killer".
  */
-const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta }) => {
-  const wordCount = doc._meta.content?.trim().split(/\s+/).length || 0;
+const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: string }) => {
+  const content = doc.content || "";
+  const wordCount = content.trim().split(/\s+/).length || 0;
   const readingTime = Math.ceil(wordCount / 200); // 200 mots par minute
 
   // Calcul de la complexité basé sur le nombre de mots
@@ -189,9 +191,9 @@ const resolveConceptRelations = async (
 
   const allConcepts = await ctx.documents(concepts);
   const relatedConcepts = allConcepts
-    .filter((concept) => doc.conceptSlugs!.includes(concept.slug))
+    .filter((concept) => doc.conceptSlugs!.includes(concept._meta.path))
     .map((concept) => ({
-      slug: concept.slug,
+      slug: concept._meta.path,
       title: concept.title,
       icon: concept.icon,
       category: concept.category,
@@ -250,7 +252,7 @@ const conceptSchema = baseSchema.extend({
   mainGuideSlug: z.string().optional(),
   category: z.string().optional(),
 });
-type ConceptDoc = z.infer<typeof conceptSchema> & { _meta: Meta };
+type ConceptDoc = z.infer<typeof conceptSchema> & { _meta: Meta; content?: string };
 
 const concepts = defineCollection({
   name: "concepts",
@@ -258,7 +260,6 @@ const concepts = defineCollection({
   include: "*.mdx",
   schema: conceptSchema,
   transform: async (doc: ConceptDoc, ctx: Context) => {
-    const mdx = await compileMDX(ctx, doc);
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     await validateConceptReferences(doc, ctx);
@@ -266,7 +267,7 @@ const concepts = defineCollection({
     return {
       ...computed,
       ...processedTags,
-      mdx,
+      content: doc.content || "",
     };
   },
 });
@@ -277,7 +278,7 @@ const guideSchema = baseSchema.extend({
   targetAudience: z.array(z.string()).default([]),
   estimatedTime: z.string().optional(),
 });
-type GuideDoc = z.infer<typeof guideSchema> & { _meta: Meta };
+type GuideDoc = z.infer<typeof guideSchema> & { _meta: Meta; content?: string };
 
 const guides = defineCollection({
   name: "guides",
@@ -285,7 +286,6 @@ const guides = defineCollection({
   include: "*.mdx",
   schema: guideSchema,
   transform: async (doc: GuideDoc, ctx: Context) => {
-    const mdx = await compileMDX(ctx, doc);
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -301,7 +301,7 @@ const guides = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx,
+      content: doc.content || "",
       complexity,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
@@ -321,7 +321,7 @@ const promptSchema = baseSchema.extend({
   promptContent: z.string().optional(),
   alternativeVersions: z.array(z.object({ name: z.string(), content: z.string() })).optional(),
 });
-type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta };
+type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta; content?: string };
 
 const prompts = defineCollection({
   name: "prompts",
@@ -329,7 +329,6 @@ const prompts = defineCollection({
   include: "*.mdx",
   schema: promptSchema,
   transform: async (doc: PromptDoc, ctx: Context) => {
-    const mdx = await compileMDX(ctx, doc);
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -345,7 +344,7 @@ const prompts = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx,
+      content: doc.content || "",
       complexity,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
@@ -361,7 +360,7 @@ const externalToolSchema = baseSchema.extend({
   pricing: z.string().optional(),
   capabilities: z.array(z.string()).default([]),
 });
-type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta };
+type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta; content?: string };
 
 const externalTools = defineCollection({
   name: "externalTools",
@@ -369,7 +368,6 @@ const externalTools = defineCollection({
   include: "*.mdx",
   schema: externalToolSchema,
   transform: async (doc: ExternalToolDoc, ctx: Context) => {
-    const mdx = await compileMDX(ctx, doc);
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -385,7 +383,7 @@ const externalTools = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx,
+      content: doc.content || "",
       complexity,
       hasPricing: !!doc.pricing,
       capabilityCount: doc.capabilities.length,
