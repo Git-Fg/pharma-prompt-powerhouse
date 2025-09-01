@@ -1,4 +1,3 @@
-import { allConcepts } from "content-collections";
 import type { Concept } from "content-collections";
 
 export interface ConceptTip {
@@ -31,10 +30,24 @@ export function getRandomConceptTip(
   // 2. Sélectionner un concept au hasard parmi les éligibles
   const randomConcept = eligibleConcepts[Math.floor(Math.random() * eligibleConcepts.length)];
 
+  // Garde-fou pour TypeScript, même si la logique l'empêche d'être undefined ici.
+  if (!randomConcept) {
+    return null;
+  }
+
+  // Le filtre garantit que keyTakeaways existe et n'est pas vide.
+  const takeaways = randomConcept.keyTakeaways;
+  if (!takeaways || takeaways.length === 0) {
+      return null; // Sécurité supplémentaire
+  }
+
   // 3. Sélectionner un key takeaway au hasard dans ce concept
-  const randomTakeaway = randomConcept.keyTakeaways[
-    Math.floor(Math.random() * randomConcept.keyTakeaways.length)
-  ];
+  const randomTakeaway = takeaways[Math.floor(Math.random() * takeaways.length)];
+  
+  // Autre garde-fou pour le cas où l'accès à l'array renverrait undefined (strictness)
+  if (!randomTakeaway) {
+      return null;
+  }
 
   // 4. Formatter les données pour le Client Component (sécurité de sérialisation)
   return {
