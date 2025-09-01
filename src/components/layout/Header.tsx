@@ -25,9 +25,9 @@ import {
   Moon,
   Sun,
   User,
-  Search,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import { CommandPalette } from "@/components/search/CommandPalette";
 
 const navigation = [
   {
@@ -110,9 +110,7 @@ export function Header() {
 
             <div className="flex items-center space-x-2">
               {/* Search */}
-              <Button variant="ghost" size="icon">
-                <Search className="w-4 h-4" />
-              </Button>
+              <CommandPalette />
 
               {/* Theme Toggle */}
               <Button
@@ -211,17 +209,7 @@ export function Header() {
                     </div>
 
                     <div className="space-y-2">
-                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
-                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-                          <Search className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <div className="font-medium">Rechercher</div>
-                          <div className="text-xs text-muted-foreground">
-                            Trouver du contenu
-                          </div>
-                        </div>
-                      </button>
+                      <CommandPalette />
 
                       <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ import { getIcon } from '@/types/icon-taxonomy';
 
 // Type co-localisé avec le composant
 export interface PromptCardProps {
+  slug: string;
   title: string;
   description: string;
   difficulty: 'débutant' | 'intermédiaire' | 'avancé';
@@ -25,11 +27,12 @@ export interface PromptCardProps {
   category?: string;
   targetTool?: string;
   icon?: string;
-  onUse: () => void;
+  promptContent?: string; // For copying the actual prompt content
   onFavorite?: () => void;
 }
 
 export const PromptCard: React.FC<PromptCardProps> = ({
+  slug,
   title,
   description,
   difficulty,
@@ -40,7 +43,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({
   category: _category,
   targetTool,
   icon,
-  onUse,
+  promptContent,
   onFavorite: _onFavorite,
 }) => {
   const [copied, setCopied] = useState(false);
@@ -54,7 +57,9 @@ export const PromptCard: React.FC<PromptCardProps> = ({
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(description);
+      // Copy the actual prompt content if available, otherwise use description
+      const textToCopy = promptContent || description;
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -129,11 +134,13 @@ export const PromptCard: React.FC<PromptCardProps> = ({
         <div className='mt-auto space-y-2'>
           <div className='flex gap-2'>
             <Button 
-              onClick={onUse} 
+              asChild
               className='flex-1'
               data-testid="use-prompt-button"
             >
-              Utiliser ce prompt
+              <Link href={`/boite-a-outils/prompt-editor?template=${slug}`}>
+                Utiliser ce prompt
+              </Link>
             </Button>
             <Button
               variant='outline'

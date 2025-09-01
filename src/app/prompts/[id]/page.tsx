@@ -8,12 +8,63 @@ import { ArrowLeft, Clock, Target, BookOpen, Edit3 } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
 import { CopyButton } from "@/components/ui/copy-button";
 import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import type { Metadata } from "next";
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
   return allPrompts.map((prompt) => ({
     id: prompt.slug,
   }));
+}
+
+// Génération des métadonnées dynamiques pour le SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const prompt = allPrompts.find((p) => p.slug === id);
+
+  if (!prompt) {
+    return {
+      title: "Prompt non trouvé - Pharma Prompt Powerhouse",
+      description: "Le prompt que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${prompt.title} - Prompts | Pharma Prompt Powerhouse`,
+    description: prompt.description,
+    keywords: [
+      "pharmacie",
+      "prompt engineering",
+      "prompt",
+      "template",
+      "IA",
+      prompt.title,
+      prompt.category,
+      ...(prompt.tags?.map(t => t.name) || [])
+    ],
+    openGraph: {
+      title: prompt.title,
+      description: prompt.description,
+      type: "article",
+      images: [
+        {
+          url: "/og-prompt.png",
+          width: 1200,
+          height: 630,
+          alt: prompt.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: prompt.title,
+      description: prompt.description,
+    },
+  };
 }
 
 const categoryLabels = {
