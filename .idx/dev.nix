@@ -34,13 +34,13 @@
           "run"
           "dev"
           "--port"
-          "{{PORT}}"
+          "9002"
           "--hostname"
           "0.0.0.0"
         ];
         manager = "web";
         env = {
-          PORT = "{{PORT}}";
+          PORT = "9002";
           HOSTNAME = "0.0.0.0";
         };
       };

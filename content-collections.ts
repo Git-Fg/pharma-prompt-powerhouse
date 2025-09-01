@@ -1,4 +1,4 @@
-import { defineCollection, defineConfig } from "@content-collections/core";
+import { defineCollection, defineConfig, Context } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 
@@ -29,6 +29,7 @@ type Meta = {
   fileName: string;
   directory: string;
   mtime?: number; // Rendre mtime optionnel
+  content: string;
 };
 
 // ============================================================================
@@ -124,15 +125,15 @@ const validationErrors: ValidationError[] = [];
  */
 const validateConceptReferences = async (
   doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
-  ctx: unknown
+  ctx: Context
 ) => {
   // --- Validation de mainGuideSlug ---
   if (doc.mainGuideSlug) {
     const allGuides = await ctx.documents(guides);
     // Trouver un guide dont le slug correspond à mainGuideSlug
     const linkedGuide = allGuides.find(
-      (g: any) => g.slug === doc.mainGuideSlug
-    ); // eslint-disable-line @typescript-eslint/no-explicit-any
+      (g) => g.slug === doc.mainGuideSlug
+    );
     if (!linkedGuide) {
       validationErrors.push({
         document: doc._meta.path,
@@ -152,8 +153,8 @@ const validateConceptReferences = async (
  * Ajoute des champs calculés communs à tous les documents (temps de lecture, slug...).
  * C'est notre fonction "boilerplate killer".
  */
-const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta, content: string }) => {
-  const wordCount = doc.content?.trim().split(/\s+/).length || 0;
+const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta }) => {
+  const wordCount = doc._meta.content?.trim().split(/\s+/).length || 0;
   const readingTime = Math.ceil(wordCount / 200); // 200 mots par minute
 
   // Calcul de la complexité basé sur le nombre de mots
@@ -180,27 +181,23 @@ const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta, content: s
  */
 const resolveConceptRelations = async (
   doc: { conceptSlugs?: string[] },
-  ctx: any,
-  conceptsCollection: any
+  ctx: Context
 ) => {
-  // eslint-disable-line @typescript-eslint/no-explicit-any
   if (!doc.conceptSlugs || doc.conceptSlugs.length === 0) {
     return { concepts: [] };
   }
 
-  // Récupération de toutes les collections de concepts
-  const allConcepts = await ctx.documents(conceptsCollection);
-  const concepts = allConcepts
-    .filter((concept: any) => doc.conceptSlugs!.includes(concept._meta.path)) // eslint-disable-line @typescript-eslint/no-explicit-any
-    .map((concept: any) => ({
-      // eslint-disable-line @typescript-eslint/no-explicit-any
-      slug: concept._meta.path,
+  const allConcepts = await ctx.documents(concepts);
+  const relatedConcepts = allConcepts
+    .filter((concept) => doc.conceptSlugs!.includes(concept.slug))
+    .map((concept) => ({
+      slug: concept.slug,
       title: concept.title,
       icon: concept.icon,
       category: concept.category,
-    })); // On ne garde que l'essentiel
+    }));
 
-  return { concepts };
+  return { concepts: relatedConcepts };
 };
 
 // ============================================================================
@@ -248,56 +245,51 @@ const processTags = (doc: { tags?: string[] }) => {
 // DÉFINITION DES COLLECTIONS
 // ============================================================================
 
-// On définit les concepts en premier car d'autres collections en dépendent.
+const conceptSchema = baseSchema.extend({
+  icon: z.string().optional(),
+  mainGuideSlug: z.string().optional(),
+  category: z.string().optional(),
+});
+type ConceptDoc = z.infer<typeof conceptSchema> & { _meta: Meta };
+
 const concepts = defineCollection({
   name: "concepts",
   directory: "src/content/concepts",
   include: "*.mdx",
-  schema: baseSchema.extend({
-    icon: z.string().optional(),
-    mainGuideSlug: z.string().optional(),
-    category: z.string().optional(),
-  }),
-  transform: async (doc, ctx) => {
-    // Compilation MDX au build
+  schema: conceptSchema,
+  transform: async (doc: ConceptDoc, ctx: Context) => {
     const mdx = await compileMDX(ctx, doc);
-
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx, concepts);
-
-    // --- Validation personnalisée : mainGuideSlug ---
     await validateConceptReferences(doc, ctx);
-    // ----------------------------------------------------
 
     return {
       ...computed,
       ...processedTags,
-      ...relations,
-      mdx, // Ajout du contenu MDX compilé
+      mdx,
     };
   },
 });
+
+const guideSchema = baseSchema.extend({
+  category: z.string(),
+  progress: z.number().optional(),
+  targetAudience: z.array(z.string()).default([]),
+  estimatedTime: z.string().optional(),
+});
+type GuideDoc = z.infer<typeof guideSchema> & { _meta: Meta };
 
 const guides = defineCollection({
   name: "guides",
   directory: "src/content/guides",
   include: "*.mdx",
-  schema: baseSchema.extend({
-    category: z.string(),
-    progress: z.number().optional(),
-    targetAudience: z.array(z.string()).default([]),
-    estimatedTime: z.string().optional(),
-  }),
-  transform: async (doc, ctx) => {
-    // Compilation MDX au build
+  schema: guideSchema,
+  transform: async (doc: GuideDoc, ctx: Context) => {
     const mdx = await compileMDX(ctx, doc);
-
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx, concepts);
+    const relations = await resolveConceptRelations(doc, ctx);
 
-    // Ajustement de la complexité pour les guides
     const complexity =
       computed.wordCount > 5000
         ? "avancé"
@@ -309,7 +301,7 @@ const guides = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx, // Ajout du contenu MDX compilé
+      mdx,
       complexity,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
@@ -318,38 +310,30 @@ const guides = defineCollection({
   },
 });
 
+const promptSchema = baseSchema.extend({
+  category: z.string(),
+  targetTool: z.string().optional(),
+  variables: z.array(z.string()).optional(),
+  domain: z.string().optional(),
+  useCase: z.string().optional(),
+  example: z.string().optional(),
+  estimatedTime: z.string().optional(),
+  promptContent: z.string().optional(),
+  alternativeVersions: z.array(z.object({ name: z.string(), content: z.string() })).optional(),
+});
+type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta };
+
 const prompts = defineCollection({
   name: "prompts",
   directory: "src/content/prompts",
   include: "*.mdx",
-  schema: baseSchema.extend({
-    category: z.string(),
-    targetTool: z.string().optional(),
-    variables: z.array(z.string()).optional(),
-    domain: z.string().optional(),
-    useCase: z.string().optional(),
-    example: z.string().optional(),
-    estimatedTime: z.string().optional(),
-    // Nouveaux champs pour séparer le prompt du contexte
-    promptContent: z.string().optional(),
-    alternativeVersions: z
-      .array(
-        z.object({
-          name: z.string(),
-          content: z.string(),
-        })
-      )
-      .optional(),
-  }),
-  transform: async (doc, ctx) => {
-    // Compilation MDX au build
+  schema: promptSchema,
+  transform: async (doc: PromptDoc, ctx: Context) => {
     const mdx = await compileMDX(ctx, doc);
-
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx, concepts);
+    const relations = await resolveConceptRelations(doc, ctx);
 
-    // Ajustement de la complexité pour les prompts
     const complexity =
       computed.wordCount > 1000
         ? "avancé"
@@ -361,35 +345,35 @@ const prompts = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx, // Ajout du contenu MDX compilé
+      mdx,
       complexity,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
-      estimatedTokens: Math.ceil(computed.wordCount * 1.3), // Approximation pour l'IA
+      estimatedTokens: Math.ceil(computed.wordCount * 1.3),
     };
   },
 });
+
+const externalToolSchema = baseSchema.extend({
+  url: z.string().url(),
+  category: z.string(),
+  pricing: z.string().optional(),
+  capabilities: z.array(z.string()).default([]),
+});
+type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta };
 
 const externalTools = defineCollection({
   name: "externalTools",
   directory: "src/content/external-tools",
   include: "*.mdx",
-  schema: baseSchema.extend({
-    url: z.string().url(),
-    category: z.string(),
-    pricing: z.string().optional(),
-    capabilities: z.array(z.string()).default([]),
-  }),
-  transform: async (doc, ctx) => {
-    // Compilation MDX au build
+  schema: externalToolSchema,
+  transform: async (doc: ExternalToolDoc, ctx: Context) => {
     const mdx = await compileMDX(ctx, doc);
-
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx, concepts);
+    const relations = await resolveConceptRelations(doc, ctx);
 
-    // Ajustement de la complexité pour les outils externes
     const complexity =
       computed.wordCount > 2000
         ? "avancé"
@@ -401,7 +385,7 @@ const externalTools = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx, // Ajout du contenu MDX compilé
+      mdx,
       complexity,
       hasPricing: !!doc.pricing,
       capabilityCount: doc.capabilities.length,
@@ -417,9 +401,7 @@ const externalTools = defineCollection({
 // ============================================================================
 export default defineConfig({
   collections: [concepts, guides, prompts, externalTools],
-  onSuccess: async (_allDocuments: any[]) => {
-    // eslint-disable-line @typescript-eslint/no-explicit-any
-    // Afficher les erreurs de validation
+  onSuccess: async () => {
     if (validationErrors.length > 0) {
       console.error("\n🚨 ERREURS DE VALIDATION DES RÉFÉRENCES CROISÉES 🚨\n");
       validationErrors.forEach((error) => {
@@ -433,8 +415,6 @@ export default defineConfig({
         `\n❌ Total: ${validationErrors.length} erreur(s) de validation`
       );
       console.error("Veuillez corriger ces erreurs avant de continuer.\n");
-
-      // Arrêter le build avec un code d'erreur
       process.exit(1);
     } else {
       console.log("✅ Toutes les références croisées sont valides");
