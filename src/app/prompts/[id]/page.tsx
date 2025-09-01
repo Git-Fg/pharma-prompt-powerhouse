@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Target, BookOpen, Edit3 } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
+import { CopyButton } from "@/components/ui/copy-button";
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
@@ -90,25 +91,68 @@ export default async function PromptDetailPage({
       {/* Contenu principal en lecture seule */}
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <Card>
+          {/* Prompt Principal - Isolé et facilement copiable */}
+          <Card className="border-2 border-primary/20">
             <CardHeader>
-              <CardTitle className="text-2xl">Prompt Brut</CardTitle>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                🎯 Prompt Principal
+                <CopyButton 
+                  text={foundPrompt.promptContent || foundPrompt.content || ""} 
+                  label="Copier"
+                />
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Voici le template de base. Copiez-le ou utilisez le bouton
-                ci-dessus pour le personnaliser dans l'éditeur.
+                <strong>Prêt à utiliser :</strong> Copiez ce prompt et collez-le dans votre outil IA préféré.
               </p>
-              <CodeBlock language="markdown" showLineNumbers>
-                {foundPrompt.content || ""}
-              </CodeBlock>
+              <div className="bg-muted/30 p-4 rounded-lg border-l-4 border-primary">
+                <CodeBlock language="text" showLineNumbers={false}>
+                  {foundPrompt.promptContent || foundPrompt.content || ""}
+                </CodeBlock>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Versions Alternatives si disponibles */}
+          {foundPrompt.alternativeVersions && foundPrompt.alternativeVersions.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">🔄 Versions Alternatives</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {foundPrompt.alternativeVersions.map((version, index) => (
+                  <div key={index} className="border rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold">{version.name}</h4>
+                      <CopyButton 
+                        text={version.content}
+                        label="Copier"
+                      />
+                    </div>
+                    <CodeBlock language="text" showLineNumbers={false}>
+                      {version.content}
+                    </CodeBlock>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Notes d'utilisation - Séparées du prompt */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">📝 Notes d'Utilisation</CardTitle>
+            </CardHeader>
+            <CardContent className="prose prose-sm max-w-none dark:prose-invert">
+              <div dangerouslySetInnerHTML={{ __html: foundPrompt.mdx || '' }} />
             </CardContent>
           </Card>
 
           {foundPrompt.variables && foundPrompt.variables.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Variables à personnaliser</CardTitle>
+                <CardTitle>🔧 Variables à personnaliser</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3">
@@ -121,7 +165,7 @@ export default async function PromptDetailPage({
                         {variable}
                       </Badge>
                       <span className="text-sm text-muted-foreground">
-                        Variable à remplacer par votre valeur
+                        Remplacez cette variable par votre valeur
                       </span>
                     </div>
                   ))}
