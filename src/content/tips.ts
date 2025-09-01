@@ -18,8 +18,8 @@ export const dailyTips: DailyTip[] = [
     link: "/guides/confidentialite-securite",
   },
   {
-    text: "L'IA vous répond sans suivre le format demandé ? Apprenez à la contraindre avec les sorties structurées ou le XML prompting.",
-    link: "/guides/sorties-structurees",
+    text: "L'IA ne suit pas vos instructions ? Apprenez à mieux guider sa pensée en structurant votre prompt avec des sections et des balises.",
+    link: "/guides/structurer-son-prompt-pour-guider-lia",
   },
   {
     text: "Utilisez les 'Instructions Personnalisées' de ChatGPT ou Claude.ai pour qu'ils se souviennent de qui vous êtes et comment vous voulez qu'ils répondent.",

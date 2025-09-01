@@ -1,46 +1,44 @@
 ---
-title: "Structuration de Contenu"
-description: "Organisez et structurez vos contenus pour optimiser leur compréhension par l'IA et améliorer la qualité des réponses."
+title: "Principes de Structuration d'un Prompt"
+description: "Découvrez les principes fondamentaux pour organiser votre demande à l'IA et maximiser la clarté et l'efficacité de vos prompts."
 icon: "List"
 category: "Fondamentaux"
-mainGuideSlug: "fondamentaux-prompting-pharmaceutique"
+mainGuideSlug: "structurer-son-prompt-pour-guider-lia"
 keyTakeaways:
-  - "Une structure claire et logique améliore significativement la compréhension et la précision des réponses de l'IA."
-  - "Utilisez des délimiteurs (XML, Markdown) et des hiérarchies pour organiser l'information de manière cohérente."
-  - "Adaptez la structure au type de contenu : tableaux pour les comparaisons, listes pour les étapes, sections pour les concepts complexes."
-tags: ["guide", "pedagogie", "pharmacie"]
+  - "Un prompt bien structuré améliore la précision et la fiabilité des réponses de l'IA."
+  - "Utilisez des sections, des listes et des séparateurs pour organiser logiquement votre demande."
+  - "Adapter la structure du prompt au type de tâche à effectuer est essentiel pour obtenir de bons résultats."
+tags: ["fondamentaux", "structuration", "prompting"]
 ---
 
-La **Structuration de Contenu** est l'art d'organiser l'information de manière logique et hiérarchique pour optimiser la compréhension de l'IA. En pharmacie, une structure claire transforme des données complexes en informations facilement assimilables.
+La **Structuration d'un Prompt** est l'art d'organiser votre demande à une IA de manière logique et hiérarchique pour en optimiser sa compréhension. En pharmacie, un prompt clair et bien structuré transforme des questions complexes en réponses précises et directement exploitables.
 
-## Pourquoi structurer le contenu ?
+## Pourquoi structurer votre prompt ?
 
-Une bonne structure améliore considérablement les résultats :
+Une bonne structure de prompt améliore considérablement les résultats que vous obtenez :
 
-- **Compréhension optimale** : L'IA traite mieux l'information organisée
-- **Réduction des erreurs** : Moins d'ambiguïté dans l'interprétation
-- **Efficacité accrue** : Réponses plus précises et pertinentes
-- **Maintenance facilitée** : Contenu plus facile à modifier et mettre à jour
+- **Compréhension optimale** : L'IA traite mieux une demande organisée, ce qui réduit les risques de mauvaise interprétation.
+- **Réduction des erreurs et hallucinations** : Moins il y a d'ambiguïté dans votre instruction, moins l'IA a de chances de s'écarter du sujet.
+- **Efficacité accrue** : Vous obtenez des réponses plus pertinentes du premier coup, ce qui vous fait gagner du temps.
+- **Itération facilitée** : Un prompt structuré est beaucoup plus simple à ajuster ou à complexifier par la suite.
 
-## Principes de structuration
+## Principes de structuration d'un prompt
 
-1. **Hiérarchisation** : Informations les plus importantes en premier
-2. **Groupement logique** : Regrouper les éléments connexes
-3. **Séquençage** : Ordre logique et progressif
-4. **Standardisation** : Format cohérent et prévisible
+1.  **Hiérarchisation** : Placez les instructions les plus importantes et le contexte général au début.
+2.  **Groupement logique** : Regroupez les éléments connexes. Par exemple, mettez tout le contexte dans une section `<contexte>` ou sous un titre "Contexte".
+3.  **Séquençage** : Si vous demandez à l'IA d'effectuer une tâche en plusieurs étapes, numérotez ces étapes dans l'ordre logique.
+4.  **Clarté et Simplicité** : Utilisez des phrases courtes et directes. Préférez la simplicité à la complexité.
 
-## Techniques de structuration
+## Techniques de structuration de prompt
 
-- **Listes à puces** : Pour les énumérations simples
-- **Tableaux** : Pour les comparaisons et données structurées
-- **Sections numérotées** : Pour les processus séquentiels
-- **Arbres de décision** : Pour les algorithmes cliniques
-- **Maps conceptuels** : Pour les relations complexes
+Voici des techniques simples pour commencer à structurer vos prompts :
 
-## Applications en pharmacie
+-   **Listes à puces ou numérotées** : Idéal pour énumérer clairement vos instructions, les critères à respecter ou les éléments d'un contexte.
+-   **Titres de section** : Utilisez des titres simples comme `Contexte :`, `Question :`, `Instructions :` pour délimiter clairement les différentes parties de votre demande.
+-   **Séparateurs** : Une simple ligne de tirets `---` peut suffire à séparer visuellement des blocs d'informations complexes et aider l'IA à les traiter distinctement.
 
-- **Dossiers patients** : Organiser les informations essentielles
-- **Protocoles thérapeutiques** : Structurer les étapes de traitement
-- **Fiches de révision** : Organiser les connaissances par thèmes
-- **Cas cliniques** : Structurer l'analyse diagnostique
-- **Présentations** : Organiser le contenu pour l'audience
+## Application en pharmacie
+
+-   **Analyse de cas cliniques** : Structurez votre prompt avec des sections pour l'histoire du patient, les résultats de laboratoire, et les questions spécifiques que vous posez à l'IA.
+-   **Création de fiches de révision** : Utilisez des listes pour spécifier les sujets à inclure, le format souhaité (tableau, liste, résumé) et le niveau de détail attendu.
+-   **Rédaction d'emails** : Délimitez le destinataire, l'objectif et les points clés à aborder pour que l'IA rédige une communication claire et professionnelle.
