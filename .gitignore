@@ -42,3 +42,6 @@ next-env.d.ts
 *.log
 dev.log
 server.log
+
+# Je pref pnpm, donc je supprime npm
+package-lock.json
