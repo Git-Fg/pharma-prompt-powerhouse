@@ -1,5 +1,5 @@
 import { defineCollection, defineConfig, Context } from "@content-collections/core";
-// import { compileMDX } from "@content-collections/mdx"; // Temporairement désactivé
+import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 
 // ============================================================================
@@ -260,8 +260,7 @@ const concepts = defineCollection({
   include: "*.mdx",
   schema: conceptSchema,
   transform: async (doc: ConceptDoc, ctx: Context) => {
-    // Temporairement désactiver MDX compilation pour debugger
-    // const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
+    const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     await validateConceptReferences(doc, ctx);
@@ -269,7 +268,7 @@ const concepts = defineCollection({
     return {
       ...computed,
       ...processedTags,
-      mdx: "", // Temporaire
+      mdx,
     };
   },
 });
@@ -288,7 +287,7 @@ const guides = defineCollection({
   include: "*.mdx",
   schema: guideSchema,
   transform: async (doc: GuideDoc, ctx: Context) => {
-    // const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
+    const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -304,7 +303,7 @@ const guides = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx: "", // Temporaire
+      mdx,
       complexity,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
@@ -332,7 +331,7 @@ const prompts = defineCollection({
   include: "*.mdx",
   schema: promptSchema,
   transform: async (doc: PromptDoc, ctx: Context) => {
-    // const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
+    const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -348,7 +347,7 @@ const prompts = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx: "", // Temporaire
+      mdx,
       complexity,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
@@ -372,7 +371,7 @@ const externalTools = defineCollection({
   include: "*.mdx",
   schema: externalToolSchema,
   transform: async (doc: ExternalToolDoc, ctx: Context) => {
-    // const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
+    const mdx = await compileMDX(ctx, { ...doc, content: doc._meta.content });
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     const relations = await resolveConceptRelations(doc, ctx);
@@ -388,7 +387,7 @@ const externalTools = defineCollection({
       ...computed,
       ...processedTags,
       ...relations,
-      mdx: "", // Temporaire
+      mdx,
       complexity,
       hasPricing: !!doc.pricing,
       capabilityCount: doc.capabilities.length,
