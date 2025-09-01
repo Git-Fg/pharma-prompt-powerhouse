@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm content-collections build && pnpm run build",
+  "buildCommand": "pnpm build",
   "installCommand": "pnpm install",
   "framework": "nextjs"
 }
