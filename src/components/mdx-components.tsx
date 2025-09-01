@@ -1,6 +1,8 @@
 // No import needed for MDXComponents type
 import React from 'react';
+import Link from 'next/link';
 import { CodeBlock } from "@/components/ui/code-block";
+import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -104,6 +106,36 @@ export function useMDXComponents(): Record<string, any> {
     CardDescription,
     CardHeader,
     CardTitle,
+    
+    // Points clés
+    KeyTakeaways,
+    
+    // Contenu associé - Version simplifiée pour MDX
+    RelatedContent: ({ title, items }: { title?: string; items?: Array<{ type: string; id: string }> }) => {
+      if (!items || items.length === 0) return null;
+      
+      return (
+        <Card className="my-6">
+          <CardHeader>
+            <CardTitle>{title || "Pour aller plus loin"}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {items.map((item, index) => (
+              <Link
+                key={index}
+                href={`/${item.type === 'concept' ? 'concepts' : item.type === 'guide' ? 'guides' : 'prompts'}/${item.id}`}
+                className="block p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+              >
+                <p className="font-medium">{item.id}</p>
+                <p className="text-sm text-muted-foreground">
+                  {item.type === 'concept' ? 'Concept' : item.type === 'guide' ? 'Guide' : 'Prompt'}
+                </p>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+      );
+    },
     
     // Listes
     ul: ({ children }: { children: React.ReactNode }) => (
