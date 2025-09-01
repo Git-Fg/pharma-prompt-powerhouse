@@ -177,28 +177,59 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
       const promptToLoad = allPrompts.find((p) => p.slug === templateToLoad);
 
       if (promptToLoad) {
-        // Convertir le prompt de content-collections en PromptTemplate
-        const template: PromptTemplate = {
-          id: promptToLoad.slug,
-          title: promptToLoad.title,
-          description: promptToLoad.description || "",
-          category: promptToLoad.category,
-          difficulty: promptToLoad.difficulty || "débutant",
-          targetTool: promptToLoad.targetTool || "",
-          content: promptToLoad.content,
-          variables: [], // On initialise avec un tableau vide pour l'instant
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
+        // Utiliser la nouvelle logique d'extraction pour obtenir tous les prompts du document
+        import('@/lib/prompt-extraction').then(({ extractPromptsFromDocument, convertToPromptTemplate }) => {
+          const extractedPrompts = extractPromptsFromDocument(promptToLoad);
+          
+          if (extractedPrompts.length > 0) {
+            // Prendre le premier prompt extrait ou permettre à l'utilisateur de choisir
+            const primaryPrompt = extractedPrompts[0];
+            if (primaryPrompt) {
+              const template = convertToPromptTemplate(primaryPrompt, promptToLoad);
+              
+              setCurrentPrompt(template);
+              setActiveTab("editor");
+              
+              // Initialiser les variables de prévisualisation avec des exemples
+              const initialPreviewVars: Record<string, string> = {};
+              template.variables.forEach((variable: PromptVariable) => {
+                initialPreviewVars[variable.name] = variable.example || `[${variable.name}]`;
+              });
+              setPreviewVariables(initialPreviewVars);
+              
+              toast({
+                title: "Prompt chargé !",
+                description: `"${template.title}" a été chargé avec ${template.variables.length} variables détectées.`,
+              });
+            }
+          } else {
+            // Fallback vers l'ancienne méthode si aucun prompt n'est détecté
+            const template: PromptTemplate = {
+              id: promptToLoad.slug,
+              title: promptToLoad.title,
+              description: promptToLoad.description || "",
+              category: promptToLoad.category,
+              difficulty: promptToLoad.difficulty || "débutant",
+              targetTool: promptToLoad.targetTool || "",
+              content: promptToLoad.content,
+              variables: [],
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            };
 
-        setCurrentPrompt(template);
-        setActiveTab("editor");
-
-        // Pour l'instant, on n'initialise pas de variables car elles sont stockées différemment
-        // dans content-collections
+            setCurrentPrompt(template);
+            setActiveTab("editor");
+          }
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: `Le template "${templateToLoad}" n'a pas été trouvé.`,
+          variant: "destructive",
+        });
       }
     }
-  }, [templateToLoad]);
+  }, [templateToLoad, toast]);
 
   const handleSavePrompt = () => {
     if (!currentPrompt.title.trim()) {
