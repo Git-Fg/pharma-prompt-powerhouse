@@ -43,10 +43,12 @@ Je suis étudiant en pharmacie et voici mon projet : **Mon Carnet de Prompts**. 
 
 ### **Technologies que j'ai choisies**
 
-- **Next.js 15** : Pour la performance et la simplicité
-- **TypeScript** : Pour éviter les bugs et faciliter la maintenance
-- **Tailwind CSS + shadcn/ui** : Pour un design cohérent et beau
-- **Content Collections avec MDX** : Pour organiser mon contenu facilement
+- **Next.js 15** : Pour la performance et la simplicité de l'App Router.
+- **React 19** : Pour ses fonctionnalités modernes comme les Actions et le hook `use`.
+- **TypeScript** : Pour un code robuste et une maintenance facilitée.
+- **Tailwind CSS + shadcn/ui** : Pour un design cohérent et rapidement itérable.
+- **Content Collections** : C'est le cœur de mon organisation. Tous mes contenus (guides, prompts, concepts) sont des fichiers Markdown (`.mdx`) stockés localement. Content Collections les transforme en données typées et prêtes à l'emploi pendant le *build* de l'application.
+- **@content-collections/mdx** : Cette extension compile mes fichiers `.mdx` en composants React au moment du build. Cela me permet d'inclure des composants interactifs directement dans mon contenu, tout en garantissant un site ultra-rapide car le navigateur reçoit du HTML déjà rendu.
 
 ### **Architecture que j'ai adoptée**
 
@@ -64,6 +66,8 @@ src/
 ```
 
 **Approche "Concept-First"** : Les concepts sont le cœur de mon projet. Chaque concept pharmaceutique est documenté avec ses prompts associés, ses guides pratiques et ses outils. Cette architecture permet une navigation intuitive et une cohérence parfaite entre le contenu théorique et ses applications pratiques.
+
+La logique de liaison entre les contenus est entièrement gérée au moment du **build** par Content Collections. Cela signifie qu'aucune logique complexe de base de données ou de mapping n'est exécutée côté client, rendant l'application extrêmement rapide.
 
 ## 🚀 Comment l'utiliser
 

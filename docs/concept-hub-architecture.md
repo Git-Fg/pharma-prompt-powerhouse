@@ -27,10 +27,10 @@ export const conceptSchema = z.object({
   title: z.string(),
   description: z.string(),
   icon: z.string().optional(),
-  content: z.string(),
+  content: z.string(), // Contenu brut Markdown/MDX
   keyTakeaways: z.array(z.string()).max(3).optional(),
 
-  // NOUVEAUX CHAMPS
+  // Champs pour la liaison sémantique
   mainGuideSlug: z.string().optional(), // Slug du guide principal pour ce concept
   category: z
     .enum(["Fondamentaux", "Techniques Avancées", "Méthodologie"])
@@ -65,98 +65,32 @@ export const conceptSchema = z.object({
 - **Outil pour Pratiquer** : Lien direct vers l'éditeur
 - **Guides d'Approfondissement** : Autres guides liés au concept
 
-## Refonte du Contenu
+## Implémentation Technique : La Philosophie du "Build-Time"
 
-### Guides Transformés en Tutoriels Pratiques
+L'efficacité de l'architecture repose sur un principe clé : **faire le maximum de travail au moment du build, et non à l'exécution**. Cela garantit un site extrêmement rapide et robuste.
 
-- **Avant** : Documents théoriques avec redéfinition des concepts
-- **Maintenant** : Tutoriels "Comment faire" orientés action
-- **Exemples** :
-  - "Comment Construire un Prompt Pharmaceutique Efficace"
-  - "Guide Pratique : Optimiser le Contexte de vos Prompts"
-  - "Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought"
+### 1. Content Collections : Le Cœur de la Donnée
 
-### Nouveaux Guides Créés
+- **Source de Vérité** : Tous les contenus (concepts, guides, prompts) sont des fichiers `.mdx` locaux dans le dossier `src/content`.
+- **Transformation au Build** : La bibliothèque `content-collections` lit ces fichiers, valide leur structure avec Zod, et effectue des transformations (ajout de `slug`, liaisons entre concepts et guides, etc.) via la fonction `transform`.
+- **Types Générés** : Le résultat est un ensemble de données fortement typées, prêtes à être consommées par les composants React, sans aucune transformation supplémentaire nécessaire côté client.
 
-- **Workflow : Automatiser la Création de Fiches de Révision**
-- **Workflow d'Investigation : Analyser un Signal de Pharmacovigilance avec ToT**
-- **Guide de Précision : Obtenir des Données Fiables avec XML et Température Basse**
+### 2. Rendu du Contenu (MDX Build-Time)
 
-## Navigation et UX
+- **Compilation Statique** : Grâce à `@content-collections/mdx`, le contenu MDX n'est pas interprété côté client. Il est **compilé en composants React pendant le build**.
+- **Performance** : Le navigateur reçoit du HTML et du JavaScript optimisés, ce qui élimine complètement le coût du parsing Markdown à l'exécution.
+- **Interactivité** : Cette approche permet d'intégrer des composants React interactifs (comme des alertes, des graphiques ou des outils personnalisés) directement dans les fichiers de contenu `.mdx`, offrant une richesse fonctionnelle impossible avec un simple rendu Markdown.
 
-### Header Refactorisé
+### 3. Composants React "Stupides"
 
-```typescript
-const navigation = [
-  {
-    name: "Concepts",
-    href: "/concepts",
-    icon: Brain,
-    description: "Point de départ : chaque concept est un dossier complet",
-  },
-  {
-    name: "Guides",
-    href: "/guides",
-    icon: BookOpen,
-    description: "Apprendre les bases du prompting",
-  },
-  // ... autres éléments
-];
-```
+- Les composants de page (comme `ConceptDetailPage`) sont volontairement simples. Ils reçoivent les données déjà transformées et compilées de Content Collections et se contentent de les afficher. 
+- Toute la logique complexe est encapsulée dans le processus de build, ce qui rend les composants plus lisibles, plus faciles à maintenir et à tester.
 
-### Parcours Utilisateur Optimisé
+### 4. Génération Statique (SSG) de Next.js
 
-1. **Arrivée** : Page d'accueil avec CTA "Commencer par un concept"
-2. **Exploration** : Navigation dans le Hub de Concepts par catégorie
-3. **Sélection** : Choix d'un concept d'intérêt
-4. **Découverte** : Page "Dossier de Concept" avec tout centralisé
-5. **Action** : Utilisation des outils et mise en pratique
-
-## Avantages de la Nouvelle Architecture
-
-### 1. **Expérience Utilisateur Améliorée**
-
-- Parcours clair et logique
-- Plus de navigation complexe entre sections
-- Découverte guidée et progressive
-
-### 2. **Contenu Mieux Structuré**
-
-- Chaque concept a un guide principal identifié
-- Liens explicites entre théorie et pratique
-- Hiérarchisation claire des informations
-
-### 3. **Maintenance Simplifiée**
-
-- Logique centralisée sur les concepts
-- Métadonnées structurées et cohérentes
-- Évolutivité facilitée
-
-### 4. **Apprentissage Optimisé**
-
-- Approche "résolution de problème" plutôt que "lecture passive"
-- Connexions explicites entre concepts et applications
-- Workflows pratiques et reproductibles
-
-## Implémentation Technique
-
-### Content Collections
-
-- **Concepts** : Collection pivot avec nouveaux champs
-- **Guides** : Liens vers concepts via `concepts: string[]`
-- **Prompts** : Liens vers concepts via `concepts: string[]`
-
-### Composants React
-
-- **ConceptsPage** : Listing organisé par catégories
-- **ConceptDetailPage** : Dossier complet avec sections structurées
-- **Navigation** : Header refactorisé avec concepts en premier
-
-### Génération Statique
-
-- **SSG** pour toutes les pages de concepts
-- **Métadonnées** générées automatiquement
-- **Liens** créés dynamiquement entre contenus
+- Toutes les pages de contenu (`/concepts/[slug]`, `/guides/[id]`) sont générées statiquement au moment du build.
+- Next.js crée des fichiers HTML pour chaque page, qui peuvent être servis instantanément via un CDN.
+- Le résultat est une performance de premier ordre et une fiabilité maximale, car il n'y a pas de rendu serveur ou de fetching de données côté client pour afficher le contenu principal.
 
 ## Métriques de Succès
 
@@ -200,6 +134,4 @@ const navigation = [
 
 ## Conclusion
 
-Le Hub de Concepts transforme fondamentalement l'expérience d'apprentissage sur Pharma Prompt Powerhouse. En passant d'une approche "silos" à une approche "centrée sur les concepts", nous créons un écosystème d'apprentissage plus intuitif, plus efficace et plus engageant.
-
-Cette architecture place l'utilisateur au centre de l'expérience, lui permettant de commencer par ce qui l'intéresse (un concept) et de découvrir naturellement tout ce qui s'y rapporte (guides, prompts, outils). C'est une approche moderne qui correspond aux attentes des apprenants d'aujourd'hui.
+Le Hub de Concepts, motorisé par une architecture **build-time** avec Content Collections et le rendu MDX statique, transforme fondamentalement l'expérience d'apprentissage. En passant d'une approche "silos" à une approche "centrée sur les concepts", nous créons un écosystème d'apprentissage plus intuitif, performant et engageant. Cette architecture place l'utilisateur au centre de l'expérience, lui permettant de commencer par ce qui l'intéresse (un concept) et de découvrir naturellement tout ce qui s'y rapporte (guides, prompts, outils).
