@@ -122,7 +122,7 @@ export default function GuidesPage() {
       guide.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (guide.tags &&
         guide.tags.some((tag) =>
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
+          tag.name.toLowerCase().includes(searchTerm.toLowerCase())
         ));
     const matchesCategory =
       selectedCategory === "all" || guide.category === selectedCategory;
@@ -284,7 +284,7 @@ export default function GuidesPage() {
                             variant="outline"
                             className="text-xs"
                           >
-                            {tag}
+                            {tag.name}
                           </Badge>
                         ))}
                       {guide.tags && guide.tags.length > 3 && (

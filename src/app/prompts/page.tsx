@@ -99,7 +99,7 @@ export default function PromptsPage() {
       prompt.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (prompt.tags &&
         prompt.tags.some((tag) =>
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
+          tag.name.toLowerCase().includes(searchTerm.toLowerCase())
         ));
     const matchesCategory =
       selectedCategory === "all" || prompt.category === selectedCategory;
@@ -251,11 +251,11 @@ export default function PromptsPage() {
                       {prompt.tags &&
                         prompt.tags.slice(0, 3).map((tag, index) => (
                           <Badge
-                            key={index}
+                            key={tag.name}
                             variant="outline"
                             className="text-xs"
                           >
-                            {tag}
+                            {tag.name}
                           </Badge>
                         ))}
                       {prompt.tags && prompt.tags.length > 3 && (

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Globe, Tag, DollarSign } from "lucide-react";
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
+import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 
@@ -69,8 +69,8 @@ export default async function ExternalToolDetailPage({
           {tool.tags && tool.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 pt-2">
               {tool.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
-                  {tag}
+                <Badge key={tag.name} variant="secondary">
+                  {tag.name}
                 </Badge>
               ))}
             </div>
@@ -84,7 +84,7 @@ export default async function ExternalToolDetailPage({
       {tool.keyTakeaways && <KeyTakeaways points={tool.keyTakeaways} />}
 
       <main className="prose prose-lg dark:prose-invert max-w-none">
-        <MarkdownRenderer content={tool.content} />
+        <MDXRenderer code={tool.mdx} />
       </main>
 
       {/* NOUVELLE SECTION : Contenu lié */}

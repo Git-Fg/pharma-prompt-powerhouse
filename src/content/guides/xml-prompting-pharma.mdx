@@ -1,449 +1,68 @@
 ---
-title: "XML Prompting en Pharmacie"
-description: "Maîtrisez l'utilisation des balises XML pour structurer vos prompts et améliorer la précision de l'IA"
-category: "ressources"
+title: "Structurer ses Prompts avec des Balises"
+description: "Apprenez à utiliser des balises simples (type XML) pour organiser vos prompts et obtenir des réponses plus fiables de l'IA."
+category: "techniques-avancees"
 difficulty: "intermédiaire"
-estimatedTime: "25 minutes"
+estimatedTime: "20 minutes"
 tags: ["xml", "structuration", "prompts", "claude", "précision"]
-progress: 0
-concepts: ["xml-prompting", "structuration-contenu"]
-date: "2025-01-20"
 isFavorite: true
+conceptSlugs: ["xml-prompting", "structuration-contenu"]
 keyTakeaways:
-  - "L'utilisation de balises XML (ex: `<contexte>`, `<instructions>`) est la meilleure pratique pour structurer les prompts, surtout avec Claude."
-  - "La structure XML réduit les erreurs d'interprétation de l'IA en séparant clairement les différentes parties de votre demande."
-  - "Organisez vos prompts de manière hiérarchique avec des balises sémantiques pour une clarté et une précision maximales."
+  - "Utiliser des balises comme `<patient>` ou `<question>` aide à organiser vos idées et à clarifier votre demande pour l'IA."
+  - "Cette technique ne vise pas à obtenir une sortie en XML, mais à rendre votre prompt d'entrée plus lisible et moins ambigu."
+  - "C'est particulièrement efficace pour les cas cliniques complexes ou les demandes multi-parties."
 ---
 
-# Structuration de Prompts avec XML pour la Pharmacie
+# Structurer ses Prompts avec des Balises
 
-## Objectifs d'apprentissage
+Quand nos demandes à l'IA deviennent complexes, comme pour une analyse de cas clinique, le texte brut peut devenir confus. Une technique simple et très efficace consiste à utiliser des balises, similaires au XML ou HTML, pour **structurer notre propre pensée** et, par conséquent, guider l'IA.
 
-À la fin de ce guide, vous serez capable de :
+**Attention :** Le but ici n'est PAS de demander à l'IA de répondre en XML. C'est une technique pour l'utilisateur, pour rendre le **prompt d'entrée** plus clair.
 
-- Comprendre pourquoi utiliser les balises XML pour structurer vos prompts
-- Maîtriser la syntaxe des balises XML sémantiques
-- Créer des prompts clairs et précis pour les tâches pharmaceutiques
-- Organiser vos prompts de manière hiérarchique et logique
+## Pourquoi cette méthode fonctionne ?
 
-## Prérequis
+Les modèles d'IA excellent à reconnaître des patterns. En encadrant des sections de votre prompt avec des balises claires, vous aidez le modèle à :
 
-- Avoir lu le guide "Prompting : Les Bases"
-- Comprendre les concepts fondamentaux de l'ingénierie de prompts
-- Avoir accès à un modèle Claude 4 ou équivalent
+-   **Distinguer le contexte des instructions.**
+-   **Comprendre la hiérarchie de l'information.**
+-   **Réduire les ambiguïtés.**
 
-## Concepts clés
+## Exemple Concret : Analyse d'un Cas Clinique
 
-### Pourquoi utiliser XML ?
+**Avant (moins clair) :**
+> J'ai un patient de 78 ans avec HTA et FA, qui prend de l'Amiodarone 200mg, de l'Apixaban 2.5mg x2 et du Furosémide 40mg. Il se plaint d'une grande fatigue depuis 2 jours et son cœur bat à 45 bpm. Analyse la situation et dis-moi quoi faire.
 
-L'utilisation de balises XML est devenue la meilleure pratique en 2025, particulièrement recommandée par Anthropic pour les modèles Claude 4. Cette approche transforme radicalement la façon dont les prompts sont structurés et interprétés.
-
-**Avantages clés :**
-
-- **Clarté** : Séparation nette des différentes sections du prompt
-- **Précision** : Réduction des erreurs d'interprétation par le modèle
-- **Flexibilité** : Modification facile des sections sans réécriture totale
-- **Parseabilité** : Facilité d'extraction de parties spécifiques des réponses
-
-### Balises essentielles
-
-Les balises essentielles à maîtriser sont :
-
-- `contexte` : pour les informations de base
-- `instructions` : pour ce que vous voulez que le modèle fasse
-- `contraintes` : pour les limites et exigences
-- `format_attendu` : pour la structure de réponse souhaitée
-
-## Méthodologie
-
-### Étape 1 : Identifier la structure de votre prompt
-
-Avant de commencer, décomposez votre demande en sections logiques :
-
-- **Contexte** : Informations de base nécessaires
-- **Instructions** : Ce que vous voulez que le modèle fasse
-- **Contraintes** : Limites et exigences spécifiques
-- **Format attendu** : Structure de la réponse souhaitée
-
-### Étape 2 : Créer des balises sémantiques
-
-Utilisez des noms de balises qui ont du sens dans votre domaine :
-
-**Exemples de bonnes balises :**
-
-- `contexte_pharmaceutique`
-- `instructions_analyse`
-- `exemples_cliniques`
-
-**Exemples à éviter :**
-
-- `text1`
-- `data`
-- `info`
-
-### Étape 3 : Organiser hiérarchiquement
-
-Structurez vos balises de manière logique et imbriquée. Voici un exemple de structure :
-
+**Après (structuré avec des balises) :**
 ```xml
-<analyse_medicament>
-  <nom_molecule>{{NOM_MOLECULE}}</nom_molecule>
-  <propriétés>
-    <pharmacocinétique>
-      <biodisponibilité>{{VALEUR}}</biodisponibilité>
-    </pharmacocinétique>
-  </propriétés>
-  <interactions>
-    <interaction type="medicament">
-      <substance>{{SUBSTANCE}}</substance>
-      <niveau_risque>{{NIVEAU}}</niveau_risque>
-    </interaction>
-  </interactions>
-</analyse_medicament>
-```
-
-## Exemples pratiques
-
-### Exemple 1 : Demande d'information pharmaceutique
-
-```xml
-<task>
-  Analyser les interactions médicamenteuses potentielles
-</task>
-
-<contexte>
-  <patient>
-    <age>67</age>
-    <sexe>M</sexe>
-    <antécédents>HTA, Diabète type 2</antécédents>
-  </patient>
-
-  <médicaments_actuels>
-    <médicament>
-      <nom>Lisinopril</nom>
-      <dose>20mg/jour</dose>
-    </médicament>
-    <médicament>
-      <nom>Metformine</nom>
-      <dose>850mg 2x/jour</dose>
-    </médicament>
-    <médicament>
-      <nom>Amlodipine</nom>
-      <dose>5mg/jour</dose>
-    </médicament>
-  </médicaments>
-
-  <nouveau_médicament>
-    <nom>Spironolactone</nom>
-    <dose>25mg/jour</dose>
-    <indication>Insuffisance cardiaque</indication>
-  </nouveau_médicament>
-</contexte>
-
-<instructions>
-  1. Identifier les interactions pharmacocinétiques potentielles
-  2. Évaluer les risques d'hyperkaliémie
-  3. Proposer des recommandations de monitoring
-  4. Suggérer des alternatives si nécessaire
-</instructions>
-
-<format_sortie>
-  <analyse_complète>
-    <interactions_détectées>
-      <interaction>
-        <médicaments_concernés>[Liste]</médicaments_concernés>
-        <mécanisme>[Description]</mécanisme>
-        <niveau_risque>[Élevé/Moyen/Faible]</niveau_risque>
-      </interaction>
-    </interactions_détectées>
-    <recommandations>
-      <monitoring>[Liste des paramètres à surveiller]</monitoring>
-      <alternatives>[Suggestions d'alternatives]</alternatives>
-    </recommandations>
-  </analyse_complète>
-</format_sortie>
-```
-
-### Exemple 2 : Analyse de cas clinique
-
-```xml
-<task>
-  Résoudre un cas clinique de pharmacovigilance
-</task>
-
 <cas_clinique>
   <patient>
-    <age>45</age>
-    <sexe>F</sexe>
-    <poids>68kg</poids>
-    <taille>165cm</taille>
+    <age>78 ans</age>
+    <antecedents>HTA, Fibrillation Atriale, Insuffisance Rénale (ClCr 40ml/min)</antecedents>
   </patient>
-
-  <symptômes>
-    <symptôme>
-      <description>Éruption cutanée généralisée</description>
-      <début>48h après début du traitement</début>
-      <intensité>Modérée</intensité>
-    </symptôme>
-    <symptôme>
-      <description>Prurit</description>
-      <début>24h après début du traitement</début>
-      <intensité>Sévère</intensité>
-    </symptôme>
-  </symptômes>
-
-  <traitement_suspect>
-    <médicament>Allopurinol</médicament>
-    <dose>300mg/jour</dose>
-    <durée>5 jours</durée>
-    <indication>Goutte</indication>
-  </traitement_suspect>
+  
+  <traitement>
+    <medicament nom="Amiodarone" dose="200mg/j" />
+    <medicament nom="Apixaban" dose="2.5mg x2/j" />
+    <medicament nom="Furosémide" dose="40mg/j" />
+  </traitement>
+  
+  <presentation_clinique>
+    <symptome>Asthénie intense depuis 48h</symptome>
+    <signe_vital>Fréquence cardiaque à 45 bpm</signe_vital>
+  </presentation_clinique>
 </cas_clinique>
 
-<instructions>
-  1. Évaluer la probabilité d'un effet indésirable médicamenteux
-  2. Identifier le mécanisme probable
-  3. Proposer une conduite à tenir immédiate
-  4. Recommander des mesures préventives futures
-</instructions>
-
-<format_sortie>
-  <évaluation>
-    <probabilité>[Élevée/Moyenne/Faible]</probabilité>
-    <mécanisme>[Description du mécanisme]</mécanisme>
-    <score_Naranjo>[Score calculé]</score_Naranjo>
-  </évaluation>
-
-  <conduite_à_tenir>
-    <immédiate>[Actions à effectuer maintenant]</immédiate>
-    <surveillance>[Paramètres à surveiller]</surveillance>
-  </conduite_à_tenir>
-
-  <prévention>
-    <mesures>[Recommandations futures]</mesures>
-    <alternatives>[Médicaments alternatifs]</alternatives>
-  </prévention>
-</format_sortie>
+<question>
+Analyse ce cas. Quelle est la cause la plus probable de la bradycardie ? Propose un plan d'action en 3 étapes.
+</question>
 ```
 
-## Bonnes pratiques
+Le second prompt est plus long en tokens, mais il est infiniment plus clair pour l'IA. Vous obtiendrez une réponse plus précise et structurée, souvent du premier coup, ce qui **économise vos quotas et votre temps**.
 
-### 1. Nommage sémantique des balises
+## Quand utiliser les balises ?
 
-- Utilisez des noms qui reflètent le contenu réel
-- Évitez les abréviations obscures
-- Maintenez une cohérence dans tout votre projet
+-   **Cas cliniques :** `<patient>`, `<traitement>`, `<biologie>`, `<question>`.
+-   **Analyse de documents :** `<source_document>`, `<instructions>`, `<format_attendu>`.
+-   **Comparaisons :** `<element_A>`, `<element_B>`, `<criteres_comparaison>`.
 
-### 2. Imbrication hiérarchique
-
-- Organisez vos balises de manière logique
-- Évitez les niveaux d'imbrication trop profonds (max 4-5 niveaux)
-- Utilisez des balises intermédiaires pour regrouper des informations
-
-### 3. Consistance dans l'utilisation
-
-- Utilisez les mêmes noms de balises dans tout votre projet
-- Référencez les balises dans vos instructions
-- Documentez votre structure de balises
-
-### 4. Gestion des variables
-
-- Utilisez une syntaxe cohérente pour les variables
-- Documentez clairement chaque variable
-- Fournissez des exemples de valeurs
-
-## Pièges à éviter
-
-### 1. Balises trop génériques
-
-**À éviter :**
-
-- `info`
-- `data`
-- `text`
-
-**Préférer :**
-
-- `contexte_patient`
-- `données_cliniques`
-- `instructions_spécifiques`
-
-### 2. Imbrication excessive
-
-**À éviter - trop de niveaux :**
-
-```xml
-<analyse>
-  <patient>
-    <données>
-      <personnelles>
-        <identité>
-          <nom>Dupont</nom>
-        </identité>
-      </personnelles>
-    </données>
-  </patient>
-</analyse>
-```
-
-**Préférer - structure plus plate :**
-
-```xml
-<analyse>
-  <patient>
-    <nom>Dupont</nom>
-    <age>45</age>
-    <poids>70kg</poids>
-  </patient>
-</analyse>
-```
-
-### 3. Oubli de la documentation
-
-- Documentez toujours vos balises
-- Expliquez le rôle de chaque section
-- Fournissez des exemples d'utilisation
-
-## Exercices pratiques
-
-### Exercice 1 : Créer un prompt pour l'analyse de posologie
-
-Créez un prompt XML pour analyser la posologie d'un médicament chez un patient pédiatrique.
-
-<details>
-<summary>Solution</summary>
-
-```xml
-<task>
-  Analyser la posologie pédiatrique d'un médicament
-</task>
-
-<contexte>
-  <patient>
-    <age>8</age>
-    <poids>25kg</poids>
-    <surface_corporelle>0.95m²</surface_corporelle>
-  </patient>
-
-  <médicament>
-    <nom>Paracétamol</nom>
-    <forme>Sirop</forme>
-    <concentration>24mg/ml</concentration>
-  </médicament>
-
-  <indication>Fièvre 39.2°C</indication>
-</contexte>
-
-<instructions>
-  1. Calculer la posologie recommandée selon le poids
-  2. Vérifier la dose maximale quotidienne
-  3. Proposer un schéma posologique adapté
-  4. Donner des conseils d'administration
-</instructions>
-
-<format_sortie>
-  <posologie_calculée>
-    <dose_par_prise>[mg]</dose_par_prise>
-    <volume_par_prise>[ml]</volume_par_prise>
-    <fréquence>[prises/jour]</fréquence>
-  </posologie_calculée>
-
-  <sécurité>
-    <dose_max_quotidienne>[mg]</dose_max_quotidienne>
-    <intervalle_minimal>[heures]</intervalle_minimal>
-  </sécurité>
-
-  <conseils>
-    <administration>[Instructions]</administration>
-    <précautions>[Avertissements]</précautions>
-  </conseils>
-</format_sortie>
-```
-
-</details>
-
-### Exercice 2 : Structurer un prompt pour l'analyse d'interactions
-
-Créez un prompt XML pour analyser les interactions entre plusieurs médicaments.
-
-<details>
-<summary>Solution</summary>
-
-```xml
-<task>
-  Analyser les interactions médicamenteuses multiples
-</task>
-
-<contexte>
-  <patient>
-    <age>72</age>
-    <fonction_rénale>Clairance créatinine 35ml/min</fonction_rénale>
-    <fonction_hépatique>Normale</fonction_hépatique>
-  </patient>
-
-  <traitement_actuel>
-    <médicament>
-      <nom>Warfarine</nom>
-      <dose>5mg/jour</dose>
-      <inr_cible>2.0-3.0</inr_cible>
-    </médicament>
-    <médicament>
-      <nom>Amiodarone</nom>
-      <dose>200mg/jour</dose>
-      <indication>Fibrillation auriculaire</indication>
-    </médicament>
-    <médicament>
-      <nom>Simvastatine</nom>
-      <dose>40mg/jour</dose>
-      <indication>Hypercholestérolémie</indication>
-    </médicament>
-  </traitement_actuel>
-</contexte>
-
-<instructions>
-  1. Identifier toutes les interactions potentielles
-  2. Classer par niveau de risque
-  3. Proposer des ajustements de posologie
-  4. Recommander un monitoring adapté
-</instructions>
-
-<format_sortie>
-  <interactions_identifiées>
-    <interaction>
-      <médicaments>[Liste]</médicaments>
-      <mécanisme>[Description]</mécanisme>
-      <niveau_risque>[Élevé/Moyen/Faible]</niveau_risque>
-      <conséquence_clinique>[Impact attendu]</conséquence_clinique>
-    </interaction>
-  </interactions_identifiées>
-
-  <recommandations>
-    <ajustements_posologie>[Modifications suggérées]</ajustements_posologie>
-    <monitoring>[Paramètres à surveiller]</monitoring>
-    <alternatives>[Médicaments alternatifs]</alternatives>
-  </recommandations>
-</format_sortie>
-```
-
-</details>
-
-## Ressources complémentaires
-
-- [Guide : Fondamentaux du Prompting Pharmaceutique](../fondamentaux/fondamentaux-prompting-pharmaceutique)
-- [Guide : Variables et Templates dans les Prompts](./variables-templates-prompts)
-- [Guide : Tree-of-Thought pour les Cas Cliniques](./tree-of-thought-clinique)
-- [Documentation Anthropic sur le prompting structuré](https://docs.anthropic.com/claude/docs/structured-prompts)
-
-## Prochaines étapes
-
-- **Maîtrisez les variables** : Apprenez à utiliser efficacement les placeholders dans vos prompts XML
-- **Explorez les techniques avancées** : Découvrez le Tree-of-Thought et le Self-Consistency prompting
-- **Pratiquez avec des cas réels** : Appliquez ces techniques à vos propres cas cliniques
-
-## Conclusion
-
-La structuration XML de vos prompts représente une révolution dans l'ingénierie de prompts en 2025. Cette approche vous permettra de créer des prompts plus clairs, plus précis et plus efficaces pour vos tâches pharmaceutiques.
-
-Commencez par maîtriser les balises de base, puis progressez vers des structures plus complexes. N'oubliez pas que la clé du succès réside dans la cohérence et la logique de votre organisation.
-
-**Rappel important** : Les modèles Claude 4 sont particulièrement optimisés pour cette approche XML, ce qui en fait votre meilleur choix pour commencer cette méthodologie.
+Utilisez cette technique avec parcimonie, là où elle apporte une réelle clarté. Pour une question simple, elle n'est pas nécessaire.

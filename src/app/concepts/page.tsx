@@ -71,10 +71,10 @@ export default function ConceptsPage() {
           if (concepts.length === 0) return null;
           const conceptsWithStats = concepts.map((c) => {
             const guideCount = allGuides.filter((g) =>
-              g.concepts?.includes(c.slug)
+              g.concepts?.some((concept: { slug: string }) => concept.slug === c.slug)
             ).length;
             const promptCount = allPrompts.filter((p) =>
-              p.concepts?.includes(c.slug)
+              p.concepts?.some((concept: { slug: string }) => concept.slug === c.slug)
             ).length;
             return { ...c, guideCount, promptCount };
           });

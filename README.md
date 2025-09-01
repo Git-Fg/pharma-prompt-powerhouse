@@ -46,7 +46,7 @@ Je suis étudiant en pharmacie et voici mon projet : **Mon Carnet de Prompts**. 
 - **Next.js 15** : Pour la performance et la simplicité
 - **TypeScript** : Pour éviter les bugs et faciliter la maintenance
 - **Tailwind CSS + shadcn/ui** : Pour un design cohérent et beau
-- **Content Collections** : Pour organiser mon contenu facilement
+- **Content Collections avec MDX** : Pour organiser mon contenu facilement
 
 ### **Architecture que j'ai adoptée**
 

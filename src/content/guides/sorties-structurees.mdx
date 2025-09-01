@@ -6,7 +6,7 @@ difficulty: "intermédiaire"
 estimatedTime: "25 minutes"
 tags: ["sorties-structurées", "yaml", "xml", "tableaux", "validation"]
 progress: 0
-concepts: ["structuration-contenu", "xml-prompting"]
+conceptSlugs: ["structuration-contenu", "xml-prompting"]
 date: "2025-01-20"
 isFavorite: true
 keyTakeaways:
@@ -224,7 +224,7 @@ XML est idéal pour les cas nécessitant une validation stricte ou une intégrat
 
 #### Exemple en Pharmacie
 
-```markdown
+```md
 ## Analyse des Interactions Médicamenteuses
 
 ### Interactions Identifiées
@@ -262,7 +262,7 @@ Imposer un format précis pour éliminer la variance.
 
 **Format YAML Strict**
 
-```markdown
+```md
 Réponds UNIQUEMENT dans ce format YAML exact :
 
 analyse_interaction:
@@ -279,7 +279,7 @@ Ne modifie PAS cette structure. Remplis uniquement les valeurs entre crochets.
 
 **Format XML Strict**
 
-```markdown
+```md
 Réponds UNIQUEMENT dans ce format XML exact :
 
 <analyse_interaction>
@@ -305,7 +305,7 @@ Demander à l'IA de valider sa propre sortie.
 
 **Auto-validation YAML**
 
-```markdown
+```md
 Après ta réponse, valide que :
 
 1. Le format YAML est syntaxiquement correct
@@ -318,7 +318,7 @@ Si tu détectes des erreurs, corrige-les immédiatement.
 
 **Validation Croisée**
 
-```markdown
+```md
 Maintenant, agis en tant que validateur et vérifie cette réponse :
 
 - Le format est-il correct ?
@@ -338,7 +338,7 @@ Imposer des règles sur le contenu des réponses.
 
 **Contraintes de Valeurs**
 
-```markdown
+```md
 Contraintes strictes :
 
 - Les noms de médicaments doivent être exacts (pas d'abréviations)
@@ -349,7 +349,7 @@ Contraintes strictes :
 
 **Contraintes de Structure**
 
-```markdown
+```md
 Structure obligatoire :
 
 - Maximum 5 interactions par analyse
@@ -502,7 +502,7 @@ validation_rules:
 
 #### Prompt
 
-```markdown
+```md
 [ROLE] Pharmacien clinicien spécialisé en cardiologie
 [TÂCHE] Analyse l'interaction entre warfarine et amiodarone
 [CONTEXTE] Patient de 75 ans avec ClCr 35 mL/min
@@ -539,7 +539,7 @@ interaction_warfarine_amiodarone:
 
 #### Prompt
 
-```markdown
+```md
 [ROLE] Pharmacien clinicien spécialisé en gériatrie
 [TÂCHE] Analyse cette ordonnance complexe et identifie tous les problèmes
 [CONTEXTE] Patient de 75 ans, ClCr 35 mL/min, 6 médicaments
@@ -663,7 +663,7 @@ def validate_yaml_output(yaml_content, schema):
 
 #### Mesures Quantitatives
 
-```markdown
+```md
 [ANALYSE QUALITÉ]
 
 - Respect schéma : 95%
@@ -684,7 +684,7 @@ def validate_yaml_output(yaml_content, schema):
 
 #### Évaluation Automatique
 
-```markdown
+```md
 [ÉVALUATION CONTENU]
 
 - Exactitude : 9.2/10
@@ -704,7 +704,7 @@ Tester différents formats pour identifier le plus efficace.
 
 #### Méthodologie
 
-```markdown
+```md
 [TEST A/B]
 VERSION A : Format YAML structuré
 VERSION B : Format XML avec validation
@@ -726,7 +726,7 @@ Améliorer progressivement la structure des sorties.
 
 #### Processus
 
-```markdown
+```md
 [PHASE 1] Format de base fonctionnel
 [PHASE 2] Ajout de validation
 [PHASE 3] Optimisation de la structure
@@ -738,7 +738,7 @@ Améliorer progressivement la structure des sorties.
 
 #### Collecte
 
-```markdown
+```md
 [FEEDBACK]
 
 - Le format est-il facile à utiliser ?

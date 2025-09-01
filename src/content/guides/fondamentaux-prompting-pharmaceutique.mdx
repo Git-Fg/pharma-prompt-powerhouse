@@ -5,7 +5,7 @@ category: "fondamentaux"
 difficulty: "débutant"
 estimatedTime: "25 minutes"
 tags: ["prompting", "structuration", "bonnes-pratiques"]
-concepts:
+conceptSlugs:
   ["prompt-prescription", "context-engineering", "structuration-contenu"]
 keyTakeaways:
   - "Structurez chaque prompt comme une prescription en définissant clairement le Rôle, la Tâche, le Contexte, le Format et les Exemples."
@@ -61,7 +61,7 @@ Pour les tâches complexes, montrez à l'IA un exemple du résultat attendu (_fe
 
 Mettons ces piliers en action pour analyser une interaction médicamenteuse.
 
-```markdown
+```md
 [ROLE]
 Tu es un pharmacien d'officine expérimenté, spécialisé dans le conseil patient.
 
@@ -96,7 +96,7 @@ Réponds en utilisant la structure suivante :
 
 ### Gestion des Cas Limites
 
-```markdown
+```md
 [CONDITIONS]
 
 - Si le patient a une ClCr < 30 mL/min : adapter la posologie
@@ -112,6 +112,16 @@ Réponds en utilisant la structure suivante :
 - **Complétude** : Tous les éléments nécessaires sont-ils présents ?
 - **Précision** : Le format de sortie est-il sans ambiguïté ?
 - **Efficacité** : Le contexte est-il optimisé pour la mémoire de l'IA ?
+
+## Adapter son Prompt à son Outil
+
+La structure des 5 piliers (Rôle, Tâche, Contexte, Format, Exemple) est universelle. Cependant, les outils de 2025 ont des spécialités.
+
+-   **Pour une analyse de précision**, utilisez **Google AI Studio** et ajoutez un `System Prompt` pour définir le rôle de manière permanente.
+-   **Pour de la créativité**, préférez **Google AI Studio** pour régler la `température` à une valeur élevée (> 0.7).
+-   **Pour la création de contenu (présentations)**, utilisez **Z.ai** et pensez à activer l'outil adéquat dans l'interface avant de prompter.
+
+Consultez notre [guide de choix des plateformes](/guides/choisir-son-ia-en-2025) pour plus de détails.
 
 ## Conclusion
 

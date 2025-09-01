@@ -5,7 +5,7 @@ category: "methodologie"
 difficulty: "avancé"
 estimatedTime: "40 minutes"
 tags: ["workflow", "automatisation", "fiches-revision", "chaîne-prompts"]
-concepts: ["chaîne-de-prompts", "structuration-contenu"]
+conceptSlugs: ["chaîne-de-prompts", "structuration-contenu"]
 keyTakeaways:
   - "Décomposez la création de fiches en une chaîne de prompts logiques pour un résultat fiable et reproductible."
   - "Utilisez l'IA pour identifier les sujets les plus importants à partir des annales avant de synthétiser vos cours."
@@ -28,7 +28,7 @@ La première étape consiste à demander à l'IA d'agir comme un data analyst po
 
 **Prompt 1 - Analyseur de Fréquence :**
 
-```markdown
+```md
 [ROLE]
 Tu es un analyste de données spécialisé dans les contenus pédagogiques.
 
@@ -61,7 +61,7 @@ Maintenant que vous connaissez le sujet le plus important (disons, les anticoagu
 
 **Prompt 2 - Synthétiseur de Cours :**
 
-```markdown
+```md
 [ROLE]
 Tu es un tuteur en pharmacie qui prépare un étudiant pour un examen.
 
@@ -90,7 +90,7 @@ Avec la synthèse du cours, l'IA peut maintenant créer des questions-réponses 
 
 **Prompt 3 - Générateur de Q&A :**
 
-```markdown
+```md
 [ROLE]
 Tu es un concepteur de sujets d'examen.
 
@@ -122,7 +122,7 @@ C'est la dernière étape. L'IA assemble toutes les pièces du puzzle.
 
 **Prompt 4 - Assembleur Final :**
 
-```markdown
+```md
 [ROLE]
 Tu es un éditeur de contenu pédagogique.
 
@@ -161,7 +161,7 @@ Vous avez un cours de 2000 mots sur les IEC et 15 questions d'annales. Créez un
 
 **Prompt 1 - Analyse des Annales :**
 
-```markdown
+```md
 [ROLE] Analyste de données pédagogiques
 [TÂCHE] Identifie les 5 thèmes les plus fréquents dans ces annales
 [CONTEXTE] [15 questions d'annales sur les IEC]
@@ -178,7 +178,7 @@ Vous avez un cours de 2000 mots sur les IEC et 15 questions d'annales. Créez un
 
 **Prompt 2 - Synthèse du Cours :**
 
-```markdown
+```md
 [ROLE] Tuteur en pharmacologie cardiovasculaire
 [TÂCHE] Extrais les points clés du cours sur les IEC
 [CONTEXTE] [Cours de 2000 mots]
@@ -187,7 +187,7 @@ Vous avez un cours de 2000 mots sur les IEC et 15 questions d'annales. Créez un
 
 **Prompt 3 - Q&A Types :**
 
-```markdown
+```md
 [ROLE] Concepteur d'examens
 [TÂCHE] Crée des réponses types pour les questions d'annales
 [CONTEXTE 1] [Synthèse du cours]
@@ -197,7 +197,7 @@ Vous avez un cours de 2000 mots sur les IEC et 15 questions d'annales. Créez un
 
 **Prompt 4 - Assemblage Final :**
 
-```markdown
+```md
 [ROLE] Éditeur pédagogique
 [TÂCHE] Crée une fiche de révision complète sur les IEC
 [CONTEXTE 1] [Synthèse du cours]

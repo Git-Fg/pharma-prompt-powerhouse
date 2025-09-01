@@ -1,69 +1,48 @@
 ---
 title: "Générateur de Questions d'Examen"
-description: 'Transformez la révision passive en révision active en générant des questions de type examen à partir de vos supports de cours.'
-category: 'analyse'
-difficulty: 'intermédiaire'
-targetTool: 'chatgpt'
-estimatedTime: '3-5 minutes'
-tags: ['examen', 'questions', 'évaluation', 'révision']
-concepts: ['tree-of-thought']
-variables:
-  ['course_content', 'question_types', 'difficulty_level', 'question_count']
+description: "Transformez vos notes de cours en QCM et questions ouvertes pour une révision active et efficace."
+category: "apprentissage"
+difficulty: "intermédiaire"
+recommendedTool: "ChatGPT"
+tags: ["examen", "qcm", "évaluation", "révision"]
+conceptSlugs: ["context-engineering"]
+variables: ["course_content", "question_types", "difficulty_level", "question_count"]
 ---
 
-# Générateur de Questions d'Examen
+## Notes d'Utilisation
 
-## Prompt
+**ChatGPT** avec son **"Study Mode"** est particulièrement adapté pour cette tâche, car il peut créer une expérience d'apprentissage interactive. Cependant, tous les outils sont capables de générer des questions de qualité. L'usage de balises est pertinent pour bien isoler le matériel de cours.
 
-Agis en tant que concepteur de sujets d'examen pour le concours de l'internat en pharmacie.
+### Prompt Recommandé (pour AI Studio / Claude)
 
-Ton expertise réside dans la création de questions pertinentes et non ambiguës qui testent la compréhension profonde d'un sujet.
+```xml
+<role>
+Tu es un concepteur de sujets d'examen pour le concours de l'internat en pharmacie. Tu crées des questions pertinentes qui testent la compréhension profonde et non la simple mémorisation.
+</role>
 
-En te basant exclusivement sur le texte de cours fourni ci-dessous, génère le matériel d'évaluation demandé.
-
-Les questions doivent être progressives en difficulté et couvrir les aspects essentiels du cours.
-
-## Texte de Cours
-
-```
+<texte_de_cours>
 {course_content}
+</texte_de_cours>
+
+<instructions>
+En te basant exclusivement sur le texte de cours fourni, génère {question_count} questions de type "{question_types}" avec un niveau de difficulté "{difficulty_level}".
+Pour les QCM, fournis la réponse correcte et une justification.
+Pour les questions ouvertes, fournis les points clés de la réponse attendue.
+</instructions>
 ```
 
-## Tâche
+### Adaptation pour ChatGPT (avec Study Mode)
 
-Crée {question_count} questions d'évaluation selon les spécifications suivantes :
+**Astuce :** Activez le "Study Mode" dans l'interface de ChatGPT avant d'envoyer ce prompt pour une expérience plus interactive.
 
-{question_types}
+```markdown
+# Objectif : Préparation à l'examen
 
-Niveau de difficulté : {difficulty_level}
+Agis en tant que mon tuteur pour l'internat en pharmacie.
+Voici mon support de cours sur lequel je veux m'entraîner :
+"""
+{course_content}
+"""
 
-## Types de Questions
-
-### QCM
-
-- Questions à Choix Multiples (QCM) avec 4 propositions de réponse (A, B, C, D)
-- Une seule réponse correcte par question
-- Indique clairement la bonne réponse après chaque question
-
-### Questions Ouvertes
-
-- Questions ouvertes nécessitant une réponse développée
-- Chaque question doit tester un concept différent
-- Fournis des éléments de réponse attendus
-
-### Vrai/Faux
-
-- Questions Vrai/Faux avec justification
-- Chaque question doit avoir une justification claire
-- Indique la réponse correcte et explique pourquoi
-
-### Mixte
-
-- Mélange équilibré de QCM, questions ouvertes et Vrai/Faux
-- Répartis équitablement les différents types
-- Adapte la difficulté selon le type de question
-
-## Format de Sortie
-
-Présente les questions de manière claire et structurée, avec des numéros et des titres explicites.
-Inclus les réponses et justifications appropriées.
+Génère {question_count} questions de type "{question_types}" (difficulté : {difficulty_level}).
+Après chaque question que je réponds, donne-moi la correction et une explication détaillée.

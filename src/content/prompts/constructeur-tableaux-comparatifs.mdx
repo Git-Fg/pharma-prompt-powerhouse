@@ -1,47 +1,54 @@
 ---
-title: 'Constructeur de Tableaux Comparatifs'
-description: "Créez des prompts pour générer des tableaux comparatifs clairs et efficaces, essentiels pour l'étude en pharmacie."
-category: 'analyse'
-difficulty: 'débutant'
-targetTool: 'chatgpt'
-estimatedTime: '2-3 minutes'
-tags: ['tableaux', 'comparaison', 'structuration', 'analyse']
-concepts: ['xml-prompting']
-variables: ['comparison_subject', 'elements_to_compare', 'comparison_criteria']
+title: "Constructeur de Tableaux Comparatifs"
+description: "Générez des tableaux comparatifs clairs et efficaces, un outil essentiel pour les révisions en pharmacie."
+category: "creation"
+difficulty: "débutant"
+recommendedTool: "Google AI Studio"
+tags: ["tableaux", "comparaison", "structuration", "révision"]
+conceptSlugs: ["structuration-contenu", "xml-prompting"]
+variables: ["sujet_comparaison", "elements_a_comparer", "criteres_comparaison"]
 ---
 
-# Constructeur de Tableaux Comparatifs
+## Notes d'Utilisation
 
-## Prompt
+Un tableau bien structuré est un gain de temps immense. **Google AI Studio** est excellent pour cette tâche car un `System Prompt` bien défini garantit la cohérence du format, même si vous modifiez les critères. Les balises XML sont très utiles ici pour structurer clairement votre demande.
 
-Tu es un expert en pharmacologie.
+-   **Sur AI Studio :** Utilisez le `System Prompt` pour définir le rôle et le format de sortie global.
+-   **Sur ChatGPT/Claude :** L'approche sans `System Prompt` fonctionne aussi très bien car la tâche est bien définie.
 
-Crée un tableau comparatif détaillé au format Markdown sur le sujet spécifié.
+### Prompt Recommandé (pour Google AI Studio)
 
-Le tableau doit être clair, complet et facile à lire.
+```xml
+<!-- À mettre dans le champ "System Prompt" de AI Studio -->
+<system_prompt>
+Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
+</system_prompt>
 
-Utilise des informations précises et à jour.
+<!-- À mettre dans le champ "User Prompt" -->
+<tache>
+Crée un tableau comparatif détaillé.
+</tache>
 
-## Sujet de Comparaison
+<sujet>
+{sujet_comparaison}
+</sujet>
 
-{comparison_subject}
+<elements>
+{elements_a_comparer}
+</elements>
 
-## Éléments à Comparer
+<criteres>
+{criteres_comparaison}
+</criteres>
+```
 
-{elements_to_compare}
+### Adaptation pour ChatGPT / Claude
 
-## Critères de Comparaison
+```markdown
+Crée un tableau comparatif au format Markdown.
 
-{comparison_criteria}
+- **Sujet :** {sujet_comparaison}
+- **Éléments à comparer :** {elements_a_comparer}
+- **Critères de comparaison :** {criteres_comparaison}
 
-## Instructions
-
-- Assure-toi que chaque cellule du tableau contient des informations pertinentes et comparables
-- Utilise des symboles ou abréviations standard quand c'est approprié
-- Rends le tableau facile à suivre et à mémoriser
-
-## Format de Sortie
-
-- Tableau au format Markdown avec des en-têtes de colonnes clairs
-- Lignes bien organisées et faciles à suivre
-- Informations concises mais complètes
+Le tableau doit être précis, synthétique et facile à mémoriser.

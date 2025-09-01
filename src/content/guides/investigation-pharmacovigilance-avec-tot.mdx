@@ -5,7 +5,7 @@ category: "methodologie"
 difficulty: "avancé"
 estimatedTime: "35 minutes"
 tags: ["workflow", "pharmacovigilance", "tree-of-thought", "investigation"]
-concepts: ["tree-of-thought", "recherche-analyse"]
+conceptSlugs: ["tree-of-thought", "recherche-analyse"]
 keyTakeaways:
   - "Le Tree-of-Thought est un framework idéal pour les investigations complexes où plusieurs causes sont possibles."
   - "Structurez votre investigation en 'branches' d'hypothèses (toxicité, interaction, qualité) pour une analyse exhaustive."
@@ -24,9 +24,9 @@ Vous êtes le pharmacien responsable de la pharmacovigilance dans un hôpital. V
 
 Nous allons construire un prompt qui force l'IA à explorer systématiquement les causes possibles.
 
-### Étape 1 : Poser le Contexte
+### Étape 1 : Poser le Contexte (Structuré)
 
-D'abord, on présente les faits de manière structurée.
+On utilise des balises pour clarifier les faits pour nous et pour l'IA.
 
 ```xml
 <cas>
@@ -34,7 +34,6 @@ D'abord, on présente les faits de manière structurée.
     <medicament_suspect>Novamab</medicament_suspect>
     <evenement_indesirable>Hépatite aiguë</evenement_indesirable>
     <nombre_de_cas>3</nombre_de_cas>
-    <delai_apparition>Entre 7 et 15 jours après initiation</delai_apparition>
   </signal>
   <informations_complementaires>
     - Les 3 patients sont âgés (> 70 ans).
@@ -44,203 +43,22 @@ D'abord, on présente les faits de manière structurée.
 </cas>
 ```
 
-### Étape 2 : Définir les Branches d'Investigation (Hypothèses)
+### Étape 2 & 3 : Guider le Raisonnement avec ToT
 
-C'est le cœur du ToT. On définit les différentes pistes à explorer.
+Ici, on ne demande pas une sortie XML, on structure notre question pour forcer l'IA à penser de manière exhaustive.
 
 ```xml
 <instructions>
-En tant qu'expert en pharmacovigilance, analyse ce signal en explorant les 3 hypothèses suivantes. Pour chaque branche, évalue la probabilité et propose des actions de vérification.
+Tu es un expert en pharmacovigilance. En te basant sur le `<cas>` ci-dessus, analyse la situation en suivant un raisonnement par arbre de pensée (Tree-of-Thought).
 
-<thinking_process>
-  <branch id="toxicite_intrinseque">
-    <hypothesis>Le Novamab a une hépatotoxicité intrinsèque non détectée lors des essais.</hypothesis>
-  </branch>
-  <branch id="interaction_medicament">
-    <hypothesis>Il existe une interaction médicamenteuse entre le Novamab et le paracétamol qui potentialise la toxicité.</hypothesis>
-  </branch>
-  <branch id="probleme_qualite">
-    <hypothesis>Le lot A123 du Novamab a un défaut de qualité (impureté, surdosage) qui cause l'hépatotoxicité.</hypothesis>
-  </branch>
-</thinking_process>
+1. **Branche 1 (Toxicité intrinsèque) :** Évalue l'hypothèse que le Novamab est hépatotoxique par lui-même. Quels sont les arguments pour/contre ? Quelle action de vérification proposes-tu ?
+
+2.  **Branche 2 (Interaction) :** Évalue l'hypothèse d'une interaction entre le Novamab et le paracétamol. Quels sont les arguments pour/contre ? Quelle action de vérification proposes-tu ?
+
+3.  **Branche 3 (Problème qualité) :** Évalue l'hypothèse d'un défaut sur le lot A123. Quels sont les arguments pour/contre ? Quelle action de vérification proposes-tu ?
+
+4.  **Synthèse :** Conclus en hiérarchisant les hypothèses de la plus probable à la moins probable, et propose un plan d'action final priorisé en 3 points.
 </instructions>
 ```
 
-### Étape 3 : Exiger une Synthèse et un Plan d'Action
-
-On demande à l'IA de conclure en hiérarchisant les actions à mener.
-
-```xml
-<format_sortie>
-Fournis une synthèse et un plan d'action structuré.
-
-<investigation_plan>
-  <evaluation_hypotheses>
-    <hypothese nom="toxicite_intrinseque" probabilité="[Faible/Moyenne/Élevée]" />
-    <hypothese nom="interaction_medicament" probabilité="[Faible/Moyenne/Élevée]" />
-    <hypothese nom="probleme_qualite" probabilité="[Faible/Moyenne/Élevée]" />
-  </evaluation_hypotheses>
-
-  <plan_action_priorise>
-    <action priorite="1">...</action>
-    <action priorite="2">...</action>
-    <action priorite="3">...</action>
-  </plan_action_priorise>
-</investigation_plan>
-</format_sortie>
-```
-
-**Résultat attendu :** Un plan d'action clair, par exemple :
-
-1.  **Priorité 1 (Urgent) :** Mettre en quarantaine le lot A123 et contacter l'ANSM.
-2.  **Priorité 2 :** Lancer une recherche bibliographique sur les voies métaboliques du Novamab et du paracétamol.
-3.  **Priorité 3 :** Revoir les données des essais cliniques sur l'hépatotoxicité du Novamab.
-
-Ce workflow transforme une situation de crise potentielle en une investigation structurée, où aucune piste n'est oubliée.
-
-## Application Pratique : Cas de Toxicité Cardiaque
-
-### Le Scénario
-
-Un nouveau médicament anti-hypertenseur, le "Cardiomab", est suspecté de causer des troubles du rythme cardiaque. Vous devez analyser le signal.
-
-### Prompt ToT Complet
-
-```xml
-<role>
-Tu es un expert en pharmacovigilance cardiovasculaire avec 20 ans d'expérience dans l'analyse des signaux de sécurité cardiaque.
-
-<tache>
-Analyse ce signal de toxicité cardiaque suspectée avec le Cardiomab et propose un plan d'investigation priorisé.
-
-<cas_clinique>
-<signal>
-  <medicament_suspect>Cardiomab 10mg/jour</medicament_suspect>
-  <evenement_indesirable>Troubles du rythme cardiaque</evenement_indesirable>
-  <nombre_de_cas>8</nombre_de_cas>
-  <delai_apparition>2-6 semaines après initiation</delai_apparition>
-  <gravite>Modérée à sévère (2 hospitalisations)</gravite>
-</signal>
-<contexte_patient>
-  - Âge moyen : 68 ans
-  - Antécédents cardiaques : 6/8 patients
-  - Co-prescriptions : 5/8 patients sous amiodarone
-  - Fonction rénale : normale chez tous
-</contexte_patient>
-</cas_clinique>
-
-<thinking_process>
-<branch id="1">
-  <hypothesis>Hépatotoxicité intrinsèque du Cardiomab</hypothesis>
-  <analyse>
-    - Délai compatible avec une toxicité médicamenteuse
-    - Fréquence élevée (8 cas)
-    - Contexte de patients cardiaques (plus sensibles)
-    - Nécessite vérification des essais cliniques
-  </analyse>
-  <probabilite>0.6</probabilite>
-</branch>
-
-<branch id="2">
-  <hypothesis>Interaction avec l'amiodarone</hypothesis>
-  <analyse>
-    - 5/8 patients prenaient de l'amiodarone
-    - L'amiodarone est pro-arythmogène
-    - Possibilité de synergie d'effet
-    - Vérifier les voies métaboliques communes
-  </analyse>
-  <probabilite>0.8</probabilite>
-</branch>
-
-<branch id="3">
-  <hypothesis>Facteur de confusion (maladie sous-jacente)</hypothesis>
-  <analyse>
-    - 6/8 patients ont des antécédents cardiaques
-    - Les troubles du rythme peuvent être liés à la pathologie
-    - Nécessite une analyse cas-témoins
-    - Vérifier l'incidence dans la population générale
-  </analyse>
-  <probabilite>0.4</probabilite>
-</branch>
-</thinking_process>
-
-<format_sortie>
-<conclusion>
-<diagnostic_probable>Interaction Cardiomab + Amiodarone</diagnostic_probable>
-<justification>Forte probabilité (0.8), co-prescription fréquente, mécanisme plausible</justification>
-</conclusion>
-
-<plan_action>
-1. **Immédiat :** Alerte aux prescripteurs sur l'association Cardiomab + Amiodarone
-2. **Court terme :** Analyse pharmacocinétique des deux médicaments
-3. **Moyen terme :** Étude cas-témoins pour confirmer le signal
-4. **Long terme :** Mise à jour du RCP si confirmation
-</plan_action>
-</format_sortie>
-```
-
-## Avantages du ToT en Pharmacovigilance
-
-### 1. **Investigation Exhaustive**
-
-- Aucune piste n'est oubliée
-- Analyse systématique de toutes les hypothèses
-- Évite les biais de confirmation
-
-### 2. **Priorisation des Actions**
-
-- Actions classées par urgence et importance
-- Justification claire de chaque recommandation
-- Facilite la communication avec les autorités
-
-### 3. **Traçabilité du Raisonnement**
-
-- Chaque hypothèse est documentée
-- Probabilités justifiées et quantifiées
-- Facilite la validation par les pairs
-
-## Conseils d'Implémentation
-
-### 1. **Structurez Rigoureusement**
-
-- Utilisez des balises XML cohérentes
-- Numérotez les branches pour faciliter la référence
-- Imposez un format de sortie strict
-
-### 2. **Quantifiez les Probabilités**
-
-- Utilisez des échelles numériques (0-1) ou qualitatives
-- Justifiez chaque évaluation
-- Assurez la cohérence entre les probabilités
-
-### 3. **Générez des Actions Concrètes**
-
-- Chaque action doit être spécifique et mesurable
-- Définissez des délais et des responsables
-- Prévoyez des critères de succès
-
-## Pièges à Éviter
-
-### 1. **Trop d'Hypothèses**
-
-- Limitez-vous à 3-4 hypothèses principales
-- Évitez les hypothèses trop spéculatives
-- Concentrez-vous sur les causes les plus probables
-
-### 2. **Évaluation Subjective**
-
-- Basez vos évaluations sur des critères objectifs
-- Justifiez chaque probabilité
-- Utilisez des références bibliographiques si possible
-
-### 3. **Oubli du Suivi**
-
-- Définissez toujours des critères de réévaluation
-- Planifiez les examens de contrôle
-- Précisez les signes d'alerte
-
-## Conclusion
-
-Le Tree-of-Thought transforme l'IA d'un "analyste simple" en un "enquêteur méthodique" qui explore systématiquement toutes les pistes. En maîtrisant cette technique, vous obtenez des investigations de pharmacovigilance plus robustes, plus transparentes et plus fiables.
-
-**Prochaine étape :** Combinez le ToT avec d'autres techniques avancées comme l'XML Prompting et le Context Engineering pour des prompts ultra-sophistiqués.
+**Résultat attendu :** Une réponse en texte (Markdown) bien structurée, qui suit votre plan d'investigation, facile à lire et à utiliser.

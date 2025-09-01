@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Target,
 } from "lucide-react";
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
+import { MDXRenderer } from "@/components/markdown/MDXRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 
 // Génération des pages statiques au build
@@ -39,10 +39,10 @@ export default async function ConceptDetailPage({
   const mainGuide = concept.mainGuideSlug
     ? allGuides.find((g) => g.slug === concept.mainGuideSlug)
     : null;
-  const relatedPrompts = allPrompts.filter((p) => p.concepts?.includes(slug));
+  const relatedPrompts = allPrompts.filter((p) => p.concepts?.some((c: { slug: string }) => c.slug === slug));
   // Guides secondaires : ceux qui sont liés au concept mais qui ne sont pas le guide principal
   const secondaryGuides = allGuides.filter(
-    (g) => g.concepts?.includes(slug) && g.slug !== concept.mainGuideSlug
+    (g) => g.concepts?.some((c: { slug: string }) => c.slug === slug) && g.slug !== concept.mainGuideSlug
   );
 
   return (
@@ -108,7 +108,7 @@ export default async function ConceptDetailPage({
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert max-w-none">
-            <MarkdownRenderer content={concept.content} />
+            <MDXRenderer code={concept.mdx} />
           </div>
         </CardContent>
       </Card>

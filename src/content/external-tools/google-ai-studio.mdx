@@ -1,54 +1,49 @@
 ---
 title: "Google AI Studio"
-description: "Interface web gratuite de Google pour expérimenter avec les modèles Gemini. Idéal pour l'apprentissage et le prototypage de prompts."
+description: "Mon guide pratique pour utiliser Google AI Studio, le laboratoire gratuit pour maîtriser les prompts avec les modèles Gemini."
 url: "https://aistudio.google.com"
 category: "LLM Généraliste"
-pricing: "Gratuit"
-capabilities: ["Prompting", "Structured Output", "Paramètres avancés", "Tests"]
-tags: ["prompting", "google", "gemini", "outil:google-ai-studio"]
+pricing: "Gratuit (avec quotas)"
+capabilities: ["Prompting avancé", "Réglage des paramètres", "System Prompt", "Thinking Mode"]
+tags: ["prompting", "google", "gemini", "aistudio"]
 keyTakeaways:
-  - "Google AI Studio est l'interface gratuite et accessible pour expérimenter directement avec les derniers modèles Gemini."
-  - "C'est l'outil idéal pour apprendre le prompting et tester les paramètres avancés (température, top-k) sans configuration complexe."
-  - "Privilégiez cet outil pour l'expérimentation et la création de prompts structurés avant de les utiliser en production."
+  - "AI Studio est le 'laboratoire' gratuit pour tester les concepts avancés : température, system prompt, etc."
+  - "Utilisez le 'System Prompt' pour définir un rôle d'expert (ex: pharmacien clinicien) qui persistera durant toute la conversation."
+  - "Activez le 'Thinking Mode' pour forcer Gemini 2.5 Pro à détailler son raisonnement, ce qui est essentiel pour valider une analyse clinique."
 ---
 
 ## Mon Guide Pratique pour Google AI Studio
 
-Google AI Studio est mon terrain de jeu favori pour tester et affiner des prompts. C'est une interface web simple, gratuite, qui donne un accès direct à la puissance des modèles Gemini de Google. Pour nous, étudiants en pharmacie, c'est l'outil parfait pour apprendre sans se soucier de l'infrastructure cloud.
+Si le chat Gemini est le couteau suisse pour les questions rapides, Google AI Studio est notre paillasse de laboratoire. C'est une interface web gratuite qui donne un accès direct à toute la puissance des modèles Gemini, avec des réglages fins impossibles à trouver ailleurs.
 
 ### Pourquoi je l'utilise ?
 
-1.  **Accès direct aux modèles Gemini :** On peut tester les dernières versions (comme Gemini 2.5 Pro) dès leur sortie.
-2.  **Contrôle total des paramètres :** C'est ici que l'on peut vraiment "sentir" l'effet de la **température**, du **Top-K** ou du **Top-P**. C'est essentiel pour comprendre comment doser la créativité de l'IA.
-3.  **Pas de barrière à l'entrée :** Un simple compte Google suffit. Pas besoin de projet Google Cloud ou de configuration complexe.
+1. **Le Contrôle Total :** C'est ici qu'on peut enfin jouer avec la **température**, le **Top-K** ou le **Top-P**. C'est essentiel pour comprendre comment "doser" la créativité de l'IA. Pour une analyse d'ordonnance, je la règle à `0.2` pour des faits. Pour créer une analogie, je monte à `0.8`.
+2.  **Le System Prompt :** C'est une instruction permanente. Je l'utilise pour définir le rôle de l'IA une bonne fois pour toutes. Par exemple : "Tu es un pharmacien clinicien expert en gériatrie. Tes réponses sont toujours basées sur les preuves et structurées."
+3.  **Le Thinking Mode :** La fonctionnalité la plus importante pour nous. En l'activant, Gemini 2.5 Pro nous montre son raisonnement étape par étape. C'est comme voir la réflexion d'un senior : on peut valider chaque étape et s'assurer que la conclusion est logique.
+4.  **Quotas Généreux :** L'utilisation est gratuite et les limites sont très élevées, parfait pour expérimenter sans stress.
 
-### Cas d'usage en pharmacie
+### Mon Workflow pour une Analyse de Cas Clinique
 
--   **Prototypage de prompts :** Avant d'intégrer un prompt dans un outil plus complexe, je le teste et l'affine ici.
--   **Génération de sorties structurées :** L'outil permet de forcer une sortie JSON, ce qui est très pratique pour créer des fiches de données.
--   **Apprentissage par l'expérimentation :** C'est le meilleur endroit pour voir concrètement l'impact d'un changement de formulation dans un prompt.
-
-### Mon premier prompt dans AI Studio
-
-Quand vous arrivez sur l'interface, choisissez "Create new prompt". Voici un prompt simple pour commencer :
-
-```markdown
-[ROLE]
-Tu es un tuteur en pharmacologie.
-
-[TÂCHE]
-Explique le mécanisme d'action des IEC (Inhibiteurs de l'Enzyme de Conversion) de manière simple pour un patient.
-
-[FORMAT]
-Utilise une analogie claire et facile à comprendre. Limite ta réponse à 3 phrases.
-```
-
-Jouez ensuite avec le curseur "Temperature" sur la droite.
--   **À 0.1 :** La réponse sera très factuelle et directe.
--   **À 0.9 :** L'analogie sera probablement beaucoup plus créative, mais potentiellement moins précise.
-
-C'est en faisant ces tests qu'on intègre vraiment l'importance de ces paramètres.
+1.  **Ouvrir AI Studio** et sélectionner le modèle `Gemini 2.5 Pro`.
+2.  **Rédiger le System Prompt** dans le champ dédié :
+    ```
+    Tu es un expert en pharmacovigilance. Ton analyse est systématique, rigoureuse et toujours justifiée par des mécanismes pharmacologiques. Tu hiérarchises les risques du plus élevé au plus faible.
+    ```
+3.  **Régler les Paramètres** sur la droite : `Température : 0.2`.
+4.  **Rédiger le Prompt Utilisateur** avec des balises pour la clarté :
+    ```xml
+    <cas>
+      <patient>Femme, 68 ans, insuffisance rénale modérée.</patient>
+      <traitement>Atorvastatine 40mg, Amlodipine 10mg.</traitement>
+      <nouveau_medicament>Clarithromycine 500mg x2/j pour une infection pulmonaire.</nouveau_medicament>
+    </cas>
+    <question>
+    Analyse l'interaction potentielle. Detaille le mécanisme, le risque clinique et propose un plan d'action.
+    </question>
+    ```
+5.  **Lancer et Analyser :** La réponse sera factuelle et le raisonnement (si Thinking Mode activé) permettra de valider la pertinence de l'analyse.
 
 ### Conclusion
 
-Google AI Studio est l'équivalent du "laboratoire de paillasse" pour le prompt engineering. C'est là que l'on fait nos expériences, qu'on se trompe et qu'on apprend. C'est un passage obligé pour quiconque veut sérieusement maîtriser l'interaction avec les IA modernes.
+Google AI Studio est un passage obligé pour quiconque veut sérieusement maîtriser l'interaction avec les IA modernes. C'est l'outil qui permet de mettre en pratique tous les concepts avancés de ce carnet.

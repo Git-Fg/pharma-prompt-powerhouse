@@ -7,7 +7,7 @@ estimatedTime: "30 minutes"
 tags:
   ["annales", "fiches-revision", "chaîne-prompts", "méthodologie", "révision"]
 progress: 0
-concepts: ["chaîne-de-prompts", "structuration-contenu"]
+conceptSlugs: ["chaîne-de-prompts", "structuration-contenu"]
 date: "2025-01-20"
 isFavorite: true
 keyTakeaways:
@@ -58,7 +58,7 @@ L'IA génère une version ultra-condensée de la fiche sous forme de tableaux co
 
 ### Prompt de Rôle (Étape 0)
 
-```markdown
+```md
 Tu es un tuteur expert en pharmacie, spécialisé dans la préparation aux examens et concours. Tu as 20 ans d'expérience dans l'enseignement et tu connais parfaitement les attentes des jurys.
 
 Ta mission est de m'aider à transformer mes annales et mes notes de cours en fiches de révision structurées et efficaces.
@@ -70,7 +70,7 @@ Commençons par l'étape 1 : l'analyse des questions d'annales.
 
 ### Prompt d'Analyse (Étape 1)
 
-```markdown
+```md
 Voici une liste de questions d'annales. Pour chaque question, analyse :
 
 1. Le sujet principal abordé
@@ -85,7 +85,7 @@ Donne-moi ton analyse sous forme de tableau avec les colonnes : "Question", "Suj
 
 ### Prompt de Clustering (Étape 2)
 
-```markdown
+```md
 Parfait. Maintenant, regroupe ces questions par grands thèmes récurrents.
 
 Pour chaque thème identifié, donne-moi :
@@ -100,7 +100,7 @@ Organise cela de manière claire et structurée.
 
 ### Prompt de Synthèse (Étape 3)
 
-```markdown
+```md
 Excellent. Maintenant, pour chaque thème identifié, je vais te donner mes notes de cours correspondantes.
 
 Pour le thème "{{THEME}}", voici mes notes :
@@ -119,7 +119,7 @@ Sois synthétique mais complet. Ces informations serviront à répondre aux ques
 
 ### Prompt de Réponses Types (Étape 4)
 
-```markdown
+```md
 Parfait. Maintenant, pour chaque question d'annale du thème "{{THEME}}", utilise les rappels de cours que nous avons synthétisés pour formuler une réponse complète et justifiée.
 
 Question : {{QUESTION_ANNALE}}
@@ -136,7 +136,7 @@ Formule ta réponse.
 
 ### Prompt d'Assemblage (Étape 5)
 
-```markdown
+```md
 Excellent travail. Maintenant, propose-moi un plan détaillé pour la fiche de révision finale sur le thème "{{THEME}}".
 
 Ce plan doit intégrer :
@@ -151,7 +151,7 @@ Propose-moi ce plan.
 
 ### Prompt de Finalisation (Étape 6)
 
-```markdown
+```md
 Parfait. Maintenant, assemble tout dans une fiche de révision complète au format Markdown.
 
 Utilise le plan que nous avons établi et intègre :
@@ -167,7 +167,7 @@ Crée cette fiche complète.
 
 ### Prompt de Condensation (Étape 7 - Optionnel)
 
-```markdown
+```md
 Excellent. Maintenant, crée une version ultra-condensée de cette fiche sous forme de tableaux comparatifs et de listes à puces.
 
 Cette version doit permettre une révision de dernière minute en 5-10 minutes maximum.

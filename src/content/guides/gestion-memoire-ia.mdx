@@ -6,7 +6,7 @@ difficulty: "intermédiaire"
 estimatedTime: "25 minutes"
 tags: ["mémoire-ia", "contexte", "conversations-longues", "optimisation"]
 progress: 0
-concepts: ["memoire-ia", "context-engineering"]
+conceptSlugs: ["memoire-ia", "context-engineering"]
 date: "2025-01-20"
 isFavorite: true
 keyTakeaways:
@@ -98,7 +98,7 @@ Créer des résumés périodiques de la conversation pour maintenir le contexte 
 
 #### Implémentation
 
-```markdown
+```md
 [RESUMÉ CONVERSATIONNEL]
 Crée un résumé de notre conversation en 100 tokens maximum :
 
@@ -189,7 +189,7 @@ Organiser le contexte par niveaux de priorité pour optimiser l'utilisation de l
 
 #### Structure Hiérarchique
 
-```markdown
+```md
 [CONTEXTE CRITIQUE] ← Priorité maximale
 Patient : 75 ans, ClCr 35 mL/min, 6 médicaments
 Problème principal : Interactions warfarine + amiodarone
@@ -226,7 +226,7 @@ Adapter la quantité et le type de contexte selon l'évolution de la conversatio
 
 #### Logique d'Adaptation
 
-```markdown
+```md
 [ÉVALUATION CONTEXTE]
 Si début de conversation : Contexte minimal (200 tokens)
 Si analyse en cours : Contexte standard (500 tokens)
@@ -251,7 +251,7 @@ Adapter les réponses selon le profil et les préférences de l'utilisateur.
 
 #### Implémentation
 
-```markdown
+```md
 [PROFIL UTILISATEUR]
 
 - Niveau : Pharmacien clinicien senior
@@ -282,7 +282,7 @@ Utiliser les connaissances du modèle comme référentiels et les enrichir avec 
 
 #### Stratégie
 
-```markdown
+```md
 [CONNAISSANCES MODÈLE] ← Mémoire long terme
 
 - Mécanismes pharmacologiques
@@ -307,7 +307,7 @@ Utiliser les connaissances du modèle comme référentiels et les enrichir avec 
 
 #### Exemple d'Application
 
-```markdown
+```md
 [VALIDATION CROISÉE]
 Vérifie que tes recommandations sont cohérentes avec :
 
@@ -327,7 +327,7 @@ Répartir les informations entre différents "agents" spécialisés.
 
 #### Architecture
 
-```markdown
+```md
 [AGENT 1 : PHARMACOLOGIE] ← Mémoire long terme + contexte spécialisé
 
 - Mécanismes d'action
@@ -363,7 +363,7 @@ Répartir les informations entre différents "agents" spécialisés.
 
 #### Début de Conversation
 
-```markdown
+```md
 [ROLE] Pharmacien clinicien spécialisé en cardiologie
 [CONTEXTE CRITIQUE] Patient 75 ans, ClCr 35 mL/min, 6 médicaments
 [TÂCHE] Analyse ordonnance et optimisation traitement
@@ -372,7 +372,7 @@ Répartir les informations entre différents "agents" spécialisés.
 
 #### Milieu de Conversation (après 20 échanges)
 
-```markdown
+```md
 [RESUMÉ CONVERSATIONNEL]
 POINTS CLÉS :
 
@@ -393,7 +393,7 @@ CONTEXTE ACTUEL :
 
 #### Fin de Conversation (après 50 échanges)
 
-```markdown
+```md
 [SYNTHÈSE FINALE]
 DÉCISIONS PRISES :
 
@@ -416,7 +416,7 @@ PLAN DE SUIVI :
 
 #### Phase 1 : Analyse Initiale
 
-```markdown
+```md
 [CONTEXTE MINIMAL]
 Patient : 75 ans, ClCr 35 mL/min
 Ordonnance : 6 médicaments
@@ -427,7 +427,7 @@ Objectif : Identification des problèmes majeurs
 
 #### Phase 2 : Analyse Approfondie
 
-```markdown
+```md
 [CONTEXTE ENRICHI]
 Patient : 75 ans, ClCr 35 mL/min, 6 médicaments
 Problèmes identifiés : Interactions warfarine + amiodarone
@@ -439,7 +439,7 @@ Objectif : Solutions détaillées et monitoring
 
 #### Phase 3 : Validation et Finalisation
 
-```markdown
+```md
 [CONTEXTE COMPLET]
 Patient : 75 ans, ClCr 35 mL/min, 6 médicaments
 Problèmes : Interactions multiples, contre-indications
@@ -463,7 +463,7 @@ Objectif : Plan final validé et documenté
 
 #### Mesures Quantitatives
 
-```markdown
+```md
 [ANALYSE MÉMOIRE]
 
 - Tokens contexte : 450
@@ -485,7 +485,7 @@ Objectif : Plan final validé et documenté
 
 #### Évaluation Continue
 
-```markdown
+```md
 [ÉVALUATION CONVERSATION]
 
 - Cohérence inter-échanges : 9.3/10
@@ -506,7 +506,7 @@ Objectif : Plan final validé et documenté
 
 #### Suivi Financier
 
-```markdown
+```md
 [ANALYSE COÛTS]
 
 - Coût total conversation : $0.045
@@ -526,7 +526,7 @@ Améliorer continuellement la gestion de la mémoire selon les retours d'expéri
 
 #### Processus
 
-```markdown
+```md
 [PHASE 1] Gestion mémoire de base
 
 - Résumés conversationnels simples
@@ -560,7 +560,7 @@ Tester différentes approches de gestion mémoire pour identifier la plus effica
 
 #### Méthodologie
 
-```markdown
+```md
 [TEST A/B]
 STRATÉGIE A : Résumés conversationnels fixes
 STRATÉGIE B : Résumés adaptatifs
@@ -578,7 +578,7 @@ STRATÉGIE C : Contexte hiérarchisé dynamique
 
 #### Collecte
 
-```markdown
+```md
 [FEEDBACK MÉMOIRE]
 
 - La conversation maintient-elle le contexte ?
@@ -590,7 +590,7 @@ STRATÉGIE C : Contexte hiérarchisé dynamique
 
 #### Intégration
 
-```markdown
+```md
 [AMÉLIORATION]
 
 - Analyse des retours utilisateur

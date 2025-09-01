@@ -13,7 +13,7 @@ tags:
     "chaînes-prompts",
   ]
 progress: 0
-concepts: ["chaîne-de-prompts", "prompting-creatif"]
+conceptSlugs: ["chaîne-de-prompts", "prompting-creatif"]
 date: "2025-01-20"
 isFavorite: true
 keyTakeaways:
@@ -157,7 +157,7 @@ Mesurer objectivement la qualité des prompts pour guider l'amélioration.
 
 #### Implémentation
 
-```markdown
+```md
 [ÉVALUATION] Après chaque réponse, évalue :
 
 - Précision : [score] / 10
@@ -184,7 +184,7 @@ Tester plusieurs versions d'un prompt pour identifier la plus efficace.
 
 #### Exemple
 
-```markdown
+```md
 [TEST A/B] Teste ces deux versions sur le même cas clinique :
 
 VERSION A : "Analyse cette ordonnance"
@@ -205,7 +205,7 @@ Adapter dynamiquement la chaîne selon la complexité du problème.
 
 #### Implémentation
 
-```markdown
+```md
 [ÉVALUATION COMPLEXITÉ]
 Si le problème est simple (≤ 3 médicaments) : Utilise la chaîne courte
 Si le problème est complexe (4-6 médicaments) : Utilise la chaîne standard
@@ -289,7 +289,7 @@ Cette fiche sera utilisée par un étudiant de 4ème année en pharmacie.
 
 ### Test et Validation
 
-```markdown
+```md
 [TEST] Exécute ce prompt sur 3 cas différents :
 
 1. IEC seul
@@ -346,7 +346,7 @@ Avant de considérer un prompt comme optimisé, vérifiez :
 
 ### Exemple de Chaîne Optimisée
 
-```markdown
+```md
 [CHAÎNE ADAPTATIVE]
 ÉTAPE 1 : Évaluation de la complexité → {{NIVEAU_COMPLEXITE}}
 ÉTAPE 2 : Analyse adaptée au niveau → {{ANALYSE}}

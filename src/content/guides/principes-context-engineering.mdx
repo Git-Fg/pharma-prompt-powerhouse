@@ -5,7 +5,7 @@ category: "fondamentaux"
 difficulty: "intermédiaire"
 estimatedTime: "20 minutes"
 tags: ["context-engineering", "fenêtre-contexte", "optimisation", "mémoire-ia"]
-concepts: ["context-engineering", "memoire-ia"]
+conceptSlugs: ["context-engineering", "memoire-ia"]
 keyTakeaways:
   - "La 'fenêtre de contexte' est la mémoire de travail limitée de l'IA ; optimisez-la en étant concis et pertinent."
   - "Contournez l'effet 'lost-in-the-middle' en plaçant vos instructions et informations critiques au début et à la fin du prompt."
@@ -30,7 +30,7 @@ Avant de donner le texte à l'IA pour la tâche finale, utilisez une première p
 
 **Prompt de Compression :**
 
-```markdown
+```md
 [ROLE]
 Tu es un assistant expert en synthèse d'informations pharmaceutiques.
 
@@ -66,7 +66,7 @@ Utilisez le contexte optimisé en respectant la règle "le plus important au dé
 
 **Prompt Final Optimisé :**
 
-```markdown
+```md
 [INSTRUCTIONS PRINCIPALES]
 Analyse l'ordonnance ci-dessous en te basant sur le contexte critique fourni.
 
@@ -97,7 +97,7 @@ Vous avez un cours de 3000 mots sur les antibiotiques et vous voulez que l'IA cr
 
 **Prompt 1 - Extraction :**
 
-```markdown
+```md
 [ROLE] Expert en synthèse pharmaceutique
 [TÂCHE] Extrais les 10 points clés les plus importants de ce cours sur les antibiotiques
 [CONTEXTE] [Cours de 3000 mots]
@@ -106,7 +106,7 @@ Vous avez un cours de 3000 mots sur les antibiotiques et vous voulez que l'IA cr
 
 **Prompt 2 - Hiérarchisation :**
 
-```markdown
+```md
 [ROLE] Professeur de pharmacologie
 [TÂCHE] Classe ces 10 points par importance pour un examen
 [CONTEXTE] [Sortie du Prompt 1]
@@ -115,7 +115,7 @@ Vous avez un cours de 3000 mots sur les antibiotiques et vous voulez que l'IA cr
 
 **Prompt 3 - Création du QCM :**
 
-```markdown
+```md
 [ROLE] Concepteur de QCM
 [TÂCHE] Crée 5 QCM basés sur les points critiques identifiés
 [CONTEXTE] [Sortie du Prompt 2]

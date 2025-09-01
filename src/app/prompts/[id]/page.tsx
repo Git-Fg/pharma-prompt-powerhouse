@@ -199,7 +199,7 @@ export default async function PromptDetailPage({
                 <div className="flex flex-wrap gap-2">
                   {foundPrompt.tags.map((tag, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
-                      {tag}
+                      {tag.name}
                     </Badge>
                   ))}
                 </div>

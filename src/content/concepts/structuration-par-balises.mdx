@@ -1,0 +1,45 @@
+---
+title: "Structuration par Balises"
+description: "Utilisez des balises pour structurer vos prompts, clarifier vos intentions et obtenir des réponses plus fiables de l'IA."
+icon: "CodeXml"
+category: "Techniques Avancées"
+mainGuideSlug: "xml-prompting-pharma"
+keyTakeaways:
+  - "Utiliser des balises comme `<contexte>` ou `<question>` aide l'IA à mieux comprendre la structure de votre demande."
+  - "Cette technique ne sert pas à obtenir du code en sortie, mais à organiser votre prompt d'entrée pour plus de clarté."
+  - "Particulièrement recommandée par Anthropic (Claude), cette méthode améliore la fiabilité sur toutes les plateformes pour les prompts complexes."
+---
+
+La **structuration par balises** est une méthode de *prompt engineering* qui consiste à utiliser des balises (similaires au HTML/XML) pour délimiter clairement les différentes parties d'un prompt : le contexte, les instructions, les exemples, etc.
+
+## Pourquoi utiliser cette technique ?
+
+Cette approche structurée transforme un bloc de texte en une instruction de travail claire et sans ambiguïté pour l'IA.
+
+-   **Clarté Maximale :** L'IA sait exactement quelle partie est le contexte et quelle partie est la question.
+-   **Réduction des Hallucinations :** En délimitant clairement la source d'information, vous réduisez le risque que l'IA invente des faits.
+-   **Fiabilité Accrue :** Les modèles comme Claude sont spécifiquement entraînés à reconnaître et respecter cette structure.
+
+## Structure de Base
+
+Un prompt bien structuré avec des balises pourrait ressembler à ça :
+
+```xml
+<role>
+Tu es un pharmacien clinicien expert.
+</role>
+
+<contexte>
+  <!-- Les informations de base du cas clinique ou du document vont ici -->
+</contexte>
+
+<instructions>
+  <!-- Ce que vous voulez que l'IA fasse, étape par étape -->
+</instructions>
+
+<format_attendu>
+  <!-- La structure de la réponse que vous souhaitez (ex: tableau Markdown, liste à puces) -->
+</format_attendu>
+```
+
+Cette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle.

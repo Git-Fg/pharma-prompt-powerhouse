@@ -1,0 +1,52 @@
+---
+title: "Claude by Anthropic"
+description: "Mon guide pour Claude, l'IA conversationnelle reconnue pour sa large fenêtre de contexte et ses capacités de synthèse de documents."
+url: "https://claude.ai/"
+category: "LLM Généraliste"
+pricing: "Gratuit (avec quotas)"
+capabilities: ["Analyse de documents longs", "Synthèse de texte", "Raisonnement complexe", "Écriture créative"]
+tags: ["claude", "pdf", "synthèse", "contexte long"]
+keyTakeaways:
+  - "La plus grande force de Claude est sa capacité à analyser de très longs documents (cours, articles scientifiques en PDF) directement dans sa version gratuite."
+  - "Utilisez-le pour obtenir des résumés de haute qualité ou pour 'dialoguer' avec vos documents de cours."
+  - "Son ton est souvent plus collaboratif et nuancé, ce qui est excellent pour explorer des sujets complexes."
+---
+
+## Mon Guide Pratique pour Claude
+
+Claude, c'est mon "assistant de lecture" par excellence. Quand un article scientifique fait 30 pages ou que mes notes de cours sont un immense fichier PDF, c'est l'outil que j'ouvre en premier. Sa capacité à "ingérer" et à raisonner sur de grandes quantités de texte, même dans sa version gratuite, le rend indispensable.
+
+### Pourquoi je l'utilise en Pharmacie ?
+
+1. **Analyse de PDF :** C'est sa fonctionnalité phare. Je peux téléverser un essai clinique complet et lui poser des questions précises : "Quelle était la population de l'étude ?", "Résume la méthodologie en 5 points clés", "Quels sont les biais potentiels de cette étude ?".
+2.  **Synthèse de Cours :** Je lui donne mes notes de cours (même désorganisées) et je lui demande de me créer une fiche de révision structurée. Sa grande "mémoire" (fenêtre de contexte) lui permet de conserver une vue d'ensemble cohérente.
+3.  **Raisonnement Nuancé :** Je trouve que Claude excelle dans l'exploration d'idées complexes. Il est très bon pour comparer des points de vue ou pour m'aider à structurer un argumentaire.
+
+### Mon Workflow pour Résumer un Article Scientifique
+
+1.  **Téléverser le Document :** Sur l'interface de Claude, j'utilise l'icône trombone pour joindre directement le fichier PDF de l'article.
+2. **Rédiger un Prompt Structuré :** Je ne lui demande pas juste "résume ça". Je le guide précisément.
+    ```xml
+    <source_document>
+    Le document que je viens de téléverser est un essai clinique sur un nouvel antidiabétique.
+    </source_document>
+
+    <instructions>
+    Agis en tant qu'expert en analyse critique de la littérature scientifique. En te basant EXCLUSIVEMENT sur le document fourni, extrais les informations suivantes :
+
+    1.  **Objectif principal de l'étude.**
+    2.  **Méthodologie :** En 3 points (type d'étude, population, critère de jugement principal).
+    3.  **Résultats clés :** Les 3 résultats les plus significatifs.
+    4.  **Conclusion des auteurs.**
+    5.  **Limites de l'étude :** Identifie 2 limites mentionnées ou implicites.
+    </instructions>
+
+    <format>
+    Réponds de manière concise, en utilisant des listes à puces pour chaque section.
+    </format>
+    ```
+3.  **Dialoguer avec le Document :** Une fois le résumé obtenu, je peux continuer la conversation : "Peux-tu m'expliquer plus en détail le critère de jugement secondaire ?", "Y a-t-il des conflits d'intérêts mentionnés ?".
+
+### Conclusion
+
+Pour toute tâche impliquant des documents longs, Claude est souvent le meilleur choix. Il remplace avantageusement des heures de lecture et de synthèse, à condition de le guider avec un prompt clair et structuré.
