@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { allConcepts, allGuides, allPrompts } from "content-collections";
+import { content, getConceptBySlug, getGuideBySlug } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,13 +13,13 @@ import {
   ArrowRight,
   Target,
 } from "lucide-react";
-import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import type { Metadata } from "next";
 
 // Génération des pages statiques au build
 export async function generateStaticParams() {
-  return allConcepts.map((concept) => ({
+  return content.concepts.map((concept) => ({
     slug: concept.slug,
   }));
 }
@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const concept = allConcepts.find((c) => c.slug === resolvedParams.slug);
+  const concept = getConceptBySlug(resolvedParams.slug);
 
   if (!concept) {
     return {
@@ -49,7 +49,7 @@ export async function generateMetadata({
       "intelligence artificielle",
       "formation",
       concept.title,
-      ...(concept.tags?.map(t => t.name) || [])
+      ...(concept.tags || [])
     ],
     openGraph: {
       title: concept.title,
@@ -78,7 +78,7 @@ export default async function ConceptDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const concept = allConcepts.find((c) => c.slug === slug);
+  const concept = getConceptBySlug(slug);
 
   if (!concept) {
     notFound();
@@ -86,11 +86,11 @@ export default async function ConceptDetailPage({
 
   // Trouver LE guide principal et les autres contenus
   const mainGuide = concept.mainGuideSlug
-    ? allGuides.find((g) => g.slug === concept.mainGuideSlug)
+    ? getGuideBySlug(concept.mainGuideSlug)
     : null;
-  const relatedPrompts = allPrompts.filter((p) => p.conceptSlugs?.includes(slug));
+  const relatedPrompts = content.prompts.filter((p) => p.conceptSlugs?.includes(slug));
   // Guides secondaires : ceux qui sont liés au concept mais qui ne sont pas le guide principal
-  const secondaryGuides = allGuides.filter(
+  const secondaryGuides = content.guides.filter(
     (g) => g.conceptSlugs?.includes(slug) && g.slug !== concept.mainGuideSlug
   );
 
@@ -157,7 +157,7 @@ export default async function ConceptDetailPage({
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert max-w-none">
-            <MDXRenderer code={concept.mdxCode} />
+            <ContentRenderer content={concept.content} />
           </div>
         </CardContent>
       </Card>

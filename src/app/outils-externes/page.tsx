@@ -1,6 +1,6 @@
 // src/app/outils-externes/page.tsx
 
-import { allExternalTools } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { Card, CardDescription, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -9,10 +9,10 @@ import { ArrowRight, CheckCircle, Globe, Tag } from "lucide-react";
 
 export default function ExternalToolsPage() {
   // Calculate statistics
-  const totalTools = allExternalTools.length;
-  const categoriesCount = new Set(allExternalTools.map(t => t.category)).size;
-  const freeTools = allExternalTools.filter(t => t.isFree).length;
-  const totalUseCases = allExternalTools.reduce((acc, tool) => acc + (tool.use_cases?.length || 0), 0);
+  const totalTools = content.tools.length;
+  const categoriesCount = new Set(content.tools.map(t => t.category)).size;
+  const freeTools = content.tools.filter(t => t.pricing?.toLowerCase().includes('gratuit')).length;
+  const totalUseCases = content.tools.reduce((acc, tool) => acc + (tool.use_cases?.length || 0), 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -66,19 +66,19 @@ export default function ExternalToolsPage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8">
-          {allExternalTools.map((tool) => (
+          {content.tools.map((tool) => (
             <Card key={tool.slug} className="flex flex-col hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
                    <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${tool.color} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform`} style={{ backgroundColor: tool.color }}>
                          <span className="text-2xl font-bold text-white">{tool.title.charAt(0)}</span>
                       </div>
                       <CardTitle className="text-xl group-hover:text-primary transition-colors">{tool.title}</CardTitle>
                    </div>
-                  <Badge variant={tool.isFree ? "default" : "secondary"} className="flex items-center gap-1">
+                  <Badge variant="secondary" className="flex items-center gap-1">
                     <Tag className="w-3 h-3" />
-                    {tool.pricing}
+                    {tool.pricing || 'Non spécifié'}
                   </Badge>
                 </div>
                 <CardDescription className="text-sm leading-relaxed">{tool.description}</CardDescription>

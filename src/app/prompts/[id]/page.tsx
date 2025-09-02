@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { allPrompts } from "content-collections";
+import { content, getPromptBySlug } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Edit3, Clock, Target, Tag } from "lucide-react";
-import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import MultiFormatPrompt from "@/components/prompts/MultiFormatPrompt";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RelatedContent } from "@/components/shared/RelatedContent";
@@ -35,12 +35,12 @@ const difficultyLabels = {
 };
 
 export async function generateStaticParams() {
-  return allPrompts.map((prompt) => ({ id: prompt.slug }));
+  return content.prompts.map((prompt) => ({ id: prompt.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
     const { id } = await params;
-    const prompt = allPrompts.find((p) => p.slug === id);
+    const prompt = getPromptBySlug(id);
     if (!prompt) return {};
     return {
       title: `${prompt.title} - Prompts`,
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function PromptDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const prompt = allPrompts.find((p) => p.slug === id);
+  const prompt = getPromptBySlug(id);
 
   if (!prompt) {
     notFound();
@@ -121,7 +121,7 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
         <Card>
           <CardHeader><CardTitle>📝 Notes d'Utilisation</CardTitle></CardHeader>
           <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-            <MDXRenderer code={prompt.mdxCode} />
+            <ContentRenderer content={prompt.content} />
           </CardContent>
         </Card>
       </main>

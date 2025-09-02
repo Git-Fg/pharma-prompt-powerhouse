@@ -1,9 +1,9 @@
 // src/lib/content-loader.ts
 import { Guide, Concept, Prompt, ExternalTool } from '@/lib/content-schema';
-import { allGuides as newGuides } from '@/content/guides-new';
-import { allConcepts as newConcepts } from '@/content/concepts-new';
-import { allPrompts as newPrompts } from '@/content/prompts-new';
-import { allExternalTools as newExternalTools } from '@/content/external-tools-new';
+import { allGuides as newGuides } from '@/content/guides';
+import { allConcepts as newConcepts } from '@/content/concepts';
+import { allPrompts as newPrompts } from '@/content/prompts';
+import { allExternalTools as newExternalTools } from '@/content/external-tools';
 
 // Collections - now fully migrated to TypeScript
 const allGuides: Guide[] = [...newGuides];

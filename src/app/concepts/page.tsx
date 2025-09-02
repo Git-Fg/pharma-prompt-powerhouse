@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allConcepts, allGuides, allPrompts } from "content-collections";
+import { content } from '@/lib/content-loader';
 import {
   Card,
   CardHeader,
@@ -17,7 +17,7 @@ export default function ConceptsPage() {
 
   const conceptsByCategory = categories.map((category) => ({
     category,
-    concepts: allConcepts.filter((c) => c.category === category),
+    concepts: content.concepts.filter((c) => c.category === category),
   }));
 
   return (
@@ -34,7 +34,7 @@ export default function ConceptsPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Card className="text-center p-4">
           <div className="text-2xl font-bold text-primary">
-            {allConcepts.length}
+            {content.concepts.length}
           </div>
           <div className="text-sm text-muted-foreground">
             Concepts disponibles
@@ -60,10 +60,10 @@ export default function ConceptsPage() {
         {conceptsByCategory.map(({ category, concepts }) => {
           if (concepts.length === 0) return null;
           const conceptsWithStats = concepts.map((c) => {
-            const guideCount = allGuides.filter((g) =>
+            const guideCount = content.guides.filter((g) =>
               g.conceptSlugs?.includes(c.slug)
             ).length;
-            const promptCount = allPrompts.filter((p) =>
+            const promptCount = content.prompts.filter((p) =>
               p.conceptSlugs?.includes(c.slug)
             ).length;
             return { ...c, guideCount, promptCount };

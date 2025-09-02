@@ -1,9 +1,9 @@
-import { allGuides } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { GuideList } from "@/components/guides/GuideList";
 import { Card } from "@/components/ui/card";
 
 export default function GuidesPage() {
-  const guides = allGuides;
+  const guides = content.guides;
 
   // Calculate statistics
   const totalGuides = guides.length;
@@ -11,7 +11,7 @@ export default function GuidesPage() {
   const beginnerGuides = guides.filter(g => g.difficulty === 'débutant').length;
   const averageReadingTime = Math.round(
     guides.reduce((acc, guide) => {
-      const timeMatch = guide.readingTime?.match(/\d+/);
+      const timeMatch = guide.estimatedTime?.match(/\d+/);
       return acc + (timeMatch ? parseInt(timeMatch[0]) : 0);
     }, 0) / guides.length
   );
