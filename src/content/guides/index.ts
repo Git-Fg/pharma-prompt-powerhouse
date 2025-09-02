@@ -2,8 +2,10 @@
 import { guide as choisirSesOutilsIa2025 } from './choisir-ses-outils-ia-en-2025-chat-vs-studio';
 import { guide as confidentialiteSecurite } from './confidentialite-securite';
 import { guide as gestionMemoireIa } from './gestion-memoire-ia';
+import { guide as iaEnLocalConfidentialite } from './ia-en-local-confidentialite-totale';
 import { guide as iaStagiaireBrillantNaif } from './ia-stagiaire-brillant-naif';
 import { guide as investigationPharmacovigilance } from './investigation-pharmacovigilance-avec-tot';
+import { guide as leCoreKitIaGratuit } from './le-core-kit-ia-gratuit-en-2025';
 import { guide as leGuideUltimeOutilsIa } from './le-guide-ultime-des-outils-ia-gratuits';
 import { guide as les5PiliersPrompt } from './les-5-piliers-dun-prompt-pharmaceutique-efficace';
 import { guide as obtenirDonneesFiables } from './obtenir-donnees-fiables';
@@ -18,8 +20,10 @@ export const allGuides = [
   choisirSesOutilsIa2025,
   confidentialiteSecurite,
   gestionMemoireIa,
+  iaEnLocalConfidentialite,
   iaStagiaireBrillantNaif,
   investigationPharmacovigilance,
+  leCoreKitIaGratuit,
   leGuideUltimeOutilsIa,
   les5PiliersPrompt,
   obtenirDonneesFiables,

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { content } from '@/lib/content-loader';
 import { getRandomConceptTip } from "@/lib/tips-utils";
 import { Button } from "@/components/ui/button";
+import { FeaturedTools } from "@/components/shared/FeaturedTools";
 import {
   Card,
   CardContent,
@@ -174,6 +175,20 @@ export default function HomePage() {
             </CardHeader>
           </Card>
         </div>
+      </section>
+
+      {/* Section 2.5 : Core Kit Étudiant - Outils Essentiels Gratuits */}
+      <section className="container mx-auto px-4 py-16 bg-gradient-to-r from-muted/20 to-background">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">
+            Le Core Kit Étudiant 2025
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Découvrez les outils IA gratuits qui changent la donne. 95% des capacités 
+            de pointe sans sortir la carte bancaire.
+          </p>
+        </div>
+        <FeaturedTools />
       </section>
 
       {/* Section 3 : Les Concepts en Vedette - Accès Direct */}

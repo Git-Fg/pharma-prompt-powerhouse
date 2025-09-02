@@ -21,7 +21,7 @@ const externalToolData = {
     "Développement web complet"
   ],
   "color": "bg-purple-500",
-  "tldr": "L'état de l'art en recherche gratuite avec GLM-4.5. Surpasse Perplexity sur bien des points avec une approche plus 'humaine' et fiable de la recherche web.",
+  "tldr": "Suite créative complète gratuite avec GLM-4.5. **Notre choix N°1 pour la recherche web fiable** grâce à son raisonnement transparent et ses appels d'outils avancés.",
   "content": [
     {
       "type": "alert",

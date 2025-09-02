@@ -237,6 +237,15 @@ Votre stratégie de confidentialité doit être un réflexe, pas une réflexion 
 4.  **Données d'Identification de Santé (PHI) :** **INTERDIT** sur toute IA grand public. Seules les solutions professionnelles validées dans un cadre hospitalier sont autorisées.
 
 En appliquant cette grille de lecture, vous pouvez bénéficier de la puissance de l'IA tout en respectant scrupuleusement vos obligations éthiques et légales.`
+    },
+    {
+      "type": "markdown",
+      "content": "## Le Seul Vrai Coffre-Fort : L'Hébergement Local"
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "ia-en-local-confidentialite-totale",
+      "reason": "Pour une confidentialité absolue, la seule solution est de faire tourner les modèles sur votre propre machine. Ce guide vous montre comment faire avec des modèles comme Qwen3-4B."
     }
   ]
 };
