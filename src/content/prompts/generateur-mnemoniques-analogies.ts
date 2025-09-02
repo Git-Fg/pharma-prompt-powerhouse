@@ -54,8 +54,81 @@ const promptData = {
   },
   "content": [
     {
+      "type": "alert",
+      "variant": "default",
+      "title": "🌡️ Température Recommandée",
+      "content": "Réglez entre **0.7** et **0.9** dans les paramètres pour obtenir des résultats vraiment originaux et créatifs. En dessous, les réponses seront trop convenues."
+    },
+    {
       "type": "markdown",
-      "content": "## Notes d'Utilisation\n\nCe prompt est disponible en plusieurs formats optimisés pour différents outils. Utilisez les onglets ci-dessus pour choisir la version qui convient le mieux à votre plateforme.\n\n<Alert>\n  <AlertDescription>\n    **🌡️ Température Recommandée :** Réglez entre \\`0.7\\` et \\`0.9\\` dans les paramètres pour obtenir des résultats vraiment originaux et créatifs. En dessous, les réponses seront trop convenues.\n  </AlertDescription>\n</Alert>\n\n## Pourquoi Plusieurs Formats ?\n\n<Card>\n  <CardHeader>\n    <CardTitle>🎯 Optimisation par Outil</CardTitle>\n  </CardHeader>\n  <CardContent className=\"space-y-3\">\n    <div className=\"flex items-start space-x-2\">\n      <Badge variant=\"outline\">Standard</Badge>\n      <p className=\"text-sm\">Parfait pour les interfaces de chat simples (ChatGPT, Claude, Gemini)</p>\n    </div>\n    <div className=\"flex items-start space-x-2\">\n      <Badge variant=\"outline\">XML</Badge>\n      <p className=\"text-sm\">Optimisé pour Claude qui excelle avec les balises structurées</p>\n    </div>\n    <div className=\"flex items-start space-x-2\">\n      <Badge variant=\"outline\">AI Studio</Badge>\n      <p className=\"text-sm\">Sépare System/User pour un contrôle granulaire des paramètres</p>\n    </div>\n  </CardContent>\n</Card>"
+      "content": "## Variables à Personnaliser"
+    },
+    {
+      "type": "card",
+      "title": "Template Variables",
+      "content": "- **{{type_aide_memoire}}** : \"mnémotechnique\", \"analogie\", \"histoire\", \"image mentale\", \"poème\"\n- **{{style_prefere}}** : \"humoristique\", \"professionnel\", \"dramatique\", \"scientifique\", \"original\"\n- **{{elements_a_memoriser}}** : Liste des éléments à retenir"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "examples",
+      "tabs": [
+        {
+          "value": "examples",
+          "title": "Exemples d'Usage",
+          "content": [
+            {
+              "type": "card",
+              "title": "Exemple : Classes d'Antibiotiques",
+              "content": "**Type** : mnémotechnique\n**Style** : humoristique\n**Éléments** : Pénicillines, Céphalosporines, Macrolides, Quinolones\n\n**Résultat possible** : \"**P**apy **C**harles **M**ange des **Q**uiches\" avec histoire détaillée pour chaque classe."
+            },
+            {
+              "type": "card",
+              "title": "Exemple : Interactions Warfarine",
+              "variant": "outline",
+              "content": "**Type** : analogie\n**Style** : professionnel\n**Éléments** : Aspirine, Amiodarone, Antibiotiques\n\n**Résultat possible** : Analogie du \"chef cuisinier\" (warfarine) perturbé par différents \"ingrédients\" (interactions)."
+            }
+          ]
+        },
+        {
+          "value": "formats",
+          "title": "Optimisation par Outil",
+          "content": [
+            {
+              "type": "card",
+              "title": "Version Standard",
+              "content": "Parfait pour les interfaces de chat simples (ChatGPT, Claude, Gemini). Format conversationnel naturel."
+            },
+            {
+              "type": "card",
+              "title": "Version XML",
+              "variant": "outline",
+              "content": "Optimisé pour Claude qui excelle avec les balises structurées `<role>`, `<task>`, `<elements_to_memorize>`."
+            },
+            {
+              "type": "card",
+              "title": "Version AI Studio",
+              "variant": "outline",
+              "content": "Sépare System/User pour un contrôle granulaire des paramètres de créativité."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🎨 Conseil Créatif",
+      "content": "N'hésitez pas à demander plusieurs approches dans le même prompt. L'IA proposera souvent 2-3 alternatives dont vous pourrez choisir la plus mémorable."
+    },
+    {
+      "type": "conceptRecommendation",
+      "slug": "température-dosage",
+      "reason": "Comprenez comment ajuster la température pour optimiser la créativité de vos mnémotechniques."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "choisir-ses-outils-ia-en-2025-chat-vs-studio",
+      "reason": "Découvrez quel format utiliser selon votre outil préféré pour maximiser la créativité."
     }
   ]
 };
