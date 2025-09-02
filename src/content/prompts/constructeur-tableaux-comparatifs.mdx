@@ -6,10 +6,10 @@ category: "creation"
 difficulty: "débutant"
 recommendedTool: "Google AI Studio"
 tags: ["comparatif", "exemple-code", "pedagogie", "pharmacie", "prompting", "tableau", "template", "variables"]
-conceptSlugs: ["structuration-contenu"]
+conceptSlugs: ["structuration-par-balises"]
 variables: ["sujet_comparaison", "elements_a_comparer", "criteres_comparaison"]
 systemPromptContent: |
-  Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
+  Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.
 promptContent: |
   <tache>
   Crée un tableau comparatif détaillé.
@@ -26,24 +26,71 @@ promptContent: |
   <criteres>
   {{criteres_comparaison}}
   </criteres>
+alternativeVersions:
+  standard: |
+    Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.
+    
+    Crée un tableau comparatif détaillé pour :
+    - **Sujet :** {{sujet_comparaison}}
+    - **Éléments à comparer :** {{elements_a_comparer}}
+    - **Critères de comparaison :** {{criteres_comparaison}}
+  xml: |
+    <role>
+    Tu es un expert en pharmacologie et en pédagogie, spécialisé dans la création de supports de révision.
+    </role>
+
+    <tache>
+    Crée un tableau comparatif détaillé au format Markdown.
+    </tache>
+
+    <sujet>
+    {{sujet_comparaison}}
+    </sujet>
+
+    <elements_to_compare>
+    {{elements_a_comparer}}
+    </elements_to_compare>
+
+    <criteria>
+    {{criteres_comparaison}}
+    </criteria>
+
+    <format_instructions>
+    - Utilise le format Markdown pour les tableaux
+    - Ajoute des émojis pour améliorer la lisibilité
+    - Inclus une conclusion synthétique après le tableau
+    </format_instructions>
+  aiStudio:
+    systemPrompt: |
+      Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.
+    userPrompt: |
+      Crée un tableau comparatif détaillé pour :
+      
+      **Sujet :** {{sujet_comparaison}}
+      **Éléments à comparer :** {{elements_a_comparer}}  
+      **Critères de comparaison :** {{criteres_comparaison}}
+      
+      Ajoute une brève conclusion après le tableau.
+recommendedTools:
+  standard: ["ChatGPT", "Claude.ai", "Gemini"]
+  xml: ["Claude.ai", "DeepSeek"]
+  aiStudio: ["Google AI Studio", "OpenAI Playground"]
 ---
 
 ## Notes d'Utilisation
 
-Ce prompt est optimisé pour les plateformes qui supportent un **"System Prompt"** (comme Google AI Studio ou OpenAI Playground). Le System Prompt définit le rôle de l'IA de manière persistante, tandis que le "User Prompt" contient la tâche spécifique.
+Ce prompt utilise les nouvelles capacités multi-format pour s'adapter automatiquement à votre outil préféré. Chaque version est optimisée pour tirer le meilleur parti de la plateforme choisie.
 
--   **Sur AI Studio :** Copiez le contenu du `System Prompt` dans le champ dédié, et le `User Prompt` dans la zone de saisie principale.
--   **Sur ChatGPT/Claude :** Vous pouvez combiner les deux en commençant votre message par le contenu du System Prompt.
+<Alert>
+  <AlertDescription>
+    **💡 Conseil :** Pour des tableaux complexes, utilisez la version XML avec Claude qui excelle dans la structuration des données.
+  </AlertDescription>
+</Alert>
 
-### Adaptation pour ChatGPT / Claude (si besoin)
+## Exemple de Variables
 
-'''markdown
-# Combinaison des deux prompts pour une interface de chat simple
-Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown.
+Voici un exemple concret d'utilisation :
 
-Crée un tableau comparatif détaillé.
-
-- **Sujet :** `{{sujet_comparaison}}`
-- **Éléments à comparer :** `{{elements_a_comparer}}`
-- **Critères de comparaison :** `{{criteres_comparaison}}`
-'''
+- **`{{sujet_comparaison}}`** : "Antidépresseurs pour le traitement de la dépression majeure"
+- **`{{elements_a_comparer}}`** : "ISRS (fluoxétine), IRSN (venlafaxine), tricycliques (amitriptyline)"
+- **`{{criteres_comparaison}}`** : "Mécanisme d'action, posologie, effets indésirables, contre-indications, surveillance"

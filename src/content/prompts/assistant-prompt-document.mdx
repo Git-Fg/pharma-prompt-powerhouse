@@ -21,18 +21,32 @@ promptContent: |
   {{user_question}}
   </question>
 alternativeVersions:
-  - name: "Version ChatGPT"
-    content: |
-      ### Contexte
-      Voici un document :
-      """
-      {{document_content}}
-      """
+  standard: |
+    ### Contexte
+    Voici un document :
+    """
+    {{document_content}}
+    """
 
-      ### Ma Question
-      En me basant uniquement sur le document ci-dessus, réponds à cette question : {{user_question}}
+    ### Ma Question
+    En me basant uniquement sur le document ci-dessus, réponds à cette question : {{user_question}}
 
-      **Règle importante :** Si la réponse ne se trouve pas dans le document, dis-le explicitement.
+    **Règle importante :** Si la réponse ne se trouve pas dans le document, dis-le explicitement.
+  xml: |
+    <document>
+    {{document_content}}
+    </document>
+
+    <instructions>
+    En te basant EXCLUSIVEMENT sur le document fourni ci-dessus, réponds à la question suivante. Si l'information n'est pas présente dans le texte, réponds "L'information n'est pas disponible dans le document fourni."
+    </instructions>
+
+    <question>
+    {{user_question}}
+    </question>
+recommendedTools:
+  standard: ["ChatGPT", "Gemini"]
+  xml: ["Claude.ai", "DeepSeek"]
 ---
 
 ## Notes d'Utilisation

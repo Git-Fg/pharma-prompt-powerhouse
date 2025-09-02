@@ -8,6 +8,7 @@ import { ArrowLeft, Clock, Target, BookOpen, Edit3 } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
 import { CopyButton } from "@/components/ui/copy-button";
 import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import MultiFormatPrompt from "@/components/prompts/MultiFormatPrompt";
 import type { Metadata } from "next";
 
 // Génération des paramètres statiques pour le build
@@ -217,29 +218,13 @@ export default async function PromptDetailPage({
             </Card>
           )}
 
-          {/* Versions Alternatives si disponibles */}
-          {foundPrompt.alternativeVersions && foundPrompt.alternativeVersions.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">🔄 Versions Alternatives</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {foundPrompt.alternativeVersions.map((version, index) => (
-                  <div key={index} className="border rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold">{version.name}</h4>
-                      <CopyButton 
-                        text={version.content}
-                        label="Copier"
-                      />
-                    </div>
-                    <CodeBlock language="text" showLineNumbers={false}>
-                      {version.content}
-                    </CodeBlock>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+          {/* Multi-format prompt display */}
+          {foundPrompt.alternativeVersions && (
+            <MultiFormatPrompt 
+              alternativeVersions={foundPrompt.alternativeVersions}
+              recommendedTools={foundPrompt.recommendedTools}
+              variables={foundPrompt.variables}
+            />
           )}
 
           {/* Notes d'utilisation - Séparées du prompt */}
