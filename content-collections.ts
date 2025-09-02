@@ -1,6 +1,7 @@
 import { defineCollection, defineConfig, Context } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
+import remarkGfm from "remark-gfm";
 import { isValidIcon } from "./src/types/icon-taxonomy";
 
 // ============================================================================
@@ -248,8 +249,13 @@ const concepts = defineCollection({
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
     
-    // Modern build-time MDX compilation
-    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
+    // Modern build-time MDX compilation with table support
+    const mdxCode = await compileMDX(ctx, { 
+      ...doc, 
+      content: doc.content || "" 
+    }, {
+      remarkPlugins: [remarkGfm],
+    });
 
     return {
       ...computed,
@@ -282,8 +288,13 @@ const guides = defineCollection({
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
     
-    // Modern build-time MDX compilation
-    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
+    // Modern build-time MDX compilation with table support
+    const mdxCode = await compileMDX(ctx, { 
+      ...doc, 
+      content: doc.content || "" 
+    }, {
+      remarkPlugins: [remarkGfm],
+    });
 
     return {
       ...computed,
@@ -345,8 +356,13 @@ const prompts = defineCollection({
     const alternativeVersions = generateAlternativeVersions(doc);
     const recommendedTools = generateRecommendedTools(doc);
     
-    // Modern build-time MDX compilation
-    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
+    // Modern build-time MDX compilation with table support
+    const mdxCode = await compileMDX(ctx, { 
+      ...doc, 
+      content: doc.content || "" 
+    }, {
+      remarkPlugins: [remarkGfm],
+    });
 
     return {
       ...computed,
@@ -386,8 +402,13 @@ const externalTools = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     
-    // Modern build-time MDX compilation
-    const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
+    // Modern build-time MDX compilation with table support
+    const mdxCode = await compileMDX(ctx, { 
+      ...doc, 
+      content: doc.content || "" 
+    }, {
+      remarkPlugins: [remarkGfm],
+    });
 
     return {
       ...computed,
