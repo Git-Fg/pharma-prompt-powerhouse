@@ -3,6 +3,13 @@ import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 import { isValidIcon } from "./src/types/icon-taxonomy";
 
+// Helper function to create a simplified object for linking
+const toLink = (doc: { _meta: { path: string }, title: string, description: string }) => ({
+  slug: doc._meta.path,
+  title: doc.title,
+  description: doc.description,
+});
+
 // ============================================================================
 // SCHÉMAS ZOD & TYPES INFERES
 // ============================================================================
@@ -186,100 +193,6 @@ const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: 
   };
 };
 
-const resolveConceptRelations = async (
-  doc: { conceptSlugs?: string[] },
-  ctx: Context
-) => {
-  if (!doc.conceptSlugs || doc.conceptSlugs.length === 0) {
-    return { concepts: [] };
-  }
-
-  const allConcepts = await ctx.documents(concepts);
-  const relatedConcepts = allConcepts
-    .filter((concept) => doc.conceptSlugs!.includes(concept._meta.path))
-    .map((concept) => ({
-      slug: concept._meta.path,
-      title: concept.title,
-      icon: concept.icon,
-      category: concept.category,
-    }));
-
-  return { concepts: relatedConcepts };
-};
-
-const resolveRelatedContent = async (
-  doc: { conceptSlugs?: string[]; _meta: Meta; tags?: string[] },
-  ctx: Context
-): Promise<{ 
-  relatedGuides: Array<{ slug: string; title: string; description: string; sharedConcepts: string[] }>; 
-  relatedPrompts: Array<{ slug: string; title: string; description: string; sharedConcepts: string[] }>; 
-  relatedConcepts: Array<{ slug: string; title: string; description?: string; icon?: string; category?: string }>; 
-}> => {
-  if (!doc.conceptSlugs || doc.conceptSlugs.length === 0) {
-    return { relatedGuides: [], relatedPrompts: [], relatedConcepts: [] };
-  }
-
-  // Get all documents of each type
-  const allGuides = await ctx.documents(guides);
-  const allPrompts = await ctx.documents(prompts);
-  const allConcepts = await ctx.documents(concepts);
-
-  // Find related guides that share concepts, prioritize by number of shared concepts
-  const relatedGuides = allGuides
-    .filter((guide) => guide._meta.path !== doc._meta.path)
-    .map((guide) => {
-      const sharedConcepts = guide.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
-      return {
-        ...guide,
-        sharedConcepts,
-        relevanceScore: sharedConcepts.length
-      };
-    })
-    .filter((guide) => guide.relevanceScore > 0)
-    .sort((a, b) => b.relevanceScore - a.relevanceScore)
-    .slice(0, 3)
-    .map((guide) => ({
-      slug: guide._meta.path,
-      title: guide.title,
-      description: guide.description,
-      sharedConcepts: guide.sharedConcepts,
-    }));
-
-  // Find related prompts that share concepts, prioritize by number of shared concepts
-  const relatedPrompts = allPrompts
-    .filter((prompt) => prompt._meta.path !== doc._meta.path)
-    .map((prompt) => {
-      const sharedConcepts = prompt.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
-      return {
-        ...prompt,
-        sharedConcepts,
-        relevanceScore: sharedConcepts.length
-      };
-    })
-    .filter((prompt) => prompt.relevanceScore > 0)
-    .sort((a, b) => b.relevanceScore - a.relevanceScore)
-    .slice(0, 3)
-    .map((prompt) => ({
-      slug: prompt._meta.path,
-      title: prompt.title,
-      description: prompt.description,
-      sharedConcepts: prompt.sharedConcepts,
-    }));
-
-  // Get the actual concepts referenced by this document
-  const relatedConcepts = allConcepts
-    .filter((concept) => doc.conceptSlugs!.includes(concept._meta.path))
-    .map((concept) => ({
-      slug: concept._meta.path,
-      title: concept.title,
-      description: concept.description,
-      icon: concept.icon,
-      category: concept.category,
-    }));
-
-  return { relatedGuides, relatedPrompts, relatedConcepts };
-};
-
 const processTags = (doc: { tags?: string[] }) => {
   if (!doc.tags || doc.tags.length === 0) {
     return { tags: [] };
@@ -325,27 +238,6 @@ const conceptSchema = baseSchema.extend({
 });
 type ConceptDoc = z.infer<typeof conceptSchema> & { _meta: Meta; content?: string };
 
-// Define validateConceptReferences after collection definitions to avoid circular dependencies
-const validateConceptReferences = async (
-  doc: BaseDoc & { _meta: Meta; mainGuideSlug?: string },
-  ctx: Context
-) => {
-  if (doc.mainGuideSlug) {
-    const allGuides = await ctx.documents(guides);
-    const linkedGuide = allGuides.find(
-      (g) => g._meta.path === doc.mainGuideSlug
-    );
-    if (!linkedGuide) {
-      validationErrors.push({
-        document: doc._meta.path,
-        field: "mainGuideSlug",
-        value: doc.mainGuideSlug,
-        message: `Le guide référencé '${doc.mainGuideSlug}' n'existe pas dans la collection 'guides'.`,
-      });
-    }
-  }
-};
-
 const concepts = defineCollection({
   name: "concepts",
   directory: "src/content/concepts",
@@ -355,7 +247,6 @@ const concepts = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
-    await validateConceptReferences(doc, ctx);
     
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
@@ -364,6 +255,7 @@ const concepts = defineCollection({
       ...computed,
       ...processedTags,
       mdxCode,
+      slug: doc._meta.path,
     };
   },
 });
@@ -388,8 +280,6 @@ const guides = defineCollection({
   transform: async (doc: GuideDoc, ctx: Context) => {
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx);
-    const relatedContent = await resolveRelatedContent(doc, ctx);
     validateIconExists(doc, ctx);
     
     // Compile MDX content at build time
@@ -399,9 +289,8 @@ const guides = defineCollection({
       ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
-      ...relations,
-      ...relatedContent,
       mdxCode,
+      slug: doc._meta.path,
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
       estimatedReadingTime: doc.estimatedTime || computed.readingTime,
@@ -448,8 +337,6 @@ const prompts = defineCollection({
   transform: async (doc: PromptDoc, ctx: Context) => {
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx);
-    const relatedContent = await resolveRelatedContent(doc, ctx);
     validateIconExists(doc, ctx);
     
     // Generate alternative versions and recommended tools
@@ -463,9 +350,8 @@ const prompts = defineCollection({
       ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
-      ...relations,
-      ...relatedContent,
       mdxCode,
+      slug: doc._meta.path,
       hasVariables: (doc.variables?.length || 0) > 0,
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
@@ -497,8 +383,6 @@ const externalTools = defineCollection({
   transform: async (doc: ExternalToolDoc, ctx: Context) => {
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
-    const relations = await resolveConceptRelations(doc, ctx);
-    const relatedContent = await resolveRelatedContent(doc, ctx);
     
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
@@ -506,9 +390,8 @@ const externalTools = defineCollection({
     return {
       ...computed,
       ...processedTags,
-      ...relations,
-      ...relatedContent,
       mdxCode,
+      slug: doc._meta.path,
       isFree:
         doc.pricing?.toLowerCase().includes("gratuit") ||
         doc.pricing?.toLowerCase().includes("free"),
