@@ -78,6 +78,7 @@ const TAG_TAXONOMY = {
     "synthese",
     "comparatif",
     "exemple-code",
+    "outils",
   ],
   outils: [
     "chatgpt",
@@ -225,8 +226,8 @@ const resolveRelatedContent = async (
 
   // Find related guides that share concepts, prioritize by number of shared concepts
   const relatedGuides = allGuides
-    .filter((guide: any) => guide._meta.path !== doc._meta.path)
-    .map((guide: any) => {
+    .filter((guide) => guide._meta.path !== doc._meta.path)
+    .map((guide) => {
       const sharedConcepts = guide.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
       return {
         ...guide,
@@ -234,10 +235,10 @@ const resolveRelatedContent = async (
         relevanceScore: sharedConcepts.length
       };
     })
-    .filter((guide: any) => guide.relevanceScore > 0)
-    .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+    .filter((guide) => guide.relevanceScore > 0)
+    .sort((a, b) => b.relevanceScore - a.relevanceScore)
     .slice(0, 3)
-    .map((guide: any) => ({
+    .map((guide) => ({
       slug: guide._meta.path,
       title: guide.title,
       description: guide.description,
@@ -246,8 +247,8 @@ const resolveRelatedContent = async (
 
   // Find related prompts that share concepts, prioritize by number of shared concepts
   const relatedPrompts = allPrompts
-    .filter((prompt: any) => prompt._meta.path !== doc._meta.path)
-    .map((prompt: any) => {
+    .filter((prompt) => prompt._meta.path !== doc._meta.path)
+    .map((prompt) => {
       const sharedConcepts = prompt.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
       return {
         ...prompt,
@@ -255,10 +256,10 @@ const resolveRelatedContent = async (
         relevanceScore: sharedConcepts.length
       };
     })
-    .filter((prompt: any) => prompt.relevanceScore > 0)
-    .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+    .filter((prompt) => prompt.relevanceScore > 0)
+    .sort((a, b) => b.relevanceScore - a.relevanceScore)
     .slice(0, 3)
-    .map((prompt: any) => ({
+    .map((prompt) => ({
       slug: prompt._meta.path,
       title: prompt.title,
       description: prompt.description,
@@ -267,8 +268,8 @@ const resolveRelatedContent = async (
 
   // Get the actual concepts referenced by this document
   const relatedConcepts = allConcepts
-    .filter((concept: any) => doc.conceptSlugs!.includes(concept._meta.path))
-    .map((concept: any) => ({
+    .filter((concept) => doc.conceptSlugs!.includes(concept._meta.path))
+    .map((concept) => ({
       slug: concept._meta.path,
       title: concept.title,
       description: concept.description,
@@ -332,7 +333,7 @@ const validateConceptReferences = async (
   if (doc.mainGuideSlug) {
     const allGuides = await ctx.documents(guides);
     const linkedGuide = allGuides.find(
-      (g: any) => g._meta.path === doc.mainGuideSlug
+      (g) => g._meta.path === doc.mainGuideSlug
     );
     if (!linkedGuide) {
       validationErrors.push({

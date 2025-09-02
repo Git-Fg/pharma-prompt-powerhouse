@@ -25,7 +25,7 @@ const TAG_TAXONOMY = {
   format: [
     "guide", "tutoriel", "workflow", "fiche-revision", "qcm", "cas-clinique",
     "tableau", "mnemonique", "synthese", "comparatif", "exemple-code",
-    "fondamentaux", "structuration", // Added missing tags
+    "fondamentaux", "structuration", "outils", // Added outils tag
   ],
   outils: [
     "chatgpt", "claude", "gemini", "perplexity", "z-ai", "aistudio",
