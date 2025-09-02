@@ -56,7 +56,27 @@ const promptData = {
   "content": [
     {
       "type": "markdown",
-      "content": "## Notes d'Utilisation\n\nCe prompt utilise les nouvelles capacités multi-format pour s'adapter automatiquement à votre outil préféré. Chaque version est optimisée pour tirer le meilleur parti de la plateforme choisie.\n\n<Alert>\n  <AlertDescription>\n    **💡 Conseil :** Pour des tableaux complexes, utilisez la version XML avec Claude qui excelle dans la structuration des données.\n  </AlertDescription>\n</Alert>\n\n## Exemple de Variables\n\nVoici un exemple concret d'utilisation :\n\n- **\\`{{sujet_comparaison}}\\`** : \"Antidépresseurs pour le traitement de la dépression majeure\"\n- **\\`{{elements_a_comparer}}\\`** : \"ISRS (fluoxétine), IRSN (venlafaxine), tricycliques (amitriptyline)\"\n- **\\`{{criteres_comparaison}}\\`** : \"Mécanisme d'action, posologie, effets indésirables, contre-indications, surveillance\""
+      "content": "## Notes d'Utilisation\n\nCe prompt utilise les nouvelles capacités multi-format pour s'adapter automatiquement à votre outil préféré. Chaque version est optimisée pour tirer le meilleur parti de la plateforme choisie."
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "💡 Conseil",
+      "content": "Pour des tableaux complexes, utilisez la version XML avec Claude qui excelle dans la structuration des données."
+    },
+    {
+      "type": "markdown",
+      "content": "## Exemple de Variables\n\nVoici un exemple concret d'utilisation :"
+    },
+    {
+      "type": "codeBlock",
+      "language": "text",
+      "filename": "variables-exemple.txt",
+      "content": "{{sujet_comparaison}} : \"Antidépresseurs pour le traitement de la dépression majeure\"\n{{elements_a_comparer}} : \"ISRS (fluoxétine), IRSN (venlafaxine), tricycliques (amitriptyline)\"\n{{criteres_comparaison}} : \"Mécanisme d'action, posologie, effets indésirables, contre-indications, surveillance\""
+    },
+    {
+      "type": "markdown",
+      "content": "## Versions Recommandées par Outil\n\n- **Version Standard** : Pour ChatGPT, Claude.ai, Gemini\n- **Version XML** : Optimale pour Claude.ai et DeepSeek\n- **Version AI Studio** : Spécialement conçue pour Google AI Studio et OpenAI Playground"
     }
   ]
 };
