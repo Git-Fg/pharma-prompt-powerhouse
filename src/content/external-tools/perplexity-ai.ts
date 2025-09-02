@@ -22,8 +22,139 @@ const externalToolData = {
   "tldr": "Moteur de recherche IA avec sources citées en temps réel. Parfait pour recherche bibliographique fiable et veille scientifique actualisée.",
   "content": [
     {
+      "type": "alert",
+      "variant": "default",
+      "title": "🎯 Point Clé",
+      "content": "Perplexity AI n'est pas un chatbot traditionnel, c'est un **moteur de réponse** qui cite toujours ses sources en temps réel."
+    },
+    {
       "type": "markdown",
-      "content": "## Qu'est-ce que Perplexity AI ?\n\nPerplexity AI n'est pas un chatbot traditionnel. C'est un **moteur de réponse** (Answer Engine). Sa mission principale est de répondre à des questions de manière précise et fiable en se basant sur des informations fraîches provenant d'Internet. Pour chaque réponse, Perplexity cite ses sources, ce qui vous permet de vérifier l'information et d'approfondir le sujet.\n\nIl utilise une technologie de **RAG (Retrieval-Augmented Generation)**, ce qui signifie qu'il ne se contente pas de \"savoir\" des choses, il va activement \"chercher\" l'information la plus à jour avant de vous répondre. C'est un atout majeur dans un domaine comme la santé où les connaissances évoluent constamment.\n\n## Les Modèles derrière Perplexity\n\nPerplexity s'appuie sur une combinaison de modèles internes et externes :\n\n- **Modèle Maison : Sonar (2024)**\n  - Un modèle propriétaire basé sur Llama 3.3, spécifiquement entraîné pour la recherche et la synthèse en temps réel. Il est extrêmement rapide (jusqu'à 1200 tokens/seconde) et efficace.\n  - **Sonar Pro :** Une version plus puissante disponible pour les abonnés.\n\n- **Modèles Externes (Abonnement Pro) :**\n  - Perplexity Pro vous donne la flexibilité de choisir parmi les meilleurs modèles du marché pour traiter votre requête, notamment :\n    - **GPT-5**\n    - **Gemini 2.5 Pro**\n    - **Claude 3**\n\n## Fonctionnalités Clés\n\n| Fonctionnalité | Version Gratuite | Version Pro ($20/mois) |\n| :--- | :--- | :--- |\n| **Recherches Pro** | 5 par jour | 300+ par jour |\n| **Modèle par défaut** | Sonar (rapide) | Sonar Pro, et accès à GPT-5, Gemini 2.5 Pro, etc. |\n| **Traitement de fichiers** | Limité (extraits) | **Illimité** (PDF, images, CSV, etc.) |\n| **Deep Research** | Non disponible | **Oui**, pour des rapports de recherche complets et autonomes. |\n| **Génération d'images**| Non disponible | Oui, intégrée à l'interface. |\n\n## Le \"Focus\" : La Recherche Ciblée\n\nUne des fonctionnalités les plus puissantes de Perplexity est le \"Focus\". Elle vous permet de restreindre la recherche à des domaines spécifiques pour obtenir des résultats plus pertinents :\n\n- **Academic :** Pour ne chercher que dans les publications scientifiques et les journaux académiques.\n- **Wolfram|Alpha :** Pour les calculs et les données structurées.\n- **YouTube :** Pour trouver des informations dans des vidéos.\n- **Reddit :** Pour sonder les discussions et les avis communautaires.\n\nPour un étudiant en pharmacie, la recherche **Academic** est un outil d'une valeur inestimable.\n\n## Cas d'Usage en Pharmacie\n\n- **Question de Pharmacovigilance :** \"Quels sont les derniers signalements sur les effets secondaires de la molécule X selon les articles publiés en 2024 ?\" (Focus: Academic)\n- **Recherche de Protocole :** \"Existe-t-il des protocoles de traitement standard pour la maladie Y chez les patients pédiatriques ?\"\n- **Analyse d'un Article :** Uploadez un PDF et demandez : \"Résume les points clés de cette étude et compare ses conclusions avec les 3 articles les plus récents sur le même sujet.\"\n- **Veille Scientifique :** \"Quelles sont les nouvelles thérapies géniques en phase 3 d'essais cliniques pour la mucoviscidose ?\"\n\n## Conclusion\n\nPerplexity AI est l'outil de choix pour la **recherche d'informations fiables et sourcées**. Alors qu'un chatbot comme ChatGPT peut parfois \"halluciner\" ou se baser sur des données datées, Perplexity met la priorité sur la véracité et la fraîcheur de l'information. Son abonnement Pro, avec la fonction **Deep Research** et l'accès aux meilleurs modèles, en fait un assistant de recherche extrêmement puissant, capable de générer des synthèses de littérature quasi automatiquement."
+      "content": "## Qu'est-ce que Perplexity AI ?"
+    },
+    {
+      "type": "card",
+      "title": "Technologie RAG",
+      "description": "Retrieval-Augmented Generation",
+      "content": "Perplexity utilise une approche **RAG** : il ne se contente pas de \"savoir\" des choses, il va activement **chercher** l'information la plus à jour avant de répondre. C'est crucial en santé où les connaissances évoluent constamment."
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "sonar",
+      "tabs": [
+        {
+          "value": "sonar",
+          "title": "Modèle Sonar (Maison)",
+          "content": [
+            {
+              "type": "card",
+              "title": "Sonar 2024",
+              "content": "- **Base** : Llama 3.3 fine-tuné par Perplexity\n- **Vitesse** : Jusqu'à 1 200 tokens/seconde\n- **Spécialisation** : Recherche et synthèse en temps réel\n- **Performance** : Dépasse GPT-4o mini et Claude 3.5 Haiku"
+            },
+            {
+              "type": "card",
+              "title": "Sonar Pro",
+              "variant": "outline",
+              "content": "Version plus puissante disponible pour les abonnés Pro avec des capacités de requêtes simultanées."
+            }
+          ]
+        },
+        {
+          "value": "external",
+          "title": "Modèles Externes (Pro)",
+          "content": [
+            {
+              "type": "markdown",
+              "content": "L'abonnement Pro donne accès aux meilleurs modèles du marché :"
+            },
+            {
+              "type": "card",
+              "title": "Modèles Disponibles",
+              "content": "- **GPT-5** : Le modèle le plus avancé d'OpenAI\n- **Gemini 2.5 Pro** : Excellence en analyse multimodale\n- **Claude 3** : Spécialisé en raisonnement complexe"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "content": "## Fonctionnalités par Version"
+    },
+    {
+      "type": "card",
+      "title": "Comparaison Gratuit vs Pro",
+      "content": "| Fonctionnalité | Version Gratuite | Version Pro (20€/mois) |\n|---|---|---|\n| **Recherches Pro** | 5 par jour | 300+ par jour |\n| **Modèle par défaut** | Sonar (rapide) | Sonar Pro + modèles premium |\n| **Traitement de fichiers** | Limité (extraits) | **Illimité** (PDF, images, CSV) |\n| **Deep Research** | ❌ Non disponible | ✅ **Rapports complets autonomes** |\n| **Génération d'images** | ❌ Non disponible | ✅ Intégrée à l'interface |"
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🔬 Focus Academic",
+      "content": "La fonctionnalité **Focus Academic** limite la recherche aux publications scientifiques - un outil inestimable pour les étudiants en pharmacie."
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "focus-types",
+      "tabs": [
+        {
+          "value": "focus-types",
+          "title": "Types de Focus",
+          "content": [
+            {
+              "type": "card",
+              "title": "Focus Academic",
+              "description": "Recherche scientifique ciblée",
+              "content": "Limite la recherche aux publications scientifiques et journaux académiques. Parfait pour la recherche bibliographique fiable."
+            },
+            {
+              "type": "card",
+              "title": "Autres Focus",
+              "variant": "outline",
+              "content": "- **Wolfram|Alpha** : Calculs et données structurées\n- **YouTube** : Informations dans les vidéos\n- **Reddit** : Discussions et avis communautaires"
+            }
+          ]
+        },
+        {
+          "value": "use-cases",
+          "title": "Cas d'Usage Pharmacie",
+          "content": [
+            {
+              "type": "card",
+              "title": "Pharmacovigilance",
+              "content": "\"Quels sont les derniers signalements sur les effets secondaires de la molécule X selon les articles publiés en 2024 ?\""
+            },
+            {
+              "type": "card",
+              "title": "Protocoles de Traitement",
+              "content": "\"Existe-t-il des protocoles de traitement standard pour la maladie Y chez les patients pédiatriques ?\""
+            },
+            {
+              "type": "card",
+              "title": "Analyse d'Études",
+              "content": "Uploadez un PDF : \"Résume les points clés et compare avec les 3 articles les plus récents sur le même sujet.\""
+            },
+            {
+              "type": "card",
+              "title": "Veille Scientifique",
+              "content": "\"Quelles sont les nouvelles thérapies géniques en phase 3 d'essais cliniques pour la mucoviscidose ?\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🎯 Avantage Concurrentiel",
+      "content": "Contrairement aux chatbots qui peuvent \"halluciner\", Perplexity priorise la **véracité** et la **fraîcheur** de l'information avec ses sources citées."
+    },
+    {
+      "type": "conceptRecommendation",
+      "slug": "hallucination-effet-indesirable",
+      "reason": "Comprenez pourquoi Perplexity est plus fiable que les chatbots traditionnels pour la recherche factuelle."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "obtenir-donnees-fiables",
+      "reason": "Apprenez les meilleures pratiques pour utiliser Perplexity et d'autres outils de recherche de manière optimale."
     }
   ]
 };
