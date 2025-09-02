@@ -35,7 +35,7 @@ export const filterContent = cache(
           item.title.toLowerCase().includes(searchTerm) ||
           item.description.toLowerCase().includes(searchTerm) ||
           (item.tags &&
-            item.tags.some((tag) => tag.name.toLowerCase().includes(searchTerm)));
+            item.tags.some((tag) => tag.toLowerCase().includes(searchTerm)));
 
         if (!matchesSearch) return false;
       }
@@ -56,7 +56,7 @@ export const filterContent = cache(
       if (filter.tags && filter.tags.length > 0) {
         if (
           !item.tags ||
-          !filter.tags.some((tag) => item.tags!.some(t => t.name === tag))
+          !filter.tags.some((tag) => item.tags!.some(t => t === tag))
         ) {
           return false;
         }

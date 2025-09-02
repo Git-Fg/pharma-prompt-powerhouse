@@ -3,7 +3,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { allPrompts, type Prompt as PromptType } from 'content-collections';
+import { content } from '@/lib/content-loader';
+import { Prompt as PromptType } from '@/lib/content-schema';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -26,7 +27,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
 
   useEffect(() => {
     if (templateToLoad) {
-      const foundPrompt = allPrompts.find(p => p.slug === templateToLoad);
+      const foundPrompt = content.prompts.find(p => p.slug === templateToLoad);
       if (foundPrompt) {
         setPromptTemplate(foundPrompt);
         const initialValues: Record<string, string> = {};

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { allGuides } from 'content-collections';
+import { getGuideBySlug } from '@/lib/content-loader';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen, CheckCircle, Clock } from 'lucide-react';
@@ -30,7 +30,7 @@ const difficultyLabels = {
 };
 
 export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
-  const guide = allGuides.find(g => g.slug === guideSlug);
+  const guide = getGuideBySlug(guideSlug);
 
   if (!guide) {
     return (
