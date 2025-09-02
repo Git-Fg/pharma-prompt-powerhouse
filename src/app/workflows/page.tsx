@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allGuides } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,15 +30,15 @@ const difficultyLabels = {
 };
 
 // Enhanced workflow detection using modern isWorkflow field from content collections
-const workflowGuides = allGuides.filter(guide => 
+const workflowGuides = content.guides.filter(guide => 
   guide.isWorkflow || 
   guide.title.toLowerCase().includes('workflow') ||
   guide.description.toLowerCase().includes('étape par étape') ||
-  guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.name?.toLowerCase() || ''))
+  guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.toLowerCase() || ''))
 );
 
 // All other practical guides (non-workflows)
-const practicalGuides = allGuides.filter(guide => !workflowGuides.includes(guide));
+const practicalGuides = content.guides.filter(guide => !workflowGuides.includes(guide));
 
 export const metadata: Metadata = {
   title: "Workflows & Guides Pratiques - Pharma Prompt Powerhouse",
@@ -82,7 +82,6 @@ function GuideCard({ guide, isWorkflow = false }: {
     category: string;
     difficulty?: string;
     estimatedTime?: string;
-    readingTime: string;
     keyTakeaways?: string[];
   };
   isWorkflow?: boolean;
@@ -135,7 +134,7 @@ function GuideCard({ guide, isWorkflow = false }: {
             </div>
           )}
           <Badge variant="outline" className="text-xs">
-            {guide.readingTime}
+            {guide.estimatedTime || '5 min'}
           </Badge>
         </div>
 

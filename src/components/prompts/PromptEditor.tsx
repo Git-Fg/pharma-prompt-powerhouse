@@ -168,7 +168,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
 
       <div className="lg:col-span-2 space-y-6">
         {/* System Prompt if it exists */}
-        {promptTemplate.hasSystemPrompt && (
+        {promptTemplate.systemPromptContent && (
           <Card>
             <CardHeader>
               <CardTitle>🧠 System Prompt</CardTitle>
@@ -187,7 +187,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
         {/* Main Prompt */}
         <Card>
           <CardHeader>
-            <CardTitle>🎯 {promptTemplate.hasSystemPrompt ? 'User Prompt' : 'Prompt Principal'}</CardTitle>
+            <CardTitle>🎯 {promptTemplate.systemPromptContent ? 'User Prompt' : 'Prompt Principal'}</CardTitle>
             <CardDescription>{promptTemplate.title}</CardDescription>
           </CardHeader>
           <CardContent>
