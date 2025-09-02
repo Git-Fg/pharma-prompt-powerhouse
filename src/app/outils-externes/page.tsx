@@ -1,7 +1,5 @@
 // src/app/outils-externes/page.tsx
 
-"use client";
-
 import { allExternalTools } from "content-collections";
 import { Card, CardDescription, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
