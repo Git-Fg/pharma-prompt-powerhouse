@@ -1,3 +1,5 @@
+# Global Rules : 
+
 <project_philosophy>
 **Philosophie du Projet : Simplicité et Apprentissage**
 
