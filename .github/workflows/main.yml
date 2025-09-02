@@ -1,9 +1,9 @@
 name: Update AI Agents from AGENTS.md
 
 on:
-  push:
-    branches: [main, master]
-    paths: ['AGENTS.md']
+  push:        # Trigger on any push to any branch
+    branches: ["*"]
+  workflow_dispatch:  # Allow manual triggering from Actions tab
 
 permissions:
   contents: write
@@ -25,7 +25,6 @@ jobs:
 
       - name: Parse and update agent files
         run: |
-          # Parse AGENTS.md and extract agent configurations
           awk '
           BEGIN { 
             current_file = ""
@@ -34,13 +33,10 @@ jobs:
           }
           
           /^## / {
-            # Save previous file if exists
             if (current_file != "" && content != "") {
               print content > current_file
               close(current_file)
             }
-            
-            # Extract new file path from header
             gsub(/^## /, "")
             gsub(/`/, "")
             current_file = $0
@@ -48,7 +44,7 @@ jobs:
             next
           }
           
-          /^```
+          /^```/ {
             in_code_block = !in_code_block
             if (!in_code_block && current_file != "") {
               next
@@ -63,7 +59,6 @@ jobs:
           }
           
           END {
-            # Save last file
             if (current_file != "" && content != "") {
               print content > current_file
               close(current_file)
@@ -73,22 +68,16 @@ jobs:
 
       - name: Ensure directories exist
         run: |
-          # Create directories if they don't exist
           mkdir -p .github .idx .roo/rules
-          
-          # Set proper file contents if they were created
           if [ ! -f .github/copilot-instructions.md ]; then
             echo "# Copilot Instructions" > .github/copilot-instructions.md
           fi
-          
           if [ ! -f .idx/dev.nix ]; then
             echo "# Dev environment configuration" > .idx/dev.nix
           fi
-          
           if [ ! -f .idx/mcp.json ]; then
             echo "{}" > .idx/mcp.json
           fi
-          
           if [ ! -f .roo/mcp.json ]; then
             echo "{}" > .roo/mcp.json
           fi
