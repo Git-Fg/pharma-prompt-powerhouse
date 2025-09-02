@@ -10,12 +10,18 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function TestNewGuidePage() {
-  const guide = getGuideBySlug('confidentialite-securite');
+  const guide = getGuideBySlug('workflow-generer-cas-cliniques');
 
   if (!guide) {
     return (
       <div className="container max-w-4xl mx-auto px-4 py-12">
         <h1>Guide non trouvé</h1>
+        <p>Guides disponibles :</p>
+        <ul>
+          <li>confidentialite-securite</li>
+          <li>optimiser-ses-quotas-et-son-temps-avec-lia</li>
+          <li>workflow-generer-cas-cliniques</li>
+        </ul>
       </div>
     );
   }
