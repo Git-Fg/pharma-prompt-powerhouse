@@ -131,16 +131,7 @@ export {
 
 // Composants de feedback
 export { Alert, AlertDescription, AlertTitle } from './alert';
-export {
-  Toast,
-  ToastAction,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-} from './toast';
-export { Toaster } from './toaster';
+export { Toaster } from './sonner';
 export { Progress } from './progress';
 export { Skeleton } from './skeleton';
 
