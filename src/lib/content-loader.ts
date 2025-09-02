@@ -50,7 +50,8 @@ export const content = {
   guides: enrichedGuides,
   concepts: enrichedConcepts,
   prompts: enrichedPrompts,
-  tools: enrichedExternalTools,
+  externalTools: enrichedExternalTools,
+  tools: enrichedExternalTools, // Backward compatibility alias
 };
 
 // Fonctions d'accès typées et performantes pour les pages
