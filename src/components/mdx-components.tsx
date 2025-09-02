@@ -108,6 +108,9 @@ export function useMDXComponents(): Record<string, any> {
     CardHeader,
     CardTitle,
     
+    // Blocs de code
+    CodeBlock,
+    
     // Points clés
     KeyTakeaways,
     
