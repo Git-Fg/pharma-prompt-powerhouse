@@ -45,3 +45,7 @@ server.log
 
 # Je pref pnpm, donc je supprime npm
 package-lock.json
+
+#test related
+playwright-report
+test-results
