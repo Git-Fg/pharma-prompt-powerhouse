@@ -10,7 +10,7 @@
 <content_rules>
 **Règles du Contenu : Le Cœur du Projet**
 
-- **Public Cible : Non-Développeurs Uniquement.** Le jargon technique lié au développement (API, RAG, etc.) est à proscrire. Le focus est sur l'ingénierie de prompts pharmaceutiques.
+- **Public Cible : Non-Développeurs.** Le public cible est un étudiant ou professionnel de santé. Le jargon technique doit être évité. **Tolérance :** Des concepts comme `RAG` ou `token` peuvent être mentionnés **uniquement s'ils sont expliqués simplement** et sont essentiels pour comprendre le fonctionnement d'une WebUI (ex: Perplexity et le RAG). Le jargon nécessitant d'écrire du code (`API`, `endpoint`, etc.) est **strictement interdit** dans le contenu destiné aux utilisateurs.
 - **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
 - **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
 - **Clarté et Pertinence :** Prioriser la qualité du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pour illustrer les concepts.
@@ -21,8 +21,7 @@
 **Stratégie de Documentation**
 
 - **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
-- **`/.github/copilot-instructions.md` :** La "Constitution" du projet. C'est la source de vérité pour les règles de développement, le style de code et la philosophie. Sert de contexte pour les développeurs et les assistants IA.
-- **`/docs/` :** La documentation d'architecture. Contient les documents de haut niveau qui expliquent les décisions de conception majeures (ex: "concept-hub-architecture.md"). Utile pour comprendre le "pourquoi" derrière la structure du projet.
+- **`/.github/copilot-instructions.md` (ou ce fichier) :** La "Constitution" du projet. C'est la source de vérité pour les règles de développement, le style de code et la philosophie. Sert de contexte pour les développeurs et les assistants IA.
 </project_documentation_rules>
 
 <coding_style_and_principles>
@@ -226,6 +225,7 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 
 <google_information>
 - Google : Deux webui disponibles - Gemini (gemini.google.com) et AI Studio (aistudio.google.com)
+  **Note :** Il est crucial de bien distinguer l'interface de chat `gemini.google.com` (produit grand public) de `aistudio.google.com` (laboratoire d'expérimentation).
 
   • Modèles récents (2024-2025) :
     - Gemini 2.5 Pro (juin 2025) : Modèle "pensant" le plus puissant
@@ -274,7 +274,25 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
   • Accès gratuit vs payant (20€/mois - Gemini Advanced) :
     - Gratuit : Gemini 2.5 Flash, 32K tokens, 10 fichiers 100Mo max
     - Payant : Gemini 2.5 Pro, 1M tokens, 100 requêtes 2.5 Pro/jour, Veo 3 (3 vidéos/jour), Deep Research
-</google_information> 
+</google_information>
+
+<notebooklm_information>
+- NotebookLM (Google) : Webui disponible - NotebookLM (https://notebooklm.google.com/)
+
+  • Modèle : Propulsé par les modèles Gemini de Google.
+  
+  • Fonctionnalités principales :
+    - **Assistant de recherche personnalisé :** Transforme vos documents (PDF, cours, notes) en une base de connaissances interactive.
+    - **Interrogation de contenu :** Permet de "discuter" avec vos documents pour obtenir des synthèses, des réponses précises et des comparaisons.
+    - **Génération de podcasts (Audio Overview) :** Crée automatiquement une discussion audio de 10-20 minutes résumant vos documents, idéale pour la révision mobile.
+    - **Organisation par "Notebooks" :** Permet de créer des espaces de travail thématiques (par matière, projet, etc.).
+    - **Citations précises :** Chaque réponse est directement liée à la source dans vos documents.
+  
+  • Accès : Totalement gratuit (août 2025)
+    • Aucune limite de temps connue.
+    • Intégration avec l'écosystème Google.
+    • Confidentialité : Soumis aux politiques de confidentialité de Google.
+</notebooklm_information>
 
 <anthropic_information>
 - Anthropic : Deux webui disponibles - Claude (claude.ai) et Console (console.anthropic.com)
@@ -548,7 +566,7 @@ Informations fondamentales sur la webui évoquée dans le projet :
 <autre>
 - Plateforme complètement gratuite mais énorme risque de confidentialité : https://ish.junioralive.in/
 - Trouver des outils gratuits en IA (attention à la confidentialité, si c'est gratuit c'est que les données sont très probablement réutilisées au mieux pour l'entraînement, au pire pour la revente) : https://fmhy.net/ai#ai-chatbots
-- ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles. 
+- ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. **La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles.**
 </autre>
 
-</webui_informations>  
+</webui_informations> 
