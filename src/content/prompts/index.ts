@@ -4,6 +4,7 @@ import { prompt as constructeurTableauxComparatifs } from './constructeur-tablea
 import { prompt as generateurMnemoniquesAnalogies } from './generateur-mnemoniques-analogies';
 import { prompt as generateurQuestionsExamen } from './generateur-questions-examen';
 import { prompt as researchHelper } from './research-helper';
+import { prompt as resolveurCasCliniquesTot } from './resolveur-cas-cliniques-tot';
 
 export const allPrompts = [
   assistantPromptDocument,
@@ -11,4 +12,5 @@ export const allPrompts = [
   generateurMnemoniquesAnalogies,
   generateurQuestionsExamen,
   researchHelper,
+  resolveurCasCliniquesTot,
 ];
