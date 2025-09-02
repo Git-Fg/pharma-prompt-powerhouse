@@ -431,7 +431,7 @@ const externalTools = defineCollection({
 
 export default defineConfig({
   collections: [concepts, guides, prompts, externalTools],
-  onSuccess: async (allDocuments: any[]) => {
+  onSuccess: async (allDocuments: Array<{ _meta: { directory: string } }>) => {
     // Enhanced validation and reporting
     if (validationErrors.length > 0) {
       const errors = validationErrors.filter(e => e.severity === 'error');
