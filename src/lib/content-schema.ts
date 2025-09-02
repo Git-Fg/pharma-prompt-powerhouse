@@ -1,5 +1,10 @@
 // src/lib/content-schema.ts
 import { z } from 'zod';
+import {
+  allDifficulties,
+  allCategories
+} from './constants';
+import { lucideIconNames } from './icon-constants';
 
 // === BLOCS DE CONTENU ATOMIQUES ===
 // Chaque partie de votre contenu sera un de ces blocs.
@@ -81,39 +86,46 @@ const contentBlockSchema = z.union([
 
 const baseContentSchema = z.object({
   slug: z.string(),
-  title: z.string().min(1),
-  description: z.string().min(10),
-  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]),
+  title: z.string().min(1, "Le titre est requis."),
+  description: z.string().min(10, "La description doit faire au moins 10 caractères."),
   tags: z.array(z.string()).default([]),
   isFavorite: z.boolean().default(false),
-  keyTakeaways: z.array(z.string()).optional(),
+  keyTakeaways: z.array(z.string()).optional(), // Reste optionnel ici, sera rendu obligatoire si besoin
   conceptSlugs: z.array(z.string()).default([]),
-  content: z.array(contentBlockSchema), // Le contenu est maintenant un tableau de blocs
-});
+  content: z.array(contentBlockSchema).min(1, "Le contenu ne peut pas être vide."), // Doit contenir au moins un bloc
+}).strict(); // NOUVEAU : Interdit les champs inconnus
 
 export const guideSchema = baseContentSchema.extend({
-  icon: z.string().optional(),
-  category: z.string(),
-  estimatedTime: z.string().optional(),
+  difficulty: z.enum(allDifficulties),
+  icon: z.enum(lucideIconNames), // DEVIENT OBLIGATOIRE : Un guide doit avoir une icône
+  category: z.enum(allCategories),
+  estimatedTime: z.string(), // DEVIENT OBLIGATOIRE : Un guide doit avoir un temps de lecture estimé
   isWorkflow: z.boolean().default(false),
-});
+}).refine(data => data.keyTakeaways && data.keyTakeaways.length > 0, {
+  message: "Un guide doit avoir au moins un 'keyTakeaway'.",
+  path: ["keyTakeaways"],
+}).strict();
 
 export const conceptSchema = baseContentSchema.extend({
-  icon: z.string().optional(),
-  category: z.string().optional(),
+  difficulty: z.enum(allDifficulties),
+  icon: z.enum(lucideIconNames), // DEVIENT OBLIGATOIRE : Un concept doit avoir une icône
+  category: z.enum(allCategories), // DEVIENT OBLIGATOIRE : Un concept doit avoir une catégorie
   mainGuideSlug: z.string().optional(),
-});
+}).refine(data => data.keyTakeaways && data.keyTakeaways.length > 0, {
+  message: "Un concept doit avoir au moins un 'keyTakeaway'.",
+  path: ["keyTakeaways"], // Indique quel champ est en erreur
+}).strict();
 
 export const promptSchema = baseContentSchema.extend({
-  icon: z.string().optional(),
-  category: z.string(),
+  difficulty: z.enum(allDifficulties),
+  icon: z.enum(lucideIconNames), // DEVIENT OBLIGATOIRE : Un prompt doit avoir une icône
+  category: z.enum(allCategories),
   targetTool: z.string().optional(),
   variables: z.array(z.string()).optional(),
   domain: z.string().optional(),
   useCase: z.string().optional(),
   example: z.string().optional(),
-  estimatedTime: z.string().optional(),
-  promptContent: z.string().optional(),
+  promptContent: z.string().min(1, "Le contenu principal du prompt (promptContent) est requis."), // DEVIENT OBLIGATOIRE
   systemPromptContent: z.string().optional(),
   alternativeVersions: z.object({
     standard: z.string().optional(),
@@ -128,17 +140,17 @@ export const promptSchema = baseContentSchema.extend({
     xml: z.array(z.string()).optional(),
     aiStudio: z.array(z.string()).optional(),
   }).optional(),
-});
+}).strict();
 
 export const externalToolSchema = baseContentSchema.extend({
   url: z.string().url(),
-  category: z.string(),
+  category: z.enum(allCategories),
   pricing: z.string().optional(),
   capabilities: z.array(z.string()).default([]),
   use_cases: z.array(z.string()).min(1, "Au moins un cas d'usage est requis"),
   color: z.string().min(1, "La couleur est requise"),
-  tldr: z.string().min(20, "Le TLDR doit être concis mais informatif").optional(),
-});
+  tldr: z.string().min(20, "Le TLDR doit être concis mais informatif"), // DEVIENT OBLIGATOIRE
+}).strict();
 
 // Types inférés de Zod
 export type Guide = z.infer<typeof guideSchema>;
@@ -154,3 +166,36 @@ export type ConceptRecommendationBlock = z.infer<typeof conceptRecommendationBlo
 export type CodeBlockType = z.infer<typeof codeBlockSchema>;
 export type CardBlock = z.infer<typeof cardBlockSchema>;
 export type TabsBlock = z.infer<typeof tabsBlockSchema>;
+
+// === SCHÉMA POUR LES OBJECTIFS ===
+
+export const objectifSchema = z.object({
+  slug: z.string(),
+  title: z.string().min(1),
+  description: z.string().min(10),
+  icon: z.enum(lucideIconNames),
+  
+  // La solution clé en main
+  masterPrompt: z.object({
+    description: z.string(),
+    prompt: promptSchema, // Réutilise le schéma de prompt existant !
+  }),
+
+  // La section d'auto-évaluation
+  beforeAfter: z.object({
+    beforePrompt: z.string(),
+    afterPrompt: z.string(),
+    // On utilise des chemins relatifs vers /public pour les images
+    beforeImageSrc: z.string().optional(),
+    afterImageSrc: z.string().optional(),
+  }),
+  
+ checklist: z.array(z.string()).min(1),
+
+  // Les liens vers l'approfondissement
+  relatedConcepts: z.array(z.string()),
+  relatedGuides: z.array(z.string()),
+}).strict();
+
+// Types inférés de Zod
+export type Objectif = z.infer<typeof objectifSchema>;

@@ -11,7 +11,7 @@ const externalToolData = {
   "keyTakeaways": [],
   "conceptSlugs": [],
   "url": "https://chat.z.ai/",
-  "category": "Suite créative",
+  "category": "suite-creative",
   "capabilities": [],
   "use_cases": [
     "Recherche académique avancée",

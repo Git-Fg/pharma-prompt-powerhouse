@@ -26,7 +26,7 @@ const guideData = {
     "context-engineering",
     "température-dosage"
   ],
-  "isWorkflow": false,
+  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",

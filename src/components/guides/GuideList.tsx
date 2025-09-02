@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { SearchInput } from '@/components/ui/search-input';
 import {
@@ -24,7 +23,7 @@ import { useFavorites } from '@/hooks/useFavorites';
 import { cn } from '@/lib/utils';
 import { getIcon } from '@/types/icon-taxonomy';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
-
+import { useContentFilter } from '@/hooks/useContentFilter';
 import { Guide } from '@/lib/content-schema';
 
 interface GuideListProps {
@@ -32,21 +31,17 @@ interface GuideListProps {
 }
 
 export function GuideList({ initialGuides }: GuideListProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
+  const {
+    filteredItems: filteredGuides,
+    searchTerm,
+    selectedCategory,
+    selectedDifficulty,
+    setSearchTerm,
+    setSelectedCategory,
+    setSelectedDifficulty,
+    resetFilters
+  } = useContentFilter<Guide>(initialGuides);
   const { toggleFavorite, isFavorite } = useFavorites('favoriteGuides');
-
-  const filteredGuides = initialGuides.filter(guide => {
-    const matchesSearch =
-      guide.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      guide.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === 'all' || guide.category === selectedCategory;
-    const matchesDifficulty =
-      selectedDifficulty === 'all' || guide.difficulty === selectedDifficulty;
-    return matchesSearch && matchesCategory && matchesDifficulty;
-  });
 
   const categories = [
     'all',
@@ -115,11 +110,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
           </p>
           <Button 
             variant="outline" 
-            onClick={() => {
-              setSearchTerm('');
-              setSelectedCategory('all');
-              setSelectedDifficulty('all');
-            }}
+            onClick={resetFilters}
           >
             Réinitialiser les filtres
           </Button>

@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link";
+import { useState } from "react";
 import { content } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,82 +11,14 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Search, Workflow, Clock, Target, BookOpen, CheckCircle } from "lucide-react";
 import { getIcon } from "@/types/icon-taxonomy";
-import type { Metadata } from "next";
+import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
-const categoryLabels = {
-  prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
-  tools: "Outils 🛠️",
-  security: "Sécurité 🔒",
-  optimization: "Optimisation ⚡",
-  fondamentaux: "Fondamentaux 📚",
-  methodologie: "Méthodologie 🔬",
-  ressources: "Ressources 📖",
-  "techniques-avancees": "Techniques Avancées 🚀",
-  "cas-pratiques": "Cas Pratiques 💊",
-};
+const allWorkflowGuides = content.guides.filter(guide => guide.isWorkflow);
 
-const difficultyLabels = {
-  débutant: "Débutant",
-  intermédiaire: "Intermédiaire", 
-  avancé: "Avancé",
-};
-
-// Enhanced workflow detection using modern isWorkflow field from content collections
-const workflowGuides = content.guides.filter(guide => 
-  guide.isWorkflow || 
-  guide.title.toLowerCase().includes('workflow') ||
-  guide.description.toLowerCase().includes('étape par étape') ||
-  guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.toLowerCase() || ''))
-);
-
-// All other practical guides (non-workflows)
-const practicalGuides = content.guides.filter(guide => !workflowGuides.includes(guide));
-
-export const metadata: Metadata = {
-  title: "Workflows & Guides Pratiques - Pharma Prompt Powerhouse",
-  description: "Découvrez nos workflows complets et guides pratiques pour maîtriser l'ingénierie de prompts appliquée aux sciences pharmaceutiques.",
-  keywords: [
-    "workflow",
-    "guides pratiques",
-    "pharmacie",
-    "prompt engineering",
-    "processus",
-    "méthodologie",
-    "étape par étape",
-    "cas pratiques"
-  ],
-  openGraph: {
-    title: "Workflows & Guides Pratiques",
-    description: "Processus complets et guides pratiques pour l'ingénierie de prompts en pharmacie",
-    type: "website",
-    images: [
-      {
-        url: "/og-workflows.png",
-        width: 1200,
-        height: 630,
-        alt: "Workflows & Guides Pratiques"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Workflows & Guides Pratiques",
-    description: "Processus complets et guides pratiques pour l'ingénierie de prompts en pharmacie"
-  }
-};
+const allPracticalGuides = content.guides.filter(guide => !guide.isWorkflow);
 
 function GuideCard({ guide, isWorkflow = false }: { 
-  guide: {
-    slug: string;
-    title: string;
-    description: string;
-    icon?: string;
-    category: string;
-    difficulty?: string;
-    estimatedTime?: string;
-    keyTakeaways?: string[];
-  };
+  guide: (typeof allWorkflowGuides)[0];
   isWorkflow?: boolean;
 }) {
   const Icon = guide.icon ? getIcon(guide.icon) : BookOpen;
@@ -133,9 +68,6 @@ function GuideCard({ guide, isWorkflow = false }: {
               </Badge>
             </div>
           )}
-          <Badge variant="outline" className="text-xs">
-            {guide.estimatedTime || '5 min'}
-          </Badge>
         </div>
 
         {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
@@ -161,11 +93,19 @@ function GuideCard({ guide, isWorkflow = false }: {
 }
 
 export default function WorkflowsPage() {
-  const totalContent = workflowGuides.length + practicalGuides.length;
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filterLogic = (guide: (typeof allWorkflowGuides)[0]) => 
+    guide.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    guide.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const filteredWorkflows = allWorkflowGuides.filter(filterLogic);
+  const filteredGuides = allPracticalGuides.filter(filterLogic);
+
+  const totalContent = allWorkflowGuides.length + allPracticalGuides.length;
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-12">
-      {/* Header */}
       <header className="text-center mb-12">
         <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
           <Workflow className="w-4 h-4 mr-2" />
@@ -180,7 +120,6 @@ export default function WorkflowsPage() {
         </p>
       </header>
 
-      {/* Search */}
       <Card className="mb-8">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -192,23 +131,24 @@ export default function WorkflowsPage() {
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Rechercher par titre, description, difficulté ou domaine d'application..."
+              placeholder="Rechercher par titre, description, ou mot-clé..."
               className="pl-10"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </CardContent>
       </Card>
 
-      {/* Unified Tabs Experience */}
       <Tabs defaultValue="workflows" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-8">
           <TabsTrigger value="workflows" className="flex items-center gap-2">
             <Workflow className="w-4 h-4" />
-            Workflows ({workflowGuides.length})
+            Workflows ({filteredWorkflows.length})
           </TabsTrigger>
           <TabsTrigger value="guides" className="flex items-center gap-2">
             <BookOpen className="w-4 h-4" />
-            Guides Pratiques ({practicalGuides.length})
+            Guides Pratiques ({filteredGuides.length})
           </TabsTrigger>
         </TabsList>
 
@@ -220,9 +160,9 @@ export default function WorkflowsPage() {
             </p>
           </div>
           
-          {workflowGuides.length > 0 ? (
+          {filteredWorkflows.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {workflowGuides.map((workflow) => (
+              {filteredWorkflows.map((workflow) => (
                 <GuideCard key={workflow.slug} guide={workflow} isWorkflow />
               ))}
             </div>
@@ -230,15 +170,10 @@ export default function WorkflowsPage() {
             <Card className="text-center py-12">
               <CardContent>
                 <Workflow className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Workflows en développement</h3>
+                <h3 className="text-lg font-semibold mb-2">Aucun workflow trouvé</h3>
                 <p className="text-muted-foreground mb-6">
-                  De nouveaux workflows sont en cours de création. Consultez les guides pratiques en attendant !
+                  Aucun workflow ne correspond à votre recherche. Essayez d'autres termes.
                 </p>
-                <Button asChild>
-                  <Link href="#guides">
-                    Voir les guides pratiques
-                  </Link>
-                </Button>
               </CardContent>
             </Card>
           )}
@@ -252,15 +187,26 @@ export default function WorkflowsPage() {
             </p>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {practicalGuides.map((guide) => (
-              <GuideCard key={guide.slug} guide={guide} />
-            ))}
-          </div>
+          {filteredGuides.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredGuides.map((guide) => (
+                <GuideCard key={guide.slug} guide={guide} />
+              ))}
+            </div>
+          ) : (
+            <Card className="text-center py-12">
+              <CardContent>
+                <BookOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
+                <p className="text-muted-foreground mb-6">
+                   Aucun guide pratique ne correspond à votre recherche. Essayez d'autres termes.
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
       </Tabs>
 
-      {/* Enhanced Call to Action */}
       <Separator className="my-12" />
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">

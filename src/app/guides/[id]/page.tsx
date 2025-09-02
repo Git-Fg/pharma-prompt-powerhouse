@@ -53,7 +53,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: guide.title,
+    title: `Guide : ${guide.title} | Pharma Prompt Powerhouse`,
     description: guide.description,
   };
 }

@@ -6,7 +6,7 @@ const conceptData = {
   "title": "Context Engineering",
   "description": "Optimisez la fenêtre de contexte de l'IA pour maximiser la pertinence et la précision des réponses en pharmacie.",
   "icon": "Target",
-  "category": "Fondamentaux",
+  "category": "fondamentaux",
   "difficulty": "débutant",
   "tags": [
     "context-engineering",

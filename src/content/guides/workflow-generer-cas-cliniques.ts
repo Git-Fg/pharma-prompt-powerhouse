@@ -8,6 +8,7 @@ const guideData = {
   "icon": "ClipboardList",
   "category": "cas-pratiques",
   "difficulty": "intermédiaire",
+  "estimatedTime": "20 min",
   "tags": [],
   "isFavorite": false,
   "keyTakeaways": [
@@ -19,7 +20,7 @@ const guideData = {
     "structuration-par-balises",
     "chaîne-de-prompts"
   ],
-  "isWorkflow": false,
+  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",

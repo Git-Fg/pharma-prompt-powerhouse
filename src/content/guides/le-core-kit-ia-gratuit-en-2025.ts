@@ -6,9 +6,9 @@ const guideData = {
   "title": "Le Core Kit de l'Étudiant : Maîtriser l'IA de Pointe sans Carte Bancaire en 2025",
   "description": "Découvrez le duo gagnant Z.AI + Google AI Studio : comment accéder aux capacités IA les plus avancées du moment sans débourser un euro. Guide complet d'un workflow éprouvé sur le terrain.",
   "difficulty": "intermédiaire",
-  "category": "Outils & Techniques",
+  "category": "outils",
   "estimatedTime": "15 min de lecture + 30 min de pratique",
-  "icon": "🎯",
+  "icon": "Star",
   "isFavorite": true,
   "keyTakeaways": [
     "Le duo Z.AI + AI Studio offre 95% des capacités des solutions payantes",

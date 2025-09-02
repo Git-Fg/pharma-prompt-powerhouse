@@ -5,7 +5,6 @@ const externalToolData = {
   "slug": "notebooklm",
   "title": "NotebookLM : Votre Assistant de Recherche Personnalisé",
   "description": "Transformez vos documents de cours, articles et notes en une base de connaissances interactive avec laquelle vous pouvez dialoguer, grâce à l'IA de Google.",
-  "difficulty": "débutant",
   "tags": [],
   "isFavorite": false,
   "keyTakeaways": [
@@ -18,7 +17,7 @@ const externalToolData = {
     "context-engineering"
   ],
   "url": "https://notebooklm.google.com/",
-  "category": "Assistant de Recherche",
+  "category": "recherche",
   "pricing": "Gratuit",
   "capabilities": [],
   "use_cases": [

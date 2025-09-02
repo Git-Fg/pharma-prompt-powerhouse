@@ -6,6 +6,7 @@ const conceptData = {
   "title": "La Température : Le Dosage de la Créativité de l'IA",
   "description": "Découvrez comment le paramètre de température influence la créativité et la prévisibilité des réponses d'un modèle de langage.",
   "icon": "Thermometer",
+  "category": "fondamentaux",
   "difficulty": "intermédiaire",
   "tags": [],
   "isFavorite": false,

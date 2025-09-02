@@ -49,3 +49,6 @@ pnpm-lock.yaml
 #test related
 playwright-report
 test-results
+
+/e2e_image
+node_modules

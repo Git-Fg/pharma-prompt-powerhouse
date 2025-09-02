@@ -28,7 +28,7 @@ const guideData = {
   "conceptSlugs": [
     "tree-of-thought"
   ],
-  "isWorkflow": false,
+  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",

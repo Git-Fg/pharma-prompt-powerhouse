@@ -27,7 +27,7 @@ interface SearchableItem {
   title: string;
   description: string;
   category?: string;
-  difficulty: string;
+  difficulty?: string;
   icon?: string;
 }
 
@@ -99,7 +99,7 @@ export function CommandPalette() {
         title: item.title,
         description: item.description,
         category: item.category,
-        difficulty: item.difficulty,
+        difficulty: undefined, // External tools don't have difficulty
       })),
     ];
     setSearchableItems(items);
@@ -183,9 +183,11 @@ export function CommandPalette() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium">{item.title}</span>
-                        <Badge variant="secondary" className="text-xs">
-                          {item.difficulty}
-                        </Badge>
+                        {item.difficulty && (
+                          <Badge variant="secondary" className="text-xs">
+                            {item.difficulty}
+                          </Badge>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground line-clamp-1">
                         {item.description}

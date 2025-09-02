@@ -84,7 +84,7 @@ Bundle Size Improvements:
 - **Parcours d'apprentissage** : Navigation guidée Débutant → Intermédiaire → Avancé
 
 ### **Architecture de Contenu Moderne**
-- **Content Collections** : Transformation statique de MDX en données typées
+- **TypeScript Content System** : Contenu structuré en TypeScript avec validation Zod
 - **Validation automatique** : Vérification des références croisées au build
 - **Type Safety** : TypeScript strict sur tous les contenus et métadonnées
 
@@ -92,20 +92,19 @@ Bundle Size Improvements:
 
 ### **Frontend Moderne**
 - **Next.js 15** : App Router, Static Generation, React Server Components
-- **React 19** : Actions, Hook `use`, Optimisations automatiques  
+- **React 19** : Actions, Hook `use`, Optimisations automatiques
 - **TypeScript** : Typage strict avec inférence Zod pour le contenu
 - **Tailwind CSS + shadcn/ui** : Design system cohérent et accessible
 
-### **Gestion de Contenu Avancée**  
-- **Content Collections** : Build-time processing de 36+ documents MDX
+### **Gestion de Contenu Avancée**
+- **TypeScript Content System** : Contenu structuré en fichiers TypeScript avec schémas Zod
 - **Zod Validation** : Schémas stricts pour concepts, guides, prompts, outils
 - **Cross-Reference Engine** : Validation automatique des liens entre contenus
 
 ### **Qualité et Performance**
-- **48 Pages Statiques** : Génération complète au build pour performance optimale  
-- **Tests Complets** : 30+ tests unitaires, validation de contenu, build verification
+- **52 Pages Statiques** : Génération complète au build pour performance optimale
+- **Tests Complets** : 40+ tests unitaires, validation de contenu, build verification
 - **Linting/TypeScript** : Code quality avec ESLint et type checking strict
-- **@content-collections/mdx** : Cette extension compile mes fichiers `.mdx` en composants React au moment du build. Cela me permet d'inclure des composants interactifs directement dans mon contenu, tout en garantissant un site ultra-rapide car le navigateur reçoit du HTML déjà rendu.
 
 ## 📁 Architecture du Projet
 
@@ -184,9 +183,6 @@ npm run test:e2e
 
 ### **Scripts Utiles**
 ```bash
-# Migration de contenu MDX vers TypeScript
-node scripts/migrate-mdx-to-ts.mjs
-
 # Nettoyage complet
 npm run clean && npm run reinstall
 

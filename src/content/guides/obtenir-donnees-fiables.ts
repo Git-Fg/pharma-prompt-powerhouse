@@ -6,11 +6,17 @@ const guideData = {
   "title": "Fiabilité et Sources : Obtenir des Données Vérifiables avec l'IA",
   "description": "Comment utiliser les IAs pour la recherche sans tomber dans le piège des hallucinations ? La clé : les outils spécialisés, la méthode RAG et un esprit critique.",
   "icon": "ShieldCheck",
-  "category": "Technique",
+  "category": "recherche",
   "difficulty": "intermédiaire",
+  "estimatedTime": "15 min",
   "tags": [],
   "isFavorite": false,
-  "keyTakeaways": [],
+  "keyTakeaways": [
+    "L'hallucination est un risque majeur avec les IA générales qui peuvent générer des informations fausses mais plausibles.",
+    "La méthode RAG (Retrieval-Augmented Generation) permet de forcer l'IA à se baser sur des sources vérifiables en temps réel.",
+    "Les outils spécialisés comme Perplexity AI avec Focus Academic offrent une recherche fiable avec citations vérifiables.",
+    "Une analyse critique des sources reste indispensable : cliquez sur les liens, évaluez la qualité des sources, et vérifiez les informations."
+  ],
   "conceptSlugs": [],
   "isWorkflow": false,
   "content": [

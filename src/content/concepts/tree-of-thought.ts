@@ -6,7 +6,7 @@ const conceptData = {
   "title": "Tree-of-Thought",
   "description": "Explorez plusieurs hypothèses en parallèle avec la technique Tree-of-Thought pour résoudre des problèmes complexes.",
   "icon": "GitBranch",
-  "category": "Techniques Avancées",
+  "category": "techniques-avancees",
   "difficulty": "intermédiaire",
   "tags": [
     "chain-of-thought",
