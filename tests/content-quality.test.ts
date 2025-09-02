@@ -99,7 +99,7 @@ describe('Content Quality and Validation', () => {
       for (const concept of content.concepts) {
         expect(concept.keyTakeaways).toBeDefined();
         expect(Array.isArray(concept.keyTakeaways)).toBe(true);
-        expect(concept.keyTakeaways.length).toBeGreaterThan(0);
+        expect(concept.keyTakeaways!.length).toBeGreaterThan(0);
         
         expect(['débutant', 'intermédiaire', 'avancé']).toContain(concept.difficulty);
       }
@@ -132,8 +132,8 @@ describe('Content Quality and Validation', () => {
           const textContent = extractTextFromContent(prompt.content);
           // At least one variable should be referenced with {{ }} syntax
           const _hasVariableReferences = prompt.variables.some(variable => 
-            textContent.includes(`{{${variable.name}}`) || 
-            prompt.promptContent?.includes(`{{${variable.name}}`)
+            textContent.includes(`{{${variable}}`) || 
+            prompt.promptContent?.includes(`{{${variable}}`)
           );
           // This is optional - some prompts might not use variables in their content blocks
           // expect(_hasVariableReferences).toBe(true);

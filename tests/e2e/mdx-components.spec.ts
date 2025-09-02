@@ -100,8 +100,8 @@ test.describe('MDX Components Functionality', () => {
     
     await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Google AI Studio');
     
-    // Should have success/advantage alert
-    await expect(page.locator('text=Avantage Concurrentiel Majeur')).toBeVisible();
+    // Should have success/advantage alert with Core Kit Quotidien - use more specific selector
+    await expect(page.locator('[role="alert"] >> text=🚀 Core Kit Quotidien')).toBeVisible();
     await expect(page.locator('[role="alert"]').first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/google-ai-studio-tool.png', fullPage: true });
