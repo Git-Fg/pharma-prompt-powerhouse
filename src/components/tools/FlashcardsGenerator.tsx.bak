@@ -46,8 +46,10 @@ export function FlashcardsGenerator() {
 
   const handleAddCard = () => {
     if (!currentCard.front?.trim() || !currentCard.back?.trim()) {
-      toast.error('Erreur', {
+      toast({
+        title: 'Erreur',
         description: 'Les deux faces de la carte sont requises.',
+        variant: 'destructive'
       });
       return;
     }
@@ -63,22 +65,26 @@ export function FlashcardsGenerator() {
     setFlashcards([...flashcards, newCard]);
     setCurrentCard({ front: '', back: '', tags: [], difficulty: 'medium' });
     
-    toast.success('Carte ajoutée !', {
+    toast({
+      title: 'Carte ajoutée !',
       description: `Votre flashcard a été créée. Total : ${flashcards.length + 1} cartes.`
     });
   };
 
   const handleDeleteCard = (id: string) => {
     setFlashcards(flashcards.filter(card => card.id !== id));
-    toast.success('Carte supprimée', {
+    toast({
+      title: 'Carte supprimée',
       description: 'La flashcard a été supprimée de votre collection.'
     });
   };
 
   const handleExportAnki = () => {
     if (flashcards.length === 0) {
-      toast.error('Aucune carte à exporter', {
+      toast({
+        title: 'Aucune carte à exporter',
         description: 'Créez d\'abord quelques flashcards.',
+        variant: 'destructive'
       });
       return;
     }
@@ -98,15 +104,18 @@ export function FlashcardsGenerator() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    toast.success('Export réussi !', {
+    toast({
+      title: 'Export réussi !',
       description: `${flashcards.length} cartes exportées au format Anki.`
     });
   };
 
   const startStudy = () => {
     if (flashcards.length === 0) {
-      toast.error('Aucune carte à réviser', {
+      toast({
+        title: 'Aucune carte à réviser',
         description: 'Créez d\'abord quelques flashcards.',
+        variant: 'destructive'
       });
       return;
     }
@@ -125,7 +134,8 @@ export function FlashcardsGenerator() {
     setFlashcards(shuffled);
     setCurrentStudyIndex(0);
     setShowAnswer(false);
-    toast.success('Cartes mélangées !', {
+    toast({
+      title: 'Cartes mélangées !',
       description: 'L\'ordre des cartes a été randomisé.'
     });
   };

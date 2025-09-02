@@ -1,43 +1,60 @@
 "use client";
 
+import { forwardRef, useState, ComponentProps } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { Copy, Check } from "lucide-react";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
-interface CopyButtonProps {
+interface CopyButtonProps extends Omit<ComponentProps<typeof Button>, "onClick"> {
   text: string;
   label?: string;
 }
 
-export function CopyButton({ text, label = "Copier" }: CopyButtonProps) {
-  const { toast } = useToast();
-  const [copied, setCopied] = useState(false);
+export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
+  ({ text, label = "Copier", className, children, ...props }, ref) => {
+    const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+    const copyToClipboard = async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
 
-      toast({
-        title: "Copié !",
-        description: "Le contenu a été copié dans le presse-papiers.",
-      });
-    } catch (err) {
-      console.error("Failed to copy text: ", err);
-      toast({
-        title: "Erreur",
-        description: "Impossible de copier le contenu.",
-        variant: "destructive",
-      });
-    }
-  };
+        toast.success("Copié !", {
+          description: "Le contenu a été copié dans le presse-papiers.",
+        });
+      } catch (err) {
+        console.error("Failed to copy text: ", err);
+        toast.error("Erreur", {
+          description: "Impossible de copier le contenu.",
+        });
+      }
+    };
 
-  return (
-    <Button size="sm" variant="outline" onClick={copyToClipboard}>
-      <Copy className="w-4 h-4 mr-1" />
-      {copied ? "Copié !" : label}
-    </Button>
-  );
-}
+    return (
+      <Button
+        ref={ref}
+        size="sm"
+        variant="outline"
+        onClick={copyToClipboard}
+        className={cn(className)}
+        {...props}
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4 mr-1" />
+            Copié !
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4 mr-1" />
+            {children || label}
+          </>
+        )}
+      </Button>
+    );
+  }
+);
+
+CopyButton.displayName = "CopyButton";
