@@ -60,7 +60,7 @@ describe('Modern TypeScript Content System', () => {
       
       item.content.forEach(block => {
         expect(block.type).toBeDefined();
-        expect(['markdown', 'alert', 'tabs', 'toolRecommendation', 'guideRecommendation', 'conceptRecommendation'].includes(block.type)).toBe(true);
+        expect(['markdown', 'alert', 'tabs', 'toolRecommendation', 'guideRecommendation', 'conceptRecommendation', 'codeBlock', 'card'].includes(block.type)).toBe(true);
       });
     });
   });

@@ -35,7 +35,7 @@ describe('TypeScript Content System', () => {
       
       allContent.forEach(item => {
         item.content.forEach(block => {
-          expect(['markdown', 'alert', 'toolRecommendation', 'guideRecommendation', 'conceptRecommendation', 'tabs']).toContain(block.type);
+          expect(['markdown', 'alert', 'toolRecommendation', 'guideRecommendation', 'conceptRecommendation', 'tabs', 'codeBlock', 'card']).toContain(block.type);
         });
       });
     });
