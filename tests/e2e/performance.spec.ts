@@ -5,10 +5,11 @@ test.describe('Content Accessibility and Performance', () => {
     const pagesToTest = [
       '/',
       '/concepts',
+      '/workflows',
       '/guides', 
       '/prompts',
       '/outils-externes',
-      '/concepts/hallucination-effet-indesirable',
+      '/concepts/context-engineering',
       '/guides/confidentialite-securite',
     ];
 
@@ -53,6 +54,11 @@ test.describe('Content Accessibility and Performance', () => {
     const conceptLinks = page.locator('a[href*="/concepts/"]');
     const conceptCount = await conceptLinks.count();
     expect(conceptCount).toBeGreaterThan(5);
+    
+    // Workflows page - NEW
+    await page.goto('/workflows');
+    const workflowCards = page.locator('h1:has-text("Workflows")');
+    await expect(workflowCards.first()).toBeVisible();
     
     // Guides page
     await page.goto('/guides');

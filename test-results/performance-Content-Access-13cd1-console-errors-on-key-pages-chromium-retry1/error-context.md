@@ -1,0 +1,232 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Workflows" [ref=e32] [cursor=pointer]:
+                  - /url: /workflows
+                  - text: Workflows
+              - listitem [ref=e36]:
+                - link "Guides" [ref=e37] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e39]:
+                - link "Prompts" [ref=e40] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e42]:
+                - link "Ma Boîte à Outils" [ref=e43] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e45]:
+                - link "Outils Externes" [ref=e46] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e50]:
+            - button "Rechercher... ⌘K" [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e55]: Rechercher...
+              - generic [ref=e56]: ⌘K
+            - generic [ref=e57]:
+              - heading "Command Palette" [level=2] [ref=e58]
+              - paragraph [ref=e59]: Search for a command to run...
+            - button [ref=e60]:
+              - img
+            - button [ref=e61]:
+              - img
+    - main [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - link "Retour aux outils" [ref=e65] [cursor=pointer]:
+            - /url: /outils-externes
+            - img
+            - text: Retour aux outils
+          - generic [ref=e66]:
+            - 'heading "Google AI Studio : L''Accès Gratuit aux Modèles Gemini de Pointe" [level=1] [ref=e67]'
+            - paragraph [ref=e68]: Découvrez Google AI Studio, la plateforme qui démocratise l'accès aux modèles Gemini 2.5 Pro et Flash sans nécessiter de carte de crédit.
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - img [ref=e71]
+                - generic [ref=e74]:
+                  - text: "Catégorie :"
+                  - generic [ref=e75]: environnement-developpement
+              - generic [ref=e76]:
+                - img [ref=e77]
+                - generic [ref=e79]: "Prix :"
+              - link "Visiter le site officiel" [ref=e81] [cursor=pointer]:
+                - /url: https://aistudio.google.com/
+                - img [ref=e82] [cursor=pointer]
+                - generic [ref=e85] [cursor=pointer]: Visiter le site officiel
+        - main [ref=e86]:
+          - 'heading "Google AI Studio : L''Accès Gratuit aux Modèles Gemini de Pointe" [level=1] [ref=e87]'
+          - alert [ref=e88]:
+            - paragraph [ref=e90]:
+              - strong [ref=e91]: "🎯 Avantage Concurrentiel Majeur :"
+              - text: Accès gratuit aux modèles Gemini 2.5 Pro les plus récents avec une fenêtre de contexte de 1 million de tokens, sans carte de crédit requise. C'est la meilleure porte d'entrée vers la puissance de l'IA Google.
+          - heading "Qu'est-ce que Google AI Studio ?" [level=2] [ref=e92]
+          - paragraph [ref=e93]:
+            - text: Google AI Studio est une interface web conçue pour les développeurs et les curieux, permettant d'explorer, de prototyper et d'utiliser les modèles d'intelligence artificielle les plus avancés de Google. Pour un étudiant non-développeur, c'est
+            - strong [ref=e94]: la meilleure porte d'entrée vers la puissance des modèles Gemini
+            - text: ", car elle offre un accès gratuit et généreux sans demander de carte de crédit."
+          - paragraph [ref=e95]:
+            - text: C'est un véritable "studio" où l'on peut manipuler les paramètres de l'IA et voir immédiatement leur effet, bien au-delà de ce que permet l'interface de chat
+            - code [ref=e96]: gemini.google.com
+            - text: .
+          - 'heading "Le Joyau : Un Accès Gratuit aux Meilleurs Modèles (Prévisions 2025)" [level=2] [ref=e97]'
+          - paragraph [ref=e98]:
+            - text: L'avantage majeur de Google AI Studio est son
+            - strong [ref=e99]: quota gratuit extrêmement généreux
+            - text: "qui donne accès aux modèles les plus récents :"
+          - list [ref=e100]:
+            - listitem [ref=e101]:
+              - strong [ref=e102]: "Gemini 2.5 Pro (Juin 2025) :"
+              - text: Le modèle multimodal le plus puissant de Google, capable de traiter texte, images, audio, vidéo et de très longs documents grâce à sa fenêtre de contexte de
+              - strong [ref=e103]: 1 million de tokens
+              - text: .
+            - listitem [ref=e104]:
+              - strong [ref=e105]: "Gemini 2.5 Flash (Juin 2025) :"
+              - text: Une version optimisée pour la vitesse et l'efficacité, tout en conservant la même fenêtre de contexte massive. Idéal pour des réponses rapides et des applications interactives.
+            - listitem [ref=e106]:
+              - strong [ref=e107]: "Imagen 4 (Août 2025) :"
+              - text: La nouvelle génération de modèles de génération d'images de Google.
+          - paragraph [ref=e108]:
+            - text: L'accès gratuit est de
+            - strong [ref=e109]: 60 requêtes par minute
+            - text: ", ce qui est largement suffisant pour un usage étudiant intensif, le tout sans jamais avoir à fournir d'informations de paiement."
+          - heading "Fonctionnalités Clés pour l'Ingénierie de Prompts" [level=2] [ref=e110]
+          - paragraph [ref=e111]:
+            - text: Google AI Studio est un terrain de jeu parfait pour l'apprentissage du
+            - code [ref=e112]: prompt engineering
+            - text: ":"
+          - list [ref=e113]:
+            - listitem [ref=e114]:
+              - paragraph [ref=e115]:
+                - strong [ref=e116]: "Choix du Modèle :"
+                - text: Sélectionnez facilement entre Gemini Pro et Flash pour comparer leurs réponses.
+            - listitem [ref=e117]:
+              - paragraph [ref=e118]:
+                - strong [ref=e119]: "Paramètres Avancés :"
+              - list [ref=e120]:
+                - listitem [ref=e121]:
+                  - strong [ref=e122]: "Temperature :"
+                  - text: Contrôlez le degré de créativité ou de prévisibilité des réponses.
+                - listitem [ref=e123]:
+                  - strong [ref=e124]: "Top K / Top P :"
+                  - text: Affinez davantage la sélection des mots du modèle.
+            - listitem [ref=e125]:
+              - paragraph [ref=e126]:
+                - strong [ref=e127]: "Modes d'Interaction :"
+              - list [ref=e128]:
+                - listitem [ref=e129]:
+                  - strong [ref=e130]: "Chat :"
+                  - text: Pour une conversation structurée avec un historique.
+                - listitem [ref=e131]:
+                  - strong [ref=e132]: "Completion :"
+                  - text: Pour des tâches de complétion de texte plus directes.
+            - listitem [ref=e133]:
+              - paragraph [ref=e134]:
+                - strong [ref=e135]: "Fonctionnalités Uniques :"
+              - list [ref=e136]:
+                - listitem [ref=e137]:
+                  - strong [ref=e138]: "Structured Outputs :"
+                  - text: Forcez l'IA à répondre dans un format spécifique (JSON), une technique avancée de fiabilisation.
+                - listitem [ref=e139]:
+                  - strong [ref=e140]: "Function Calling :"
+                  - text: Permet à l'IA de simuler l'utilisation d'outils externes.
+                - listitem [ref=e141]:
+                  - strong [ref=e142]: "URL Context :"
+                  - text: Donnez une URL à l'IA pour qu'elle base sa réponse sur son contenu.
+          - heading "Gemini (Chat) vs. Google AI Studio" [level=2] [ref=e143]
+          - paragraph [ref=e144]:
+            - text: "| Feature | Gemini (gemini.google.com) | Google AI Studio (aistudio.google.com) | | :--- | :--- | :--- | |"
+            - strong [ref=e145]: Modèle Gratuit
+            - text: "| Gemini 2.5 Flash (contexte de 32K) |"
+            - strong [ref=e146]: Gemini 2.5 Pro
+            - text: (contexte de 1M) | |
+            - strong [ref=e147]: Public Cible
+            - text: "| Grand public | Étudiants, développeurs, curieux | |"
+            - strong [ref=e148]: Contrôle
+            - text: "| Minimal |"
+            - strong [ref=e149]: Granulaire
+            - text: (Température, Top K...) | |
+            - strong [ref=e150]: Objectif
+            - text: "| Assistant conversationnel | Laboratoire d'expérimentation et de prototypage | |"
+            - strong [ref=e151]: Accès
+            - text: "| Simple et direct | Nécessite un compte Google, mais"
+            - strong [ref=e152]: sans CB
+            - text: "|"
+          - 'heading "Conclusion : L''Outil Privilégié pour les Étudiants" [level=2] [ref=e153]'
+          - paragraph [ref=e154]:
+            - text: Pour un étudiant en pharmacie qui souhaite explorer sérieusement le
+            - code [ref=e155]: prompt engineering
+            - text: sans contraintes financières,
+            - strong [ref=e156]: Google AI Studio est l'outil par excellence
+            - text: . Il offre un accès sans précédent au modèle le plus puissant de Google (Gemini 2.5 Pro) avec sa gigantesque fenêtre de contexte, le tout gratuitement.
+          - paragraph [ref=e157]: C'est l'endroit idéal pour tester des prompts sur de très longs documents de recherche, des cours entiers, ou pour apprendre à structurer les sorties de l'IA de manière fiable. Une ressource inestimable pour développer des compétences de pointe.
+    - contentinfo [ref=e158]:
+      - generic [ref=e159]:
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - img [ref=e164]
+              - generic [ref=e172]: Pharma Prompt
+            - paragraph [ref=e173]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e174]:
+            - heading "Apprentissage" [level=3] [ref=e175]
+            - list [ref=e176]:
+              - listitem [ref=e177]:
+                - link "Concepts" [ref=e178] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e179] [cursor=pointer]
+                  - generic [ref=e181] [cursor=pointer]: Concepts
+              - listitem [ref=e182]:
+                - link "Guides" [ref=e183] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e184] [cursor=pointer]
+                  - generic [ref=e186] [cursor=pointer]: Guides
+              - listitem [ref=e187]:
+                - link "Prompts" [ref=e188] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e189] [cursor=pointer]
+                  - generic [ref=e191] [cursor=pointer]: Prompts
+          - generic [ref=e192]:
+            - heading "Outils" [level=3] [ref=e193]
+            - list [ref=e194]:
+              - listitem [ref=e195]:
+                - link "Ma Boîte à Outils" [ref=e196] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e197] [cursor=pointer]
+                  - generic [ref=e199] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e200]:
+                - link "Outils Externes" [ref=e201] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e202] [cursor=pointer]: Outils Externes
+                  - img [ref=e203] [cursor=pointer]
+          - generic [ref=e207]:
+            - heading "Légal" [level=3] [ref=e208]
+            - list [ref=e209]:
+              - listitem [ref=e210]:
+                - link "Confidentialité" [ref=e211] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e212] [cursor=pointer]
+                  - generic [ref=e214] [cursor=pointer]: Confidentialité
+        - generic [ref=e216]:
+          - paragraph [ref=e217]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e219]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e220]
+```
