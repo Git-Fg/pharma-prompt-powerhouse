@@ -3,13 +3,6 @@ import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 import { isValidIcon } from "./src/types/icon-taxonomy";
 
-// Helper function to create a simplified object for linking
-const toLink = (doc: { _meta: { path: string }, title: string, description: string }) => ({
-  slug: doc._meta.path,
-  title: doc.title,
-  description: doc.description,
-});
-
 // ============================================================================
 // SCHÉMAS ZOD & TYPES INFERES
 // ============================================================================
