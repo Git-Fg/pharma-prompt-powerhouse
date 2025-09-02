@@ -25,7 +25,143 @@ const conceptData = {
   "content": [
     {
       "type": "markdown",
-      "content": "# Hallucination : Effet Indésirable\n\n## Qu'est-ce qu'une hallucination ?\n\nUne **hallucination** est une erreur factuelle plausible générée par l'IA. Contrairement à une simple erreur, l'hallucination est crédible et peut tromper même des experts. C'est l'équivalent d'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante.\n\n## Pourquoi les hallucinations surviennent-elles ?\n\n<Alert type=\"info\">\n  <AlertDescription>\n    **Comprendre les mécanismes :** Comme pour un médicament, connaître les mécanismes d'action des hallucinations permet de mieux les prévenir et les traiter.\n  </AlertDescription>\n</Alert>\n\n### Mécanismes d'action\n\n<Card>\n  <CardHeader>\n    <CardTitle>🌡️ Température élevée</CardTitle>\n  </CardHeader>\n  <CardContent>\n    L'IA devient trop \"créative\" et invente des informations plausibles mais inexactes\n  </CardContent>\n</Card>\n\n<Card>\n  <CardHeader>\n    <CardTitle>🔍 Contexte insuffisant</CardTitle>\n  </CardHeader>\n  <CardContent>\n    L'IA comble les vides avec des données plausibles mais fausses, comme un diagnostique différentiel mal orienté\n  </CardContent>\n</Card>\n\n<Card>\n  <CardHeader>\n    <CardTitle>❓ Instructions ambiguës</CardTitle>\n  </CardHeader>\n  <CardContent>\n    L'IA interprète mal vos demandes et répond à côté de la question\n  </CardContent>\n</Card>\n\n<Card>\n  <CardHeader>\n    <CardTitle>📚 Limitations du modèle</CardTitle>\n  </CardHeader>\n  <CardContent>\n    L'IA n'a pas accès à des informations récentes ou très spécialisées\n  </CardContent>\n</Card>\n\n### Facteurs de risque\n\n<Alert type=\"destructive\">\n  <AlertDescription>\n    **Attention :** Ces facteurs augmentent significativement le risque d'hallucination, comme des facteurs de risque d'effet indésirable.\n  </AlertDescription>\n</Alert>\n\n- **Température > 0.7** : Risque élevé d'hallucination\n- **Prompts vagues** : \"Parle-moi des IEC\" vs \"Listez les IEC disponibles en France en 2025\"\n- **Contexte insuffisant** : L'IA doit deviner ce que vous voulez\n- **Tâches complexes** : Plus la tâche est complexe, plus le risque augmente\n\n## Prévention et traitement\n\n<Tabs defaultValue=\"prevention\">\n  <TabsList>\n    <TabsTrigger value=\"prevention\">Stratégies de Prévention</TabsTrigger>\n    <TabsTrigger value=\"traitement\">Actions Correctives</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"prevention\">\n    <Card>\n      <CardHeader>\n        <CardTitle>1. Contrôle de la Température</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque.\n\n\\`\\`\\`\n❌ Température : 0.9 (risque élevé)\n\"Inventez une nouvelle molécule pour traiter l'hypertension\"\n\n✅ Température : 0.2 (risque faible)\n\"Listez les molécules antihypertensives disponibles en 2025\"\n\\`\\`\\`\n      </CardContent>\n    </Card>\n\n    <Card>\n      <CardHeader>\n        <CardTitle>2. Contexte Clair et Délimité</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Fournir un contexte précis et des limites claires aide l'IA à rester dans les faits.\n\n\\`\\`\\`\n❌ Prompt vague\n\"Analyse cette ordonnance\"\n\n✅ Prompt précis\n\"Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.\nSi une information n'est pas dans le texte, indique 'Non précisé'.\"\n\\`\\`\\`\n      </CardContent>\n    </Card>\n\n    <Card>\n      <CardHeader>\n        <CardTitle>3. Instructions de Validation</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Demandez explicitement à l'IA de vérifier ses réponses avant de les donner.\n\n\\`\\`\\`\n\"Avant de répondre, vérifie que toutes les informations que tu donnes\nsont directement dérivées du contexte fourni. Si tu n'es pas sûr,\nindique-le clairement.\"\n\\`\\`\\`\n      </CardContent>\n    </Card>\n  </TabsContent>\n  \n  <TabsContent value=\"traitement\">\n    <Alert type=\"destructive\">\n      <AlertDescription>\n        **Action immédiate requise :** Face à une hallucination détectée, agissez rapidement pour corriger et prévenir la récidive.\n      </AlertDescription>\n    </Alert>\n\n    ### Détection des signes d'alerte\n\n    - **Informations trop précises** sans source\n    - **Citations inexistantes** d'études\n    - **Données numériques** fantaisistes\n    - **Réponses trop parfaites** pour être vraies\n\n    ### Plan d'action corrective\n\n    1. **Réduire la température** immédiatement\n    2. **Demander des sources** pour chaque affirmation\n    3. **Utiliser des prompts de vérification**\n    4. **Vérifier avec des sources officielles**\n  </TabsContent>\n</Tabs>\n\n## Applications en pharmacie\n\n### Cas 1 : Analyse d'interaction médicamenteuse\n\n\\`\\`\\`\n❌ Prompt risqué\n\"Dis-moi tout sur l'interaction warfarine-amiodarone\"\n\n✅ Prompt sécurisé\n\"Basé sur les référentiels fournis, liste les interactions\ndocumentées entre warfarine et amiodarone. Indique le niveau\nde preuve pour chaque interaction.\"\n\\`\\`\\`\n\n### Cas 2 : Calcul de dose\n\n\\`\\`\\`\n❌ Prompt risqué\n\"Calcule la dose de digoxine pour ce patient\"\n\n✅ Prompt sécurisé\n\"Utilise la formule de Cockcroft-Gault fournie pour calculer\nla clairance de créatinine, puis applique les recommandations\nde dosage de la HAS pour la digoxine.\"\n\\`\\`\\`\n\n### Cas 3 : Recherche bibliographique\n\n\\`\\`\\`\n❌ Prompt risqué\n\"Trouve les dernières études sur les nouveaux anticoagulants\"\n\n✅ Prompt sécurisé\n\"Recherche dans PubMed les études publiées entre 2020 et 2025\nsur les anticoagulants oraux directs. Limite aux essais\ncliniques randomisés.\"\n\\`\\`\\`\n\n## Monitoring et surveillance\n\n### Signes d'alerte\n\n- **Réponses trop détaillées** sans contexte suffisant\n- **Citations d'études** que vous ne connaissez pas\n- **Données numériques** qui semblent trop parfaites\n- **Informations contradictoires** dans la même réponse\n\n### Tests de validation\n\n1. **Test de cohérence** : Posez la même question plusieurs fois\n2. **Test de source** : Demandez toujours les références\n3. **Test de plausibilité** : Vérifiez si la réponse semble réaliste\n4. **Test de vérification** : Confrontez avec des sources fiables\n\n## Bénéfices de cette approche\n\n1. **Sécurité accrue** : Moins de risques d'erreurs factuelles\n2. **Fiabilité** : Réponses plus prévisibles et vérifiables\n3. **Confiance** : Vous savez quand faire confiance à l'IA\n4. **Apprentissage** : Vous améliorez vos techniques de prompting\n\n## Règles d'or\n\n1. **Jamais 100% de confiance** : L'IA peut toujours halluciner\n2. **Toujours vérifier** : Les informations critiques doivent être validées\n3. **Contexte d'abord** : Plus le contexte est clair, moins le risque est élevé\n4. **Température adaptée** : Utilisez la température la plus basse possible\n5. **Instructions précises** : Évitez l'ambiguïté dans vos prompts\n\nEn traitant les hallucinations comme des effets indésirables prévisibles, vous transformez l'IA en un outil plus sûr et plus fiable, exactement comme un bon pharmacien gère les effets indésirables de ses prescriptions.\n\n<ToolRecommendation \n  toolSlug=\"perplexity-ai\" \n  reason=\"Perplexity AI intègre nativement la vérification de sources grâce à sa fonction RAG, réduisant drastiquement le risque d'hallucination pour la recherche d'informations.\"\n/>\n\n<GuideRecommendation \n  guideSlug=\"obtenir-donnees-fiables\" \n  reason=\"Apprenez les techniques avancées pour utiliser l'IA comme assistant de recherche tout en évitant le piège des hallucinations.\"\n/>\n\n<GuideRecommendation \n  guideSlug=\"techniques-avancees-fiabilisation\" \n  reason=\"Découvrez les techniques professionnelles pour détecter, prévenir et corriger les hallucinations dans vos interactions avec l'IA.\"\n/>"
+      "content": "# Hallucination : Effet Indésirable\n\n## Qu'est-ce qu'une hallucination ?\n\nUne **hallucination** est une erreur factuelle plausible générée par l'IA. Contrairement à une simple erreur, l'hallucination est crédible et peut tromper même des experts. C'est l'équivalent d'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante.\n\n## Pourquoi les hallucinations surviennent-elles ?"
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "Comprendre les mécanismes",
+      "content": "Comme pour un médicament, connaître les mécanismes d'action des hallucinations permet de mieux les prévenir et les traiter."
+    },
+    {
+      "type": "markdown",
+      "content": "### Mécanismes d'action"
+    },
+    {
+      "type": "card",
+      "title": "🌡️ Température élevée",
+      "content": "L'IA devient trop \"créative\" et invente des informations plausibles mais inexactes"
+    },
+    {
+      "type": "card",
+      "title": "🔍 Contexte insuffisant",
+      "content": "L'IA comble les vides avec des données plausibles mais fausses, comme un diagnostique différentiel mal orienté"
+    },
+    {
+      "type": "card",
+      "title": "❓ Instructions ambiguës",
+      "content": "L'IA interprète mal vos demandes et répond à côté de la question"
+    },
+    {
+      "type": "card",
+      "title": "📚 Limitations du modèle",
+      "content": "L'IA n'a pas accès à des informations récentes ou très spécialisées"
+    },
+    {
+      "type": "markdown",
+      "content": "### Facteurs de risque"
+    },
+    {
+      "type": "alert",
+      "variant": "destructive",
+      "title": "Attention",
+      "content": "Ces facteurs augmentent significativement le risque d'hallucination, comme des facteurs de risque d'effet indésirable."
+    },
+    {
+      "type": "markdown",
+      "content": "- **Température > 0.7** : Risque élevé d'hallucination\n- **Prompts vagues** : \"Parle-moi des IEC\" vs \"Listez les IEC disponibles en France en 2025\"\n- **Contexte insuffisant** : L'IA doit deviner ce que vous voulez\n- **Tâches complexes** : Plus la tâche est complexe, plus le risque augmente\n\n## Prévention et traitement"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "prevention",
+      "tabs": [
+        {
+          "value": "prevention",
+          "title": "Stratégies de Prévention",
+          "content": [
+            {
+              "type": "card",
+              "title": "1. Contrôle de la Température",
+              "content": "Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque.\n\n**❌ Température : 0.9 (risque élevé)**\n```\n\"Inventez une nouvelle molécule pour traiter l'hypertension\"\n```\n\n**✅ Température : 0.2 (risque faible)**\n```\n\"Listez les molécules antihypertensives disponibles en 2025\"\n```"
+            },
+            {
+              "type": "card",
+              "title": "2. Contexte Clair et Délimité",
+              "content": "Fournir un contexte précis et des limites claires aide l'IA à rester dans les faits.\n\n**❌ Prompt vague**\n```\n\"Analyse cette ordonnance\"\n```\n\n**✅ Prompt précis**\n```\n\"Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.\nSi une information n'est pas dans le texte, indique 'Non précisé'.\"\n```"
+            },
+            {
+              "type": "card",
+              "title": "3. Instructions de Validation",
+              "content": "Demandez explicitement à l'IA de vérifier ses réponses avant de les donner.\n\n```\n\"Avant de répondre, vérifie que toutes les informations que tu donnes\nsont directement dérivées du contexte fourni. Si tu n'es pas sûr,\nindique-le clairement.\"\n```"
+            }
+          ]
+        },
+        {
+          "value": "traitement",
+          "title": "Actions Correctives",
+          "content": [
+            {
+              "type": "alert",
+              "variant": "destructive",
+              "title": "Action immédiate requise",
+              "content": "Face à une hallucination détectée, agissez rapidement pour corriger et prévenir la récidive."
+            },
+            {
+              "type": "markdown",
+              "content": "### Détection des signes d'alerte\n\n- **Informations trop précises** sans source\n- **Citations inexistantes** d'études\n- **Données numériques** fantaisistes\n- **Réponses trop parfaites** pour être vraies\n\n### Plan d'action corrective\n\n1. **Réduire la température** immédiatement\n2. **Demander des sources** pour chaque affirmation\n3. **Utiliser des prompts de vérification**\n4. **Vérifier avec des sources officielles**"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "content": "## Applications en pharmacie\n\n### Cas 1 : Analyse d'interaction médicamenteuse"
+    },
+    {
+      "type": "codeBlock",
+      "language": "text",
+      "filename": "interaction-medicamenteuse.txt",
+      "content": "❌ Prompt risqué\n\"Dis-moi tout sur l'interaction warfarine-amiodarone\"\n\n✅ Prompt sécurisé\n\"Basé sur les référentiels fournis, liste les interactions\ndocumentées entre warfarine et amiodarone. Indique le niveau\nde preuve pour chaque interaction.\""
+    },
+    {
+      "type": "markdown",
+      "content": "### Cas 2 : Calcul de dose"
+    },
+    {
+      "type": "codeBlock",
+      "language": "text",
+      "filename": "calcul-dose.txt",
+      "content": "❌ Prompt risqué\n\"Calcule la dose de digoxine pour ce patient\"\n\n✅ Prompt sécurisé\n\"Utilise la formule de Cockcroft-Gault fournie pour calculer\nla clairance de créatinine, puis applique les recommandations\nde dosage de la HAS pour la digoxine.\""
+    },
+    {
+      "type": "markdown",
+      "content": "### Cas 3 : Recherche bibliographique"
+    },
+    {
+      "type": "codeBlock",
+      "language": "text",
+      "filename": "recherche-biblio.txt",
+      "content": "❌ Prompt risqué\n\"Trouve les dernières études sur les nouveaux anticoagulants\"\n\n✅ Prompt sécurisé\n\"Recherche dans PubMed les études publiées entre 2020 et 2025\nsur les anticoagulants oraux directs. Limite aux essais\ncliniques randomisés.\""
+    },
+    {
+      "type": "markdown",
+      "content": "## Monitoring et surveillance\n\n### Signes d'alerte\n\n- **Réponses trop détaillées** sans contexte suffisant\n- **Citations d'études** que vous ne connaissez pas\n- **Données numériques** qui semblent trop parfaites\n- **Informations contradictoires** dans la même réponse\n\n### Tests de validation\n\n1. **Test de cohérence** : Posez la même question plusieurs fois\n2. **Test de source** : Demandez toujours les références\n3. **Test de plausibilité** : Vérifiez si la réponse semble réaliste\n4. **Test de vérification** : Confrontez avec des sources fiables\n\n## Bénéfices de cette approche\n\n1. **Sécurité accrue** : Moins de risques d'erreurs factuelles\n2. **Fiabilité** : Réponses plus prévisibles et vérifiables\n3. **Confiance** : Vous savez quand faire confiance à l'IA\n4. **Apprentissage** : Vous améliorez vos techniques de prompting\n\n## Règles d'or\n\n1. **Jamais 100% de confiance** : L'IA peut toujours halluciner\n2. **Toujours vérifier** : Les informations critiques doivent être validées\n3. **Contexte d'abord** : Plus le contexte est clair, moins le risque est élevé\n4. **Température adaptée** : Utilisez la température la plus basse possible\n5. **Instructions précises** : Évitez l'ambiguïté dans vos prompts\n\nEn traitant les hallucinations comme des effets indésirables prévisibles, vous transformez l'IA en un outil plus sûr et plus fiable, exactement comme un bon pharmacien gère les effets indésirables de ses prescriptions."
+    },
+    {
+      "type": "toolRecommendation",
+      "slug": "perplexity-ai",
+      "reason": "Perplexity AI intègre nativement la vérification de sources grâce à sa fonction RAG, réduisant drastiquement le risque d'hallucination pour la recherche d'informations."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "obtenir-donnees-fiables",
+      "reason": "Apprenez les techniques avancées pour utiliser l'IA comme assistant de recherche tout en évitant le piège des hallucinations."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "techniques-avancees-fiabilisation",
+      "reason": "Découvrez les techniques professionnelles pour détecter, prévenir et corriger les hallucinations dans vos interactions avec l'IA."
     }
   ]
 };
