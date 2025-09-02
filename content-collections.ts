@@ -129,6 +129,48 @@ const validateIconExists = (doc: { icon?: string; _meta: Meta }, _ctx: Context) 
 // FONCTIONS D'ENRICHISSEMENT (TRANSFORM HELPERS)
 // ============================================================================
 
+const generateAlternativeVersions = (doc: PromptDoc) => {
+  // If alternative versions are already provided, return them as-is
+  if (doc.alternativeVersions) {
+    return doc.alternativeVersions;
+  }
+
+  // Auto-generate alternative versions if we have systemPromptContent and promptContent
+  if (doc.systemPromptContent && doc.promptContent) {
+    return {
+      standard: `${doc.systemPromptContent}\n\n${doc.promptContent}`,
+      xml: doc.promptContent.includes('<') ? doc.promptContent : 
+        `<role>\n${doc.systemPromptContent}\n</role>\n\n<task>\n${doc.promptContent}\n</task>`,
+      aiStudio: {
+        systemPrompt: doc.systemPromptContent,
+        userPrompt: doc.promptContent,
+      }
+    };
+  }
+
+  // Fallback: only standard version available
+  return {
+    standard: doc.promptContent || doc.systemPromptContent || '',
+  };
+};
+
+const generateRecommendedTools = (doc: PromptDoc) => {
+  // If tools are already specified, return them
+  if (doc.recommendedTools) {
+    return doc.recommendedTools;
+  }
+
+  // Auto-generate based on prompt characteristics
+  const hasSystemPrompt = !!doc.systemPromptContent;
+  const hasXMLStructure = doc.promptContent?.includes('<') || false;
+
+  return {
+    standard: ['ChatGPT', 'Claude.ai', 'Gemini'],
+    xml: hasXMLStructure ? ['Claude.ai', 'ChatGPT', 'DeepSeek'] : ['Claude.ai'],
+    aiStudio: hasSystemPrompt ? ['Google AI Studio', 'OpenAI Playground'] : ['Google AI Studio'],
+  };
+};
+
 const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: string }) => {
   const content = doc.content || "";
   const wordCount = content.trim().split(/\s+/).length || 0;
@@ -165,47 +207,76 @@ const resolveConceptRelations = async (
 };
 
 const resolveRelatedContent = async (
-  doc: { conceptSlugs?: string[]; _meta: Meta },
+  doc: { conceptSlugs?: string[]; _meta: Meta; tags?: string[] },
   ctx: Context
 ): Promise<{ 
-  relatedGuides: Array<{ slug: string; title: string; description: string }>; 
-  relatedPrompts: Array<{ slug: string; title: string; description: string }>; 
+  relatedGuides: Array<{ slug: string; title: string; description: string; sharedConcepts: string[] }>; 
+  relatedPrompts: Array<{ slug: string; title: string; description: string; sharedConcepts: string[] }>; 
+  relatedConcepts: Array<{ slug: string; title: string; description?: string; icon?: string; category?: string }>; 
 }> => {
   if (!doc.conceptSlugs || doc.conceptSlugs.length === 0) {
-    return { relatedGuides: [], relatedPrompts: [] };
+    return { relatedGuides: [], relatedPrompts: [], relatedConcepts: [] };
   }
 
   // Get all documents of each type
   const allGuides = await ctx.documents(guides);
   const allPrompts = await ctx.documents(prompts);
+  const allConcepts = await ctx.documents(concepts);
 
-  // Find related guides that share at least one concept
+  // Find related guides that share concepts, prioritize by number of shared concepts
   const relatedGuides = allGuides
-    .filter((guide: any) =>
-      guide._meta.path !== doc._meta.path &&
-      guide.conceptSlugs?.some((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug))
-    )
-    .slice(0, 2)
+    .filter((guide: any) => guide._meta.path !== doc._meta.path)
+    .map((guide: any) => {
+      const sharedConcepts = guide.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
+      return {
+        ...guide,
+        sharedConcepts,
+        relevanceScore: sharedConcepts.length
+      };
+    })
+    .filter((guide: any) => guide.relevanceScore > 0)
+    .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+    .slice(0, 3)
     .map((guide: any) => ({
       slug: guide._meta.path,
       title: guide.title,
       description: guide.description,
+      sharedConcepts: guide.sharedConcepts,
     }));
 
-  // Find related prompts that share at least one concept
+  // Find related prompts that share concepts, prioritize by number of shared concepts
   const relatedPrompts = allPrompts
-    .filter((prompt: any) =>
-      prompt._meta.path !== doc._meta.path &&
-      prompt.conceptSlugs?.some((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug))
-    )
-    .slice(0, 2)
+    .filter((prompt: any) => prompt._meta.path !== doc._meta.path)
+    .map((prompt: any) => {
+      const sharedConcepts = prompt.conceptSlugs?.filter((conceptSlug: string) => doc.conceptSlugs!.includes(conceptSlug)) || [];
+      return {
+        ...prompt,
+        sharedConcepts,
+        relevanceScore: sharedConcepts.length
+      };
+    })
+    .filter((prompt: any) => prompt.relevanceScore > 0)
+    .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+    .slice(0, 3)
     .map((prompt: any) => ({
       slug: prompt._meta.path,
       title: prompt.title,
       description: prompt.description,
+      sharedConcepts: prompt.sharedConcepts,
     }));
 
-  return { relatedGuides, relatedPrompts };
+  // Get the actual concepts referenced by this document
+  const relatedConcepts = allConcepts
+    .filter((concept: any) => doc.conceptSlugs!.includes(concept._meta.path))
+    .map((concept: any) => ({
+      slug: concept._meta.path,
+      title: concept.title,
+      description: concept.description,
+      icon: concept.icon,
+      category: concept.category,
+    }));
+
+  return { relatedGuides, relatedPrompts, relatedConcepts };
 };
 
 const processTags = (doc: { tags?: string[] }) => {
@@ -350,8 +421,21 @@ const promptSchema = baseSchema.extend({
   example: z.string().optional(),
   estimatedTime: z.string().optional(),
   promptContent: z.string().optional(),
-  alternativeVersions: z.array(z.object({ name: z.string(), content: z.string() })).optional(),
-  systemPromptContent: z.string().optional(), // NOUVEAU CHAMP
+  systemPromptContent: z.string().optional(),
+  // Multi-format support
+  alternativeVersions: z.object({
+    standard: z.string().optional(), // Simple version for chat interfaces
+    xml: z.string().optional(), // Structured XML version for Claude
+    aiStudio: z.object({
+      systemPrompt: z.string().optional(),
+      userPrompt: z.string().optional(),
+    }).optional(), // Optimized for Google AI Studio with separate system prompt
+  }).optional(),
+  recommendedTools: z.object({
+    standard: z.array(z.string()).optional(), // Tools for standard version
+    xml: z.array(z.string()).optional(), // Tools for XML version  
+    aiStudio: z.array(z.string()).optional(), // Tools for AI Studio version
+  }).optional(),
 });
 type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta; content?: string };
 
@@ -367,6 +451,10 @@ const prompts = defineCollection({
     const relatedContent = await resolveRelatedContent(doc, ctx);
     validateIconExists(doc, ctx);
     
+    // Generate alternative versions and recommended tools
+    const alternativeVersions = generateAlternativeVersions(doc);
+    const recommendedTools = generateRecommendedTools(doc);
+    
     // Compile MDX content at build time
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
@@ -381,7 +469,11 @@ const prompts = defineCollection({
       variableCount: doc.variables?.length || 0,
       isTemplate: (doc.variables?.length || 0) > 0,
       estimatedTokens: Math.ceil(computed.wordCount * 1.3),
-      hasSystemPrompt: !!doc.systemPromptContent, // NOUVEAU CHAMP CALCULE
+      hasSystemPrompt: !!doc.systemPromptContent,
+      // New fields for multi-format support
+      alternativeVersions,
+      recommendedTools,
+      hasMultipleVersions: !!(alternativeVersions.standard && (alternativeVersions.xml || alternativeVersions.aiStudio)),
     };
   },
 });
