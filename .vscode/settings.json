@@ -1,6 +1,6 @@
 {
-  "npm.packageManager": "pnpm",
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "typescript.validate.enable": true
 }

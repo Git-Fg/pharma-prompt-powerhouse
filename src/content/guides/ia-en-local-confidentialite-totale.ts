@@ -6,9 +6,9 @@ const guideData = {
   "title": "L'IA en Local : Le Guide pour une Confidentialité à 100%",
   "description": "Hébergez des modèles IA directement sur votre machine pour une confidentialité absolue. Guide complet : prérequis matériel, installation, modèles recommandés comme Qwen3-4B, et cas d'usage en recherche pharmaceutique sensible.",
   "difficulty": "avancé",
-  "category": "Sécurité & Confidentialité", 
+  "category": "securite",
   "estimatedTime": "30 min de lecture + 1-2h d'installation",
-  "icon": "🔒",
+  "icon": "Lock",
   "isFavorite": false,
   "keyTakeaways": [
     "L'IA locale est la SEULE solution pour une confidentialité à 100%",

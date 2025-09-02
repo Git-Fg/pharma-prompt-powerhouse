@@ -1,21 +1,24 @@
 // src/lib/content-loader.ts
-import { Guide, Concept, Prompt, ExternalTool } from '@/lib/content-schema';
+import { Guide, Concept, Prompt, ExternalTool, Objectif } from '@/lib/content-schema';
 import { allGuides as newGuides } from '@/content/guides';
 import { allConcepts as newConcepts } from '@/content/concepts';
 import { allPrompts as newPrompts } from '@/content/prompts';
 import { allExternalTools as newExternalTools } from '@/content/external-tools';
+import { allObjectifs as newObjectifs } from '@/content/objectifs';
 
 // Collections - now fully migrated to TypeScript
 const allGuides: Guide[] = [...newGuides];
 const allConcepts: Concept[] = [...newConcepts];
 const allPrompts: Prompt[] = [...newPrompts];
 const allExternalTools: ExternalTool[] = [...newExternalTools];
+const allObjectifs: Objectif[] = [...newObjectifs];
 
 // Crée des Maps pour des recherches ultra-rapides O(1)
 const conceptsMap = new Map(allConcepts.map(c => [c.slug, c]));
 const guidesMap = new Map(allGuides.map(g => [g.slug, g]));
 const promptsMap = new Map(allPrompts.map(p => [p.slug, p]));
 const toolsMap = new Map(allExternalTools.map(t => [t.slug, t]));
+const objectifsMap = new Map(allObjectifs.map(o => [o.slug, o]));
 
 // Enrichir chaque élément avec ses relations au moment du chargement
 const enrichedGuides = allGuides.map(guide => ({
@@ -46,12 +49,15 @@ const enrichedExternalTools = allExternalTools.map(tool => ({
     .filter((concept): concept is Concept => concept !== undefined),
 }));
 
+console.log('Enriched Concepts:', enrichedConcepts);
+
 export const content = {
   guides: enrichedGuides,
   concepts: enrichedConcepts,
   prompts: enrichedPrompts,
   externalTools: enrichedExternalTools,
   tools: enrichedExternalTools, // Backward compatibility alias
+  objectifs: allObjectifs,
 };
 
 // Fonctions d'accès typées et performantes pour les pages
@@ -59,9 +65,11 @@ export const getGuideBySlug = (slug: string) => guidesMap.get(slug);
 export const getConceptBySlug = (slug: string) => conceptsMap.get(slug);
 export const getPromptBySlug = (slug: string) => promptsMap.get(slug);
 export const getToolBySlug = (slug: string) => toolsMap.get(slug);
+export const getObjectifBySlug = (slug: string) => objectifsMap.get(slug);
 
 // Types enrichis pour une meilleure expérience de développement
 export type EnrichedGuide = typeof enrichedGuides[0];
 export type EnrichedConcept = typeof enrichedConcepts[0];
 export type EnrichedPrompt = typeof enrichedPrompts[0];
 export type EnrichedExternalTool = typeof enrichedExternalTools[0];
+export type EnrichedObjectif = typeof allObjectifs[0];

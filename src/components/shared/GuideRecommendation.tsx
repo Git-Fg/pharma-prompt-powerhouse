@@ -5,6 +5,8 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { Button } from '@/components/ui/button';
 import { BookOpen, Info, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 
 interface GuideRecommendationProps {
   guideSlug: string;
@@ -31,9 +33,78 @@ const difficultyLabels = {
 };
 
 export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
+  const isMobile = useIsMobile();
   const guide = content.guides.find(g => g.slug === guideSlug);
 
   if (!guide) return <Badge variant="destructive">Guide introuvable: {guideSlug}</Badge>;
+
+  const RecommendationContent = () => (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h4 className="text-sm font-semibold">{guide.title}</h4>
+        <p className="text-sm text-muted-foreground">{guide.description}</p>
+      </div>
+      
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="outline" className="bg-background">
+          {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
+        </Badge>
+        {guide.difficulty && (
+          <Badge variant="secondary">
+            {difficultyLabels[guide.difficulty as keyof typeof difficultyLabels]}
+          </Badge>
+        )}
+        {guide.estimatedTime && (
+          <Badge variant="outline">
+            <Clock className="w-3 h-3 mr-1" />
+            {guide.estimatedTime}
+          </Badge>
+        )}
+      </div>
+
+      {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
+        <div>
+          <p className="text-xs font-medium mb-1">TLDR :</p>
+          <p className="text-xs text-muted-foreground">
+            {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
+          </p>
+        </div>
+      )}
+
+      <div className="flex items-center pt-2 border-t">
+        <Info className="mr-2 h-4 w-4 shrink-0 opacity-70" />
+        <span className="text-xs text-muted-foreground italic">{reason}</span>
+      </div>
+      
+      <Button asChild size="sm" className="w-full">
+        <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
+          <BookOpen className="w-4 h-4" />
+          Lire le guide
+        </Link>
+      </Button>
+    </div>
+  );
+
+  if (isMobile) {
+    return (
+      <Sheet>
+        <SheetTrigger asChild>
+          <span className="text-primary font-semibold underline decoration-dotted underline-offset-4 cursor-pointer">
+            {guide.title}
+          </span>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>{guide.title}</SheetTitle>
+            <SheetDescription>{guide.description}</SheetDescription>
+          </SheetHeader>
+          <div className="py-4">
+            <RecommendationContent />
+          </div>
+        </SheetContent>
+      </Sheet>
+    );
+  }
 
   return (
     <HoverCard>
@@ -43,51 +114,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         </span>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <div className="flex flex-col gap-4">
-          <div>
-            <h4 className="text-sm font-semibold">{guide.title}</h4>
-            <p className="text-sm text-muted-foreground">{guide.description}</p>
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="outline" className="bg-background">
-              {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
-            </Badge>
-            {guide.difficulty && (
-              <Badge variant="secondary">
-                {difficultyLabels[guide.difficulty]}
-              </Badge>
-            )}
-            {guide.estimatedTime && (
-              <Badge variant="outline">
-                <Clock className="w-3 h-3 mr-1" />
-                {guide.estimatedTime}
-              </Badge>
-            )}
-          </div>
-
-          {/* Concise TLDR display */}
-          {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-            <div>
-              <p className="text-xs font-medium mb-1">TLDR :</p>
-              <p className="text-xs text-muted-foreground">
-                {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
-              </p>
-            </div>
-          )}
-
-          <div className="flex items-center pt-2 border-t">
-            <Info className="mr-2 h-4 w-4 shrink-0 opacity-70" />
-            <span className="text-xs text-muted-foreground italic">{reason}</span>
-          </div>
-          
-          <Button asChild size="sm" className="w-full">
-            <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
-              Lire le guide
-            </Link>
-          </Button>
-        </div>
+        <RecommendationContent />
       </HoverCardContent>
     </HoverCard>
   );

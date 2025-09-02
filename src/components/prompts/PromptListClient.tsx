@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Prompt } from '@/lib/content-schema';
 import { SearchInput } from '@/components/ui/search-input';
 import {
@@ -14,26 +13,23 @@ import { FileText } from 'lucide-react';
 import { PromptCard } from '@/components/prompts/PromptCard';
 import { Button } from '@/components/ui/button';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
+import { useContentFilter } from '@/hooks/useContentFilter';
 
 interface PromptListProps {
   initialPrompts: Prompt[];
 }
 
 export function PromptListClient({ initialPrompts }: PromptListProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
-
-  const filteredPrompts = initialPrompts.filter(prompt => {
-    const matchesSearch =
-      prompt.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      prompt.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === 'all' || prompt.category === selectedCategory;
-    const matchesDifficulty =
-      selectedDifficulty === 'all' || prompt.difficulty === selectedDifficulty;
-    return matchesSearch && matchesCategory && matchesDifficulty;
-  });
+    const {
+    filteredItems: filteredPrompts,
+    searchTerm,
+    selectedCategory,
+    selectedDifficulty,
+    setSearchTerm,
+    setSelectedCategory,
+    setSelectedDifficulty,
+    resetFilters
+  } = useContentFilter<Prompt>(initialPrompts);
 
   const categories = [
     'all',
@@ -102,11 +98,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
           </p>
           <Button 
             variant="outline" 
-            onClick={() => {
-              setSearchTerm('');
-              setSelectedCategory('all');
-              setSelectedDifficulty('all');
-            }}
+            onClick={resetFilters}
           >
             Réinitialiser les filtres
           </Button>
@@ -123,7 +115,6 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
               title={prompt.title}
               description={prompt.description}
               difficulty={prompt.difficulty}
-              estimatedTime={prompt.estimatedTime || 'N/A'}
               tags={prompt.tags}
               icon={prompt.icon}
               promptContent={prompt.promptContent}

@@ -37,12 +37,8 @@ describe('Link Verification', () => {
   });
 
   test('workflow guides should be properly identified', () => {
-    const workflowGuides = guides.filter(guide => 
-      guide.title.toLowerCase().includes('workflow') ||
-      guide.title.toLowerCase().includes('méthode') ||
-      guide.description.toLowerCase().includes('étape par étape') ||
-      guide.tags?.some((tag: string) => ['workflow', 'processus', 'methodologie'].includes(tag?.toLowerCase?.() || ''))
-    );
+    // Nouvelle logique, beaucoup plus simple et robuste
+    const workflowGuides = guides.filter(guide => guide.isWorkflow);
 
     // Should find some workflow guides
     expect(workflowGuides.length).toBeGreaterThan(0);

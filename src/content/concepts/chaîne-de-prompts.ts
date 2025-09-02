@@ -6,7 +6,7 @@ const conceptData = {
   "title": "Chaîne de Prompts",
   "description": "Découpez vos tâches complexes en une série de prompts logiques, comme un protocole de soin",
   "icon": "GitBranch",
-  "category": "Méthodologie",
+  "category": "methodologie",
   "difficulty": "débutant",
   "tags": [
     "exemple-code",

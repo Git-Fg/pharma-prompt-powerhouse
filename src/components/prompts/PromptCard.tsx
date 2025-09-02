@@ -20,7 +20,7 @@ export interface PromptCardProps {
   title: string;
   description: string;
   difficulty: 'débutant' | 'intermédiaire' | 'avancé';
-  estimatedTime: string;
+  estimatedTime?: string;
   author?: string;
   isFavorite?: boolean;
   tags?: string[];
@@ -102,10 +102,12 @@ export const PromptCard: React.FC<PromptCardProps> = ({
           >
             {difficultyLabels[difficulty]}
           </Badge>
-          <Badge variant='outline' className='flex items-center gap-1'>
-            <Clock className='h-3 w-3' />
-            {estimatedTime}
-          </Badge>
+          {estimatedTime && (
+            <Badge variant='outline' className='flex items-center gap-1'>
+              <Clock className='h-3 w-3' />
+              {estimatedTime}
+            </Badge>
+          )}
           {author && (
             <Badge variant='outline' className='flex items-center gap-1'>
               <User className='h-3 w-3' />

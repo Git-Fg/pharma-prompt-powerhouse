@@ -22,7 +22,12 @@ import {
   Network,
   Lightbulb,
   Workflow,
+  FileText,
+  Target,
+  CheckCircle,
+  Zap,
 } from "lucide-react";
+import { getIcon } from "@/types/icon-taxonomy";
 
 // Concepts fondamentaux à mettre en avant sur la page d'accueil
 const featuredConcepts = [
@@ -191,35 +196,32 @@ export default function HomePage() {
         <FeaturedTools />
       </section>
 
-      {/* Section 3 : Les Concepts en Vedette - Accès Direct */}
+      {/* NOUVELLE Section : Hub d'Objectifs */}
       <section className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">
-            Concepts Fondamentaux à Maîtriser
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">Que voulez-vous accomplir aujourd'hui ?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Commencez par ces dossiers essentiels pour construire des bases
-            solides en prompt engineering.
+            Choisissez un objectif et accédez directement à un prompt optimisé, des exemples et des guides pour aller plus loin.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {featuredConcepts.map((concept) => {
-            const Icon = concept.icon;
+          {content.objectifs.map((objectif) => {
+            const Icon = getIcon(objectif.icon);
             return (
-              <Card key={concept.slug} className="flex flex-col">
+              <Card key={objectif.slug} className="flex flex-col hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
-                  <CardTitle>{concept.title}</CardTitle>
+                  <CardTitle>{objectif.title}</CardTitle>
                   <CardDescription className="flex-grow">
-                    {concept.description}
+                    {objectif.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="mt-auto">
                   <Button variant="outline" className="w-full" asChild>
-                    <Link href={`/concepts/${concept.slug}`}>
-                      Explorer le concept
+                    <Link href={`/objectifs/${objectif.slug}`}>
+                      Explorer l'objectif
                     </Link>
                   </Button>
                 </CardContent>

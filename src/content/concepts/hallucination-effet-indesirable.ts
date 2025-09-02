@@ -6,7 +6,7 @@ const conceptData = {
   "title": "Hallucination : Effet Indésirable",
   "description": "Comprendre et prévenir les hallucinations de l'IA comme des effets indésirables prévisibles",
   "icon": "AlertTriangle",
-  "category": "Fondamentaux",
+  "category": "fondamentaux",
   "difficulty": "débutant",
   "tags": [
     "exemple-code",

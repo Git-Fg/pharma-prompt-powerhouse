@@ -158,13 +158,6 @@ export const ICON_TAXONOMY = {
 } as const;
 
 /**
- * Toutes les icônes valides organisées par catégorie
- */
-export const ALL_VALID_ICONS = Object.values(ICON_TAXONOMY)
-  .flatMap(category => Object.values(category))
-  .flatMap(icons => [...icons]) as readonly LucideIconName[];
-
-/**
  * Fonction utilitaire pour obtenir une icône Lucide React
  * @param name - Nom de l'icône
  * @param fallback - Icône de fallback (défaut: BrainCircuit)
@@ -177,13 +170,6 @@ export const getIcon = (
     return LucideIcons[fallback] as React.ComponentType<{ className?: string }>;
   }
   return LucideIcons[name as LucideIconName] as React.ComponentType<{ className?: string }>;
-};
-
-/**
- * Valide qu'une icône existe dans Lucide React
- */
-export const isValidIcon = (iconName: string): iconName is LucideIconName => {
-  return iconName in LucideIcons;
 };
 
 /**

@@ -6,7 +6,7 @@ const conceptData = {
   "title": "Structuration par Balises",
   "description": "Utilisez des balises pour structurer vos prompts, clarifier vos intentions et obtenir des réponses plus fiables de l'IA.",
   "icon": "CodeXml",
-  "category": "Techniques Avancées",
+  "category": "techniques-avancees",
   "difficulty": "intermédiaire",
   "tags": [
     "exemple-code",

@@ -6,6 +6,7 @@ const conceptData = {
   "title": "Le Token : L'Acide Aminé de l'IA",
   "description": "Comprendre ce qu'est un token, l'unité de base que les modèles de langage utilisent pour lire, comprendre et générer du texte.",
   "icon": "Dna",
+  "category": "fondamentaux",
   "difficulty": "intermédiaire",
   "tags": [],
   "isFavorite": false,

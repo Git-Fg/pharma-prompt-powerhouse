@@ -1,42 +1,39 @@
 // Centralized constants for filtering and labeling
+
+// NOUVELLE SOURCE DE VÉRITÉ UNIQUE
 export const categoryLabels = {
-  // Guides categories
-  'prise-en-main': 'Prise en main',
-  fondamentaux: 'Fondamentaux',
-  methodologie: 'Méthodologie',
-  'techniques-avancees': 'Techniques avancées',
-  'cas-pratiques': 'Cas pratiques',
-  'principes-generaux': 'Principes généraux',
-  outils: 'Outils',
-  'bonnes-pratiques': 'Bonnes pratiques',
-  technique: 'Technique',
-  ressources: 'Ressources',
+  // Intention: Apprendre la théorie
+  'fondamentaux': 'Fondamentaux',
+  'techniques-avancees': 'Techniques Avancées',
 
-  // Prompts categories
-  'rédaction-médicale': 'Rédaction Médicale',
-  'analyse-de-données': 'Analyse de Données',
-  'formation-et-éducation': 'Formation et Éducation',
-  'optimisation-de-processus': 'Optimisation de Processus',
-  'cas-cliniques': 'Cas Cliniques',
-  révision: 'Révision',
-  diagnostic: 'Diagnostic',
-  créatif: 'Créatif',
-  documentation: 'Documentation',
-  recherche: 'Recherche',
-  pharmacologie: 'Pharmacologie',
+  // Intention: Apprendre à faire
+  'methodologie': 'Méthodologie',
+  'cas-pratiques': 'Cas Pratiques',
+  'bonnes-pratiques': 'Bonnes Pratiques',
 
-  // External tools categories
-  'environnement-developpement': 'Environnement de développement',
-  chatbot: 'Chatbot',
-  'moteur-de-recherche': 'Moteur de recherche',
-  'suite-creative': 'Suite créative',
+  // Intention: Utiliser des ressources
+  'outils': 'Outils',
+  'prompts': 'Prompts',
+  'ressources': 'Ressources',
+  
+  // Catégories spécifiques mais transversales
+  'securite': 'Sécurité & Confidentialité',
+  'apprentissage': 'Apprentissage & Révision',
+  'recherche': 'Recherche & Analyse',
+  'creation': 'Création de Contenu',
 } as const;
+
+// Nouvelle liste unique pour Zod
+export const allCategories = Object.keys(categoryLabels) as [keyof typeof categoryLabels, ...(keyof typeof categoryLabels)[]];
 
 export const difficultyLabels = {
   débutant: 'Débutant',
   intermédiaire: 'Intermédiaire',
-  avancé: 'Avancé',
+ avancé: 'Avancé',
 } as const;
+
+// Exporter les clés sous forme de tableau pour Zod
+export const allDifficulties = Object.keys(difficultyLabels) as [keyof typeof difficultyLabels, ...(keyof typeof difficultyLabels)[]];
 
 export const toolLabels = {
   chatgpt: 'ChatGPT',
@@ -50,7 +47,7 @@ export const toolLabels = {
 
 // Legacy constants for backward compatibility
 export const CATEGORIES = {
-  CONCEPTS: {
+ CONCEPTS: {
     FONDAMENTAUX: "Fondamentaux",
     TECHNIQUES_AVANCEES: "Techniques Avancées",
     METHODOLOGIE: "Méthodologie"

@@ -5,6 +5,10 @@
 
 import { content } from '@/lib/content-loader';
 import type { ContentBlock } from '@/lib/content-schema';
+import {
+  allCategories,
+  categoryLabels
+} from '@/lib/constants';
 
 // Define the tag taxonomy as used in the new TypeScript content system
 const TAG_TAXONOMY = {
@@ -106,15 +110,9 @@ describe('Content Quality and Validation', () => {
     });
 
     test('guides have actionable content', () => {
-      const validCategories = [
-        'outils', 'bonnes-pratiques', 'Technique', 'methodologie', 
-        'fondamentaux', 'techniques-avancees', 'ressources', 'cas-pratiques',
-        'Outils & Techniques', 'Sécurité & Confidentialité'
-      ];
-      
       for (const guide of content.guides) {
         expect(guide.category).toBeDefined();
-        expect(validCategories).toContain(guide.category);
+        expect(allCategories).toContain(guide.category);
         
         expect(Array.isArray(guide.conceptSlugs)).toBe(true);
         expect(['débutant', 'intermédiaire', 'avancé']).toContain(guide.difficulty);

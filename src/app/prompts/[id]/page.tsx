@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const prompt = getPromptBySlug(id);
     if (!prompt) return {};
     return {
-      title: `${prompt.title} - Prompts`,
+      title: `Prompt : ${prompt.title} | Pharma Prompt Powerhouse`,
       description: prompt.description,
     };
 }
@@ -86,12 +86,6 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
                     {difficultyLabels[prompt.difficulty]}
                   </Badge>
                 </span>
-              </div>
-            )}
-            {prompt.estimatedTime && (
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>Temps estimé : {prompt.estimatedTime}</span>
               </div>
             )}
           </div>
