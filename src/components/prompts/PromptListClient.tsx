@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { allPrompts } from 'content-collections';
-import { Input } from '@/components/ui/input';
+import { SearchInput } from '@/components/ui/search-input';
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { PromptCard } from '@/components/prompts/PromptCard';
 import { Button } from '@/components/ui/button';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
@@ -50,13 +50,11 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
     <>
       {/* Search and Filter Controls */}
       <div className="flex flex-col lg:flex-row gap-4 max-w-4xl mx-auto mb-8">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-          <Input
+        <div className="flex-1">
+          <SearchInput
             placeholder="Rechercher un prompt..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="pl-10"
           />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
