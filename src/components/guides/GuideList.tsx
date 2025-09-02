@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { allGuides } from 'content-collections';
+import { content } from '@/lib/content-loader';
 import { SearchInput } from '@/components/ui/search-input';
 import {
   Select,
@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils';
 import { getIcon } from '@/types/icon-taxonomy';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
-type Guide = (typeof allGuides)[0];
+import { Guide } from '@/lib/content-schema';
 
 interface GuideListProps {
   initialGuides: Guide[];

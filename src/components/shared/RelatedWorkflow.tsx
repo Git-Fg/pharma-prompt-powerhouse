@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { allGuides } from 'content-collections';
+import { getGuideBySlug } from '@/lib/content-loader';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Workflow, CheckCircle, Clock } from 'lucide-react';
@@ -12,7 +12,7 @@ interface RelatedWorkflowProps {
 
 export function RelatedWorkflow({ workflowSlug, reason }: RelatedWorkflowProps) {
   // Find workflow in guides (as workflows are part of guides now)
-  const workflow = allGuides.find(g => g.slug === workflowSlug);
+  const workflow = getGuideBySlug(workflowSlug);
 
   if (!workflow) {
     return (

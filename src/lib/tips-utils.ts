@@ -1,4 +1,4 @@
-import type { Concept } from "content-collections";
+import type { Concept } from "@/lib/content-schema";
 
 export interface ConceptTip {
   text: string;

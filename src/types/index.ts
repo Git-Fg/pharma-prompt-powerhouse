@@ -1,18 +1,18 @@
 /**
- * Point d'entrée pour les types de contenu générés par Content Collections.
+ * Point d'entrée pour les types de contenu.
  * C'est la source de vérité unique pour les types de données de notre contenu.
- * NE PAS AJOUTER DE TYPES MANUELS ICI. La logique est dans `content-collections.ts`.
+ * Types définis avec Zod dans content-schema.ts
  */
 export type {
   Concept,
   Guide,
   Prompt,
   ExternalTool,
-} from "content-collections";
+} from "@/lib/content-schema";
 
 // Type global pour représenter n'importe quel élément de nos collections.
 export type AnyContent = 
-  | import("content-collections").Concept 
-  | import("content-collections").Guide 
-  | import("content-collections").Prompt 
-  | import("content-collections").ExternalTool;
+  | import("@/lib/content-schema").Concept 
+  | import("@/lib/content-schema").Guide 
+  | import("@/lib/content-schema").Prompt 
+  | import("@/lib/content-schema").ExternalTool;

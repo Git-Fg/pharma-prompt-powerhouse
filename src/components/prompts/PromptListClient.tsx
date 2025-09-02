@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { allPrompts } from 'content-collections';
+import { content } from '@/lib/content-loader';
+import { Prompt } from '@/lib/content-schema';
 import { SearchInput } from '@/components/ui/search-input';
 import {
   Select,
@@ -14,8 +15,6 @@ import { FileText } from 'lucide-react';
 import { PromptCard } from '@/components/prompts/PromptCard';
 import { Button } from '@/components/ui/button';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
-
-type Prompt = (typeof allPrompts)[0];
 
 interface PromptListProps {
   initialPrompts: Prompt[];
