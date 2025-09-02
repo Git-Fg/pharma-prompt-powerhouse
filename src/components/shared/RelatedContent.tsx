@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb } from "lucide-react";
 interface RelatedContentProps {
   currentItem: {
     slug: string;
+    conceptSlugs?: string[];
     concepts?: Array<{ slug: string; title: string; icon?: string; category?: string }>;
     relatedGuides?: Array<{ slug: string; title: string; description: string }>;
     relatedPrompts?: Array<{ slug: string; title: string; description: string }>;
@@ -18,7 +19,10 @@ interface RelatedContentProps {
  * Utilise maintenant des données pré-calculées au build-time pour optimiser les performances.
  */
 export function RelatedContent({ currentItem }: RelatedContentProps) {
-  if (!currentItem.concepts || currentItem.concepts.length === 0) {
+  const hasRelatedData = (currentItem.concepts && currentItem.concepts.length > 0) || 
+                        (currentItem.conceptSlugs && currentItem.conceptSlugs.length > 0);
+  
+  if (!hasRelatedData) {
     return null;
   }
 
@@ -29,7 +33,7 @@ export function RelatedContent({ currentItem }: RelatedContentProps) {
   if (relatedGuides.length === 0 && relatedPrompts.length === 0) {
     return (
       <footer>
-        <RelatedConcepts conceptSlugs={currentItem.concepts?.map(c => c.slug) || []} />
+        <RelatedConcepts conceptSlugs={currentItem.conceptSlugs || currentItem.concepts?.map(c => c.slug) || []} />
       </footer>
     );
   }
@@ -37,7 +41,7 @@ export function RelatedContent({ currentItem }: RelatedContentProps) {
   return (
     <footer className="space-y-8">
       {/* Section Concepts - Utilise le composant de base */}
-      <RelatedConcepts conceptSlugs={currentItem.concepts?.map(c => c.slug) || []} />
+      <RelatedConcepts conceptSlugs={currentItem.conceptSlugs || currentItem.concepts?.map(c => c.slug) || []} />
 
       {/* Section Contenu Lié - Guides et Prompts */}
       <Card>
