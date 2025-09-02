@@ -1,8 +1,9 @@
+'use client';
 import Link from 'next/link';
-import { getGuideBySlug } from '@/lib/content-loader';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { content } from '@/lib/content-loader';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BookOpen, CheckCircle, Clock } from 'lucide-react';
+import { BookOpen, Info, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface GuideRecommendationProps {
@@ -30,75 +31,64 @@ const difficultyLabels = {
 };
 
 export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
-  const guide = getGuideBySlug(guideSlug);
+  const guide = content.guides.find(g => g.slug === guideSlug);
 
-  if (!guide) {
-    return (
-      <Card className="my-6 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950">
-        <CardContent className="pt-6">
-          <p className="text-amber-800 dark:text-amber-200">
-            Guide "{guideSlug}" non trouvé dans la collection guides
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
+  if (!guide) return <Badge variant="destructive">Guide introuvable: {guideSlug}</Badge>;
 
   return (
-    <Card className="my-6 border-l-4 border-l-green-500 bg-gradient-to-r from-background to-green-50/30 dark:to-green-950/30">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <CardTitle className="text-lg flex items-center gap-2 mb-2">
-              <CheckCircle className="w-5 h-5 text-green-600" />
-              {guide.title}
-            </CardTitle>
-            <CardDescription className="text-base mb-3">
-              <strong>Pourquoi :</strong> {reason}
-            </CardDescription>
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <span className="text-primary font-semibold underline decoration-dotted underline-offset-4 cursor-pointer hover:text-primary/80 transition-colors">
+          {guide.title}
+        </span>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80">
+        <div className="flex flex-col gap-4">
+          <div>
+            <h4 className="text-sm font-semibold">{guide.title}</h4>
+            <p className="text-sm text-muted-foreground">{guide.description}</p>
           </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="pt-0">
-        <div className="flex flex-wrap gap-2 mb-4">
-          <Badge variant="outline" className="bg-background">
-            {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
-          </Badge>
-          {guide.difficulty && (
-            <Badge variant="secondary">
-              {difficultyLabels[guide.difficulty]}
+          
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="outline" className="bg-background">
+              {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
             </Badge>
-          )}
-          {guide.estimatedTime && (
-            <Badge variant="outline">
-              <Clock className="w-3 h-3 mr-1" />
-              {guide.estimatedTime}
-            </Badge>
-          )}
-        </div>
-
-        {/* Concise TLDR display */}
-        {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-          <div className="mb-4">
-            <p className="text-sm font-medium mb-2">TLDR :</p>
-            <p className="text-sm text-muted-foreground">
-              {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
-            </p>
+            {guide.difficulty && (
+              <Badge variant="secondary">
+                {difficultyLabels[guide.difficulty]}
+              </Badge>
+            )}
+            {guide.estimatedTime && (
+              <Badge variant="outline">
+                <Clock className="w-3 h-3 mr-1" />
+                {guide.estimatedTime}
+              </Badge>
+            )}
           </div>
-        )}
 
-        <Button asChild className="w-full">
-          <Link 
-            href={`/guides/${guide.slug}`}
-            className="inline-flex items-center gap-2"
-          >
-            <BookOpen className="w-4 h-4" />
-            Lire
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </Button>
-      </CardContent>
-    </Card>
+          {/* Concise TLDR display */}
+          {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
+            <div>
+              <p className="text-xs font-medium mb-1">TLDR :</p>
+              <p className="text-xs text-muted-foreground">
+                {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
+              </p>
+            </div>
+          )}
+
+          <div className="flex items-center pt-2 border-t">
+            <Info className="mr-2 h-4 w-4 shrink-0 opacity-70" />
+            <span className="text-xs text-muted-foreground italic">{reason}</span>
+          </div>
+          
+          <Button asChild size="sm" className="w-full">
+            <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              Lire le guide
+            </Link>
+          </Button>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 }
