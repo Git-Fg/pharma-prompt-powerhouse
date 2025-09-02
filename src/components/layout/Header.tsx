@@ -25,6 +25,7 @@ import {
   Moon,
   Sun,
   User,
+  Workflow,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/search/CommandPalette";
@@ -35,6 +36,12 @@ const navigation = [
     href: "/concepts",
     icon: Brain,
     description: "Point de départ : chaque concept est un dossier complet",
+  },
+  {
+    name: "Workflows",
+    href: "/workflows",
+    icon: Workflow,
+    description: "Processus complets étape par étape avec exemples pratiques",
   },
   {
     name: "Guides",

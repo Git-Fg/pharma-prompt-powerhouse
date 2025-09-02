@@ -84,7 +84,7 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
           </Button>
           <Button variant="outline" asChild>
             <Link 
-              href={`/tools/${tool.slug}`}
+              href={`/outils-externes/${tool.slug}`}
               className="inline-flex items-center gap-2"
             >
               En savoir plus
