@@ -3,39 +3,47 @@ import { ExternalTool, externalToolSchema } from '@/lib/content-schema';
 
 const externalToolData = {
   "slug": "z-ai",
-  "title": "Zhipu AI (Chat Z.AI) : L'IA Open-Source et Gratuite",
-  "description": "Explorez Chat Z.AI, la plateforme de Zhipu AI qui donne accès au puissant modèle open-source GLM-4.5 et à une suite d'outils de création impressionnants, le tout gratuitement.",
+  "title": "Chat Z.AI : L'État de l'Art de la Recherche Intelligente",
+  "description": "Découvrez Chat Z.AI, qui révolutionne la recherche et création grâce à GLM-4.5. Une alternative gratuite redoutablement efficace aux solutions payantes.",
   "difficulty": "intermédiaire",
   "tags": [],
-  "isFavorite": false,
+  "isFavorite": true,
   "keyTakeaways": [],
   "conceptSlugs": [],
   "url": "https://chat.z.ai/",
   "category": "Suite créative",
   "capabilities": [],
   "use_cases": [
+    "Recherche académique avancée",
     "Création de présentations",
     "Génération de schémas",
-    "Projets créatifs"
+    "Projets créatifs",
+    "Développement web complet"
   ],
   "color": "bg-purple-500",
-  "tldr": "Suite créative complète gratuite avec GLM-4.5. Génération de présentations, schémas et projets visuels. Alternative innovante aux outils classiques.",
+  "tldr": "L'état de l'art en recherche gratuite avec GLM-4.5. Surpasse Perplexity sur bien des points avec une approche plus 'humaine' et fiable de la recherche web.",
   "content": [
     {
       "type": "alert",
       "variant": "default",
-      "title": "🆓 Totalement Gratuit",
-      "content": "Chat Z.AI offre un accès gratuit complet au modèle GLM-4.5 et à tous ses outils créatifs avancés (en août 2025)."
+      "title": "⭐ Retour d'Expérience Terrain",
+      "content": "En combinaison avec AI Studio, Z.AI représente le **core kit quotidien** permettant d'exploiter quasiment l'ensemble des capacités les plus avancées du moment de façon gratuite. Particulièrement efficace pour la recherche où son approche **surpasse souvent Perplexity**."
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🆓 Totalement Gratuit + Excellence Technique",
+      "content": "Chat Z.AI offre un accès gratuit complet au modèle GLM-4.5 et à tous ses outils créatifs avancés. **Aucune limitation d'usage connue** en août 2025."
     },
     {
       "type": "markdown",
-      "content": "## Qu'est-ce que Zhipu AI (Chat Z.AI) ?"
+      "content": "## Pourquoi Z.AI Révolutionne la Recherche"
     },
     {
       "type": "card",
-      "title": "Philosophie Open-Source",
-      "description": "Innovation accessible à tous",
-      "content": "Zhipu AI mise fortement sur l'**open-source**, à l'instar de DeepSeek et Alibaba. Leur plateforme **Chat Z.AI** democratise l'accès aux modèles de pointe sans barrière financière."
+      "title": "La Différence Z.AI vs Perplexity",
+      "description": "L'avantage concurrentiel décisif",
+      "content": "Là où **Perplexity** utilise une approche **RAG** classique (recherche puis synthèse), **Z.AI** utilise **GLM-4.5** et sa capacité excellente à effectuer une **recherche 'humaine'** plus naturelle et contextuelle.\n\n**Le résultat** : des synthèses plus fiables et pertinentes, confirmées par l'expérience terrain."
     },
     {
       "type": "tabs",
@@ -43,122 +51,106 @@ const externalToolData = {
       "tabs": [
         {
           "value": "glm-model",
-          "title": "Modèle GLM-4.5",
+          "title": "Architecture GLM-4.5",
           "content": [
             {
               "type": "card",
-              "title": "Architecture Mixture-of-Experts",
-              "content": "- **Paramètres** : 355 milliards (MoE) - parmi les plus grands open-source\n- **Contexte** : 128K tokens (standard 2025)\n- **Performance** : 3ème mondial sur 12 benchmarks\n- **Modes** : Thinking (raisonnement) + Non-thinking (rapidité)"
+              "title": "Performance Exceptionnelle",
+              "content": "- **355 milliards de paramètres** (MoE) - parmi les plus grands open-source\n- **Contexte 128K tokens** (standard 2025)\n- **3ème mondial** sur 12 benchmarks (63.2 points)\n- **Dual-mode** : Thinking (raisonnement) + Non-thinking (rapidité)"
             },
             {
-              "type": "alert",
-              "variant": "default",
-              "title": "🏆 Performance Exceptionnelle",
-              "content": "GLM-4.5 se classe 3ème mondial avec 63.2 points, derrière seulement Grok-4 et GPT-o3, surpassant de nombreux modèles propriétaires."
+              "type": "card",
+              "title": "💰 Tarification",
+              "variant": "outline",
+              "content": "**Gratuit** : Accès complet au GLM-4.5 sans restriction connue"
             }
           ]
         },
         {
-          "value": "creative-tools",
-          "title": "Suite Créative",
+          "value": "research-excellence",
+          "title": "Excellence en Recherche",
           "content": [
             {
               "type": "card",
-              "title": "AI Slides (Présentations)",
-              "description": "Agent de création de présentations",
-              "content": "- Génération complète à partir d'un prompt simple\n- Recherche web autonome pour contenu et images\n- Sortie HTML universellement accessible\n- Support de documents de référence"
+              "title": "Avantages Uniques",
+              "content": "✅ **Web Search 'Humaine'** : Plus contextuelle et naturelle que l'approche RAG classique\n✅ **Compréhension d'images native** intégrée\n✅ **Synthèse plus fiable** que Perplexity sur de nombreux points\n✅ **Présentation avec recherche web autonome** bluffante"
+            },
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "🏆 État de l'Art en Recherche",
+              "content": "Représente selon l'expérience terrain **l'état de l'art dans la recherche**, bien plus fiable que Perplexity sur de nombreux points critiques."
+            }
+          ]
+        },
+        {
+          "value": "creative-suite",
+          "title": "Suite Créative Complète",
+          "content": [
+            {
+              "type": "card",
+              "title": "AI Slides - Création de Présentations",
+              "description": "Agent de création ultra-performant",
+              "content": "- Génération complète à partir d'un prompt simple\n- **Recherche web autonome** pour contenu et images\n- Sortie **HTML universellement accessible**\n- Support de documents de référence"
             },
             {
               "type": "card",
-              "title": "Fullstack & Web Design",
+              "title": "Développement Web Complet",
               "variant": "outline",
-              "content": "- Développement web complet (frontend + backend + BDD)\n- Création d'applications à partir de prompts naturels\n- Déploiement automatique et gestion des données"
-            },
-            {
-              "type": "card",
-              "title": "Code & Artefacts Autonomes",
-              "variant": "outline",
-              "content": "- Mini-jeux et simulations physiques\n- Graphiques SVG détaillés\n- Code exécutable (Python, JS, HTML)\n- Édition par dialogue naturel"
+              "content": "- **Fullstack & Web Design** : frontend + backend + BDD\n- Création d'applications à partir de **prompts naturels**\n- **Déploiement automatique** et gestion des données\n- **Artefacts autonomes** : mini-jeux, simulations physiques"
             }
           ]
         }
       ]
     },
     {
-      "type": "markdown",
-      "content": "## Avantages et Considérations"
+      "type": "card",
+      "title": "Z.AI vs Alternatives - Comparaison",
+      "content": "| Critère | **Chat Z.AI (GLM-4.5)** | **Perplexity Pro** |\n|---------|-------------------------|---------------------|\n| **Tarif** | 🆓 Gratuit complet | 💰 $20/mois |\n| **Recherche** | 🏆 Approche 'humaine' excellente | ⚖️ RAG classique |\n| **Créativité** | 🎨 Suite complète (slides, dev) | ⚠️ Limitée |\n| **Fiabilité** | 🎯 Supérieure à Perplexity (terrain) | ✅ Bonne avec sources |\n| **Confidentialité** | ⚠️ Risque élevé (Asie) | ✅ Meilleure (US) |\n| **Verdict** | **État de l'art gratuit** | Référence payante |"
+    },
+    {
+      "type": "alert",
+      "variant": "destructive",
+      "title": "⚠️ Confidentialité : Prudence Maximale",
+      "content": "**Risque très élevé** : Plateforme hébergée en Asie avec politique de confidentialité légère. **Ne jamais utiliser de données sensibles, personnelles ou identifiables.**"
     },
     {
       "type": "tabs",
-      "defaultValue": "advantages",
+      "defaultValue": "pharmacy-use",
       "tabs": [
         {
-          "value": "advantages",
-          "title": "Points Forts",
+          "value": "pharmacy-use",
+          "title": "Usage Pharmaceutique",
           "content": [
             {
               "type": "card",
-              "title": "Accès Libre Total",
-              "content": "✅ **Totalement Gratuit** : Aucune restriction connue sur l'usage\n✅ **Suite d'Outils Unique** : Génération slides + développement full-stack\n✅ **Excellence Agentique** : 90.6% de succès d'appel d'outils\n✅ **Open-Source** : Modèle transparent et auditable"
-            }
-          ]
-        },
-        {
-          "value": "considerations",
-          "title": "Précautions",
-          "content": [
-            {
-              "type": "alert",
-              "variant": "destructive",
-              "title": "⚠️ Confidentialité Critique",
-              "content": "**Risque très élevé** : Plateforme hébergée en Asie avec politique de confidentialité légère. **Ne jamais utiliser de données sensibles, personnelles ou identifiables.**"
-            },
-            {
-              "type": "card",
-              "title": "Considérations d'Usage",
-              "variant": "outline",
-              "content": "⚠️ **Moins Axé Recherche Académique** : Optimisé pour la création plutôt que la recherche sourcée\n⚠️ **Vigilance Requise** : Prudence maximale sur les données partagées"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "tabs",
-      "defaultValue": "presentations",
-      "tabs": [
-        {
-          "value": "presentations",
-          "title": "Cas d'Usage : Présentations",
-          "content": [
-            {
-              "type": "card",
-              "title": "Exemple Pratique",
-              "description": "Création de présentation pharmaceutique",
-              "content": "**Prompt** : \"Crée une présentation sur les nouveaux traitements de l'Alzheimer en 2025\"\n\n**Résultat** : L'agent effectue sa recherche web, trouve les informations récentes, sélectionne des images appropriées, et génère une présentation HTML complète en quelques minutes."
-            },
-            {
-              "type": "alert",
-              "variant": "default",
-              "title": "💡 Astuce Pédagogique",
-              "content": "Parfait pour créer des présentations de révision, des supports de cours, ou des projets universitaires - à condition de ne pas inclure de données confidentielles."
-            }
-          ]
-        },
-        {
-          "value": "development",
-          "title": "Cas d'Usage : Développement",
-          "content": [
-            {
-              "type": "card",
-              "title": "Applications Interactives",
-              "content": "- **Simulateurs d'interactions médicamenteuses**\n- **Quiz interactifs pour révisions**\n- **Calculateurs de dosage** (à des fins pédagogiques)\n- **Visualisations de données pharmaceutiques**"
+              "title": "Cas d'Usage Optimaux",
+              "description": "Applications pratiques pour étudiants en pharmacie",
+              "content": "✅ **Recherche bibliographique** sur nouveaux traitements\n✅ **Création de présentations** de révision\n✅ **Supports de cours** et projets universitaires\n✅ **Simulateurs d'interactions** médicamenteuses (pédagogiques)"
             },
             {
               "type": "codeBlock",
               "language": "text",
-              "filename": "exemple-prompt.txt",
-              "content": "Crée une application web interactive pour simuler l'interaction entre différentes classes d'antidépresseurs. Inclus :\n- Interface utilisateur simple\n- Base de données des médicaments\n- Système d'alerte pour les interactions\n- Graphiques de visualisation"
+              "filename": "exemple-prompt-recherche.txt",
+              "content": "Recherche les dernières avancées en thérapie génique pour la mucoviscidose. Analyse les essais cliniques en cours, les mécanismes d'action novateurs, et les perspectives d'AMM en Europe."
+            }
+          ]
+        },
+        {
+          "value": "presentations",
+          "title": "Créer des Présentations",
+          "content": [
+            {
+              "type": "card",
+              "title": "Exemple Concret",
+              "description": "Génération automatique avec recherche",
+              "content": "**Prompt** : \"Crée une présentation sur les nouveaux traitements de l'Alzheimer approuvés en 2024-2025\"\n\n**Résultat automatique** :\n1. L'agent effectue sa recherche web\n2. Trouve les informations récentes validées\n3. Sélectionne des images appropriées\n4. Génère une présentation HTML complète\n5. Le tout en quelques minutes"
+            },
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "💡 Excellence Pédagogique",
+              "content": "Parfait pour créer des présentations de révision, des supports de cours, ou des projets universitaires - à condition de ne pas inclure de données confidentielles."
             }
           ]
         }
@@ -168,7 +160,7 @@ const externalToolData = {
       "type": "alert",
       "variant": "default",
       "title": "🎯 Positionnement Idéal",
-      "content": "Chat Z.AI excelle pour créer des **livrables concrets** (présentations, applications, prototypes) plutôt que pour la recherche bibliographique rigoureuse."
+      "content": "Z.AI excelle pour créer des **livrables concrets** (présentations, applications, recherches) avec une approche de recherche **plus fiable que Perplexity** sur bien des aspects."
     },
     {
       "type": "guideRecommendation",
@@ -177,8 +169,8 @@ const externalToolData = {
     },
     {
       "type": "toolRecommendation",
-      "slug": "perplexity-ai",
-      "reason": "Pour la recherche bibliographique rigoureuse, préférez Perplexity qui cite ses sources et est plus adapté à la recherche académique."
+      "slug": "google-ai-studio",
+      "reason": "Combo parfait : Z.AI pour la recherche créative + AI Studio pour l'analyse rigoureuse forment le core kit quotidien gratuit."
     }
   ]
 };
