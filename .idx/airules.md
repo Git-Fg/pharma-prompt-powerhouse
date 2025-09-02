@@ -6,6 +6,7 @@
 - **Objectif Pédagogique :** Ce projet est un outil d'apprentissage pour d'autres étudiants, pas une application d'entreprise complexe.
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
 - **Maintenabilité :** Écrire du code et créer du contenu que n'importe qui dans l'équipe peut comprendre et modifier facilement.
+- **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile.
 </project_philosophy>
 
 <content_rules>
@@ -37,6 +38,7 @@
 - **Dépendances Minimales :** N'ajouter une bibliothèque que si elle résout un problème réel qu'une fonctionnalité native ne peut pas couvrir.
 - **Documentation Utile :** Commenter le "pourquoi" derrière les choix de code complexes, pas le "comment".
 </coding_style_and_principles>
+
 <user_experience_and_accessibility>
 **Expérience Utilisateur et Accessibilité**
 - **Conception Centrée sur l'Utilisateur :** Concevoir chaque interface en pensant d'abord aux étudiants non-développeurs.
@@ -48,17 +50,14 @@
 
 # **Règles Techniques Spécifiques**
 
----
-
 <react19_rules>
 **Compiler et optimisation:**
 - Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément.
 - Écrire du code simple et lisible que le compiler peut optimiser.
 - Éviter `useMemo`/`useCallback` manuels sauf besoins spécifiques.
 **Actions et formulaires:**
-- Pour les formulaires simples (soumission de données serveur), explorer les Actions React 19 pour centraliser la logique.
+- Pour les formulaires simples (soumission de données serveur), utiliser **`useActionState`** comme approche standard en 2025 pour centraliser la logique et gérer les états pending/error/success.
 - Pour les composants interactifs complexes côté client (ex: l'éditeur de prompts), une gestion d'état avec `useState` et `useTransition` est privilégiée pour une meilleure réactivité de l'interface.
-- Lors de l'utilisation d'Actions, `useActionState` est l'outil de choix pour gérer l'état (pending, error, data).
 - `useOptimistic` peut être utilisé pour améliorer l'UX lors des mutations de données serveur.
 **Gestion des données:**
 - Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement).
@@ -68,6 +67,7 @@
 - Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants.
 - Utiliser les stylesheets natifs avec la propriété `precedence`.
 </react19_rules>
+
 <nextjs15_rules>
 **App Router:**
 - Utiliser exclusivement l'App Router avec structure basée sur les fichiers.
@@ -85,6 +85,9 @@
 - Expérimenter avec `unstable_after` pour exécuter du code après le streaming.
 - Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
 - Utiliser `next.config.ts` pour la configuration TypeScript.
+**Serveur Personnalisé:**
+- **NE JAMAIS utiliser de serveur personnalisé** (`server.ts`). Un serveur personnalisé désactive les optimisations de performance importantes comme l'Automatic Static Optimization.
+- Utiliser exclusivement `next start` pour le déploiement en production.
 </nextjs15_rules>
 
 <shadcn_ui_rules>
@@ -93,13 +96,18 @@
 - Configurer plusieurs registres dans `components.json`.
 - Profiter du MCP Server pour l'intégration avec les outils d'IA.
 - Utiliser les nouvelles commandes de recherche et découverte.
-**Utilisation des composants:**
+**Système de Notifications:**
+- **Standardiser exclusivement sur Sonner** pour les notifications toast. Sonner est le composant toast officiel recommandé par shadcn/ui en 2025.
+- Supprimer tout autre système de notification (radix-ui/react-toast, use-toast custom).
+- Utiliser l'API simple de Sonner : `toast.success()`, `toast.error()`, etc.
+**Utilisation des Composants:**
 - Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation.
-- Combiner les composants simplement avec la composition.
+- Combiner les composants simplement avec la composition plutôt que la surcharge.
 - Utiliser les fonctionnalités d'accessibilité intégrées.
+- Pour les composants personnalisés (ex: search-input, copy-button), étendre les composants shadcn/ui existants en utilisant leurs props natives.
 **Formulaires:**
 - Utiliser les composants de formulaire shadcn/ui.
-- Intégrer avec les hooks React (`useState`, `useTransition`) ou les Actions React 19 selon le cas d'usage.
+- Intégrer avec `useActionState` (React 19) ou les hooks React selon le cas d'usage.
 - Garder la logique de validation simple et proche du formulaire.
 </shadcn_ui_rules>
 
@@ -107,15 +115,20 @@
 **Philosophie : Le Schéma est la Source de Vérité**
 - Toute la structure de contenu est définie par des schémas Zod dans `src/lib/content-schema.ts`.
 - Les composants React doivent être "stupides" : ils consomment des données déjà typées et validées, sans faire de transformations complexes.
-**Structure des Données :**
+**Structure des Données:**
 - **Contenu Structuré :** Le contenu est modélisé comme un tableau de blocs typés, chaque bloc représentant soit un paragraphe de texte, soit un composant interactif.
 - **Schéma Central :** Le fichier `src/lib/content-schema.ts` définit tous les types de blocs possibles et les schémas des collections de contenu.
 - **Validation au Runtime :** Chaque fichier de contenu utilise `schema.parse(data)` pour garantir sa validité.
-**Enrichissement des Données :**
+**Zod Best Practices 2025:**
+- **Type Inference :** Utiliser exclusivement `z.infer<typeof schema>` pour typer les données. Ne jamais créer de types manuels.
+- **Modularité :** Garder les schémas modulaires et réutilisables. Utiliser `.extend()` et `.merge()` pour la composition.
+- **Transformation Intelligente :** Utiliser `.transform()` pour enrichir les données pendant la validation.
+- **Validation Stricte :** Ne jamais utiliser `any`. Toujours valider les données entrantes avec les schémas Zod.
+**Enrichissement des Données:**
 - **Content Loader :** Le fichier `src/lib/content-loader.ts` centralise le chargement et l'enrichissement du contenu.
 - **Relations :** Les relations entre collections (ex: guides et concepts) sont résolues au chargement via des Maps pour des recherches ultra-rapides O(1).
 - **Typage Fort :** Toutes les données sont enrichies et typées avant d'être utilisées par les composants.
-**Organisation des Fichiers :**
+**Organisation des Fichiers:**
 - **Collections :** Chaque collection a son dossier dans `src/content/` (ex: `src/content/guides/`).
 - **Fichiers de Contenu :** Chaque élément de contenu est un fichier `.ts` qui exporte un objet validé par son schéma.
 - **Index :** Chaque collection a un fichier `index.ts` qui exporte un tableau de tous les éléments de la collection.
@@ -123,6 +136,28 @@
 - **Validation Stricte de la Taxonomie :** Le build DOIT échouer si un contenu ne respecte pas son schéma Zod.
 - **Intégrité des Références :** Les références entre collections (ex: `conceptSlugs`) sont validées à la compilation pour garantir la cohérence.
 </content_structure_rules>
+
+<testing_rules>
+**Framework de Test:**
+- **Standardiser exclusivement sur Vitest** pour tous les tests unitaires et d'intégration. Vitest est le framework de test moderne recommandé pour les projets Next.js en 2025.
+- Supprimer complètement Jest et ses dépendances.
+**Configuration Vitest:**
+- Utiliser la configuration standard pour Next.js avec support TypeScript, JSX, et jsdom.
+- Configurer les aliases de chemins (`@/` -> `src/`) pour correspondre au projet.
+- Utiliser le mode `globals` pour une API de test plus simple.
+**Organisation des Tests:**
+- Placer les fichiers de test dans `tests/unit/` et `tests/integration/`.
+- Utiliser le pattern `*.test.ts` ou `*.spec.ts` pour les fichiers de test.
+- Séparer clairement les tests unitaires des tests d'intégration et E2E.
+**Scripts de Test:**
+- Configurer les scripts : `"test": "vitest"`, `"test:watch": "vitest"`, `"test:ui": "vitest --ui"`, `"test:coverage": "vitest run --coverage"`.
+- Utiliser l'interface UI de Vitest pour une meilleure expérience de développement.
+**Bonnes Pratiques:**
+- Écrire des tests qui vérifient le comportement plutôt que l'implémentation.
+- Utiliser les mocks de manière minimale et ciblée.
+- Tester les schémas Zod et la validation des données.
+- Tester les composants avec `@testing-library/react`.
+</testing_rules>
 
 <typescript_rules>
 **Sécurité des Types :**
@@ -137,7 +172,29 @@
 - Utiliser des interfaces de props simples.
 - Importer les types (`Guide`, `Concept`, `ContentBlock`, etc.) directement depuis `src/lib/content-schema.ts` pour les props des composants.
 - Utiliser le composant `ContentRenderer` pour afficher les blocs de contenu de manière standardisée.
+**Configuration TypeScript:**
+- Maintenir le mode `strict` activé dans `tsconfig.json`.
+- Utiliser les résolutions de chemin appropriées pour les aliases.
+- Configurer correctement les types pour Vitest et les environnements de test.
 </typescript_rules>
+
+<performance_rules>
+**Optimisations de Build:**
+- Éviter absolument les serveurs personnalisés qui désactivent l'Automatic Static Optimization.
+- Utiliser `export dynamic = 'force-static'` pour les pages qui peuvent être pré-rendues.
+- Configurer le cache explicitement pour les données qui doivent être mises en cache.
+**Optimisations d'Exécution:**
+- Faire confiance aux optimisations automatiques de React 19.
+- Éviter l'optimisation prématurée avec `useMemo`/`useCallback`.
+- Utiliser le pattern composants serveur/client de manière optimale : serveur pour le chargement de données, client pour l'interactivité.
+**Bundle et Dépendances:**
+- Maintenir les dépendances au minimum nécessaire.
+- Privilégier les bibliothèques légères et modernes (Sonner, Vitest, etc.).
+- Éviter les dépendances redondantes ou obsolètes.
+**Monitoring:**
+- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
+- Surveiller les performances avec les outils de développement Next.js.
+</performance_rules>
 
 <instructions>
 DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
@@ -146,21 +203,25 @@ DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenan
 DO utiliser les schémas Zod pour définir la structure du contenu
 DO faire confiance aux types générés par Zod comme source de vérité
 DO structurer le contenu comme un tableau de blocs typés
+DO utiliser Sonner exclusivement pour les notifications
+DO utiliser Vitest exclusivement pour les tests
+DO utiliser `useActionState` pour les formulaires React 19
 DO comprendre que Next.js 15 ne met plus rien en cache par défaut
 DO écrire du code facile à expliquer aux autres étudiants
+DO NOT utiliser de serveur personnalisé
+DO NOT utiliser Jest ou d'autres frameworks de test
+DO NOT utiliser de systèmes de notification alternatifs
 DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
-DO NOT effectuer de logique de liaison de données (ex: `guides.map(...)` pour trouver des concepts) au runtime. C'est le rôle du content loader.
-DO NOT créer de types manuels pour le contenu (ex: `GuideWithSlug`).
+DO NOT effectuer de logique de liaison de données au runtime. C'est le rôle du content loader.
+DO NOT créer de types manuels pour le contenu.
 DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
 DO NOT sacrifier la clarté pour la sophistication technique
-En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, et Zod.
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
 </instructions>
 
 ---
 
-# **Règles et informations de Contenu**
-
----
+# **Règles de Contenu**
 
 <webui_informations>
 <openai_information>
