@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { CodeBlock } from "@/components/ui/code-block";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import { ToolRecommendation } from "@/components/shared/ToolRecommendation";
+import { GuideRecommendation } from "@/components/shared/GuideRecommendation";
+import { ConceptRecommendation } from "@/components/shared/ConceptRecommendation";
 import MultiFormatPrompt from "@/components/prompts/MultiFormatPrompt";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -118,6 +120,12 @@ export function useMDXComponents(): Record<string, any> {
     
     // Tool recommendations
     ToolRecommendation,
+    
+    // Guide recommendations
+    GuideRecommendation,
+    
+    // Concept recommendations
+    ConceptRecommendation,
     
     // Points clés
     KeyTakeaways,

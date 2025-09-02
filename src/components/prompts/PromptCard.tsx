@@ -136,10 +136,10 @@ export const PromptCard: React.FC<PromptCardProps> = ({
             <Button 
               asChild
               className='flex-1'
-              data-testid="use-prompt-button"
+              data-testid="view-prompt-details-button"
             >
-              <Link href={`/boite-a-outils/prompt-editor?template=${slug}`}>
-                Utiliser ce prompt
+              <Link href={`/prompts/${slug}`}>
+                Voir les détails
               </Link>
             </Button>
             <Button
@@ -157,6 +157,17 @@ export const PromptCard: React.FC<PromptCardProps> = ({
               )}
             </Button>
           </div>
+          <Button 
+            asChild
+            variant='outline'
+            size='sm'
+            className='w-full'
+            data-testid="use-prompt-button"
+          >
+            <Link href={`/boite-a-outils/prompt-editor?template=${slug}`}>
+              Utiliser directement
+            </Link>
+          </Button>
         </div>
       </CardContent>
     </Card>
