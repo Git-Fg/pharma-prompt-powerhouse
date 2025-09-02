@@ -138,11 +138,11 @@ export default async function ExternalToolDetailPage({
       </main>
 
       {/* NOUVELLE SECTION : Contenu lié */}
-      {tool.concepts && (
+      {tool.conceptSlugs && tool.conceptSlugs.length > 0 && (
         <>
           <Separator className="my-12" />
           <RelatedContent
-            currentItem={{ slug: tool.slug, concepts: tool.concepts }}
+            currentItem={{ slug: tool.slug, conceptSlugs: tool.conceptSlugs }}
           />
         </>
       )}
