@@ -19,8 +19,171 @@ const conceptData = {
   "conceptSlugs": [],
   "content": [
     {
+      "type": "alert",
+      "variant": "default",
+      "title": "🧬 Analogie Biologique",
+      "content": "Un **token** est à l'IA ce qu'un **acide aminé** est à une protéine : un bloc fondamental indivisible que le système manipule."
+    },
+    {
       "type": "markdown",
-      "content": "## Définition : Qu'est-ce qu'un Token ?\n\nDans le domaine des modèles de langage (LLMs), un **token** est l'unité de base du texte. C'est l'équivalent d'un acide aminé pour une protéine : un bloc fondamental que le modèle manipule.\n\nUn token n'est pas exactement un mot. Il peut être :\n- Un mot entier (\\`\"pharmacie\"\\`)\n- Un morceau de mot (\\`\"phar\"\\`, \\`\"ma\"\\`, \\`\"cie\"\\`)\n- Un signe de ponctuation (\\`\"?\"\\`)\n- Un espace ou un caractère spécial.\n\nEn moyenne, en français, **100 tokens représentent environ 75 mots**.\n\n\\`Cette phrase contient 7 mots, mais est probablement découpée en 9 ou 10 tokens par le modèle.\\`\n\n## La Fenêtre de Contexte : La \"Mémoire à Court Terme\" de l'IA\n\nChaque modèle d'IA possède une **fenêtre de contexte** (ou *context window*), qui est la quantité maximale de tokens qu'il peut prendre en compte à un instant T. C'est sa mémoire de travail.\n\nCette fenêtre inclut à la fois :\n1.  **Votre prompt** (les tokens que vous envoyez)\n2.  **La réponse de l'IA** (les tokens qu'elle génère)\n\nSi la conversation dépasse cette limite, l'IA commence à \"oublier\" les informations les plus anciennes.\n\n### Exemples de Tailles de Fenêtre de Contexte (Prévisions 2025)\n\nLa taille de la fenêtre de contexte a explosé, ce qui change radicalement ce qu'il est possible de faire :\n\n- **Modèles Standards (anciens) :** 4 000 à 8 000 tokens (environ 10-20 pages de texte).\n- **Modèles de Génération 2024 (Ex: GPT-4, Claude 2) :** 128 000 à 200 000 tokens (un livre entier).\n- **Modèles de Génération 2025 :**\n  - **GPT-5 :** 400 000 tokens.\n  - **Gemini 2.5 Pro :** **1 000 000 de tokens** (l'équivalent de plusieurs gros livres ou d'un petit projet de codebase).\n\n## Pourquoi est-ce Important pour la Pharmacie ?\n\n1.  **Analyse de Documents Longs :** Avec une fenêtre de 1M de tokens, vous pouvez soumettre un dossier patient complet, plusieurs études cliniques, ou l'intégralité d'un cours à l'IA et lui demander d'effectuer une analyse transversale sans qu'elle perde le fil.\n\n2.  **Coût d'Utilisation (API) :** Lorsque vous utilisez l'API (pour les développeurs), le coût est généralement calculé en fonction du nombre de tokens en entrée et en sortie. Optimiser la longueur de ses prompts peut donc avoir un impact financier.\n\n3.  **Qualité de la Réponse :** Un prompt bien formulé qui utilise efficacement les tokens disponibles (en étant concis et précis) obtiendra de meilleurs résultats qu'un prompt verbeux et mal structuré.\n\nComprendre la notion de token et de fenêtre de contexte est la première étape pour passer d'un simple utilisateur à un véritable \\`prompt engineer\\` capable de tirer le meilleur parti de ces outils puissants."
+      "content": "## Définition : Qu'est-ce qu'un Token ?"
+    },
+    {
+      "type": "card",
+      "title": "Unité de Base du Texte",
+      "description": "L'équivalent numérique d'un acide aminé",
+      "content": "Dans le domaine des modèles de langage (LLMs), un **token** est l'unité de base du texte. C'est l'équivalent d'un acide aminé pour une protéine : un bloc fondamental que le modèle manipule."
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "composition",
+      "tabs": [
+        {
+          "value": "composition",
+          "title": "Composition d'un Token",
+          "content": [
+            {
+              "type": "card",
+              "title": "Un Token Peut Être :",
+              "content": "- **Un mot entier** : `\"pharmacie\"`\n- **Un morceau de mot** : `\"phar\"`, `\"ma\"`, `\"cie\"`\n- **Un signe de ponctuation** : `\"?\"`, `\"!\"`\n- **Un espace ou caractère spécial** : espaces, retours à la ligne"
+            },
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "📊 Règle de Conversion",
+              "content": "En moyenne, en français : **100 tokens ≈ 75 mots**"
+            },
+            {
+              "type": "codeBlock",
+              "language": "text",
+              "filename": "exemple-tokenisation.txt",
+              "content": "Phrase : \"Cette phrase contient 7 mots\"\n\nTokenisation probable :\n[\"Cette\"] [\"phrase\"] [\"contient\"] [\"7\"] [\"mots\"]\n= 5 tokens pour 5 mots (simple)\n\nPhrase complexe : \"L'anti-inflammatoire non-stéroïdien\"\nTokenisation probable :\n[\"L'\"] [\"anti\"] [\"-\"] [\"inflamm\"] [\"atoire\"] [\"non\"] [\"-\"] [\"stér\"] [\"oïd\"] [\"ien\"]\n= 10 tokens pour 3 mots (complexe)"
+            }
+          ]
+        },
+        {
+          "value": "context-window",
+          "title": "Fenêtre de Contexte",
+          "content": [
+            {
+              "type": "card",
+              "title": "La \"Mémoire à Court Terme\" de l'IA",
+              "description": "Quantité maximale de tokens gérés simultanément",
+              "content": "Chaque modèle d'IA possède une **fenêtre de contexte** (ou *context window*), qui est la quantité maximale de tokens qu'il peut prendre en compte à un instant T."
+            },
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "📝 Composition de la Fenêtre",
+              "content": "La fenêtre inclut :\n1. **Votre prompt** (tokens que vous envoyez)\n2. **La réponse de l'IA** (tokens qu'elle génère)\n\nSi la conversation dépasse cette limite, l'IA \"oublie\" les informations les plus anciennes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "content": "## Évolution des Tailles de Fenêtre de Contexte"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "evolution",
+      "tabs": [
+        {
+          "value": "evolution",
+          "title": "Générations de Modèles",
+          "content": [
+            {
+              "type": "card",
+              "title": "Modèles Standards (Anciens)",
+              "content": "- **Taille** : 4 000 à 8 000 tokens\n- **Équivalence** : 10-20 pages de texte\n- **Usage** : Conversations courtes, analyses limitées"
+            },
+            {
+              "type": "card",
+              "title": "Génération 2024",
+              "variant": "outline",
+              "content": "- **Taille** : 128 000 à 200 000 tokens\n- **Équivalence** : Un livre entier\n- **Modèles** : GPT-4, Claude 2"
+            },
+            {
+              "type": "card",
+              "title": "Génération 2025 (Prévisions)",
+              "content": "- **GPT-5** : 400 000 tokens\n- **Gemini 2.5 Pro** : **1 000 000 tokens**\n- **Équivalence** : Plusieurs livres ou une codebase complète"
+            }
+          ]
+        },
+        {
+          "value": "implications",
+          "title": "Implications Pratiques",
+          "content": [
+            {
+              "type": "card",
+              "title": "Révolution des Capacités",
+              "description": "Ce que permet 1M de tokens",
+              "content": "Avec une fenêtre de 1M de tokens, vous pouvez soumettre :\n- Un dossier patient complet\n- Plusieurs études cliniques\n- L'intégralité d'un cours\n- Une analyse transversale sans perte de contexte"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "content": "## Pourquoi c'est Important pour la Pharmacie ?"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "clinical",
+      "tabs": [
+        {
+          "value": "clinical",
+          "title": "Applications Cliniques",
+          "content": [
+            {
+              "type": "card",
+              "title": "Analyse de Documents Longs",
+              "content": "Soumettez un dossier patient complet, plusieurs études cliniques, ou l'intégralité d'un cours et demandez une analyse transversale sans que l'IA perde le fil."
+            },
+            {
+              "type": "card",
+              "title": "Qualité de la Réponse",
+              "variant": "outline",
+              "content": "Un prompt bien formulé qui utilise efficacement les tokens disponibles (concis et précis) obtiendra de meilleurs résultats qu'un prompt verbeux et mal structuré."
+            }
+          ]
+        },
+        {
+          "value": "economic",
+          "title": "Considérations Économiques",
+          "content": [
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "💰 Coût API",
+              "content": "Pour les développeurs utilisant l'API, le coût est calculé en fonction du nombre de tokens en entrée et en sortie. Optimiser ses prompts peut avoir un impact financier."
+            },
+            {
+              "type": "card",
+              "title": "Optimisation pour Étudiants",
+              "content": "Même en version gratuite, comprendre les tokens aide à :\n- Maximiser l'efficacité des conversations\n- Éviter de dépasser les limites gratuites\n- Structurer l'information de manière optimale"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🚀 Passage au Niveau Supérieur",
+      "content": "Comprendre la notion de token et de fenêtre de contexte est la première étape pour passer d'un simple utilisateur à un véritable **prompt engineer** capable de tirer le meilleur parti de ces outils puissants."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "optimiser-ses-quotas-et-son-temps-avec-lia",
+      "reason": "Apprenez à optimiser vos conversations pour maximiser l'efficacité de vos quotas gratuits."
+    },
+    {
+      "type": "conceptRecommendation",
+      "slug": "context-engineering",
+      "reason": "Maîtrisez l'art d'optimiser la fenêtre de contexte pour des réponses plus précises et pertinentes."
     }
   ]
 };
