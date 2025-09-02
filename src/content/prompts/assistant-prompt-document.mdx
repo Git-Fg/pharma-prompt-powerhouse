@@ -6,7 +6,7 @@ category: "apprentissage"
 difficulty: "intermédiaire"
 recommendedTool: "Claude"
 tags: ["claude", "exemple-code", "fiche-revision", "pharmacie", "prompting", "recherche", "synthese", "template", "variables"]
-conceptSlugs: ["context-engineering", "recherche-analyse"]
+conceptSlugs: ["context-engineering"]
 variables: ["document_content", "user_question"]
 promptContent: |
   <document>
@@ -133,3 +133,18 @@ Ce prompt est conçu pour analyser un contenu textuel que vous fournissez. La me
     L'utilisation de balises XML (`<document>`, `<instructions>`, `<question>`) sépare clairement la source de vérité de l'instruction, ce qui réduit drastiquement le risque d'hallucination. L'IA sait exactement où chercher l'information et quoi faire si elle ne la trouve pas.
   </CardContent>
 </Card>
+
+<ToolRecommendation 
+  toolSlug="claude-ai" 
+  reason="Claude excelle dans l'analyse de documents avec cette structure XML et peut traiter les PDF directement grâce à sa capacité d'upload de fichiers native."
+/>
+
+<ConceptRecommendation 
+  conceptSlug="context-engineering" 
+  reason="Ce prompt illustre parfaitement les principes du context engineering : structuration claire des informations pour une analyse précise et fiable."
+/>
+
+<GuideRecommendation 
+  guideSlug="structurer-ses-prompts-avec-des-balises-methode-xml" 
+  reason="Approfondissez votre maîtrise de la structuration XML pour créer des prompts d'analyse encore plus sophistiqués et précis."
+/>
