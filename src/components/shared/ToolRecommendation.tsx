@@ -35,9 +35,8 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
               {tool.title}
             </CardTitle>
             <CardDescription className="text-base mb-3">
-              <strong>Pourquoi cet outil :</strong> {reason}
+              <strong>Pourquoi :</strong> {reason}
             </CardDescription>
-            <p className="text-sm text-muted-foreground">{tool.description}</p>
           </div>
         </div>
       </CardHeader>
@@ -47,11 +46,6 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
           <Badge variant="outline" className="bg-background">
             {tool.category}
           </Badge>
-          {tool.difficulty && (
-            <Badge variant="secondary">
-              {tool.difficulty}
-            </Badge>
-          )}
           {tool.pricing && (
             <Badge variant={tool.isFree ? "default" : "secondary"}>
               {tool.pricing}
@@ -59,16 +53,13 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
           )}
         </div>
 
-        {tool.use_cases && tool.use_cases.length > 0 && (
-          <div className="mb-4">
-            <p className="text-sm font-medium mb-2">Cas d'usage principaux :</p>
-            <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-              {tool.use_cases.map((useCase, index) => (
-                <li key={index}>{useCase}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Enhanced TLDR display */}
+        <div className="mb-4">
+          <p className="text-sm font-medium mb-2">TLDR :</p>
+          <p className="text-sm text-muted-foreground">
+            {tool.tldr || tool.description}
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-2">
           <Button asChild className="flex-1">
@@ -79,7 +70,7 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
               className="inline-flex items-center gap-2"
             >
               <ExternalLink className="w-4 h-4" />
-              Accéder à {tool.title}
+              Accéder
             </a>
           </Button>
           <Button variant="outline" asChild>
@@ -87,7 +78,7 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
               href={`/outils-externes/${tool.slug}`}
               className="inline-flex items-center gap-2"
             >
-              En savoir plus
+              Détails
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
