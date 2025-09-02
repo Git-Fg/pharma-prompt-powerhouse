@@ -2,42 +2,24 @@ import Link from 'next/link';
 import { allGuides } from 'content-collections';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BookOpen, CheckCircle, Clock } from 'lucide-react';
+import { ArrowRight, Workflow, CheckCircle, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-interface GuideRecommendationProps {
-  guideSlug: string;
+interface RelatedWorkflowProps {
+  workflowSlug: string;
   reason: string;
 }
 
-const categoryLabels = {
-  prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
-  tools: "Outils 🛠️",
-  security: "Sécurité 🔒",
-  optimization: "Optimisation ⚡",
-  fondamentaux: "Fondamentaux 📚",
-  methodologie: "Méthodologie 🔬",
-  ressources: "Ressources 📖",
-  "techniques-avancees": "Techniques Avancées 🚀",
-  "cas-pratiques": "Cas Pratiques 💊",
-};
+export function RelatedWorkflow({ workflowSlug, reason }: RelatedWorkflowProps) {
+  // Find workflow in guides (as workflows are part of guides now)
+  const workflow = allGuides.find(g => g.slug === workflowSlug);
 
-const difficultyLabels = {
-  débutant: "Débutant",
-  intermédiaire: "Intermédiaire",
-  avancé: "Avancé",
-};
-
-export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
-  const guide = allGuides.find(g => g.slug === guideSlug);
-
-  if (!guide) {
+  if (!workflow) {
     return (
       <Card className="my-6 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950">
         <CardContent className="pt-6">
           <p className="text-amber-800 dark:text-amber-200">
-            Guide "{guideSlug}" non trouvé dans la collection guides
+            Workflow "{workflowSlug}" non trouvé dans la collection guides
           </p>
         </CardContent>
       </Card>
@@ -45,17 +27,18 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
   }
 
   return (
-    <Card className="my-6 border-l-4 border-l-green-500 bg-gradient-to-r from-background to-green-50/30 dark:to-green-950/30">
+    <Card className="my-6 border-l-4 border-l-purple-500 bg-gradient-to-r from-background to-purple-50/30 dark:to-purple-950/30">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg flex items-center gap-2 mb-2">
-              <CheckCircle className="w-5 h-5 text-green-600" />
-              {guide.title}
+              <CheckCircle className="w-5 h-5 text-purple-600" />
+              {workflow.title}
             </CardTitle>
             <CardDescription className="text-base mb-3">
-              <strong>Pourquoi :</strong> {reason}
+              <strong>Pourquoi ce workflow :</strong> {reason}
             </CardDescription>
+            <p className="text-sm text-muted-foreground line-clamp-2">{workflow.description}</p>
           </div>
         </div>
       </CardHeader>
@@ -63,38 +46,39 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
       <CardContent className="pt-0">
         <div className="flex flex-wrap gap-2 mb-4">
           <Badge variant="outline" className="bg-background">
-            {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
+            <Workflow className="w-3 h-3 mr-1" />
+            Processus
           </Badge>
-          {guide.difficulty && (
+          {workflow.difficulty && (
             <Badge variant="secondary">
-              {difficultyLabels[guide.difficulty]}
+              {workflow.difficulty}
             </Badge>
           )}
-          {guide.estimatedTime && (
+          {workflow.estimatedTime && (
             <Badge variant="outline">
               <Clock className="w-3 h-3 mr-1" />
-              {guide.estimatedTime}
+              {workflow.estimatedTime}
             </Badge>
           )}
         </div>
 
-        {/* Concise TLDR display */}
-        {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
+        {/* Compact key takeaways for concise display */}
+        {workflow.keyTakeaways && workflow.keyTakeaways.length > 0 && (
           <div className="mb-4">
             <p className="text-sm font-medium mb-2">TLDR :</p>
             <p className="text-sm text-muted-foreground">
-              {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
+              {workflow.keyTakeaways[0]} {workflow.keyTakeaways.length > 1 && `+ ${workflow.keyTakeaways.length - 1} étapes`}
             </p>
           </div>
         )}
 
         <Button asChild className="w-full">
           <Link 
-            href={`/guides/${guide.slug}`}
+            href={`/guides/${workflow.slug}`}
             className="inline-flex items-center gap-2"
           >
-            <BookOpen className="w-4 h-4" />
-            Lire
+            <Workflow className="w-4 h-4" />
+            Suivre ce workflow
             <ArrowRight className="w-4 h-4" />
           </Link>
         </Button>

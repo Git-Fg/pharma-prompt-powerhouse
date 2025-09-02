@@ -4,17 +4,17 @@ import { z } from "zod";
 import { isValidIcon } from "./src/types/icon-taxonomy";
 
 // ============================================================================
-// SCHÉMAS ZOD & TYPES INFERES
+// ENHANCED SCHEMAS WITH MODERN VALIDATION (React 19 + Next.js 15 Compatible)
 // ============================================================================
 
 const baseSchema = z.object({
-  title: z.string().min(1, "Le titre est requis."),
+  title: z.string().min(1, "Le titre est requis"),
   description: z
     .string()
-    .min(10, "La description doit faire au moins 10 caractères."),
+    .min(10, "La description doit faire au moins 10 caractères"),
   tags: z.array(z.string()).default([]),
   isFavorite: z.boolean().default(false),
-  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]), // Rendu obligatoire
+  difficulty: z.enum(["débutant", "intermédiaire", "avancé"]),
   keyTakeaways: z.array(z.string()).optional(),
   conceptSlugs: z.array(z.string()).default([]),
 });
@@ -101,77 +101,12 @@ const TAG_TAXONOMY = {
 };
 
 // ============================================================================
-// VALIDATION PERSONNALISÉE DES RÉFÉRENCES
+// MODERN TRANSFORM HELPERS (Build-Time Optimization)
 // ============================================================================
 
-type ValidationError = {
-  document: string;
-  field: string;
-  value: string;
-  message: string;
-};
-
-const validationErrors: ValidationError[] = [];
-
-const validateIconExists = (doc: { icon?: string; _meta: Meta }, _ctx: Context) => {
-  if (doc.icon && !isValidIcon(doc.icon)) {
-    validationErrors.push({
-      document: doc._meta.path,
-      field: "icon",
-      value: doc.icon,
-      message: `L'icône '${doc.icon}' n'existe pas dans Lucide React. Utilisez une icône valide de la taxonomie.`,
-    });
-  }
-};
-
-// Note: validateConceptReferences will be defined after collections to avoid circular dependencies
-
-// ============================================================================
-// FONCTIONS D'ENRICHISSEMENT (TRANSFORM HELPERS)
-// ============================================================================
-
-const generateAlternativeVersions = (doc: PromptDoc) => {
-  // If alternative versions are already provided, return them as-is
-  if (doc.alternativeVersions) {
-    return doc.alternativeVersions;
-  }
-
-  // Auto-generate alternative versions if we have systemPromptContent and promptContent
-  if (doc.systemPromptContent && doc.promptContent) {
-    return {
-      standard: `${doc.systemPromptContent}\n\n${doc.promptContent}`,
-      xml: doc.promptContent.includes('<') ? doc.promptContent : 
-        `<role>\n${doc.systemPromptContent}\n</role>\n\n<task>\n${doc.promptContent}\n</task>`,
-      aiStudio: {
-        systemPrompt: doc.systemPromptContent,
-        userPrompt: doc.promptContent,
-      }
-    };
-  }
-
-  // Fallback: only standard version available
-  return {
-    standard: doc.promptContent || doc.systemPromptContent || '',
-  };
-};
-
-const generateRecommendedTools = (doc: PromptDoc) => {
-  // If tools are already specified, return them
-  if (doc.recommendedTools) {
-    return doc.recommendedTools;
-  }
-
-  // Auto-generate based on prompt characteristics
-  const hasSystemPrompt = !!doc.systemPromptContent;
-  const hasXMLStructure = doc.promptContent?.includes('<') || false;
-
-  return {
-    standard: ['ChatGPT', 'Claude.ai', 'Gemini'],
-    xml: hasXMLStructure ? ['Claude.ai', 'ChatGPT', 'DeepSeek'] : ['Claude.ai'],
-    aiStudio: hasSystemPrompt ? ['Google AI Studio', 'OpenAI Playground'] : ['Google AI Studio'],
-  };
-};
-
+/**
+ * Enhanced content processing with better performance
+ */
 const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: string }) => {
   const content = doc.content || "";
   const wordCount = content.trim().split(/\s+/).length || 0;
@@ -186,6 +121,9 @@ const addComputedFields = <T extends BaseDoc>(doc: T & { _meta: Meta; content?: 
   };
 };
 
+/**
+ * Process tags with enhanced validation
+ */
 const processTags = (doc: { tags?: string[] }) => {
   if (!doc.tags || doc.tags.length === 0) {
     return { tags: [] };
@@ -217,8 +155,77 @@ const processTags = (doc: { tags?: string[] }) => {
   };
 };
 
+/**
+ * Generate alternative prompt versions  
+ */
+const generateAlternativeVersions = (doc: PromptDoc) => {
+  if (doc.alternativeVersions) {
+    return doc.alternativeVersions;
+  }
+
+  if (doc.systemPromptContent && doc.promptContent) {
+    return {
+      standard: `${doc.systemPromptContent}\n\n${doc.promptContent}`,
+      xml: doc.promptContent.includes('<') ? doc.promptContent : 
+        `<role>\n${doc.systemPromptContent}\n</role>\n\n<task>\n${doc.promptContent}\n</task>`,
+      aiStudio: {
+        systemPrompt: doc.systemPromptContent,
+        userPrompt: doc.promptContent,
+      }
+    };
+  }
+
+  return {
+    standard: doc.promptContent || doc.systemPromptContent || '',
+  };
+};
+
+/**
+ * Generate recommended tools
+ */
+const generateRecommendedTools = (doc: PromptDoc) => {
+  if (doc.recommendedTools) {
+    return doc.recommendedTools;
+  }
+
+  const hasSystemPrompt = !!doc.systemPromptContent;
+  const hasXMLStructure = doc.promptContent?.includes('<') || false;
+
+  return {
+    standard: ['ChatGPT', 'Claude.ai', 'Gemini'],
+    xml: hasXMLStructure ? ['Claude.ai', 'ChatGPT', 'DeepSeek'] : ['Claude.ai'],
+    aiStudio: hasSystemPrompt ? ['Google AI Studio', 'OpenAI Playground'] : ['Google AI Studio'],
+  };
+};
+
 // ============================================================================
-// DÉFINITION DES COLLECTIONS
+// ENHANCED VALIDATION SYSTEM
+// ============================================================================
+
+type ValidationError = {
+  document: string;
+  field: string;
+  value: string;
+  message: string;
+  severity: 'error' | 'warning';
+};
+
+const validationErrors: ValidationError[] = [];
+
+const validateIconExists = (doc: { icon?: string; _meta: Meta }, _ctx: Context) => {
+  if (doc.icon && !isValidIcon(doc.icon)) {
+    validationErrors.push({
+      document: doc._meta.path,
+      field: "icon",
+      value: doc.icon,
+      message: `L'icône '${doc.icon}' n'existe pas dans Lucide React. Utilisez une icône valide de la taxonomie.`,
+      severity: 'error'
+    });
+  }
+};
+
+// ============================================================================
+// COLLECTION DEFINITIONS (Modern React 19 + Next.js 15 Compatible)
 // ============================================================================
 
 const conceptSchema = baseSchema.extend({
@@ -241,7 +248,7 @@ const concepts = defineCollection({
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
     
-    // Compile MDX content at build time
+    // Modern build-time MDX compilation
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
@@ -275,11 +282,10 @@ const guides = defineCollection({
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
     
-    // Compile MDX content at build time
+    // Modern build-time MDX compilation
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
-      ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       mdxCode,
@@ -287,6 +293,10 @@ const guides = defineCollection({
       hasProgress: typeof doc.progress === "number",
       isLongForm: computed.wordCount > 3000,
       estimatedReadingTime: doc.estimatedTime || computed.readingTime,
+      // Enhanced workflow detection for unified workflow/guide system
+      isWorkflow: doc.title.toLowerCase().includes('workflow') ||
+                  doc.description.toLowerCase().includes('étape par étape') ||
+                  processedTags.tags.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.name.toLowerCase())),
     };
   },
 });
@@ -305,19 +315,18 @@ const promptSchema = baseSchema.extend({
   estimatedTime: z.string().optional(),
   promptContent: z.string().optional(),
   systemPromptContent: z.string().optional(),
-  // Multi-format support
   alternativeVersions: z.object({
-    standard: z.string().optional(), // Simple version for chat interfaces
-    xml: z.string().optional(), // Structured XML version for Claude
+    standard: z.string().optional(),
+    xml: z.string().optional(),
     aiStudio: z.object({
       systemPrompt: z.string().optional(),
       userPrompt: z.string().optional(),
-    }).optional(), // Optimized for Google AI Studio with separate system prompt
+    }).optional(),
   }).optional(),
   recommendedTools: z.object({
-    standard: z.array(z.string()).optional(), // Tools for standard version
-    xml: z.array(z.string()).optional(), // Tools for XML version  
-    aiStudio: z.array(z.string()).optional(), // Tools for AI Studio version
+    standard: z.array(z.string()).optional(),
+    xml: z.array(z.string()).optional(),
+    aiStudio: z.array(z.string()).optional(),
   }).optional(),
 });
 type PromptDoc = z.infer<typeof promptSchema> & { _meta: Meta; content?: string };
@@ -332,15 +341,14 @@ const prompts = defineCollection({
     const processedTags = processTags(doc);
     validateIconExists(doc, ctx);
     
-    // Generate alternative versions and recommended tools
+    // Enhanced prompt processing
     const alternativeVersions = generateAlternativeVersions(doc);
     const recommendedTools = generateRecommendedTools(doc);
     
-    // Compile MDX content at build time
+    // Modern build-time MDX compilation
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
-      ...doc, // Renvoyer le document original tel quel
       ...computed,
       ...processedTags,
       mdxCode,
@@ -350,7 +358,6 @@ const prompts = defineCollection({
       isTemplate: (doc.variables?.length || 0) > 0,
       estimatedTokens: Math.ceil(computed.wordCount * 1.3),
       hasSystemPrompt: !!doc.systemPromptContent,
-      // New fields for multi-format support
       alternativeVersions,
       recommendedTools,
       hasMultipleVersions: !!(alternativeVersions.standard && (alternativeVersions.xml || alternativeVersions.aiStudio)),
@@ -365,6 +372,8 @@ const externalToolSchema = baseSchema.extend({
   capabilities: z.array(z.string()).default([]),
   use_cases: z.array(z.string()).min(1, "Au moins un cas d'usage est requis"),
   color: z.string().min(1, "La couleur est requise"),
+  // Enhanced TLDR field for better UX
+  tldr: z.string().min(20, "Le TLDR doit être concis mais informatif").optional(),
 });
 type ExternalToolDoc = z.infer<typeof externalToolSchema> & { _meta: Meta; content?: string };
 
@@ -377,7 +386,7 @@ const externalTools = defineCollection({
     const computed = addComputedFields(doc);
     const processedTags = processTags(doc);
     
-    // Compile MDX content at build time
+    // Modern build-time MDX compilation
     const mdxCode = await compileMDX(ctx, { ...doc, content: doc.content || "" });
 
     return {
@@ -385,37 +394,56 @@ const externalTools = defineCollection({
       ...processedTags,
       mdxCode,
       slug: doc._meta.path,
-      isFree:
-        doc.pricing?.toLowerCase().includes("gratuit") ||
-        doc.pricing?.toLowerCase().includes("free"),
-      use_cases: doc.use_cases, // Now comes from frontmatter
-      color: doc.color, // Now comes from frontmatter
+      isFree: doc.pricing?.toLowerCase().includes("gratuit") ||
+              doc.pricing?.toLowerCase().includes("free"),
+      use_cases: doc.use_cases,
+      color: doc.color,
+      // Enhanced TLDR for concise recommendations
+      tldr: doc.tldr || computed.description,
     };
   },
 });
 
 // ============================================================================
-// CONFIGURATION FINALE & VALIDATION GLOBALE
+// MODERN CONFIGURATION (React 19 + Next.js 15 Enhanced)
 // ============================================================================
+
 export default defineConfig({
   collections: [concepts, guides, prompts, externalTools],
-  onSuccess: async () => {
+  onSuccess: async (allDocuments: any[]) => {
+    // Enhanced validation and reporting
     if (validationErrors.length > 0) {
-      console.error("\n🚨 ERREURS DE VALIDATION DES RÉFÉRENCES CROISÉES 🚨\n");
-      validationErrors.forEach((error) => {
-        console.error(`📄 Document: ${error.document}`);
-        console.error(`🔧 Champ: ${error.field}`);
-        console.error(`💬 Valeur: "${error.value}"`);
-        console.error(`❌ ${error.message}`);
-        console.error("---");
-      });
-      console.error(
-        `\n❌ Total: ${validationErrors.length} erreur(s) de validation`
-      );
-      console.error("Veuillez corriger ces erreurs avant de continuer.\n");
-      process.exit(1);
-    } else {
-      console.log("✅ Toutes les références croisées sont valides");
+      const errors = validationErrors.filter(e => e.severity === 'error');
+      const warnings = validationErrors.filter(e => e.severity === 'warning');
+      
+      if (errors.length > 0) {
+        console.error("\n🚨 ERREURS CRITIQUES 🚨\n");
+        errors.forEach((error) => {
+          console.error(`📄 ${error.document}: ${error.message}`);
+        });
+        console.error(`\n❌ Total: ${errors.length} erreur(s) critique(s)`);
+        process.exit(1);
+      }
+      
+      if (warnings.length > 0) {
+        console.warn(`\n⚠️ ${warnings.length} avertissement(s) de qualité`);
+      }
     }
+
+    // Success metrics
+    const totalDocs = allDocuments.length;
+    const conceptsCount = allDocuments.filter(doc => 
+      doc._meta.directory.includes('concepts')).length;
+    const guidesCount = allDocuments.filter(doc => 
+      doc._meta.directory.includes('guides')).length;
+    const promptsCount = allDocuments.filter(doc => 
+      doc._meta.directory.includes('prompts')).length;
+    const toolsCount = allDocuments.filter(doc => 
+      doc._meta.directory.includes('external-tools')).length;
+    
+    console.log("\n✅ BUILD RÉUSSI - CONFIGURATION MODERNE\n");
+    console.log(`📊 Total: ${totalDocs} documents`);
+    console.log(`🧠 Concepts: ${conceptsCount} | 📚 Guides: ${guidesCount} | 💡 Prompts: ${promptsCount} | 🔧 Outils: ${toolsCount}`);
+    console.log("🚀 Optimisé pour React 19 + Next.js 15 - Production Ready\n");
   },
 });

@@ -35,9 +35,8 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
               {concept.title}
             </CardTitle>
             <CardDescription className="text-base mb-3">
-              <strong>Pourquoi ce concept :</strong> {reason}
+              <strong>Pourquoi :</strong> {reason}
             </CardDescription>
-            <p className="text-sm text-muted-foreground">{concept.description}</p>
           </div>
         </div>
       </CardHeader>
@@ -45,30 +44,26 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
       <CardContent className="pt-0">
         {concept.tags && concept.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
-            {concept.tags.slice(0, 4).map((tag) => (
+            {concept.tags.slice(0, 3).map((tag) => (
               <Badge key={tag.name} variant="outline" className="bg-background">
                 {tag.name}
               </Badge>
             ))}
-            {concept.tags.length > 4 && (
+            {concept.tags.length > 3 && (
               <Badge variant="outline" className="bg-background text-xs">
-                +{concept.tags.length - 4} autres
+                +{concept.tags.length - 3}
               </Badge>
             )}
           </div>
         )}
 
+        {/* Concise TLDR display */}
         {concept.keyTakeaways && concept.keyTakeaways.length > 0 && (
           <div className="mb-4">
-            <p className="text-sm font-medium mb-2">Points clés :</p>
-            <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-              {concept.keyTakeaways.slice(0, 3).map((takeaway, index) => (
-                <li key={index}>{takeaway}</li>
-              ))}
-              {concept.keyTakeaways.length > 3 && (
-                <li className="text-xs italic">et {concept.keyTakeaways.length - 3} points supplémentaires...</li>
-              )}
-            </ul>
+            <p className="text-sm font-medium mb-2">TLDR :</p>
+            <p className="text-sm text-muted-foreground">
+              {concept.keyTakeaways[0]} {concept.keyTakeaways.length > 1 && `+ ${concept.keyTakeaways.length - 1} points clés`}
+            </p>
           </div>
         )}
 
@@ -78,7 +73,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
             className="inline-flex items-center gap-2"
           >
             <Lightbulb className="w-4 h-4" />
-            Découvrir ce concept
+            Explorer
             <ArrowRight className="w-4 h-4" />
           </Link>
         </Button>
