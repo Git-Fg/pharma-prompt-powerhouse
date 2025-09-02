@@ -1,21 +1,18 @@
 /**
  * Test for modern features and workflow functionality  
  */
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
+
 describe('Modern Features Validation', () => {
   test('RelatedWorkflow component file exists', () => {
-    const fs = require('fs');
-    const path = require('path');
-    
-    const componentPath = path.join(__dirname, '../src/components/shared/RelatedWorkflow.tsx');
+    const componentPath = path.join(process.cwd(), 'src/components/shared/RelatedWorkflow.tsx');
     expect(fs.existsSync(componentPath)).toBe(true);
   });
 
   test('external tool MDX files have TLDR field', () => {
-    const fs = require('fs');
-    const path = require('path');
-    const glob = require('glob');
-    
-    const externalToolFiles = glob.sync(path.join(__dirname, '../src/content/external-tools/*.mdx'));
+    const externalToolFiles = glob.sync(path.join(process.cwd(), 'src/content/external-tools/*.mdx'));
     
     expect(externalToolFiles.length).toBeGreaterThan(0);
     
@@ -23,7 +20,7 @@ describe('Modern Features Validation', () => {
       const content = fs.readFileSync(file, 'utf8');
       const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
       
-      if (frontmatterMatch) {
+      if (frontmatterMatch && frontmatterMatch[1]) {
         const frontmatter = frontmatterMatch[1];
         // Should have either tldr field or description that's enhanced
         expect(frontmatter.includes('tldr:') || frontmatter.includes('description:')).toBe(true);
@@ -34,10 +31,7 @@ describe('Modern Features Validation', () => {
   });
 
   test('workflows page component exists', () => {
-    const fs = require('fs');
-    const path = require('path');
-    
-    const workflowPagePath = path.join(__dirname, '../src/app/workflows/page.tsx');
+    const workflowPagePath = path.join(process.cwd(), 'src/app/workflows/page.tsx');
     expect(fs.existsSync(workflowPagePath)).toBe(true);
     
     const content = fs.readFileSync(workflowPagePath, 'utf8');
@@ -47,10 +41,7 @@ describe('Modern Features Validation', () => {
   });
 
   test('content collections configuration is modernized', () => {
-    const fs = require('fs');
-    const path = require('path');
-    
-    const configPath = path.join(__dirname, '../content-collections.ts');
+    const configPath = path.join(process.cwd(), 'content-collections.ts');
     const content = fs.readFileSync(configPath, 'utf8');
     
     // Check for modern features
@@ -61,9 +52,6 @@ describe('Modern Features Validation', () => {
   });
 
   test('enhanced related components exist', () => {
-    const fs = require('fs');
-    const path = require('path');
-    
     const components = [
       'RelatedWorkflow.tsx',
       'ToolRecommendation.tsx',
@@ -72,7 +60,7 @@ describe('Modern Features Validation', () => {
     ];
     
     components.forEach(component => {
-      const componentPath = path.join(__dirname, '../src/components/shared', component);
+      const componentPath = path.join(process.cwd(), 'src/components/shared', component);
       expect(fs.existsSync(componentPath)).toBe(true);
       
       const content = fs.readFileSync(componentPath, 'utf8');

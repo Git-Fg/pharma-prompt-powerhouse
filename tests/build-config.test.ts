@@ -73,7 +73,7 @@ describe('Build and Generation', () => {
       expect(packageJson.scripts).toBeDefined();
       expect(packageJson.scripts.build).toBe('next build');
       expect(packageJson.scripts.dev).toBe('next dev');
-      expect(packageJson.scripts.test).toBe('jest');
+      expect(packageJson.scripts.test).toBe('vitest');
     });
 
     test('required dependencies are present', () => {
@@ -106,9 +106,9 @@ describe('Build and Generation', () => {
         'eslint',
         '@types/react',
         '@types/node',
-        'jest',
-        'ts-jest',
-        '@types/jest'
+        'vitest',
+        '@vitejs/plugin-react',
+        '@vitest/ui'
       ];
       
       for (const dep of requiredDevDeps) {

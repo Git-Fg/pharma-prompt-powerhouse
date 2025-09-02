@@ -25,6 +25,8 @@ function getAllContentFiles() {
             title: data.title,
             conceptSlugs: data.conceptSlugs || [],
             mainGuideSlug: data.mainGuideSlug,
+            description: data.description || '',
+            tags: data.tags || [],
             ...data
           };
         });
@@ -57,7 +59,7 @@ describe('Link Verification', () => {
     
     guides.forEach(guide => {
       if (guide.conceptSlugs && guide.conceptSlugs.length > 0) {
-        guide.conceptSlugs.forEach(conceptSlug => {
+        guide.conceptSlugs.forEach((conceptSlug: string) => {
           const conceptExists = validSlugs.concepts.has(conceptSlug);
           if (!conceptExists) {
             console.error(`❌ Dead concept link in guide "${guide.title}": concepts/${conceptSlug}`);
@@ -75,7 +77,7 @@ describe('Link Verification', () => {
     
     prompts.forEach(prompt => {
       if (prompt.conceptSlugs && prompt.conceptSlugs.length > 0) {
-        prompt.conceptSlugs.forEach(conceptSlug => {
+        prompt.conceptSlugs.forEach((conceptSlug: string) => {
           const conceptExists = validSlugs.concepts.has(conceptSlug);
           if (!conceptExists) {
             console.error(`❌ Dead concept link in prompt "${prompt.title}": concepts/${conceptSlug}`);
@@ -93,7 +95,7 @@ describe('Link Verification', () => {
     
     tools.forEach(tool => {
       if (tool.conceptSlugs && tool.conceptSlugs.length > 0) {
-        tool.conceptSlugs.forEach(conceptSlug => {
+        tool.conceptSlugs.forEach((conceptSlug: string) => {
           const conceptExists = validSlugs.concepts.has(conceptSlug);
           if (!conceptExists) {
             console.error(`❌ Dead concept link in tool "${tool.title}": concepts/${conceptSlug}`);
@@ -146,7 +148,7 @@ describe('Link Verification', () => {
       guide.title.toLowerCase().includes('workflow') ||
       guide.description.toLowerCase().includes('workflow') ||
       guide.description.toLowerCase().includes('étape par étape') ||
-      guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag?.toLowerCase?.() || ''))
+      guide.tags?.some((tag: string) => ['workflow', 'processus', 'methodologie'].includes(tag?.toLowerCase?.() || ''))
     );
 
     // Should find some workflow guides

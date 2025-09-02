@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// scripts/migrate-mdx-to-ts.js
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
+// scripts/migrate-mdx-to-ts.mjs
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 const MDX_TO_TS_GUIDES_DIR = 'src/content/guides';
 const TS_OUTPUT_DIR = 'src/content/guides-new';
@@ -31,7 +31,6 @@ function normalizeDifficulty(difficulty) {
 // Fonction pour générer le fichier TypeScript
 function generateTSGuide(frontmatter, content, filename) {
   const slug = path.basename(filename, '.mdx');
-  const kebabCaseName = slug.replace(/-./g, x => x[1].toUpperCase()).replace(/-/g, '');
   
   const difficulty = normalizeDifficulty(frontmatter.difficulty || 'débutant');
   const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
