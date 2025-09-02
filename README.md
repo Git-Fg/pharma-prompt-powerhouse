@@ -1,6 +1,6 @@
 # 🎯 Pharma Prompt Powerhouse
 
-**Status**: 🚀 **Production Ready** | Build: ✅ | Tests: 42/42 ✅ | TypeScript: 100% ✅
+**Status**: 🚀 **Production Ready** | Build: ✅ | Tests: 40/40 ✅ | TypeScript: 100% ✅
 
 ## 👋 Vision du Projet
 
@@ -46,8 +46,10 @@ Bundle Size Improvements:
 - Context Engineering, Chaîne de Prompts, Hallucination, Memory IA, etc.
 - Chaque concept avec guide principal + ressources liées
 
-#### **14 Guides Pratiques** 
+#### **16 Guides Pratiques** 
 - Les 5 Piliers d'un Prompt Efficace, Méthode XML, Optimisation Itérative
+- **Core Kit Étudiant 2025** : Maîtriser Z.AI + AI Studio sans carte bancaire
+- **IA en Local** : Guide confidentialité 100% avec modèles comme Qwen3-4B
 - Workflows spécialisés : Cas Cliniques, Données Fiables, Gestion Mémoire
 - Enrichis avec recommandations contextuelles d'outils et concepts
 
@@ -55,9 +57,11 @@ Bundle Size Improvements:
 - Assistant d'Analyse Document, Générateur de Mnémotiques, Tableaux Comparatifs
 - Templates multi-plateformes (ChatGPT, Claude, Gemini) avec guides d'usage
 
-#### **9 Outils Externes Évalués**
-- ChatGPT, Claude AI, Perplexity, Google AI Studio, etc.
-- Analyses détaillées : cas d'usage, forces/faiblesses, recommandations d'apprentissage
+#### **10 Outils Externes Évalués**
+- **Core Kit Recommandé** : Z.AI (recherche fiable) + AI Studio (multimodal)
+- ChatGPT, Claude AI, Perplexity, DeepSeek, Qwen Chat, etc.
+- Analyses détaillées : cas d'usage, forces/faiblesses, retours terrain
+- **Confidentialité & Sécurité** : Guide complet des bonnes pratiques
 
 ### 🛠️ **Outils Interactifs Intégrés**
 
@@ -172,11 +176,11 @@ npm run test:e2e
 ## 🔧 Outils de Développement
 
 ### **Modern Development Stack**
-- **Package Manager**: pnpm (configuration workspace)
+- **Package Manager**: npm (default) / pnpm (local development) 
 - **Testing**: Vitest avec jsdom (5-10x plus rapide que Jest)
 - **Type Checking**: TypeScript strict avec validation Zod
 - **Linting**: ESLint avec règles React 19 et Next.js 15
-- **Content Validation**: Build-time validation avec Content Collections
+- **Content Validation**: Build-time validation avec schémas Zod
 
 ### **Scripts Utiles**
 ```bash
@@ -194,10 +198,11 @@ npm run build && npm run test && npm run lint
 
 ### **Status Complet** 🚀
 - **Build**: ✅ Compilation sans erreur (Next.js 15 + React 19)
-- **Tests**: ✅ 42/42 tests passent (Vitest)
+- **Tests**: ✅ 40/40 tests passent (Vitest)
 - **TypeScript**: ✅ 100% type safe (mode strict)
 - **Linting**: ✅ Zero erreur ESLint
 - **Performance**: ✅ Bundle optimisé (-97% sur certaines routes)
+- **Content**: ✅ 52 pages statiques générées (+2 nouveaux guides)
 
 ### **Migrations Complétées**
 - ✅ **Toast System**: Unifié sur Sonner (suppression Radix toast)
@@ -250,17 +255,17 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 ## 🎯 État du Projet - Production Ready
 
 ### **Métriques de Performance**
-- ✅ **48 pages statiques** générées sans erreur
-- ✅ **36 documents** de contenu interconnectés
-- ✅ **30+ tests** unitaires et de validation
+- ✅ **52 pages statiques** générées sans erreur (+2 nouveaux guides)
+- ✅ **39 documents** de contenu interconnectés
+- ✅ **40+ tests** unitaires et de validation
 - ✅ **Zero erreur** TypeScript/ESLint
 - ✅ **Temps de build** optimisé (< 30 secondes)
 
 ### **Qualité du Contenu**
 - ✅ **8 concepts fondamentaux** avec guides principaux
-- ✅ **14 guides pratiques** enrichis d'interconnexions
+- ✅ **16 guides pratiques** enrichis d'interconnexions (dont Core Kit 2025)
 - ✅ **5 prompts professionnels** multi-plateformes
-- ✅ **9 outils IA** analysés et contextualisés
+- ✅ **10 outils IA** analysés avec retours terrain
 - ✅ **Validation croisée** automatique des références
 
 ### **Expérience Utilisateur Finalisée**  
