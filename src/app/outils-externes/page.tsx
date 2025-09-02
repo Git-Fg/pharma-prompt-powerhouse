@@ -5,6 +5,7 @@ import { Card, CardDescription, CardHeader, CardTitle, CardContent } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { FeaturedTools } from "@/components/shared/FeaturedTools";
 import { ArrowRight, CheckCircle, Globe, Tag } from "lucide-react";
 
 export default function ExternalToolsPage() {
@@ -65,6 +66,16 @@ export default function ExternalToolsPage() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Core Kit Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-center">Le Core Kit Étudiant - Nos Recommandations N°1</h2>
+          <FeaturedTools />
+        </div>
+
+        {/* All Tools Grid */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-6">Tous les Outils Analysés</h2>
+        </div>
         <div className="grid md:grid-cols-2 gap-8">
           {content.tools.map((tool) => (
             <Card key={tool.slug} className="flex flex-col hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">

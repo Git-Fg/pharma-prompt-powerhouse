@@ -21,7 +21,7 @@ const externalToolData = {
     "Raisonnement multi-étapes"
   ],
   "color": "bg-blue-500",
-  "tldr": "L'écosystème multimodal de Google. Au-delà du chat : génération d'images, audio, vidéo, et création d'applications complètes. Parfait complément à Z.AI.",
+  "tldr": "Accès gratuit aux modèles Gemini 2.5 de Google. **Inégalé pour l'analyse d'images et de documents manuscrits** grâce à son contexte de 1M de tokens.",
   "content": [
     {
       "type": "alert",

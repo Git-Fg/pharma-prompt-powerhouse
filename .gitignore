@@ -43,8 +43,8 @@ next-env.d.ts
 dev.log
 server.log
 
-# Je pref pnpm, donc je supprime npm
-package-lock.json
+# Package managers - npm is default, but allow pnpm for local development
+pnpm-lock.yaml
 
 #test related
 playwright-report

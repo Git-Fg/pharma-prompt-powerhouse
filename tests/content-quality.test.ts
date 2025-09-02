@@ -108,7 +108,8 @@ describe('Content Quality and Validation', () => {
     test('guides have actionable content', () => {
       const validCategories = [
         'outils', 'bonnes-pratiques', 'Technique', 'methodologie', 
-        'fondamentaux', 'techniques-avancees', 'ressources', 'cas-pratiques'
+        'fondamentaux', 'techniques-avancees', 'ressources', 'cas-pratiques',
+        'Outils & Techniques', 'Sécurité & Confidentialité'
       ];
       
       for (const guide of content.guides) {
