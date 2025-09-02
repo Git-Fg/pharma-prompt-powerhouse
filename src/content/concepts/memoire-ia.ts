@@ -18,8 +18,102 @@ const conceptData = {
   "conceptSlugs": [],
   "content": [
     {
+      "type": "alert",
+      "variant": "default",
+      "title": "💻 Analogie Informatique",
+      "content": "La mémoire de l'IA fonctionne **exactement comme un ordinateur** : une mémoire vive (RAM) pour le travail immédiat et un disque dur pour la persistance."
+    },
+    {
       "type": "markdown",
-      "content": "Pour interagir efficacement avec une IA, il faut comprendre comment elle \"se souvient\" des informations. On peut simplifier sa mémoire en deux catégories principales, très similaires au fonctionnement d'un ordinateur.\n\n<Alert>\n  <AlertDescription>\n    **Analogie informatique :** La mémoire de l'IA fonctionne exactement comme un ordinateur : une mémoire vive (RAM) pour le travail immédiat et un disque dur pour la persistance.\n  </AlertDescription>\n</Alert>\n\n<Tabs defaultValue=\"contexte\">\n  <TabsList>\n    <TabsTrigger value=\"contexte\">Mémoire de Contexte (RAM)</TabsTrigger>\n    <TabsTrigger value=\"persistante\">Mémoire Persistante (Disque Dur)</TabsTrigger>\n  </TabsList>\n  \n  <TabsContent value=\"contexte\">\n    <Card>\n      <CardHeader>\n        <CardTitle>🧠 La Fenêtre de Contexte : La Mémoire Vive (RAM)</CardTitle>\n      </CardHeader>\n      <CardContent>\n        La forme de mémoire la plus directe d'une IA est sa **fenêtre de contexte**. C'est la quantité totale d'informations (votre prompt + les réponses précédentes de l'IA + les documents fournis) que le modèle peut \"voir\" et traiter à un instant T.\n\n        ### Caractéristiques\n\n        **Analogie :** C'est la **RAM** de l'IA, ou la taille de son **bureau de travail**.\n\n        **Force :** Plus la fenêtre est grande, plus le bureau est grand. Vous pouvez y étaler de nombreux documents (PDFs, notes) et l'IA s'en souviendra parfaitement... tant que vous ne quittez pas le bureau.\n\n        **Évolution :** C'est là que les progrès sont les plus spectaculaires. Les premiers modèles avaient une fenêtre de quelques milliers de **[tokens](/concepts/token-acide-amine)** (quelques pages). Les modèles de 2025 comme **Gemini 2.5 Pro** atteignent **1 à 2 millions de tokens**, l'équivalent d'une vingtaine de gros livres posés ouverts sur le bureau !\n\n        <Alert type=\"destructive\">\n          <AlertDescription>\n            **Faiblesse critique :** Cette mémoire est **volatile**. Dès que vous lancez une nouvelle conversation, cette mémoire est entièrement effacée. C'est un nouveau bureau, vide.\n          </AlertDescription>\n        </Alert>\n      </CardContent>\n    </Card>\n  </TabsContent>\n\n  <TabsContent value=\"persistante\">\n    <Card>\n      <CardHeader>\n        <CardTitle>💾 La Mémoire à Long Terme (Simulée) : Le Disque Dur</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Par nature, une IA n'a pas de mémoire à long terme. Elle ne se souvient pas de vous entre deux conversations. Cependant, plusieurs techniques ont été développées pour **simuler un disque dur**.\n\n        ### a) Instructions Personnalisées (Le \"Post-it\" sur l'Écran)\n\n        C'est la forme la plus simple de mémoire à long terme. Disponible sur **ChatGPT** ou **Claude.ai**.\n\n        - **Analogie :** C'est comme coller un **Post-it permanent** sur l'écran de l'IA avec vos préférences\n        - **Exemple :** *\"Je suis étudiant en pharmacie, réponds toujours en citant la classe pharmacologique des médicaments.\"*\n        - **Usage :** Idéal pour définir votre persona et vos préférences générales\n\n        ### b) GPTs & Assistants (Les \"Logiciels Spécialisés\")\n\n        Créer un **GPT (sur ChatGPT Plus)** ou un **Assistant (via l'API d'OpenAI)** avec une base de connaissances.\n\n        - **Analogie :** C'est comme installer un **logiciel spécialisé** sur le disque dur\n        - **Fonctionnement (RAG) :** L'IA cherche d'abord dans sa base de connaissances, puis place les documents pertinents dans sa mémoire vive\n        - **Usage :** Parfait pour créer des experts sur des sujets de niche\n\n        ### c) Projets & Workbenchs (Les \"Dossiers Thématiques\")\n\n        Des plateformes comme **[Claude.ai (Pro)](/external-tools/claude-ai)** permettent de regrouper conversations et documents.\n\n        - **Analogie :** Organiser votre travail dans des **dossiers thématiques** sur votre disque dur\n        - **Usage :** Très utile pour les projets de recherche à long terme\n      </CardContent>\n    </Card>\n  </TabsContent>\n</Tabs>\n\n## Conclusion : Savoir sur quel \"Disque\" On Travaille\n\nUn bon \\`prompt engineer\\` sait utiliser ces deux types de mémoire à son avantage :\n\n- Il utilise la **fenêtre de contexte (la RAM)** pour la tâche immédiate, en y chargeant les documents et les instructions spécifiques au problème à résoudre.\n- Il configure la **mémoire à long terme (le disque dur)** via les instructions personnalisées, les GPTs ou les projets, pour s'assurer que l'IA dispose en permanence des connaissances de fond, des préférences et du rôle qu'il attend d'elle.\n\nMaîtriser ce flux d'information entre la mémoire persistante et la mémoire de travail est la clé pour passer d'un simple utilisateur à un véritable pilote d'IA."
+      "content": "Pour interagir efficacement avec une IA, il faut comprendre comment elle \"se souvient\" des informations. On peut simplifier sa mémoire en deux catégories principales, très similaires au fonctionnement d'un ordinateur."
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "contexte",
+      "tabs": [
+        {
+          "value": "contexte",
+          "title": "Mémoire de Contexte (RAM)",
+          "content": [
+            {
+              "type": "card",
+              "title": "🧠 La Fenêtre de Contexte : La Mémoire Vive (RAM)",
+              "description": "Mémoire temporaire pour le travail immédiat",
+              "content": "La forme de mémoire la plus directe d'une IA est sa **fenêtre de contexte**. C'est la quantité totale d'informations (votre prompt + les réponses précédentes de l'IA + les documents fournis) que le modèle peut \"voir\" et traiter à un instant T."
+            },
+            {
+              "type": "card",
+              "title": "Caractéristiques Clés",
+              "variant": "outline",
+              "content": "**Analogie :** C'est la **RAM** de l'IA, ou la taille de son **bureau de travail**.\n\n**Force :** Plus la fenêtre est grande, plus le bureau est grand. Vous pouvez y étaler de nombreux documents (PDFs, notes) et l'IA s'en souviendra parfaitement... tant que vous ne quittez pas le bureau.\n\n**Évolution :** Les premiers modèles avaient quelques milliers de tokens (quelques pages). Les modèles de 2025 comme **Gemini 2.5 Pro** atteignent **1 à 2 millions de tokens** - l'équivalent d'une vingtaine de gros livres posés ouverts sur le bureau !"
+            },
+            {
+              "type": "alert",
+              "variant": "destructive",
+              "title": "⚠️ Faiblesse Critique",
+              "content": "Cette mémoire est **volatile**. Dès que vous lancez une nouvelle conversation, cette mémoire est entièrement effacée. C'est un nouveau bureau, vide."
+            }
+          ]
+        },
+        {
+          "value": "persistante",
+          "title": "Mémoire Persistante (Disque Dur)",
+          "content": [
+            {
+              "type": "card",
+              "title": "💾 La Mémoire à Long Terme (Simulée) : Le Disque Dur",
+              "description": "Stockage permanent des préférences et connaissances",
+              "content": "Par nature, une IA n'a pas de mémoire à long terme. Elle ne se souvient pas de vous entre deux conversations. Cependant, plusieurs techniques ont été développées pour **simuler un disque dur**."
+            },
+            {
+              "type": "card",
+              "title": "📌 Instructions Personnalisées - Le \"Post-it\" Permanent",
+              "description": "Instructions qui persistent entre sessions",
+              "content": "C'est la forme la plus simple de mémoire à long terme. Disponible sur **ChatGPT** ou **Claude.ai**.\n\n**Analogie :** C'est comme coller un **Post-it permanent** sur l'écran de l'IA avec vos préférences.\n\n**Exemple :** *\"Je suis étudiant en pharmacie, réponds toujours en citant la classe pharmacologique des médicaments.\"*\n\n**Usage :** Idéal pour définir votre persona et vos préférences générales."
+            },
+            {
+              "type": "card",
+              "title": "🔧 GPTs & Assistants - Les \"Logiciels Spécialisés\"",
+              "variant": "outline",
+              "description": "Experts avec base de connaissances",
+              "content": "Créer un **GPT (sur ChatGPT Plus)** ou un **Assistant (via l'API d'OpenAI)** avec une base de connaissances.\n\n**Analogie :** C'est comme installer un **logiciel spécialisé** sur le disque dur.\n\n**Fonctionnement (RAG) :** L'IA cherche d'abord dans sa base de connaissances, puis place les documents pertinents dans sa mémoire vive.\n\n**Usage :** Parfait pour créer des experts sur des sujets de niche."
+            },
+            {
+              "type": "card",
+              "title": "📁 Projets & Workbenches - Les \"Dossiers Thématiques\"",
+              "variant": "outline",
+              "description": "Organisation par projet",
+              "content": "Des plateformes comme **Claude.ai (Pro)** permettent de regrouper conversations et documents.\n\n**Analogie :** Organiser votre travail dans des **dossiers thématiques** sur votre disque dur.\n\n**Usage :** Très utile pour les projets de recherche à long terme."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "content": "## Conclusion : Savoir sur quel \"Disque\" On Travaille"
+    },
+    {
+      "type": "card",
+      "title": "🎯 Stratégie d'un Bon Prompt Engineer",
+      "description": "Utiliser les deux types de mémoire à son avantage",
+      "content": "Un bon prompt engineer sait utiliser ces deux types de mémoire :\n\n- Il utilise la **fenêtre de contexte (la RAM)** pour la tâche immédiate, en y chargeant les documents et les instructions spécifiques au problème à résoudre.\n\n- Il configure la **mémoire à long terme (le disque dur)** via les instructions personnalisées, les GPTs ou les projets, pour s'assurer que l'IA dispose en permanence des connaissances de fond, des préférences et du rôle qu'il attend d'elle."
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🚀 Niveau Expert",
+      "content": "Maîtriser ce flux d'information entre la mémoire persistante et la mémoire de travail est la clé pour passer d'un simple utilisateur à un véritable **pilote d'IA**."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "gestion-memoire-ia",
+      "reason": "Apprenez les techniques pratiques pour gérer activement la mémoire de l'IA et éviter la 'démence contextuelle'."
+    },
+    {
+      "type": "toolRecommendation",
+      "slug": "chatgpt",
+      "reason": "ChatGPT Plus offre les fonctionnalités les plus avancées pour la gestion de mémoire persistante avec les GPTs."
     }
   ]
 };
