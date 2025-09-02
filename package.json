@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf .next node_modules",
-    "reinstall": "npm run clean && npm install",
     "test": "vitest",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
