@@ -12,6 +12,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 
 // Fonction pour utiliser les composants MDX
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -157,19 +159,22 @@ export function useMDXComponents(): Record<string, any> {
       );
     },
     
-    // Listes
+    
+    // Listes améliorées avec meilleur espacement et styles
     ul: ({ children }: { children: React.ReactNode }) => (
-      <ul className="list-disc list-inside space-y-2 my-4">
+      <ul className="list-disc list-inside space-y-3 my-6 pl-2">
         {children}
       </ul>
     ),
     ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="list-decimal list-inside space-y-2 my-4">
+      <ol className="list-decimal list-inside space-y-3 my-6 pl-2">
         {children}
       </ol>
     ),
     li: ({ children }: { children: React.ReactNode }) => (
-      <li className="text-foreground">{children}</li>
+      <li className="text-foreground leading-relaxed">
+        {children}
+      </li>
     ),
     
     // Liens
@@ -191,28 +196,139 @@ export function useMDXComponents(): Record<string, any> {
       </blockquote>
     ),
     
-    // Tableaux
+    // Tableaux améliorés - responsive et stylés
     table: ({ children }: { children: React.ReactNode }) => (
-      <div className="overflow-x-auto my-6">
-        <table className="min-w-full divide-y divide-border border border-border rounded-lg">
+      <div className="overflow-x-auto my-6 rounded-lg border border-border shadow-sm">
+        <table className="min-w-full divide-y divide-border">
           {children}
         </table>
       </div>
     ),
+    thead: ({ children }: { children: React.ReactNode }) => (
+      <thead className="bg-muted/50">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: { children: React.ReactNode }) => (
+      <tbody className="divide-y divide-border bg-background">
+        {children}
+      </tbody>
+    ),
     th: ({ children }: { children: React.ReactNode }) => (
-      <th className="px-6 py-3 bg-muted text-left text-xs font-medium text-muted-foreground uppercase tracking-wider border-b border-border">
+      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider border-r border-border last:border-r-0">
         {children}
       </th>
     ),
     td: ({ children }: { children: React.ReactNode }) => (
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground border-b border-border">
+      <td className="px-4 py-3 text-sm text-foreground border-r border-border last:border-r-0 max-w-xs break-words">
         {children}
       </td>
+    ),
+    tr: ({ children }: { children: React.ReactNode }) => (
+      <tr className="hover:bg-muted/25 transition-colors">
+        {children}
+      </tr>
     ),
     
     // Séparateurs
     hr: () => (
       <hr className="border-border my-8" />
     ),
+
+    // Composants spécialisés pour contenu pharmaceutique
+
+    // Checklist interactive
+    CheckList: ({ items, title }: { items: Array<{ text: string; checked?: boolean; id: string }>; title?: string }) => (
+      <Card className="my-6">
+        {title && (
+          <CardHeader>
+            <CardTitle className="text-lg">{title}</CardTitle>
+          </CardHeader>
+        )}
+        <CardContent className="space-y-3">
+          {items.map((item) => (
+            <div key={item.id} className="flex items-start space-x-3">
+              <Checkbox
+                id={item.id}
+                defaultChecked={item.checked}
+                className="mt-1"
+              />
+              <label
+                htmlFor={item.id}
+                className="text-sm leading-relaxed cursor-pointer flex-1"
+              >
+                {item.text}
+              </label>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+    ),
+
+    // Tableau comparatif amélioré
+    ComparisonTable: ({ 
+      headers, 
+      rows, 
+      title 
+    }: { 
+      headers: string[];
+      rows: Array<Array<string>>;
+      title?: string;
+    }) => (
+      <Card className="my-6">
+        {title && (
+          <CardHeader>
+            <CardTitle>{title}</CardTitle>
+          </CardHeader>
+        )}
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border bg-muted/30">
+                  {headers.map((header, index) => (
+                    <th key={index} className="text-left p-4 font-semibold text-sm">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex} className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                    {row.map((cell, cellIndex) => (
+                      <td key={cellIndex} className="p-4 text-sm">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+    ),
+
+    // Tips box amélioré pour éviter l'overflow
+    TipBox: ({ children, type = "info" }: { children: React.ReactNode; type?: "info" | "warning" | "success" | "error" }) => {
+      const variants = {
+        info: "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/30",
+        warning: "border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30", 
+        success: "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/30",
+        error: "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/30"
+      };
+
+      return (
+        <div className={`my-6 p-4 border-l-4 rounded-r-lg ${variants[type]} max-w-full overflow-hidden`}>
+          <div className="break-words text-sm leading-relaxed">
+            {children}
+          </div>
+        </div>
+      );
+    },
+
+    // Separator stylé
+    Separator,
   };
 }

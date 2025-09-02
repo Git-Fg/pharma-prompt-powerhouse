@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allConcepts } from "content-collections";
+import { allConcepts, allGuides } from "content-collections";
 import { getRandomConceptTip } from "@/lib/tips-utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +19,8 @@ import {
   Code,
   GitBranch,
   Network,
-  Lightbulb
+  Lightbulb,
+  Workflow,
 } from "lucide-react";
 
 // Concepts fondamentaux à mettre en avant sur la page d'accueil
@@ -53,6 +54,17 @@ const featuredConcepts = [
     icon: GitBranch,
   },
 ];
+
+// Identify featured workflows
+const featuredWorkflows = allGuides
+  .filter(guide => 
+    guide.title.toLowerCase().includes('workflow') ||
+    guide.title.toLowerCase().includes('étapes') ||
+    guide.description.toLowerCase().includes('workflow') ||
+    guide.description.toLowerCase().includes('étape par étape') ||
+    guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.name?.toLowerCase() || ''))
+  )
+  .slice(0, 3);
 
 export default function HomePage() {
   const dailyTip = getRandomConceptTip(allConcepts);
@@ -201,6 +213,61 @@ export default function HomePage() {
           })}
         </div>
       </section>
+
+      {/* Section 3.5 : Workflows En Vedette - NOUVEAU */}
+      {featuredWorkflows.length > 0 && (
+        <section className="container mx-auto px-4 py-16 bg-gradient-to-r from-muted/30 to-background">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+              <Workflow className="w-4 h-4 mr-2" />
+              Nouveauté 2025
+            </div>
+            <h2 className="text-3xl font-bold mb-4">
+              Workflows Étape par Étape
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Des processus complets qui vous guident de A à Z dans l'application pratique 
+              des concepts. Parfaits pour mettre en pratique votre apprentissage.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {featuredWorkflows.map((workflow) => (
+              <Card key={workflow.slug} className="flex flex-col hover:shadow-lg transition-all duration-200">
+                <CardHeader className="flex-grow">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                    <Workflow className="w-5 h-5 text-primary" />
+                  </div>
+                  <CardTitle className="line-clamp-2">{workflow.title}</CardTitle>
+                  <CardDescription className="line-clamp-3 text-sm">
+                    {workflow.description}
+                  </CardDescription>
+                  {workflow.estimatedTime && (
+                    <Badge variant="secondary" className="self-start mt-2">
+                      {workflow.estimatedTime}
+                    </Badge>
+                  )}
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <Button asChild className="w-full">
+                    <Link href={`/guides/${workflow.slug}`}>
+                      Suivre ce workflow
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/workflows">
+                Voir tous les workflows
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      )}
 
       {/* Section 4 : Le CTA Final */}
       <section className="container mx-auto px-4 py-16">
