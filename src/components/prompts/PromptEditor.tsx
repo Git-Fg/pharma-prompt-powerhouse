@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { Copy, CheckCircle, Play, Sparkles, Download } from 'lucide-react';
 import Link from 'next/link';
 
@@ -18,7 +18,6 @@ interface PromptEditorProps {
 }
 
 export function PromptEditor({ templateToLoad }: PromptEditorProps) {
-  const { toast } = useToast();
   const [promptTemplate, setPromptTemplate] = useState<PromptType | null>(null);
   const [variableValues, setVariableValues] = useState<Record<string, string>>({});
   const [generatedPrompt, setGeneratedPrompt] = useState('');
@@ -38,16 +37,14 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
         setGeneratedPrompt('');
         setGeneratedSystemPrompt('');
       } else {
-        toast({
-          title: 'Erreur',
+        toast.error('Erreur', {
           description: `Le template "${templateToLoad}" n'a pas été trouvé.`,
-          variant: 'destructive',
         });
       }
     } else {
       setPromptTemplate(null);
     }
-  }, [templateToLoad, toast]);
+  }, [templateToLoad]);
 
   const handleVariableChange = (name: string, value: string) => {
     setVariableValues(prev => ({ ...prev, [name]: value }));
@@ -72,8 +69,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
     setGeneratedPrompt(finalPrompt);
     setGeneratedSystemPrompt(finalSystemPrompt);
     
-    toast({
-      title: 'Prompt généré !',
+    toast.success('Prompt généré !', {
       description: "Vous pouvez maintenant le copier et l'utiliser.",
     });
   };
@@ -84,12 +80,13 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
       await navigator.clipboard.writeText(content);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      toast({ 
-        title: 'Copié !', 
+      toast.success('Copié !', {
         description: `Le ${type === 'system' ? 'system prompt' : 'prompt'} a été copié dans le presse-papiers.`
       });
     } catch (_err) {
-      toast({ title: 'Erreur', description: 'Impossible de copier.', variant: 'destructive' });
+      toast.error('Erreur', {
+        description: 'Impossible de copier.',
+      });
     }
   };
 
@@ -114,8 +111,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
-    toast({ 
-      title: 'Téléchargé !', 
+    toast.success('Téléchargé !', {
       description: 'Le prompt a été téléchargé en tant que fichier texte.'
     });
   };
