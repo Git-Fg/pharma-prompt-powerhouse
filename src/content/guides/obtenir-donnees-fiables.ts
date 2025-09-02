@@ -3,8 +3,8 @@ import { Guide, guideSchema } from '@/lib/content-schema';
 
 const guideData = {
   "slug": "obtenir-donnees-fiables",
-  "title": "Fiabilité et Sources : Obtenir des Données Vérifiables avec l'IA",
-  "description": "Comment utiliser les IAs pour la recherche sans tomber dans le piège des hallucinations ? La clé : les outils spécialisés, la méthode RAG et un esprit critique.",
+  "title": "Méthodologie de Recherche Bibliographique avec l'IA",
+  "description": "Apprenez les principes universels pour obtenir des données fiables avec n'importe quel outil d'IA : méthode PICO, analyse critique des sources et techniques anti-hallucination.",
   "icon": "ShieldCheck",
   "category": "recherche",
   "difficulty": "intermédiaire",
@@ -12,125 +12,16 @@ const guideData = {
   "tags": [],
   "isFavorite": false,
   "keyTakeaways": [
-    "L'hallucination est un risque majeur avec les IA générales qui peuvent générer des informations fausses mais plausibles.",
-    "La méthode RAG (Retrieval-Augmented Generation) permet de forcer l'IA à se baser sur des sources vérifiables en temps réel.",
-    "Les outils spécialisés comme Perplexity AI avec Focus Academic offrent une recherche fiable avec citations vérifiables.",
-    "Une analyse critique des sources reste indispensable : cliquez sur les liens, évaluez la qualité des sources, et vérifiez les informations."
+    "La qualité de votre question (méthode PICO) est plus importante que l'outil utilisé.",
+    "Ne faites jamais confiance à la synthèse de l'IA sans vérifier vous-même les sources primaires.",
+    "Utilisez les outils IA comme des assistants de recherche surpuissants, pas comme des oracles infaillibles."
   ],
-  "conceptSlugs": [],
+  "conceptSlugs": ["hallucination-effet-indesirable"],
   "isWorkflow": false,
   "content": [
     {
-      "type": "alert",
-      "variant": "destructive",
-      "title": "⚠️ Le Plus Grand Défi : L'Hallucination",
-      "content": "L'un des principaux \"effets indésirables\" des modèles de langage est l'**hallucination**. C'est la tendance de l'IA à générer des informations qui semblent parfaitement plausibles, bien écrites et logiques, mais qui sont en réalité **fausses, inventées ou mal attribuées**."
-    },
-    {
-      "type": "card",
-      "title": "💊 Analogie Pharmaceutique",
-      "description": "Comprendre le risque en contexte de santé",
-      "content": "Dans le domaine de la santé, où chaque information peut avoir un impact direct sur la sécurité des patients, se fier aveuglément à un chatbot standard n'est pas seulement une erreur, **c'est une faute professionnelle potentielle**.\n\nHeureusement, des outils et des techniques existent pour transformer l'IA en un puissant assistant de recherche, fiable et vérifiable."
-    },
-    {
       "type": "markdown",
-      "content": "## La Méthode RAG : Forcer l'IA à se Baser sur des Faits Récents"
-    },
-    {
-      "type": "card",
-      "title": "Comprendre le RAG (Retrieval-Augmented Generation)",
-      "description": "La différence fondamentale",
-      "content": "La plupart des chatbots ont été \"entraînés\" sur une quantité massive de données, mais ces données ont une **date limite**. Ils ne connaissent pas les événements ou les publications parus après leur date d'entraînement.\n\nLe **RAG** résout ce problème :\n- **Retrieval** : L'IA va d'abord chercher l'information en temps réel sur Internet\n- **Generation** : Elle utilise les documents trouvés pour construire sa réponse\n\n**Analogie** : C'est la différence entre un étudiant qui récite son cours par cœur et un étudiant qui va chercher la réponse dans les dernières publications de la bibliothèque avant de vous répondre."
-    },
-    {
-      "type": "markdown",
-      "content": "## Workflow pour une Recherche d'Information Fiable et Critique"
-    },
-    {
-      "type": "alert",
-      "variant": "default",
-      "title": "⚗️ Principe Fondamental",
-      "content": "L'outil ne fait pas tout. **Votre rigueur de professionnel de santé reste indispensable.**"
-    },
-    {
-      "type": "tabs",
-      "defaultValue": "etape-1",
-      "tabs": [
-        {
-          "value": "etape-1",
-          "title": "Étape 1 : Question PICO",
-          "content": [
-            {
-              "type": "card",
-              "title": "Formuler une Question Précise",
-              "description": "La qualité de votre question détermine 80% de la qualité de la réponse",
-              "content": "Inspirez-vous du modèle **PICO** :\n- **P**atient/Problem\n- **I**ntervention  \n- **C**omparison\n- **O**utcome"
-            },
-            {
-              "type": "card",
-              "title": "Exemples de Formulation",
-              "variant": "outline",
-              "content": "**❌ À éviter (trop vague) :**\n`Parle-moi des nouveaux médicaments pour le diabète.`\n\n**✅ À privilégier (précis) :**\n`Chez les patients adultes atteints de diabète de type 2 (P), quel est l'impact de l'ajout d'un inhibiteur de la SGLT2 (I) par rapport à un placebo (C) sur la réduction de l'HbA1c et les événements cardiovasculaires majeurs (O) ?`"
-            }
-          ]
-        },
-        {
-          "value": "etape-2",
-          "title": "Étape 2 : Outils Spécialisés",
-          "content": [
-            {
-              "type": "card",
-              "title": "🎯 Perplexity AI - Recherche Académique",
-              "description": "Moteur de réponse conçu pour la fiabilité",
-              "content": "**Perplexity AI** avec `Focus: Academic` pour toute question nécessitant des preuves scientifiques - il cite systématiquement ses sources."
-            },
-            {
-              "type": "alert",
-              "variant": "default",
-              "title": "🆚 Note Terrain : Z.AI",
-              "content": "Selon les retours d'expérience, **Chat Z.AI** offre également une excellente approche de recherche, souvent plus \"humaine\" et contextuelle que Perplexity. Attention cependant aux considérations de confidentialité."
-            }
-          ]
-        },
-        {
-          "value": "etape-3",
-          "title": "Étape 3 : Analyse Critique",
-          "content": [
-            {
-              "type": "alert",
-              "variant": "destructive",
-              "title": "🔍 L'Étape la Plus Importante",
-              "content": "**Ne vous contentez jamais de la synthèse de l'IA.** Elle peut mal interpréter une nuance."
-            },
-            {
-              "type": "card",
-              "title": "Checklist d'Analyse des Sources",
-              "content": "1. **Cliquez sur les liens** (les numéros [1], [2]...)\n2. **Évaluez la source** : Méta-analyse dans *The Lancet* ? Essai randomisé contrôlé ? Ou simple article d'opinion ?\n3. **Lisez l'abstract et les conclusions** de l'article source\n4. **Vérifiez** : L'IA a-t-elle correctement représenté les résultats ?\n5. **Cherchez** : A-t-elle omis une limitation importante mentionnée par les auteurs ?"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "alert",
-      "variant": "default",
-      "title": "🎯 Résultat Final",
-      "content": "En adoptant cette approche méthodique, vous transformez l'IA d'une source potentielle de désinformation en un **assistant de recherche surpuissant**, qui vous fait gagner un temps précieux tout en renforçant la rigueur scientifique de votre travail."
-    },
-    {
-      "type": "toolRecommendation",
-      "slug": "perplexity-ai",
-      "reason": "Perplexity AI est spécifiquement conçu pour la recherche fiable avec RAG intégré. Sa fonction Focus Academic vous donne accès aux publications scientifiques avec citations vérifiables."
-    },
-    {
-      "type": "toolRecommendation",
-      "slug": "z-ai",
-      "reason": "Alternative avec approche de recherche plus 'humaine' et contextuelle, particulièrement efficace selon les retours terrain."
-    },
-    {
-      "type": "conceptRecommendation",
-      "slug": "hallucination-effet-indesirable",
-      "reason": "Comprendre les mécanismes d'hallucination de l'IA est essentiel pour développer un esprit critique dans l'usage des outils d'IA en pharmacie."
+      "content": "## Le Principe Fondamental : Vous êtes le Chercheur, l'IA est l'Assistant\n\nL'erreur la plus commune est de déléguer son esprit critique à l'IA. Ce guide vous apprend à utiliser l'IA pour décupler votre efficacité de recherche, tout en renforçant votre rigueur scientifique.\n\n<Alert variant='destructive'>\n  <AlertTitle>Attention : L'Hallucination</AlertTitle>\n  <AlertDescription>Le plus grand risque est l'<ConceptRecommendation conceptSlug='hallucination-effet-indesirable' reason='Ce concept est la base de toute utilisation sécurisée de l_IA pour la recherche.' />. L'IA peut inventer des faits ou des sources de manière très convaincante.</AlertDescription>\n</Alert>\n\n## Étape 1 : Formuler une Question de Recherche Efficace (Méthode PICO)\n\nUne question précise est la clé. Le framework PICO est parfait pour cela :\n- **P**atient/Problème\n- **I**ntervention\n- **C**omparaison\n- **O**utcome (Résultat)\n\n**Exemple :**\n*Au lieu de :* `\"infos sur les nouveaux traitements du diabète\"`\n*Préférez :* `\"Chez les patients DT2 (P), quel est l'impact des inhibiteurs de SGLT2 (I) vs placebo (C) sur les événements cardiovasculaires majeurs (O) ?\"`\n\n## Étape 2 : Choisir le Bon Type d'Outil\n\nPour la recherche, privilégiez les outils basés sur le **RAG (Retrieval-Augmented Generation)**. Ils cherchent l'information sur le web *avant* de générer une réponse, et citent leurs sources.\n\n<ToolRecommendation toolSlug='perplexity-ai' reason='C_est l_exemple type de moteur de réponse RAG, conçu pour la recherche sourcée.'/>\n<ToolRecommendation toolSlug='z-ai' reason='Utilise une approche de recherche planifiée avancée, une alternative puissante au RAG classique.'/>\n\n## Étape 3 : L'Analyse Critique des Sources (Votre Vraie Valeur Ajoutée)\n\nC'est l'étape la plus importante et non-délégable.\n\n1.  **Cliquez sur les Sources :** Ne lisez JAMAIS une synthèse sans ouvrir les liens [1], [2]...\n2.  **Évaluez la Qualité de la Source :** Est-ce une méta-analyse du NEJM, un essai randomisé, ou un article de blog ?\n3.  **Lisez l'Abstract et les Conclusions :** Vérifiez si la synthèse de l'IA correspond à la conclusion des auteurs.\n4.  **Cherchez les Biais :** L'IA a-t-elle omis une limitation importante mentionnée dans l'article source ?\n\n## Conclusion : Un Workflow en Boucle\nVotre travail de recherche devient une boucle vertueuse :\n\n`Question PICO -> IA (Recherche) -> Analyse Critique des Sources -> Affinement de la Question -> IA (Recherche plus ciblée) ...`\n\nEn maîtrisant ce processus, vous utilisez l'IA pour ce qu'elle fait de mieux (scanner et synthétiser des volumes massifs de données) tout en gardant ce que vous faites de mieux : l'analyse critique et le jugement expert."
     }
   ]
 };

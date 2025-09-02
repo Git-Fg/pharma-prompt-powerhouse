@@ -38,12 +38,6 @@ const externalToolData = {
       "content": "Perplexity utilise une approche **RAG classique** : il recherche d'abord, puis synthétise. Cette méthode est excellente pour la recherche factuelle rapide et fiable avec sources citées."
     },
     {
-      "type": "alert",
-      "variant": "default",
-      "title": "🤔 Perplexity vs Z.AI : Deux Approches Complémentaires",
-      "content": "**Perplexity** excelle dans la recherche RAG classique avec sources immédiates. **Z.AI** utilise une approche de recherche 'humaine' planifiée qui peut être plus contextuelle sur certains sujets complexes. Les deux ont leur place selon vos besoins."
-    },
-    {
       "type": "tabs",
       "defaultValue": "sonar",
       "tabs": [
@@ -161,6 +155,12 @@ const externalToolData = {
       "type": "guideRecommendation",
       "slug": "obtenir-donnees-fiables",
       "reason": "Apprenez les meilleures pratiques pour utiliser Perplexity et d'autres outils de recherche de manière optimale."
+    },
+    {
+      "type": "card",
+      "title": "Mise en Pratique",
+      "description": "Voir cet outil en action",
+      "content": "Pour une comparaison directe de Perplexity avec d'autres outils pour la recherche bibliographique, consultez notre page objectif dédiée.\n\n<GuideRecommendation guideSlug='faire-recherche-bibliographique' reason='Comparez Perplexity et Z.AI sur un cas pratique et apprenez le workflow de recherche optimal.' />"
     }
   ]
 };

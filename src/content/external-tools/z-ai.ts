@@ -40,12 +40,6 @@ const externalToolData = {
       "content": "## Pourquoi Z.AI Révolutionne la Recherche"
     },
     {
-      "type": "card",
-      "title": "La Différence Z.AI vs Perplexity",
-      "description": "L'avantage concurrentiel décisif",
-      "content": "Là où **Perplexity** utilise une approche **RAG** classique (recherche puis synthèse), **Z.AI** utilise **GLM-4.5** et sa capacité excellente à effectuer une **recherche 'humaine'** plus naturelle et contextuelle.\n\n**Le résultat** : des synthèses plus fiables et pertinentes, confirmées par l'expérience terrain."
-    },
-    {
       "type": "tabs",
       "defaultValue": "glm-model",
       "tabs": [
@@ -104,10 +98,10 @@ const externalToolData = {
       ]
     },
     {
-      "type": "card",
-      "title": "Z.AI vs Alternatives - Comparaison",
-      "content": "| Critère | **Chat Z.AI (GLM-4.5)** | **Perplexity Pro** |\n|---------|-------------------------|---------------------|\n| **Tarif** | 🆓 Gratuit complet | 💰 $20/mois |\n| **Recherche** | 🏆 Approche 'humaine' excellente | ⚖️ RAG classique |\n| **Créativité** | 🎨 Suite complète (slides, dev) | ⚠️ Limitée |\n| **Fiabilité** | 🎯 Supérieure à Perplexity (terrain) | ✅ Bonne avec sources |\n| **Confidentialité** | ⚠️ Risque élevé (Asie) | ✅ Meilleure (US) |\n| **Verdict** | **État de l'art gratuit** | Référence payante |"
-    },
+     "type": "card",
+     "title": "Z.AI - Points Forts",
+     "content": "| Critère | **Chat Z.AI (GLM-4.5)** |\n|-------------------------|\n| **Tarif** | 🆓 Gratuit complet |\n| **Recherche** | 🏆 Approche 'humaine' excellente |\n| **Créativité** | 🎨 Suite complète (slides, dev) |\n| **Fiabilité** | 🎯 Très bonne |\n| **Confidentialité** | ⚠️ Risque élevé (Asie) |"
+   },
     {
       "type": "alert",
       "variant": "destructive",
@@ -171,6 +165,12 @@ const externalToolData = {
       "type": "toolRecommendation",
       "slug": "google-ai-studio",
       "reason": "Combo parfait : Z.AI pour la recherche créative + AI Studio pour l'analyse rigoureuse forment le core kit quotidien gratuit."
+    },
+    {
+      "type": "card",
+      "title": "Mise en Pratique",
+      "description": "Voir cet outil en action",
+      "content": "Pour une comparaison directe de Z.AI avec d'autres outils pour la recherche bibliographique, consultez notre page objectif dédiée.\n\n<GuideRecommendation guideSlug='faire-recherche-bibliographique' reason='Comparez Z.AI et Perplexity sur un cas pratique et apprenez le workflow de recherche optimal.' />"
     }
   ]
 };
