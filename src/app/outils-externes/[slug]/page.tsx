@@ -2,19 +2,19 @@
 
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { allExternalTools } from "content-collections";
+import { content, getToolBySlug } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Globe, Tag, DollarSign } from "lucide-react";
-import { MDXRenderer } from "@/components/markdown/MDXRenderer";
+import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import { RelatedContent } from "@/components/shared/RelatedContent";
 import type { Metadata } from "next";
 
 // Cette fonction permet à Next.js de générer les pages statiques au moment du build
 export async function generateStaticParams() {
-  return allExternalTools.map((tool) => ({
+  return content.tools.map((tool) => ({
     slug: tool.slug,
   }));
 }
@@ -26,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const tool = allExternalTools.find((t) => t.slug === slug);
+  const tool = getToolBySlug(slug);
 
   if (!tool) {
     return {
@@ -45,7 +45,7 @@ export async function generateMetadata({
       "intelligence artificielle",
       tool.title,
       tool.category,
-      ...(tool.tags?.map(t => t.name) || [])
+      ...(tool.tags || [])
     ],
     openGraph: {
       title: tool.title,
@@ -75,7 +75,7 @@ export default async function ExternalToolDetailPage({
 }) {
   const { slug } = await params;
   // On trouve l'outil par son slug
-  const tool = allExternalTools.find((t) => t.slug === slug);
+  const tool = getToolBySlug(slug);
 
   if (!tool) {
     notFound();
@@ -119,8 +119,8 @@ export default async function ExternalToolDetailPage({
           {tool.tags && tool.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 pt-2">
               {tool.tags.map((tag) => (
-                <Badge key={tag.name} variant="secondary">
-                  {tag.name}
+                <Badge key={tag} variant="secondary">
+                  {tag}
                 </Badge>
               ))}
             </div>
@@ -134,7 +134,7 @@ export default async function ExternalToolDetailPage({
       {tool.keyTakeaways && <KeyTakeaways points={tool.keyTakeaways} />}
 
       <main className="prose prose-lg dark:prose-invert max-w-none">
-        <MDXRenderer code={tool.mdxCode} />
+        <ContentRenderer content={tool.content} />
       </main>
 
       {/* NOUVELLE SECTION : Contenu lié */}

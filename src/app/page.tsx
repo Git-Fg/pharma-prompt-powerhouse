@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allConcepts, allGuides } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { getRandomConceptTip } from "@/lib/tips-utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,18 +56,18 @@ const featuredConcepts = [
 ];
 
 // Identify featured workflows
-const featuredWorkflows = allGuides
+const featuredWorkflows = content.guides
   .filter(guide => 
     guide.title.toLowerCase().includes('workflow') ||
     guide.title.toLowerCase().includes('étapes') ||
     guide.description.toLowerCase().includes('workflow') ||
     guide.description.toLowerCase().includes('étape par étape') ||
-    guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.name?.toLowerCase() || ''))
+    guide.tags?.some(tag => ['workflow', 'processus', 'methodologie'].includes(tag.toLowerCase() || ''))
   )
   .slice(0, 3);
 
 export default function HomePage() {
-  const dailyTip = getRandomConceptTip(allConcepts);
+  const dailyTip = getRandomConceptTip(content.concepts);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">

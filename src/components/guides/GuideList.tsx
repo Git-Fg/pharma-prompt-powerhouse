@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { content } from '@/lib/content-loader';
 import { SearchInput } from '@/components/ui/search-input';
 import {
   Select,
@@ -182,7 +181,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-3 h-3 mr-1" />
-                    {guide.readingTime}
+                    {guide.estimatedTime || '5 min'}
                   </div>
                 </div>
                 <Button asChild className="w-full">

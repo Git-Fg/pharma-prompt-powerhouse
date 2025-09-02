@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { content } from '@/lib/content-loader';
 import { Prompt } from '@/lib/content-schema';
 import { SearchInput } from '@/components/ui/search-input';
 import {
@@ -125,7 +124,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
               description={prompt.description}
               difficulty={prompt.difficulty}
               estimatedTime={prompt.estimatedTime || 'N/A'}
-              tags={prompt.tags.map(t => t.name)}
+              tags={prompt.tags}
               icon={prompt.icon}
               promptContent={prompt.promptContent}
             />

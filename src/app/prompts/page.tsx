@@ -1,16 +1,16 @@
-import { allPrompts } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { PromptListClient } from "@/components/prompts/PromptListClient";
 import { Card } from "@/components/ui/card";
 
 export default function PromptsPage() {
-  const prompts = allPrompts;
+  const prompts = content.prompts;
 
   // Calculate statistics
   const totalPrompts = prompts.length;
   const categoriesCount = new Set(prompts.map(p => p.category)).size;
-  const templatesWithVariables = prompts.filter(p => p.variableCount && p.variableCount > 0).length;
+  const templatesWithVariables = prompts.filter(p => p.variables && p.variables.length > 0).length;
   const averageVariables = Math.round(
-    prompts.reduce((acc, prompt) => acc + (prompt.variableCount || 0), 0) / prompts.length
+    prompts.reduce((acc, prompt) => acc + (prompt.variables?.length || 0), 0) / prompts.length
   );
 
   return (
