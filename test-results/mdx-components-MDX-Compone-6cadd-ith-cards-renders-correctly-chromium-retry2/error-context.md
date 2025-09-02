@@ -1,0 +1,115 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Pharma Prompt" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9] [cursor=pointer]
+          - generic [ref=e17] [cursor=pointer]: Pharma Prompt
+        - generic [ref=e18]:
+          - navigation "Main" [ref=e19]:
+            - list [ref=e21]:
+              - listitem [ref=e22]:
+                - link "Concepts" [ref=e23] [cursor=pointer]:
+                  - /url: /concepts
+                  - text: Concepts
+              - listitem [ref=e31]:
+                - link "Workflows" [ref=e32] [cursor=pointer]:
+                  - /url: /workflows
+                  - text: Workflows
+              - listitem [ref=e36]:
+                - link "Guides" [ref=e37] [cursor=pointer]:
+                  - /url: /guides
+                  - text: Guides
+              - listitem [ref=e39]:
+                - link "Prompts" [ref=e40] [cursor=pointer]:
+                  - /url: /prompts
+                  - text: Prompts
+              - listitem [ref=e42]:
+                - link "Ma Boîte à Outils" [ref=e43] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - text: Ma Boîte à Outils
+              - listitem [ref=e45]:
+                - link "Outils Externes" [ref=e46] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - text: Outils Externes
+          - generic [ref=e50]:
+            - button "Rechercher... ⌘K" [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e55]: Rechercher...
+              - generic [ref=e56]: ⌘K
+            - generic [ref=e57]:
+              - heading "Command Palette" [level=2] [ref=e58]
+              - paragraph [ref=e59]: Search for a command to run...
+            - button [ref=e60]:
+              - img
+            - button [ref=e61]:
+              - img
+    - main [ref=e62]:
+      - generic [ref=e64]:
+        - img [ref=e66]
+        - heading "Page non trouvée" [level=1] [ref=e69]
+        - paragraph [ref=e70]: Désolé, nous n'avons pas trouvé la page que vous recherchez.
+        - generic [ref=e71]:
+          - link "Retour à l'accueil" [ref=e72] [cursor=pointer]:
+            - /url: /
+            - img
+            - text: Retour à l'accueil
+          - link "Voir tous les guides" [ref=e73] [cursor=pointer]:
+            - /url: /guides
+    - contentinfo [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - img [ref=e80]
+              - generic [ref=e88]: Pharma Prompt
+            - paragraph [ref=e89]: Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec la communauté pour contribuer à l'innovation pédagogique.
+          - generic [ref=e90]:
+            - heading "Apprentissage" [level=3] [ref=e91]
+            - list [ref=e92]:
+              - listitem [ref=e93]:
+                - link "Concepts" [ref=e94] [cursor=pointer]:
+                  - /url: /concepts
+                  - img [ref=e95] [cursor=pointer]
+                  - generic [ref=e97] [cursor=pointer]: Concepts
+              - listitem [ref=e98]:
+                - link "Guides" [ref=e99] [cursor=pointer]:
+                  - /url: /guides
+                  - img [ref=e100] [cursor=pointer]
+                  - generic [ref=e102] [cursor=pointer]: Guides
+              - listitem [ref=e103]:
+                - link "Prompts" [ref=e104] [cursor=pointer]:
+                  - /url: /prompts
+                  - img [ref=e105] [cursor=pointer]
+                  - generic [ref=e107] [cursor=pointer]: Prompts
+          - generic [ref=e108]:
+            - heading "Outils" [level=3] [ref=e109]
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - link "Ma Boîte à Outils" [ref=e112] [cursor=pointer]:
+                  - /url: /boite-a-outils
+                  - img [ref=e113] [cursor=pointer]
+                  - generic [ref=e115] [cursor=pointer]: Ma Boîte à Outils
+              - listitem [ref=e116]:
+                - link "Outils Externes" [ref=e117] [cursor=pointer]:
+                  - /url: /outils-externes
+                  - generic [ref=e118] [cursor=pointer]: Outils Externes
+                  - img [ref=e119] [cursor=pointer]
+          - generic [ref=e123]:
+            - heading "Légal" [level=3] [ref=e124]
+            - list [ref=e125]:
+              - listitem [ref=e126]:
+                - link "Confidentialité" [ref=e127] [cursor=pointer]:
+                  - /url: /guides/confidentialite-securite
+                  - img [ref=e128] [cursor=pointer]
+                  - generic [ref=e130] [cursor=pointer]: Confidentialité
+        - generic [ref=e132]:
+          - paragraph [ref=e133]: © 2025 Pharma Prompt Powerhouse. Tous droits réservés.
+          - paragraph [ref=e135]: Mon carnet de notes, partagé avec ❤️ pour la communauté pharmaceutique.
+  - region "Notifications alt+T"
+  - alert [ref=e136]
+```

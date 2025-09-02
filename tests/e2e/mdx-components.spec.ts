@@ -28,25 +28,23 @@ test.describe('MDX Components Functionality', () => {
     await page.screenshot({ path: 'test-results/hallucination-concept.png', fullPage: true });
   });
 
-  test('prompt prescription concept with cards renders correctly', async ({ page }) => {
-    await page.goto('/concepts/prompt-prescription');
+  test('context engineering concept renders correctly', async ({ page }) => {
+    await page.goto('/concepts/context-engineering');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Prompt');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Context Engineering');
     
-    // Check that the 5 elements are present in Cards (rendered as generic elements)
-    await expect(page.locator('text=1. Le Rôle (La Molécule)')).toBeVisible();
-    await expect(page.locator('text=2. La Tâche (La Posologie)')).toBeVisible();
-    await expect(page.locator('text=3. Le Contexte (Les Antécédents)')).toBeVisible();
-    await expect(page.locator("text=4. Le Format (La Voie d'Administration)")).toBeVisible();
-    await expect(page.locator('text=5. Les Exemples (Les Cas Cliniques de Référence)')).toBeVisible();
+    // Check that the concept content is visible
+    await expect(page.locator('text=Optimisez la fenêtre de contexte')).toBeVisible();
+    await expect(page.locator('text=Pourquoi c\'est crucial ?')).toBeVisible();
+    await expect(page.locator('text=Principes clés')).toBeVisible();
     
-    // Check for Alert component
-    const alerts = page.locator('[role="alert"]');
-    if (await alerts.count() > 0) {
-      await expect(alerts.first()).toBeVisible();
+    // Check for key takeaways
+    const keyTakeaways = page.locator('[data-testid="key-takeaways"], .key-takeaways');
+    if (await keyTakeaways.count() > 0) {
+      await expect(keyTakeaways.first()).toBeVisible();
     }
     
-    await page.screenshot({ path: 'test-results/prompt-prescription-concept.png', fullPage: true });
+    await page.screenshot({ path: 'test-results/context-engineering-concept.png', fullPage: true });
   });
 
   test('memory concept with tabs renders correctly', async ({ page }) => {
