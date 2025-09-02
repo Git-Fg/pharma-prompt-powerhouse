@@ -4,6 +4,7 @@
  */
 
 import { content } from '@/lib/content-loader';
+import type { ContentBlock } from '@/lib/content-schema';
 
 // Define the tag taxonomy as used in the new TypeScript content system
 const TAG_TAXONOMY = {
@@ -35,11 +36,37 @@ const TAG_TAXONOMY = {
 const ALL_VALID_TAGS = Object.values(TAG_TAXONOMY).flat();
 
 // Helper function to extract text from content blocks
-function extractTextFromContent(contentBlocks: any[]): string {
-  return contentBlocks
-    .filter(block => block.type === 'markdown')
-    .map(block => block.content)
-    .join(' ');
+function extractTextFromContent(contentBlocks: ContentBlock[]): string {
+  let text = '';
+  
+  for (const block of contentBlocks) {
+    switch (block.type) {
+      case 'markdown':
+        text += block.content + ' ';
+        break;
+      case 'alert':
+        text += (block.title || '') + ' ' + block.content + ' ';
+        break;
+      case 'card':
+        text += (block.title || '') + ' ' + (block.description || '') + ' ' + block.content + ' ';
+        break;
+      case 'codeBlock':
+        text += block.content + ' ';
+        break;
+      case 'tabs':
+        for (const tab of block.tabs) {
+          text += tab.title + ' ' + extractTextFromContent(tab.content) + ' ';
+        }
+        break;
+      case 'toolRecommendation':
+      case 'guideRecommendation':
+      case 'conceptRecommendation':
+        text += block.reason + ' ';
+        break;
+    }
+  }
+  
+  return text;
 }
 
 describe('Content Quality and Validation', () => {
@@ -104,12 +131,12 @@ describe('Content Quality and Validation', () => {
           // Check that variables are properly referenced in content
           const textContent = extractTextFromContent(prompt.content);
           // At least one variable should be referenced with {{ }} syntax
-          const hasVariableReferences = prompt.variables.some(variable => 
+          const _hasVariableReferences = prompt.variables.some(variable => 
             textContent.includes(`{{${variable.name}}`) || 
             prompt.promptContent?.includes(`{{${variable.name}}`)
           );
           // This is optional - some prompts might not use variables in their content blocks
-          // expect(hasVariableReferences).toBe(true);
+          // expect(_hasVariableReferences).toBe(true);
         }
       }
     });
