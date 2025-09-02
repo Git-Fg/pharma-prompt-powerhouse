@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { allConcepts } from 'content-collections';
+import { getConceptBySlug } from '@/lib/content-loader';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Lightbulb, CheckCircle } from 'lucide-react';
@@ -11,7 +11,7 @@ interface ConceptRecommendationProps {
 }
 
 export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommendationProps) {
-  const concept = allConcepts.find(c => c.slug === conceptSlug);
+  const concept = getConceptBySlug(conceptSlug);
 
   if (!concept) {
     return (
@@ -45,8 +45,8 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         {concept.tags && concept.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {concept.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag.name} variant="outline" className="bg-background">
-                {tag.name}
+              <Badge key={tag} variant="outline" className="bg-background">
+                {tag}
               </Badge>
             ))}
             {concept.tags.length > 3 && (

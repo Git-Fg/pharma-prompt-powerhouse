@@ -19,7 +19,7 @@ import {
   Search,
   FileText
 } from "lucide-react";
-import { allConcepts, allGuides, allPrompts, allExternalTools } from "content-collections";
+import { content } from '@/lib/content-loader';
 
 interface SearchableItem {
   type: 'concept' | 'guide' | 'prompt' | 'external-tool';
@@ -66,7 +66,7 @@ export function CommandPalette() {
   // Build searchable index on mount
   useEffect(() => {
     const items: SearchableItem[] = [
-      ...allConcepts.map(item => ({
+      ...content.concepts.map(item => ({
         type: 'concept' as const,
         slug: item.slug,
         title: item.title,
@@ -75,7 +75,7 @@ export function CommandPalette() {
         difficulty: item.difficulty,
         icon: item.icon,
       })),
-      ...allGuides.map(item => ({
+      ...content.guides.map(item => ({
         type: 'guide' as const,
         slug: item.slug,
         title: item.title,
@@ -84,7 +84,7 @@ export function CommandPalette() {
         difficulty: item.difficulty,
         icon: item.icon,
       })),
-      ...allPrompts.map(item => ({
+      ...content.prompts.map(item => ({
         type: 'prompt' as const,
         slug: item.slug,
         title: item.title,
@@ -93,7 +93,7 @@ export function CommandPalette() {
         difficulty: item.difficulty,
         icon: item.icon,
       })),
-      ...allExternalTools.map(item => ({
+      ...content.tools.map(item => ({
         type: 'external-tool' as const,
         slug: item.slug,
         title: item.title,

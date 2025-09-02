@@ -1,15 +1,15 @@
 // src/lib/content-loader.ts
-// Cette classe sera initialement vide et sera remplie au fur et à mesure de la migration
 import { Guide, Concept, Prompt, ExternalTool } from '@/lib/content-schema';
 import { allGuides as newGuides } from '@/content/guides-new';
+import { allConcepts as newConcepts } from '@/content/concepts-new';
+import { allPrompts as newPrompts } from '@/content/prompts-new';
+import { allExternalTools as newExternalTools } from '@/content/external-tools-new';
 
-// Chaque collection sera importée ici au fur et à mesure de la migration
-
-// Collections - mélange ancien/nouveau système pendant la migration
+// Collections - now fully migrated to TypeScript
 const allGuides: Guide[] = [...newGuides];
-const allConcepts: Concept[] = [];
-const allPrompts: Prompt[] = [];
-const allExternalTools: ExternalTool[] = [];
+const allConcepts: Concept[] = [...newConcepts];
+const allPrompts: Prompt[] = [...newPrompts];
+const allExternalTools: ExternalTool[] = [...newExternalTools];
 
 // Crée des Maps pour des recherches ultra-rapides O(1)
 const conceptsMap = new Map(allConcepts.map(c => [c.slug, c]));

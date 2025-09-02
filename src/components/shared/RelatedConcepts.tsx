@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allConcepts } from "content-collections";
+import { content } from '@/lib/content-loader';
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Network } from "lucide-react";
 import { getIcon } from "@/types/icon-taxonomy";
@@ -24,7 +24,7 @@ export function RelatedConcepts({
     return null;
   }
 
-  const related = allConcepts.filter((c) => conceptSlugs.includes(c.slug));
+  const related = content.concepts.filter((c) => conceptSlugs.includes(c.slug));
 
   if (related.length === 0) {
     return null;

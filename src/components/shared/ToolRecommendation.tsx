@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { allExternalTools } from 'content-collections';
+import { getToolBySlug } from '@/lib/content-loader';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, ExternalLink } from 'lucide-react';
@@ -11,7 +11,7 @@ interface ToolRecommendationProps {
 }
 
 export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps) {
-  const tool = allExternalTools.find(t => t.slug === toolSlug);
+  const tool = getToolBySlug(toolSlug);
 
   if (!tool) {
     return (
@@ -26,7 +26,7 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
   }
 
   return (
-    <Card className={`my-6 border-l-4 ${tool.color} bg-gradient-to-r from-background to-muted/30`}>
+    <Card className={`my-6 border-l-4 bg-gradient-to-r from-background to-muted/30`} style={{ borderLeftColor: tool.color }}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -47,7 +47,7 @@ export function ToolRecommendation({ toolSlug, reason }: ToolRecommendationProps
             {tool.category}
           </Badge>
           {tool.pricing && (
-            <Badge variant={tool.isFree ? "default" : "secondary"}>
+            <Badge variant="secondary">
               {tool.pricing}
             </Badge>
           )}
