@@ -7,7 +7,7 @@
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
 - **Maintenabilité :** Écrire du code et créer du contenu que n'importe qui dans l'équipe peut comprendre et modifier facilement.
 - **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile.
-</project_philosophy>
+</project_philosophy>. 
 
 <content_rules>
 **Règles du Contenu : Le Cœur du Projet**
