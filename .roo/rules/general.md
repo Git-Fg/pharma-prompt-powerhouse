@@ -1,6 +1,7 @@
+# **Règles Générales**
+
 <project_philosophy>
 **Philosophie du Projet : Simplicité et Apprentissage**
-
 - **Simplicité avant tout :** Toujours choisir la solution la plus simple qui fonctionne. La clarté prime sur la sophistication.
 - **Objectif Pédagogique :** Ce projet est un outil d'apprentissage pour d'autres étudiants, pas une application d'entreprise complexe.
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
@@ -9,7 +10,6 @@
 
 <content_rules>
 **Règles du Contenu : Le Cœur du Projet**
-
 - **Public Cible : Non-Développeurs.** Le public cible est un étudiant ou professionnel de santé. Le jargon technique doit être évité. **Tolérance :** Des concepts comme `RAG` ou `token` peuvent être mentionnés **uniquement s'ils sont expliqués simplement** et sont essentiels pour comprendre le fonctionnement d'une WebUI (ex: Perplexity et le RAG). Le jargon nécessitant d'écrire du code (`API`, `endpoint`, etc.) est **strictement interdit** dans le contenu destiné aux utilisateurs.
 - **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
 - **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
@@ -19,14 +19,12 @@
   
 <project_documentation_rules>
 **Stratégie de Documentation**
-
 - **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
-- **`/.github/copilot-instructions.md` (ou ce fichier) :** La "Constitution" du projet. C'est la source de vérité pour les règles de développement, le style de code et la philosophie. Sert de contexte pour les développeurs et les assistants IA.
+- **`docs` (ou ce fichier) :** Documentation complémentaire sur le projet : uniquement sur des concepts centraux, à utiliser avec parcimonie
 </project_documentation_rules>
 
 <coding_style_and_principles>
 **Principes et Style de Code**
-
 - **Composants Ciblés :** Écrire des composants petits et spécialisés qui n'ont qu'une seule responsabilité.
 - **Lisibilité du Code :** Utiliser des noms de variables et de fonctions descriptifs. Le code doit se lire comme une histoire et expliquer ses intentions.
 - **Gestion d'État Progressive :**
@@ -34,70 +32,55 @@
   - Utiliser `useContext` pour un partage simple entre composants.
   - Réserver `useReducer` pour les logiques d'état réellement complexes.
 - **Performance Intelligente :**
-  - La meilleure optimisation est de **déplacer la logique vers le build** avec Content Collections.
+  - La meilleure optimisation est de **déplacer la logique vers la structure de données** avec des blocs de contenu typés.
   - Faire confiance aux optimisations automatiques de React 19 et éviter l'optimisation prématurée.
 - **Dépendances Minimales :** N'ajouter une bibliothèque que si elle résout un problème réel qu'une fonctionnalité native ne peut pas couvrir.
 - **Documentation Utile :** Commenter le "pourquoi" derrière les choix de code complexes, pas le "comment".
 </coding_style_and_principles>
-
 <user_experience_and_accessibility>
 **Expérience Utilisateur et Accessibilité**
-
 - **Conception Centrée sur l'Utilisateur :** Concevoir chaque interface en pensant d'abord aux étudiants non-développeurs.
 - **Guidage et Intuitivité :** Créer des parcours et des outils interactifs qui sont simples à comprendre et à utiliser sans explication préalable.
 - **Tirer parti de l'Accessibilité Native :** Utiliser systématiquement les fonctionnalités d'accessibilité (ARIA, gestion du focus, etc.) intégrées dans shadcn/ui pour garantir que le site est utilisable par tous.
 </user_experience_and_accessibility>
 
 ---
-### **Règles Techniques Spécifiques**
+
+# **Règles Techniques Spécifiques**
+
 ---
 
 <react19_rules>
 **Compiler et optimisation:**
-
 - Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément.
 - Écrire du code simple et lisible que le compiler peut optimiser.
 - Éviter `useMemo`/`useCallback` manuels sauf besoins spécifiques.
-
 **Actions et formulaires:**
-
 - Pour les formulaires simples (soumission de données serveur), explorer les Actions React 19 pour centraliser la logique.
 - Pour les composants interactifs complexes côté client (ex: l'éditeur de prompts), une gestion d'état avec `useState` et `useTransition` est privilégiée pour une meilleure réactivité de l'interface.
 - Lors de l'utilisation d'Actions, `useActionState` est l'outil de choix pour gérer l'état (pending, error, data).
 - `useOptimistic` peut être utilisé pour améliorer l'UX lors des mutations de données serveur.
-
 **Gestion des données:**
-
 - Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement).
 - Combiner `use()` avec Suspense pour un code asynchrone propre.
 - Ne pas utiliser `use()` avec des promesses créées dans le render.
-
 **Nouvelles fonctionnalités:**
-
 - Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants.
 - Utiliser les stylesheets natifs avec la propriété `precedence`.
 </react19_rules>
-
 <nextjs15_rules>
 **App Router:**
-
 - Utiliser exclusivement l'App Router avec structure basée sur les fichiers.
 - Modèle de route: `src/app/[feature]/page.tsx`.
 - Utiliser `"use client"` uniquement pour les composants interactifs.
-
 **Cache (IMPORTANT):**
-
 - Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut.
 - Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire.
 - Configurer explicitement le cache pour les données qui doivent être mises en cache.
-
 **APIs Async:**
-
 - Utiliser `await` pour `cookies()`, `headers()`, `draftMode()`, `params`, `searchParams`.
 - Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone.
-
 **Nouvelles fonctionnalités:**
-
 - Utiliser `@next/codemod` pour les mises à niveau automatisées.
 - Expérimenter avec `unstable_after` pour exécuter du code après le streaming.
 - Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
@@ -106,87 +89,82 @@
 
 <shadcn_ui_rules>
 **Version 3.0:**
-
 - Utiliser les registres namespacés: `@registry/name`.
 - Configurer plusieurs registres dans `components.json`.
 - Profiter du MCP Server pour l'intégration avec les outils d'IA.
 - Utiliser les nouvelles commandes de recherche et découverte.
-
 **Utilisation des composants:**
-
 - Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation.
 - Combiner les composants simplement avec la composition.
 - Utiliser les fonctionnalités d'accessibilité intégrées.
-
 **Formulaires:**
-
 - Utiliser les composants de formulaire shadcn/ui.
 - Intégrer avec les hooks React (`useState`, `useTransition`) ou les Actions React 19 selon le cas d'usage.
 - Garder la logique de validation simple et proche du formulaire.
 </shadcn_ui_rules>
 
-<content_collections_rules>
-**Philosophie : Le Build est la Source de Vérité**
-
-- Toute la logique de préparation des données (ajout de slugs, calculs, relations) DOIT se faire dans `content-collections.ts` via la fonction `transform`.
-- Les composants React doivent être "stupides" : ils consomment des données déjà prêtes et parfaitement typées, sans faire de transformations complexes.
-
-**Configuration (`content-collections.ts`):**
-
-- **Ordre des Dépendances :** Déclarer les collections sans dépendances (ex: `concepts`) AVANT les collections qui en dépendent (ex: `guides`).
-- **`transform` est la clé :** Utiliser systématiquement la fonction `transform` pour enrichir les données. Extraire la logique complexe dans des fonctions helpers pour garder le fichier principal lisible.
-- **Filtrage au Build :** Utiliser `ctx.skip("raison")` dans `transform` pour exclure des documents (ex: brouillons avec `draft: true`).
-
+<content_structure_rules>
+**Philosophie : Le Schéma est la Source de Vérité**
+- Toute la structure de contenu est définie par des schémas Zod dans `src/lib/content-schema.ts`.
+- Les composants React doivent être "stupides" : ils consomment des données déjà typées et validées, sans faire de transformations complexes.
+**Structure des Données :**
+- **Contenu Structuré :** Le contenu est modélisé comme un tableau de blocs typés, chaque bloc représentant soit un paragraphe de texte, soit un composant interactif.
+- **Schéma Central :** Le fichier `src/lib/content-schema.ts` définit tous les types de blocs possibles et les schémas des collections de contenu.
+- **Validation au Runtime :** Chaque fichier de contenu utilise `schema.parse(data)` pour garantir sa validité.
+**Enrichissement des Données :**
+- **Content Loader :** Le fichier `src/lib/content-loader.ts` centralise le chargement et l'enrichissement du contenu.
+- **Relations :** Les relations entre collections (ex: guides et concepts) sont résolues au chargement via des Maps pour des recherches ultra-rapides O(1).
+- **Typage Fort :** Toutes les données sont enrichies et typées avant d'être utilisées par les composants.
+**Organisation des Fichiers :**
+- **Collections :** Chaque collection a son dossier dans `src/content/` (ex: `src/content/guides/`).
+- **Fichiers de Contenu :** Chaque élément de contenu est un fichier `.ts` qui exporte un objet validé par son schéma.
+- **Index :** Chaque collection a un fichier `index.ts` qui exporte un tableau de tous les éléments de la collection.
 **Validation et Qualité des Données:**
-
-- **Validation Stricte de la Taxonomie :** Le build DOIT échouer ou afficher un avertissement clair si un tag utilisé dans un fichier de contenu n'est pas défini dans la `TAG_TAXONOMY`. Cette vérification est implémentée dans le hook `onSuccess` de `content-collections.ts` pour garantir la cohérence des métadonnées.
-
-**Utilisation dans le Code :**
-
-- Importer les collections directement depuis `"content-collections"`.
-- Faire confiance aux types générés : si `guide.concepts` est typé comme `Concept[]`, c'est un tableau d'objets, pas de `string`.
-</content_collections_rules>
+- **Validation Stricte de la Taxonomie :** Le build DOIT échouer si un contenu ne respecte pas son schéma Zod.
+- **Intégrité des Références :** Les références entre collections (ex: `conceptSlugs`) sont validées à la compilation pour garantir la cohérence.
+</content_structure_rules>
 
 <typescript_rules>
 **Sécurité des Types :**
-
-- La source de vérité pour les types de contenu est le dossier `.content-collections/generated`. Ne JAMAIS créer de types manuels comme `GuideWithSlug`.
-- **Inférence de Type avec Zod :** Utiliser `z.infer<typeof schema>` dans `content-collections.ts` pour typer les documents avant leur transformation.
-- **Typage des Fonctions `transform` :** Importer `Context` et les types de documents inférés pour typer les fonctions de transformation.
+- La source de vérité pour les types de contenu est le fichier `src/lib/content-schema.ts`. Ne JAMAIS créer de types manuels comme `GuideWithSlug`.
+- **Inférence de Type avec Zod :** Utiliser `z.infer<typeof schema>` pour typer les données de contenu.
+- **Typage des Fonctions :** Importer les types inférés depuis `src/lib/content-schema.ts` pour typer les fonctions et composants.
 - **Diagnostic :** En cas d'erreur de type liée au contenu, le premier réflexe est de :
-  1.  Vérifier `content-collections.ts`.
-  2.  Relancer le build (`pnpm dev`) pour régénérer les types.
+  1.  Vérifier `src/lib/content-schema.ts`.
+  2.  Vérifier que le contenu respecte bien son schéma.
   3.  Redémarrer le serveur TS de l'éditeur si nécessaire.
-
 **Typage des Composants :**
-
 - Utiliser des interfaces de props simples.
-- Importer les types (`Guide`, `Concept`, etc.) directement depuis `"content-collections"` ou `@/types` pour les props des composants.
+- Importer les types (`Guide`, `Concept`, `ContentBlock`, etc.) directement depuis `src/lib/content-schema.ts` pour les props des composants.
+- Utiliser le composant `ContentRenderer` pour afficher les blocs de contenu de manière standardisée.
 </typescript_rules>
 
 <instructions>
 DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
 DO maintenir un ton professionnel mais abordable
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant
-DO utiliser la fonction `transform` de Content Collections pour enrichir les données au build
-DO faire confiance aux types générés par Content Collections comme source de vérité
-DO relancer le build après avoir modifié `content-collections.ts`
+DO utiliser les schémas Zod pour définir la structure du contenu
+DO faire confiance aux types générés par Zod comme source de vérité
+DO structurer le contenu comme un tableau de blocs typés
 DO comprendre que Next.js 15 ne met plus rien en cache par défaut
 DO écrire du code facile à expliquer aux autres étudiants
-
 DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
-DO NOT effectuer de logique de liaison de données (ex: `guides.map(...)` pour trouver des concepts) au runtime. C'est le rôle du build.
+DO NOT effectuer de logique de liaison de données (ex: `guides.map(...)` pour trouver des concepts) au runtime. C'est le rôle du content loader.
 DO NOT créer de types manuels pour le contenu (ex: `GuideWithSlug`).
 DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
 DO NOT sacrifier la clarté pour la sophistication technique
-
-En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, et Content Collections.
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, et Zod.
 </instructions>
+
+---
+
+# **Règles et informations de Contenu**
+
+---
 
 <webui_informations>
 <openai_information>
 - Openai : Deux webui disponibles : ChatGPT (https://chatgpt.com/) et Playground (https://platform.openai.com/playground)
-
   • Modèles récents (2024-2025) :
     - GPT-5 (août 2025) : Modèle unifié avec raisonnement avancé. 
       Variantes : gpt-5 (complet), gpt-5-mini (rapide), gpt-5-nano (ultra-rapide)
@@ -195,7 +173,6 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     - GPT-4.1 (2024) : Modèle pour développeurs, API flexible
       Variantes : gpt-4.1, gpt-4.1-mini, gpt-4.1-nano
     - GPT-4o (mai 2024) : Multimodal (texte, image, son)
-
   • ChatGPT - Outils disponibles :
     - Compréhension PDF :
       • Gratuit : GPT-4o mini (limité)
@@ -203,12 +180,11 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     
     - Deep Research :
       • Gratuit : Version lite (5 utilisations/mois)
-      • Payant : Version complète (illimitée, export PDF)
+      • Payant : Version complète (illimitées, export PDF)
     
     - Live :
       • Gratuit : Voix standard
       • Payant : Voix avancée, streaming temps réel
-
   • ChatGPT Playground - Outils :
     - Modèles : GPT-5, GPT-4.1, GPT-4o, GPT-3.5-turbo (+ variants mini/nano)
     - Paramètres : Temperature (0-1), Max length (1-2048), Top P (0-1)
@@ -217,16 +193,13 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     - Connecteurs : Intégrations externes, CRM, bases de données
     - Agent : Exécution tâches complexes multi-outils
     - Pas de quotas gratuit sans CB
-
   • Accès gratuit vs payant (20€/mois) :
     - Gratuit : GPT-5 limité, GPT-4o mini, 8K tokens, plugins non disponibles
     - Payant : GPT-5 étendu, 32K tokens, plugins, génération images, GPTs personnalisés
 </openai_information>
-
 <google_information>
 - Google : Deux webui disponibles - Gemini (gemini.google.com) et AI Studio (aistudio.google.com)
   **Note :** Il est crucial de bien distinguer l'interface de chat `gemini.google.com` (produit grand public) de `aistudio.google.com` (laboratoire d'expérimentation).
-
   • Modèles récents (2024-2025) :
     - Gemini 2.5 Pro (juin 2025) : Modèle "pensant" le plus puissant
       • Contexte : 1M tokens (env. 750 Mo texte)
@@ -241,7 +214,6 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
       • Entrées : Texte, image, vidéo, audio, PDF
     - Gemini 2.5 Flash Image Preview (août 2025) : Génération d'images conversationnelle
     - Imagen 4 (août 2025) : Ultra, Standard et Fast modèles
-
   • Gemini - Outils disponibles :
     - Compréhension PDF :
       • Gratuit : Gemini 2.5 Flash (limité à 32K tokens, 10 fichiers max 100Mo)
@@ -254,7 +226,6 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     - Live :
       • Gratuit : Voix standard
       • Payant : Gemini Live avec interactions vocales temps réel
-
   • Google AI Studio - Outils :
     - Modèles : Gemini 2.5 Pro/Flash/Flash-Lite, Imagen 4, Veo 3
     - Paramètres : Temperature, Max tokens, Top P, Top K
@@ -270,15 +241,12 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
       • Caching support
     - API gratuite : 60 requêtes/min, 300K tokens/jour
     - API Gratuite = Accès gratuit sur la webui avec quota (utilisant api en arrière plan mais pas besoin de code). De plus, pas de CB nécessaire pour l'inscription = outil privilégié pour les étudiants, sans nécessité de sortir la carte de crédit, permettant d'accéder aux meilleurs modèles avec quota généreux. 
-
   • Accès gratuit vs payant (20€/mois - Gemini Advanced) :
     - Gratuit : Gemini 2.5 Flash, 32K tokens, 10 fichiers 100Mo max
     - Payant : Gemini 2.5 Pro, 1M tokens, 100 requêtes 2.5 Pro/jour, Veo 3 (3 vidéos/jour), Deep Research
 </google_information>
-
 <notebooklm_information>
 - NotebookLM (Google) : Webui disponible - NotebookLM (https://notebooklm.google.com/)
-
   • Modèle : Propulsé par les modèles Gemini de Google.
   
   • Fonctionnalités principales :
@@ -293,10 +261,8 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     • Intégration avec l'écosystème Google.
     • Confidentialité : Soumis aux politiques de confidentialité de Google.
 </notebooklm_information>
-
 <anthropic_information>
 - Anthropic : Deux webui disponibles - Claude (claude.ai) et Console (console.anthropic.com)
-
   • Modèles récents (2024-2025) :
     - Claude Opus 4.1 (août 2025) : Modèle le plus performant pour tâches complexes
       • Contexte : 200K tokens (env. 150 000 mots)
@@ -309,7 +275,6 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     - Claude Haiku 4 (mai 2025) : Modèle rapide et économique
       • Contexte : 200K tokens
       • Spécialisation : Réponses rapides, traitement haut volume
-
   • Claude - Outils disponibles :
     - Compréhension PDF :
       • Gratuit : Traitement basique, 50 messages/jour
@@ -322,7 +287,6 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
     - Projects :
       • Gratuit : Non disponible
       • Payant : Organisation illimitée de chats et documents
-
   • Anthropic Console - Outils :
     - Modèles : Claude Opus 4.1, Sonnet 4, Haiku 4
     - Paramètres : Temperature, Top P, Top K, Max tokens
@@ -336,22 +300,18 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
       • Prompt caching : Jusqu'à 90% d'économies
       • Batch processing : 50% d'économies
       • Support multimodal : Texte, image, document
-
   • Accès gratuit vs payant ($18-25/mois) :
     - Gratuit : 50 messages/jour, personas prédéfinis, publicités occasionnelles
     - Payant : Usage illimité (limites en heures de pointe), personas personnalisables, intégrations (Slack, Google Workspace), priorité accès, early features, Claude Code, Projects illimités
 </anthropic_information>
-
 <zai_information>
 - Zhipu AI : Webui disponible - Chat Z.AI (chat.z.ai)
-
   • Modèle récent (2025) :
     - GLM-4.5 (juillet 2025) : Modèle open-source unifié
       • Architecture : Mixture-of-Experts (MoE) avec 355B paramètres totaux, 32B actifs
       • Contexte : 128K tokens
       • Performances : 3ème mondial (63.2) sur 12 benchmarks, derrière Grok-4 et GPT-o3
       • Modes hybrides : Mode "thinking" pour raisonnement complexe, mode "non-thinking" pour réponses rapides
-
   • Chat Z.AI - Outils disponibles (tous gratuits actuellement) :
     - Création de présentation (AI Slides) :
       • Agent PPT/Poster intégré
@@ -380,25 +340,20 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
       • Création d'artefacts autonomes (mini-jeux, simulations physiques)
       • Génération de code exécutable en HTML, SVG, Python
       • Capacités d'édition et raffinement par dialogue naturel
-
   • Fonctionnalités principales :
     - Architecture unifiée raisonnement/codage/agent
     - Taux de succès d'appel d'outils : 90.6% (meilleur que Claude-4-Sonnet, Kimi K2, Qwen3-Coder)
     - Mode Auto Think pour activation automatique du raisonnement
     - Création d'artefacts complexes et autonomes
     - Interface conversationnelle pour itérations et améliorations
-
   • Accès : Totalement gratuit (août 2025)
     • Aucune limitation de usage connue
     • Accès direct au modèle GLM-4.5 complet
     • Tous les outils avancés disponibles sans restriction
-
 Attention, risque très important au niveau de la confidentialité lorsque l'on passe par leurs propre plateforme.
 </zai_information>
-
 <perplexity_information>
 - Perplexity : Webui disponible - Perplexity (perplexity.ai)
-
   • Modèles récents (2024-2025) :
     - Sonar (2024) : Moteur de réponse propriétaire basé sur Llama 3.3 fine-tuné par perplexity (70B)
       • Contexte : Recherche web en temps réel
@@ -408,7 +363,6 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
       • GPT 5
       • Gemini 2.5 Pro
       • Claude 3
-
   • Perplexity - Outils disponibles :
     - Recherche approfondie (Deep Research) :
       • Gratuit : Non disponible
@@ -421,7 +375,6 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
     - Traitement de fichiers :
       • Gratuit : Limité (extraits ou documents courts)
       • Payant : Illimité (PDFs, images, CSVs, tableurs)
-
   • Fonctionnalités principales :
     - Recherche web en temps réel avec sources citées (utilisation de RAG, possibilité de cibler contenu des réseaux sociaux, académiques)
     - Synthèse structurée avec transparence des sources
@@ -429,7 +382,6 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
     - Capacité à traiter et analyser des documents uploadés
     - Personnalisation des domaines de recherche favoris
     - Historique des recherches et conversations
-
   • Accès gratuit vs payant ($20/mois) :
     - Gratuit :
       • 5 recherches Pro/jour
@@ -447,10 +399,8 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
       • Support prioritaire (1-2 jours)
       • $5/mois de crédits API
 </perplexity_information>
-
 <qwen_information>
 - Alibaba : Webui disponible - Qwen Chat (chat.qwen.ai)
-
   • Modèles récents (2025) :
     - Qwen 3 (avril 2025) : Famille de modèles open-source sous licence Apache 2.0
       • Architecture : Mixture of Experts (MoE) et versions denses
@@ -461,7 +411,6 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
         - Qwen3-14B : Compromis performance/matériel
       • Contexte : Jusqu'à 128K tokens
       • Performances : Excellence en mathématiques (surpasse DeepSeek R1 sur AIME'24/25), programmation, raisonnement
-
   • Qwen Chat - Outils disponibles (tous gratuits actuellement) :
     - Deep Research :
       • Disponible pour tous les utilisateurs depuis août 2025
@@ -486,7 +435,6 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
       • Rendu de texte précis
       • Création à partir de descriptions textuelles
       • Support multimodal avancé
-
   • Fonctionnalités principales :
     - Mode "Thinking" pour raisonnement approfondi
     - Recherche web intégrée avec sources
@@ -494,18 +442,15 @@ Attention, risque très important au niveau de la confidentialité lorsque l'on 
     - Traitement de documents
     - Interface conversationnelle naturelle
     - Compatibilité avec matériel grand public (versions optimisées)
-
   • Accès : Totalement gratuit (août 2025)
     • Aucune limitation de usage connue
     • Accès à tous les modèles Qwen 3
     • Tous les outils avancés disponibles sans restriction
     • Licence Apache 2.0 pour utilisation commerciale
 </qwen_information>
-
 <deepseek_information>
 Informations fondamentales sur la webui évoquée dans le projet :
 - DeepSeek : Webui disponible - DeepSeek Chat (chat.deepseek.com)
-
   • Modèles récents (2025) :
     - DeepSeek V3.1 (août 2025) : Dernière version open-source
       • Architecture : Mixture-of-Experts avec 671B paramètres totaux, 37B actifs par token
@@ -517,7 +462,6 @@ Informations fondamentales sur la webui évoquée dans le projet :
       • Focus : Raisonnement complexe, logique avancée
       • Performances : Supérieur à V3.1 sur tâches nécessitant une réflexion approfondie
       • Tarification : 6,5 fois plus coûteux que V3.1
-
   • DeepSeek Chat - Outils disponibles (tous gratuits actuellement) :
     - DeepThink (R1) :
       • Fonctionnalité de raisonnement approfondi intégrée
@@ -547,7 +491,6 @@ Informations fondamentales sur la webui évoquée dans le projet :
       • Performances : Surpasse DALL-E 3 et Stable Diffusion
       • Génération de prompts détaillés pour création d'images
       • Applications : Art numérique, supports marketing, impression à demande
-
   • Fonctionnalités principales :
     - Interface similaire à ChatGPT avec moteur de recherche intégré
     - Mode "Thinking" automatique pour raisonnement approfondi
@@ -555,18 +498,15 @@ Informations fondamentales sur la webui évoquée dans le projet :
     - Historique des conversations organisable
     - Évaluation des réponses pour amélioration du modèle
     - Personnalisation : thème clair/sombre, langue d'interface
-
   • Accès : Totalement gratuit (août 2025)
     • Aucune restriction sur les fonctionnalités de base
-    • Limitation : 50 messages/jour pour DeepThink R1
-    • API disponible à tarification compétitive (0,27$/million tokens entrée, 1,10$/million sortie)
-    • Modèles open-source sous licence MIT pour utilisation commerciale
+    - Limitation : 50 messages/jour pour DeepThink R1
+    - API disponible à tarification compétitive (0,27$/million tokens entrée, 1,10$/million sortie)
+    - Modèles open-source sous licence MIT pour utilisation commerciale
 </deepseek_information>
-
 <autre>
 - Plateforme complètement gratuite mais énorme risque de confidentialité : https://ish.junioralive.in/
 - Trouver des outils gratuits en IA (attention à la confidentialité, si c'est gratuit c'est que les données sont très probablement réutilisées au mieux pour l'entraînement, au pire pour la revente) : https://fmhy.net/ai#ai-chatbots
 - ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. **La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles.**
 </autre>
-
-</webui_informations> 
+</webui_informations>
