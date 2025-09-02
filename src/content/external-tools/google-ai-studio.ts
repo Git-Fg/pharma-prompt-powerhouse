@@ -3,11 +3,11 @@ import { ExternalTool, externalToolSchema } from '@/lib/content-schema';
 
 const externalToolData = {
   "slug": "google-ai-studio",
-  "title": "Google AI Studio : L'Accès Gratuit aux Modèles Gemini de Pointe",
-  "description": "Découvrez Google AI Studio, la plateforme qui démocratise l'accès aux modèles Gemini 2.5 Pro et Flash sans nécessiter de carte de crédit.",
+  "title": "Google AI Studio : L'Écosystème Multimodal Gratuit",
+  "description": "Découvrez Google AI Studio, bien plus qu'un simple chat : un écosystème complet avec génération d'images, audio, vidéo et applications web, le tout avec les modèles Gemini de pointe.",
   "difficulty": "intermédiaire",
   "tags": [],
-  "isFavorite": false,
+  "isFavorite": true,
   "keyTakeaways": [],
   "conceptSlugs": [],
   "url": "https://aistudio.google.com/",
@@ -16,68 +16,89 @@ const externalToolData = {
   "use_cases": [
     "Analyse clinique précise",
     "Test de prompts avancés",
+    "Génération multimodale",
+    "Création d'applications web",
     "Raisonnement multi-étapes"
   ],
   "color": "bg-blue-500",
-  "tldr": "Accès gratuit aux modèles Gemini 2.5 de Google. Interface pro sans carte de crédit, excellent pour analyse clinique précise et raisonnement complexe.",
+  "tldr": "L'écosystème multimodal de Google. Au-delà du chat : génération d'images, audio, vidéo, et création d'applications complètes. Parfait complément à Z.AI.",
   "content": [
     {
       "type": "alert",
       "variant": "default",
-      "title": "🎯 Avantage Concurrentiel Majeur",
-      "content": "Accès gratuit aux modèles Gemini 2.5 Pro les plus récents avec une fenêtre de contexte de **1 million de tokens**, sans carte de crédit requise. C'est la meilleure porte d'entrée vers la puissance de l'IA Google."
-    },
-    {
-      "type": "markdown",
-      "content": "## Qu'est-ce que Google AI Studio ?"
+      "title": "🚀 Core Kit Quotidien",
+      "content": "En combinaison avec Z.AI, AI Studio forme le **duo parfait** : Z.AI pour la recherche créative + AI Studio pour l'analyse rigoureuse et la génération multimodale. **Aucune carte de crédit nécessaire** - outil privilégié pour les étudiants."
     },
     {
       "type": "card",
-      "title": "Interface Pro Accessible",
-      "description": "Un studio pour explorer les IA de Google",
-      "content": "Google AI Studio est une interface web conçue pour les développeurs et les curieux, permettant d'explorer, de prototyper et d'utiliser les modèles d'intelligence artificielle les plus avancés de Google. Pour un étudiant non-développeur, c'est **la meilleure porte d'entrée vers la puissance des modèles Gemini**."
+      "title": "💰 Tarification - API Gratuite Généreuse",
+      "variant": "outline",
+      "content": "**Gratuit** : 60 requêtes/min, 300K tokens/jour - largement suffisant pour usage étudiant intensif. Aucune information de paiement requise."
+    },
+    {
+      "type": "markdown",
+      "content": "## Au-Delà du Chat : Un Écosystème Complet"
+    },
+    {
+      "type": "card",
+      "title": "Vision Élargie d'AI Studio",
+      "description": "Bien plus qu'une interface de chat",
+      "content": "Google AI Studio ne se limite pas aux modèles Gemini pour le texte. C'est un **écosystème multimodal complet** qui intègre :\n\n- Génération d'images (Imagen 4)\n- Transformation audio (texte vers audio, audio vers audio)\n- Création vidéo (Veo 3)\n- Développement d'applications web complètes\n\nL'équivalent d'avoir plusieurs outils spécialisés dans une seule interface."
     },
     {
       "type": "tabs",
-      "defaultValue": "models",
+      "defaultValue": "models-2025",
       "tabs": [
         {
-          "value": "models",
-          "title": "Modèles Disponibles (2025)",
+          "value": "models-2025",
+          "title": "Modèles 2025",
           "content": [
             {
               "type": "card",
-              "title": "Gemini 2.5 Pro (Juin 2025)",
-              "content": "- **Capacité** : Modèle multimodal le plus puissant de Google\n- **Contexte** : 1 million de tokens\n- **Modalités** : Texte, images, audio, vidéo, documents longs\n- **Spécialité** : Analyse approfondie et raisonnement complexe"
-            },
-            {
-              "type": "card",
-              "title": "Gemini 2.5 Flash (Juin 2025)",
-              "variant": "outline",
-              "content": "- **Optimisé** : Vitesse et efficacité\n- **Contexte** : 1 million de tokens (identique au Pro)\n- **Usage** : Réponses rapides et applications interactives"
-            },
-            {
-              "type": "card",
-              "title": "Imagen 4 (Août 2025)",
-              "variant": "outline",
-              "content": "Nouvelle génération de modèles de génération d'images de Google, intégrée à l'interface AI Studio."
+              "title": "Gamme Gemini Complète",
+              "content": "| **Modèle** | **Lancement** | **Contexte** | **Modalités** | **Spécialité** |\n|------------|---------------|--------------|---------------|----------------|\n| **Gemini 2.5 Pro** | Juin 2025 | 1M tokens | Texte, images, audio, vidéo, PDF | Analyse approfondie, raisonnement |\n| **Gemini 2.5 Flash** | Juin 2025 | 1M tokens | Texte, images, audio, vidéo | Vitesse et efficacité - optimal quotidien |\n| **Gemini 2.5 Flash-Lite** | Juillet 2025 | 1M tokens | Multimodal complet | Coût/latence optimisés pour usage intensif |"
             }
           ]
         },
         {
-          "value": "access",
-          "title": "Accès Gratuit",
+          "value": "multimodal-suite",
+          "title": "Suite Multimodale",
           "content": [
             {
-              "type": "alert",
-              "variant": "default",
-              "title": "🆓 Quota Généreux",
-              "content": "**60 requêtes par minute** - largement suffisant pour un usage étudiant intensif, sans jamais fournir d'informations de paiement."
+              "type": "card",
+              "title": "🎨 Imagen 4 (Images) - Août 2025",
+              "description": "Génération d'images avancée",
+              "content": "- **Ultra, Standard et Fast** - 3 variantes selon les besoins\n- **Génération conversationnelle** avec Gemini 2.5 Flash Image Preview\n- **Intégration native** dans l'interface AI Studio\n- **Qualité professionnelle** pour supports pédagogiques"
             },
             {
               "type": "card",
-              "title": "Avantages de l'Accès Gratuit",
-              "content": "- Aucune carte de crédit requise\n- Accès aux modèles les plus récents\n- Interface professionnelle complète\n- Paramètres avancés disponibles\n- Documentation et exemples intégrés"
+              "title": "🎬 Veo 3 (Vidéos)",
+              "variant": "outline",
+              "content": "✅ **Génération vidéo** à partir de prompts textuels\n✅ **Qualité HD** pour présentations\n✅ **Animations éducatives** pharmaceutiques\n✅ **Intégration directe** avec Gemini"
+            },
+            {
+              "type": "card",
+              "title": "🎵 Outils Audio Complets",
+              "variant": "outline",
+              "content": "- **Texte vers audio** : Narration automatique\n- **Audio vers audio** : Transformation et amélioration\n- **Synthèse vocale** pour présentations\n- **Qualité professionnelle** adaptée à l'enseignement"
+            }
+          ]
+        },
+        {
+          "value": "web-apps",
+          "title": "Création d'Applications",
+          "content": [
+            {
+              "type": "card",
+              "title": "Développement Web Intégré",
+              "description": "Création d'applications complètes",
+              "content": "- **Applications web complètes** générées par prompts\n- **Interface utilisateur** responsive automatique\n- **Logique métier** intégrée\n- **Déploiement facilité** pour prototypes éducatifs"
+            },
+            {
+              "type": "codeBlock",
+              "language": "text",
+              "filename": "exemple-webapp-prompt.txt",
+              "content": "Crée une application web interactive pour visualiser les interactions médicamenteuses. Interface simple avec :\n- Sélecteur de médicaments\n- Affichage des interactions en temps réel  \n- Système d'alertes par gravité\n- Export PDF des résultats"
             }
           ]
         }
@@ -85,50 +106,56 @@ const externalToolData = {
     },
     {
       "type": "markdown",
-      "content": "## Fonctionnalités pour le Prompt Engineering"
+      "content": "## Fonctionnalités Avancées pour le Prompt Engineering"
     },
     {
       "type": "tabs",
-      "defaultValue": "controls",
+      "defaultValue": "structured-outputs",
       "tabs": [
         {
-          "value": "controls",
-          "title": "Contrôles Avancés",
-          "content": [
-            {
-              "type": "card",
-              "title": "Paramètres Ajustables",
-              "content": "- **Temperature** : Contrôle créativité vs prévisibilité\n- **Top K / Top P** : Affinage de la sélection des mots\n- **Max Tokens** : Limite de longueur des réponses\n- **Stop Sequences** : Contrôle précis de l'arrêt"
-            },
-            {
-              "type": "card",
-              "title": "Modes d'Interaction",
-              "variant": "outline",
-              "content": "- **Chat** : Conversation avec historique\n- **Completion** : Complétion de texte directe\n- **Batch** : Traitement en lot pour l'efficacité"
-            }
-          ]
-        },
-        {
-          "value": "advanced",
-          "title": "Fonctionnalités Uniques",
+          "value": "structured-outputs",
+          "title": "Sorties Structurées",
           "content": [
             {
               "type": "card",
               "title": "Structured Outputs",
               "description": "Fiabilisation avancée",
-              "content": "Forcez l'IA à répondre dans un format spécifique (JSON, XML). Technique cruciale pour des réponses prévisibles et exploitables."
+              "content": "Forcez l'IA à répondre dans un **format spécifique** (JSON, XML, tableaux). Technique cruciale pour des réponses prévisibles et exploitables dans des applications pharmaceutiques."
             },
             {
-              "type": "card",
-              "title": "Function Calling",
-              "variant": "outline",
-              "content": "Permet à l'IA de simuler l'utilisation d'outils externes comme des calculatrices ou des bases de données."
-            },
+              "type": "alert",
+              "variant": "default",
+              "title": "💡 Application Pratique",
+              "content": "Idéal pour extraire des données structurées de RCP, créer des bases de données de médicaments, ou générer des rapports formatés automatiquement."
+            }
+          ]
+        },
+        {
+          "value": "advanced-features",
+          "title": "Fonctions Avancées",
+          "content": [
             {
               "type": "card",
-              "title": "URL Context",
-              "variant": "outline",
-              "content": "Donnez une URL à l'IA pour qu'elle base sa réponse sur le contenu de la page web."
+              "title": "Function Calling & Code Execution",
+              "content": "- **Function Calling** : L'IA peut simuler l'utilisation d'outils externes\n- **Code Execution** : Exécution de code Python directement dans l'interface\n- **Search Grounding** : Recherche web intégrée pour données actualisées\n- **URL Context** : Analyse de pages web en direct"
+            }
+          ]
+        },
+        {
+          "value": "thinking-mode",
+          "title": "Mode Thinking",
+          "content": [
+            {
+              "type": "card",
+              "title": "Raisonnement Approfondi",
+              "description": "Thinking Mode activable",
+              "content": "Le **mode Thinking** permet à Gemini de 'réfléchir' explicitement avant de répondre, particulièrement utile pour des analyses cliniques complexes ou des raisonnements pharmaceutiques multi-étapes."
+            },
+            {
+              "type": "codeBlock",
+              "language": "text",
+              "filename": "exemple-thinking-mode.txt",
+              "content": "Analyse cette interaction médicamenteuse complexe :\nPatient prenant warfarine + amiodarone + oméprazole\n\n[Mode Thinking activé : l'IA analysera chaque interaction, les mécanismes, les risques, avant de donner sa conclusion structurée]"
             }
           ]
         }
@@ -137,23 +164,58 @@ const externalToolData = {
     {
       "type": "card",
       "title": "Comparaison : Gemini Chat vs Google AI Studio",
-      "content": "| Aspect | Gemini (gemini.google.com) | Google AI Studio (aistudio.google.com) |\n|---|---|---|\n| **Modèle Gratuit** | Gemini 2.5 Flash (32K contexte) | **Gemini 2.5 Pro** (1M contexte) |\n| **Public Cible** | Grand public | Étudiants, développeurs, curieux |\n| **Contrôle** | Minimal | **Granulaire** (Température, Top K...) |\n| **Objectif** | Assistant conversationnel | Laboratoire d'expérimentation |\n| **Accès** | Simple et direct | Nécessite compte Google, **sans CB** |"
+      "content": "| **Aspect** | **Gemini Chat** (gemini.google.com) | **Google AI Studio** (aistudio.google.com) |\n|------------|-------------------------------------|---------------------------------------------|\n| **Public** | Grand public | Développeurs/Étudiants |\n| **Modèle Gratuit** | Gemini 2.5 Flash (32K) | **Gemini 2.5 Pro** (1M tokens) |\n| **Contrôle** | Minimal | **Granulaire complet** |\n| **Multimodal** | Chat uniquement | **Images, Audio, Vidéo** |\n| **Applications** | Non | **Développement web** |\n| **Verdict** | Usage simple | **Écosystème complet** |"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "pharmacy-applications",
+      "tabs": [
+        {
+          "value": "pharmacy-applications",
+          "title": "Applications Pharmaceutiques",
+          "content": [
+            {
+              "type": "card",
+              "title": "Cas d'Usage Multimodaux",
+              "content": "✅ **Analyse de documents longs** avec le contexte 1M tokens\n✅ **Génération d'images** pour supports pédagogiques\n✅ **Création de vidéos** explicatives sur mécanismes d'action\n✅ **Applications interactives** pour révisions\n✅ **Narration audio** de cours ou présentations"
+            }
+          ]
+        },
+        {
+          "value": "workflow-example",
+          "title": "Workflow Complet",
+          "content": [
+            {
+              "type": "card",
+              "title": "Création d'un Support Pédagogique Complet",
+              "description": "Exemple de workflow intégré",
+              "content": "1. **Analyse** d'une monographie de médicament (contexte 1M tokens)\n2. **Extraction** des points clés avec structured outputs\n3. **Génération d'images** explicatives avec Imagen 4\n4. **Création vidéo** du mécanisme d'action avec Veo 3\n5. **Application web** interactive pour tester les connaissances\n6. **Narration audio** pour présentation finale"
+            },
+            {
+              "type": "alert",
+              "variant": "default",
+              "title": "🎯 Avantage Unique",
+              "content": "AI Studio permet de créer un **écosystème pédagogique complet** dans une seule interface, sans jongler entre plusieurs outils."
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "alert",
       "variant": "default",
       "title": "🎓 Parfait pour les Étudiants",
-      "content": "Google AI Studio est l'outil idéal pour tester des prompts sur de très longs documents de recherche, des cours entiers, ou pour apprendre à structurer les sorties de l'IA de manière fiable."
+      "content": "Google AI Studio est l'outil idéal pour **créer des écosystèmes pédagogiques multimodaux**, tester des prompts avancés, et développer des applications éducatives - le tout sans carte de crédit."
     },
     {
       "type": "guideRecommendation",
       "slug": "choisir-ses-outils-ia-en-2025-chat-vs-studio",
-      "reason": "Apprenez quand utiliser les interfaces chat vs les environnements studio pour maximiser votre efficacité."
+      "reason": "Apprenez quand utiliser les interfaces chat vs les environnements studio pour maximiser votre efficacité avec l'écosystème Google."
     },
     {
-      "type": "conceptRecommendation",
-      "slug": "température-dosage",
-      "reason": "Maîtrisez les paramètres comme la température pour des réponses optimales selon votre usage."
+      "type": "toolRecommendation",
+      "slug": "z-ai",
+      "reason": "Combo parfait : AI Studio pour l'analyse multimodale rigoureuse + Z.AI pour la recherche créative forment le core kit quotidien gratuit."
     }
   ]
 };
