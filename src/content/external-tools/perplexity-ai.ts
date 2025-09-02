@@ -35,7 +35,13 @@ const externalToolData = {
       "type": "card",
       "title": "Technologie RAG",
       "description": "Retrieval-Augmented Generation",
-      "content": "Perplexity utilise une approche **RAG** : il ne se contente pas de \"savoir\" des choses, il va activement **chercher** l'information la plus à jour avant de répondre. C'est crucial en santé où les connaissances évoluent constamment."
+      "content": "Perplexity utilise une approche **RAG classique** : il recherche d'abord, puis synthétise. Cette méthode est excellente pour la recherche factuelle rapide et fiable avec sources citées."
+    },
+    {
+      "type": "alert",
+      "variant": "default",
+      "title": "🤔 Perplexity vs Z.AI : Deux Approches Complémentaires",
+      "content": "**Perplexity** excelle dans la recherche RAG classique avec sources immédiates. **Z.AI** utilise une approche de recherche 'humaine' planifiée qui peut être plus contextuelle sur certains sujets complexes. Les deux ont leur place selon vos besoins."
     },
     {
       "type": "tabs",
