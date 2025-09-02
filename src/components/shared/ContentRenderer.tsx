@@ -5,6 +5,8 @@ import { ContentBlock } from '@/lib/content-schema';
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CodeBlock } from '@/components/ui/code-block';
 import { ToolRecommendation } from './ToolRecommendation';
 import { GuideRecommendation } from './GuideRecommendation';
 import { ConceptRecommendation } from './ConceptRecommendation';
@@ -32,6 +34,32 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
 
     case 'conceptRecommendation':
       return <ConceptRecommendation conceptSlug={block.slug} reason={block.reason} />;
+
+    case 'codeBlock':
+      return (
+        <CodeBlock 
+          language={block.language}
+          filename={block.filename}
+          showLineNumbers={block.showLineNumbers}
+        >
+          {block.content}
+        </CodeBlock>
+      );
+
+    case 'card':
+      return (
+        <Card className="my-6">
+          {(block.title || block.description) && (
+            <CardHeader>
+              {block.title && <CardTitle>{block.title}</CardTitle>}
+              {block.description && <CardDescription>{block.description}</CardDescription>}
+            </CardHeader>
+          )}
+          <CardContent>
+            <MarkdownRenderer content={block.content} />
+          </CardContent>
+        </Card>
+      );
 
     case 'tabs':
       return (

@@ -33,6 +33,22 @@ const conceptRecommendationBlockSchema = recommendationSchema.extend({
   type: z.literal('conceptRecommendation'),
 });
 
+const codeBlockSchema = z.object({
+  type: z.literal('codeBlock'),
+  language: z.string().optional(),
+  filename: z.string().optional(),
+  showLineNumbers: z.boolean().default(false),
+  content: z.string(),
+});
+
+const cardBlockSchema = z.object({
+  type: z.literal('card'),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  content: z.string(), // Markdown content
+  variant: z.enum(['default', 'outline']).default('default'),
+});
+
 // Union des blocs de base (sans onglets pour éviter la circularité)
 const basicContentBlockSchema = z.union([
   markdownBlockSchema,
@@ -40,6 +56,8 @@ const basicContentBlockSchema = z.union([
   toolRecommendationBlockSchema,
   guideRecommendationBlockSchema,
   conceptRecommendationBlockSchema,
+  codeBlockSchema,
+  cardBlockSchema,
 ]);
 
 // Bloc pour les onglets utilisant les blocs de base
@@ -133,4 +151,6 @@ export type AlertBlock = z.infer<typeof alertBlockSchema>;
 export type ToolRecommendationBlock = z.infer<typeof toolRecommendationBlockSchema>;
 export type GuideRecommendationBlock = z.infer<typeof guideRecommendationBlockSchema>;
 export type ConceptRecommendationBlock = z.infer<typeof conceptRecommendationBlockSchema>;
+export type CodeBlockType = z.infer<typeof codeBlockSchema>;
+export type CardBlock = z.infer<typeof cardBlockSchema>;
 export type TabsBlock = z.infer<typeof tabsBlockSchema>;
