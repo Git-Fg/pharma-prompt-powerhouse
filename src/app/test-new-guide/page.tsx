@@ -1,5 +1,4 @@
 // src/app/test-new-guide/page.tsx
-'use client';
 
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { getGuideBySlug } from '@/lib/content-loader';

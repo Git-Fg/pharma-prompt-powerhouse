@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clock, BookOpen, Target } from "lucide-react";
+import { ArrowLeft, Clock, Target } from "lucide-react";
 import { content, getGuideBySlug } from "@/lib/content-loader";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { RelatedContent } from "@/components/shared/RelatedContent";
