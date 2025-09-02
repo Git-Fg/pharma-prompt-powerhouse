@@ -1,32 +1,27 @@
 <project_philosophy>
-**Philosophie du Projet : Plateforme d'Excellence Pédagogique**
+**Philosophie du Projet : Simplicité et Apprentissage**
 
-- **Mission : Transformer les utilisateurs d'IA de "passagers" en "pilotes"** par l'apprentissage structuré et l'interconnexion des connaissances.
-- **Excellence du Contenu :** Chaque élément doit apporter une valeur pédagogique mesurable avec des takeaways clairs et des recommandations contextuelles.
-- **Écosystème Interconnecté :** Tous les contenus doivent se référencer mutuellement de manière intelligente (GuideRecommendation, ConceptRecommendation, ToolRecommendation).
-- **Principe de Progression :** Architecture Débutant → Intermédiaire → Avancé avec parcours d'apprentissage guidé.
-- **Qualité avant Quantité :** 36 documents finement craftés valent mieux que 100 contenus médiocres.
+- **Simplicité avant tout :** Toujours choisir la solution la plus simple qui fonctionne. La clarté prime sur la sophistication.
+- **Objectif Pédagogique :** Ce projet est un outil d'apprentissage pour d'autres étudiants, pas une application d'entreprise complexe.
+- **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
+- **Maintenabilité :** Écrire du code et créer du contenu que n'importe qui dans l'équipe peut comprendre et modifier facilement.
 </project_philosophy>
 
 <content_rules>
-**Règles du Contenu : L'Excellence Pédagogique**
+**Règles du Contenu : Le Cœur du Projet**
 
-- **Public Cible : Non-Développeurs Uniquement.** Bannir totalement le jargon technique dev (API, RAG, etc.). Focus absolu sur l'ingénierie de prompts pharmaceutiques.
-- **Approche "WebUI First" Absolue :** 100% des guides utilisent des interfaces web (ChatGPT, Claude, AI Studio, etc.). Zéro ligne de code requise.
-- **Valoriser les Outils Avancés :** Promouvoir Playground/Console/Studio comme outils d'expertise, pas de développement.
-- **Interconnexions Obligatoires :** Chaque contenu DOIT avoir des recommandations contextuelles vers autres contenus pertinents.
-- **Variables Standardisées :** Format `{{nom_variable}}` strict dans frontmatter ET MDX avec backticks : `{{variable}}`.
-- **Qualité Mesurable :** keyTakeaways obligatoires pour concepts/guides, conceptSlugs validés automatiquement.
-- **Validation Croisée :** Tests automatiques vérifient toutes les références entre contenus.
+- **Public Cible : Non-Développeurs.** Le public cible est un étudiant ou professionnel de santé. Le jargon technique doit être évité. **Tolérance :** Des concepts comme `RAG` ou `token` peuvent être mentionnés **uniquement s'ils sont expliqués simplement** et sont essentiels pour comprendre le fonctionnement d'une WebUI (ex: Perplexity et le RAG). Le jargon nécessitant d'écrire du code (`API`, `endpoint`, etc.) est **strictement interdit** dans le contenu destiné aux utilisateurs.
+- **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
+- **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
+- **Clarté et Pertinence :** Prioriser la qualité du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pour illustrer les concepts.
+- **Standardisation :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts afin de garantir la cohérence.
 </content_rules>
-
+  
 <project_documentation_rules>
-**Documentation Architecture - Production Ready**
+**Stratégie de Documentation**
 
-- **`README.md` :** Vitrine du projet fini avec métriques de performance, guide complet d'installation/déploiement.
-- **`/.github/copilot-instructions.md` :** Constitution technique mise à jour reflétant l'état finalisé du projet.
-- **Validation Continue :** 30+ tests automatiques garantissent la cohérence documentation/code.
-- **Standards de Qualité :** Documentation alignée avec la maturité production du projet.
+- **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
+- **`/.github/copilot-instructions.md` (ou ce fichier) :** La "Constitution" du projet. C'est la source de vérité pour les règles de développement, le style de code et la philosophie. Sert de contexte pour les développeurs et les assistants IA.
 </project_documentation_rules>
 
 <coding_style_and_principles>
@@ -48,136 +43,304 @@
 <user_experience_and_accessibility>
 **Expérience Utilisateur et Accessibilité**
 
-<user_experience_and_accessibility>
-**UX/UI - Production Ready Standards**
-
-- **Cohérence Absolue :** Toutes les pages suivent le même pattern : Header enrichi + KeyTakeaways + Contenu + Interconnexions + Related Content.
-- **Navigation Intelligente :** PromptCard mène aux détails d'abord, action secondaire pour usage direct.
-- **Accessibilité Native :** shadcn/ui garantit WCAG compliance, testid pour E2E robustes.
-- **Responsive Excellence :** Mobile-first avec breakpoints optimisés pour tous devices.
-- **Performance UX :** <2s load time, 48 pages statiques pré-générées.
+- **Conception Centrée sur l'Utilisateur :** Concevoir chaque interface en pensant d'abord aux étudiants non-développeurs.
+- **Guidage et Intuitivité :** Créer des parcours et des outils interactifs qui sont simples à comprendre et à utiliser sans explication préalable.
+- **Tirer parti de l'Accessibilité Native :** Utiliser systématiquement les fonctionnalités d'accessibilité (ARIA, gestion du focus, etc.) intégrées dans shadcn/ui pour garantir que le site est utilisable par tous.
 </user_experience_and_accessibility>
 
 ---
-### **Architecture Technique Finalisée**
+### **Règles Techniques Spécifiques**
 ---
 
-<content_collections_architecture>
-**Content Collections - Cœur du Système**
+<react19_rules>
+**Compiler et optimisation:**
 
-- **Build-Time Processing :** Transformation MDX → TypeScript au build pour performance maximale.
-- **Zod + TypeScript :** Validation stricte + génération automatique de types pour tous contenus.
-- **Interconnexions Automatiques :** conceptSlugs → objets Concept complets via transform functions.
-- **Validation Croisée :** Tests automatiques vérifient toutes références entre contenus.
-- **Zero Runtime Logic :** Aucune résolution de liens côté client, tout préparé au build.
+- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément.
+- Écrire du code simple et lisible que le compiler peut optimiser.
+- Éviter `useMemo`/`useCallback` manuels sauf besoins spécifiques.
+
+**Actions et formulaires:**
+
+- Pour les formulaires simples (soumission de données serveur), explorer les Actions React 19 pour centraliser la logique.
+- Pour les composants interactifs complexes côté client (ex: l'éditeur de prompts), une gestion d'état avec `useState` et `useTransition` est privilégiée pour une meilleure réactivité de l'interface.
+- Lors de l'utilisation d'Actions, `useActionState` est l'outil de choix pour gérer l'état (pending, error, data).
+- `useOptimistic` peut être utilisé pour améliorer l'UX lors des mutations de données serveur.
+
+**Gestion des données:**
+
+- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement).
+- Combiner `use()` avec Suspense pour un code asynchrone propre.
+- Ne pas utiliser `use()` avec des promesses créées dans le render.
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants.
+- Utiliser les stylesheets natifs avec la propriété `precedence`.
+</react19_rules>
+
+<nextjs15_rules>
+**App Router:**
+
+- Utiliser exclusivement l'App Router avec structure basée sur les fichiers.
+- Modèle de route: `src/app/[feature]/page.tsx`.
+- Utiliser `"use client"` uniquement pour les composants interactifs.
+
+**Cache (IMPORTANT):**
+
+- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut.
+- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire.
+- Configurer explicitement le cache pour les données qui doivent être mises en cache.
+
+**APIs Async:**
+
+- Utiliser `await` pour `cookies()`, `headers()`, `draftMode()`, `params`, `searchParams`.
+- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone.
+
+**Nouvelles fonctionnalités:**
+
+- Utiliser `@next/codemod` pour les mises à niveau automatisées.
+- Expérimenter avec `unstable_after` pour exécuter du code après le streaming.
+- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
+- Utiliser `next.config.ts` pour la configuration TypeScript.
+</nextjs15_rules>
+
+<shadcn_ui_rules>
+**Version 3.0:**
+
+- Utiliser les registres namespacés: `@registry/name`.
+- Configurer plusieurs registres dans `components.json`.
+- Profiter du MCP Server pour l'intégration avec les outils d'IA.
+- Utiliser les nouvelles commandes de recherche et découverte.
+
+**Utilisation des composants:**
+
+- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation.
+- Combiner les composants simplement avec la composition.
+- Utiliser les fonctionnalités d'accessibilité intégrées.
+
+**Formulaires:**
+
+- Utiliser les composants de formulaire shadcn/ui.
+- Intégrer avec les hooks React (`useState`, `useTransition`) ou les Actions React 19 selon le cas d'usage.
+- Garder la logique de validation simple et proche du formulaire.
+</shadcn_ui_rules>
+
+<content_collections_rules>
+**Philosophie : Le Build est la Source de Vérité**
+
+- Toute la logique de préparation des données (ajout de slugs, calculs, relations) DOIT se faire dans `content-collections.ts` via la fonction `transform`.
+- Les composants React doivent être "stupides" : ils consomment des données déjà prêtes et parfaitement typées, sans faire de transformations complexes.
 
 **Configuration (`content-collections.ts`):**
-- **Ordre des Dépendances :** Collections sans deps (concepts) AVANT celles qui en dépendent (guides).
-- **Transform Functions :** Enrichissement des données au build via helpers dédiés.
-- **Filtrage Intelligent :** ctx.skip() pour brouillons, validation taxonomy dans onSuccess.
-</content_collections_architecture>
 
-<component_system>
-**Système de Composants Interconnectés**
+- **Ordre des Dépendances :** Déclarer les collections sans dépendances (ex: `concepts`) AVANT les collections qui en dépendent (ex: `guides`).
+- **`transform` est la clé :** Utiliser systématiquement la fonction `transform` pour enrichir les données. Extraire la logique complexe dans des fonctions helpers pour garder le fichier principal lisible.
+- **Filtrage au Build :** Utiliser `ctx.skip("raison")` dans `transform` pour exclure des documents (ex: brouillons avec `draft: true`).
 
-**Composants de Recommandation (Production):**
-- **GuideRecommendation :** Affiche guide avec takeaways preview + bouton d'action contextuel.
-- **ConceptRecommendation :** Concept avec description + tags + lien découverte.  
-- **ToolRecommendation :** Outil avec cas d'usage + accès direct + détails.
+**Validation et Qualité des Données:**
 
-**Composants MDX Étendus :**
-- **MultiFormatPrompt :** Affichage prompt multi-plateforme (Claude XML, ChatGPT standard, etc).
-- **KeyTakeaways :** Points clés visuels pour apprentissage rapide.
-- **RelatedContent :** Système de liens connexes automatique.
+- **Validation Stricte de la Taxonomie :** Le build DOIT échouer ou afficher un avertissement clair si un tag utilisé dans un fichier de contenu n'est pas défini dans la `TAG_TAXONOMY`. Cette vérification est implémentée dans le hook `onSuccess` de `content-collections.ts` pour garantir la cohérence des métadonnées.
 
-**Usage dans MDX :**
-```mdx
-<ToolRecommendation toolSlug="claude-ai" reason="Claude excelle pour..." />
-<GuideRecommendation guideSlug="5-piliers" reason="Maîtrisez d'abord..." />
-<ConceptRecommendation conceptSlug="context-engineering" reason="Technique fondamentale..." />
-```
-</component_system>
+**Utilisation dans le Code :**
 
-<react19_production_rules>
-**React 19 - Optimisé Production**
+- Importer les collections directement depuis `"content-collections"`.
+- Faire confiance aux types générés : si `guide.concepts` est typé comme `Concept[]`, c'est un tableau d'objets, pas de `string`.
+</content_collections_rules>
 
-**Performance Native :**
-- React Compiler activé avec fallbacks manuels si nécessaire.
-- Pas de useMemo/useCallback sauf cas spécifiques mesurés.
-- Composants "stupides" consommant données pré-traitées par Content Collections.
+<typescript_rules>
+**Sécurité des Types :**
 
-**Gestion d'État Moderne :**
-- `useState` + `useTransition` pour interactions client complexes (éditeur prompts).
-- `use()` hook pour consommation de contextes et promesses.
-- Actions React 19 pour formulaires simples avec `useActionState`.
+- La source de vérité pour les types de contenu est le dossier `.content-collections/generated`. Ne JAMAIS créer de types manuels comme `GuideWithSlug`.
+- **Inférence de Type avec Zod :** Utiliser `z.infer<typeof schema>` dans `content-collections.ts` pour typer les documents avant leur transformation.
+- **Typage des Fonctions `transform` :** Importer `Context` et les types de documents inférés pour typer les fonctions de transformation.
+- **Diagnostic :** En cas d'erreur de type liée au contenu, le premier réflexe est de :
+  1.  Vérifier `content-collections.ts`.
+  2.  Relancer le build (`pnpm dev`) pour régénérer les types.
+  3.  Redémarrer le serveur TS de l'éditeur si nécessaire.
 
-**APIs Async Natives :**
-- Toutes les APIs Next.js (cookies, headers, params) utilisées en async/await.
-- Gestion d'erreur avec error boundaries appropriés.
-</react19_production_rules>
+**Typage des Composants :**
 
-<nextjs15_production_architecture>
-**Next.js 15 - Configuration Production**
+- Utiliser des interfaces de props simples.
+- Importer les types (`Guide`, `Concept`, etc.) directement depuis `"content-collections"` ou `@/types` pour les props des composants.
+</typescript_rules>
 
-**App Router Optimisé :**
-- Structure `/[feature]/[slug]/page.tsx` pour SEO et performance.
-- Génération statique de 48 pages avec `generateStaticParams`.
-- Métadonnées dynamiques complètes pour chaque type de contenu.
+<instructions>
+DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
+DO maintenir un ton professionnel mais abordable
+DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant
+DO utiliser la fonction `transform` de Content Collections pour enrichir les données au build
+DO faire confiance aux types générés par Content Collections comme source de vérité
+DO relancer le build après avoir modifié `content-collections.ts`
+DO comprendre que Next.js 15 ne met plus rien en cache par défaut
+DO écrire du code facile à expliquer aux autres étudiants
 
-**Cache Strategy :**
-- Cache désactivé par défaut conformément à Next.js 15.
-- `force-static` uniquement où nécessaire pour performance.
-- Build statique complet pour déploiement edge optimisé.
+DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
+DO NOT effectuer de logique de liaison de données (ex: `guides.map(...)` pour trouver des concepts) au runtime. C'est le rôle du build.
+DO NOT créer de types manuels pour le contenu (ex: `GuideWithSlug`).
+DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
+DO NOT sacrifier la clarté pour la sophistication technique
 
-**Performance Monitoring :**
-- Bundle analysis intégré avec métriques de build.
-- Lighthouse scores > 95 sur tous critères.
-- Core Web Vitals optimisés pour l'expérience utilisateur.
-</nextjs15_production_architecture>
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, et Content Collections.
+</instructions>
 
-<shadcn_ui_integration>
-**shadcn/ui - Design System Production**
+<webui_informations>
+<openai_information>
+- Openai : Deux webui disponibles : ChatGPT (https://chatgpt.com/) et Playground (https://platform.openai.com/playground)
 
-**Philosophie d'Usage :**
-- Composants utilisés tels quels, pas de sur-personnalisation.
-- Composition simple pour fonctionnalités complexes.  
-- Accessibilité intégrée exploitée à 100%.
+  • Modèles récents (2024-2025) :
+    - GPT-5 (août 2025) : Modèle unifié avec raisonnement avancé. 
+      Variantes : gpt-5 (complet), gpt-5-mini (rapide), gpt-5-nano (ultra-rapide)
+      Fenêtre contextuelle : jusqu'à 400K tokens
+      Performances : 94.6% (AIME 2025), 74.9% (SWE-bench), 84.2% (MMMU)
+    - GPT-4.1 (2024) : Modèle pour développeurs, API flexible
+      Variantes : gpt-4.1, gpt-4.1-mini, gpt-4.1-nano
+    - GPT-4o (mai 2024) : Multimodal (texte, image, son)
 
-**Patterns Etablis :**
-- Card + CardHeader/CardContent pour structure cohérente.
-- Tabs pour organisation multi-vues (prompts, guides).
-- Alert/AlertDescription pour informations importantes.
-- Badge système pour catégories/difficultés/tags.
-</shadcn_ui_integration>
+  • ChatGPT - Outils disponibles :
+    - Compréhension PDF :
+      • Gratuit : GPT-4o mini (limité)
+      • Payant (20€/mois) : GPT-5 (complet) - OCR natif, analyse tableaux/diagrammes
+    
+    - Deep Research :
+      • Gratuit : Version lite (5 utilisations/mois)
+      • Payant : Version complète (illimitée, export PDF)
+    
+    - Live :
+      • Gratuit : Voix standard
+      • Payant : Voix avancée, streaming temps réel
 
----
+  • ChatGPT Playground - Outils :
+    - Modèles : GPT-5, GPT-4.1, GPT-4o, GPT-3.5-turbo (+ variants mini/nano)
+    - Paramètres : Temperature (0-1), Max length (1-2048), Top P (0-1)
+    - Modes : Chat, Completion
+    - Multimodal : Texte, image, audio
+    - Connecteurs : Intégrations externes, CRM, bases de données
+    - Agent : Exécution tâches complexes multi-outils
+    - Pas de quotas gratuit sans CB
 
-## 🎯 **Production-Ready Best Practices**
+  • Accès gratuit vs payant (20€/mois) :
+    - Gratuit : GPT-5 limité, GPT-4o mini, 8K tokens, plugins non disponibles
+    - Payant : GPT-5 étendu, 32K tokens, plugins, génération images, GPTs personnalisés
+</openai_information>
 
-### **DO's - Excellence Standards**
-- ✅ **Content Interconnection**: Systématiquement ajouter GuideRecommendation, ConceptRecommendation, ToolRecommendation contextuels  
-- ✅ **Build-Time Logic**: Utiliser `transform` de Content Collections pour toute logique de données
-- ✅ **Type Safety**: Faire confiance aux types générés `.content-collections/generated`
-- ✅ **Quality Standards**: keyTakeaways obligatoires, conceptSlugs validés, références croisées vérifiées
-- ✅ **Performance Focus**: 48 pages statiques, <2s load time, build optimisé
-- ✅ **Test Coverage**: 30+ tests automatiques pour validation continue
+<google_information>
+- Google : Deux webui disponibles - Gemini (gemini.google.com) et AI Studio (aistudio.google.com)
+  **Note :** Il est crucial de bien distinguer l'interface de chat `gemini.google.com` (produit grand public) de `aistudio.google.com` (laboratoire d'expérimentation).
 
-### **DON'Ts - Anti-Patterns à Éviter**
-- ❌ **Runtime Logic**: Jamais de logique liaison données côté client (guides.map() etc)
-- ❌ **Manual Types**: Jamais créer de types manuels pour contenu (GuideWithSlug)  
-- ❌ **Over-Engineering**: Pas de complexité inutile, solutions simples privilégiées
-- ❌ **Cache Assumptions**: Next.js 15 ne cache rien par défaut, configuration explicite
-- ❌ **Technical Jargon**: Contenu 100% non-développeurs, bannir API/RAG/etc
+  • Modèles récents (2024-2025) :
+    - Gemini 2.5 Pro (juin 2025) : Modèle "pensant" le plus puissant
+      • Contexte : 1M tokens (env. 750 Mo texte)
+      • Entrées : Audio, images, vidéo, texte, PDF
+      • Performances : Raisonnement avancé, analyse codebases, traitement documents longs
+    - Gemini 2.5 Flash (juin 2025) : Meilleur rapport prix/performance
+      • Contexte : 1M tokens
+      • Entrées : Audio, images, vidéo, texte
+      • Optimisé pour faible latence et haut débit
+    - Gemini 2.5 Flash-Lite (juillet 2025) : Version optimisée coût/latence
+      • Contexte : 1M tokens
+      • Entrées : Texte, image, vidéo, audio, PDF
+    - Gemini 2.5 Flash Image Preview (août 2025) : Génération d'images conversationnelle
+    - Imagen 4 (août 2025) : Ultra, Standard et Fast modèles
 
-### **Content Excellence Framework**
-- **Progression Naturelle**: Débutant → Intermédiaire → Avancé avec recommandations
-- **Validation Automatique**: Tests vérifient toutes références croisées et métadonnées  
-- **WebUI First**: 100% interfaces web, zéro ligne de code requise
-- **Pharmaceutical Focus**: Exemples concrets, cas pratiques, vocabulaire métier
+  • Gemini - Outils disponibles :
+    - Compréhension PDF :
+      • Gratuit : Gemini 2.5 Flash (limité à 32K tokens, 10 fichiers max 100Mo)
+      • Payant (20€/mois) : Gemini 2.5 Pro (1M tokens, analyse feuilles calcul, données tabulaires)
+    
+    - Deep Research :
+      • Gratuit : Non disponible
+      • Payant : Disponible avec Gemini Advanced, génération rapports détaillés
+    
+    - Live :
+      • Gratuit : Voix standard
+      • Payant : Gemini Live avec interactions vocales temps réel
 
----
+  • Google AI Studio - Outils :
+    - Modèles : Gemini 2.5 Pro/Flash/Flash-Lite, Imagen 4, Veo 3
+    - Paramètres : Temperature, Max tokens, Top P, Top K
+    - Modes : Chat, Completion, Batch
+    - Multimodal : Texte, image, audio, vidéo, PDF
+    - Fonctionnalités : 
+      • Structured outputs
+      • Function calling
+      • Code execution
+      • Search grounding
+      • Thinking mode
+      • URL context
+      • Caching support
+    - API gratuite : 60 requêtes/min, 300K tokens/jour
+    - API Gratuite = Accès gratuit sur la webui avec quota (utilisant api en arrière plan mais pas besoin de code). De plus, pas de CB nécessaire pour l'inscription = outil privilégié pour les étudiants, sans nécessité de sortir la carte de crédit, permettant d'accéder aux meilleurs modèles avec quota généreux. 
 
-*Instructions mises à jour pour refléter l'état production-ready du projet avec 48 pages statiques, système d'interconnexions finalisé, et architecture optimisée Next.js 15 + React 19.*
+  • Accès gratuit vs payant (20€/mois - Gemini Advanced) :
+    - Gratuit : Gemini 2.5 Flash, 32K tokens, 10 fichiers 100Mo max
+    - Payant : Gemini 2.5 Pro, 1M tokens, 100 requêtes 2.5 Pro/jour, Veo 3 (3 vidéos/jour), Deep Research
+</google_information>
+
+<notebooklm_information>
+- NotebookLM (Google) : Webui disponible - NotebookLM (https://notebooklm.google.com/)
+
+  • Modèle : Propulsé par les modèles Gemini de Google.
+  
+  • Fonctionnalités principales :
+    - **Assistant de recherche personnalisé :** Transforme vos documents (PDF, cours, notes) en une base de connaissances interactive.
+    - **Interrogation de contenu :** Permet de "discuter" avec vos documents pour obtenir des synthèses, des réponses précises et des comparaisons.
+    - **Génération de podcasts (Audio Overview) :** Crée automatiquement une discussion audio de 10-20 minutes résumant vos documents, idéale pour la révision mobile.
+    - **Organisation par "Notebooks" :** Permet de créer des espaces de travail thématiques (par matière, projet, etc.).
+    - **Citations précises :** Chaque réponse est directement liée à la source dans vos documents.
+  
+  • Accès : Totalement gratuit (août 2025)
+    • Aucune limite de temps connue.
+    • Intégration avec l'écosystème Google.
+    • Confidentialité : Soumis aux politiques de confidentialité de Google.
+</notebooklm_information>
+
+<anthropic_information>
+- Anthropic : Deux webui disponibles - Claude (claude.ai) et Console (console.anthropic.com)
+
+  • Modèles récents (2024-2025) :
+    - Claude Opus 4.1 (août 2025) : Modèle le plus performant pour tâches complexes
+      • Contexte : 200K tokens (env. 150 000 mots)
+      • Performances : 74.5% sur SWE-bench Verified, excellence en codage et raisonnement
+      • Spécialisation : Analyse approfondie, recherche, traitement codebases complexes
+    - Claude Sonnet 4 (mai 2025) : Meilleur rapport performance/pratique
+      • Contexte : 200K tokens (1M tokens en version bêta depuis août 2025)
+      • Performances : Faible hallucination, idéal pour bases de connaissances volumineuses
+      • Spécialisation : Agents conversationnels, génération code, analyse données
+    - Claude Haiku 4 (mai 2025) : Modèle rapide et économique
+      • Contexte : 200K tokens
+      • Spécialisation : Réponses rapides, traitement haut volume
+
+  • Claude - Outils disponibles :
+    - Compréhension PDF :
+      • Gratuit : Traitement basique, 50 messages/jour
+      • Payant ($18-25/mois) : Analyse avancée, traitement documents volumineux
+    
+    - Research :
+      • Gratuit : Accès limité aux fonctionnalités de recherche
+      • Payant : Accès complet à Research, analyse approfondie
+    
+    - Projects :
+      • Gratuit : Non disponible
+      • Payant : Organisation illimitée de chats et documents
+
+  • Anthropic Console - Outils :
+    - Modèles : Claude Opus 4.1, Sonnet 4, Haiku 4
+    - Paramètres : Temperature, Top P, Top K, Max tokens
+    - Modes : Messages, Completions
+    - Fonctionnalités :
+      • Evaluate : Tests et évaluation de prompts avec génération de cas de test
+      • Workbench : Environnement de développement intégré
+      • Générateur de prompts : Création automatique de prompts détaillés
+      • API Reference : Documentation complète et exemples de code
+      • Cookbooks : Exemples pratiques et meilleures pratiques
+      • Prompt caching : Jusqu'à 90% d'économies
+      • Batch processing : 50% d'économies
+      • Support multimodal : Texte, image, document
+
+  • Accès gratuit vs payant ($18-25/mois) :
+    - Gratuit : 50 messages/jour, personas prédéfinis, publicités occasionnelles
+    - Payant : Usage illimité (limites en heures de pointe), personas personnalisables, intégrations (Slack, Google Workspace), priorité accès, early features, Claude Code, Projects illimités
+</anthropic_information>
 
 <zai_information>
 - Zhipu AI : Webui disponible - Chat Z.AI (chat.z.ai)
@@ -403,7 +566,7 @@ Informations fondamentales sur la webui évoquée dans le projet :
 <autre>
 - Plateforme complètement gratuite mais énorme risque de confidentialité : https://ish.junioralive.in/
 - Trouver des outils gratuits en IA (attention à la confidentialité, si c'est gratuit c'est que les données sont très probablement réutilisées au mieux pour l'entraînement, au pire pour la revente) : https://fmhy.net/ai#ai-chatbots
-- ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles. 
+- ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. **La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles.**
 </autre>
 
-</webui_informations>  
+</webui_informations> 
