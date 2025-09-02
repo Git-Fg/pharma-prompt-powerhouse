@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { CodeBlock } from "@/components/ui/code-block";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
+import MultiFormatPrompt from "@/components/prompts/MultiFormatPrompt";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -110,6 +111,9 @@ export function useMDXComponents(): Record<string, any> {
     
     // Blocs de code
     CodeBlock,
+    
+    // Multi-format prompts
+    MultiFormatPrompt,
     
     // Points clés
     KeyTakeaways,
