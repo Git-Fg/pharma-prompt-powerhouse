@@ -168,7 +168,7 @@ export default async function GuideDetailPage({
 
       {/* FOOTER ENTIÈREMENT REMPLACÉ PAR LA NOUVELLE LOGIQUE */}
       <RelatedContent
-        currentItem={{ slug: guide.slug, concepts: guide.concepts }}
+        currentItem={{ slug: guide.slug, conceptSlugs: guide.conceptSlugs }}
       />
     </div>
   );
