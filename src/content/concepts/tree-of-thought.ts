@@ -22,7 +22,6 @@ export const concept = {
     "Cette technique est idéale pour le diagnostic différentiel, l'analyse de cas complexes et la prise de décision clinique."
   ],
   "conceptSlugs": [],
-  "mainGuideSlug": "tree-of-thought-clinique",
   "content": [
     {
       "type": "markdown",

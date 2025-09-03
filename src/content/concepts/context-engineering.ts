@@ -21,7 +21,6 @@ export const concept = {
     "Structurez et concisiez vos données pour maximiser l'efficacité de la mémoire de travail de l'IA."
   ],
   "conceptSlugs": [],
-  "mainGuideSlug": "gestion-memoire-ia",
   "content": [
     {
       "type": "alert",

@@ -20,7 +20,6 @@ export const concept = {
     "Cette méthode permet de valider chaque étape et de mieux contrôler le résultat final."
   ],
   "conceptSlugs": [],
-  "mainGuideSlug": "optimisation-de-prompts-la-methode-iterative",
   "content": [
     {
       "type": "markdown",

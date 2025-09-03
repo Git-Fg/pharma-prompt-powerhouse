@@ -65,7 +65,6 @@ export const conceptSchema = baseContentSchema.extend({
   category: z.string(),
   difficulty: z.string(),
   keyTakeaways: z.array(z.string()).min(1),
-  mainGuideSlug: slugSchema.optional(),
   content: z.array(contentBlockSchema),
 });
 
@@ -185,6 +184,4 @@ export type EnrichedGuide = Guide & {
   relatedPrompts: Omit<Prompt, 'content'>[];
 };
 
-export type EnrichedConcept = Concept & {
-  guide?: EnrichedGuide;
-};
+export type EnrichedConcept = Concept;

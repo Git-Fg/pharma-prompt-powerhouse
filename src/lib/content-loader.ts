@@ -81,10 +81,7 @@ export function loadContent() {
     };
   });
   
-  const enrichedConcepts: EnrichedConcept[] = concepts.map(concept => ({
-    ...concept,
-    guide: concept.mainGuideSlug ? enrichedGuides.find(g => g.slug === concept.mainGuideSlug) : undefined,
-  }));
+  const enrichedConcepts: EnrichedConcept[] = concepts;
 
   return { 
     guides: enrichedGuides, 
