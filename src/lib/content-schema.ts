@@ -11,7 +11,23 @@ const guideRecommendationBlockSchema = z.object({ type: z.literal('guideRecommen
 const conceptRecommendationBlockSchema = z.object({ type: z.literal('conceptRecommendation'), slug: z.string(), reason: z.string() });
 const codeBlockSchema = z.object({ type: z.literal('codeBlock'), language: z.string(), filename: z.string().optional(), showLineNumbers: z.boolean().optional(), content: z.string() });
 const cardBlockSchema = z.object({ type: z.literal('card'), title: z.string().optional(), description: z.string().optional(), content: z.string(), variant: z.enum(['default', 'outline']).optional() });
-const multiFormatPromptBlockSchema = z.object({ type: z.literal('multiFormatPrompt'), alternativeVersions: z.record(z.string(), z.unknown()).optional(), recommendedTools: z.record(z.string(), z.unknown()).optional(), variables: z.array(z.string()).optional() });
+const multiFormatPromptBlockSchema = z.object({ 
+  type: z.literal('multiFormatPrompt'), 
+  alternativeVersions: z.object({
+    standard: z.string().optional(),
+    xml: z.string().optional(),
+    aiStudio: z.object({
+      systemPrompt: z.string().optional(),
+      userPrompt: z.string().optional(),
+    }).optional(),
+  }).optional(), 
+  recommendedTools: z.object({
+    standard: z.array(z.string()).optional(),
+    xml: z.array(z.string()).optional(),
+    aiStudio: z.array(z.string()).optional(),
+  }).optional(), 
+  variables: z.array(z.string()).optional() 
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({ 
