@@ -52,3 +52,18 @@ test-results
 
 /e2e_image
 node_modules
+# Ignorer les tests de couverture
+coverage/
+.nyc_output/
+
+# Ignorer les fichiers temporaires de test
+tests/tmp/
+*.test.local.*
+
+# Ignorer les fichiers de config temporaires de Playwright  
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Ignorer les screenshots de test si générés localement
+**/__screenshots__/

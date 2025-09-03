@@ -11,6 +11,12 @@
     "typecheck": "tsc --noEmit",
     "cleanreinstall": "rm -rf .next node_modules && rm package-lock.json && npm install && npm run build",
     "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:unit": "vitest run tests/unit/",
+    "test:integration": "vitest run tests/integration/",
+    "test:component": "vitest run tests/component/",
     "test:e2e": "playwright test",
     "e2e:image": "playwright test tests/e2e/screenshot.spec.ts"
   },
