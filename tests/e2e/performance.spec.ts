@@ -7,8 +7,8 @@ test.describe('Content Accessibility and Performance', () => {
       '/concepts',
       '/workflows',
       '/guides', 
-      '/prompts',
-      '/outils-externes',
+      '/l-arsenal-ia',
+      '/par-ou-commencer',
       '/concepts/context-engineering',
       '/guides/confidentialite-securite',
     ];
@@ -55,7 +55,7 @@ test.describe('Content Accessibility and Performance', () => {
     const conceptCount = await conceptLinks.count();
     expect(conceptCount).toBeGreaterThanOrEqual(5); // We have exactly 8 concepts, so >= 5 is appropriate
     
-    // Workflows page - NEW
+    // Workflows page
     await page.goto('/workflows');
     const workflowCards = page.locator('h1:has-text("Workflows")');
     await expect(workflowCards.first()).toBeVisible();
@@ -66,22 +66,9 @@ test.describe('Content Accessibility and Performance', () => {
     const guideCount = await guideLinks.count();
     expect(guideCount).toBeGreaterThan(10);
     
-    // Prompts page - check for prompt cards with action buttons using data-testid
-    await page.goto('/prompts');
-    const promptButtons = page.locator('[data-testid="use-prompt-button"], [data-testid="copy-prompt-button"]');
-    const buttonCount = await promptButtons.count();
-    if (buttonCount === 0) {
-      // Fallback to text-based selectors
-      const fallbackButtons = page.locator('button:has-text("Utiliser ce prompt"), button:has-text("Copier le prompt")');
-      const fallbackCount = await fallbackButtons.count();
-      expect(fallbackCount).toBeGreaterThan(3);
-    } else {
-      expect(buttonCount).toBeGreaterThan(3);
-    }
-    
-    // External tools page
-    await page.goto('/outils-externes');
-    const toolLinks = page.locator('a[href*="/outils-externes/"]');
+    // Arsenal IA page - updated route
+    await page.goto('/l-arsenal-ia');
+    const toolLinks = page.locator('a[href*="/l-arsenal-ia/"]');
     const toolCount = await toolLinks.count();
     expect(toolCount).toBeGreaterThan(5);
   });
@@ -169,8 +156,8 @@ test.describe('Content Accessibility and Performance', () => {
       '/',
       '/concepts/hallucination-effet-indesirable',
       '/guides/confidentialite-securite',
-      '/prompts/generateur-mnemoniques-analogies',
-      '/outils-externes/google-ai-studio'
+      '/workflows/creer-fiches-de-revision',
+      '/l-arsenal-ia/google-ai-studio'
     ];
 
     for (const url of pagesToTest) {
