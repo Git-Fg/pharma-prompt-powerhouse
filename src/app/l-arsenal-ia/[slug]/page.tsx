@@ -24,16 +24,6 @@ export default function ToolPage({ params }: ToolPageProps) {
     notFound();
   }
 
-  // Type assertion to access optional enhanced schema fields
-  const enhancedTool = tool as typeof tool & {
-    personalReview?: string;
-    strongPoints?: string[];
-    vigilancePoints?: string[];
-    confidenceScore?: number;
-    confidenceJustification?: string;
-    freeVsPaidOffer?: string;
-  };
-
   const renderStarRating = (score: number) => {
     return (
       <div className="flex items-center gap-1">
@@ -71,44 +61,44 @@ export default function ToolPage({ params }: ToolPageProps) {
       </div>
 
       {/* Enhanced Schema Content */}
-      {(enhancedTool.personalReview || enhancedTool.strongPoints || enhancedTool.vigilancePoints || enhancedTool.confidenceScore) && (
+      {(tool.personalReview || tool.strongPoints || tool.vigilancePoints || tool.confidenceScore) && (
         <div className="grid gap-6 md:grid-cols-2">
           {/* Mon Avis en Bref */}
-          {enhancedTool.personalReview && (
+          {tool.personalReview && (
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Mon Avis en Bref</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground italic">{enhancedTool.personalReview}</p>
+                <p className="text-muted-foreground italic">{tool.personalReview}</p>
               </CardContent>
             </Card>
           )}
 
           {/* Score de Confiance */}
-          {enhancedTool.confidenceScore && (
+          {tool.confidenceScore && (
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Score de Confiance</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {renderStarRating(enhancedTool.confidenceScore)}
-                {enhancedTool.confidenceJustification && (
-                  <p className="text-sm text-muted-foreground">{enhancedTool.confidenceJustification}</p>
+                {renderStarRating(tool.confidenceScore)}
+                {tool.confidenceJustification && (
+                  <p className="text-sm text-muted-foreground">{tool.confidenceJustification}</p>
                 )}
               </CardContent>
             </Card>
           )}
 
           {/* Points Forts */}
-          {enhancedTool.strongPoints && enhancedTool.strongPoints.length > 0 && (
+          {tool.strongPoints && tool.strongPoints.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg text-green-600">Points Forts</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {enhancedTool.strongPoints?.map((point: string, index: number) => (
+                  {tool.strongPoints?.map((point: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="text-green-500 mt-1">✓</span>
                       <span>{point}</span>
@@ -120,14 +110,14 @@ export default function ToolPage({ params }: ToolPageProps) {
           )}
 
           {/* Points de Vigilance */}
-          {enhancedTool.vigilancePoints && enhancedTool.vigilancePoints.length > 0 && (
+          {tool.vigilancePoints && tool.vigilancePoints.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg text-orange-600">Points de Vigilance</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {enhancedTool.vigilancePoints?.map((point: string, index: number) => (
+                  {tool.vigilancePoints?.map((point: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="text-orange-500 mt-1">⚠</span>
                       <span>{point}</span>
@@ -141,21 +131,21 @@ export default function ToolPage({ params }: ToolPageProps) {
       )}
 
       {/* Offre Gratuite vs Payante */}
-      {enhancedTool.freeVsPaidOffer && (
+      {tool.freeVsPaidOffer && (
         <Card>
           <CardHeader>
             <CardTitle className="text-xl">Offre Gratuite vs Payante</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="prose dark:prose-invert max-w-none">
-              <ReactMarkdown>{enhancedTool.freeVsPaidOffer}</ReactMarkdown>
+              <ReactMarkdown>{tool.freeVsPaidOffer}</ReactMarkdown>
             </div>
           </CardContent>
         </Card>
       )}
 
       {/* TLDR */}
-      {tool.tldr && (
+      {("tldr" in tool) && tool.tldr && (
         <Card className="border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800">
           <CardHeader>
             <CardTitle className="text-lg text-blue-800 dark:text-blue-200">
@@ -163,7 +153,7 @@ export default function ToolPage({ params }: ToolPageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-blue-700 dark:text-blue-300">{tool.tldr}</p>
+            <p className="text-blue-700 dark:text-blue-300">{("tldr" in tool) ? tool.tldr : ""}</p>
           </CardContent>
         </Card>
       )}
