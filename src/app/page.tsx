@@ -1,10 +1,10 @@
 import { content } from '@/lib/content-loader';
-import { ConceptCard } from '@/components/cards/ConceptCard';
-import { GuideCard } from '@/components/cards/GuideCard';
-import { PromptCard } from '@/components/cards/PromptCard';
-import { SearchInput } from '@/components/search/SearchInput';
-import { Tag } from '@/components/ui/tag';
-import { ObjectifCard } from '@/components/cards/ObjectifCard';
+import { ConceptCard } from '@/components/shared/ConceptCard';
+import { GuideCard } from '@/components/shared/GuideCard';
+import { PromptCard } from '@/components/prompts/PromptCard';
+import { SearchInput } from '@/components/ui/search-input';
+import { Badge } from '@/components/ui/badge';
+import { ObjectifCard } from '@/components/objectifs/ObjectifCard';
 
 export default function HomePage() {
   const favoriteConcepts = content.concepts.filter(c => c.isFavorite);
@@ -53,7 +53,7 @@ export default function HomePage() {
         <section>
           <h2 className="text-3xl font-bold mb-6">Prompts à la Une</h2>
           <div className="flex flex-wrap gap-2 mb-6">
-            {allTags.map((tag: string) => <Tag key={tag} text={tag} />)}
+            {allTags.map((tag: string) => <Badge key={tag} variant="outline">{tag}</Badge>)}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {favoritePrompts.map(prompt => <PromptCard key={prompt.slug} prompt={prompt} />)}

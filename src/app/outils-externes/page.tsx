@@ -1,7 +1,7 @@
 import { content } from '@/lib/content-loader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
-import { Tag } from '@/components/ui/tag';
+import { Badge } from '@/components/ui/badge';
 import { ExternalLink } from 'lucide-react';
 
 export default function ExternalToolsPage() {
@@ -22,7 +22,7 @@ export default function ExternalToolsPage() {
       </header>
 
       <div className="flex flex-wrap gap-2 justify-center">
-        {allTags.map((tag) => <Tag key={tag} text={tag} />)}
+        {allTags.map((tag) => <Badge key={tag} variant="outline">{tag}</Badge>)}
       </div>
 
       {Object.entries(toolsByCategory).map(([category, tools]) => (
@@ -41,7 +41,7 @@ export default function ExternalToolsPage() {
                   <CardContent>
                     <p className="text-muted-foreground text-sm">{tool.description}</p>
                     <div className="flex flex-wrap gap-2 mt-4">
-                        {tool.tags.map((tag) => <Tag key={tag} text={tag} />)}
+                        {tool.tags.map((tag) => <Badge key={tag} variant="outline">{tag}</Badge>)}
                     </div>
                   </CardContent>
                 </Card>
