@@ -3,7 +3,6 @@ import { content, getToolBySlug } from '@/lib/content-loader';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 interface ToolPageProps {
   params: {

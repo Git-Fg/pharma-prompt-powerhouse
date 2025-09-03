@@ -1,4 +1,3 @@
-import { content } from '@/lib/content-loader';
 import { ConceptCard } from '@/components/shared/ConceptCard';
 import { EnrichedGuide } from '@/lib/content-schema';
 

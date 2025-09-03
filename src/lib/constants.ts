@@ -2,21 +2,20 @@
 
 // NOUVELLE SOURCE DE VÉRITÉ UNIQUE
 export const categoryLabels = {
-  // Intention: Apprendre la théorie
+  // Categories from schema
+  'techniques-de-base': 'Techniques de Base',
+  'prompts-avancés': 'Prompts Avancés', 
+  'bonnes-pratiques': 'Bonnes Pratiques',
+  'outils-et-workflows': 'Outils et Workflows',
+  
+  // Additional legacy categories that might exist
   'fondamentaux': 'Fondamentaux',
   'techniques-avancees': 'Techniques Avancées',
-
-  // Intention: Apprendre à faire
   'methodologie': 'Méthodologie',
   'cas-pratiques': 'Cas Pratiques',
-  'bonnes-pratiques': 'Bonnes Pratiques',
-
-  // Intention: Utiliser des ressources
   'outils': 'Outils',
   'prompts': 'Prompts',
   'ressources': 'Ressources',
-  
-  // Catégories spécifiques mais transversales
   'securite': 'Sécurité & Confidentialité',
   'apprentissage': 'Apprentissage & Révision',
   'recherche': 'Recherche & Analyse',

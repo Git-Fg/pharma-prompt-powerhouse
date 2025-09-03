@@ -111,13 +111,7 @@ export function PromptListClient({ initialPrompts }: PromptListProps) {
           {filteredPrompts.map(prompt => (
             <PromptCard
               key={prompt.slug}
-              slug={prompt.slug}
-              title={prompt.title}
-              description={prompt.description}
-              difficulty={prompt.difficulty}
-              tags={prompt.tags}
-              icon={prompt.icon}
-              promptContent={prompt.promptContent}
+              prompt={prompt}
             />
           ))}
         </div>

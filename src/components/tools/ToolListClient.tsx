@@ -88,14 +88,7 @@ export function ToolListClient({ initialTools }: ToolListClientProps) {
           {filteredTools.map(tool => (
             <ToolCard
               key={tool.slug}
-              slug={tool.slug}
-              title={tool.title}
-              description={tool.description}
-              category={tool.category}
-              pricing={tool.pricing}
-              url={tool.url}
-              use_cases={tool.use_cases}
-              color={tool.color}
+              tool={tool}
             />
           ))}
         </div>

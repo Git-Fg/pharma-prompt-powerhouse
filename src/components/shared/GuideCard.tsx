@@ -2,96 +2,65 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, Button } from '@/components/ui';
-import { ArrowRight, Clock, BookOpen, Star, Workflow } from 'lucide-react';
-import { getIcon } from '@/types/icon-taxonomy';
-import { cn } from '@/lib/utils';
-import { useFavorites } from '@/hooks/useFavorites';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Clock, BookOpen, Target } from 'lucide-react';
+import type { EnrichedGuide } from '@/lib/content-schema';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
 interface GuideCardProps {
-  slug: string;
-  title: string;
-  description: string;
-  icon?: string;
-  category: string;
-  difficulty: 'débutant' | 'intermédiaire' | 'avancé';
-  estimatedTime?: string;
-  isWorkflow?: boolean;
+  guide: EnrichedGuide;
 }
 
-export const GuideCard: React.FC<GuideCardProps> = ({
-  slug,
-  title,
-  description,
-  icon,
-  category,
-  difficulty,
-  estimatedTime,
-  isWorkflow,
-}) => {
-  const IconComponent = getIcon(icon);
-  const { toggleFavorite, isFavorite } = useFavorites('favoriteGuides');
+export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
+  const categoryLabel = categoryLabels[guide.category] || guide.category;
+  const difficultyLabel = difficultyLabels[guide.difficulty] || guide.difficulty;
 
   return (
-    <Card className="h-full flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
       <CardHeader className="flex-grow">
-        <div className="flex justify-between items-start">
-          <Badge variant="secondary" className="mb-2">
-            {categoryLabels[category as keyof typeof categoryLabels] || category}
-          </Badge>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-8 h-8 p-0 -mt-2 -mr-2"
-            onClick={(e) => {
-              e.preventDefault();
-              toggleFavorite(slug);
-            }}
-          >
-            <Star
-              className={cn(
-                'w-4 h-4',
-                isFavorite(slug) ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground'
-              )}
-            />
-          </Button>
-        </div>
-        <div className="flex items-center gap-3 mb-2">
-          <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
-            <IconComponent className="w-5 h-5 text-primary" />
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-4">
+            <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
+              <BookOpen className="w-6 h-6 text-primary" />
+            </div>
+            <div className="flex-1">
+              <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                {guide.title}
+              </CardTitle>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="secondary">{categoryLabel}</Badge>
+                <Badge variant="outline">{difficultyLabel}</Badge>
+                {guide.isWorkflow && (
+                  <Badge variant="default">
+                    <Target className="mr-1 h-3 w-3" />
+                    Workflow
+                  </Badge>
+                )}
+              </div>
+            </div>
           </div>
-          <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">
-            {title}
-          </CardTitle>
         </div>
-        <CardDescription className="text-sm line-clamp-3">
-          {description}
+        <CardDescription className="text-sm text-muted-foreground line-clamp-3 mb-4">
+          {guide.description}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-          <div className="flex items-center gap-1">
-            {isWorkflow && (
-              <Badge variant="default" className="text-xs mr-1">
-                <Workflow className="w-3 h-3 mr-1" />
-                Workflow
-              </Badge>
-            )}
-            <BookOpen className="w-3 h-3 mr-1" />
-            {difficultyLabels[difficulty]}
-          </div>
-          <div className="flex items-center">
-            <Clock className="w-3 h-3 mr-1" />
-            {estimatedTime || '5 min'}
-          </div>
-        </div>
-        <Button asChild className="w-full">
-          <Link href={`/guides/${slug}`}>
-            {isWorkflow ? "Suivre le workflow" : "Lire le guide"}
-            <ArrowRight className="w-4 h-4 ml-2" />
+        <div className="space-y-3">
+          {guide.estimatedTime && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Clock className="h-4 w-4" />
+              <span>Temps de lecture : {guide.estimatedTime}</span>
+            </div>
+          )}
+          <Link href={`/guides/${guide.slug}`} className="block">
+            <Button className="w-full" size="sm">
+              Lire le guide
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
           </Link>
-        </Button>
+        </div>
       </CardContent>
     </Card>
   );
