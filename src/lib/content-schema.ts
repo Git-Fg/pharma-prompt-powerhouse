@@ -133,12 +133,9 @@ export const enhancedExternalToolSchema = baseContentSchema.extend({
   personalReview: z.string(), // "Mon Avis en Bref"
   strongPoints: z.array(z.string()), // "Points Forts (selon mon expérience)"
   vigilancePoints: z.array(z.string()), // "Points de Vigilance"
-  confidenceScore: z.number().min(1).max(10), // Score de Confiance
+  confidenceScore: z.number().min(1).max(5), // Score de Confiance sur 5
   confidenceJustification: z.string(), // Justification du score
-  freeVsPaid: z.object({
-    free: z.array(z.string()),
-    paid: z.array(z.string()),
-  }), // Offre Gratuite vs Payante
+  freeVsPaidOffer: z.string(), // Tableau comparatif en Markdown
   tldr: z.string().optional(),
   color: z.string().optional(),
   use_cases: z.array(z.string()).optional(),
