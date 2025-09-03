@@ -99,27 +99,55 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
 
     case 'table':
       return (
-        <Table className="my-6">
-          {block.caption && <TableCaption>{block.caption}</TableCaption>}
-          <TableHeader>
-            <TableRow>
-              {block.headers.map((header: string, index: number) => (
-                <TableHead key={index}>{header}</TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {block.rows.map((row: string[], rowIndex: number) => (
-              <TableRow key={rowIndex}>
-                {row.map((cell: string, cellIndex: number) => (
-                  <TableCell key={cellIndex}>
-                    <MarkdownRenderer content={cell} />
-                  </TableCell>
+        <div className="my-6">
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
+            <Table>
+              {block.caption && <TableCaption>{block.caption}</TableCaption>}
+              <TableHeader>
+                <TableRow>
+                  {block.headers.map((header: string, index: number) => (
+                    <TableHead key={index}>{header}</TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {block.rows.map((row: string[], rowIndex: number) => (
+                  <TableRow key={rowIndex}>
+                    {row.map((cell: string, cellIndex: number) => (
+                      <TableCell key={cellIndex}>
+                        <MarkdownRenderer content={cell} />
+                      </TableCell>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          
+          {/* Mobile Card View */}
+          <div className="block md:hidden space-y-4">
+            {block.rows.map((row: string[], rowIndex: number) => (
+              <Card key={rowIndex} className="p-4">
+                {row.map((cell: string, cellIndex: number) => (
+                  <div key={cellIndex} className="mb-3 last:mb-0">
+                    <div className="text-sm font-medium text-muted-foreground mb-1">
+                      {block.headers[cellIndex]}
+                    </div>
+                    <div className="text-sm">
+                      <MarkdownRenderer content={cell} />
+                    </div>
+                  </div>
+                ))}
+              </Card>
             ))}
-          </TableBody>
-        </Table>
+            {block.caption && (
+              <p className="text-sm text-muted-foreground text-center mt-2">
+                {block.caption}
+              </p>
+            )}
+          </div>
+        </div>
       );
 
     case 'multiFormatPrompt':
