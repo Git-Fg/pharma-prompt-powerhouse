@@ -108,7 +108,7 @@ export default function ToolPage({ params }: ToolPageProps) {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {enhancedTool.strongPoints.map((point, index) => (
+                  {enhancedTool.strongPoints?.map((point: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="text-green-500 mt-1">✓</span>
                       <span>{point}</span>
@@ -127,7 +127,7 @@ export default function ToolPage({ params }: ToolPageProps) {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {enhancedTool.vigilancePoints.map((point, index) => (
+                  {enhancedTool.vigilancePoints?.map((point: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="text-orange-500 mt-1">⚠</span>
                       <span>{point}</span>
@@ -176,7 +176,7 @@ export default function ToolPage({ params }: ToolPageProps) {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {tool.use_cases.map((useCase, index) => (
+              {tool.use_cases?.map((useCase: string, index: number) => (
                 <Badge key={index} variant="secondary">
                   {useCase}
                 </Badge>

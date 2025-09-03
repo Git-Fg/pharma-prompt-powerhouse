@@ -8,7 +8,7 @@ interface ToolRecommendationProps {
 
 export function ToolRecommendation({ tags, currentSlug }: ToolRecommendationProps) {
   const recommendedTools = content.externalTools.filter(t => 
-    t.slug !== currentSlug && t.tags.some(tag => tags.includes(tag))
+    t.slug !== currentSlug && t.tags.some((tag: string) => tags.includes(tag))
   ).slice(0, 2);
 
   if (recommendedTools.length === 0) {
