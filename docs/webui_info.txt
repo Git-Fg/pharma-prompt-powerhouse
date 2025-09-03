@@ -1,7 +1,4 @@
-Effectue une mise à jour et amélioration globale du contenu de ce projet, pour intégrer l'ensemble des informations suivantes issues de diverses recherches ciblées. Mets à jours/ajoute en priorité les informations des externals tools, mais mets à jour également l'ensemble des guides et concepts contenant des informations non à jour + ajoute l'ensemble des informations pertinentes compte tenu des informations complémentaires suivantes. 
-Commence par relire attentivement l'ensemble du contenu mdx du projet, et planifie l'ensemble des informations à implémenter et des contenus à créer. 
 
-Informations : """
 <webui_informations>
 <openai_information>
 - Openai : Deux webui disponibles : ChatGPT (https://chatgpt.com/) et Playground (https://platform.openai.com/playground)
@@ -370,4 +367,3 @@ Informations fondamentales sur la webui évoquée dans le projet :
 </autre>
 
 </webui_informations>  
-"""
