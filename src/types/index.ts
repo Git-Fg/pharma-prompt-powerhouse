@@ -1,13 +1,17 @@
 /**
  * Point d'entrée pour les types de contenu.
  * C'est la source de vérité unique pour les types de données de notre contenu.
- * Types définis avec Zod dans content-schema.ts
+ * Les types sont définis avec Zod et inférés depuis lib/content-schema.ts
  */
 export type {
   Concept,
   Guide,
   Prompt,
   ExternalTool,
+  Objectif,
+  ContentBlock,
+  EnrichedGuide,
+  EnrichedConcept,
 } from "@/lib/content-schema";
 
 // Type global pour représenter n'importe quel élément de nos collections.
