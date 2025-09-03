@@ -2,9 +2,8 @@ import { allConcepts } from '@/content/concepts';
 import { allGuides } from '@/content/guides';
 import { allPrompts } from '@/content/prompts';
 import { allExternalTools } from '@/content/external-tools';
-import { allObjectifs } from '@/content/objectifs';
 import { allWorkflows } from '@/content/workflows';
-import type { Concept, Guide, Prompt, Objectif, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
+import type { Concept, Guide, Prompt, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
 
 type ContentItem = Guide | Prompt | Workflow;
 
@@ -14,7 +13,6 @@ export function loadContent() {
   const workflows: Workflow[] = allWorkflows;
   const prompts: Prompt[] = allPrompts;
   const externalTools = allExternalTools;
-  const objectifs = allObjectifs;
 
   const conceptMap = new Map<string, Concept>(concepts.map(c => [c.slug, c]));
   const guideMap = new Map<string, Guide>(guides.map(g => [g.slug, g]));
@@ -88,8 +86,7 @@ export function loadContent() {
     workflows: enrichedWorkflows,
     concepts: enrichedConcepts, 
     prompts, 
-    externalTools, 
-    objectifs 
+    externalTools 
   };
 }
 
@@ -100,4 +97,3 @@ export const getWorkflowBySlug = (slug: string) => content.workflows.find(w => w
 export const getConceptBySlug = (slug: string) => content.concepts.find(c => c.slug === slug);
 export const getPromptBySlug = (slug: string) => content.prompts.find(p => p.slug === slug);
 export const getExternalToolBySlug = (slug: string) => content.externalTools.find(t => t.slug === slug);
-export const getObjectifBySlug = (slug: string): Objectif | undefined => content.objectifs.find(o => o.slug === slug);

@@ -10,8 +10,6 @@ import { ToolRecommendation } from './ToolRecommendation';
 import { GuideRecommendation } from './GuideRecommendation';
 import { ConceptRecommendation } from './ConceptRecommendation';
 import { KeyTakeaways } from './KeyTakeaways';
-import { BeforeAfterPrompt } from '../objectifs/BeforeAfterPrompt';
-import { InteractiveChecklist } from '../objectifs/InteractiveChecklist';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import MultiFormatPrompt from '../prompts/MultiFormatPrompt';
@@ -84,12 +82,6 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
     // --- NOUVEAUX CAS DE RENDU ---
     case 'keyTakeaways':
       return <KeyTakeaways points={block.points} />;
-
-    case 'beforeAfterPrompt':
-      return <BeforeAfterPrompt {...block} />;
-
-    case 'interactiveChecklist':
-      return <InteractiveChecklist items={block.items} />;
 
     case 'accordion':
       return (

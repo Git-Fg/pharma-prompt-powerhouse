@@ -6,7 +6,6 @@ import {
   getConceptBySlug,
   getPromptBySlug,
   getExternalToolBySlug,
-  getObjectifBySlug,
   content
 } from '@/lib/content-loader'
 import type { EnrichedGuide, EnrichedConcept } from '@/lib/content-schema'
@@ -159,12 +158,6 @@ describe('Content Loader Integration', () => {
         const foundWorkflow = getWorkflowBySlug(firstWorkflow.slug)
         expect(foundWorkflow).toEqual(firstWorkflow)
       }
-
-      const firstObjectif = loadedContent.objectifs[0]
-      if (firstObjectif) {
-        const foundObjectif = getObjectifBySlug(firstObjectif.slug)
-        expect(foundObjectif).toEqual(firstObjectif)
-      }
     })
 
     it('should return undefined for non-existent slugs', () => {
@@ -173,7 +166,6 @@ describe('Content Loader Integration', () => {
       expect(getPromptBySlug('non-existent-prompt')).toBeUndefined()
       expect(getExternalToolBySlug('non-existent-tool')).toBeUndefined()
       expect(getWorkflowBySlug('non-existent-workflow')).toBeUndefined()
-      expect(getObjectifBySlug('non-existent-objectif')).toBeUndefined()
     })
   })
 
