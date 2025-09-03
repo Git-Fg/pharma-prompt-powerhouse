@@ -1,15 +1,17 @@
-import { Objectif, objectifSchema } from '@/lib/content-schema';
+import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
 
 // On récupère un prompt existant pour le réutiliser
 const masterPromptData = allPrompts.find(p => p.slug === 'generateur-mnemoniques-analogies');
 if (!masterPromptData) throw new Error("Prompt 'generateur-mnemoniques-analogies' non trouvé");
 
-const objectifData = {
+export const objectif = {
   slug: 'memoriser-concepts-difficiles',
   title: 'Mémoriser des Concepts Difficiles',
   description: 'Vaincre les listes et mécanismes complexes en utilisant l\'IA pour générer des mnémoniques, analogies et histoires mémorables.',
   icon: 'Brain',
+  tags: [],
+  isFavorite: false,
   
   masterPrompt: {
     description: "Ce prompt utilise l'IA pour créer des moyens mnémotechniques et des analogies pour mémoriser facilement les concepts pharmaceutiques les plus complexes.",
@@ -19,7 +21,7 @@ const objectifData = {
   beforeAfter: {
     beforePrompt: `"Donne-moi un moyen de retenir les effets des bêta-bloquants."`,
     afterPrompt: `"Crée une histoire humoristique pour mémoriser les effets des bêta-bloquants avec des conseils d'utilisation."`,
-    // NOTE: Vous devrez créer ces screenshots et les placer dans /public/images/objectifs/
+    // TODO: Vous devrez créer ces screenshots et les placer dans /public/images/objectifs/
     beforeImageSrc: "/images/objectifs/mnemonique-avant.png",
     afterImageSrc: "/images/objectifs/mnemonique-apres.png",
   },
@@ -82,6 +84,4 @@ const objectifData = {
       ]
     }
   ]
-};
-
-export const objectif: Objectif = objectifSchema.parse(objectifData);
+} satisfies ObjectifInput;

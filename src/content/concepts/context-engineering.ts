@@ -1,7 +1,7 @@
-// src/content/concepts-new/context-engineering.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+// src/content/concepts/context-engineering.ts
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "context-engineering",
   "title": "Context Engineering",
   "description": "Optimisez la fenêtre de contexte de l'IA pour maximiser la pertinence et la précision des réponses en pharmacie.",
@@ -42,7 +42,6 @@ const conceptData = {
     {
       "type": "card",
       "title": "Bénéfices Concrets",
-      "variant": "outline",
       "content": "- **Précision diagnostique** : L'IA comprend mieux les symptômes et l'historique\n- **Recommandations adaptées** : Les conseils sont plus personnalisés\n- **Sécurité accrue** : Moins de risques d'erreurs d'interprétation\n- **Efficacité** : Réponses plus directes et utiles"
     },
     {
@@ -167,7 +166,4 @@ const conceptData = {
       "reason": "La méthode XML est une technique avancée de context engineering qui permet de structurer parfaitement l'information fournie à l'IA."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

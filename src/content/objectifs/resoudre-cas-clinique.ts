@@ -1,17 +1,19 @@
-import { Objectif, objectifSchema } from '@/lib/content-schema';
+import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
 
 // On récupère le prompt que nous venons de créer
 const masterPromptData = allPrompts.find(p => p.slug === 'resolveur-cas-cliniques-tot');
 if (!masterPromptData) throw new Error("Prompt 'resolveur-cas-cliniques-tot' non trouvé");
 
-const objectifData = {
+export const objectif = {
   slug: 'resoudre-cas-clinique',
   title: 'Résoudre un Cas Clinique Complexe',
   description: 'Utilisez des techniques de prompting avancées pour transformer l\'IA en un partenaire de raisonnement clinique, capable d\'explorer plusieurs hypothèses.',
   icon: 'GitBranch',
+ tags: [],
+  isFavorite: false,
   
-  masterPrompt: {
+ masterPrompt: {
     description: "Ce prompt avancé combine les concepts de structuration par balises et de Tree-of-Thought pour analyser des cas cliniques complexes avec un diagnostic différentiel structuré. C'est le prompt le plus avancé et le plus pédagogique du site.",
     prompt: masterPromptData,
   },
@@ -82,6 +84,4 @@ const objectifData = {
       ]
     }
   ]
-};
-
-export const objectif: Objectif = objectifSchema.parse(objectifData);
+} satisfies ObjectifInput;

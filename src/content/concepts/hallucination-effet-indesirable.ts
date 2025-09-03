@@ -1,7 +1,7 @@
-// src/content/concepts-new/hallucination-effet-indesirable.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+// src/content/concepts/hallucination-effet-indesirable.ts
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "hallucination-effet-indesirable",
   "title": "Hallucination : Effet Indésirable",
   "description": "Comprendre et prévenir les hallucinations de l'IA comme des effets indésirables prévisibles",
@@ -164,7 +164,4 @@ const conceptData = {
       "reason": "Découvrez les techniques professionnelles pour détecter, prévenir et corriger les hallucinations dans vos interactions avec l'IA."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

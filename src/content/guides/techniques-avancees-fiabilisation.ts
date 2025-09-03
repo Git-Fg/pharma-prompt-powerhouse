@@ -1,6 +1,6 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "techniques-avancees-fiabilisation",
   "title": "Techniques de Fiabilisation des Réponses IA",
   "description": "Maîtrisez les techniques avancées pour améliorer la fiabilité et la cohérence de vos interactions avec l'IA",
@@ -19,6 +19,7 @@ const guideData = {
     "tree-of-thought"
   ],
   "isFavorite": true,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Utilisez le 'Chain-of-Thought' (CoT) en demandant à l'IA de raisonner 'étape par étape' pour améliorer la transparence et la logique.",
     "Appliquez le 'Tree-of-Thoughts' (ToT) pour explorer plusieurs hypothèses en parallèle, idéal pour les cas cliniques complexes.",
@@ -27,7 +28,6 @@ const guideData = {
   "conceptSlugs": [
     "tree-of-thought"
   ],
-  "isWorkflow": false,
   "content": [
     {
       "type": "markdown",
@@ -116,7 +116,4 @@ const guideData = {
       "content": "## Conclusion\n\nCes techniques transforment l'IA d'un \"oracle\" potentiellement trompeur en un \"collègue\" dont vous pouvez vérifier le travail. La fiabilité n'est pas une question de chance, c'est le résultat d'une approche méthodique et rigoureuse."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

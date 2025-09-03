@@ -1,7 +1,7 @@
 // src/content/guides/le-core-kit-ia-gratuit-en-2025.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "le-core-kit-ia-gratuit-en-2025",
   "title": "Le Core Kit de l'Étudiant : Maîtriser l'IA de Pointe sans Carte Bancaire en 2025",
   "description": "Découvrez le duo gagnant Z.AI + Google AI Studio : comment accéder aux capacités IA les plus avancées du moment sans débourser un euro. Guide complet d'un workflow éprouvé sur le terrain.",
@@ -10,6 +10,7 @@ const guideData = {
   "estimatedTime": "15 min de lecture + 30 min de pratique",
   "icon": "Star",
   "isFavorite": true,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Le duo Z.AI + AI Studio offre 95% des capacités des solutions payantes",
     "Z.AI surpasse Perplexity pour la recherche planifiée et sourcée",
@@ -58,7 +59,6 @@ const guideData = {
             {
               "type": "card",
               "title": "✅ Étape 3 : Validation Croisée",
-              "variant": "outline",
               "content": "**Bonnes pratiques :**\n1. Confrontez les résultats des deux outils\n2. Utilisez AI Studio pour analyser les sources trouvées par Z.AI\n3. Validez les informations critiques avec des sources officielles\n4. Documentez vos sources pour traçabilité"
             }
           ]
@@ -77,7 +77,7 @@ const guideData = {
               "type": "codeBlock",
               "language": "text",
               "filename": "workflow-exemple.txt",
-              "content": "📋 Workflow Type : Recherche Pharmaceutique\n\n1. Z.AI - Recherche initiale :\n   \"Trouve les dernières données sur l'efficacité des inhibiteurs de SGLT2 \n   en insuffisance cardiaque. Focus sur les essais 2024-2025.\"\n   \n2. AI Studio - Analyse approfondie :\n   [Copier les sources trouvées]\n   \"Analyse comparative des études DAPA-HF vs EMPEROR-Reduced vs nouvelles données 2025.\n   Structure : mécanisme, population, endpoints, résultats, place en thérapie.\"\n   \n3. Validation croisée :\n   - Vérifier cohérence entre les deux analyses\n   - Contrôler avec sources officielles (HAS, ESC/AHA)\n   - Documenter les références pour usage ultérieur"
+              "content": "📋 Workflow Type : Recherche Pharmaceutique\n1. Z.AI - Recherche initiale :\n   \"Trouve les dernières données sur l'efficacité des inhibiteurs de SGLT2 \n   en insuffisance cardiaque. Focus sur les essais 2024-2025.\"\n   \n2. AI Studio - Analyse approfondie :\n   [Copier les sources trouvées]\n   \"Analyse comparative des études DAPA-HF vs EMPEROR-Reduced vs nouvelles données 2025.\n   Structure : mécanisme, population, endpoints, résultats, place en thérapie.\"\n   \n3. Validation croisée :\n   - Vérifier cohérence entre les deux analyses\n   - Contrôler avec sources officielles (HAS, ESC/AHA)\n   - Documenter les références pour usage ultérieur"
             }
           ]
         },
@@ -156,7 +156,4 @@ const guideData = {
       "reason": "Explorer l'écosystème complet d'AI Studio : bien plus qu'un simple chat, c'est une suite créative multimodale."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

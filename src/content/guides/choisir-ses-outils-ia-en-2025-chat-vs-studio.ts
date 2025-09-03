@@ -1,7 +1,7 @@
 // src/content/guides/choisir-ses-outils-ia-en-2025-chat-vs-studio.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "choisir-ses-outils-ia-en-2025-chat-vs-studio",
   "title": "Choisir ses Outils IA en 2025 : Chat vs Studio",
   "description": "Guide complet pour choisir ses outils IA en 2025 : interfaces de chat pour l'usage quotidien vs studios d'expérimentation pour maîtriser le prompt engineering",
@@ -16,6 +16,7 @@ const guideData = {
     "comparatif"
   ],
   "isFavorite": true,
+  "isWorkflow": true,
   "keyTakeaways": [
     "Il existe deux catégories d'outils IA : les **interfaces de chat** pour l'usage quotidien et les **studios d'expérimentation** pour maîtriser le prompt engineering.",
     "Perplexity.ai est le roi de la recherche fiable grâce à ses sources systématiques et son mode 'Academic'.",
@@ -26,7 +27,6 @@ const guideData = {
     "context-engineering",
     "température-dosage"
   ],
-  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",
@@ -144,7 +144,7 @@ const guideData = {
     },
     {
       "type": "markdown",
-      "content": "### Tableau Comparatif des Environnements d'Expérimentation\n\n| Critère | Google AI Studio | OpenAI Playground | Anthropic Console |\n| :--- | :--- | :--- | :--- |\n| **Point Fort** | **Accès Gratuit & Généreux** | **Accès aux derniers modèles GPT** | **Outils d'Évaluation de Prompts** |\n| **Modèle Gratuit** | ✅ **Gemini 2.5 Pro (1M tokens)** | ❌ Non (nécessite une CB) | ❌ Non (nécessite une CB) |\n| **Contexte Max** | **1 Million de tokens** | 400 000 tokens | 200 000 tokens (1M en bêta) |\n| **Expérience Non-Dev**| **Excellente et intuitive** | Bonne, un peu plus technique | Bonne, orientée évaluation |\n| **Fonctionnalité Unique**| Contexte via URL, Sorties Structurées | Accès aux variantes (nano, mini) | **Workbench & Générateur de Prompts** |\n| **Idéal pour...**| **Apprendre sans frais, tester sur de longs textes**| Expérimenter avec l'écosystème GPT | Rédiger et évaluer des prompts de manière rigoureuse |"
+      "content": "### Tableau Comparatif des Environnements d'Expérimentation\n\n| Critère | Google AI Studio | OpenAI Playground | Anthropic Console |\n| :--- | :--- | :--- | :--- |\n| **Point Fort** | **Accès Gratuit & Généreux** | **Accès aux derniers modèles GPT** | **Outils d'Évaluation de Prompts** |\n| **Modèle Gratuit** | ✅ **Gemini 2.5 Pro (1M tokens)** | ❌ Non (nécessite une CB) | ❌ Non (nécessite une CB) |\n| **Contexte Max** | **1 Million de tokens** | 400 00 tokens | 200 000 tokens (1M en bêta) |\n| **Expérience Non-Dev**| **Excellente et intuitive** | Bonne, un peu plus technique | Bonne, orientée évaluation |\n| **Fonctionnalité Unique**| Contexte via URL, Sorties Structurées | Accès aux variantes (nano, mini) | **Workbench & Générateur de Prompts** |\n| **Idéal pour...**| **Apprendre sans frais, tester sur de longs textes**| Expérimenter avec l'écosystème GPT | Rédiger et évaluer des prompts de manière rigoureuse |"
     },
     {
       "type": "markdown",
@@ -207,7 +207,7 @@ const guideData = {
     },
     {
       "type": "markdown",
-      "content": "## Aller Plus Loin\n\nPour une exploration complète des outils IA gratuits et sans carte bancaire, consultez notre guide sur le core kit gratuit."
+      "content": "## Aller Plus Loin\nPour une exploration complète des outils IA gratuits et sans carte bancaire, consultez notre guide sur le core kit gratuit."
     },
     {
       "type": "guideRecommendation",
@@ -229,7 +229,4 @@ const guideData = {
       "reason": "La maîtrise de la température, un paramètre clé des studios, vous permet de doser la créativité de l'IA."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

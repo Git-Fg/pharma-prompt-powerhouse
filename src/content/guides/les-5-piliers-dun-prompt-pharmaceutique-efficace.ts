@@ -1,7 +1,7 @@
-// src/content/guides-new/les-5-piliers-dun-prompt-pharmaceutique-efficace.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+// src/content/guides/les-5-piliers-dun-prompt-pharmaceutique-efficace.ts
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "les-5-piliers-dun-prompt-pharmaceutique-efficace",
   "title": "Les 5 Piliers d'un Prompt Pharmaceutique Efficace",
   "description": "Apprenez à construire un prompt fiable en suivant la méthode des 5 piliers : Rôle, Tâche, Contexte, Format et Exemples, inspirée de la rédaction d'une prescription.",
@@ -18,6 +18,7 @@ const guideData = {
     "prompting"
   ],
   "isFavorite": false,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Structurez chaque prompt comme une prescription en définissant clairement le Rôle, la Tâche, le Contexte, le Format et les Exemples.",
     "Un prompt bien rédigé ne laisse aucune place à l'ambiguïté, ce qui réduit les erreurs et les hallucinations de l'IA.",
@@ -27,7 +28,6 @@ const guideData = {
     "context-engineering",
     "structuration-par-balises"
   ],
-  "isWorkflow": false,
   "content": [
     {
       "type": "markdown",
@@ -97,7 +97,4 @@ const guideData = {
       "reason": "Une fois les 5 piliers maîtrisés, apprenez à structurer des prompts encore plus complexes avec la méthode XML pour des cas cliniques multi-parties."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

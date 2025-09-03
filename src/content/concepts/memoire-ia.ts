@@ -1,7 +1,7 @@
-// src/content/concepts-new/memoire-ia.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+// src/content/concepts/memoire-ia.ts
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "memoire-ia",
   "title": "La Mémoire de l'IA : Contexte (RAM) vs Instructions (Disque Dur)",
   "description": "Comprenez la différence fondamentale entre la mémoire de travail volatile (fenêtre de contexte) et les techniques de mémoire persistante (instructions, GPTs, RAG).",
@@ -45,7 +45,6 @@ const conceptData = {
             {
               "type": "card",
               "title": "Caractéristiques Clés",
-              "variant": "outline",
               "content": "**Analogie :** C'est la **RAM** de l'IA, ou la taille de son **bureau de travail**.\n\n**Force :** Plus la fenêtre est grande, plus le bureau est grand. Vous pouvez y étaler de nombreux documents (PDFs, notes) et l'IA s'en souviendra parfaitement... tant que vous ne quittez pas le bureau.\n\n**Évolution :** Les premiers modèles avaient quelques milliers de tokens (quelques pages). Les modèles de 2025 comme **Gemini 2.5 Pro** atteignent **1 à 2 millions de tokens** - l'équivalent d'une vingtaine de gros livres posés ouverts sur le bureau !"
             },
             {
@@ -75,14 +74,12 @@ const conceptData = {
             {
               "type": "card",
               "title": "🔧 GPTs & Assistants - Les \"Logiciels Spécialisés\"",
-              "variant": "outline",
               "description": "Experts avec base de connaissances",
               "content": "Créer un **GPT (sur ChatGPT Plus)** ou un **Assistant (via l'API d'OpenAI)** avec une base de connaissances.\n\n**Analogie :** C'est comme installer un **logiciel spécialisé** sur le disque dur.\n\n**Fonctionnement (RAG) :** L'IA cherche d'abord dans sa base de connaissances, puis place les documents pertinents dans sa mémoire vive.\n\n**Usage :** Parfait pour créer des experts sur des sujets de niche."
             },
             {
               "type": "card",
               "title": "📁 Projets & Workbenches - Les \"Dossiers Thématiques\"",
-              "variant": "outline",
               "description": "Organisation par projet",
               "content": "Des plateformes comme **Claude.ai (Pro)** permettent de regrouper conversations et documents.\n\n**Analogie :** Organiser votre travail dans des **dossiers thématiques** sur votre disque dur.\n\n**Usage :** Très utile pour les projets de recherche à long terme."
             }
@@ -117,7 +114,4 @@ const conceptData = {
       "reason": "ChatGPT Plus offre les fonctionnalités les plus avancées pour la gestion de mémoire persistante avec les GPTs."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

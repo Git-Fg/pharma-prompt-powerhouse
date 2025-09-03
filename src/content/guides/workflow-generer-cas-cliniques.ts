@@ -1,6 +1,6 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "workflow-generer-cas-cliniques",
   "title": "Workflow : Générer des Cas Cliniques pour la Révision",
   "description": "Apprenez à utiliser l'IA pour générer des cas cliniques riches, pertinents et adaptés à votre niveau d'étude, transformant la préparation aux examens.",
@@ -10,6 +10,7 @@ const guideData = {
   "estimatedTime": "20 min",
   "tags": [],
   "isFavorite": false,
+  "isWorkflow": true,
   "keyTakeaways": [
     "Utilisez un prompt 'maître' structuré pour générer des cas cliniques réalistes avec des problèmes pharmaceutiques ciblés.",
     "L'IA peut créer une infinité de scénarios, vous permettant de vous entraîner sur une grande diversité de cas.",
@@ -19,7 +20,6 @@ const guideData = {
     "structuration-par-balises",
     "chaîne-de-prompts"
   ],
-  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",
@@ -61,7 +61,4 @@ const guideData = {
       "content": "## Conclusion\n\nL'IA transforme la création de cas cliniques d'un exercice fastidieux en un processus créatif et efficace. En maîtrisant cette technique, vous créez un arsenal illimité de scénarios d'apprentissage qui s'adaptent parfaitement à vos besoins."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

@@ -1,6 +1,6 @@
-import { Concept, conceptSchema } from '@/lib/content-schema';
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "chaîne-de-prompts",
   "title": "Chaîne de Prompts",
   "description": "Découpez vos tâches complexes en une série de prompts logiques, comme un protocole de soin",
@@ -28,7 +28,7 @@ const conceptData = {
     },
     {
       "type": "markdown",
-      "content": "## Pourquoi utiliser cette approche ?\n\n### Avantages\n\n- **Fiabilité accrue** : Chaque étape peut être validée individuellement\n- **Contrôle du processus** : Vous suivez le raisonnement étape par étape\n- **Réutilisabilité** : Une chaîne bien conçue peut être adaptée à d'autres cas\n- **Debugging facilité** : Si quelque chose ne va pas, vous savez à quelle étape"
+      "content": "## Pourquoi utiliser cette approche ?\n### Avantages\n- **Fiabilité accrue** : Chaque étape peut être validée individuellement\n- **Contrôle du processus** : Vous suivez le raisonnement étape par étape\n- **Réutilisabilité** : Une chaîne bien conçue peut être adaptée à d'autres cas\n- **Debugging facilité** : Si quelque chose ne va pas, vous savez à quelle étape"
     },
     {
       "type": "card",
@@ -72,7 +72,7 @@ const conceptData = {
     },
     {
       "type": "markdown",
-      "content": "## Applications en pharmacie\n\n- **Analyse d'interactions médicamenteuses** : Recherche → Analyse → Recommandations → Monitoring\n- **Création de protocoles** : Littérature → Synthèse → Rédaction → Validation\n- **Cas cliniques** : Présentation → Analyse → Diagnostic → Traitement → Suivi\n\nCette approche transforme des tâches complexes en processus guidés et fiables, exactement comme un bon protocole de soin."
+      "content": "## Applications en pharmacie\n\n- **Analyse d'interactions médicamenteuses** : Recherche → Analyse → Recommandations → Monitoring\n- **Création de protocoles** : Littérature → Synthèse → Rédaction → Validation\n- **Cas cliniques** : Présentation → Analyse → Diagnostic → Traitement → Suivi\nCette approche transforme des tâches complexes en processus guidés et fiables, exactement comme un bon protocole de soin."
     },
     {
       "type": "toolRecommendation",
@@ -90,7 +90,4 @@ const conceptData = {
       "reason": "Apprenez les techniques d'optimisation itérative qui vous aideront à peaufiner chaque prompt de votre chaîne pour des résultats optimaux."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

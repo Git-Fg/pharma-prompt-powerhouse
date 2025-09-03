@@ -1,7 +1,7 @@
-// src/content/concepts-new/token-acide-amine.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+// src/content/concepts/token-acide-amine.ts
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "token-acide-amine",
   "title": "Le Token : L'Acide Aminé de l'IA",
   "description": "Comprendre ce qu'est un token, l'unité de base que les modèles de langage utilisent pour lire, comprendre et générer du texte.",
@@ -102,7 +102,6 @@ const conceptData = {
             {
               "type": "card",
               "title": "Génération 2024",
-              "variant": "outline",
               "content": "- **Taille** : 128 000 à 200 000 tokens\n- **Équivalence** : Un livre entier\n- **Modèles** : GPT-4, Claude 2"
             },
             {
@@ -146,7 +145,6 @@ const conceptData = {
             {
               "type": "card",
               "title": "Qualité de la Réponse",
-              "variant": "outline",
               "content": "Un prompt bien formulé qui utilise efficacement les tokens disponibles (concis et précis) obtiendra de meilleurs résultats qu'un prompt verbeux et mal structuré."
             }
           ]
@@ -187,7 +185,4 @@ const conceptData = {
       "reason": "Maîtrisez l'art d'optimiser la fenêtre de contexte pour des réponses plus précises et pertinentes."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

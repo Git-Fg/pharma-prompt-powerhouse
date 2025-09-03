@@ -1,7 +1,7 @@
 // src/content/guides/ia-en-local-confidentialite-totale.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "ia-en-local-confidentialite-totale",
   "title": "L'IA en Local : Le Guide pour une Confidentialité à 100%",
   "description": "Hébergez des modèles IA directement sur votre machine pour une confidentialité absolue. Guide complet : prérequis matériel, installation, modèles recommandés comme Qwen3-4B, et cas d'usage en recherche pharmaceutique sensible.",
@@ -10,6 +10,7 @@ const guideData = {
   "estimatedTime": "30 min de lecture + 1-2h d'installation",
   "icon": "Lock",
   "isFavorite": false,
+  "isWorkflow": false,
   "keyTakeaways": [
     "L'IA locale est la SEULE solution pour une confidentialité à 100%",
     "Les modèles légers comme Qwen3-4B sont efficaces et accessibles", 
@@ -51,7 +52,6 @@ const guideData = {
             {
               "type": "card",
               "title": "⚡ Performance & Autonomie", 
-              "variant": "outline",
               "content": "✅ **Pas de quotas** - Usage illimité\n✅ **Latence optimale** - Pas de réseau\n✅ **Disponibilité 24/7** - Pas de maintenance externe\n✅ **Personnalisation** - Fine-tuning possible\n✅ **Offline** - Fonctionne sans internet"
             }
           ]
@@ -64,12 +64,12 @@ const guideData = {
               "type": "card",
               "title": "💻 Configuration Recommandée",
               "description": "Setup optimal pour modèles performants",
-              "content": "**Option 1 : PC Gaming/Workstation**\n- **GPU** : RTX 4070 ou supérieur (12 GB VRAM+)\n- **RAM** : 16 GB minimum, 32 GB recommandé\n- **Stockage** : 50 GB libres minimum\n- **OS** : Windows 10/11, Linux Ubuntu/Debian\n\n**Option 2 : MacBook Pro M-series**\n- **Processeur** : M1 Pro/Max, M2 Pro/Max/Ultra, M3 Pro/Max\n- **RAM** : 16 GB minimum, 32 GB recommandé \n- **Stockage** : 50 GB libres minimum\n- **Avantage** : MLX optimisé pour Apple Silicon"
+              "content": "**Option 1 : PC Gaming/Workstation**\n- **GPU** : RTX 4070 ou supérieur (12 GB VRAM+)\n- **RAM** : 16 GB minimum, 32 GB recommandé\n- **Stockage** : 50 GB libres minimum\n- **OS** : Windows 10/11, Linux Ubuntu/Debian\n**Option 2 : MacBook Pro M-series**\n- **Processeur** : M1 Pro/Max, M2 Pro/Max/Ultra, M3 Pro/Max\n- **RAM** : 16 GB minimum, 32 GB recommandé \n- **Stockage** : 50 GB libres minimum\n- **Avantage** : MLX optimisé pour Apple Silicon"
             },
             {
               "type": "card",
               "title": "📊 Configuration Budget vs Performance",
-              "content": "| **Setup** | **Budget** | **Modèles supportés** | **Performance** |\n|-----------|------------|----------------------|----------------|\n| **RTX 4060 (8GB)** | ~300€ | Qwen3-4B, Llama3.1-8B | ⭐⭐⭐ Bon |\n| **RTX 4070 (12GB)** | ~600€ | Qwen3-14B, Mixtral-8x7B | ⭐⭐⭐⭐ Très bon |\n| **MacBook Pro M3** | ~2500€ | Qwen3-32B, modèles avancés | ⭐⭐⭐⭐⭐ Excellent |\n| **RTX 4090 (24GB)** | ~1800€ | Tous modèles open-source | ⭐⭐⭐⭐⭐ Maximum |"
+              "content": "| **Setup** | **Budget** | **Modèles supportés** | **Performance** |\n|-----------|------------|----------------------|----------------|\n| **RTX 4060 (8GB)** | ~300€ | Qwen3-4B, Llama3.1-8B | ⭐⭐⭐ Bon |\n| **RTX 4070 (12GB)** | ~600€ | Qwen3-14B, Mixtral-8x7B | ⭐⭐⭐⭐ Très bon |\n| **MacBook Pro M3** | ~2500€ | Qwen3-32B, modèles avancés | ⭐⭐⭐⭐⭐ Excellent |\n| **RTX 4090 (24GB)** | ~1800€ | Tous modèles open-source | ⭐⭐⭐⭐ Maximum |"
             }
           ]
         },
@@ -86,7 +86,6 @@ const guideData = {
             {
               "type": "card",
               "title": "📋 Autres Modèles Intéressants",
-              "variant": "outline", 
               "content": "**Qwen3-14B** : Meilleur équilibre pour GPU moyens (RTX 4070+)\n**Llama 3.1-8B** : Alternative solide, optimisé Meta\n**Mistral 7B** : Excellent pour l'Europe, RGPD-friendly\n**CodeQwen** : Spécialisé développement et analyse de code\n**Qwen3-32B** : Pour configurations haut de gamme (M3 Pro+, RTX 4090)"
             }
           ]
@@ -127,7 +126,7 @@ const guideData = {
               "type": "card",
               "title": "⚡ Installation Ollama",
               "description": "Pour les utilisateurs techniques",
-              "content": "**Avantages d'Ollama :**\n- Plus léger que LM Studio\n- Gestion des modèles simplifiée\n- API REST intégrée\n- Idéal pour intégrations customs\n\n**Installation rapide :**\n```bash\n# Linux/Mac\ncurl -fsSL https://ollama.ai/install.sh | sh\n\n# Windows (via winget)\nwinget install Ollama.Ollama\n```"
+              "content": "**Avantages d'Ollama :**\n- Plus léger que LM Studio\n- Gestion des modèles simplifiée\n- API REST intégrée\n- Idéal pour intégrations customs\n**Installation rapide :**\n```bash\n# Linux/Mac\ncurl -fsSL https://ollama.ai/install.sh | sh\n\n# Windows (via winget)\nwinget install Ollama.Ollama\n```"
             },
             {
               "type": "codeBlock",
@@ -172,7 +171,6 @@ const guideData = {
             {
               "type": "card",
               "title": "🏥 Recherche Clinique Sensible",
-              "variant": "outline",
               "content": "**Protocoles d'études :**\n- Aide à la rédaction de protocoles innovants\n- Analyse de faisabilité sur populations spécifiques\n- Stratégie statistique pour endpoints complexes\n\n**⚠️ ATTENTION :** Même en local, ne jamais utiliser de données patients identifiables"
             }
           ]
@@ -203,7 +201,7 @@ const guideData = {
               "type": "card",
               "title": "👨‍🎓 Vie Étudiante & Professionnelle",
               "description": "Applications pour données sensibles personnelles",
-              "content": "**CV et candidatures :**\n- Optimisation de CV avec données salariales\n- Lettres de motivation personnalisées\n- Préparation d'entretiens avec historique personnel\n\n**Finances et projets :**\n- Analyse de situation financière personnelle\n- Planification de carrière avec données privées\n- Projets entrepreneuriaux confidentiels\n\n**Correspondance professionnelle :**\n- Aide à la rédaction d'emails sensibles\n- Négociations contractuelles\n- Communications internes délicates"
+              "content": "**CV et candidatures :**\n- Optimisation de CV avec données salariales\n- Lettres de motivation personnalisées\n- Préparation d'entretiens avec historique personnel\n\n**Finances et projets :**\n- Analyse de situation financière personnelle\n- Planification de carrière avec données privées\n- Projets entrepreneuriaux confidentiels\n**Correspondance professionnelle :**\n- Aide à la rédaction d'emails sensibles\n- Négociations contractuelles\n- Communications internes délicates"
             },
             {
               "type": "alert",
@@ -224,7 +222,7 @@ const guideData = {
       "type": "alert",
       "variant": "destructive",
       "title": "⚠️ Limitations à Connaître", 
-      "content": "**Performance** : Les modèles locaux (4-14B params) sont moins performants que les géants cloud (100B+ params)\n\n**Maintenance** : Vous devez gérer mises à jour, bugs, et optimisations\n\n**Setup technique** : Installation et configuration requises\n\n**Pas de support** : Pas de hotline en cas de problème"
+      "content": "**Performance** : Les modèles locaux (4-14B params) sont moins performants que les géants cloud (100B+ params)\n\n**Maintenance** : Vous devez gérer mises à jour, bugs, et optimisations\n**Setup technique** : Installation et configuration requises\n\n**Pas de support** : Pas de hotline en cas de problème"
     },
     {
       "type": "tabs",
@@ -237,7 +235,7 @@ const guideData = {
             {
               "type": "card",
               "title": "🛡️ Sécurité Maximale",
-              "content": "**Configuration sécurisée :**\n- Installer sur machine dédiée si possible\n- Désactiver accès réseau pendant usage sensible\n- Chiffrer le disque dur (BitLocker/FileVault)\n- Sauvegarder les modèles téléchargés\n\n**Procédures d'usage :**\n- Vérifier mode offline avant traitement sensible\n- Nettoyer l'historique après usage critique\n- Documenter les sources et versions de modèles utilisés\n- Tester périodiquement la qualité des réponses"
+              "content": "**Configuration sécurisée :**\n- Installer sur machine dédiée si possible\n- Désactiver accès réseau pendant usage sensible\n- Chiffrer le disque dur (BitLocker/FileVault)\n- Sauvegarder les modèles téléchargés\n**Procédures d'usage :**\n- Vérifier mode offline avant traitement sensible\n- Nettoyer l'historique après usage critique\n- Documenter les sources et versions de modèles utilisés\n- Tester périodiquement la qualité des réponses"
             }
           ]
         },
@@ -272,7 +270,4 @@ const guideData = {
       "reason": "Pour les usages non-sensibles, le core kit gratuit Z.AI + AI Studio reste la solution optimale au quotidien."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

@@ -1,14 +1,16 @@
-import { Objectif, objectifSchema } from '@/lib/content-schema';
+import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
 
 const masterPromptData = allPrompts.find(p => p.slug === 'research-helper');
 if (!masterPromptData) throw new Error("Prompt 'research-helper' non trouvé");
 
-const objectifData = {
+export const objectif = {
   slug: 'faire-recherche-bibliographique',
   title: 'Faire une Recherche Bibliographique Fiable',
   description: 'Apprenez à utiliser les meilleurs outils IA pour des recherches académiques rapides, sourcées et sans hallucination.',
-  icon: 'BookCheck',
+ icon: 'BookCheck',
+  tags: [],
+  isFavorite: false,
   
   masterPrompt: {
     description: "Ce prompt initial est conçu pour lancer votre recherche sur n'importe quel outil. Il demande une synthèse large et l'identification des sous-thèmes, vous donnant une base solide pour approfondir.",
@@ -81,6 +83,4 @@ const objectifData = {
       ]
     }
   ]
-};
-
-export const objectif: Objectif = objectifSchema.parse(objectifData);
+} satisfies ObjectifInput;

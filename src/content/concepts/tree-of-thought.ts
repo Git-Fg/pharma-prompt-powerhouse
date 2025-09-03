@@ -1,7 +1,7 @@
 // src/content/concepts/tree-of-thought.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "tree-of-thought",
   "title": "Tree-of-Thought",
   "description": "Explorez plusieurs hypothèses en parallèle avec la technique Tree-of-Thought pour résoudre des problèmes complexes.",
@@ -34,14 +34,11 @@ const conceptData = {
     },
     {
       "type": "markdown",
-      "content": "## Comment ça fonctionne ?\n\nLe ToT fonctionne comme un arbre de décision où chaque \"nœud\" représente une étape de raisonnement. L'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies."
+      "content": "## Comment ça fonctionne ?\nLe ToT fonctionne comme un arbre de décision où chaque \"nœud\" représente une étape de raisonnement. L'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies."
     },
     {
       "type": "markdown",
       "content": "## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement"
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;
