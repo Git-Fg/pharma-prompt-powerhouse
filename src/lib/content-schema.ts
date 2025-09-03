@@ -113,6 +113,40 @@ export const externalToolSchema = baseContentSchema.extend({
   content: z.array(contentBlockSchema),
 });
 
+export const workflowSchema = baseContentSchema.extend({
+  category: z.string(),
+  difficulty: z.string(),
+  estimatedTime: z.string().optional(),
+  problem: z.array(contentBlockSchema),
+  initialApproach: z.array(contentBlockSchema),
+  optimizedStrategy: z.array(contentBlockSchema),
+  toolComparison: z.array(contentBlockSchema),
+  finalPrompt: z.array(contentBlockSchema),
+  keyTakeaways: z.array(z.string()).min(1),
+  content: z.array(contentBlockSchema).optional(), // For additional content sections
+});
+
+// Enhanced external tool schema for L'Arsenal IA
+export const enhancedExternalToolSchema = baseContentSchema.extend({
+  url: z.string().url(),
+  category: z.string(),
+  personalReview: z.string(), // "Mon Avis en Bref"
+  strongPoints: z.array(z.string()), // "Points Forts (selon mon expérience)"
+  vigilancePoints: z.array(z.string()), // "Points de Vigilance"
+  confidenceScore: z.number().min(1).max(10), // Score de Confiance
+  confidenceJustification: z.string(), // Justification du score
+  freeVsPaid: z.object({
+    free: z.array(z.string()),
+    paid: z.array(z.string()),
+  }), // Offre Gratuite vs Payante
+  tldr: z.string().optional(),
+  color: z.string().optional(),
+  use_cases: z.array(z.string()).optional(),
+  capabilities: z.array(z.string()).optional(),
+  keyTakeaways: z.array(z.string()).optional(),
+  content: z.array(contentBlockSchema),
+});
+
 export const objectifSchema = baseContentSchema.extend({
   masterPrompt: z.object({
     description: z.string(),
@@ -137,9 +171,16 @@ export const objectifSchema = baseContentSchema.extend({
 
 export type Concept = z.infer<typeof conceptSchema>;
 export type Guide = z.infer<typeof guideSchema>;
+export type Workflow = z.infer<typeof workflowSchema>;
 export type Prompt = z.infer<typeof promptSchema>;
 export type ExternalTool = z.infer<typeof externalToolSchema>;
+export type EnhancedExternalTool = z.infer<typeof enhancedExternalToolSchema>;
 export type Objectif = z.infer<typeof objectifSchema>;
+
+export type EnrichedWorkflow = Workflow & {
+  concepts: Concept[];
+  relatedWorkflows: Omit<Workflow, 'content' | 'concepts' | 'relatedWorkflows'>[];
+};
 
 export type EnrichedGuide = Guide & {
   concepts: Concept[];
