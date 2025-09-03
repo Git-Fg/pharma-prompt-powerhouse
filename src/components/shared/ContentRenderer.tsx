@@ -14,6 +14,7 @@ import { BeforeAfterPrompt } from '../objectifs/BeforeAfterPrompt';
 import { InteractiveChecklist } from '../objectifs/InteractiveChecklist';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import MultiFormatPrompt from '../prompts/MultiFormatPrompt';
 import type { ContentBlock } from '@/lib/content-schema';
 
 function assertNever(x: never): never {
@@ -131,38 +132,12 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
 
     case 'multiFormatPrompt':
       return (
-        <Card className="my-6">
-          <CardHeader>
-            <CardTitle>Format Multi-Plateforme</CardTitle>
-            <CardDescription>Ce prompt est disponible sous plusieurs formats optimisés</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {block.alternativeVersions && (
-              <div className="space-y-4">
-                <h4 className="font-medium">Versions alternatives disponibles:</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  {Object.keys(block.alternativeVersions).map((version) => (
-                    <li key={version} className="text-sm text-muted-foreground">
-                      Version {version}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {block.variables && block.variables.length > 0 && (
-              <div className="mt-4">
-                <h4 className="font-medium">Variables:</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  {block.variables.map((variable: string) => (
-                    <li key={variable} className="text-sm text-muted-foreground">
-                      {variable}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+        <MultiFormatPrompt
+          alternativeVersions={block.alternativeVersions}
+          recommendedTools={block.recommendedTools}
+          variables={block.variables}
+          className="my-6"
+        />
       );
 
     default:
