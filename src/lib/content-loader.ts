@@ -1,5 +1,6 @@
 import { glob } from 'glob';
 import path from 'path';
+import { z } from 'zod';
 import {
   guideSchema,
   conceptSchema,
@@ -9,13 +10,17 @@ import {
   workflowSchema
 } from './content-schema';
 import type {
-  Guide, Concept, Prompt, ExternalTool, Objectif, Workflow, EnrichedGuide, EnrichedConcept
+  Concept, EnrichedGuide, EnrichedConcept
 } from './content-schema';
 
 const CONTENT_PATH = path.join(process.cwd(), 'src/content');
 
-function loadCollection<T>(pattern: string, schema: Zod.Schema<T>): T[] {
+function loadCollection<T>(pattern: string, schema: z.Schema<T>): T[] {
   return glob.sync(`${CONTENT_PATH}/${pattern}/**/*.ts`).map(file => {
+    // Use dynamic import to load the file content
+    // Note: This will need to be handled differently in a real build
+    // For now, we'll use a temporary approach
+    delete require.cache[require.resolve(file)];
     const data = require(file).default;
     return schema.parse(data);
   });
