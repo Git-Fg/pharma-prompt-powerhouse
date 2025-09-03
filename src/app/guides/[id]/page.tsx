@@ -3,10 +3,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clock, Target } from "lucide-react";
+import { ArrowLeft, Clock, Target, BookOpen } from "lucide-react";
 import { content, getGuideBySlug } from "@/lib/content-loader";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { RelatedContent } from "@/components/shared/RelatedContent";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
 import type { Metadata } from "next";
 
@@ -120,7 +120,34 @@ export default async function GuideDetailPage({
 
       <Separator className="my-12" />
       
-      <RelatedContent currentItem={guide} />
+      {/* Related Guides - Direct Logic */}
+      {guide.relatedGuides && guide.relatedGuides.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Pour aller plus loin</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <h3 className="font-semibold flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                Guides similaires
+              </h3>
+              {guide.relatedGuides.map((relatedGuide) => (
+                <Link
+                  href={`/guides/${relatedGuide.slug}`}
+                  key={relatedGuide.slug}
+                  className="block p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+                >
+                  <p className="font-medium">{relatedGuide.title}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-1">
+                    {relatedGuide.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
