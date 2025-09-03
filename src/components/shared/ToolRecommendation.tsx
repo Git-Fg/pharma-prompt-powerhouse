@@ -1,6 +1,5 @@
 import { content } from '@/lib/content-loader';
 import { ToolCard } from '@/components/shared/ToolCard';
-import type { ExternalTool } from '@/lib/content-schema';
 
 interface ToolRecommendationProps {
   tags: string[];

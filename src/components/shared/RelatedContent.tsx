@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { RelatedConcepts } from "./RelatedConcepts";
 import { BookOpen, Lightbulb } from "lucide-react";
 
 interface RelatedContentProps {
