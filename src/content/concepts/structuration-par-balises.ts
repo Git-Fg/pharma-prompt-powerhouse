@@ -22,7 +22,6 @@ export const concept = {
     "Particulièrement recommandée par Anthropic (Claude), cette méthode améliore la fiabilité sur toutes les plateformes pour les prompts complexes."
   ],
   "conceptSlugs": [],
-  "mainGuideSlug": "structurer-ses-prompts-avec-des-balises-methode-xml",
   "content": [
     {
       "type": "markdown",
