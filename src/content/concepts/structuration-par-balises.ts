@@ -1,7 +1,7 @@
 // src/content/concepts/structuration-par-balises.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "structuration-par-balises",
   "title": "Structuration par Balises",
   "description": "Utilisez des balises pour structurer vos prompts, clarifier vos intentions et obtenir des réponses plus fiables de l'IA.",
@@ -39,14 +39,11 @@ const conceptData = {
     {
       "type": "codeBlock",
       "language": "xml",
-      "content": "<role>\nTu es un pharmacien clinicien expert.\n</role>\n\n<contexte>\n  <!-- Les informations de base du cas clinique ou du document vont ici -->\n</contexte>\n\n<instructions>\n  <!-- Ce que vous voulez que l'IA fasse, étape par étape -->\n</instructions>\n\n<format_attendu>\n  <!-- La structure de la réponse que vous souhaitez (ex: tableau Markdown, liste à puces) -->\n</format_attendu>"
+      "content": "<role>\nTu es un pharmacien clinicien expert.\n</role>\n\n<contexte>\n <!-- Les informations de base du cas clinique ou du document vont ici -->\n</contexte>\n\n<instructions>\n  <!-- Ce que vous voulez que l'IA fasse, étape par étape -->\n</instructions>\n\n<format_attendu>\n  <!-- La structure de la réponse que vous souhaitez (ex: tableau Markdown, liste à puces) -->\n</format_attendu>"
     },
     {
       "type": "markdown",
       "content": "Cette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

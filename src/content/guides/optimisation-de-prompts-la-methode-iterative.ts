@@ -1,6 +1,6 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "optimisation-de-prompts-la-methode-iterative",
   "title": "Optimisation de Prompts : La Méthode Itérative",
   "description": "Maîtrisez l'art de l'amélioration continue de vos prompts grâce au dialogue, à l'auto-critique et aux chaînes de prompts.",
@@ -18,6 +18,7 @@ const guideData = {
     "prompting"
   ],
   "isFavorite": true,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Un prompt efficace est le résultat d'un cycle d'optimisation : Prompt initial -> Analyse -> Auto-critique assistée -> Raffinement.",
     "Utilisez des 'chaînes de prompts' pour décomposer une tâche complexe en une série d'étapes simples et fiables, comme un protocole.",
@@ -26,7 +27,6 @@ const guideData = {
   "conceptSlugs": [
     "chaîne-de-prompts"
   ],
-  "isWorkflow": false,
   "content": [
     {
       "type": "markdown",
@@ -130,7 +130,4 @@ const guideData = {
       "reason": "Avant d'optimiser, assurez-vous de maîtriser les fondamentaux : un prompt bien structuré nécessite moins d'itérations pour atteindre l'excellence."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

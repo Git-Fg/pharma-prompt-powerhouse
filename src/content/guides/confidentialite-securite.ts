@@ -1,15 +1,16 @@
-// src/content/guides-new/confidentialite-securite.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+// src/content/guides/confidentialite-securite.ts
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   slug: 'confidentialite-securite',
   title: "Confidentialité et Sécurité : Le Serment d'Hippocrate de l'Ère Numérique",
   description: "Comment utiliser les outils d'IA de manière responsable en protégeant les données. Les bonnes pratiques pour un usage éthique et légal en santé.",
   icon: "Shield",
   category: "bonnes-pratiques",
-  difficulty: "débutant" as const,
+  difficulty: "débutant",
   tags: ["confidentialite", "securite", "rgpd", "bonnes-pratiques"],
   isFavorite: false,
+  isWorkflow: false,
   keyTakeaways: [
     "Ne soumettez JAMAIS d'informations permettant d'identifier un patient à une IA grand public",
     "Anonymisez toujours vos cas cliniques en supprimant tous les éléments identifiants",
@@ -18,7 +19,6 @@ const guideData = {
   ],
   conceptSlugs: [],
   estimatedTime: "10 min",
-  isWorkflow: false,
   content: [
     {
       type: 'markdown',
@@ -32,7 +32,6 @@ const guideData = {
     {
       type: 'markdown',
       content: `### Qu'est-ce qu'une Donnée Identifiable ?
-
 C'est plus large que vous ne le pensez.`
     },
     {
@@ -248,7 +247,4 @@ En appliquant cette grille de lecture, vous pouvez bénéficier de la puissance 
       "reason": "Pour une confidentialité absolue, la seule solution est de faire tourner les modèles sur votre propre machine. Ce guide vous montre comment faire avec des modèles comme Qwen3-4B."
     }
   ]
-};
-
-// Validation et export - si cela échoue, il y a une erreur de structure
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

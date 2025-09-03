@@ -1,15 +1,17 @@
-import { Objectif, objectifSchema } from '@/lib/content-schema';
+import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
 
 // On récupère un prompt existant pour le réutiliser
 const masterPromptData = allPrompts.find(p => p.slug === 'generateur-questions-examen');
 if (!masterPromptData) throw new Error("Prompt 'generateur-questions-examen' non trouvé");
 
-const objectifData = {
+export const objectif = {
   slug: 'creer-fiches-de-revision',
   title: 'Créer des Fiches de Révision',
   description: 'Transformez vos notes de cours en fiches de révision et QCM interactifs pour un apprentissage actif.',
   icon: 'FileText',
+  tags: [],
+  isFavorite: false,
   
   masterPrompt: {
     description: "Ce prompt 'maître' est conçu pour transformer n'importe quel contenu de cours en un outil de révision structuré. Il demande à l'IA d'agir comme un concepteur d'examen, garantissant des questions pertinentes.",
@@ -34,6 +36,4 @@ const objectifData = {
 
   relatedConcepts: ["context-engineering", "structuration-par-balises"],
   relatedGuides: ["les-5-piliers-dun-prompt-pharmaceutique-efficace"],
-};
-
-export const objectif: Objectif = objectifSchema.parse(objectifData);
+} satisfies ObjectifInput;

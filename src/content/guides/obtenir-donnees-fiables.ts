@@ -1,6 +1,6 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "obtenir-donnees-fiables",
   "title": "Méthodologie de Recherche Bibliographique avec l'IA",
   "description": "Apprenez les principes universels pour obtenir des données fiables avec n'importe quel outil d'IA : méthode PICO, analyse critique des sources et techniques anti-hallucination.",
@@ -10,13 +10,13 @@ const guideData = {
   "estimatedTime": "15 min",
   "tags": [],
   "isFavorite": false,
+  "isWorkflow": false,
   "keyTakeaways": [
     "La qualité de votre question (méthode PICO) est plus importante que l'outil utilisé.",
     "Ne faites jamais confiance à la synthèse de l'IA sans vérifier vous-même les sources primaires.",
     "Utilisez les outils IA comme des assistants de recherche surpuissants, pas comme des oracles infaillibles."
-  ],
+ ],
   "conceptSlugs": ["hallucination-effet-indesirable"],
-  "isWorkflow": false,
   "content": [
     {
       "type": "markdown",
@@ -60,7 +60,4 @@ const guideData = {
       "content": "## Conclusion : Un Workflow en Boucle\nVotre travail de recherche devient une boucle vertueuse :\n\n`Question PICO -> IA (Recherche) -> Analyse Critique des Sources -> Affinement de la Question -> IA (Recherche plus ciblée) ...`\n\nEn maîtrisant ce processus, vous utilisez l'IA pour ce qu'elle fait de mieux (scanner et synthétiser des volumes massifs de données) tout en gardant ce que vous faites de mieux : l'analyse critique et le jugement expert."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

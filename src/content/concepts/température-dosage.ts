@@ -1,7 +1,7 @@
-// src/content/concepts-new/température-dosage.ts
-import { Concept, conceptSchema } from '@/lib/content-schema';
+// src/content/concepts/température-dosage.ts
+import type { ConceptInput } from '@/types/content';
 
-const conceptData = {
+export const concept = {
   "slug": "température-dosage",
   "title": "La Température : Le Dosage de la Créativité de l'IA",
   "description": "Découvrez comment le paramètre de température influence la créativité et la prévisibilité des réponses d'un modèle de langage.",
@@ -42,7 +42,6 @@ const conceptData = {
             {
               "type": "card",
               "title": "Cas d'Usage en Pharmacie",
-              "variant": "outline",
               "content": "- **Extraction d'informations** : \"Extrais toutes les posologies mentionnées dans ce document.\"\n- **Classification** : \"Classe ces médicaments en fonction de leur famille thérapeutique.\"\n- **Résumé factuel** : \"Résume les conclusions de cette étude clinique sans interprétation.\"\n- **Formatage de données** : \"Transforme cette liste de médicaments en un tableau JSON.\""
             }
           ]
@@ -60,7 +59,6 @@ const conceptData = {
             {
               "type": "card",
               "title": "Cas d'Usage en Pharmacie",
-              "variant": "outline",
               "content": "- **Brainstorming** : \"Donne-moi 10 idées de sujets de thèse sur l'impact de l'IA en pharmacovigilance.\"\n- **Génération de mnémoniques** : \"Invente une phrase mnémotechnique pour se souvenir des effets secondaires des bêta-bloquants.\"\n- **Reformulation** : \"Réécris ce paragraphe sur le mécanisme d'action du paracétamol pour un public de non-initiés, en utilisant une analogie simple.\"\n- **Simulation de dialogue** : \"Simule une conversation entre un pharmacien et un patient inquiet au sujet des vaccins.\""
             }
           ]
@@ -84,7 +82,4 @@ const conceptData = {
       "reason": "Google AI Studio est la meilleure plateforme gratuite pour expérimenter avec le paramètre de température et comprendre son impact sur les réponses de Gemini."
     }
   ]
-};
-
-// Validation et export
-export const concept: Concept = conceptSchema.parse(conceptData);
+} satisfies ConceptInput;

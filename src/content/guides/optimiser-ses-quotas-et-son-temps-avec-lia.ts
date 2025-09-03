@@ -1,22 +1,22 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   slug: 'optimiser-ses-quotas-et-son-temps-avec-lia',
   title: "Optimiser ses Quotas et son Temps avec l'IA",
   description: "Maîtrisez l'équilibre entre qualité, vitesse et utilisation de vos quotas gratuits dans vos interactions avec l'IA.",
   icon: "Gauge",
   category: "techniques-avancees",
-  difficulty: "intermédiaire" as const,
+  difficulty: "intermédiaire",
   estimatedTime: "20 minutes",
   tags: ["clinique", "guide", "pedagogie", "pharmacie"],
   isFavorite: true,
+  isWorkflow: false,
   keyTakeaways: [
     "Pour nous, étudiants, le 'coût' de l'IA est la limite de nos quotas gratuits sur les modèles puissants et le temps d'attente.",
     "Optimisez vos prompts en étant concis (moins de tokens) pour faire plus de requêtes de qualité avec vos quotas quotidiens.",
     "Choisissez le bon modèle pour la tâche : un modèle rapide (Gemini Flash) pour les tâches simples, et un modèle puissant (GPT-4o, Gemini Pro) pour les analyses complexes."
   ],
   conceptSlugs: ["token-acide-amine", "context-engineering"],
-  isWorkflow: false,
   content: [
     {
       "type": "markdown",
@@ -55,7 +55,4 @@ const guideData = {
       "content": "## Conclusion\n\nOptimiser ses prompts sur les interfaces gratuites, ce n'est pas une question d'argent, mais d'efficacité. En étant concis et en choisissant le bon outil, vous maximiserez la valeur que vous tirez de vos quotas gratuits et passerez moins de temps à attendre les réponses."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

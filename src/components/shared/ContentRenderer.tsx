@@ -9,24 +9,13 @@ import { CodeBlock } from '@/components/ui/code-block';
 import { ToolRecommendation } from './ToolRecommendation';
 import { GuideRecommendation } from './GuideRecommendation';
 import { ConceptRecommendation } from './ConceptRecommendation';
-
-// Define a more flexible content block type
-
-type KnownBlock =
-  | { type: "markdown"; content: string }
-  | { type: "alert"; variant?: "default"|"destructive"; title?: string; content: string }
-  | { type: "toolRecommendation"; slug?: string; reason?: string }
-  | { type: "guideRecommendation"; slug?: string; reason?: string }
-  | { type: "conceptRecommendation"; slug?: string; reason?: string }
-  | { type: "codeBlock"; language: string; filename?: string; showLineNumbers?: boolean; content: string }
-  | { type: "card"; title?: string; description?: string; content: string }
-  | { type: "tabs"; defaultValue?: string; tabs: Array<{ value: string; title: string; content: KnownBlock[] }> };
+import type { ContentBlock } from '@/types/content';
 
 function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`);
 }
 
-const BlockSwitch = ({ block }: { block: KnownBlock }) => {
+const BlockSwitch = ({ block }: { block: ContentBlock }) => {
   switch (block.type) {
     case "markdown":
       return <MarkdownRenderer content={block.content} />;
@@ -93,7 +82,7 @@ const BlockSwitch = ({ block }: { block: KnownBlock }) => {
 
 // Suppression du code dupliqué et conservation du switch exhaustif
 
-  export function ContentRenderer({ content }: { content: KnownBlock[] }) {
+  export function ContentRenderer({ content }: { content: ContentBlock[] }) {
   if (!content || content.length === 0) return null;
   
   return (

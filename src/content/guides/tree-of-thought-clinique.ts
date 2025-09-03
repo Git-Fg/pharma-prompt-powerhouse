@@ -1,11 +1,11 @@
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "tree-of-thought-clinique",
   "title": "Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought",
   "description": "Apprenez à construire et utiliser un prompt Tree-of-Thought pour analyser un cas clinique avec plusieurs hypothèses diagnostiques.",
   "icon": "Network",
-  "category": "ressources",
+ "category": "ressources",
   "difficulty": "avancé",
   "estimatedTime": "30 minutes",
   "tags": [
@@ -18,6 +18,7 @@ const guideData = {
     "tree-of-thought"
   ],
   "isFavorite": false,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Utilisez le Tree-of-Thought pour forcer l'IA à évaluer plusieurs hypothèses en parallèle, idéal pour le diagnostic différentiel.",
     "Structurez votre prompt en XML avec une balise `<thinking_process>` contenant plusieurs balises `<branch>` pour chaque hypothèse.",
@@ -27,7 +28,6 @@ const guideData = {
     "tree-of-thought",
     "structuration-par-balises"
   ],
-  "isWorkflow": false,
   "content": [
     {
       "type": "markdown",
@@ -67,14 +67,11 @@ const guideData = {
     {
       "type": "codeBlock",
       "language": "xml",
-      "content": "<format_sortie>\nAprès avoir exploré chaque branche, fournis une synthèse finale :\n\n<analyse_finale>\n  <evaluation_branches>\n    <branche id=\"1\" probabilité=\"[0-1]\" justification=\"...\" />\n    <branche id=\"2\" probabilité=\"[0-1]\" justification=\"...\" />\n    <branche id=\"3\" probabilité=\"[0-1]\" justification=\"...\" />\n  </evaluation_branches>\n  <diagnostic_le_plus_probable>...</diagnostic_le_plus_probable>\n  <plan_action_immediat>\n    1. Action 1...\n    2. Action 2...\n  </plan_action_immediat>\n</analyse_finale>\n</format_sortie>"
+      "content": "<format_sortie>\nAprès avoir exploré chaque branche, fournis une synthèse finale :\n\n<analyse_finale>\n  <evaluation_branches>\n    <branche id=\"1\" probabilité=\"[0-1]\" justification=\"...\" />\n    <branche id=\"2\" probabilité=\"[0-1]\" justification=\"...\" />\n    <branche id=\"3\" probabilité=\"[0-1]\" justification=\"...\" />\n  </evaluation_branches>\n <diagnostic_le_plus_probable>...</diagnostic_le_plus_probable>\n  <plan_action_immediat>\n    1. Action 1...\n    2. Action 2...\n  </plan_action_immediat>\n</analyse_finale>\n</format_sortie>"
     },
     {
       "type": "markdown",
       "content": "En combinant ces trois blocs, vous obtenez un prompt ToT robuste qui guide l'IA à travers un processus de diagnostic différentiel structuré, fiable et transparent."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

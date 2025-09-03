@@ -1,15 +1,17 @@
-import { Objectif, objectifSchema } from '@/lib/content-schema';
+import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
 
 // On récupère un prompt existant pour le réutiliser
 const masterPromptData = allPrompts.find(p => p.slug === 'constructeur-tableaux-comparatifs');
 if (!masterPromptData) throw new Error("Prompt 'constructeur-tableaux-comparatifs' non trouvé");
 
-const objectifData = {
+export const objectif = {
   slug: 'construire-tableau-comparatif',
   title: 'Construire un Tableau Comparatif Efficace',
   description: 'Maîtrisez l\'art de la synthèse visuelle en générant des tableaux clairs pour comparer des médicaments, des pathologies ou des concepts.',
   icon: 'Table',
+  tags: [],
+  isFavorite: false,
   
   masterPrompt: {
     description: "Ce prompt est conçu pour générer des tableaux comparatifs clairs et efficaces, un outil essentiel pour les révisions en pharmacie.",
@@ -19,7 +21,7 @@ const objectifData = {
   beforeAfter: {
     beforePrompt: `"Compare les ISRS et les IRSN."`,
     afterPrompt: `"Crée un tableau comparatif des ISRS et IRSN avec les critères : Mécanisme d'action, posologie, effets indésirables, contre-indications, surveillance."`,
-    // NOTE: Vous devrez créer ces screenshots et les placer dans /public/images/objectifs/
+    // TODO: Vous devrez créer ces screenshots et les placer dans /public/images/objectifs/
     beforeImageSrc: "/images/objectifs/tableau-comparatif-avant.png",
     afterImageSrc: "/images/objectifs/tableau-comparatif-apres.png",
   },
@@ -65,7 +67,7 @@ const objectifData = {
           "content": [
             {
               "type": "markdown",
-              "content": "Google AI Studio offre la fonctionnalité **Structured Output** qui permet de forcer une sortie au format JSON, garantissant une fiabilité à 100% pour l'intégration dans d'autres outils.\n\n**Avantages de la sortie structurée :**\n- Fiabilité garantie à 100%\n- Intégration facile dans d'autres outils\n- Possibilité d'automatisation\n\n**Cas d'usage avancé :**\n- Intégration dans des applications de révision\n- Génération automatique de fiches de révision\n- Création de bases de données de comparaisons"
+              "content": "Google AI Studio offre la fonctionnalité **Structured Output** qui permet de forcer une sortie au format JSON, garantissant une fiabilité à 100% pour l'intégration dans d'autres outils.\n\n**Avantages de la sortie structurée :**\n- Fiabilité garantie à 100%\n- Intégration facile dans d'autres outils\n- Possibilité d'automatisation\n**Cas d'usage avancé :**\n- Intégration dans des applications de révision\n- Génération automatique de fiches de révision\n- Création de bases de données de comparaisons"
             },
             {
               "type": "toolRecommendation",
@@ -87,6 +89,4 @@ const objectifData = {
       ]
     }
   ]
-};
-
-export const objectif: Objectif = objectifSchema.parse(objectifData);
+} satisfies ObjectifInput;

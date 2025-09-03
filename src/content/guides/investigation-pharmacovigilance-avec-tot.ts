@@ -1,7 +1,7 @@
 // src/content/guides/investigation-pharmacovigilance-avec-tot.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "investigation-pharmacovigilance-avec-tot",
   "title": "Workflow d'Investigation : Analyser un Signal de Pharmacovigilance avec ToT",
   "description": "Apprenez à utiliser le Tree-of-Thought pour mener une investigation structurée et rigoureuse face à un signal de sécurité médicamenteuse.",
@@ -20,6 +20,7 @@ const guideData = {
     "workflow"
   ],
   "isFavorite": false,
+  "isWorkflow": true,
   "keyTakeaways": [
     "Le Tree-of-Thought est un framework idéal pour les investigations complexes où plusieurs causes sont possibles.",
     "Structurez votre investigation en 'branches' d'hypothèses (toxicité, interaction, qualité) pour une analyse exhaustive.",
@@ -28,11 +29,10 @@ const guideData = {
   "conceptSlugs": [
     "tree-of-thought"
   ],
-  "isWorkflow": true,
   "content": [
     {
       "type": "markdown",
-      "content": "# Workflow d'Investigation : Analyser un Signal de Pharmacovigilance avec ToT\n\nCe guide pratique vous montre **comment** appliquer le concept avancé de Tree-of-Thought à un scénario complexe de pharmacovigilance. Le but est de transformer l'IA en un enquêteur méthodique qui explore toutes les pistes."
+      "content": "# Workflow d'Investigation : Analyser un Signal de Pharmacovigilance avec ToT\nCe guide pratique vous montre **comment** appliquer le concept avancé de Tree-of-Thought à un scénario complexe de pharmacovigilance. Le but est de transformer l'IA en un enquêteur méthodique qui explore toutes les pistes."
     },
     {
       "type": "conceptRecommendation",
@@ -58,7 +58,7 @@ const guideData = {
     },
     {
       "type": "markdown",
-      "content": "### Étape 2 & 3 : Guider le Raisonnement avec ToT\n\nIci, on ne demande pas une sortie XML, on structure notre question pour forcer l'IA à penser de manière exhaustive."
+      "content": "### Étape 2 & 3 : Guider le Raisonnement avec ToT\nIci, on ne demande pas une sortie XML, on structure notre question pour forcer l'IA à penser de manière exhaustive."
     },
     {
       "type": "codeBlock",
@@ -72,7 +72,4 @@ const guideData = {
       "content": "Une réponse en texte (Markdown) bien structurée, qui suit votre plan d'investigation, facile à lire et à utiliser."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;

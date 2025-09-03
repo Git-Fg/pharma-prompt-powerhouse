@@ -1,7 +1,7 @@
-// src/content/guides/guides/gestion-memoire-ia.ts
-import { Guide, guideSchema } from '@/lib/content-schema';
+// src/content/guides/gestion-memoire-ia.ts
+import type { GuideInput } from '@/types/content';
 
-const guideData = {
+export const guide = {
   "slug": "gestion-memoire-ia",
   "title": "Gérer la Mémoire de l'IA : Le Guide Pratique",
   "description": "Devenez un pilote d'IA efficace en apprenant à gérer activement sa mémoire volatile (contexte) et sa mémoire persistante (instructions, GPTs).",
@@ -11,13 +11,13 @@ const guideData = {
   "estimatedTime": "30 minutes",
   "tags": [],
   "isFavorite": false,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Maîtrisez la fenêtre de contexte avec des points de sauvegarde et des corrections de trajectoire pour des conversations longues et cohérentes.",
     "Personnalisez l'IA avec des instructions persistantes et créez des GPTs spécialisés pour des tâches récurrentes.",
     "Une gestion proactive de la mémoire transforme l'IA d'un outil générique en un assistant personnel puissant."
   ],
   "conceptSlugs": [],
-  "isWorkflow": false,
   "content": [
     {
       "type": "alert",
@@ -132,7 +132,4 @@ const guideData = {
       "reason": "La gestion de mémoire est une application pratique du context engineering - optimiser la fenêtre de contexte pour des interactions plus efficaces."
     }
   ]
-};
-
-// Validation et export
-export const guide: Guide = guideSchema.parse(guideData);
+} satisfies GuideInput;
