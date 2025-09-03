@@ -8,7 +8,6 @@ export type {
   Guide,
   Workflow,
   ExternalTool,
-  EnhancedExternalTool,
   ContentBlock,
   EnrichedGuide,
   EnrichedConcept,

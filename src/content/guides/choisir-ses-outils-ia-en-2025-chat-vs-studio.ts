@@ -16,6 +16,7 @@ export const guide = {
     "comparatif"
   ],
   "isFavorite": true,
+  "isWorkflow": false,
   "keyTakeaways": [
     "Il existe deux catégories d'outils IA : les **interfaces de chat** pour l'usage quotidien et les **studios d'expérimentation** pour maîtriser le prompt engineering.",
     "Perplexity.ai est le roi de la recherche fiable grâce à ses sources systématiques et son mode 'Academic'.",
