@@ -1,4 +1,4 @@
-// src/content/external-tools-new/index.ts
+// src/content/external-tools/index.ts
 import { externalTool as anthropicConsole } from './anthropic-console';
 import { externalTool as chatgpt } from './chatgpt';
 import { externalTool as claudeAi } from './claude-ai';
