@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { BookOpen, Lightbulb } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import type { EnrichedGuide } from "@/lib/content-schema";
 
 interface RelatedContentProps {

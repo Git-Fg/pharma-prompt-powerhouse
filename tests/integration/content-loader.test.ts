@@ -4,11 +4,10 @@ import {
   getGuideBySlug,
   getWorkflowBySlug,
   getConceptBySlug,
-  getPromptBySlug,
   getExternalToolBySlug,
   content
 } from '@/lib/content-loader'
-import type { EnrichedGuide, EnrichedConcept } from '@/lib/content-schema'
+import type { EnrichedGuide } from '@/lib/content-schema'
 
 describe('Content Loader Integration', () => {
   let loadedContent: ReturnType<typeof loadContent>
@@ -21,17 +20,15 @@ describe('Content Loader Integration', () => {
     it('should load all content collections', () => {
       expect(loadedContent.guides).toBeDefined()
       expect(loadedContent.concepts).toBeDefined()
-      expect(loadedContent.prompts).toBeDefined()
+      expect(loadedContent.workflows).toBeDefined()
       expect(loadedContent.externalTools).toBeDefined()
-      expect(loadedContent.objectifs).toBeDefined()
     })
 
-    it('should load guides as arrays', () => {
+    it('should load content as arrays', () => {
       expect(Array.isArray(loadedContent.guides)).toBe(true)
       expect(Array.isArray(loadedContent.concepts)).toBe(true)
-      expect(Array.isArray(loadedContent.prompts)).toBe(true)
+      expect(Array.isArray(loadedContent.workflows)).toBe(true)
       expect(Array.isArray(loadedContent.externalTools)).toBe(true)
-      expect(Array.isArray(loadedContent.objectifs)).toBe(true)
     })
 
     it('should have content items with required properties', () => {
@@ -50,6 +47,15 @@ describe('Content Loader Integration', () => {
         expect(concept.description).toBeDefined()
         expect(concept.category).toBeDefined()
         expect(concept.difficulty).toBeDefined()
+      }
+
+      if (loadedContent.workflows.length > 0) {
+        const workflow = loadedContent.workflows[0]
+        expect(workflow.slug).toBeDefined()
+        expect(workflow.title).toBeDefined()
+        expect(workflow.description).toBeDefined()
+        expect(workflow.problem).toBeDefined()
+        expect(workflow.finalPrompt).toBeDefined()
       }
     })
   })
@@ -72,7 +78,7 @@ describe('Content Loader Integration', () => {
       }
     })
 
-    it('should enrich guides with related guides and prompts', () => {
+    it('should enrich guides with related guides', () => {
       const guidesWithConcepts = loadedContent.guides.filter(guide => 
         guide.conceptSlugs && guide.conceptSlugs.length > 0
       )
@@ -80,24 +86,19 @@ describe('Content Loader Integration', () => {
       if (guidesWithConcepts.length > 0) {
         const enrichedGuide = guidesWithConcepts[0] as EnrichedGuide
         expect(enrichedGuide.relatedGuides).toBeDefined()
-        expect(enrichedGuide.relatedPrompts).toBeDefined()
         expect(Array.isArray(enrichedGuide.relatedGuides)).toBe(true)
-        expect(Array.isArray(enrichedGuide.relatedPrompts)).toBe(true)
       }
     })
 
-    it('should enrich concepts with linked main guides', () => {
-      const conceptsWithMainGuide = loadedContent.concepts.filter(concept =>
-        concept.mainGuideSlug
+    it('should enrich workflows with related workflows', () => {
+      const workflowsWithConcepts = loadedContent.workflows.filter(workflow => 
+        workflow.conceptSlugs && workflow.conceptSlugs.length > 0
       )
 
-      if (conceptsWithMainGuide.length > 0) {
-        const enrichedConcept = conceptsWithMainGuide[0] as EnrichedConcept
-        expect(enrichedConcept.guide).toBeDefined()
-        if (enrichedConcept.guide) {
-          expect(enrichedConcept.guide.slug).toBeDefined()
-          expect(enrichedConcept.guide.title).toBeDefined()
-        }
+      if (workflowsWithConcepts.length > 0) {
+        const enrichedWorkflow = workflowsWithConcepts[0]
+        expect(enrichedWorkflow.relatedWorkflows).toBeDefined()
+        expect(Array.isArray(enrichedWorkflow.relatedWorkflows)).toBe(true)
       }
     })
 
@@ -113,13 +114,6 @@ describe('Content Loader Integration', () => {
         if (enrichedGuide.relatedGuides) {
           expect(enrichedGuide.relatedGuides.some(relatedGuide => 
             relatedGuide.slug === guide.slug
-          )).toBe(false)
-        }
-        
-        // Check related prompts don't include guide slug (if it were a prompt)
-        if (enrichedGuide.relatedPrompts) {
-          expect(enrichedGuide.relatedPrompts.some(relatedPrompt => 
-            relatedPrompt.slug === guide.slug
           )).toBe(false)
         }
       })
@@ -140,10 +134,10 @@ describe('Content Loader Integration', () => {
         expect(foundConcept).toEqual(firstConcept)
       }
 
-      const firstPrompt = loadedContent.prompts[0]
-      if (firstPrompt) {
-        const foundPrompt = getPromptBySlug(firstPrompt.slug)
-        expect(foundPrompt).toEqual(firstPrompt)
+      const firstWorkflow = loadedContent.workflows[0]
+      if (firstWorkflow) {
+        const foundWorkflow = getWorkflowBySlug(firstWorkflow.slug)
+        expect(foundWorkflow).toEqual(firstWorkflow)
       }
 
       const firstTool = loadedContent.externalTools[0]
@@ -152,20 +146,14 @@ describe('Content Loader Integration', () => {
         expect(foundTool).toEqual(firstTool)
       }
 
-      // Test workflow accessor if we have workflows
-      if (loadedContent.workflows && loadedContent.workflows.length > 0) {
-        const firstWorkflow = loadedContent.workflows[0]
-        const foundWorkflow = getWorkflowBySlug(firstWorkflow.slug)
-        expect(foundWorkflow).toEqual(firstWorkflow)
-      }
+
     })
 
     it('should return undefined for non-existent slugs', () => {
       expect(getGuideBySlug('non-existent-guide')).toBeUndefined()
       expect(getConceptBySlug('non-existent-concept')).toBeUndefined()
-      expect(getPromptBySlug('non-existent-prompt')).toBeUndefined()
-      expect(getExternalToolBySlug('non-existent-tool')).toBeUndefined()
       expect(getWorkflowBySlug('non-existent-workflow')).toBeUndefined()
+      expect(getExternalToolBySlug('non-existent-tool')).toBeUndefined()
     })
   })
 
@@ -188,9 +176,8 @@ describe('Content Loader Integration', () => {
       // The content export should be the same as calling loadContent()
       expect(content.guides).toHaveLength(loadedContent.guides.length)
       expect(content.concepts).toHaveLength(loadedContent.concepts.length)
-      expect(content.prompts).toHaveLength(loadedContent.prompts.length)
+      expect(content.workflows).toHaveLength(loadedContent.workflows.length)
       expect(content.externalTools).toHaveLength(loadedContent.externalTools.length)
-      expect(content.objectifs).toHaveLength(loadedContent.objectifs.length)
     })
   })
 
@@ -206,6 +193,9 @@ describe('Content Loader Integration', () => {
         }
         if (loadedContent.concepts.length > 0) {
           getConceptBySlug(loadedContent.concepts[0].slug)
+        }
+        if (loadedContent.workflows.length > 0) {
+          getWorkflowBySlug(loadedContent.workflows[0].slug)
         }
       }
       
