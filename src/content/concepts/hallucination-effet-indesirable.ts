@@ -20,7 +20,6 @@ export const concept = {
     "Vérifiez systématiquement les informations critiques générées avec des sources officielles."
   ],
   "conceptSlugs": [],
-  "mainGuideSlug": "techniques-avancees-fiabilisation",
   "content": [
     {
       "type": "markdown",

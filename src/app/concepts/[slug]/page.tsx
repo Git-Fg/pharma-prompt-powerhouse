@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { content, getConceptBySlug, getGuideBySlug } from '@/lib/content-loader';
+import { content, getConceptBySlug } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -82,14 +82,10 @@ export default async function ConceptDetailPage({
     notFound();
   }
 
-  // Trouver LE guide principal et les autres contenus
-  const mainGuide = concept.mainGuideSlug
-    ? getGuideBySlug(concept.mainGuideSlug)
-    : null;
+  // Trouver les contenus liés à ce concept
   const relatedPrompts = content.prompts.filter((p) => p.conceptSlugs?.includes(slug));
-  // Guides secondaires : ceux qui sont liés au concept mais qui ne sont pas le guide principal
-  const secondaryGuides = content.guides.filter(
-    (g) => g.conceptSlugs?.includes(slug) && g.slug !== concept.mainGuideSlug
+  const relatedGuides = content.guides.filter(
+    (g) => g.conceptSlugs?.includes(slug)
   );
 
   return (
@@ -119,9 +115,7 @@ export default async function ConceptDetailPage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card className="text-center p-4">
               <div className="text-2xl font-bold text-primary">
-                {(mainGuide ? 1 : 0) +
-                  relatedPrompts.length +
-                  secondaryGuides.length}
+                {relatedGuides.length + relatedPrompts.length}
               </div>
               <div className="text-sm text-muted-foreground">
                 Ressources liées
@@ -129,7 +123,7 @@ export default async function ConceptDetailPage({
             </Card>
             <Card className="text-center p-4">
               <div className="text-2xl font-bold text-green-600">
-                {(mainGuide ? 1 : 0) + secondaryGuides.length}
+                {relatedGuides.length}
               </div>
               <div className="text-sm text-muted-foreground">Guides</div>
             </Card>
@@ -163,30 +157,26 @@ export default async function ConceptDetailPage({
       <Separator className="my-8" />
 
       <main className="space-y-12">
-        {/* 1. Le Guide Fondamental */}
-        {mainGuide && (
+        {/* Guides liés */}
+        {relatedGuides.length > 0 && (
           <section>
             <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <BookOpen className="w-8 h-8 text-primary" /> Apprendre : Le Guide
-              Fondamental
+              <BookOpen className="w-8 h-8 text-primary" /> Guides liés à ce concept
             </h2>
-            <Link href={`/guides/${mainGuide.slug}`} className="block">
-              <Card className="hover:shadow-xl transition-shadow border-2 border-primary/20 hover:border-primary/40">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-primary">
-                    {mainGuide.title}
-                  </CardTitle>
-                  <p className="text-md text-muted-foreground">
-                    {mainGuide.description}
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <Button>
-                    Lire le guide <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-            </Link>
+            <div className="grid gap-4">
+              {relatedGuides.map((guide) => (
+                <Link href={`/guides/${guide.slug}`} key={guide.slug}>
+                  <Card className="hover:bg-accent/50 transition-colors">
+                    <CardHeader>
+                      <CardTitle>{guide.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {guide.description}
+                      </p>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
 
@@ -242,29 +232,6 @@ export default async function ConceptDetailPage({
             </CardHeader>
           </Card>
         </section>
-
-        {/* 4. Guides d'Approfondissement (optionnel) */}
-        {secondaryGuides.length > 0 && (
-          <section>
-            <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <Target className="w-8 h-8 text-green-500" /> Approfondir le sujet
-            </h2>
-            <div className="grid gap-4">
-              {secondaryGuides.map((guide) => (
-                <Link href={`/guides/${guide.slug}`} key={guide.slug}>
-                  <Card className="hover:bg-accent/50 transition-colors">
-                    <CardHeader>
-                      <CardTitle>{guide.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {guide.description}
-                      </p>
-                    </CardHeader>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
       </main>
     </div>
   );
