@@ -142,7 +142,7 @@ export default function ExternalToolsPage() {
                       
                       <TableCell>
                         <div className="flex flex-wrap gap-1 max-w-xs">
-                          {tool.use_cases?.slice(0, 2).map((useCase, i) => (
+                          {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
                             <Badge key={i} variant="outline" className="text-xs">
                               {useCase}
                             </Badge>
