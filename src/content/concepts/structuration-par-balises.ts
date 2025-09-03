@@ -1,4 +1,4 @@
-// src/content/concepts-new/structuration-par-balises.ts
+// src/content/concepts/structuration-par-balises.ts
 import { Concept, conceptSchema } from '@/lib/content-schema';
 
 const conceptData = {
@@ -26,7 +26,24 @@ const conceptData = {
   "content": [
     {
       "type": "markdown",
-      "content": "La **structuration par balises** est une méthode de *prompt engineering* qui consiste à utiliser des balises (similaires au HTML/XML) pour délimiter clairement les différentes parties d'un prompt : le contexte, les instructions, les exemples, etc.\n\n## Pourquoi utiliser cette technique ?\n\nCette approche structurée transforme un bloc de texte en une instruction de travail claire et sans ambiguïté pour l'IA.\n\n-   **Clarté Maximale :** L'IA sait exactement quelle partie est le contexte et quelle partie est la question.\n-   **Réduction des Hallucinations :** En délimitant clairement la source d'information, vous réduisez le risque que l'IA invente des faits.\n-   **Fiabilité Accrue :** Les modèles comme Claude sont spécifiquement entraînés à reconnaître et respecter cette structure.\n\n## Structure de Base\n\nUn prompt bien structuré avec des balises pourrait ressembler à ça :\n\n\\`\\`\\`xml\n<role>\nTu es un pharmacien clinicien expert.\n</role>\n\n<contexte>\n  <!-- Les informations de base du cas clinique ou du document vont ici -->\n</contexte>\n\n<instructions>\n  <!-- Ce que vous voulez que l'IA fasse, étape par étape -->\n</instructions>\n\n<format_attendu>\n  <!-- La structure de la réponse que vous souhaitez (ex: tableau Markdown, liste à puces) -->\n</format_attendu>\n\\`\\`\\`\n\nCette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle."
+      "content": "La **structuration par balises** est une méthode de *prompt engineering* qui consiste à utiliser des balises (similaires au HTML/XML) pour délimiter clairement les différentes parties d'un prompt : le contexte, les instructions, les exemples, etc."
+    },
+    {
+      "type": "markdown",
+      "content": "## Pourquoi utiliser cette technique ?\n\nCette approche structurée transforme un bloc de texte en une instruction de travail claire et sans ambiguïté pour l'IA.\n\n-   **Clarté Maximale :** L'IA sait exactement quelle partie est le contexte et quelle partie est la question.\n-   **Réduction des Hallucinations :** En délimitant clairement la source d'information, vous réduisez le risque que l'IA invente des faits.\n-   **Fiabilité Accrue :** Les modèles comme Claude sont spécifiquement entraînés à reconnaître et respecter cette structure."
+    },
+    {
+      "type": "markdown",
+      "content": "## Structure de Base\n\nUn prompt bien structuré avec des balises pourrait ressembler à ça :"
+    },
+    {
+      "type": "codeBlock",
+      "language": "xml",
+      "content": "<role>\nTu es un pharmacien clinicien expert.\n</role>\n\n<contexte>\n  <!-- Les informations de base du cas clinique ou du document vont ici -->\n</contexte>\n\n<instructions>\n  <!-- Ce que vous voulez que l'IA fasse, étape par étape -->\n</instructions>\n\n<format_attendu>\n  <!-- La structure de la réponse que vous souhaitez (ex: tableau Markdown, liste à puces) -->\n</format_attendu>"
+    },
+    {
+      "type": "markdown",
+      "content": "Cette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle."
     }
   ]
 };

@@ -1,4 +1,4 @@
-// src/content/concepts-new/tree-of-thought.ts
+// src/content/concepts/tree-of-thought.ts
 import { Concept, conceptSchema } from '@/lib/content-schema';
 
 const conceptData = {
@@ -26,7 +26,19 @@ const conceptData = {
   "content": [
     {
       "type": "markdown",
-      "content": "Le **Tree-of-Thought (ToT)** est une technique avancée qui guide l'IA à explorer plusieurs chemins de raisonnement simultanément. Plutôt que de suivre une seule ligne de pensée, elle évalue différentes hypothèses, ce qui est crucial pour le diagnostic différentiel ou l'analyse d'interactions complexes en pharmacie.\n\n## Pourquoi utiliser le Tree-of-Thought ?\n\nCette approche est particulièrement utile quand vous devez :\n\n- Analyser plusieurs hypothèses diagnostiques\n- Évaluer différentes stratégies thérapeutiques\n- Résoudre des cas cliniques complexes avec plusieurs variables\n- Optimiser des protocoles de soins\n\n## Comment ça fonctionne ?\n\nLe ToT fonctionne comme un arbre de décision où chaque \"nœud\" représente une étape de raisonnement. L'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies.\n\n## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement"
+      "content": "Le **Tree-of-Thought (ToT)** est une technique avancée qui guide l'IA à explorer plusieurs chemins de raisonnement simultanément. Plutôt que de suivre une seule ligne de pensée, elle évalue différentes hypothèses, ce qui est crucial pour le diagnostic différentiel ou l'analyse d'interactions complexes en pharmacie."
+    },
+    {
+      "type": "markdown",
+      "content": "## Pourquoi utiliser le Tree-of-Thought ?\n\nCette approche est particulièrement utile quand vous devez :\n\n- Analyser plusieurs hypothèses diagnostiques\n- Évaluer différentes stratégies thérapeutiques\n- Résoudre des cas cliniques complexes avec plusieurs variables\n- Optimiser des protocoles de soins"
+    },
+    {
+      "type": "markdown",
+      "content": "## Comment ça fonctionne ?\n\nLe ToT fonctionne comme un arbre de décision où chaque \"nœud\" représente une étape de raisonnement. L'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies."
+    },
+    {
+      "type": "markdown",
+      "content": "## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement"
     }
   ]
 };
