@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants';
 import { ArrowRight, Globe } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import type { ExternalTool } from '@/lib/content-schema';
 import { categoryLabels } from '@/lib/constants';
 
@@ -17,7 +19,10 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   const categoryLabel = categoryLabels[tool.category as keyof typeof categoryLabels] ?? tool.category;
 
   return (
-    <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
+    <Card className={cn(
+      contentCardVariants({ variant: "tool", size: "default" }),
+      "h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group"
+    )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
@@ -29,7 +34,9 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                 {tool.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">{categoryLabel}</Badge>
+                <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
+                  {categoryLabel}
+                </Badge>
               </div>
             </div>
           </div>
@@ -54,7 +61,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </a>
-            <Link href={`/outils-externes/${tool.slug}`} className="flex-1">
+            <Link href={`/l-arsenal-ia/${tool.slug}`} className="flex-1">
               <Button variant="outline" className="w-full" size="sm">
                 En savoir plus
               </Button>
