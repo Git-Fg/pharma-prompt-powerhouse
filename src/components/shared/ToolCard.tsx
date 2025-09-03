@@ -14,7 +14,7 @@ interface ToolCardProps {
 }
 
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
-  const categoryLabel = categoryLabels[tool.category] || tool.category;
+  const categoryLabel = categoryLabels[tool.category as keyof typeof categoryLabels] ?? tool.category;
 
   return (
     <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">

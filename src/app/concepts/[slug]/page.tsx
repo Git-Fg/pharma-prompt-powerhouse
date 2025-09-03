@@ -28,10 +28,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const concept = getConceptBySlug(resolvedParams.slug);
+  const concept = getConceptBySlug(params.slug);
 
   if (!concept) {
     return {
@@ -39,7 +38,6 @@ export async function generateMetadata({
       description: "Le concept que vous recherchez n'existe pas.",
     };
   }
-
   return {
     title: `${concept.title} - Concepts | Pharma Prompt Powerhouse`,
     description: concept.description,
@@ -57,7 +55,7 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: "/og-concept.png", // You could create category-specific OG images
+          url: "/og-concept.png",
           width: 1200,
           height: 630,
           alt: concept.title,

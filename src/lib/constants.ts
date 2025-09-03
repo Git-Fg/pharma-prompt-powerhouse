@@ -1,29 +1,30 @@
 // Centralized constants for filtering and labeling
 
 // SOURCE DE VÉRITÉ UNIQUE - Toutes les catégories utilisées dans le contenu
-export const categoryLabels: Record<string, string> = {
-  // Categories les plus utilisées (basées sur l'analyse du contenu existant)
-  'outils': 'Outils',
-  'fondamentaux': 'Fondamentaux',
-  'techniques-avancees': 'Techniques Avancées',
-  'methodologie': 'Méthodologie',
-  'recherche': 'Recherche & Analyse',
-  'apprentissage': 'Apprentissage & Révision',
-  'cas-pratiques': 'Cas Pratiques',
-  'ressources': 'Ressources',
-  'creation': 'Création de Contenu',
-  'securite': 'Sécurité & Confidentialité',
-  'clinique': 'Clinique',
-  'chatbot': 'Chatbot',
-  'moteur-de-recherche': 'Moteur de Recherche',
-  'suite-creative': 'Suite Créative',
-};
 
-export const difficultyLabels: Record<string, string> = {
+// Type Category défini ici pour labels stricts
+export type Category =
+  | 'fondamentaux'
+  | 'methodologie'
+  | 'ressources'
+  | 'techniques-avancees'
+  | 'cas-pratiques';
+
+export type Difficulty = 'débutant' | 'intermédiaire' | 'avancé';
+
+export const categoryLabels = {
+  fondamentaux: 'Fondamentaux 📚',
+  methodologie: 'Méthodologie 🔬',
+  ressources: 'Ressources 📖',
+  'techniques-avancees': 'Techniques Avancées 🚀',
+  'cas-pratiques': 'Cas Pratiques 💊',
+} as const satisfies Record<Category, string>;
+
+export const difficultyLabels = {
   débutant: 'Débutant',
   intermédiaire: 'Intermédiaire',
   avancé: 'Avancé',
-};
+} as const satisfies Record<Difficulty, string>;
 
 export const toolLabels = {
   chatgpt: 'ChatGPT',
@@ -65,4 +66,4 @@ export const CATEGORIES = {
   }
 } as const;
 
-export type Category = typeof CATEGORIES;
+// export type Category = typeof CATEGORIES; // supprimé car doublon et non utilisé

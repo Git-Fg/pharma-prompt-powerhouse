@@ -41,17 +41,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }): Promise<Metadata> {
-  const { id } = await params;
-  const guide = getGuideBySlug(id);
+  const guide = getGuideBySlug(params.id);
 
   if (!guide) {
     return {
       title: "Guide non trouvé",
     };
   }
-
   return {
     title: `Guide : ${guide.title} | Pharma Prompt Powerhouse`,
     description: guide.description,

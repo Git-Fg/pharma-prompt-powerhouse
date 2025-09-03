@@ -1,7 +1,6 @@
 // src/components/shared/ContentRenderer.tsx
 'use client';
 
-import { ContentBlock } from '@/lib/content-schema';
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -12,107 +11,89 @@ import { GuideRecommendation } from './GuideRecommendation';
 import { ConceptRecommendation } from './ConceptRecommendation';
 
 // Define a more flexible content block type
-type FlexibleContentBlock = ContentBlock | {
-  type: string;
-  slug?: string;
-  reason?: string;
-  language?: string;
-  filename?: string;
-  showLineNumbers?: boolean;
-  content: string;
-  title?: string;
-  variant?: string;
-  defaultValue?: string;
-  tabs?: Array<{
-    value: string;
-    title: string;
-    content: FlexibleContentBlock[];
-  }>;
-  description?: string;
-  [key: string]: unknown;
-};
 
-const BlockSwitch = ({ block }: { block: FlexibleContentBlock }) => {
-  const flexBlock = block as FlexibleContentBlock & { [key: string]: unknown };
-  
+type KnownBlock =
+  | { type: "markdown"; content: string }
+  | { type: "alert"; variant?: "default"|"destructive"; title?: string; content: string }
+  | { type: "toolRecommendation"; slug?: string; reason?: string }
+  | { type: "guideRecommendation"; slug?: string; reason?: string }
+  | { type: "conceptRecommendation"; slug?: string; reason?: string }
+  | { type: "codeBlock"; language: string; filename?: string; showLineNumbers?: boolean; content: string }
+  | { type: "card"; title?: string; description?: string; content: string }
+  | { type: "tabs"; defaultValue?: string; tabs: Array<{ value: string; title: string; content: KnownBlock[] }> };
+
+function assertNever(x: never): never {
+  throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`);
+}
+
+const BlockSwitch = ({ block }: { block: KnownBlock }) => {
   switch (block.type) {
-    case 'markdown':
-      return <MarkdownRenderer content={flexBlock.content} />;
-    
-    case 'alert':
+    case "markdown":
+      return <MarkdownRenderer content={block.content} />;
+    case "alert":
       return (
-        <Alert variant={flexBlock.variant as "default" | "destructive" | undefined} className="my-6">
-          {typeof flexBlock.title === 'string' && <AlertTitle>{flexBlock.title}</AlertTitle>}
+        <Alert variant={block.variant} className="my-6">
+          {typeof block.title === "string" && <AlertTitle>{block.title}</AlertTitle>}
           <AlertDescription>
-            <MarkdownRenderer content={flexBlock.content} />
+            <MarkdownRenderer content={block.content} />
           </AlertDescription>
         </Alert>
       );
-    
-    case 'toolRecommendation':
-      return <ToolRecommendation tags={[]} currentSlug={String(flexBlock.slug || '')} />;
-    
-    case 'guideRecommendation':
-      return <GuideRecommendation guideSlug={String(flexBlock.slug || '')} reason={String(flexBlock.reason || '')} />;
-
-    case 'conceptRecommendation':
-      return <ConceptRecommendation conceptSlug={String(flexBlock.slug || '')} reason={String(flexBlock.reason || '')} />;
-
-    case 'codeBlock':
+    case "toolRecommendation":
+      return <ToolRecommendation tags={[]} currentSlug={String(block.slug || "")} />;
+    case "guideRecommendation":
+      return <GuideRecommendation guideSlug={String(block.slug || "")} reason={String(block.reason || "")} />;
+    case "conceptRecommendation":
+      return <ConceptRecommendation conceptSlug={String(block.slug || "")} reason={String(block.reason || "")} />;
+    case "codeBlock":
       return (
-        <CodeBlock 
-          language={flexBlock.language as string}
-          filename={flexBlock.filename as string}
-          showLineNumbers={flexBlock.showLineNumbers as boolean}
+        <CodeBlock
+          language={block.language}
+          filename={block.filename}
+          showLineNumbers={block.showLineNumbers}
         >
-          {flexBlock.content}
+          {block.content}
         </CodeBlock>
       );
-
-    case 'card':
+    case "card":
       return (
         <Card className="my-6">
-          {(typeof flexBlock.title === 'string' || typeof flexBlock.description === 'string') && (
-            <CardHeader>
-              {typeof flexBlock.title === 'string' && <CardTitle>{flexBlock.title}</CardTitle>}
-              {typeof flexBlock.description === 'string' && <CardDescription>{flexBlock.description}</CardDescription>}
-            </CardHeader>
-          )}
+          <CardHeader>
+            {block.title && <CardTitle>{block.title}</CardTitle>}
+            {block.description && <CardDescription>{block.description}</CardDescription>}
+          </CardHeader>
           <CardContent>
-            <MarkdownRenderer content={flexBlock.content} />
+            <MarkdownRenderer content={block.content} />
           </CardContent>
         </Card>
       );
-
-    case 'tabs':
+    case "tabs":
       return (
-        <Tabs defaultValue={flexBlock.defaultValue as string} className="my-6">
+        <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value} className="my-6">
           <TabsList>
-            {((flexBlock.tabs as Array<{value: string; title: string; content: FlexibleContentBlock[]}>) || []).map((tab) => 
+            {block.tabs.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.title}
               </TabsTrigger>
-            )}
+            ))}
           </TabsList>
-          {((flexBlock.tabs as Array<{value: string; title: string; content: FlexibleContentBlock[]}>) || []).map((tab) => (
-            <TabsContent key={tab.value} value={tab.value} className="pt-4">
-              <ContentRenderer content={tab.content} />
+          {block.tabs.map((tab) => (
+            <TabsContent key={tab.value} value={tab.value}>
+              {tab.content.map((subBlock, idx) => (
+                <BlockSwitch key={idx} block={subBlock} />
+              ))}
             </TabsContent>
           ))}
         </Tabs>
       );
-
     default:
-      // Pour l'instant, on gère les cas non couverts avec un message d'erreur
-      return (
-        <div className="p-4 my-4 bg-red-100 border border-red-500 text-red-800 rounded">
-          Erreur : Type de bloc inconnu: {JSON.stringify(block)}
-        </div>
-      );
+      return assertNever(block);
   }
 };
 
-export function ContentRenderer({ content }: { content: FlexibleContentBlock[] }) {
+// Suppression du code dupliqué et conservation du switch exhaustif
+
+  export function ContentRenderer({ content }: { content: KnownBlock[] }) {
   if (!content || content.length === 0) return null;
   
   return (
