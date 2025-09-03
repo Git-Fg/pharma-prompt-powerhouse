@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants';
 import { ArrowRight, Clock, BookOpen, Target } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import type { EnrichedGuide } from '@/lib/content-schema';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
@@ -18,7 +20,10 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
   const difficultyLabel = difficultyLabels[guide.difficulty as keyof typeof difficultyLabels] ?? guide.difficulty;
 
   return (
-    <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
+    <Card className={cn(
+      contentCardVariants({ variant: "guide", size: "default" }),
+      "h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group"
+    )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
@@ -30,7 +35,9 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
                 {guide.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">{categoryLabel}</Badge>
+                <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
+                  {categoryLabel}
+                </Badge>
                 <Badge variant="outline">{difficultyLabel}</Badge>
                 {guide.isWorkflow && (
                   <Badge variant="default">

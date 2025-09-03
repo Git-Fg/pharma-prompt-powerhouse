@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants';
 import { BookOpen, Lightbulb } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import type { Concept } from '@/lib/content-schema';
 
 interface ConceptCardProps {
@@ -14,7 +16,10 @@ interface ConceptCardProps {
 
 export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
   return (
-    <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
+    <Card className={cn(
+      contentCardVariants({ variant: "concept", size: "default" }),
+      "h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group"
+    )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
@@ -39,6 +44,9 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
+              {concept.category}
+            </Badge>
             {concept.tags.map((tag) => (
               <Badge key={tag} variant="outline" className="text-xs">
                 {tag}
