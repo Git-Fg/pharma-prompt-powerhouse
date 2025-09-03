@@ -3,27 +3,58 @@ import { allGuides } from '@/content/guides';
 import { allPrompts } from '@/content/prompts';
 import { allExternalTools } from '@/content/external-tools';
 import { allObjectifs } from '@/content/objectifs';
-import type { Concept, Guide, Prompt, Objectif, EnrichedGuide, EnrichedConcept } from './content-schema';
+import { allWorkflows } from '@/content/workflows';
+import type { Concept, Guide, Prompt, Objectif, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
 
-type ContentItem = Guide | Prompt;
+type ContentItem = Guide | Prompt | Workflow;
 
 export function loadContent() {
   const concepts: Concept[] = allConcepts;
   const guides: Guide[] = allGuides;
+  const workflows: Workflow[] = allWorkflows;
   const prompts: Prompt[] = allPrompts;
   const externalTools = allExternalTools;
   const objectifs = allObjectifs;
 
   const conceptMap = new Map<string, Concept>(concepts.map(c => [c.slug, c]));
   const guideMap = new Map<string, Guide>(guides.map(g => [g.slug, g]));
+  const workflowMap = new Map<string, Workflow>(workflows.map(w => [w.slug, w]));
   const promptMap = new Map<string, Prompt>(prompts.map(p => [p.slug, p]));
-  const allContent: ContentItem[] = [...guides, ...prompts];
+  const allContent: ContentItem[] = [...guides, ...prompts, ...workflows];
 
+  // Enrich workflows
+  const enrichedWorkflows: EnrichedWorkflow[] = workflows.map(workflow => {
+    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is Concept => c !== undefined) || [];
+    const relatedWorkflows: EnrichedWorkflow['relatedWorkflows'] = [];
+    
+    // Find related workflows based on shared concepts
+    if (workflow.conceptSlugs) {
+      const relatedContent = allContent.filter(item => 
+        item.slug !== workflow.slug &&
+        item.conceptSlugs?.some(slug => workflow.conceptSlugs!.includes(slug))
+      );
+      
+      relatedContent.forEach(item => {
+        if (workflowMap.has(item.slug) && !relatedWorkflows.some(w => w.slug === item.slug)) {
+          const { content: _content, concepts: _concepts, relatedWorkflows: _rw, ...workflowWithoutContent } = item as EnrichedWorkflow;
+          relatedWorkflows.push(workflowWithoutContent);
+        }
+      });
+    }
+
+    return {
+      ...workflow,
+      concepts: conceptsForWorkflow,
+      relatedWorkflows: relatedWorkflows.slice(0, 3),
+    };
+  });
+
+  // Enrich guides
   const enrichedGuides: EnrichedGuide[] = guides.map(guide => {
     const conceptsForGuide = guide.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is Concept => c !== undefined) || [];
     const relatedGuides: EnrichedGuide['relatedGuides'] = [];
     const relatedPrompts: EnrichedGuide['relatedPrompts'] = [];
-
+    
     if (guide.conceptSlugs) {
       const relatedContent = allContent.filter(item => 
         item.slug !== guide.slug &&
@@ -55,15 +86,21 @@ export function loadContent() {
     guide: concept.mainGuideSlug ? enrichedGuides.find(g => g.slug === concept.mainGuideSlug) : undefined,
   }));
 
-  return { guides: enrichedGuides, concepts: enrichedConcepts, prompts, externalTools, objectifs };
+  return { 
+    guides: enrichedGuides, 
+    workflows: enrichedWorkflows,
+    concepts: enrichedConcepts, 
+    prompts, 
+    externalTools, 
+    objectifs 
+  };
 }
 
 export const content = loadContent();
 
-// --- Data Accessor Functions ---
-
 export const getGuideBySlug = (slug: string) => content.guides.find(g => g.slug === slug);
+export const getWorkflowBySlug = (slug: string) => content.workflows.find(w => w.slug === slug);
 export const getConceptBySlug = (slug: string) => content.concepts.find(c => c.slug === slug);
 export const getPromptBySlug = (slug: string) => content.prompts.find(p => p.slug === slug);
-export const getToolBySlug = (slug: string) => content.externalTools.find(t => t.slug === slug);
+export const getExternalToolBySlug = (slug: string) => content.externalTools.find(t => t.slug === slug);
 export const getObjectifBySlug = (slug: string): Objectif | undefined => content.objectifs.find(o => o.slug === slug);
