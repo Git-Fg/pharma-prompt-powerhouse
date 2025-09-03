@@ -7,9 +7,8 @@ vi.mock('@/lib/content-loader', () => ({
   content: {
     guides: [],
     concepts: [],
-    prompts: [],
-    externalTools: [],
-    objectifs: []
+    workflows: [],
+    externalTools: []
   }
 }))
 
