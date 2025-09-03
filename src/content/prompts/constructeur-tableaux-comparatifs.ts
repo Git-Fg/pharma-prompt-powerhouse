@@ -1,82 +1,112 @@
-// src/content/prompts-new/constructeur-tableaux-comparatifs.ts
 import { Prompt, promptSchema } from '@/lib/content-schema';
 
 const promptData = {
   "slug": "constructeur-tableaux-comparatifs",
   "title": "Constructeur de Tableaux Comparatifs",
-  "description": "Générez des tableaux comparatifs clairs et efficaces, un outil essentiel pour les révisions en pharmacie.",
+  "description": "Un prompt pour structurer et générer des tableaux comparatifs pédagogiques (ex: antihypertenseurs, antibiotiques).",
   "icon": "Table",
-  "category": "creation",
-  "difficulty": "débutant",
-  "tags": [
-    "comparatif",
-    "exemple-code",
-    "pedagogie",
+  "category": "enseignement",
+  "difficulty": "intermédiaire",
+ "tags": [
+    "antibiotiques",
+    "enseignement",
+    "génération-contenu",
     "pharmacie",
     "prompting",
-    "tableau",
+    "tableau-comparatif",
     "template",
     "variables"
   ],
   "isFavorite": false,
   "keyTakeaways": [],
-  "conceptSlugs": [
-    "structuration-par-balises"
-  ],
+  "conceptSlugs": [],
   "variables": [
-    "sujet_comparaison",
-    "elements_a_comparer",
-    "criteres_comparaison"
+    "classes_medicaments",
+    "caracteristiques_comparees"
   ],
-  "promptContent": "<tache>\nCrée un tableau comparatif détaillé.\n</tache>\n\n<sujet>\n{{sujet_comparaison}}\n</sujet>\n\n<elements>\n{{elements_a_comparer}}\n</elements>\n\n<criteres>\n{{criteres_comparaison}}\n</criteres>\n",
-  "systemPromptContent": "Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.\n",
+  "promptContent": "Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie.\n\n<classes_medicaments>\n{{classes_medicaments}}\n</classes_medicaments>\n\n<caracteristiques_comparees>\n{{caracteristiques_comparees}}\n</caracteristiques_comparees>\n\n<thinking_process>\n1. **Identification des Classes** : Liste toutes les classes de médicaments à comparer.\n2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes pour la comparaison.\n3. **Structuration du Tableau** : Organise les classes en lignes et les caractéristiques en colonnes.\n4. **Remplissage des Données** : Complète chaque cellule avec l'information pertinente.\n</thinking_process>\n\n<format_sortie>\n- Présente le tableau au format markdown avec un en-tête clair.\n- Utilise des symboles (✅, ⚠️, ❌) pour une lecture rapide.\n- Ajoute une légende si nécessaire pour les symboles.\n</format_sortie>",
+  "systemPromptContent": "Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l'apprentissage de classes thérapeutiques.\n",
   "alternativeVersions": {
-    "standard": "Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.\n\nCrée un tableau comparatif détaillé pour :\n- **Sujet :** {{sujet_comparaison}}\n- **Éléments à comparer :** {{elements_a_comparer}}\n- **Critères de comparaison :** {{criteres_comparaison}}\n",
-    "xml": "<role>\nTu es un expert en pharmacologie et en pédagogie, spécialisé dans la création de supports de révision.\n</role>\n\n<tache>\nCrée un tableau comparatif détaillé au format Markdown.\n</tache>\n\n<sujet>\n{{sujet_comparaison}}\n</sujet>\n\n<elements_to_compare>\n{{elements_a_comparer}}\n</elements_to_compare>\n\n<criteria>\n{{criteres_comparaison}}\n</criteria>\n\n<format_instructions>\n- Utilise le format Markdown pour les tableaux\n- Ajoute des émojis pour améliorer la lisibilité\n- Inclus une conclusion synthétique après le tableau\n</format_instructions>\n",
+    "standard": "Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie.\n\nCrée un tableau comparatif des classes de médicaments suivantes.\n\n**Classes de Médicaments :**\n{{classes_medicaments}}\n\n**Caractéristiques à Comparer :**\n{{caracteristiques_comparees}}\n\nProcède ainsi :\n1. **Identification des Classes** : Liste toutes les classes.\n2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes.\n3. **Structuration du Tableau** : Organise en lignes/colonnes.\n4. **Remplissage des Données** : Complète chaque cellule.\n\nPrésente le tableau en markdown avec un en-tête clair. Utilise des symboles (✅, ⚠️, ❌) et ajoute une légende.",
+    "xml": "Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie.\n\n<classes_medicaments>\n{{classes_medicaments}}\n</classes_medicaments>\n\n<caracteristiques_comparees>\n{{caracteristiques_comparees}}\n</caracteristiques_comparees>\n\n<thinking_process>\n1. **Identification des Classes** : Liste toutes les classes de médicaments à comparer.\n2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes pour la comparaison.\n3. **Structuration du Tableau** : Organise les classes en lignes et les caractéristiques en colonnes.\n4. **Remplissage des Données** : Complète chaque cellule avec l'information pertinente.\n</thinking_process>\n\n<format_sortie>\n- Présente le tableau au format markdown avec un en-tête clair.\n- Utilise des symboles (✅, ⚠️, ❌) pour une lecture rapide.\n- Ajoute une légende si nécessaire pour les symboles.\n</format_sortie>",
     "aiStudio": {
-      "systemPrompt": "Tu es un expert en pharmacologie et en pédagogie. Ta spécialité est de créer des supports de révision clairs et synthétiques. Tu réponds toujours au format Markdown avec des tableaux bien structurés.\n",
-      "userPrompt": "Crée un tableau comparatif détaillé pour :\n\n**Sujet :** {{sujet_comparaison}}\n**Éléments à comparer :** {{elements_a_comparer}}  \n**Critères de comparaison :** {{criteres_comparaison}}\n\nAjoute une brève conclusion après le tableau.\n"
+      "systemPrompt": "Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l'apprentissage de classes thérapeutiques.\n",
+      "userPrompt": "Crée un tableau comparatif des classes de médicaments suivantes.\n\n**Classes de Médicaments :**\n{{classes_medicaments}}\n\n**Caractéristiques à Comparer :**\n{{caracteristiques_comparees}}\n\nProcède ainsi :\n1. **Identification des Classes** : Liste toutes les classes.\n2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes.\n3. **Structuration du Tableau** : Organise en lignes/colonnes.\n4. **Remplissage des Données** : Complète chaque cellule.\n\nPrésente le tableau en markdown avec un en-tête clair. Utilise des symboles (✅, ⚠️, ❌) et ajoute une légende."
     }
   },
   "recommendedTools": {
     "standard": [
       "ChatGPT",
-      "Claude.ai",
-      "Gemini"
+      "Claude.ai"
     ],
     "xml": [
-      "Claude.ai",
-      "DeepSeek"
+      "Claude.ai"
     ],
     "aiStudio": [
       "Google AI Studio",
-      "OpenAI Playground"
+      "Qwen Chat"
     ]
   },
   "content": [
     {
       "type": "markdown",
-      "content": "## Notes d'Utilisation\n\nCe prompt utilise les nouvelles capacités multi-format pour s'adapter automatiquement à votre outil préféré. Chaque version est optimisée pour tirer le meilleur parti de la plateforme choisie."
+      "content": "## Organisation Comparée par IA\n\nCe prompt guide un LLM dans la création de tableaux comparatifs structurés pour des classes thérapeutiques, facilitant l'apprentissage par la visualisation."
+    },
+    {
+      "type": "card",
+      "title": "Variables à Personnaliser",
+      "content": "- **{{classes_medicaments}}** : Liste des classes thérapeutiques à comparer\n- **{{caracteristiques_comparees}}** : Liste des caractéristiques (efficacité, effets secondaires, etc.)"
+    },
+    {
+      "type": "tabs",
+      "defaultValue": "examples",
+      "tabs": [
+        {
+          "value": "examples",
+          "title": "Exemples d'Usage",
+          "content": [
+            {
+              "type": "card",
+              "title": "Exemple : Antihypertenseurs (L2)",
+              "content": "**Classes de Médicaments :**\nIEC, ARA II, Bêta-bloquants, Inhibiteurs calciques, Diurétiques thiazidiques\n\n**Caractéristiques à Comparer :**\nMécanisme d'action, Indications principales, Effets secondaires fréquents, Contre-indications, Grossesse"
+            }
+          ]
+        },
+        {
+          "value": "formats",
+          "title": "Optimisation par Outil",
+          "content": [
+            {
+              "type": "card",
+              "title": "Version Standard",
+              "content": "Parfait pour les interfaces de chat simples (ChatGPT, Claude). Format conversationnel naturel."
+            },
+            {
+              "type": "card",
+              "title": "Version XML",
+              "variant": "outline",
+              "content": "Optimisé pour Claude qui excelle avec les balises structurées `<classes_medicaments>`, `<caracteristiques_comparees>`."
+            },
+            {
+              "type": "card",
+              "title": "Version AI Studio",
+              "variant": "outline",
+              "content": "Sépare System/User pour un contrôle granulaire des paramètres de créativité. Idéal pour Qwen Chat."
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "alert",
       "variant": "default",
-      "title": "💡 Conseil",
-      "content": "Pour des tableaux complexes, utilisez la version XML avec Claude qui excelle dans la structuration des données."
+      "title": "⚠️ Validation Scientifique",
+      "content": "Toujours valider les informations générées avec des sources fiables (bonnes pratiques, référentiels officiels) avant utilisation pédagogique."
     },
     {
-      "type": "markdown",
-      "content": "## Exemple de Variables\n\nVoici un exemple concret d'utilisation :"
-    },
-    {
-      "type": "codeBlock",
-      "language": "text",
-      "filename": "variables-exemple.txt",
-      "content": "{{sujet_comparaison}} : \"Antidépresseurs pour le traitement de la dépression majeure\"\n{{elements_a_comparer}} : \"ISRS (fluoxétine), IRSN (venlafaxine), tricycliques (amitriptyline)\"\n{{criteres_comparaison}} : \"Mécanisme d'action, posologie, effets indésirables, contre-indications, surveillance\""
-    },
-    {
-      "type": "markdown",
-      "content": "## Versions Recommandées par Outil\n\n- **Version Standard** : Pour ChatGPT, Claude.ai, Gemini\n- **Version XML** : Optimale pour Claude.ai et DeepSeek\n- **Version AI Studio** : Spécialement conçue pour Google AI Studio et OpenAI Playground"
+      "type": "guideRecommendation",
+      "slug": "methodologie-comparaison",
+      "reason": "Suivez une méthodologie éprouvée pour construire des comparaisons pertinentes et pédagogiques."
     }
   ]
 };

@@ -1,3 +1,4 @@
+
 # **Règles Générales**
 
 <project_philosophy>
@@ -21,7 +22,8 @@
 <project_documentation_rules>
 **Stratégie de Documentation**
 - **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
-- **`docs` (ou ce fichier) :** Documentation complémentaire sur le projet : uniquement sur des concepts centraux, à utiliser avec parcimonie
+- **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances technique du projet. Sert de constitution pour le développement et la création de contenu.
+- **`src/types/README.md` :** Documentation sur la philosophie de typage, expliquant la source de vérité unique et comment étendre les types de contenu.
 </project_documentation_rules>
 
 <coding_style_and_principles>
@@ -33,7 +35,7 @@
   - Utiliser `useContext` pour un partage simple entre composants.
   - Réserver `useReducer` pour les logiques d'état réellement complexes.
 - **Performance Intelligente :**
-  - La meilleure optimisation est de **déplacer la logique vers la structure de données** avec des blocs de contenu typés.
+  - La meilleure optimisation est de **déplacer la logique vers la structure de données** avec des blocs de contenu fortement typés via `content-schema.ts`.
   - Faire confiance aux optimisations automatiques de React 19 et éviter l'optimisation prématurée.
 - **Dépendances Minimales :** N'ajouter une bibliothèque que si elle résout un problème réel qu'une fonctionnalité native ne peut pas couvrir.
 - **Documentation Utile :** Commenter le "pourquoi" derrière les choix de code complexes, pas le "comment".
@@ -112,29 +114,25 @@
 </shadcn_ui_rules>
 
 <content_structure_rules>
-**Philosophie : Le Schéma est la Source de Vérité**
-- Toute la structure de contenu est définie par des schémas Zod dans `src/lib/content-schema.ts`.
-- Les composants React doivent être "stupides" : ils consomment des données déjà typées et validées, sans faire de transformations complexes.
-**Structure des Données:**
-- **Contenu Structuré :** Le contenu est modélisé comme un tableau de blocs typés, chaque bloc représentant soit un paragraphe de texte, soit un composant interactif.
-- **Schéma Central :** Le fichier `src/lib/content-schema.ts` définit tous les types de blocs possibles et les schémas des collections de contenu.
-- **Validation au Runtime :** Chaque fichier de contenu utilise `schema.parse(data)` pour garantir sa validité.
+**Philosophie : Le Schéma Zod est la Source de Vérité Unique**
+- Toute la structure de contenu est définie par des schémas Zod dans `src/lib/content-schema.ts`. C'est le seul endroit où les types de contenu sont définis.
+- Les composants React doivent être "stupides" : ils consomment des données déjà typées, sans faire de transformations complexes. La logique d'enrichissement est dans `content-loader.ts`.
+**Validation à la Compilation (`satisfies`)**
+- Chaque fichier de contenu (`.ts`) utilise l'opérateur `satisfies` de TypeScript pour valider sa structure contre le type inféré de Zod (ex: `satisfies Guide`).
+- Cette approche garantit la type-safety **au moment du développement**, avant même que le code ne soit exécuté, et offre une autocomplétion parfaite.
+- Le build échouera si un contenu ne respecte pas son schéma, assurant une intégrité totale.
 **Zod Best Practices 2025:**
-- **Type Inference :** Utiliser exclusivement `z.infer<typeof schema>` pour typer les données. Ne jamais créer de types manuels.
-- **Modularité :** Garder les schémas modulaires et réutilisables. Utiliser `.extend()` et `.merge()` pour la composition.
-- **Transformation Intelligente :** Utiliser `.transform()` pour enrichir les données pendant la validation.
-- **Validation Stricte :** Ne jamais utiliser `any`. Toujours valider les données entrantes avec les schémas Zod.
+- **Inférence de Type :** Utiliser exclusivement `z.infer<typeof schema>` dans `content-schema.ts` pour générer les types TypeScript.
+- **Modularité :** Garder les schémas modulaires. Le `contentBlockSchema` est une union de tous les blocs possibles, ce qui permet une extensibilité propre.
+- **Pas de Validation Runtime Inutile :** Le `content-loader` n'a pas besoin de parser les données car la validation est déjà assurée par TypeScript et `satisfies` au niveau de chaque fichier de contenu.
 **Enrichissement des Données:**
-- **Content Loader :** Le fichier `src/lib/content-loader.ts` centralise le chargement et l'enrichissement du contenu.
-- **Relations :** Les relations entre collections (ex: guides et concepts) sont résolues au chargement via des Maps pour des recherches ultra-rapides O(1).
-- **Typage Fort :** Toutes les données sont enrichies et typées avant d'être utilisées par les composants.
+- **Content Loader :** Le fichier `src/lib/content-loader.ts` centralise le chargement et l'enrichissement du contenu (ex: lier les guides à leurs concepts).
+- **Relations :** Les relations entre collections sont résolues au chargement via des Maps pour des recherches ultra-rapides O(1) dans l'application.
+- **Typage Fort :** Toutes les données sont enrichies et fortement typées avant d'être passées aux composants.
 **Organisation des Fichiers:**
-- **Collections :** Chaque collection a son dossier dans `src/content/` (ex: `src/content/guides/`).
-- **Fichiers de Contenu :** Chaque élément de contenu est un fichier `.ts` qui exporte un objet validé par son schéma.
-- **Index :** Chaque collection a un fichier `index.ts` qui exporte un tableau de tous les éléments de la collection.
-**Validation et Qualité des Données:**
-- **Validation Stricte de la Taxonomie :** Le build DOIT échouer si un contenu ne respecte pas son schéma Zod.
-- **Intégrité des Références :** Les références entre collections (ex: `conceptSlugs`) sont validées à la compilation pour garantir la cohérence.
+- **Collections :** Chaque collection a son dossier dans `src/content/`.
+- **Fichiers de Contenu :** Chaque élément est un fichier `.ts` qui exporte un objet unique validé avec `satisfies`.
+- **Index :** Chaque dossier de collection a un fichier `index.ts` qui agrège et exporte tous les éléments.
 </content_structure_rules>
 
 <testing_rules>
@@ -160,22 +158,19 @@
 </testing_rules>
 
 <typescript_rules>
-**Sécurité des Types :**
-- La source de vérité pour les types de contenu est le fichier `src/lib/content-schema.ts`. Ne JAMAIS créer de types manuels comme `GuideWithSlug`.
-- **Inférence de Type avec Zod :** Utiliser `z.infer<typeof schema>` pour typer les données de contenu.
-- **Typage des Fonctions :** Importer les types inférés depuis `src/lib/content-schema.ts` pour typer les fonctions et composants.
-- **Diagnostic :** En cas d'erreur de type liée au contenu, le premier réflexe est de :
-  1.  Vérifier `src/lib/content-schema.ts`.
-  2.  Vérifier que le contenu respecte bien son schéma.
-  3.  Redémarrer le serveur TS de l'éditeur si nécessaire.
+**Typage du Contenu : Zéro Redondance**
+- **Source de Vérité Unique :** Le fichier `src/lib/content-schema.ts` est la seule source de vérité. Tous les types de contenu (`Concept`, `Guide`, `ContentBlock`, etc.) sont inférés de schémas Zod et exportés depuis ce fichier.a
+- **Workflow de Typage :**
+  1.  Définir ou modifier un schéma Zod dans `content-schema.ts`.
+  2.  Le type TypeScript est automatiquement mis à jour via `z.infer`.
+  3.  Utiliser l'opérateur `satisfies` dans les fichiers de contenu pour une validation instantanée.
 **Typage des Composants :**
 - Utiliser des interfaces de props simples.
-- Importer les types (`Guide`, `Concept`, `ContentBlock`, etc.) directement depuis `src/lib/content-schema.ts` pour les props des composants.
-- Utiliser le composant `ContentRenderer` pour afficher les blocs de contenu de manière standardisée.
+- Importer les types (`Guide`, `Concept`, `ContentBlock`) depuis `src/types/index.ts` (qui ré-exporte depuis `content-schema.ts`) pour typer les props.
+- **Synchronisation du `ContentRenderer` :** Le composant `ContentRenderer` utilise une union discriminée sur le type `ContentBlock`. L'utilisation d'une fonction `assertNever` dans le `switch default` garantit que si un nouveau type de bloc est ajouté au schéma, TypeScript générera une erreur de compilation tant que le `ContentRenderer` n'est pas mis à jour pour le gérer.
 **Configuration TypeScript:**
 - Maintenir le mode `strict` activé dans `tsconfig.json`.
 - Utiliser les résolutions de chemin appropriées pour les aliases.
-- Configurer correctement les types pour Vitest et les environnements de test.
 </typescript_rules>
 
 <performance_rules>
@@ -198,24 +193,25 @@
 
 <instructions>
 DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
-DO maintenir un ton professionnel mais abordable
-DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant
-DO utiliser les schémas Zod pour définir la structure du contenu
-DO faire confiance aux types générés par Zod comme source de vérité
-DO structurer le contenu comme un tableau de blocs typés
-DO utiliser Sonner exclusivement pour les notifications
-DO utiliser Vitest exclusivement pour les tests
-DO utiliser `useActionState` pour les formulaires React 19
-DO comprendre que Next.js 15 ne met plus rien en cache par défaut
-DO écrire du code facile à expliquer aux autres étudiants
-DO NOT utiliser de serveur personnalisé
-DO NOT utiliser Jest ou d'autres frameworks de test
-DO NOT utiliser de systèmes de notification alternatifs
-DO NOT sur-ingénier les solutions ou ajouter une complexité inutile
-DO NOT effectuer de logique de liaison de données au runtime. C'est le rôle du content loader.
-DO NOT créer de types manuels pour le contenu.
-DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15
-DO NOT sacrifier la clarté pour la sophistication technique
+DO maintenir un ton professionnel mais abordable.
+DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant.
+DO utiliser les schémas Zod dans `src/lib/content-schema.ts` comme unique source de vérité pour la structure du contenu.
+DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
+DO faire confiance aux types inférés de Zod.
+DO structurer le contenu comme un tableau de blocs typés.
+DO utiliser Sonner exclusivement pour les notifications.
+DO utiliser Vitest exclusively pour les tests.
+DO utiliser `useActionState` pour les formulaires React 19.
+DO comprendre que Next.js 15 ne met plus rien en cache par défaut.
+DO écrire du code facile à expliquer aux autres étudiants.
+DO NOT utiliser de serveur personnalisé.
+DO NOT utiliser Jest ou d'autres frameworks de test.
+DO NOT utiliser de systèmes de notification alternatifs.
+DO NOT sur-ingénier les solutions ou ajouter une complexité inutile.
+DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
+DO NOT créer de types manuels redondants pour le contenu (le fichier `src/types/content.ts` est obsolète).
+DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15.
+DO NOT sacrifier la clarté pour la sophistication technique.
 En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
 </instructions>
 
