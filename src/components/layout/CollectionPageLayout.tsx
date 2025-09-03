@@ -1,6 +1,8 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Container, Section } from './Container';
+import { StaggeredPage, StaggeredItem } from '@/components/ui/transitions';
+import { ScrollAnimated, AnimatedList, AnimatedItem } from '@/components/ui/animated';
 
 interface StatCardProps {
   value: string | number;
@@ -27,47 +29,55 @@ export function CollectionPageLayout({
   children,
 }: CollectionPageLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Hero Header avec responsive design mobile-first */}
-      <div className={cn("border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60", headerClassName)}>
-        <Section size="md">
-          <Container maxWidth="4xl">
-            <div className="page-header">
-              <h1 className="page-title text-balance">
-                {title}
-              </h1>
-              <p className="page-description text-pretty">
-                {description}
-              </p>
-            </div>
-
-            {stats && stats.length > 0 && (
-              <div className="stats-grid">
-                {stats.map((stat, index) => (
-                  <div key={index} className={cn("stat-card", stat.bgClass)}>
-                    <div className={cn("stat-number", stat.colorClass)}>
-                      {stat.value}
-                    </div>
-                    <div className={cn(
-                      "stat-label",
-                      stat.colorClass.replace('text-', 'text-').replace('-400', '-300/70').replace('-600', '-600/70')
-                    )}>
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
+    <StaggeredPage className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Hero Header avec responsive design mobile-first et animations */}
+      <StaggeredItem>
+        <div className={cn("border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60", headerClassName)}>
+          <Section size="md">
+            <Container maxWidth="4xl">
+              <div className="page-header">
+                <h1 className="page-title text-balance animate-fade-in">
+                  {title}
+                </h1>
+                <p className="page-description text-pretty animate-slide-up">
+                  {description}
+                </p>
               </div>
-            )}
+
+              {stats && stats.length > 0 && (
+                <AnimatedList className="stats-grid" staggerDelay={0.15}>
+                  {stats.map((stat, index) => (
+                    <AnimatedItem key={index} delay={index * 0.1}>
+                      <div className={cn("stat-card hover-glow hover-scale cursor-pointer", stat.bgClass)}>
+                        <div className={cn("stat-number animate-bounce-subtle", stat.colorClass)}>
+                          {stat.value}
+                        </div>
+                        <div className={cn(
+                          "stat-label",
+                          stat.colorClass.replace('text-', 'text-').replace('-400', '-300/70').replace('-600', '-600/70')
+                        )}>
+                          {stat.label}
+                        </div>
+                      </div>
+                    </AnimatedItem>
+                  ))}
+                </AnimatedList>
+              )}
+            </Container>
+          </Section>
+        </div>
+      </StaggeredItem>
+
+      {/* Contenu principal avec marges standardisées et animations */}
+      <StaggeredItem>
+        <Section>
+          <Container maxWidth={contentMaxWidth}>
+            <ScrollAnimated variant="slideUp" className="animate-fade-in">
+              {children}
+            </ScrollAnimated>
           </Container>
         </Section>
-      </div>
-
-      {/* Contenu principal avec marges standardisées */}
-      <Section>
-        <Container maxWidth={contentMaxWidth}>
-          {children}
-        </Container>
-      </Section>
-    </div>
+      </StaggeredItem>
+    </StaggeredPage>
   );
 }
