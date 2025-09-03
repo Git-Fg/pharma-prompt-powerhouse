@@ -68,8 +68,17 @@ export const guide = {
             },
             {
               "type": "card",
-              "title": "📊 Configuration Budget vs Performance",
-              "content": "| **Setup** | **Budget** | **Modèles supportés** | **Performance** |\n|-----------|------------|----------------------|----------------|\n| **RTX 4060 (8GB)** | ~300€ | Qwen3-4B, Llama3.1-8B | ⭐⭐⭐ Bon |\n| **RTX 4070 (12GB)** | ~600€ | Qwen3-14B, Mixtral-8x7B | ⭐⭐⭐⭐ Très bon |\n| **MacBook Pro M3** | ~2500€ | Qwen3-32B, modèles avancés | ⭐⭐⭐⭐⭐ Excellent |\n| **RTX 4090 (24GB)** | ~1800€ | Tous modèles open-source | ⭐⭐⭐⭐ Maximum |"
+              "title": "📊 Configuration Budget vs Performance"
+            },
+            {
+              "type": "table",
+              "headers": ["**Setup**", "**Budget**", "**Modèles supportés**", "**Performance**"],
+              "rows": [
+                ["**RTX 4060 (8GB)**", "~300€", "Qwen3-4B, Llama3.1-8B", "⭐⭐⭐ Bon"],
+                ["**RTX 4070 (12GB)**", "~600€", "Qwen3-14B, Mixtral-8x7B", "⭐⭐⭐⭐ Très bon"],
+                ["**MacBook Pro M3**", "~2500€", "Qwen3-32B, modèles avancés", "⭐⭐⭐⭐⭐ Excellent"],
+                ["**RTX 4090 (24GB)**", "~1800€", "Tous modèles open-source", "⭐⭐⭐⭐ Maximum"]
+              ]
             }
           ]
         },
@@ -215,8 +224,21 @@ export const guide = {
     },
     {
       "type": "card",
-      "title": "Local vs Cloud - Quand Choisir Quoi ?",
-      "content": "| **Critère** | **IA Locale (Qwen3-4B)** | **IA Cloud (ChatGPT/Claude)** |\n|-------------|---------------------------|-------------------------------|\n| **Confidentialité** | 🏆 100% garantie | ⚠️ Risque résiduel |\n| **Performance** | ⚖️ Bonne (4B params) | 🏆 Excellente (100B+ params) |\n| **Coût long terme** | 🏆 Gratuit après setup | 💰 $20+/mois récurrent |\n| **Facilité d'usage** | ⚖️ Setup technique requis | 🏆 Prêt immédiatement |\n| **Quotas/Limites** | 🏆 Illimité | ⚠️ Quotas stricts |\n| **Mise à jour** | ⚖️ Manuelle | 🏆 Automatique |\n| **Support** | ⚖️ Communautaire | 🏆 Support officiel |\n\n**Recommandation** : Utilisez le local pour le **sensible**, le cloud pour le **performance**"
+      "title": "Local vs Cloud - Quand Choisir Quoi ?"
+    },
+    {
+      "type": "table",
+      "headers": ["**Critère**", "**IA Locale (Qwen3-4B)**", "**IA Cloud (ChatGPT/Claude)**"],
+      "rows": [
+        ["**Confidentialité**", "🏆 100% garantie", "⚠️ Risque résiduel"],
+        ["**Performance**", "⚖️ Bonne (4B params)", "🏆 Excellente (100B+ params)"],
+        ["**Coût long terme**", "🏆 Gratuit après setup", "💰 $20+/mois récurrent"],
+        ["**Facilité d'usage**", "⚖️ Setup technique requis", "🏆 Prêt immédiatement"],
+        ["**Quotas/Limites**", "🏆 Illimité", "⚠️ Quotas stricts"],
+        ["**Mise à jour**", "⚖️ Manuelle", "🏆 Automatique"],
+        ["**Support**", "⚖️ Communautaire", "🏆 Support officiel"]
+      ],
+      "caption": "**Recommandation** : Utilisez le local pour le **sensible**, le cloud pour le **performance**"
     },
     {
       "type": "alert",
