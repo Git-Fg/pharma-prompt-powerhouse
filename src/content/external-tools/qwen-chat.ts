@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "qwen-chat",
@@ -37,6 +37,6 @@ const externalTool = {
       content: "J'utilise cet outil pour des calculs complexes, pour générer du code pour des projets personnels, ou pour des recherches sur des sujets non confidentiels. C'est un excellent bac à sable technique, à condition de bien cloisonner son utilisation."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

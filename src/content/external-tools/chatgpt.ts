@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "chatgpt",
@@ -43,6 +43,6 @@ const externalTool = {
       content: "Pour moi, **ChatGPT** est un **produit fini**, une application que j'utilise pour accomplir des tâches. **OpenAI Playground** est mon **laboratoire**, un outil d'expérimentation pour comprendre le fonctionnement des modèles et construire des prompts sur mesure. La maîtrise commence sur ChatGPT, mais l'expertise se développe dans le Playground."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

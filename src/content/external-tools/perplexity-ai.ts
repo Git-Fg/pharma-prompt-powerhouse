@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "perplexity-ai",
@@ -36,6 +36,6 @@ const externalTool = {
       content: "1. **Question initiale :** Je pose ma question de recherche avec le `Focus: Academic`.\n2. **Analyse des sources :** J'ouvre les 3-4 sources les plus pertinentes (souvent des articles PubMed ou des revues systématiques) dans de nouveaux onglets.\n3. **Validation :** Je lis les abstracts et conclusions pour m'assurer que le résumé de Perplexity est fidèle.\n4. **Approfondissement :** J'utilise ensuite un outil comme NotebookLM ou Claude.ai pour analyser en profondeur les PDF que j'ai trouvés."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "openai-playground",
@@ -37,6 +37,6 @@ const externalTool = {
       content: "Pour une exploration des paramètres sans frais, je recommande de commencer avec **Google AI Studio**. Une fois les concepts maîtrisés, le Playground d'OpenAI devient un outil puissant pour ceux qui veulent se spécialiser sur l'écosystème GPT."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

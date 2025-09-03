@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "claude-ai",
@@ -36,6 +36,6 @@ const externalTool = {
       content: "- **Analyse d'Études Cliniques :** J'uploade un PDF de 30 pages et je demande à Claude d'extraire le protocole, les résultats et les conclusions.\n- **Synthèse de Cours :** Je colle le contenu de plusieurs cours pour obtenir une fiche de révision comparative.\n- **Préparation de Cas Cliniques :** Je soumets une description de cas (anonymisée !) pour explorer les diagnostics différentiels et les options de traitement."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

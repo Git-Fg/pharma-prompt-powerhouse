@@ -2,7 +2,7 @@ import { allConcepts } from '@/content/concepts';
 import { allGuides } from '@/content/guides';
 import { allExternalTools } from '@/content/external-tools';
 import { allWorkflows } from '@/content/workflows';
-import type { Concept, Guide, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
+import type { Concept, Guide, Workflow, ExternalTool, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
 
 type ContentItem = Guide | Workflow;
 
@@ -10,7 +10,7 @@ export function loadContent() {
   const concepts: Concept[] = allConcepts;
   const guides: Guide[] = allGuides;
   const workflows: Workflow[] = allWorkflows;
-  const externalTools = allExternalTools;
+  const externalTools: ExternalTool[] = allExternalTools;
 
   const conceptMap = new Map<string, Concept>(concepts.map(c => [c.slug, c]));
   const guideMap = new Map<string, Guide>(guides.map(g => [g.slug, g]));
