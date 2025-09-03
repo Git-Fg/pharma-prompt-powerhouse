@@ -1,5 +1,5 @@
 // src/content/concepts/tree-of-thought.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "tree-of-thought",
@@ -41,4 +41,4 @@ export const concept = {
       "content": "## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement"
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

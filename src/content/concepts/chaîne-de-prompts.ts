@@ -1,4 +1,4 @@
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "chaîne-de-prompts",
@@ -90,4 +90,4 @@ export const concept = {
       "reason": "Apprenez les techniques d'optimisation itérative qui vous aideront à peaufiner chaque prompt de votre chaîne pour des résultats optimaux."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

@@ -1,5 +1,4 @@
-// src/content/guides/les-5-piliers-dun-prompt-pharmaceutique-efficace.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "les-5-piliers-dun-prompt-pharmaceutique-efficace",
@@ -97,4 +96,4 @@ export const guide = {
       "reason": "Une fois les 5 piliers maîtrisés, apprenez à structurer des prompts encore plus complexes avec la méthode XML pour des cas cliniques multi-parties."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

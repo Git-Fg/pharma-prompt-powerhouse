@@ -1,5 +1,5 @@
 // src/content/concepts/token-acide-amine.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "token-acide-amine",
@@ -185,4 +185,4 @@ export const concept = {
       "reason": "Maîtrisez l'art d'optimiser la fenêtre de contexte pour des réponses plus précises et pertinentes."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

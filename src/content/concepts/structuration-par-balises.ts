@@ -1,5 +1,5 @@
 // src/content/concepts/structuration-par-balises.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "structuration-par-balises",
@@ -46,4 +46,4 @@ export const concept = {
       "content": "Cette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

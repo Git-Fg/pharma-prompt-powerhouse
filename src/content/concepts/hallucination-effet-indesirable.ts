@@ -1,5 +1,4 @@
-// src/content/concepts/hallucination-effet-indesirable.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "hallucination-effet-indesirable",
@@ -164,4 +163,4 @@ export const concept = {
       "reason": "Découvrez les techniques professionnelles pour détecter, prévenir et corriger les hallucinations dans vos interactions avec l'IA."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

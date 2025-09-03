@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "techniques-avancees-fiabilisation",
@@ -116,4 +116,4 @@ export const guide = {
       "content": "## Conclusion\n\nCes techniques transforment l'IA d'un \"oracle\" potentiellement trompeur en un \"collègue\" dont vous pouvez vérifier le travail. La fiabilité n'est pas une question de chance, c'est le résultat d'une approche méthodique et rigoureuse."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

@@ -1,5 +1,5 @@
 // src/content/guides/ia-en-local-confidentialite-totale.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "ia-en-local-confidentialite-totale",
@@ -270,4 +270,4 @@ export const guide = {
       "reason": "Pour les usages non-sensibles, le core kit gratuit Z.AI + AI Studio reste la solution optimale au quotidien."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

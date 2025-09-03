@@ -1,5 +1,4 @@
-// src/content/guides/gestion-memoire-ia.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "gestion-memoire-ia",
@@ -132,4 +131,4 @@ export const guide = {
       "reason": "La gestion de mémoire est une application pratique du context engineering - optimiser la fenêtre de contexte pour des interactions plus efficaces."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

@@ -1,5 +1,4 @@
-// src/content/guides/ia-stagiaire-brillant-naif.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "ia-stagiaire-brillant-naif",
@@ -69,4 +68,4 @@ export const guide = {
       "content": "Comme un médecin reste responsable des prescriptions signées, vous restez responsable des informations générées par l'IA que vous utilisez. La validation par des sources fiables et votre expertise professionnelle sont indispensables."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

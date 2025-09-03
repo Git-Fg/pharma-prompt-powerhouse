@@ -1,5 +1,4 @@
-// src/content/guides/le-core-kit-ia-gratuit-en-2025.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "le-core-kit-ia-gratuit-en-2025",
@@ -156,4 +155,4 @@ export const guide = {
       "reason": "Explorer l'écosystème complet d'AI Studio : bien plus qu'un simple chat, c'est une suite créative multimodale."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;
