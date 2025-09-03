@@ -1,119 +1,41 @@
-// src/content/external-tools-new/claude-ai.ts
-import type { ExternalTool } from '@/lib/content-schema';
+import type { EnhancedExternalTool } from '@/lib/content-schema';
 
-const externalToolData = {
-  "slug": "claude-ai",
-  "title": "Claude.ai : La Conversation Intelligente avec Anthropic",
-  "description": "Découvrez Claude.ai, l'interface de chat directe et accessible pour interagir avec les modèles d'IA d'Anthropic au quotidien.",
-  "tags": [],
-  "isFavorite": false,
-  "keyTakeaways": [],
-  "conceptSlugs": [],
-  "url": "https://claude.ai/",
-  "category": "outils",
-  "capabilities": [],
-  "use_cases": [
-    "Analyse de longs PDF",
-    "Synthèse de cours",
-    "Dialogue avec un document"
+const externalTool = {
+  slug: "claude-ai",
+  title: "Claude.ai",
+  description: "Mon assistant de prédilection pour l'analyse de documents longs et le raisonnement clinique.",
+  url: "https://claude.ai/",
+  category: "outils",
+  tags: ["analyse-document", "pdf", "anthropic"],
+  isFavorite: false,
+
+  personalReview: "J'utilise Claude.ai dès que j'ai besoin d'analyser en profondeur des documents longs, comme des articles scientifiques ou des chapitres de cours. Sa grande fenêtre de contexte et sa capacité à extraire des informations nuancées en font mon outil de choix pour les synthèses et les analyses critiques. Je le trouve particulièrement fiable pour le raisonnement clinique.",
+
+  strongPoints: [
+    "Excellente gestion des documents longs (PDF, Word, etc.).",
+    "Faible tendance à l'hallucination, ce qui le rend fiable pour la synthèse.",
+    "Très performant pour le raisonnement complexe et l'analyse de cas cliniques.",
+    "Comprend très bien les prompts structurés avec des balises XML.",
   ],
-  "color": "bg-orange-500",
-  "tldr": "Chat IA d'Anthropic excellent pour analyser des documents longs et PDFs. Interface intuitive, idéale pour synthèse de cours et recherche approfondie.",
-  "content": [
+
+  vigilancePoints: [
+    "La version gratuite a un quota de messages assez restrictif qui se réinitialise toutes les quelques heures.",
+    "Peut parfois être plus lent que d'autres modèles sur des tâches simples.",
+    "Les fonctionnalités avancées comme 'Projects' sont réservées à la version payante.",
+  ],
+  
+  confidenceScore: 4,
+  confidenceJustification: "Très bon score car l'outil est fiable et la politique de données est claire. Le fait qu'il hallucine moins que d'autres est un gage de confiance. Il n'a pas 5/5 car les quotas gratuits peuvent être frustrants.",
+
+  freeVsPaidOffer: `| Fonctionnalité | Version Gratuite | Version Pro (~20€/mois) |\n| :--- | :--- | :--- |\n| **Modèle principal** | Claude Sonnet 4 | ✅ Claude **Opus** 4.1 (plus puissant) |\n| **Quota d'usage** | Limité (~50 messages/8h) | ✅ **5x plus de messages** |\n| **Analyse de documents** | ✅ Oui (limité en volume) | ✅ **Optimisé pour les gros fichiers** |\n| **Projects (Mémoire)** | ❌ Non | ✅ **Illimité** |`,
+
+  content: [
     {
-      "type": "markdown",
-      "content": "## Qu'est-ce que Claude.ai ?"
-    },
-    {
-      "type": "card",
-      "title": "Interface Grand Public d'Anthropic",
-      "description": "Chat IA puissant et accessible",
-      "content": "`Claude.ai` est l'interface de conversation grand public développée par Anthropic. C'est un chatbot puissant et accessible, conçu pour des interactions fluides et naturelles. Il est particulièrement réputé pour sa grande fenêtre de contexte et sa faible propension à l'hallucination."
-    },
-    {
-      "type": "tabs",
-      "defaultValue": "free-vs-paid",
-      "tabs": [
-        {
-          "value": "free-vs-paid",
-          "title": "Gratuit vs Payant",
-          "content": [
-            {
-              "type": "card",
-              "title": "Version Gratuite",
-              "content": "- **Usage** : Besoins ponctuels (≈50 messages toutes les 8h)\n- **Modèle** : Claude Sonnet 4 (excellent compromis)\n- **Fonctionnalités** : Compréhension de base des PDF\n- **Limitations** : Peut être ralenti aux heures de pointe"
-            },
-            {
-              "type": "card",
-              "title": "Claude Pro (18-25€/mois)",
-              "variant": "outline",
-              "content": "- **Usage** : Au moins 5× plus de messages, utilisation intensive\n- **Modèles** : Sonnet 4 + **Claude Opus 4.1** (le plus puissant)\n- **Fonctionnalités** : Analyse documents volumineux, Projects, accès anticipé\n- **Avantages** : Mémoire à long terme, espaces de travail dédiés"
-            }
-          ]
-        },
-        {
-          "value": "use-cases",
-          "title": "Cas d'Usage Pharmacie",
-          "content": [
-            {
-              "type": "card",
-              "title": "Analyse d'Études Cliniques",
-              "content": "Uploadez un PDF de plusieurs dizaines de pages et demandez à Claude d'extraire le protocole, les résultats principaux et les conclusions."
-            },
-            {
-              "type": "card",
-              "title": "Préparation de Cas",
-              "variant": "outline",
-              "content": "Soumettez une description de cas pour explorer les diagnostics différentiels, options de traitement et interactions médicamenteuses."
-            },
-            {
-              "type": "card",
-              "title": "Fiches de Révision",
-              "variant": "outline",
-              "content": "Collez le contenu d'un cours pour le synthétiser en points clés, tableaux ou flashcards."
-            },
-            {
-              "type": "card",
-              "title": "Aide à la Rédaction",
-              "variant": "outline",
-              "content": "Reformulation de phrases, correction grammaticale, synonymes pour termes médicaux."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "alert",
-      "variant": "default",
-      "title": "🎯 Claude.ai vs Anthropic Console",
-      "content": "- **`claude.ai`** = Votre **assistant de travail** pour accomplir des tâches\n- **Anthropic Console** = Votre **laboratoire d'expérimentation** pour le prompt engineering"
-    },
-    {
-      "type": "markdown",
-      "content": "## Stratégie d'Apprentissage"
-    },
-    {
-      "type": "card",
-      "title": "Progression Recommandée",
-      "content": "1. **Maîtrisez `claude.ai`** pour vos besoins quotidiens\n2. **Explorez la Console** pour le prompt engineering avancé\n3. **Combinez les deux** pour un workflow optimal"
-    },
-    {
-      "type": "guideRecommendation",
-      "slug": "structurer-ses-prompts-avec-des-balises-methode-xml",
-      "reason": "Claude excelle dans l'interprétation de prompts structurés en XML. Maîtrisez cette technique pour exploiter pleinement ses capacités d'analyse et de raisonnement."
-    },
-    {
-      "type": "guideRecommendation",
-      "slug": "gestion-memoire-ia",
-      "reason": "Apprenez à exploiter la fonctionnalité Projects de Claude Pro pour créer une mémoire à long terme et organiser vos conversations par thème ou matière."
-    },
-    {
-      "type": "conceptRecommendation",
-      "slug": "context-engineering",
-      "reason": "Claude gère exceptionnellement bien les contextes longs et complexes. Découvrez comment optimiser vos interactions avec des techniques de context engineering."
+      type: "card",
+      title: "Mes cas d'usage principaux pour Claude.ai",
+      content: "- **Analyse d'Études Cliniques :** J'uploade un PDF de 30 pages et je demande à Claude d'extraire le protocole, les résultats et les conclusions.\n- **Synthèse de Cours :** Je colle le contenu de plusieurs cours pour obtenir une fiche de révision comparative.\n- **Préparation de Cas Cliniques :** Je soumets une description de cas (anonymisée !) pour explorer les diagnostics différentiels et les options de traitement."
     }
   ]
-};
+} satisfies EnhancedExternalTool;
 
-// Validation et export
-export const externalTool = externalToolData satisfies ExternalTool;
+export { externalTool };
