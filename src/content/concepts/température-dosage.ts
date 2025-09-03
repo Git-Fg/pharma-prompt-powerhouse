@@ -79,6 +79,16 @@ export const concept = {
       "type": "toolRecommendation",
       "slug": "google-ai-studio",
       "reason": "Google AI Studio est la meilleure plateforme gratuite pour expérimenter avec le paramètre de température et comprendre son impact sur les réponses de Gemini."
+    },
+    {
+      "type": "toolRecommendation",
+      "slug": "openai-playground",
+      "reason": "L'OpenAI Playground vous permet d'expérimenter finement avec la température des modèles GPT, parfait pour comprendre l'impact de ce paramètre sur la créativité vs la factualité."
+    },
+    {
+      "type": "toolRecommendation",
+      "slug": "anthropic-console",
+      "reason": "La Console Anthropic offre un contrôle précis de la température pour les modèles Claude, idéale pour des expérimentations avancées de prompt engineering."
     }
   ]
 } satisfies Concept;

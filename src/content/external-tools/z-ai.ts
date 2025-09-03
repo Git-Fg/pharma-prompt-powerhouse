@@ -141,6 +141,11 @@ const externalToolData = {
               "content": "**Prompt** : \"Crée une présentation sur les nouveaux traitements de l'Alzheimer approuvés en 2024-2025\"\n\n**Résultat automatique** :\n1. L'agent effectue sa recherche web\n2. Trouve les informations récentes validées\n3. Sélectionne des images appropriées\n4. Génère une présentation HTML complète\n5. Le tout en quelques minutes"
             },
             {
+              "type": "guideRecommendation",
+              "slug": "workflow-generer-cas-cliniques",
+              "reason": "Combinez Z.AI avec le workflow de génération de cas cliniques : utilisez l'agent PPT pour transformer vos cas cliniques créés avec l'IA en présentations interactives pour réviser."
+            },
+            {
               "type": "alert",
               "variant": "default",
               "title": "💡 Excellence Pédagogique",

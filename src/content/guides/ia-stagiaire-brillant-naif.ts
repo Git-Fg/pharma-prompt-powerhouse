@@ -62,6 +62,11 @@ export const guide = {
       "content": "- **Donner des instructions claires et précises**\n- **Vérifier systématiquement le travail avant utilisation**\n- **Corriger les erreurs et expliquer pourquoi c'est incorrect**\n- **Guider l'IA vers de meilleures réponses par des itérations successives**\n- **Protéger l'IA contre les mauvaises informations ou instructions**"
     },
     {
+      "type": "guideRecommendation",
+      "slug": "les-5-piliers-dun-prompt-pharmaceutique-efficace",
+      "reason": "Apprenez la méthodologie des 5 piliers pour donner des instructions claires et précises à votre 'stagiaire IA', maximisant ainsi la qualité des réponses obtenues."
+    },
+    {
       "type": "alert",
       "variant": "destructive",
       "title": "La Responsabilité Finale",

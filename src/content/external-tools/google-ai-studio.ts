@@ -151,6 +151,11 @@ const externalToolData = {
               "content": "Le **mode Thinking** permet à Gemini de 'réfléchir' explicitement avant de répondre, particulièrement utile pour des analyses cliniques complexes ou des raisonnements pharmaceutiques multi-étapes."
             },
             {
+              "type": "conceptRecommendation",
+              "slug": "tree-of-thought",
+              "reason": "Le mode Thinking de Gemini facilite l'application du Tree-of-Thought en permettant à l'IA d'explorer plusieurs chemins de raisonnement avant de conclure."
+            },
+            {
               "type": "codeBlock",
               "language": "text",
               "filename": "exemple-thinking-mode.txt",

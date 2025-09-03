@@ -44,6 +44,11 @@ export const concept = {
     {
       "type": "markdown",
       "content": "Cette méthode simple mais puissante est une des clés pour passer de prompts amateurs à des résultats de qualité professionnelle."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "structurer-ses-prompts-avec-des-balises-methode-xml",
+      "reason": "Mettez immédiatement en pratique la structuration par balises avec ce guide complet qui vous montre comment l'appliquer concrètement à vos cas cliniques."
     }
   ]
 } satisfies Concept;

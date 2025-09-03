@@ -109,6 +109,11 @@ export const concept = {
     },
     {
       "type": "toolRecommendation",
+      "slug": "notebooklm",
+      "reason": "NotebookLM est un excellent exemple de mémoire 'Disque Dur', car il crée une base de connaissances persistante à partir de vos documents."
+    },
+    {
+      "type": "toolRecommendation",
       "slug": "chatgpt",
       "reason": "ChatGPT Plus offre les fonctionnalités les plus avancées pour la gestion de mémoire persistante avec les GPTs."
     }

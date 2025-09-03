@@ -23,6 +23,11 @@ export const guide = {
       "content": "# Optimiser ses Quotas et son Temps avec l'IA\n\nEn tant qu'étudiant, on n'utilise pas les API payantes. Notre \"monnaie\", ce sont les **quotas de messages gratuits** sur les modèles les plus performants (comme GPT-4o ou Gemini 2.5 Pro) et notre **temps**. Ce guide vous montre comment maximiser ces deux ressources."
     },
     {
+      "type": "conceptRecommendation",
+      "slug": "token-acide-amine",
+      "reason": "Comprenez d'abord ce qu'est un token et comment les modèles 'consomment' vos quotas : c'est la base technique pour optimiser vos interactions."
+    },
+    {
       "type": "markdown",
       "content": "## L'Économie des Prompts sur les Web UI Gratuites\n\nChaque prompt a un \"poids\" en tokens. Plus un prompt est long, plus il \"consomme\" de ressources.\n\n-   **Impact sur les Quotas :** Un prompt mal formulé qui nécessite 5 itérations pour obtenir la bonne réponse a \"gaspillé\" 4 messages de votre quota quotidien sur un modèle puissant.\n-   **Impact sur le Temps (Latence) :** Un prompt de 300 mots prendra plus de temps à être traité qu'un prompt optimisé de 500 mots, même s'ils visent le même résultat.\n\nL'objectif est donc d'être **efficace** : obtenir le résultat souhaité en un minimum de messages et de temps."
     },

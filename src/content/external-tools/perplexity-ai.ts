@@ -105,6 +105,11 @@ const externalToolData = {
               "content": "Limite la recherche aux publications scientifiques et journaux académiques. Parfait pour la recherche bibliographique fiable."
             },
             {
+              "type": "guideRecommendation",
+              "slug": "obtenir-donnees-fiables",
+              "reason": "Apprenez à utiliser le Focus Academic de Perplexity dans un workflow de recherche rigoureux pour obtenir des données bibliographiques fiables."
+            },
+            {
               "type": "card",
               "title": "Autres Focus",
               "variant": "outline",

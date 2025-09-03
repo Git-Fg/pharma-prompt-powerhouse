@@ -66,6 +66,11 @@ export const guide = {
       "content": "**❌ Mauvais :**\n```text\nFais une liste des effets.\n```\n\n**✅ Bon :**\n```text\nPrésente les effets indésirables dans un tableau Markdown à 3 colonnes : \"Effet\", \"Fréquence (RCP)\", et \"Gestion/Conseil\".\n```"
     },
     {
+      "type": "conceptRecommendation",
+      "slug": "structuration-par-balises",
+      "reason": "Maîtrisez la technique des balises XML pour structurer parfaitement les piliers 'Contexte' et 'Format' de vos prompts pharmaceutiques."
+    },
+    {
       "type": "card",
       "title": "5. Donner un Exemple (Le \"Cas de Référence\")",
       "description": "Montrez à l'IA un exemple du résultat attendu (_few-shot prompting_).",

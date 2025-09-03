@@ -39,6 +39,16 @@ export const concept = {
     {
       "type": "markdown",
       "content": "## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement"
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "tree-of-thought-clinique",
+      "reason": "Découvrez comment appliquer concrètement le Tree-of-Thought pour analyser des cas cliniques complexes en pharmacie, avec des exemples détaillés."
+    },
+    {
+      "type": "guideRecommendation",
+      "slug": "investigation-pharmacovigilance-avec-tot",
+      "reason": "Explorez une application avancée du Tree-of-Thought pour mener des enquêtes de pharmacovigilance méthodiques et rigoureuses."
     }
   ]
 } satisfies Concept;

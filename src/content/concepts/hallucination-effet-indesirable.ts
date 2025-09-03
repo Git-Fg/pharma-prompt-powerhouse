@@ -84,6 +84,11 @@ export const concept = {
               "content": "Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque.\n\n**❌ Température : 0.9 (risque élevé)**\n```\n\"Inventez une nouvelle molécule pour traiter l'hypertension\"\n```\n\n**✅ Température : 0.2 (risque faible)**\n```\n\"Listez les molécules antihypertensives disponibles en 2025\"\n```"
             },
             {
+              "type": "conceptRecommendation",
+              "slug": "température-dosage",
+              "reason": "Maîtrisez le concept de température comme un dosage de créativité : plus c'est bas, moins il y a de risque d'hallucination, exactement comme un effet indésirable dose-dépendant."
+            },
+            {
               "type": "card",
               "title": "2. Contexte Clair et Délimité",
               "content": "Fournir un contexte précis et des limites claires aide l'IA à rester dans les faits.\n\n**❌ Prompt vague**\n```\n\"Analyse cette ordonnance\"\n```\n\n**✅ Prompt précis**\n```\n\"Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.\nSi une information n'est pas dans le texte, indique 'Non précisé'.\"\n```"

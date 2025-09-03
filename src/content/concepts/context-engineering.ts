@@ -30,6 +30,11 @@ export const concept = {
       "content": "Le **Context Engineering** est l'art d'optimiser la fenêtre de contexte de l'IA pour obtenir des réponses plus précises et pertinentes."
     },
     {
+      "type": "card",
+      "title": "Analogie Pratique",
+      "content": "Le *context engineering*, c'est comme préparer un dossier patient pour un collègue : on ne lui donne que les informations pertinentes, dans le bon ordre, pour qu'il comprenne vite et bien."
+    },
+    {
       "type": "markdown",
       "content": "## Pourquoi c'est Crucial ?"
     },
