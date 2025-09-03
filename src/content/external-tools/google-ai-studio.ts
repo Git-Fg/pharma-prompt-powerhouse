@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "google-ai-studio",
@@ -43,6 +43,6 @@ const externalTool = {
       content: "J'utilise Z.AI pour sa recherche créative et planifiée, puis je bascule sur AI Studio pour une analyse rigoureuse et multimodale des sources et documents. Ce duo couvre 95% de mes besoins sans coûter un centime."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "deepseek-chat",
@@ -42,6 +42,6 @@ const externalTool = {
       content: "- **Synthèse d'annales :** Uploader 20-30 PDF d'annales pour identifier les thèmes récurrents.\n- **Analyse de littérature :** Soumettre un grand nombre d'articles publics pour une revue de la littérature rapide.\n- **Test de raisonnement :** Utiliser le mode 'DeepThink' pour résoudre des problèmes logiques complexes."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

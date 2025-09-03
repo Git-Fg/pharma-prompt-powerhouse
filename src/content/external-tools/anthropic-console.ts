@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "anthropic-console",
@@ -48,6 +48,6 @@ const externalTool = {
       content: "L'Anthropic Console est un outil inestimable. C'est ici que l'on peut tester comment de légères variations dans un prompt ou un changement de température peuvent radicalement altérer la qualité d'une analyse de cas clinique. C'est une étape essentielle pour devenir un véritable 'pilote d'IA'."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

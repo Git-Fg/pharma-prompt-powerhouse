@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "z-ai",
@@ -38,6 +38,6 @@ const externalTool = {
       content: "Pour toute recherche qui ne contient aucune donnée sensible, Z.AI est mon premier choix. Son workflow de recherche planifiée est plus transparent et, à mon avis, plus fiable que celui de Perplexity. La capacité à transformer cette recherche en une présentation en un clic est un gain de temps énorme."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };

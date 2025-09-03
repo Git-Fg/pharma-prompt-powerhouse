@@ -1,4 +1,4 @@
-import type { EnhancedExternalTool } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalTool = {
   slug: "notebooklm",
@@ -38,6 +38,6 @@ const externalTool = {
       content: "1. **Création :** Je crée un notebook par Unité d'Enseignement (UE).\n2. **Alimentation :** Tout au long du semestre, j'ajoute les PDFs des cours, les TD et mes fiches de révision.\n3. **Interrogation :** Avant un examen, je lui pose des questions transversales : *'Compare les mécanismes d'action des diurétiques selon mes différentes sources'*.\n4. **Synthèse Audio :** Je génère l' 'Audio Overview' pour réviser passivement pendant mes trajets."
     }
   ]
-} satisfies EnhancedExternalTool;
+} satisfies ExternalTool;
 
 export { externalTool };
