@@ -220,3 +220,12 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 - **Premium Recommandé :** Gemini Advanced. Les rapports "Deep Research" sont excellents et peuvent servir de contexte de haute qualité dans d'autres outils comme AI Studio.
 </personal_recommendations>
 </webui_informations>
+
+<copilot_contrainte>
+Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation. 
+Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'implémentation en privilégiant l'édition manuelle, étape par étape des différents fichiers. 
+
+A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type, vitest et e2e. 
+
+Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus. 
+</copilot_contrainte>
