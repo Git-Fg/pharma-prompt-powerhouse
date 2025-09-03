@@ -100,14 +100,16 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
     case 'table':
       return (
         <div className="my-6">
-          {/* Desktop Table View */}
-          <div className="hidden md:block overflow-x-auto">
-            <Table>
+          {/* Desktop Table View - Enhanced with mobile-first styling */}
+          <div className="hidden md:block overflow-x-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
+            <Table className="w-full min-w-[600px]">
               {block.caption && <TableCaption>{block.caption}</TableCaption>}
               <TableHeader>
                 <TableRow>
                   {block.headers.map((header: string, index: number) => (
-                    <TableHead key={index}>{header}</TableHead>
+                    <TableHead key={index} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
+                      {header}
+                    </TableHead>
                   ))}
                 </TableRow>
               </TableHeader>
@@ -115,7 +117,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
                 {block.rows.map((row: string[], rowIndex: number) => (
                   <TableRow key={rowIndex}>
                     {row.map((cell: string, cellIndex: number) => (
-                      <TableCell key={cellIndex}>
+                      <TableCell key={cellIndex} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
                         <MarkdownRenderer content={cell} />
                       </TableCell>
                     ))}
@@ -125,7 +127,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
             </Table>
           </div>
           
-          {/* Mobile Card View */}
+          {/* Mobile Card View - Enhanced with better spacing */}
           <div className="block md:hidden space-y-4">
             {block.rows.map((row: string[], rowIndex: number) => (
               <Card key={rowIndex} className="p-4">
@@ -134,7 +136,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
                     <div className="text-sm font-medium text-muted-foreground mb-1">
                       {block.headers[cellIndex]}
                     </div>
-                    <div className="text-sm">
+                    <div className="text-sm leading-relaxed">
                       <MarkdownRenderer content={cell} />
                     </div>
                   </div>
