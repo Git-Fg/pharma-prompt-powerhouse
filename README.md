@@ -1,6 +1,6 @@
 # 🎯 Pharma Prompt Powerhouse
 
-**Status**: 🚀 **Production Ready** | Build: ✅ | Tests: 40/40 ✅ | TypeScript: 100% ✅
+**Status**: 🚀 **Production Ready** | Build: ✅ | Tests: 49/49 ✅ | CSS: Centralized ✅
 
 ## 👋 Vision du Projet
 
@@ -16,6 +16,12 @@ Transformer les étudiants en pharmacie de "passagers" à "pilotes" de l'IA, en 
 - **Un écosystème cohérent** : Interconnexions intelligentes entre tous les contenus
 
 ## 🏗️ Architecture Moderne (2025)
+
+### **Design System Centralisé**
+- **Tailwind v4 + Shadcn Canary**: Architecture CSS moderne avec `@theme inline`, `@utility`, et `@layer components`
+- **Mobile-First**: Responsive design optimisé avec breakpoints cohérents et composants adaptatifs
+- **Performance CSS**: Variables CSS centralisées, utilitaires réutilisables et zéro duplication
+- **Single Source Design**: Tous les tokens dans `src/app/globals.css` (spacing, colors, typography, etc.)
 
 ### **TypeScript Content System**
 - **Type-Safe Content**: Migration complète vers TypeScript avec validation Zod

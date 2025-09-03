@@ -1,6 +1,5 @@
 // src/components/layout/ResponsiveGrid.tsx
 import { ReactNode } from 'react'
-import { grid } from '@/lib/design-system'
 
 interface ResponsiveGridProps {
   children: ReactNode
@@ -17,14 +16,15 @@ export function ResponsiveGrid({
   className = '',
   cols = { mobile: 1, tablet: 2, desktop: 3 }
 }: ResponsiveGridProps) {
-  const mobileClass = cols.mobile === 2 ? grid.mobile.cols2 : grid.mobile.cols1
-  const tabletClass = cols.tablet === 4 ? grid.tablet.cols4 : 
-                     cols.tablet === 3 ? grid.tablet.cols3 : grid.tablet.cols2
-  const desktopClass = cols.desktop === 6 ? grid.desktop.cols6 : 
-                      cols.desktop === 4 ? grid.desktop.cols4 : grid.desktop.cols3
+  // Generate responsive grid classes using Tailwind utilities
+  const mobileClass = cols.mobile === 2 ? 'grid-cols-2' : 'grid-cols-1'
+  const tabletClass = cols.tablet === 4 ? 'md:grid-cols-4' : 
+                     cols.tablet === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
+  const desktopClass = cols.desktop === 6 ? 'lg:grid-cols-6' : 
+                      cols.desktop === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
 
   return (
-    <div className={`grid ${mobileClass} ${tabletClass} ${desktopClass} ${grid.mobile.gap} ${grid.tablet.gap} ${grid.desktop.gap} ${className}`}>
+    <div className={`content-grid ${mobileClass} ${tabletClass} ${desktopClass} ${className}`}>
       {children}
     </div>
   )
