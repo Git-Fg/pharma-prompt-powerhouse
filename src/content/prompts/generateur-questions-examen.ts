@@ -1,4 +1,4 @@
-import { Prompt, promptSchema } from '@/lib/content-schema';
+import type { Prompt } from '@/lib/content-schema';
 
 const promptData = {
   "slug": "generateur-questions-examen",
@@ -113,4 +113,4 @@ const promptData = {
 };
 
 // Validation et export
-export const prompt: Prompt = promptSchema.parse(promptData);
+export const prompt = promptData satisfies Prompt;
