@@ -29,8 +29,7 @@
     "exactOptionalPropertyTypes": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "target": "ES2022",
-    "types": ["vitest/globals"]
+    "target": "ES2022"
   },
   "include": [
     "next-env.d.ts",
@@ -38,5 +37,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".next", "dist", "build"]
+  "exclude": ["node_modules", ".next", "dist", "build", "tests/**/*"]
 }
