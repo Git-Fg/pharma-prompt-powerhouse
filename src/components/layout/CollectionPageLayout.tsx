@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { Container, Section } from './Container';
 
@@ -33,29 +32,29 @@ export function CollectionPageLayout({
       <div className={cn("border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60", headerClassName)}>
         <Section size="md">
           <Container maxWidth="4xl">
-            <div className="text-center space-y-4 md:space-y-6">
-              <h1 className="text-2xl md:text-4xl font-bold leading-tight">
+            <div className="page-header">
+              <h1 className="page-title text-balance">
                 {title}
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              <p className="page-description text-pretty">
                 {description}
               </p>
             </div>
 
             {stats && stats.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto mt-8">
+              <div className="stats-grid">
                 {stats.map((stat, index) => (
-                  <Card key={index} className={cn("p-4 md:p-6 text-center", stat.bgClass)}>
-                    <div className={cn("text-2xl md:text-3xl font-bold", stat.colorClass)}>
+                  <div key={index} className={cn("stat-card", stat.bgClass)}>
+                    <div className={cn("stat-number", stat.colorClass)}>
                       {stat.value}
                     </div>
                     <div className={cn(
-                      "text-xs md:text-sm mt-1",
+                      "stat-label",
                       stat.colorClass.replace('text-', 'text-').replace('-400', '-300/70').replace('-600', '-600/70')
                     )}>
                       {stat.label}
                     </div>
-                  </Card>
+                  </div>
                 ))}
               </div>
             )}
