@@ -13,16 +13,11 @@ test.describe('Core Site Navigation', () => {
     // Check main title is present - use the actual title
     await expect(page).toHaveTitle(/Pharma Prompt Powerhouse/i);
     
-    // Check main navigation elements using data-testid
-    const navElements = ['concepts', 'guides', 'prompts', 'outils externes'];
+    // Check main navigation elements - updated for new structure
+    const navElements = ['Par où commencer ?', 'Workflows Stratégiques', 'L\'Arsenal IA', 'Concepts'];
     for (const navItem of navElements) {
-      const navElement = page.locator(`[data-testid="nav-${navItem}"]`);
-      if (await navElement.count() > 0) {
-        await expect(navElement).toBeVisible({ timeout: 10000 });
-      } else {
-        // Fallback to text-based selector
-        await expect(page.locator(`text=${navItem}`).first()).toBeVisible({ timeout: 10000 });
-      }
+      // Use more flexible text matching
+      await expect(page.locator(`text=${navItem}`).first()).toBeVisible({ timeout: 10000 });
     }
     
     await page.screenshot({ path: 'test-results/homepage.png', fullPage: true });
@@ -62,19 +57,28 @@ test.describe('Core Site Navigation', () => {
     await page.screenshot({ path: 'test-results/guides-page.png', fullPage: true });
   });
 
-  test('prompts page navigation works', async ({ page }) => {
-    await page.goto('/prompts');
+  test('workflows page navigation works', async ({ page }) => {
+    await page.goto('/workflows');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Prompt');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Workflow');
     
-    await page.screenshot({ path: 'test-results/prompts-page.png', fullPage: true });
+    await page.screenshot({ path: 'test-results/workflows-page.png', fullPage: true });
   });
 
-  test('external tools page navigation works', async ({ page }) => {
-    await page.goto('/outils-externes');
+  test('arsenal IA page navigation works', async ({ page }) => {
+    await page.goto('/l-arsenal-ia');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Outils');
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Arsenal IA');
     
-    await page.screenshot({ path: 'test-results/external-tools-page.png', fullPage: true });
+    await page.screenshot({ path: 'test-results/arsenal-ia-page.png', fullPage: true });
+  });
+
+  test('par où commencer page navigation works', async ({ page }) => {
+    await page.goto('/par-ou-commencer');
+    
+    // This page should exist and load
+    await expect(page.locator('main h1, article h1, .content h1').first()).toBeVisible();
+    
+    await page.screenshot({ path: 'test-results/par-ou-commencer-page.png', fullPage: true });
   });
 });

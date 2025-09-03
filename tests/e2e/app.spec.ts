@@ -11,12 +11,11 @@ test.describe('Application E2E Tests', () => {
     // Check main heading
     await expect(page.locator('h1')).toContainText('Pharma Prompt Powerhouse');
     
-    // Check objectifs section exists
-    await expect(page.locator('text=Objectifs d\'Apprentissage')).toBeVisible();
+    // Check workflows section exists (replaces objectifs)
+    await expect(page.locator('text=Workflows')).toBeVisible();
     
     // Check navigation is working
-    await expect(page.locator('text=Ressources')).toBeVisible();
-    await expect(page.locator('text=Outils')).toBeVisible();
+    await expect(page.locator('text=Arsenal IA')).toBeVisible();
   });
 
   test('concepts page navigation and content', async ({ page }) => {
@@ -47,38 +46,34 @@ test.describe('Application E2E Tests', () => {
     await expect(page.locator('text=Commencer')).toBeVisible();
   });
 
-  test('prompts page displays correctly', async ({ page }) => {
-    await page.goto('/prompts');
-    
-    // Check prompts page loads
-    await expect(page.locator('h1')).toContainText('La Banque de Prompts');
-    
-    // Check search functionality
-    await expect(page.locator('input[placeholder*="Rechercher"]')).toBeVisible();
-    
-    // Check copy functionality exists
-    await expect(page.locator('button:has-text("Copier")')).toBeVisible();
-  });
-
-  test('external tools page loads', async ({ page }) => {
-    await page.goto('/outils-externes');
-    
-    // Check page loads
-    await expect(page.locator('h1')).toContainText('Outils Externes');
-    
-    // Check tool categories exist
-    await expect(page.locator('h2')).toBeVisible();
-  });
-
-  test('workflows page functionality', async ({ page }) => {
+  test('workflows page displays correctly', async ({ page }) => {
     await page.goto('/workflows');
     
-    // Check workflows page loads  
-    await expect(page.locator('h1')).toContainText('Workflows & Guides Pratiques');
+    // Check workflows page loads
+    await expect(page.locator('h1')).toContainText('Workflows');
     
-    // Check tab functionality
-    await expect(page.locator('text=Workflows')).toBeVisible();
-    await expect(page.locator('text=Guides Pratiques')).toBeVisible();
+    // Check workflow cards are visible
+    await expect(page.locator('a[href*="/workflows/"]')).toBeVisible();
+  });
+
+  test('arsenal IA page loads', async ({ page }) => {
+    await page.goto('/l-arsenal-ia');
+    
+    // Check page loads
+    await expect(page.locator('h1')).toContainText('Arsenal IA');
+    
+    // Check comparative table exists
+    await expect(page.locator('text=Tableau Comparatif')).toBeVisible();
+    
+    // Check tool cards/rows exist
+    await expect(page.locator('text=ChatGPT')).toBeVisible();
+  });
+
+  test('par où commencer page loads', async ({ page }) => {
+    await page.goto('/par-ou-commencer');
+    
+    // Check page loads
+    await expect(page.locator('h1')).toBeVisible();
   });
 
   test('no console errors on main pages', async ({ page }) => {
@@ -89,8 +84,8 @@ test.describe('Application E2E Tests', () => {
       }
     });
 
-    // Test main pages for console errors
-    const pagesToTest = ['/', '/concepts', '/guides', '/prompts', '/workflows', '/outils-externes'];
+    // Test main pages for console errors - updated routes
+    const pagesToTest = ['/', '/concepts', '/guides', '/workflows', '/l-arsenal-ia', '/par-ou-commencer'];
     
     for (const path of pagesToTest) {
       await page.goto(path);
