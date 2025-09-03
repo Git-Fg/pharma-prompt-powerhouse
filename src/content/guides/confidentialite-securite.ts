@@ -130,14 +130,17 @@ La politique de confidentialité de l'entreprise détermine ce qu'il advient de 
       content: `**Important :** La localisation des serveurs et le cadre légal de l'entreprise ont un impact majeur sur la confidentialité réelle de vos données.`
     },
     {
+      type: 'table',
+      headers: ['Juridiction', 'Entreprises Concernées', 'Niveau de Risque (Données Sensibles Anonymisées)'],
+      rows: [
+        ['**Union Européenne (RGPD)**', '(Certains services Cloud pro, non grand public)', '**Faible**. Le RGPD est le cadre le plus strict au monde.'],
+        ['**États-Unis**', '**OpenAI, Google, Anthropic, Perplexity**', '**Modéré**. Politiques de sécurité robustes, mais soumis au CLOUD Act.'],
+        ['**Asie (Chine, etc.)**', '**DeepSeek, Zhipu AI (Z.AI), Alibaba (Qwen)**', '⚠️ **Élevé à Très Élevé**. Lois sur les données souples.']
+      ]
+    },
+    {
       type: 'markdown',
-      content: `| Juridiction | Entreprises Concernées | Niveau de Risque (Données Sensibles Anonymisées) |
-| :--- | :--- | :--- |
-| **Union Européenne (RGPD)** | (Certains services Cloud pro, non grand public) | **Faible**. Le RGPD est le cadre le plus strict au monde. |
-| **États-Unis** | **OpenAI, Google, Anthropic, Perplexity** | **Modéré**. Politiques de sécurité robustes, mais soumis au CLOUD Act. |
-| **Asie (Chine, etc.)** | **DeepSeek, Zhipu AI (Z.AI), Alibaba (Qwen)** | ⚠️ **Élevé à Très Élevé**. Lois sur les données souples. |
-
-### Recommandations par Niveau de Risque`
+      content: `### Recommandations par Niveau de Risque`
     },
     {
       type: 'tabs',

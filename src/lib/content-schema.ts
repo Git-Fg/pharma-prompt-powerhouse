@@ -29,6 +29,28 @@ const multiFormatPromptBlockSchema = z.object({
   variables: z.array(z.string()).optional() 
 });
 
+// Additional block types supported by ContentRenderer
+const keyTakeawaysBlockSchema = z.object({ 
+  type: z.literal('keyTakeaways'), 
+  points: z.array(z.string()) 
+});
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const accordionBlockSchema: z.ZodType<any> = z.lazy(() => z.object({ 
+  type: z.literal('accordion'), 
+  items: z.array(z.object({ 
+    title: z.string(), 
+    content: z.array(contentBlockSchema) 
+  })) 
+}));
+
+const tableBlockSchema = z.object({ 
+  type: z.literal('table'), 
+  caption: z.string().optional(),
+  headers: z.array(z.string()), 
+  rows: z.array(z.array(z.string())) 
+});
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({ 
   type: z.literal('tabs'), 
@@ -40,7 +62,20 @@ const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   })) 
 }));
 
-export const contentBlockSchema = z.union([markdownBlockSchema, alertBlockSchema, toolRecommendationBlockSchema, guideRecommendationBlockSchema, conceptRecommendationBlockSchema, codeBlockSchema, cardBlockSchema, tabsBlockSchema, multiFormatPromptBlockSchema]);
+export const contentBlockSchema = z.union([
+  markdownBlockSchema, 
+  alertBlockSchema, 
+  toolRecommendationBlockSchema, 
+  guideRecommendationBlockSchema, 
+  conceptRecommendationBlockSchema, 
+  codeBlockSchema, 
+  cardBlockSchema, 
+  tabsBlockSchema, 
+  multiFormatPromptBlockSchema,
+  keyTakeawaysBlockSchema,
+  accordionBlockSchema,
+  tableBlockSchema
+]);
 
 // Type TypeScript inféré pour un bloc de contenu
 export type ContentBlock = z.infer<typeof contentBlockSchema>;
