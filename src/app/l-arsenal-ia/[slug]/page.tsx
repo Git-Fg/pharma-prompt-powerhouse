@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { content, getToolBySlug } from '@/lib/content-loader';
+import { content, getExternalToolBySlug } from '@/lib/content-loader';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 }
 
 export default function ToolPage({ params }: ToolPageProps) {
-  const tool = getToolBySlug(params.slug);
+  const tool = getExternalToolBySlug(params.slug);
 
   if (!tool) {
     notFound();

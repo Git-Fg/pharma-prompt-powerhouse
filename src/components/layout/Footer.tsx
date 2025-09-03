@@ -2,26 +2,26 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Brain, BookOpen, Shield, ExternalLink, Wrench } from "lucide-react";
+import { Brain, BookOpen, Shield, ExternalLink, Wrench, Target } from "lucide-react";
 
 const footerSections = [
   {
-    title: "Apprentissage",
+    title: "Navigation",
     links: [
-      { name: "Concepts", href: "/concepts", icon: BookOpen },
-      { name: "Guides", href: "/guides", icon: BookOpen },
-      { name: "Prompts", href: "/prompts", icon: BookOpen },
+      { name: "Par où commencer ?", href: "/par-ou-commencer", icon: Target },
+      { name: "Workflows Stratégiques", href: "/workflows", icon: BookOpen },
+      { name: "L'Arsenal IA", href: "/l-arsenal-ia", icon: ExternalLink },
+      { name: "Concepts", href: "/concepts", icon: Brain },
     ],
   },
   {
     title: "Outils",
     links: [
       { name: "Ma Boîte à Outils", href: "/boite-a-outils", icon: Wrench },
-      { name: "Outils Externes", href: "/outils-externes", icon: ExternalLink },
     ],
   },
   {
-    title: "Légal",
+    title: "Sécurité & Légal",
     links: [
       {
         name: "Confidentialité",
