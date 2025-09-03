@@ -2,9 +2,10 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { 
   loadContent,
   getGuideBySlug,
+  getWorkflowBySlug,
   getConceptBySlug,
   getPromptBySlug,
-  getToolBySlug,
+  getExternalToolBySlug,
   getObjectifBySlug,
   content
 } from '@/lib/content-loader'
@@ -148,8 +149,15 @@ describe('Content Loader Integration', () => {
 
       const firstTool = loadedContent.externalTools[0]
       if (firstTool) {
-        const foundTool = getToolBySlug(firstTool.slug)
+        const foundTool = getExternalToolBySlug(firstTool.slug)
         expect(foundTool).toEqual(firstTool)
+      }
+
+      // Test workflow accessor if we have workflows
+      if (loadedContent.workflows && loadedContent.workflows.length > 0) {
+        const firstWorkflow = loadedContent.workflows[0]
+        const foundWorkflow = getWorkflowBySlug(firstWorkflow.slug)
+        expect(foundWorkflow).toEqual(firstWorkflow)
       }
 
       const firstObjectif = loadedContent.objectifs[0]
@@ -163,7 +171,8 @@ describe('Content Loader Integration', () => {
       expect(getGuideBySlug('non-existent-guide')).toBeUndefined()
       expect(getConceptBySlug('non-existent-concept')).toBeUndefined()
       expect(getPromptBySlug('non-existent-prompt')).toBeUndefined()
-      expect(getToolBySlug('non-existent-tool')).toBeUndefined()
+      expect(getExternalToolBySlug('non-existent-tool')).toBeUndefined()
+      expect(getWorkflowBySlug('non-existent-workflow')).toBeUndefined()
       expect(getObjectifBySlug('non-existent-objectif')).toBeUndefined()
     })
   })
