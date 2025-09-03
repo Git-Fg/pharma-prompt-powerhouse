@@ -77,17 +77,6 @@ export const guideSchema = baseContentSchema.extend({
   content: z.array(contentBlockSchema),
 });
 
-export const externalToolSchema = baseContentSchema.extend({
-  url: z.string().url(),
-  category: z.string(),
-  tldr: z.string().optional(),
-  color: z.string().optional(),
-  use_cases: z.array(z.string()).optional(),
-  capabilities: z.array(z.string()).optional(),
-  keyTakeaways: z.array(z.string()).optional(),
-  content: z.array(contentBlockSchema),
-});
-
 export const workflowSchema = baseContentSchema.extend({
   category: z.string(),
   difficulty: z.string(),
@@ -102,7 +91,7 @@ export const workflowSchema = baseContentSchema.extend({
 });
 
 // Enhanced external tool schema for L'Arsenal IA
-export const enhancedExternalToolSchema = baseContentSchema.extend({
+export const externalToolSchema = baseContentSchema.extend({
   url: z.string().url(),
   category: z.string(),
   personalReview: z.string(), // "Mon Avis en Bref"
@@ -128,7 +117,6 @@ export type Concept = z.infer<typeof conceptSchema>;
 export type Guide = z.infer<typeof guideSchema>;
 export type Workflow = z.infer<typeof workflowSchema>;
 export type ExternalTool = z.infer<typeof externalToolSchema>;
-export type EnhancedExternalTool = z.infer<typeof enhancedExternalToolSchema>;
 
 export type EnrichedWorkflow = Workflow & {
   concepts: Concept[];

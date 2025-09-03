@@ -1,8 +1,8 @@
-import type { Guide } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema';
 
-export const guide = {
+export const workflow = {
   "slug": "workflow-generer-cas-cliniques",
-  "title": "Workflow : Générer des Cas Cliniques pour la Révision",
+  "title": "Générer des Cas Cliniques pour la Révision",
   "description": "Apprenez à utiliser l'IA pour générer des cas cliniques riches, pertinents et adaptés à votre niveau d'étude, transformant la préparation aux examens.",
   "icon": "ClipboardList",
   "category": "cas-pratiques",
@@ -10,30 +10,66 @@ export const guide = {
   "estimatedTime": "20 min",
   "tags": [],
   "isFavorite": false,
-  "isWorkflow": true,
-  "keyTakeaways": [
-    "Utilisez un prompt 'maître' structuré pour générer des cas cliniques réalistes avec des problèmes pharmaceutiques ciblés.",
-    "L'IA peut créer une infinité de scénarios, vous permettant de vous entraîner sur une grande diversité de cas.",
-    "Enrichissez vos cas en intégrant des 'pièges' subtils et des questions à complexité progressive pour un apprentissage actif."
-  ],
   "conceptSlugs": [
     "structuration-par-balises",
     "chaîne-de-prompts"
   ],
-  "content": [
+  
+  "problem": [
     {
       "type": "markdown",
       "content": "## Le Problème : Le Manque de Cas Pratiques\n\nLa théorie, c'est bien. La pratique, c'est mieux. L'un des plus grands défis pour les étudiants en pharmacie est de trouver suffisamment de cas cliniques variés pour s'entraîner. L'IA résout ce problème en devenant un générateur de scénarios inépuisable."
-    },
+    }
+  ],
+
+  "initialApproach": [
     {
       "type": "markdown",
-      "content": "### L'Outil Idéal pour la Création de Contenu Structuré"
+      "content": "## Mon Approche Initiale (et ses Limites)\n\nAu début, j'ai essayé de demander directement à l'IA :\n\n> *\"Fais-moi un cas clinique sur les interactions médicamenteuses.\"*\n\n**Résultat :** Des cas génériques, sans rapport avec mon niveau d'étude, souvent trop simplistes ou au contraire trop complexes."
+    },
+    {
+      "type": "alert",
+      "variant": "destructive",
+      "title": "Pourquoi ça ne marche pas",
+      "content": "L'IA n'a aucun contexte sur votre niveau, vos objectifs pédagogiques spécifiques, ni sur les types de problèmes que vous devez maîtriser pour vos examens."
+    }
+  ],
+
+  "optimizedStrategy": [
+    {
+      "type": "markdown",
+      "content": "## Ma Stratégie Optimisée\n\nLa clé est de fournir un contexte riche et structuré :"
+    },
+    {
+      "type": "card",
+      "title": "📚 Étape 1 : Définir le Contexte Précis",
+      "content": "- Précisez votre niveau (L2, L3, Master...)\n- Indiquez le type d'évaluation (QCM, cas cliniques...)\n- Définissez le niveau de difficulté souhaité\n- Spécifiez la spécialité concernée"
+    },
+    {
+      "type": "card", 
+      "title": "🎯 Étape 2 : Identifier les Problèmes à Intégrer",
+      "content": "**Listez les concepts à tester :**\n- Interactions médicamenteuses\n- Adaptations posologiques\n- Contre-indications\n- Surveillance thérapeutique\n\nPlus vous êtes précis, plus le cas sera pertinent !"
+    },
+    {
+      "type": "card",
+      "title": "⚙️ Étape 3 : Structurer la Sortie",
+      "content": "**Demandez un format spécifique :**\n- Présentation du patient\n- Données cliniques/biologiques\n- Prescription initiale\n- Questions progressives avec justifications"
+    }
+  ],
+
+  "toolComparison": [
+    {
+      "type": "markdown",
+      "content": "## L'Outil Idéal pour Cette Tâche"
     },
     {
       "type": "toolRecommendation",
       "slug": "google-ai-studio",
       "reason": "AI Studio est parfait pour cette tâche. Son accès à Gemini 2.5 Pro et son mode 'System Prompt' permettent de définir un rôle de 'professeur' expert, garantissant des cas cliniques cohérents et pédagogiques."
-    },
+    }
+  ],
+
+  "finalPrompt": [
     {
       "type": "markdown",
       "content": "## Le Prompt \"Maître\" pour Générer des Cas\n\nCe prompt est un template puissant. Vous le copiez dans **Google AI Studio** (le rôle dans le `System Prompt`, le reste dans le `User Prompt`), vous remplissez les variables, et l'IA génère un cas sur mesure."
@@ -55,10 +91,12 @@ export const guide = {
       "type": "card",
       "title": "Comment Remplir les Variables ?",
       "content": "-   `{{SPECIALITE}}` : Cardiologie, Infectiologie, Gériatrie...\n-   `{{NIVEAU_ETUDE}}` : 4ème année, préparation à l'internat...\n-   `{{PROFIL_PATIENT}}` : \"Femme de 82 ans, 55kg, insuffisante rénale chronique stade 3\"\n-   `{{PROBLEMES}}` : \"une interaction médicamenteuse, une posologie à adapter à la fonction rénale, une contre-indication liée aux antécédents\""
-    },
-    {
-      "type": "markdown",
-      "content": "## Conclusion\n\nL'IA transforme la création de cas cliniques d'un exercice fastidieux en un processus créatif et efficace. En maîtrisant cette technique, vous créez un arsenal illimité de scénarios d'apprentissage qui s'adaptent parfaitement à vos besoins."
     }
+  ],
+
+  "keyTakeaways": [
+    "Utilisez un prompt 'maître' structuré pour générer des cas cliniques réalistes avec des problèmes pharmaceutiques ciblés.",
+    "L'IA peut créer une infinité de scénarios, vous permettant de vous entraîner sur une grande diversité de cas.",
+    "Enrichissez vos cas en intégrant des 'pièges' subtils et des questions à complexité progressive pour un apprentissage actif."
   ]
-} satisfies Guide;
+} satisfies Workflow;
