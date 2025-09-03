@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -13,7 +12,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
   Menu,
@@ -25,7 +23,6 @@ import {
   Moon,
   Sun,
   User,
-  Workflow,
   Target,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -45,27 +42,6 @@ const ressourcesNav = [
 const outilsNav = [
     { name: "Ma Boîte à Outils", href: "/boite-a-outils", icon: Wrench },
     { name: "Outils Externes", href: "/outils-externes", icon: ExternalLink },
-];
-
-const navigation = [
-  {
-    name: "Objectifs",
-    href: "/objectifs",
-    icon: Target,
-    description: "Atteignez vos objectifs d'apprentissage avec des solutions clé en main",
-  },
-  {
-    name: "Ressources",
-    href: "/ressources",
-    icon: BookOpen,
-    description: "Parcourez notre bibliothèque de concepts, guides et prompts",
-  },
-  {
-    name: "Outils",
-    href: "/outils",
-    icon: Wrench,
-    description: "Accédez à nos outils interactifs et analyses d'outils externes",
-  },
 ];
 
 // N'oubliez pas d'ajouter le composant ListItem utilisé dans le dropdown,
@@ -96,7 +72,6 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
 ListItem.displayName = "ListItem";
 
 export function Header() {
-  const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,38 +1,29 @@
 // Centralized constants for filtering and labeling
 
-// NOUVELLE SOURCE DE VÉRITÉ UNIQUE
-export const categoryLabels = {
-  // Categories from schema
-  'techniques-de-base': 'Techniques de Base',
-  'prompts-avancés': 'Prompts Avancés', 
-  'bonnes-pratiques': 'Bonnes Pratiques',
-  'outils-et-workflows': 'Outils et Workflows',
-  
-  // Additional legacy categories that might exist
+// SOURCE DE VÉRITÉ UNIQUE - Toutes les catégories utilisées dans le contenu
+export const categoryLabels: Record<string, string> = {
+  // Categories les plus utilisées (basées sur l'analyse du contenu existant)
+  'outils': 'Outils',
   'fondamentaux': 'Fondamentaux',
   'techniques-avancees': 'Techniques Avancées',
   'methodologie': 'Méthodologie',
-  'cas-pratiques': 'Cas Pratiques',
-  'outils': 'Outils',
-  'prompts': 'Prompts',
-  'ressources': 'Ressources',
-  'securite': 'Sécurité & Confidentialité',
-  'apprentissage': 'Apprentissage & Révision',
   'recherche': 'Recherche & Analyse',
+  'apprentissage': 'Apprentissage & Révision',
+  'cas-pratiques': 'Cas Pratiques',
+  'ressources': 'Ressources',
   'creation': 'Création de Contenu',
-} as const;
+  'securite': 'Sécurité & Confidentialité',
+  'clinique': 'Clinique',
+  'chatbot': 'Chatbot',
+  'moteur-de-recherche': 'Moteur de Recherche',
+  'suite-creative': 'Suite Créative',
+};
 
-// Nouvelle liste unique pour Zod
-export const allCategories = Object.keys(categoryLabels) as [keyof typeof categoryLabels, ...(keyof typeof categoryLabels)[]];
-
-export const difficultyLabels = {
+export const difficultyLabels: Record<string, string> = {
   débutant: 'Débutant',
   intermédiaire: 'Intermédiaire',
- avancé: 'Avancé',
-} as const;
-
-// Exporter les clés sous forme de tableau pour Zod
-export const allDifficulties = Object.keys(difficultyLabels) as [keyof typeof difficultyLabels, ...(keyof typeof difficultyLabels)[]];
+  avancé: 'Avancé',
+};
 
 export const toolLabels = {
   chatgpt: 'ChatGPT',

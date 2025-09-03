@@ -17,12 +17,6 @@ export default function PromptPage({ params }: PromptPageProps) {
         notFound();
     }
 
-    const difficultyBadgeColor = {
-        débutant: 'bg-green-500',
-        intermédiaire: 'bg-yellow-500',
-        avancé: 'bg-red-500',
-    };
-
     return (
         <article className="container mx-auto py-8">
             <div className="max-w-4xl mx-auto">
