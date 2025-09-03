@@ -14,8 +14,8 @@ interface GuideCardProps {
 }
 
 export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
-  const categoryLabel = categoryLabels[guide.category] || guide.category;
-  const difficultyLabel = difficultyLabels[guide.difficulty] || guide.difficulty;
+  const categoryLabel = categoryLabels[guide.category as keyof typeof categoryLabels] ?? guide.category;
+  const difficultyLabel = difficultyLabels[guide.difficulty as keyof typeof difficultyLabels] ?? guide.difficulty;
 
   return (
     <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">

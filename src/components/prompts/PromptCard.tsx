@@ -22,8 +22,8 @@ export interface PromptCardProps {
 export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   const [copied, setCopied] = useState(false);
   
-  const categoryLabel = categoryLabels[prompt.category] || prompt.category;
-  const difficultyLabel = difficultyLabels[prompt.difficulty] || prompt.difficulty;
+  const categoryLabel = categoryLabels[prompt.category as keyof typeof categoryLabels] ?? prompt.category;
+  const difficultyLabel = difficultyLabels[prompt.difficulty as keyof typeof difficultyLabels] ?? prompt.difficulty;
 
   const handleCopy = async () => {
     if (prompt.promptContent) {
