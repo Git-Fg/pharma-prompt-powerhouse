@@ -1,0 +1,78 @@
+### **Blueprint Final du Projet : Prompt Santé**
+
+#### **1. Titre et Ligne Directrice**
+
+*   **Titre :** Pharma Prompt Powerhouse
+*   **Ligne Directrice :** Un guide pratique de l'IA, par un étudiant pour les étudiants.
+
+#### **2. Philosophie Fondamentale et Ton**
+
+*   **Posture de l'Auteur :** Je suis un étudiant, comme vous. J'ai passé du temps à explorer ces outils pour mes propres études et je partage ici mes méthodes, mes découvertes et mes doutes. Ce site est le carnet de bord de mon exploration, structuré pour vous faire gagner du temps.
+*   **Ton :**
+    *   **Première Personne ("Je") :** Le contenu est rédigé à la première personne pour renforcer l'authenticité et la proximité. Ex: *"J'ai constaté que pour cette tâche, l'outil X..."* au lieu de *"Il est constaté que..."*.
+    *   **Sobriété et Professionnalisme :** Le ton est direct, informatif et respectueux. Pas de familiarité excessive, pas d'exagération. L'objectif est la clarté et la crédibilité.
+    *   **Humilité Intellectuelle :** Je ne prétends pas détenir de vérité absolue. Les "scores de confiance", les recommandations et les analyses sont basés sur mon expérience personnelle et mes recherches. Je vous encourage systématiquement à tester par vous-même.
+*   **Absence de Marketing :** Le site n'a rien à vendre. Il n'y a pas d'appel à l'action commercial, pas de newsletter, pas de création de communauté (Discord, forum...). C'est une ressource purement informative et pédagogique.
+
+#### **3. Disclaimers et Avertissements Essentiels (Présents sur tout le site)**
+
+Chaque page, et plus particulièrement chaque workflow et chaque fiche d'outil, intégrera des avertissements clairs et récurrents :
+
+*   **Sur la Performance :** *"Les résultats présentés ici sont des exemples. Le paysage de l'IA évolue constamment et les performances des modèles peuvent changer. La seule façon de trouver la solution optimale pour *votre* besoin est d'expérimenter et de comparer."*
+*   **Sur la Fiabilité du Contenu Généré :** *"Une IA, même la plus avancée, peut commettre des erreurs, omettre des informations cruciales ou "halluciner". Dans le domaine de la santé, toute information générée par une IA doit être systématiquement vérifiée avec des sources fiables et validées. **N'utilisez jamais une information non vérifiée pour une décision clinique ou académique importante.**"*
+*   **Sur la Confidentialité :** *"La règle d'or : si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt. N'utilisez **jamais** de données personnelles, identifiables ou de patient sur une plateforme en ligne. Je précise le niveau de risque perçu pour chaque outil, mais la prudence absolue reste votre meilleure protection."*
+
+#### **4. Structure du Site Web**
+
+**A. Page d'Accueil**
+
+*   **Titre :** Bienvenue sur Prompt Santé.
+*   **Introduction (rédigée à la première personne) :** Un paragraphe court expliquant la genèse du projet. *"En tant qu'étudiant en pharmacie, je me suis vite senti dépassé par la multitude d'outils d'IA. J'ai créé ce guide pour centraliser mes apprentissages et partager une méthode pour utiliser ces technologies de manière réfléchie et efficace dans nos études."*
+*   **Accès Rapides :**
+    *   Les 3 derniers workflows publiés.
+    *   Un lien vers la section "Par où commencer ?" pour les nouveaux visiteurs.
+    *   Un lien vers "L'Arsenal IA 2025" pour ceux qui veulent comparer rapidement les outils.
+
+**B. Section : "Par où commencer ?"**
+
+*   Une page guidant le débutant.
+*   **Étape 1 : Les Concepts Clés.** Une introduction douce aux notions de prompt, de contexte et de modèle.
+*   **Étape 2 : Votre Premier Workflow.** Suggestion de commencer par le workflow le plus simple (ex: "Création de Flashcards").
+*   **Étape 3 : La Règle d'Or de la Sécurité.** Un rappel concis et direct sur la confidentialité des données.
+
+**C. Section : "Workflows Stratégiques"**
+
+*   Le cœur du site. Chaque workflow est présenté comme une étude de cas personnelle.
+*   **Structure d'un Workflow :**
+    1.  **Le Problème :** Description de la tâche concrète.
+    2.  **Mon Approche Initiale (et ses limites) :** Montrer une première tentative simple pour illustrer les pièges courants.
+    3.  **La Stratégie Optimisée :** Déroulé pas-à-pas de la méthode que j'ai développée, en expliquant la logique derrière chaque étape.
+    4.  **Comparaison des Outils :** Une section où je teste la stratégie sur 2 ou 3 plateformes pertinentes. *"Voici ce que j'ai obtenu avec Google AI Studio...", "De son côté, ChatGPT a mieux géré...", "Mon avis personnel sur le meilleur outil pour *cette* tâche précise est..."*.
+    5.  **Le Prompt Final (à adapter) :** Le prompt final est fourni, avec des commentaires expliquant chaque partie et des suggestions pour que l'utilisateur puisse le personnaliser.
+    6.  **Ce qu'il faut retenir :** Un résumé des grands principes méthodologiques appris dans le workflow.
+*   **Exemples de workflows :** (cf. la liste précédente : Flashcards, Synthèse biblio, Présentation, Analyse de manuels).
+
+**D. Section : "L'Arsenal IA 2025"**
+
+*   Un catalogue des outils, présenté comme une boîte à outils personnelle.
+*   **Page Principale :** Une table comparative synthétique avec des filtres (gratuit/payant, analyse de fichiers, génération d'images, score de confiance).
+*   **Fiches Détaillées par Outil :**
+    *   **Nom de l'outil.**
+    *   **Mon Avis en Bref :** *"J'utilise principalement cet outil pour..."*.
+    *   **Points Forts (selon mon expérience) :** Liste à puces.
+    *   **Points de Vigilance :** Liste à puces.
+    *   **Offre Gratuite vs Payante (Septembre 2025) :** Un tableau simple et clair.
+    *   **Score de Confiance et Justification :** L'étoile ou la note, suivie d'une phrase : *"Je lui attribue ce score car ses serveurs sont basés en Europe et sa politique de confidentialité est claire. Cependant, la prudence reste de mise."* ou *"Attention, cet outil est très puissant mais sa politique de données est floue. À n'utiliser que pour des tâches non confidentielles."*
+
+**E. Section : "Concepts"**
+
+*   Un lexique sobre et alphabétique. Chaque entrée est une page simple qui définit un terme technique (ex: *Fenêtre Contextuelle*) avec une analogie simple et une explication de son importance pratique pour un étudiant.
+
+#### **5. Objectif Final pour l'Utilisateur**
+
+À la fin de sa visite, l'étudiant ne repart pas avec une solution miracle, mais avec :
+*   **Une Méthodologie :** Il a compris comment décomposer un besoin, formuler une demande précise, et itérer pour améliorer un résultat.
+*   **Un Esprit Critique :** Il sait qu'il doit vérifier les informations et se méfier des outils gratuits aux politiques de confidentialité opaques.
+*   **La Confiance d'Expérimenter :** Il a les clés pour tester les outils par lui-même de manière informée et structurée.
+
+En somme, il repart avec les compétences nécessaires pour faire de l'IA un véritable levier pour ses études, en toute autonomie et en toute conscience.
