@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   slug: 'optimiser-ses-quotas-et-son-temps-avec-lia',
@@ -55,4 +55,4 @@ export const guide = {
       "content": "## Conclusion\n\nOptimiser ses prompts sur les interfaces gratuites, ce n'est pas une question d'argent, mais d'efficacité. En étant concis et en choisissant le bon outil, vous maximiserez la valeur que vous tirez de vos quotas gratuits et passerez moins de temps à attendre les réponses."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

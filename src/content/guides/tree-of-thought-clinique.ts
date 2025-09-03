@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "tree-of-thought-clinique",
@@ -74,4 +74,4 @@ export const guide = {
       "content": "En combinant ces trois blocs, vous obtenez un prompt ToT robuste qui guide l'IA à travers un processus de diagnostic différentiel structuré, fiable et transparent."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

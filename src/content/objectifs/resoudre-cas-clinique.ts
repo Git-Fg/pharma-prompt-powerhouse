@@ -1,5 +1,5 @@
-import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
+import type { Objectif } from '@/lib/content-schema';
 
 // On récupère le prompt que nous venons de créer
 const masterPromptData = allPrompts.find(p => p.slug === 'resolveur-cas-cliniques-tot');
@@ -84,4 +84,4 @@ export const objectif = {
       ]
     }
   ]
-} satisfies ObjectifInput;
+} satisfies Objectif;

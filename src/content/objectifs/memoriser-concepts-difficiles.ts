@@ -1,5 +1,5 @@
-import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
+import type { Objectif } from '@/lib/content-schema';
 
 // On récupère un prompt existant pour le réutiliser
 const masterPromptData = allPrompts.find(p => p.slug === 'generateur-mnemoniques-analogies');
@@ -84,4 +84,4 @@ export const objectif = {
       ]
     }
   ]
-} satisfies ObjectifInput;
+} satisfies Objectif;

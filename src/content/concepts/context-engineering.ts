@@ -1,5 +1,5 @@
 // src/content/concepts/context-engineering.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "context-engineering",
@@ -166,4 +166,4 @@ export const concept = {
       "reason": "La méthode XML est une technique avancée de context engineering qui permet de structurer parfaitement l'information fournie à l'IA."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

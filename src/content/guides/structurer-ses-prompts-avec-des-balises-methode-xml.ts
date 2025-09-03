@@ -1,5 +1,4 @@
-// src/content/guides/structurer-ses-prompts-avec-des-balises-methode-xml.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "structurer-ses-prompts-avec-des-balises-methode-xml",
@@ -114,4 +113,4 @@ export const guide = {
       "reason": "La structuration par balises est une technique avancée de context engineering qui permet de mieux organiser l'information fournie à l'IA."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

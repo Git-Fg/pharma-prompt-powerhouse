@@ -1,5 +1,4 @@
-// src/content/concepts/température-dosage.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "température-dosage",
@@ -82,4 +81,4 @@ export const concept = {
       "reason": "Google AI Studio est la meilleure plateforme gratuite pour expérimenter avec le paramètre de température et comprendre son impact sur les réponses de Gemini."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

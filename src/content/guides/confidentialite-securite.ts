@@ -1,5 +1,4 @@
-// src/content/guides/confidentialite-securite.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   slug: 'confidentialite-securite',
@@ -247,4 +246,4 @@ En appliquant cette grille de lecture, vous pouvez bénéficier de la puissance 
       "reason": "Pour une confidentialité absolue, la seule solution est de faire tourner les modèles sur votre propre machine. Ce guide vous montre comment faire avec des modèles comme Qwen3-4B."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

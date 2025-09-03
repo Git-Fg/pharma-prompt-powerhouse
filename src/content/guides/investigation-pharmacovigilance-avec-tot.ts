@@ -1,5 +1,4 @@
-// src/content/guides/investigation-pharmacovigilance-avec-tot.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "investigation-pharmacovigilance-avec-tot",
@@ -72,4 +71,4 @@ export const guide = {
       "content": "Une réponse en texte (Markdown) bien structurée, qui suit votre plan d'investigation, facile à lire et à utiliser."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

@@ -9,7 +9,7 @@ import { CodeBlock } from '@/components/ui/code-block';
 import { ToolRecommendation } from './ToolRecommendation';
 import { GuideRecommendation } from './GuideRecommendation';
 import { ConceptRecommendation } from './ConceptRecommendation';
-import type { ContentBlock } from '@/types/content';
+import type { ContentBlock } from '@/lib/content-schema';
 
 function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`);
@@ -60,15 +60,15 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
       return (
         <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value} className="my-6">
           <TabsList>
-            {block.tabs.map((tab) => (
+            {block.tabs.map((tab: any) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.title}
               </TabsTrigger>
             ))}
           </TabsList>
-          {block.tabs.map((tab) => (
+          {block.tabs.map((tab: any) => (
             <TabsContent key={tab.value} value={tab.value}>
-              {tab.content.map((subBlock, idx) => (
+              {tab.content.map((subBlock: any, idx: any) => (
                 <BlockSwitch key={idx} block={subBlock} />
               ))}
             </TabsContent>

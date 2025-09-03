@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "optimisation-de-prompts-la-methode-iterative",
@@ -130,4 +130,4 @@ export const guide = {
       "reason": "Avant d'optimiser, assurez-vous de maîtriser les fondamentaux : un prompt bien structuré nécessite moins d'itérations pour atteindre l'excellence."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

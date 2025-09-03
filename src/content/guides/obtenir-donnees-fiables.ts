@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "obtenir-donnees-fiables",
@@ -60,4 +60,4 @@ export const guide = {
       "content": "## Conclusion : Un Workflow en Boucle\nVotre travail de recherche devient une boucle vertueuse :\n\n`Question PICO -> IA (Recherche) -> Analyse Critique des Sources -> Affinement de la Question -> IA (Recherche plus ciblée) ...`\n\nEn maîtrisant ce processus, vous utilisez l'IA pour ce qu'elle fait de mieux (scanner et synthétiser des volumes massifs de données) tout en gardant ce que vous faites de mieux : l'analyse critique et le jugement expert."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

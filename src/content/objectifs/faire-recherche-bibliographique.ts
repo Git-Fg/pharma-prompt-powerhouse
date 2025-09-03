@@ -1,5 +1,5 @@
-import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
+import type { Objectif } from '@/lib/content-schema';
 
 const masterPromptData = allPrompts.find(p => p.slug === 'research-helper');
 if (!masterPromptData) throw new Error("Prompt 'research-helper' non trouvé");
@@ -83,4 +83,4 @@ export const objectif = {
       ]
     }
   ]
-} satisfies ObjectifInput;
+} satisfies Objectif;

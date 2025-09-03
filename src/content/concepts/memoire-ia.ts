@@ -1,5 +1,4 @@
-// src/content/concepts/memoire-ia.ts
-import type { ConceptInput } from '@/types/content';
+import type { Concept } from '@/lib/content-schema';
 
 export const concept = {
   "slug": "memoire-ia",
@@ -114,4 +113,4 @@ export const concept = {
       "reason": "ChatGPT Plus offre les fonctionnalités les plus avancées pour la gestion de mémoire persistante avec les GPTs."
     }
   ]
-} satisfies ConceptInput;
+} satisfies Concept;

@@ -1,4 +1,4 @@
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "workflow-generer-cas-cliniques",
@@ -61,4 +61,4 @@ export const guide = {
       "content": "## Conclusion\n\nL'IA transforme la création de cas cliniques d'un exercice fastidieux en un processus créatif et efficace. En maîtrisant cette technique, vous créez un arsenal illimité de scénarios d'apprentissage qui s'adaptent parfaitement à vos besoins."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

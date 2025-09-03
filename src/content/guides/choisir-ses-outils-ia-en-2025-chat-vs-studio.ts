@@ -1,5 +1,5 @@
 // src/content/guides/choisir-ses-outils-ia-en-2025-chat-vs-studio.ts
-import type { GuideInput } from '@/types/content';
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   "slug": "choisir-ses-outils-ia-en-2025-chat-vs-studio",
@@ -229,4 +229,4 @@ export const guide = {
       "reason": "La maîtrise de la température, un paramètre clé des studios, vous permet de doser la créativité de l'IA."
     }
   ]
-} satisfies GuideInput;
+} satisfies Guide;

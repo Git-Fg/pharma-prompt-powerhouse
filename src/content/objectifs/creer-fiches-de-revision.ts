@@ -1,5 +1,5 @@
-import type { ObjectifInput } from '@/types/content';
 import { allPrompts } from '@/content/prompts';
+import type { Objectif } from '@/lib/content-schema';
 
 // On récupère un prompt existant pour le réutiliser
 const masterPromptData = allPrompts.find(p => p.slug === 'generateur-questions-examen');
@@ -36,4 +36,4 @@ export const objectif = {
 
   relatedConcepts: ["context-engineering", "structuration-par-balises"],
   relatedGuides: ["les-5-piliers-dun-prompt-pharmaceutique-efficace"],
-} satisfies ObjectifInput;
+} satisfies Objectif;
