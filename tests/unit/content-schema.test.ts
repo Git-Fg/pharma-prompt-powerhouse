@@ -3,7 +3,7 @@ import {
   contentBlockSchema,
   promptSchema,
   externalToolSchema,
-  objectifSchema
+  workflowSchema
 } from '@/lib/content-schema'
 
 describe('Content Schema Edge Cases', () => {
@@ -124,51 +124,45 @@ describe('Content Schema Edge Cases', () => {
     })
   })
 
-  describe('objectif schema validation', () => {
-    it('should require at least one checklist item', () => {
-      const validObjectif = {
-        slug: 'test-objectif',
-        title: 'Test Objective',
+  describe('workflow schema validation', () => {
+    it('should require at least one keyTakeaway', () => {
+      const validWorkflow = {
+        slug: 'test-workflow',
+        title: 'Test Workflow',
         description: 'Test description',
+        category: 'test',
+        difficulty: 'débutant',
         tags: [],
         isFavorite: false,
-        masterPrompt: {
-          description: 'Test prompt',
-          prompt: { test: 'value' }
-        },
-        beforeAfter: {
-          beforePrompt: 'Before',
-          afterPrompt: 'After'
-        },
-        checklist: ['At least one item'],
-        relatedConcepts: [],
-        relatedGuides: []
+        problem: [{ type: 'markdown' as const, content: 'Test problem' }],
+        initialApproach: [{ type: 'markdown' as const, content: 'Test approach' }],
+        optimizedStrategy: [{ type: 'markdown' as const, content: 'Test strategy' }],
+        toolComparison: [{ type: 'markdown' as const, content: 'Test comparison' }],
+        finalPrompt: [{ type: 'markdown' as const, content: 'Test prompt' }],
+        keyTakeaways: ['At least one takeaway']
       }
       
-      expect(() => objectifSchema.parse(validObjectif)).not.toThrow()
+      expect(() => workflowSchema.parse(validWorkflow)).not.toThrow()
     })
 
-    it('should reject objectif with empty checklist', () => {
-      const invalidObjectif = {
-        slug: 'test-objectif',
-        title: 'Test Objective',
+    it('should reject workflow with empty keyTakeaways', () => {
+      const invalidWorkflow = {
+        slug: 'test-workflow',
+        title: 'Test Workflow',
         description: 'Test description',
+        category: 'test',
+        difficulty: 'débutant',
         tags: [],
         isFavorite: false,
-        masterPrompt: {
-          description: 'Test prompt',
-          prompt: { test: 'value' }
-        },
-        beforeAfter: {
-          beforePrompt: 'Before',
-          afterPrompt: 'After'
-        },
-        checklist: [], // Empty checklist should fail
-        relatedConcepts: [],
-        relatedGuides: []
+        problem: [{ type: 'markdown' as const, content: 'Test problem' }],
+        initialApproach: [{ type: 'markdown' as const, content: 'Test approach' }],
+        optimizedStrategy: [{ type: 'markdown' as const, content: 'Test strategy' }],
+        toolComparison: [{ type: 'markdown' as const, content: 'Test comparison' }],
+        finalPrompt: [{ type: 'markdown' as const, content: 'Test prompt' }],
+        keyTakeaways: [] // Empty keyTakeaways should fail
       }
       
-      expect(() => objectifSchema.parse(invalidObjectif)).toThrow()
+      expect(() => workflowSchema.parse(invalidWorkflow)).toThrow()
     })
   })
 

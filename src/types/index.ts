@@ -7,11 +7,13 @@ export type {
   Concept,
   Guide,
   Prompt,
+  Workflow,
   ExternalTool,
-  Objectif,
+  EnhancedExternalTool,
   ContentBlock,
   EnrichedGuide,
   EnrichedConcept,
+  EnrichedWorkflow,
 } from "@/lib/content-schema";
 
 // Type global pour représenter n'importe quel élément de nos collections.
@@ -19,4 +21,5 @@ export type AnyContent =
   | import("@/lib/content-schema").Concept 
   | import("@/lib/content-schema").Guide 
   | import("@/lib/content-schema").Prompt 
+  | import("@/lib/content-schema").Workflow
   | import("@/lib/content-schema").ExternalTool;
