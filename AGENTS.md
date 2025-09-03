@@ -1,569 +1,222 @@
-
 # **Règles Générales**
 
 <project_philosophy>
-**Philosophie du Projet : Simplicité et Apprentissage**
-- **Simplicité avant tout :** Toujours choisir la solution la plus simple qui fonctionne. La clarté prime sur la sophistication.
-- **Objectif Pédagogique :** Ce projet est un outil d'apprentissage pour d'autres étudiants, pas une application d'entreprise complexe.
-- **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles. Éviter l'ingénierie prématurée.
-- **Maintenabilité :** Écrire du code et créer du contenu que n'importe qui dans l'équipe peut comprendre et modifier facilement.
+**Philosophie du Projet : Pharma Prompt Powerhouse**
+- **Ligne Directrice :** Un guide pratique de l'IA, par un étudiant pour les étudiants.
+- **Posture de l'Auteur :** Je suis un étudiant, comme vous. Ce site est le carnet de bord de mon exploration. Je partage mes méthodes, mes découvertes, mes doutes et même mes échecs pour vous faire gagner du temps.
+- **Humilité Intellectuelle :** Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle. J'encourage systématiquement à tester par soi-même.
+- **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
+- **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
+- **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
 - **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile.
 </project_philosophy>
 
 <content_rules>
 **Règles du Contenu : Le Cœur du Projet**
-- **Public Cible : Non-Développeurs.** Le public cible est un étudiant ou professionnel de santé. Le jargon technique doit être évité. **Tolérance :** Des concepts comme `RAG` ou `token` peuvent être mentionnés **uniquement s'ils sont expliqués simplement** et sont essentiels pour comprendre le fonctionnement d'une WebUI (ex: Perplexity et le RAG). Le jargon nécessitant d'écrire du code (`API`, `endpoint`, etc.) est **strictement interdit** dans le contenu destiné aux utilisateurs.
-- **Approche "WebUI First" :** Tous les guides et tutoriels doivent se baser sur des interfaces web accessibles (ChatGPT, Google AI Studio, chat.z.ai, etc.). Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
-- **Valoriser les "Playgrounds" et "Studios" :** Présenter les interfaces avancées (OpenAI Playground, Anthropic Console, Google AI Studio) comme des outils d'exploration pour non-développeurs, permettant de manipuler des paramètres comme le `system prompt` ou la `température` sans coder.
-- **Clarté et Pertinence :** Prioriser la qualité du contenu pharmaceutique. Utiliser des exemples réels et des cas pratiques pour illustrer les concepts.
-- **Standardisation :** Toujours utiliser le format `{{nom_variable}}` pour les variables dans les prompts afin de garantir la cohérence.
+- **Public Cible : Étudiants et Professionnels de Santé.** Le jargon technique doit être évité. **Tolérance :** Des concepts comme `RAG` ou `token` peuvent être mentionnés **uniquement s'ils sont expliqués simplement**. Le jargon de développeur (`API`, `endpoint`, etc.) est **strictement interdit**.
+- **Approche "WebUI First" :** Tous les guides et "Workflows" doivent se baser sur des interfaces web accessibles. Aucun guide ne doit nécessiter d'écrire la moindre ligne de code.
+- **Standardisation des Prompts :** Toujours utiliser le format `{{nom_variable}}` pour les variables afin de garantir la cohérence et la personnalisation.
+
+<persona_and_tone>
+**Persona, Ton et Voix de l'Auteur**
+- **Incarner le Persona :** Toujours écrire à la première personne ("Je", "Mon", "J'ai découvert"). Le site est un carnet de bord, pas une encyclopédie.
+- **Authenticité :** Partager les doutes, les échecs et les itérations. La section "Mon Approche Initiale (et ses limites)" dans les workflows est essentielle pour montrer que la maîtrise vient de l'expérimentation.
+- **Exemple de Ton :**
+    - **À proscrire :** "Il est possible d'utiliser l'IA pour générer des flashcards."
+    - **À adopter :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
+</persona_and_tone>
+
+<essential_disclaimers>
+**Avertissements Essentiels (Disclaimers)**
+- **Intégration Obligatoire :** Ces trois avertissements doivent être présents et visibles sur chaque workflow et chaque fiche d'outil.
+- **Sur la Performance :** *"Les résultats présentés ici sont des exemples. Le paysage de l'IA évolue constamment et les performances des modèles peuvent changer. La seule façon de trouver la solution optimale pour *votre* besoin est d'expérimenter et de comparer."*
+- **Sur la Fiabilité du Contenu Généré :** *"Une IA, même la plus avancée, peut commettre des erreurs, omettre des informations cruciales ou "halluciner". Dans le domaine de la santé, toute information générée par une IA doit être systématiquement vérifiée avec des sources fiables et validées. **N'utilisez jamais une information non vérifiée pour une décision clinique ou académique importante.**"*
+- **Sur la Confidentialité :** *"La règle d'or : si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt. N'utilisez **jamais** de données personnelles, identifiables ou de patient sur une plateforme en ligne. Je précise le niveau de risque perçu pour chaque outil, mais la prudence absolue reste votre meilleure protection."*
+</essential_disclaimers>
 </content_rules>
   
 <project_documentation_rules>
 **Stratégie de Documentation**
-- **`README.md` (Racine) :** La porte d'entrée du projet. Doit contenir la présentation générale, les objectifs, et les instructions d'installation pour les visiteurs et contributeurs.
-- **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances technique du projet. Sert de constitution pour le développement et la création de contenu.
-- **`src/types/README.md` :** Documentation sur la philosophie de typage, expliquant la source de vérité unique et comment étendre les types de contenu.
+- **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
+- **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances du projet. La constitution pour le développement et la création de contenu.
 </project_documentation_rules>
 
-<coding_style_and_principles>
-**Principes et Style de Code**
-- **Composants Ciblés :** Écrire des composants petits et spécialisés qui n'ont qu'une seule responsabilité.
-- **Lisibilité du Code :** Utiliser des noms de variables et de fonctions descriptifs. Le code doit se lire comme une histoire et expliquer ses intentions.
-- **Gestion d'État Progressive :**
-  - Commencer avec `useState` pour l'état local.
-  - Utiliser `useContext` pour un partage simple entre composants.
-  - Réserver `useReducer` pour les logiques d'état réellement complexes.
-- **Performance Intelligente :**
-  - La meilleure optimisation est de **déplacer la logique vers la structure de données** avec des blocs de contenu fortement typés via `content-schema.ts`.
-  - Faire confiance aux optimisations automatiques de React 19 et éviter l'optimisation prématurée.
-- **Dépendances Minimales :** N'ajouter une bibliothèque que si elle résout un problème réel qu'une fonctionnalité native ne peut pas couvrir.
-- **Documentation Utile :** Commenter le "pourquoi" derrière les choix de code complexes, pas le "comment".
-</coding_style_and_principles>
+---
 
-<user_experience_and_accessibility>
-**Expérience Utilisateur et Accessibilité**
-- **Conception Centrée sur l'Utilisateur :** Concevoir chaque interface en pensant d'abord aux étudiants non-développeurs.
-- **Guidage et Intuitivité :** Créer des parcours et des outils interactifs qui sont simples à comprendre et à utiliser sans explication préalable.
-- **Tirer parti de l'Accessibilité Native :** Utiliser systématiquement les fonctionnalités d'accessibilité (ARIA, gestion du focus, etc.) intégrées dans shadcn/ui pour garantir que le site est utilisable par tous.
-</user_experience_and_accessibility>
+# **Structure du Contenu et du Site**
+
+<site_architecture>
+**Architecture du Site Web**
+- **Objectif :** Guider l'utilisateur de la découverte à la maîtrise autonome, à travers un parcours logique et personnel.
+
+  <homepage>
+  **A. Page d'Accueil**
+  - **Titre :** Bienvenue sur Pharma Prompt Powerhouse.
+  - **Introduction :** Paragraphe à la première personne sur la genèse du projet. *"En tant qu'étudiant en pharmacie, je me suis vite senti dépassé... J'ai créé ce guide pour centraliser mes apprentissages..."*
+  - **Accès Rapides :** 3 derniers workflows, lien vers "Par où commencer ?", lien vers "L'Arsenal IA 2025".
+  </homepage>
+
+  <getting_started>
+  **B. Section : "Par où commencer ?"**
+  - **Étape 1 :** Concepts Clés (prompt, contexte, modèle).
+  - **Étape 2 :** Votre Premier Workflow (suggestion du plus simple).
+  - **Étape 3 :** La Règle d'Or de la Sécurité (rappel sur la confidentialité).
+  </getting_started>
+  
+  <workflows_section>
+  **C. Section : "Workflows Stratégiques" (Cœur du site)**
+  - **Présentation :** Chaque workflow est une étude de cas personnelle et détaillée.
+  - **Structure :** Doit impérativement suivre le format `<workflow_structure>` ci-dessous.
+  </workflows_section>
+  
+  <ia_arsenal_section>
+  **D. Section : "L'Arsenal IA 2025"**
+  - **Présentation :** Mon catalogue d'outils personnel.
+  - **Page Principale :** Table comparative synthétique avec filtres (gratuit/payant, analyse de fichiers, score de confiance).
+  - **Fiches Détaillées :** Chaque outil a sa propre page, suivant le format `<tool_card_structure>`.
+  </ia_arsenal_section>
+
+  <concepts_section>
+  **E. Section : "Concepts"**
+  - **Format :** Un lexique alphabétique. Chaque entrée suit la structure `<concept_structure>`.
+  </concepts_section>
+</site_architecture>
+
+<workflow_structure>
+**Structure d'un Workflow**
+- **Chaque workflow doit impérativement contenir les 6 sections suivantes :**
+  1.  **Le Problème :** Un scénario étudiant concret, précis et relatable.
+  2.  **Mon Approche Initiale (et ses limites) :** Une première tentative simple qui a échoué, et l'explication du *pourquoi*.
+  3.  **La Stratégie Optimisée :** Le déroulé pas-à-pas de la méthode finale, en expliquant la logique de chaque étape.
+  4.  **Comparaison des Outils :** Le test de la stratégie sur 2-3 outils, avec les nuances de résultats et ma préférence personnelle *justifiée pour cette tâche*.
+  5.  **Le Prompt Final (à adapter) :** Le prompt complet dans un bloc de code, commenté pour expliquer le rôle de chaque partie.
+  6.  **Ce qu'il faut retenir :** Les grands principes méthodologiques appris, transférables à d'autres problèmes.
+</workflow_structure>
+
+<tool_card_structure>
+**Structure d'une Fiche Outil ("Arsenal IA")**
+- **Chaque fiche doit impérativement contenir les sections suivantes :**
+  - **Nom de l'outil.**
+  - **Mon Avis en Bref :** *"J'utilise principalement cet outil pour..."*
+  - **Points Forts (selon mon expérience) :** Liste à puces.
+  - **Points de Vigilance :** Liste à puces.
+  - **Offre Gratuite vs Payante :** Tableau simple avec la date (ex: "Septembre 2025").
+  - **Score de Confiance et Justification :** Note (ex: ⭐️⭐️⭐️☆☆) suivie d'une justification basée sur des critères clairs (localisation des serveurs, politique de confidentialité, etc.).
+</tool_card_structure>
+
+<concept_structure>
+**Structure d'une Définition de "Concept"**
+- **Chaque concept doit impérativement suivre cette structure en 3 temps :**
+  1.  **L'Analogie Simple :** Une comparaison non technique pour l'intuition.
+  2.  **La Définition Formelle :** L'explication plus précise mais accessible.
+  3.  **Pourquoi c'est important pour vous :** L'impact pratique pour un étudiant.
+</concept_structure>
 
 ---
 
 # **Règles Techniques Spécifiques**
 
 <react19_rules>
-**Compiler et optimisation:**
-- Expérimenter avec React Compiler (expérimental) mais ne pas y faire confiance aveuglément.
-- Écrire du code simple et lisible que le compiler peut optimiser.
-- Éviter `useMemo`/`useCallback` manuels sauf besoins spécifiques.
-**Actions et formulaires:**
-- Pour les formulaires simples (soumission de données serveur), utiliser **`useActionState`** comme approche standard en 2025 pour centraliser la logique et gérer les états pending/error/success.
-- Pour les composants interactifs complexes côté client (ex: l'éditeur de prompts), une gestion d'état avec `useState` et `useTransition` est privilégiée pour une meilleure réactivité de l'interface.
-- `useOptimistic` peut être utilisé pour améliorer l'UX lors des mutations de données serveur.
-**Gestion des données:**
-- Utiliser le hook `use()` pour lire les promesses et le contexte (peut être utilisé conditionnellement).
-- Combiner `use()` avec Suspense pour un code asynchrone propre.
-- Ne pas utiliser `use()` avec des promesses créées dans le render.
-**Nouvelles fonctionnalités:**
-- Utiliser le support natif des métadonnées (title, meta, link) directement dans les composants.
-- Utiliser les stylesheets natifs avec la propriété `precedence`.
+**React 19**
+- **Compiler et optimisation :** Écrire du code simple et lisible pour le React Compiler. Éviter `useMemo`/`useCallback` manuels.
+- **Actions et formulaires :** Utiliser **`useActionState`** comme standard pour les formulaires. Privilégier `useState` et `useTransition` pour l'interactivité complexe côté client.
+- **Gestion des données :** Utiliser `use()` avec Suspense pour le code asynchrone.
 </react19_rules>
 
 <nextjs15_rules>
-**App Router:**
-- Utiliser exclusivement l'App Router avec structure basée sur les fichiers.
-- Modèle de route: `src/app/[feature]/page.tsx`.
-- Utiliser `"use client"` uniquement pour les composants interactifs.
-**Cache (IMPORTANT):**
-- Les requêtes `fetch`, Route Handlers `GET` et navigations client ne sont PLUS cachées par défaut.
-- Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire.
-- Configurer explicitement le cache pour les données qui doivent être mises en cache.
-**APIs Async:**
-- Utiliser `await` pour `cookies()`, `headers()`, `draftMode()`, `params`, `searchParams`.
-- Ces APIs sont maintenant asynchrones - ne pas y accéder de manière synchrone.
-**Nouvelles fonctionnalités:**
-- Utiliser `@next/codemod` pour les mises à niveau automatisées.
-- Expérimenter avec `unstable_after` pour exécuter du code après le streaming.
-- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
-- Utiliser `next.config.ts` pour la configuration TypeScript.
-**Serveur Personnalisé:**
-- **NE JAMAIS utiliser de serveur personnalisé** (`server.ts`). Un serveur personnalisé désactive les optimisations de performance importantes comme l'Automatic Static Optimization.
-- Utiliser exclusivement `next start` pour le déploiement en production.
+**Next.js 15**
+- **App Router :** Utiliser exclusivement l'App Router. `"use client"` uniquement pour l'interactivité.
+- **Cache (IMPORTANT) :** Rien n'est mis en cache par défaut. Utiliser `export dynamic = 'force-static'` pour activer le cache quand nécessaire.
+- **APIs Async :** `cookies()`, `headers()`, etc., sont maintenant asynchrones. Utiliser `await`.
+- **Serveur Personnalisé :** **NE JAMAIS utiliser de serveur personnalisé** (`server.ts`). Il désactive les optimisations de performance critiques.
 </nextjs15_rules>
 
 <shadcn_ui_rules>
-**Version 3.0:**
-- Utiliser les registres namespacés: `@registry/name`.
-- Configurer plusieurs registres dans `components.json`.
-- Profiter du MCP Server pour l'intégration avec les outils d'IA.
-- Utiliser les nouvelles commandes de recherche et découverte.
-**Système de Notifications:**
-- **Standardiser exclusivement sur Sonner** pour les notifications toast. Sonner est le composant toast officiel recommandé par shadcn/ui en 2025.
-- Supprimer tout autre système de notification (radix-ui/react-toast, use-toast custom).
-- Utiliser l'API simple de Sonner : `toast.success()`, `toast.error()`, etc.
-**Utilisation des Composants:**
-- Utiliser les composants shadcn/ui tels quels, sans sur-personnalisation.
-- Combiner les composants simplement avec la composition plutôt que la surcharge.
-- Utiliser les fonctionnalités d'accessibilité intégrées.
-- Pour les composants personnalisés (ex: search-input, copy-button), étendre les composants shadcn/ui existants en utilisant leurs props natives.
-**Formulaires:**
-- Utiliser les composants de formulaire shadcn/ui.
-- Intégrer avec `useActionState` (React 19) ou les hooks React selon le cas d'usage.
-- Garder la logique de validation simple et proche du formulaire.
+**shadcn/ui**
+- **Système de Notifications :** **Standardiser exclusivement sur Sonner** pour les notifications toast. Supprimer tout autre système.
+- **Utilisation des Composants :** Utiliser les composants tels quels. Privilégier la composition simple à la surcharge.
+- **Formulaires :** Utiliser les composants de formulaire shadcn/ui intégrés avec `useActionState` (React 19).
 </shadcn_ui_rules>
 
 <content_structure_rules>
-**Philosophie : Le Schéma Zod est la Source de Vérité Unique**
-- Toute la structure de contenu est définie par des schémas Zod dans `src/lib/content-schema.ts`. C'est le seul endroit où les types de contenu sont définis.
-- Les composants React doivent être "stupides" : ils consomment des données déjà typées, sans faire de transformations complexes. La logique d'enrichissement est dans `content-loader.ts`.
-**Validation à la Compilation (`satisfies`)**
-- Chaque fichier de contenu (`.ts`) utilise l'opérateur `satisfies` de TypeScript pour valider sa structure contre le type inféré de Zod (ex: `satisfies Guide`).
-- Cette approche garantit la type-safety **au moment du développement**, avant même que le code ne soit exécuté, et offre une autocomplétion parfaite.
-- Le build échouera si un contenu ne respecte pas son schéma, assurant une intégrité totale.
-**Zod Best Practices 2025:**
-- **Inférence de Type :** Utiliser exclusivement `z.infer<typeof schema>` dans `content-schema.ts` pour générer les types TypeScript.
-- **Modularité :** Garder les schémas modulaires. Le `contentBlockSchema` est une union de tous les blocs possibles, ce qui permet une extensibilité propre.
-- **Pas de Validation Runtime Inutile :** Le `content-loader` n'a pas besoin de parser les données car la validation est déjà assurée par TypeScript et `satisfies` au niveau de chaque fichier de contenu.
-**Enrichissement des Données:**
-- **Content Loader :** Le fichier `src/lib/content-loader.ts` centralise le chargement et l'enrichissement du contenu (ex: lier les guides à leurs concepts).
-- **Relations :** Les relations entre collections sont résolues au chargement via des Maps pour des recherches ultra-rapides O(1) dans l'application.
-- **Typage Fort :** Toutes les données sont enrichies et fortement typées avant d'être passées aux composants.
-**Organisation des Fichiers:**
-- **Collections :** Chaque collection a son dossier dans `src/content/`.
-- **Fichiers de Contenu :** Chaque élément est un fichier `.ts` qui exporte un objet unique validé avec `satisfies`.
-- **Index :** Chaque dossier de collection a un fichier `index.ts` qui agrège et exporte tous les éléments.
+**Structure Technique du Contenu (Zod)**
+- **Philosophie :** Le Schéma Zod est la **Source de Vérité Unique** dans `src/lib/content-schema.ts`.
+- **Validation à la Compilation :** Chaque fichier de contenu (`.ts`) utilise l'opérateur `satisfies` pour valider sa structure. Le build échouera si un contenu est invalide.
+- **Enrichissement des Données :** `src/lib/content-loader.ts` centralise le chargement et la liaison des données.
 </content_structure_rules>
 
 <testing_rules>
-**Framework de Test:**
-- **Standardiser exclusivement sur Vitest** pour tous les tests unitaires et d'intégration. Vitest est le framework de test moderne recommandé pour les projets Next.js en 2025.
-- Supprimer complètement Jest et ses dépendances.
-**Configuration Vitest:**
-- Utiliser la configuration standard pour Next.js avec support TypeScript, JSX, et jsdom.
-- Configurer les aliases de chemins (`@/` -> `src/`) pour correspondre au projet.
-- Utiliser le mode `globals` pour une API de test plus simple.
-**Organisation des Tests:**
-- Placer les fichiers de test dans `tests/unit/` et `tests/integration/`.
-- Utiliser le pattern `*.test.ts` ou `*.spec.ts` pour les fichiers de test.
-- Séparer clairement les tests unitaires des tests d'intégration et E2E.
-**Scripts de Test:**
-- Configurer les scripts : `"test": "vitest"`, `"test:watch": "vitest"`, `"test:ui": "vitest --ui"`, `"test:coverage": "vitest run --coverage"`.
-- Utiliser l'interface UI de Vitest pour une meilleure expérience de développement.
-**Bonnes Pratiques:**
-- Écrire des tests qui vérifient le comportement plutôt que l'implémentation.
-- Utiliser les mocks de manière minimale et ciblée.
-- Tester les schémas Zod et la validation des données.
-- Tester les composants avec `@testing-library/react`.
+**Tests (Vitest)**
+- **Framework de Test :** **Standardiser exclusivement sur Vitest**. Supprimer complètement Jest.
+- **Configuration :** Utiliser la configuration standard pour Next.js avec les alias et le mode `globals`.
+- **Scripts de Test :** Configurer les scripts : `"test": "vitest"`, `"test:watch": "vitest"`.
+- **Bonnes Pratiques :** Tester le comportement, pas l'implémentation. Utiliser `@testing-library/react`.
 </testing_rules>
 
 <typescript_rules>
-**Typage du Contenu : Zéro Redondance**
-- **Source de Vérité Unique :** Le fichier `src/lib/content-schema.ts` est la seule source de vérité. Tous les types de contenu (`Concept`, `Guide`, `ContentBlock`, etc.) sont inférés de schémas Zod et exportés depuis ce fichier.a
-- **Workflow de Typage :**
-  1.  Définir ou modifier un schéma Zod dans `content-schema.ts`.
-  2.  Le type TypeScript est automatiquement mis à jour via `z.infer`.
-  3.  Utiliser l'opérateur `satisfies` dans les fichiers de contenu pour une validation instantanée.
-**Typage des Composants :**
-- Utiliser des interfaces de props simples.
-- Importer les types (`Guide`, `Concept`, `ContentBlock`) depuis `src/types/index.ts` (qui ré-exporte depuis `content-schema.ts`) pour typer les props.
-- **Synchronisation du `ContentRenderer` :** Le composant `ContentRenderer` utilise une union discriminée sur le type `ContentBlock`. L'utilisation d'une fonction `assertNever` dans le `switch default` garantit que si un nouveau type de bloc est ajouté au schéma, TypeScript générera une erreur de compilation tant que le `ContentRenderer` n'est pas mis à jour pour le gérer.
-**Configuration TypeScript:**
-- Maintenir le mode `strict` activé dans `tsconfig.json`.
-- Utiliser les résolutions de chemin appropriées pour les aliases.
+**TypeScript**
+- **Source de Vérité Unique :** Tous les types de contenu sont inférés des schémas Zod. Pas de types manuels.
+- **Synchronisation du `ContentRenderer` :** Utiliser une union discriminée et une fonction `assertNever` dans le `switch` pour garantir que tous les types de blocs de contenu sont gérés, sous peine d'erreur de compilation.
+- **Configuration :** Maintenir le mode `strict` activé dans `tsconfig.json`.
 </typescript_rules>
 
-<performance_rules>
-**Optimisations de Build:**
-- Éviter absolument les serveurs personnalisés qui désactivent l'Automatic Static Optimization.
-- Utiliser `export dynamic = 'force-static'` pour les pages qui peuvent être pré-rendues.
-- Configurer le cache explicitement pour les données qui doivent être mises en cache.
-**Optimisations d'Exécution:**
-- Faire confiance aux optimisations automatiques de React 19.
-- Éviter l'optimisation prématurée avec `useMemo`/`useCallback`.
-- Utiliser le pattern composants serveur/client de manière optimale : serveur pour le chargement de données, client pour l'interactivité.
-**Bundle et Dépendances:**
-- Maintenir les dépendances au minimum nécessaire.
-- Privilégier les bibliothèques légères et modernes (Sonner, Vitest, etc.).
-- Éviter les dépendances redondantes ou obsolètes.
-**Monitoring:**
-- Utiliser `instrumentation.js` pour l'observabilité du cycle de vie serveur.
-- Surveiller les performances avec les outils de développement Next.js.
-</performance_rules>
-
 <instructions>
-DO utiliser la première personne ("je") pour les explications personnelles, mais pas besoin d'appuyer trop le "je", les contenus en eux-même peuvent inclure des instructions sans référence personnelle.
-DO maintenir un ton professionnel mais abordable.
-DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant.
-DO utiliser les schémas Zod dans `src/lib/content-schema.ts` comme unique source de vérité pour la structure du contenu.
+DO rédiger tout le contenu à la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
+DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
+DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
+DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
 DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
-DO faire confiance aux types inférés de Zod.
-DO structurer le contenu comme un tableau de blocs typés.
-DO utiliser Sonner exclusivement pour les notifications.
-DO utiliser Vitest exclusively pour les tests.
+DO utiliser Sonner exclusivement pour les notifications et Vitest pour les tests.
 DO utiliser `useActionState` pour les formulaires React 19.
 DO comprendre que Next.js 15 ne met plus rien en cache par défaut.
-DO écrire du code facile à expliquer aux autres étudiants.
 DO NOT utiliser de serveur personnalisé.
-DO NOT utiliser Jest ou d'autres frameworks de test.
-DO NOT utiliser de systèmes de notification alternatifs.
-DO NOT sur-ingénier les solutions ou ajouter une complexité inutile.
+DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
+DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
 DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
-DO NOT créer de types manuels redondants pour le contenu (le fichier `src/types/content.ts` est obsolète).
-DO NOT supposer que les données sont mises en cache par défaut dans Next.js 15.
+DO NOT créer de types manuels redondants pour le contenu.
 DO NOT sacrifier la clarté pour la sophistication technique.
 En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
 </instructions>
 
 ---
 
-# **Règles de Contenu**
+# **Base de Données sur les Outils IA (WebUI)**
 
 <webui_informations>
 <openai_information>
 - Openai : Deux webui disponibles : ChatGPT (https://chatgpt.com/) et Playground (https://platform.openai.com/playground)
-  • Modèles récents (2024-2025) :
-    - GPT-5 (août 2025) : Modèle unifié avec raisonnement avancé. 
-      Variantes : gpt-5 (complet), gpt-5-mini (rapide), gpt-5-nano (ultra-rapide)
-      Fenêtre contextuelle : jusqu'à 400K tokens
-      Performances : 94.6% (AIME 2025), 74.9% (SWE-bench), 84.2% (MMMU)
-    - GPT-4.1 (2024) : Modèle pour développeurs, API flexible
-      Variantes : gpt-4.1, gpt-4.1-mini, gpt-4.1-nano
-    - GPT-4o (mai 2024) : Multimodal (texte, image, son)
-  • ChatGPT - Outils disponibles :
-    - Compréhension PDF :
-      • Gratuit : GPT-4o mini (limité)
-      • Payant (20€/mois) : GPT-5 (complet) - OCR natif, analyse tableaux/diagrammes
-    
-    - Deep Research :
-      • Gratuit : Version lite (5 utilisations/mois)
-      • Payant : Version complète (illimitées, export PDF)
-    
-    - Live :
-      • Gratuit : Voix standard
-      • Payant : Voix avancée, streaming temps réel
-  • ChatGPT Playground - Outils :
-    - Modèles : GPT-5, GPT-4.1, GPT-4o, GPT-3.5-turbo (+ variants mini/nano)
-    - Paramètres : Temperature (0-1), Max length (1-2048), Top P (0-1)
-    - Modes : Chat, Completion
-    - Multimodal : Texte, image, audio
-    - Connecteurs : Intégrations externes, CRM, bases de données
-    - Agent : Exécution tâches complexes multi-outils
-    - Pas de quotas gratuit sans CB
-  • Accès gratuit vs payant (20€/mois) :
-    - Gratuit : GPT-5 limité, GPT-4o mini, 8K tokens, plugins non disponibles
-    - Payant : GPT-5 étendu, 32K tokens, plugins, génération images, GPTs personnalisés
 </openai_information>
 <google_information>
-- Google : Deux webui disponibles - Gemini (gemini.google.com) et AI Studio (aistudio.google.com)
-  **Note :** Il est crucial de bien distinguer l'interface de chat `gemini.google.com` (produit grand public) de `aistudio.google.com` (laboratoire d'expérimentation).
-  • Modèles récents (2024-2025) :
-    - Gemini 2.5 Pro (juin 2025) : Modèle "pensant" le plus puissant
-      • Contexte : 1M tokens (env. 750 Mo texte)
-      • Entrées : Audio, images, vidéo, texte, PDF
-      • Performances : Raisonnement avancé, analyse codebases, traitement documents longs
-    - Gemini 2.5 Flash (juin 2025) : Meilleur rapport prix/performance
-      • Contexte : 1M tokens
-      • Entrées : Audio, images, vidéo, texte
-      • Optimisé pour faible latence et haut débit
-    - Gemini 2.5 Flash-Lite (juillet 2025) : Version optimisée coût/latence
-      • Contexte : 1M tokens
-      • Entrées : Texte, image, vidéo, audio, PDF
-    - Gemini 2.5 Flash Image Preview (août 2025) : Génération d'images conversationnelle
-    - Imagen 4 (août 2025) : Ultra, Standard et Fast modèles
-  • Gemini - Outils disponibles :
-    - Compréhension PDF :
-      • Gratuit : Gemini 2.5 Flash (limité à 32K tokens, 10 fichiers max 100Mo)
-      • Payant (20€/mois) : Gemini 2.5 Pro (1M tokens, analyse feuilles calcul, données tabulaires)
-    
-    - Deep Research :
-      • Gratuit : Non disponible
-      • Payant : Disponible avec Gemini Advanced, génération rapports détaillés
-    
-    - Live :
-      • Gratuit : Voix standard
-      • Payant : Gemini Live avec interactions vocales temps réel
-  • Google AI Studio - Outils :
-    - Modèles : Gemini 2.5 Pro/Flash/Flash-Lite, Imagen 4, Veo 3
-    - Paramètres : Temperature, Max tokens, Top P, Top K
-    - Modes : Chat, Completion, Batch
-    - Multimodal : Texte, image, audio, vidéo, PDF
-    - Fonctionnalités : 
-      • Structured outputs
-      • Function calling
-      • Code execution
-      • Search grounding
-      • Thinking mode
-      • URL context
-      • Caching support
-    - API gratuite : 60 requêtes/min, 300K tokens/jour
-    - API Gratuite = Accès gratuit sur la webui avec quota (utilisant api en arrière plan mais pas besoin de code). De plus, pas de CB nécessaire pour l'inscription = outil privilégié pour les étudiants, sans nécessité de sortir la carte de crédit, permettant d'accéder aux meilleurs modèles avec quota généreux. 
-  • Accès gratuit vs payant (20€/mois - Gemini Advanced) :
-    - Gratuit : Gemini 2.5 Flash, 32K tokens, 10 fichiers 100Mo max
-    - Payant : Gemini 2.5 Pro, 1M tokens, 100 requêtes 2.5 Pro/jour, Veo 3 (3 vidéos/jour), Deep Research
+- Google : Deux webui disponibles - Gemini (gemini.google.com) et AI Studio (aistudio.google.com). AI Studio est privilégié pour l'expérimentation étudiante (quota gratuit généreux sans CB).
 </google_information>
 <notebooklm_information>
-- NotebookLM (Google) : Webui disponible - NotebookLM (https://notebooklm.google.com/)
-  • Modèle : Propulsé par les modèles Gemini de Google.
-  
-  • Fonctionnalités principales :
-    - **Assistant de recherche personnalisé :** Transforme vos documents (PDF, cours, notes) en une base de connaissances interactive.
-    - **Interrogation de contenu :** Permet de "discuter" avec vos documents pour obtenir des synthèses, des réponses précises et des comparaisons.
-    - **Génération de podcasts (Audio Overview) :** Crée automatiquement une discussion audio de 10-20 minutes résumant vos documents, idéale pour la révision mobile.
-    - **Organisation par "Notebooks" :** Permet de créer des espaces de travail thématiques (par matière, projet, etc.).
-    - **Citations précises :** Chaque réponse est directement liée à la source dans vos documents.
-  
-  • Accès : Totalement gratuit (août 2025)
-    • Aucune limite de temps connue.
-    • Intégration avec l'écosystème Google.
-    • Confidentialité : Soumis aux politiques de confidentialité de Google.
+- NotebookLM (Google) : Webui disponible - NotebookLM (https://notebooklm.google.com/). Outil de recherche personnalisé gratuit, idéal pour "discuter" avec ses propres documents de cours.
 </notebooklm_information>
 <anthropic_information>
 - Anthropic : Deux webui disponibles - Claude (claude.ai) et Console (console.anthropic.com)
-  • Modèles récents (2024-2025) :
-    - Claude Opus 4.1 (août 2025) : Modèle le plus performant pour tâches complexes
-      • Contexte : 200K tokens (env. 150 000 mots)
-      • Performances : 74.5% sur SWE-bench Verified, excellence en codage et raisonnement
-      • Spécialisation : Analyse approfondie, recherche, traitement codebases complexes
-    - Claude Sonnet 4 (mai 2025) : Meilleur rapport performance/pratique
-      • Contexte : 200K tokens (1M tokens en version bêta depuis août 2025)
-      • Performances : Faible hallucination, idéal pour bases de connaissances volumineuses
-      • Spécialisation : Agents conversationnels, génération code, analyse données
-    - Claude Haiku 4 (mai 2025) : Modèle rapide et économique
-      • Contexte : 200K tokens
-      • Spécialisation : Réponses rapides, traitement haut volume
-  • Claude - Outils disponibles :
-    - Compréhension PDF :
-      • Gratuit : Traitement basique, 50 messages/jour
-      • Payant ($18-25/mois) : Analyse avancée, traitement documents volumineux
-    
-    - Research :
-      • Gratuit : Accès limité aux fonctionnalités de recherche
-      • Payant : Accès complet à Research, analyse approfondie
-    
-    - Projects :
-      • Gratuit : Non disponible
-      • Payant : Organisation illimitée de chats et documents
-  • Anthropic Console - Outils :
-    - Modèles : Claude Opus 4.1, Sonnet 4, Haiku 4
-    - Paramètres : Temperature, Top P, Top K, Max tokens
-    - Modes : Messages, Completions
-    - Fonctionnalités :
-      • Evaluate : Tests et évaluation de prompts avec génération de cas de test
-      • Workbench : Environnement de développement intégré
-      • Générateur de prompts : Création automatique de prompts détaillés
-      • API Reference : Documentation complète et exemples de code
-      • Cookbooks : Exemples pratiques et meilleures pratiques
-      • Prompt caching : Jusqu'à 90% d'économies
-      • Batch processing : 50% d'économies
-      • Support multimodal : Texte, image, document
-  • Accès gratuit vs payant ($18-25/mois) :
-    - Gratuit : 50 messages/jour, personas prédéfinis, publicités occasionnelles
-    - Payant : Usage illimité (limites en heures de pointe), personas personnalisables, intégrations (Slack, Google Workspace), priorité accès, early features, Claude Code, Projects illimités
 </anthropic_information>
 <zai_information>
-- Zhipu AI : Webui disponible - Chat Z.AI (chat.z.ai)
-  • Modèle récent (2025) :
-    - GLM-4.5 (juillet 2025) : Modèle open-source unifié
-      • Architecture : Mixture-of-Experts (MoE) avec 355B paramètres totaux, 32B actifs
-      • Contexte : 128K tokens
-      • Performances : 3ème mondial (63.2) sur 12 benchmarks, derrière Grok-4 et GPT-o3
-      • Modes hybrides : Mode "thinking" pour raisonnement complexe, mode "non-thinking" pour réponses rapides
-  • Chat Z.AI - Outils disponibles (tous gratuits actuellement) :
-    - Création de présentation (AI Slides) :
-      • Agent PPT/Poster intégré
-      • Recherche web autonome pour contenu et images
-      • Génération directe en HTML (pas de templates)
-      • Support documents de référence
-    
-    - Web search avancée :
-      • Simulation de recherche "humaine" plus naturelle que Perplexity
-      • Collecte et synthèse d'informations en temps réel
-      • Intégration native dans les workflows de création
-    
-    - Fullstack :
-      • Développement web complet (frontend, backend, base de données)
-      • Création d'applications entières à partir de prompts simples
-      • Déploiement automatique et gestion de bases de données
-    
-    - Web design :
-      • Création d'interfaces frontend complexes et responsives
-      • Génération de graphiques SVG détaillés
-      • Design visuel avancé avec HTML et Python
-      • Agent dédié pour sites web complets
-    
-    - Code :
-      • Support multi-langages
-      • Création d'artefacts autonomes (mini-jeux, simulations physiques)
-      • Génération de code exécutable en HTML, SVG, Python
-      • Capacités d'édition et raffinement par dialogue naturel
-  • Fonctionnalités principales :
-    - Architecture unifiée raisonnement/codage/agent
-    - Taux de succès d'appel d'outils : 90.6% (meilleur que Claude-4-Sonnet, Kimi K2, Qwen3-Coder)
-    - Mode Auto Think pour activation automatique du raisonnement
-    - Création d'artefacts complexes et autonomes
-    - Interface conversationnelle pour itérations et améliorations
-  • Accès : Totalement gratuit (août 2025)
-    • Aucune limitation de usage connue
-    • Accès direct au modèle GLM-4.5 complet
-    • Tous les outils avancés disponibles sans restriction
-Attention, risque très important au niveau de la confidentialité lorsque l'on passe par leurs propre plateforme.
+- Zhipu AI : Webui disponible - Chat Z.AI (chat.z.ai). Outils puissants et gratuits, mais grande prudence sur la confidentialité.
 </zai_information>
 <perplexity_information>
-- Perplexity : Webui disponible - Perplexity (perplexity.ai)
-  • Modèles récents (2024-2025) :
-    - Sonar (2024) : Moteur de réponse propriétaire basé sur Llama 3.3 fine-tuné par perplexity (70B)
-      • Contexte : Recherche web en temps réel
-      • Performances : 1 200 tokens/seconde, dépasse GPT-4o mini et Claude 3.5 Haiku
-      • Variantes : Sonar (rapide et léger), Sonar Pro (plus puissant, requêtes simultanées)
-    - Modèles externes (accès payant) :
-      • GPT 5
-      • Gemini 2.5 Pro
-      • Claude 3
-  • Perplexity - Outils disponibles :
-    - Recherche approfondie (Deep Research) :
-      • Gratuit : Non disponible
-      • Payant ($20/mois) : Effectue dizaines de recherches, analyse centaines de sources, génère rapports complets autonomes
-    
-    - Génération d'images :
-      • Gratuit : Non disponible
-      • Payant : Intégrée directement dans l'interface
-    
-    - Traitement de fichiers :
-      • Gratuit : Limité (extraits ou documents courts)
-      • Payant : Illimité (PDFs, images, CSVs, tableurs)
-  • Fonctionnalités principales :
-    - Recherche web en temps réel avec sources citées (utilisation de RAG, possibilité de cibler contenu des réseaux sociaux, académiques)
-    - Synthèse structurée avec transparence des sources
-    - Mode conversationnel pour affiner les résultats
-    - Capacité à traiter et analyser des documents uploadés
-    - Personnalisation des domaines de recherche favoris
-    - Historique des recherches et conversations
-  • Accès gratuit vs payant ($20/mois) :
-    - Gratuit :
-      • 5 recherches Pro/jour
-      • Recherches standard illimitées (modèle par défaut)
-      • Modèle : Sonar (version rapide)
-      • Uploads limités
-      • Support basique
-    
-    - Payant (Pro) :
-      • 300+ recherches Pro/jour
-      • Accès modèles avancés (GPT-4o, Claude 3)
-      • Génération d'images
-      • Uploads illimités
-      • Deep Research
-      • Support prioritaire (1-2 jours)
-      • $5/mois de crédits API
+- Perplexity : Webui disponible - Perplexity (perplexity.ai). Moteur de recherche conversationnel qui cite ses sources.
 </perplexity_information>
 <qwen_information>
-- Alibaba : Webui disponible - Qwen Chat (chat.qwen.ai)
-  • Modèles récents (2025) :
-    - Qwen 3 (avril 2025) : Famille de modèles open-source sous licence Apache 2.0
-      • Architecture : Mixture of Experts (MoE) et versions denses
-      • Variantes principales :
-        - Qwen3-235B-A22B : 235B paramètres totaux, 22B actifs (modèle phare)
-        - Qwen3-30B-A3B : 30B paramètres, 3B actifs (recommandé pour usage local)
-        - Qwen3-32B dense : Version dense pour créativité et raisonnement complexe
-        - Qwen3-14B : Compromis performance/matériel
-      • Contexte : Jusqu'à 128K tokens
-      • Performances : Excellence en mathématiques (surpasse DeepSeek R1 sur AIME'24/25), programmation, raisonnement
-  • Qwen Chat - Outils disponibles (tous gratuits actuellement) :
-    - Deep Research :
-      • Disponible pour tous les utilisateurs depuis août 2025
-      • Compile des rapports complets sur des sujets complexes
-      • Pose des questions de précision pour affiner la recherche
-      • Analyse et synthétise des centaines de sources
-    
-    - Image Edit :
-      • Basé sur Qwen-Image-Edit (20B paramètres)
-      • Architecture dual-path pour préservation sémantique et apparence
-      • Modifications haute fidélité avec contrôle sémantique
-      • Retouches d'images en quelques secondes
-    
-    - Web Dev :
-      • Développement full-stack sans codage
-      • Création d'applications web complètes via prompts naturels
-      • Génération instantanée de code et composants UI
-      • Support frontend et backend avec intégration Qwen 3
-    
-    - Image Generation :
-      • Intégration de Qwen-Image pour génération d'images
-      • Rendu de texte précis
-      • Création à partir de descriptions textuelles
-      • Support multimodal avancé
-  • Fonctionnalités principales :
-    - Mode "Thinking" pour raisonnement approfondi
-    - Recherche web intégrée avec sources
-    - Capacités multimodales (texte, image, vidéo)
-    - Traitement de documents
-    - Interface conversationnelle naturelle
-    - Compatibilité avec matériel grand public (versions optimisées)
-  • Accès : Totalement gratuit (août 2025)
-    • Aucune limitation de usage connue
-    • Accès à tous les modèles Qwen 3
-    • Tous les outils avancés disponibles sans restriction
-    • Licence Apache 2.0 pour utilisation commerciale
+- Alibaba : Webui disponible - Qwen Chat (chat.qwen.ai).
 </qwen_information>
 <deepseek_information>
-Informations fondamentales sur la webui évoquée dans le projet :
-- DeepSeek : Webui disponible - DeepSeek Chat (chat.deepseek.com)
-  • Modèles récents (2025) :
-    - DeepSeek V3.1 (août 2025) : Dernière version open-source
-      • Architecture : Mixture-of-Experts avec 671B paramètres totaux, 37B actifs par token
-      • Contexte : 128K tokens (environ 100 000 caractères chinois ou 96 000 mots anglais)
-      • Performances : Excellence en raisonnement mathématique (59.4 sur AIME), programmation (49.2 sur LiveCodeBench), rédaction chinoise
-      • Améliorations : Raisonnement intégré (pas de basculement manuel), traitement frontend amélioré
-    
-    - DeepSeek R1 : Modèle spécialisé raisonnement
-      • Focus : Raisonnement complexe, logique avancée
-      • Performances : Supérieur à V3.1 sur tâches nécessitant une réflexion approfondie
-      • Tarification : 6,5 fois plus coûteux que V3.1
-  • DeepSeek Chat - Outils disponibles (tous gratuits actuellement) :
-    - DeepThink (R1) :
-      • Fonctionnalité de raisonnement approfondi intégrée
-      • Traitement de problèmes complexes avec analyse logique étape par étape
-      • Combinable avec recherche web pour réponses plus complètes
-      • Limitation : 50 messages par jour en mode gratuit
-    
-    - Recherche web en temps réel :
-      • Accès aux informations actualisées
-      • Intégration avec DeepThink pour analyses approfondies
-      • Pas de limitation d'utilisation connue
-    
-    - Import et analyse de fichiers :
-      • Formats supportés : PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), texte brut (.txt)
-      • Images : JPEG, PNG, GIF
-      • Capacité : Jusqu'à 50 fichiers simultanément, 100 Mo par fichier
-      • Extraction et analyse d'informations multi-formats
-    
-    - Développement web (via DeepSite) :
-      • Création de sites web par description en langage naturel
-      • Génération complète de code HTML/CSS/JavaScript
-      • Modification et ajustement en temps réel
-      • Aucune connaissance en codage requise
-    
-    - Génération d'images (via Janus-Pro) :
-      • Modèle Janus-Pro-7B spécialisé
-      • Performances : Surpasse DALL-E 3 et Stable Diffusion
-      • Génération de prompts détaillés pour création d'images
-      • Applications : Art numérique, supports marketing, impression à demande
-  • Fonctionnalités principales :
-    - Interface similaire à ChatGPT avec moteur de recherche intégré
-    - Mode "Thinking" automatique pour raisonnement approfondi
-    - Support multilingue (anglais et mandarin principalement)
-    - Historique des conversations organisable
-    - Évaluation des réponses pour amélioration du modèle
-    - Personnalisation : thème clair/sombre, langue d'interface
-  • Accès : Totalement gratuit (août 2025)
-    • Aucune restriction sur les fonctionnalités de base
-    - Limitation : 50 messages/jour pour DeepThink R1
-    - API disponible à tarification compétitive (0,27$/million tokens entrée, 1,10$/million sortie)
-    - Modèles open-source sous licence MIT pour utilisation commerciale
+- DeepSeek : Webui disponible - DeepSeek Chat (chat.deepseek.com).
 </deepseek_information>
-<autre>
-- Plateforme complètement gratuite mais énorme risque de confidentialité : https://ish.junioralive.in/
-- Trouver des outils gratuits en IA (attention à la confidentialité, si c'est gratuit c'est que les données sont très probablement réutilisées au mieux pour l'entraînement, au pire pour la revente) : https://fmhy.net/ai#ai-chatbots
-- ATTENTION : Veiller à distinguer MODELE OPENSOURCE du Provider, un modèle opensource (glm-4.5, qwen-3 ...) est, par définition, parfaitement confidentiel, SI HEBERGE LOCALEMENT. Lorsque vous utilisez les site comme z.ai, qwen ... vous utilisez une version qu'eux-même hébergent et donc vos données transitent par leurs serveurs. Par défaut, évitez toute données confidentielles, mais méfiez vous particulièrement des serveurs basés en asie (qwen, zai, deepseek...) la politique de confidentialité étant bien souvent très légère par rapport à ceux hébergés en UE. **La seule façon d'avoir une confidentialité optimale/suffisante pour des données personnelles ou identifiable est d'héberger localement, sur son ordinateur via des outils comme LM Studio, des modèles.**
-</autre>
+<confidentiality_warning>
+**Avertissement sur la Confidentialité et l'Open-Source**
+- **Risque sur les plateformes gratuites :** Méfiez-vous des outils gratuits, surtout ceux basés en Asie (Qwen, Z.AI, DeepSeek). Si c'est gratuit, vos données sont probablement utilisées pour l'entraînement.
+- **Open-Source vs. Service en Ligne :** Un modèle open-source est confidentiel **uniquement s'il est hébergé localement sur votre machine**. Utiliser la WebUI du fournisseur signifie que vos données transitent par leurs serveurs.
+- **Règle d'or :** La seule façon de garantir une confidentialité optimale est d'utiliser un modèle open-source en local (ex: via LM Studio).
+</confidentiality_warning>
+<personal_recommendations>
+**Mon "Core Pack" Recommandé (Septembre 2025)**
+- **Entièrement Gratuit :** Google AI Studio (`aistudio.google.com`) est mon choix n°1 pour l'expérimentation et les tâches complexes. Pour la recherche web et la création de diapos, j'utilise Chat Z.AI (`chat.z.ai`), en étant conscient des risques de confidentialité.
+- **Premium Recommandé :** Gemini Advanced. Les rapports "Deep Research" sont excellents et peuvent servir de contexte de haute qualité dans d'autres outils comme AI Studio.
+</personal_recommendations>
 </webui_informations>
