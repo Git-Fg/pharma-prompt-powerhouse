@@ -1,5 +1,5 @@
 // src/content/external-tools-new/claude-ai.ts
-import { ExternalTool, externalToolSchema } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalToolData = {
   "slug": "claude-ai",
@@ -116,4 +116,4 @@ const externalToolData = {
 };
 
 // Validation et export
-export const externalTool: ExternalTool = externalToolSchema.parse(externalToolData);
+export const externalTool = externalToolData satisfies ExternalTool;
