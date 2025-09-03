@@ -94,12 +94,12 @@ export const workflowSchema = baseContentSchema.extend({
 export const externalToolSchema = baseContentSchema.extend({
   url: z.string().url(),
   category: z.string(),
-  personalReview: z.string(), // "Mon Avis en Bref"
-  strongPoints: z.array(z.string()), // "Points Forts (selon mon expérience)"
-  vigilancePoints: z.array(z.string()), // "Points de Vigilance"
-  confidenceScore: z.number().min(1).max(5), // Score de Confiance sur 5
-  confidenceJustification: z.string(), // Justification du score
-  freeVsPaidOffer: z.string(), // Tableau comparatif en Markdown
+  personalReview: z.string().optional(), // "Mon Avis en Bref" - optional for gradual migration
+  strongPoints: z.array(z.string()).optional(), // "Points Forts (selon mon expérience)" - optional
+  vigilancePoints: z.array(z.string()).optional(), // "Points de Vigilance" - optional
+  confidenceScore: z.number().min(1).max(5).optional(), // Score de Confiance sur 5 - optional
+  confidenceJustification: z.string().optional(), // Justification du score - optional
+  freeVsPaidOffer: z.string().optional(), // Tableau comparatif en Markdown - optional
   tldr: z.string().optional(),
   color: z.string().optional(),
   use_cases: z.array(z.string()).optional(),
