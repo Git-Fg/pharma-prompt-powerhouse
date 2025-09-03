@@ -1,4 +1,3 @@
-// src/components/shared/ResponsiveComparisonTable.tsx
 import {
   Table,
   TableBody,
@@ -7,10 +6,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Star } from "lucide-react"
 import Link from "next/link"
+import { AnimatedList, AnimatedItem, ScrollAnimated } from "@/components/ui/animated"
+import { MagneticCard } from "@/components/ui/interactions"
 
 interface ToolData {
   slug: string
@@ -59,7 +60,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
   }
 
   return (
-    <div className={className}>
+    <ScrollAnimated className={className} variant="slideUp">
       {/* Desktop Table View - Using centralized CSS classes */}
       <div className="desktop-table">
         <div className="table-wrapper">
@@ -83,13 +84,13 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                 const availability = getAvailability(tool)
                 
                 return (
-                  <TableRow key={tool.slug} className="group hover:bg-muted/50">
+                  <TableRow key={tool.slug} className="group hover:bg-muted/50 hover-lift transition-all duration-200">
                     <TableCell className="table-cell">
                       <div className="space-y-1">
                         <div className="font-medium responsive-text">
                           {tool.title}
                           {tool.isFavorite && (
-                            <Badge variant="secondary" className="ml-2 text-xs">
+                            <Badge variant="secondary" className="ml-2 text-xs animate-bounce-subtle">
                               ⭐ Favori
                             </Badge>
                           )}
@@ -123,12 +124,12 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                     <TableCell className="table-cell hidden lg:table-cell">
                       <div className="flex flex-wrap gap-1 max-w-xs">
                         {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
-                          <Badge key={i} variant="outline" className="text-xs">
+                          <Badge key={i} variant="outline" className="text-xs hover-scale">
                             {useCase}
                           </Badge>
                         ))}
                         {tool.use_cases && tool.use_cases.length > 2 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-xs hover-scale">
                             +{tool.use_cases.length - 2}
                           </Badge>
                         )}
@@ -139,7 +140,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                       <div className="flex gap-2">
                         <Link 
                           href={`/l-arsenal-ia/${tool.slug}`}
-                          className="text-primary hover:underline text-sm font-medium focus-ring"
+                          className="text-primary hover:underline text-sm font-medium focus-ring hover-lift"
                         >
                           Détails
                         </Link>
@@ -147,7 +148,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                           href={tool.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-primary transition-colors focus-ring"
+                          className="text-muted-foreground hover:text-primary transition-colors focus-ring hover-lift"
                         >
                           <ExternalLink className="size-4" />
                         </a>
@@ -161,71 +162,74 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
         </div>
       </div>
 
-      {/* Mobile Card View - Using centralized CSS classes */}
+      {/* Mobile Card View - Using centralized CSS classes with animations */}
       <div className="mobile-card">
-        <div className="content-spacing flex flex-col">
-          {tools.map((tool) => {
+        <AnimatedList className="content-spacing flex flex-col" staggerDelay={0.1}>
+          {tools.map((tool, index) => {
             const availability = getAvailability(tool)
             
             return (
-              <Card key={tool.slug} className="card hover:border-primary transition-colors animate-fade-in">
-                <CardHeader className="card-header">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <CardTitle className="card-title responsive-subheading">
-                        {tool.title}
-                      </CardTitle>
-                      {tool.isFavorite && (
-                        <Badge variant="secondary" className="text-xs">
-                          ⭐
-                        </Badge>
-                      )}
+              <AnimatedItem key={tool.slug} delay={index * 0.1}>
+                <MagneticCard className="hover:border-primary transition-colors duration-300">
+                  <CardHeader className="card-header">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <CardTitle className="card-title responsive-subheading">
+                          {tool.title}
+                        </CardTitle>
+                        {tool.isFavorite && (
+                          <Badge variant="secondary" className="text-xs animate-pulse-subtle">
+                            ⭐
+                          </Badge>
+                        )}
+                      </div>
+                      <a
+                        href={tool.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors focus-ring hover-scale"
+                      >
+                        <ExternalLink className="size-4" />
+                      </a>
                     </div>
-                    <a
-                      href={tool.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors focus-ring"
-                    >
-                      <ExternalLink className="size-4" />
-                    </a>
-                  </div>
-                </CardHeader>
-                <CardContent className="card-content">
-                  <p className="responsive-text text-muted-foreground leading-relaxed">{tool.description}</p>
-                  
-                  {tool.personalReview && (
-                    <blockquote className="text-sm italic border-l-2 border-muted pl-3 leading-relaxed">
-                      "{tool.personalReview}"
-                    </blockquote>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className={availability.color}>
-                      {availability.label}
-                    </Badge>
-                    {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
-                      <Badge key={i} variant="outline" className="text-xs">
-                        {useCase}
+                  </CardHeader>
+                  <CardContent className="card-content">
+                    <p className="responsive-text text-muted-foreground leading-relaxed">{tool.description}</p>
+                    
+                    {tool.personalReview && (
+                      <blockquote className="text-sm italic border-l-2 border-muted pl-3 leading-relaxed">
+                        "{tool.personalReview}"
+                      </blockquote>
+                    )}
+                    
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className={availability.color}>
+                        {availability.label}
                       </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="card-footer">
-                    <div>{tool.confidenceScore && renderStarRating(tool.confidenceScore)}</div>
-                    <Link 
-                      href={`/l-arsenal-ia/${tool.slug}`}
-                      className="text-primary hover:underline text-sm font-medium focus-ring"
-                    >
-                      Voir les détails →
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
+                      {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
+                        <Badge key={i} variant="outline" className="text-xs hover-scale">
+                          {useCase}
+                        </Badge>
+                      ))}
+                    </div>
+                    
+                    <div className="card-footer">
+                      <div>{tool.confidenceScore && renderStarRating(tool.confidenceScore)}</div>
+                      <Link 
+                        href={`/l-arsenal-ia/${tool.slug}`}
+                        className="text-primary hover:underline text-sm font-medium focus-ring hover-lift inline-flex items-center gap-1"
+                      >
+                        Voir les détails
+                        <span className="transition-transform hover:scale-110">→</span>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </MagneticCard>
+              </AnimatedItem>
             )
           })}
-        </div>
+        </AnimatedList>
       </div>
-    </div>
+    </ScrollAnimated>
   )
 }
