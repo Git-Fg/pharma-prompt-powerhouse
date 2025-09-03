@@ -1,24 +1,21 @@
 import { allConcepts } from '@/content/concepts';
 import { allGuides } from '@/content/guides';
-import { allPrompts } from '@/content/prompts';
 import { allExternalTools } from '@/content/external-tools';
 import { allWorkflows } from '@/content/workflows';
-import type { Concept, Guide, Prompt, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
+import type { Concept, Guide, Workflow, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
 
-type ContentItem = Guide | Prompt | Workflow;
+type ContentItem = Guide | Workflow;
 
 export function loadContent() {
   const concepts: Concept[] = allConcepts;
   const guides: Guide[] = allGuides;
   const workflows: Workflow[] = allWorkflows;
-  const prompts: Prompt[] = allPrompts;
   const externalTools = allExternalTools;
 
   const conceptMap = new Map<string, Concept>(concepts.map(c => [c.slug, c]));
   const guideMap = new Map<string, Guide>(guides.map(g => [g.slug, g]));
   const workflowMap = new Map<string, Workflow>(workflows.map(w => [w.slug, w]));
-  const promptMap = new Map<string, Prompt>(prompts.map(p => [p.slug, p]));
-  const allContent: ContentItem[] = [...guides, ...prompts, ...workflows];
+  const allContent: ContentItem[] = [...guides, ...workflows];
 
   // Enrich workflows
   const enrichedWorkflows: EnrichedWorkflow[] = workflows.map(workflow => {
@@ -51,7 +48,6 @@ export function loadContent() {
   const enrichedGuides: EnrichedGuide[] = guides.map(guide => {
     const conceptsForGuide = guide.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is Concept => c !== undefined) || [];
     const relatedGuides: EnrichedGuide['relatedGuides'] = [];
-    const relatedPrompts: EnrichedGuide['relatedPrompts'] = [];
     
     if (guide.conceptSlugs) {
       const relatedContent = allContent.filter(item => 
@@ -61,12 +57,8 @@ export function loadContent() {
       
       relatedContent.forEach(item => {
         if (guideMap.has(item.slug) && !relatedGuides.some(g => g.slug === item.slug)) {
-          const { content: _content, concepts: _concepts, relatedGuides: _rg, relatedPrompts: _rp, ...guideWithoutContent } = item as EnrichedGuide;
+          const { content: _content, concepts: _concepts, relatedGuides: _rg, ...guideWithoutContent } = item as EnrichedGuide;
           relatedGuides.push(guideWithoutContent);
-        }
-        else if (promptMap.has(item.slug) && !relatedPrompts.some(p => p.slug === item.slug)) {
-          const { content: _content, ...promptWithoutContent } = item as Prompt;
-          relatedPrompts.push(promptWithoutContent);
         }
       });
     }
@@ -75,7 +67,6 @@ export function loadContent() {
       ...guide,
       concepts: conceptsForGuide,
       relatedGuides: relatedGuides.slice(0, 3),
-      relatedPrompts: relatedPrompts.slice(0, 3),
     };
   });
   
@@ -85,7 +76,6 @@ export function loadContent() {
     guides: enrichedGuides, 
     workflows: enrichedWorkflows,
     concepts: enrichedConcepts, 
-    prompts, 
     externalTools 
   };
 }
@@ -95,5 +85,4 @@ export const content = loadContent();
 export const getGuideBySlug = (slug: string) => content.guides.find(g => g.slug === slug);
 export const getWorkflowBySlug = (slug: string) => content.workflows.find(w => w.slug === slug);
 export const getConceptBySlug = (slug: string) => content.concepts.find(c => c.slug === slug);
-export const getPromptBySlug = (slug: string) => content.prompts.find(p => p.slug === slug);
 export const getExternalToolBySlug = (slug: string) => content.externalTools.find(t => t.slug === slug);

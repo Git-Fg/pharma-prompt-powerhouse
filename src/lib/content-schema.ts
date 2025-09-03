@@ -77,30 +77,6 @@ export const guideSchema = baseContentSchema.extend({
   content: z.array(contentBlockSchema),
 });
 
-export const promptSchema = baseContentSchema.extend({
-  category: z.string(),
-  difficulty: z.string(),
-  keyTakeaways: z.array(z.string()).optional(),
-  promptContent: z.string().optional(),
-  systemPromptContent: z.string().optional(),
-  variables: z.array(z.string()).optional(),
-  targetTool: z.string().optional(),
-  alternativeVersions: z.object({
-    standard: z.string().optional(),
-    xml: z.string().optional(),
-    aiStudio: z.object({
-      systemPrompt: z.string().optional(),
-      userPrompt: z.string().optional(),
-    }).optional(),
-  }).optional(),
-  recommendedTools: z.object({
-    standard: z.array(z.string()).optional(),
-    xml: z.array(z.string()).optional(),
-    aiStudio: z.array(z.string()).optional(),
-  }).optional(),
-  content: z.array(contentBlockSchema),
-});
-
 export const externalToolSchema = baseContentSchema.extend({
   url: z.string().url(),
   category: z.string(),
@@ -151,7 +127,6 @@ export const enhancedExternalToolSchema = baseContentSchema.extend({
 export type Concept = z.infer<typeof conceptSchema>;
 export type Guide = z.infer<typeof guideSchema>;
 export type Workflow = z.infer<typeof workflowSchema>;
-export type Prompt = z.infer<typeof promptSchema>;
 export type ExternalTool = z.infer<typeof externalToolSchema>;
 export type EnhancedExternalTool = z.infer<typeof enhancedExternalToolSchema>;
 
@@ -162,8 +137,7 @@ export type EnrichedWorkflow = Workflow & {
 
 export type EnrichedGuide = Guide & {
   concepts: Concept[];
-  relatedGuides: Omit<Guide, 'content' | 'concepts' | 'relatedGuides' | 'relatedPrompts'>[];
-  relatedPrompts: Omit<Prompt, 'content'>[];
+  relatedGuides: Omit<Guide, 'content' | 'concepts' | 'relatedGuides'>[];
 };
 
 export type EnrichedConcept = Concept;
