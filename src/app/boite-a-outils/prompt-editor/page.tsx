@@ -5,14 +5,12 @@
 import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 // ✅ MODIFICATION : Importer le bon composant
 import { PromptEditor } from '@/components/prompts/PromptEditor';
 
 function PromptEditorContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const templateToLoad = searchParams.get('template');
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-background via-background to-muted/20'>
@@ -31,17 +29,15 @@ function PromptEditorContent() {
             <div className='flex-1'>
               <h1 className='text-3xl font-bold'>✏️ Éditeur de Prompts</h1>
               <p className='text-muted-foreground mt-2'>
-                {templateToLoad
-                  ? `Personnalisation du prompt "${templateToLoad}"...`
-                  : 'Choisissez un prompt depuis la bibliothèque pour commencer.'}
+                Créez et personnalisez vos prompts. Les templates sont maintenant intégrés dans nos workflows.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Contenu principal - Passe le template à charger */}
-      <PromptEditor templateToLoad={templateToLoad} />
+      {/* Contenu principal */}
+      <PromptEditor />
     </div>
   );
 }
