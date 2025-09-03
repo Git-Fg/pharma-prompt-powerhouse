@@ -62,7 +62,7 @@ export default function MultiFormatPrompt({
               onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
               className="ml-2"
             >
-              {copiedStates['standard'] ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copiedStates['standard'] ? <Check className="size-4" /> : <Copy className="size-4" />}
             </Button>
           </CardTitle>
         </CardHeader>
@@ -105,7 +105,7 @@ export default function MultiFormatPrompt({
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
                   >
-                    {copiedStates['standard'] ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    {copiedStates['standard'] ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -143,7 +143,7 @@ export default function MultiFormatPrompt({
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.xml!, 'xml')}
                   >
-                    {copiedStates['xml'] ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    {copiedStates['xml'] ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -152,7 +152,7 @@ export default function MultiFormatPrompt({
               </CardHeader>
               <CardContent className="space-y-4">
                 <Alert>
-                  <Settings className="h-4 w-4" />
+                  <Settings className="size-4" />
                   <AlertDescription>
                     Cette version utilise des balises XML pour une structuration claire des instructions et une meilleure fiabilité des réponses.
                   </AlertDescription>
@@ -189,7 +189,7 @@ export default function MultiFormatPrompt({
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.systemPrompt || '', 'system')}
                     >
-                      {copiedStates['system'] ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copiedStates['system'] ? <Check className="size-4" /> : <Copy className="size-4" />}
                       System
                     </Button>
                     <Button
@@ -197,7 +197,7 @@ export default function MultiFormatPrompt({
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.userPrompt || '', 'user')}
                     >
-                      {copiedStates['user'] ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copiedStates['user'] ? <Check className="size-4" /> : <Copy className="size-4" />}
                       User
                     </Button>
                   </div>
@@ -208,7 +208,7 @@ export default function MultiFormatPrompt({
               </CardHeader>
               <CardContent className="space-y-4">
                 <Alert>
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="size-4" />
                   <AlertDescription>
                     Copiez le System Prompt dans le champ dédié et le User Prompt dans la zone principale pour une performance optimale.
                   </AlertDescription>

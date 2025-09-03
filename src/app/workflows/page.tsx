@@ -18,7 +18,7 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
       <CardHeader className="flex-grow">
         <div className="flex items-center justify-between mb-3">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Icon className="w-5 h-5 text-primary" />
+            <Icon className="size-5 text-primary" />
           </div>
           <div className="flex gap-2">
             <Badge variant="outline" className="text-xs">
@@ -54,7 +54,7 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
         <Link href={`/workflows/${workflow.slug}`}>
           <Button className="w-full group/btn">
             <span>Découvrir la méthode</span>
-            <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+            <ArrowRight className="size-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </CardContent>
@@ -93,7 +93,7 @@ export default function WorkflowsPage() {
       {/* Search and Filters */}
       <div className="mb-8 space-y-4">
         <div className="relative max-w-md mx-auto">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
           <Input
             placeholder="Rechercher un workflow..."
             value={searchTerm}
@@ -151,7 +151,7 @@ export default function WorkflowsPage() {
           <Link href="/par-ou-commencer">
             <Button>
               Par où commencer ?
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="size-4 ml-2" />
             </Button>
           </Link>
           <Link href="/concepts">

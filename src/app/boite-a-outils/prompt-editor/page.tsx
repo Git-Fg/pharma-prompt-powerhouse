@@ -25,7 +25,7 @@ function PromptEditorContent() {
               size='sm'
               onClick={() => router.push('/boite-a-outils')}
             >
-              <ArrowLeft className='w-4 h-4 mr-2' />
+              <ArrowLeft className='size-4 mr-2' />
               Retour aux outils
             </Button>
             <div className='flex-1'>

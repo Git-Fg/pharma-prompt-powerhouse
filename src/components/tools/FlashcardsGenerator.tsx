@@ -182,7 +182,7 @@ export function FlashcardsGenerator() {
 
           <div className="flex justify-center gap-4 mt-6">
             <Button variant="outline" onClick={shuffleCards}>
-              <Shuffle className="w-4 h-4 mr-2" />
+              <Shuffle className="size-4 mr-2" />
               Mélanger
             </Button>
           </div>
@@ -269,7 +269,7 @@ export function FlashcardsGenerator() {
               </div>
 
               <Button onClick={handleAddCard} className="w-full">
-                <Plus className="w-4 h-4 mr-2" />
+                <Plus className="size-4 mr-2" />
                 Ajouter la carte
               </Button>
             </CardContent>
@@ -280,7 +280,7 @@ export function FlashcardsGenerator() {
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">Mes Flashcards ({flashcards.length})</h2>
             <Button onClick={handleExportAnki} disabled={flashcards.length === 0}>
-              <Download className="w-4 h-4 mr-2" />
+              <Download className="size-4 mr-2" />
               Exporter pour Anki
             </Button>
           </div>
@@ -310,7 +310,7 @@ export function FlashcardsGenerator() {
                       size="sm"
                       onClick={() => handleDeleteCard(card.id)}
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="size-4" />
                     </Button>
                   </div>
                 </CardContent>
@@ -359,11 +359,11 @@ export function FlashcardsGenerator() {
 
               <div className="flex gap-4 justify-center pt-4">
                 <Button onClick={startStudy} disabled={flashcards.length === 0}>
-                  <Play className="w-4 h-4 mr-2" />
+                  <Play className="size-4 mr-2" />
                   Commencer la révision
                 </Button>
                 <Button variant="outline" onClick={shuffleCards} disabled={flashcards.length === 0}>
-                  <Shuffle className="w-4 h-4 mr-2" />
+                  <Shuffle className="size-4 mr-2" />
                   Mélanger les cartes
                 </Button>
               </div>

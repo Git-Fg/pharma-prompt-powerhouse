@@ -28,7 +28,7 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <BookOpen className="w-6 h-6 text-primary" />
+              <BookOpen className="size-6 text-primary" />
             </div>
             <div className="flex-1">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
@@ -57,14 +57,14 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
         <div className="space-y-3">
           {guide.estimatedTime && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
+              <Clock className="size-4" />
               <span>Temps de lecture : {guide.estimatedTime}</span>
             </div>
           )}
           <Link href={`/guides/${guide.slug}`} className="block">
             <Button className="w-full" size="sm">
               Lire le guide
-              <ArrowRight className="ml-1 h-4 w-4" />
+              <ArrowRight className="ml-1 size-4" />
             </Button>
           </Link>
         </div>

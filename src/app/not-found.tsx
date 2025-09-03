@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className='container mx-auto px-4 py-16 text-center'>
       <div className='max-w-2xl mx-auto'>
         <div className='w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-6'>
-          <Search className='w-8 h-8 text-muted-foreground' />
+          <Search className='size-8 text-muted-foreground' />
         </div>
 
         <h1 className='text-4xl font-bold tracking-tight text-foreground sm:text-5xl'>
@@ -21,7 +21,7 @@ export default function NotFound() {
         <div className='mt-10 flex items-center justify-center gap-x-6'>
           <Button asChild>
             <Link href='/'>
-              <ArrowLeft className='w-4 h-4 mr-2' />
+              <ArrowLeft className='size-4 mr-2' />
               Retour à l'accueil
             </Link>
           </Button>

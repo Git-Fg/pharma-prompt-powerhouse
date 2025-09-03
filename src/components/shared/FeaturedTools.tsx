@@ -11,7 +11,7 @@ export function FeaturedTools() {
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-xl flex items-center gap-2">
-              <Star className="w-5 h-5 text-purple-600" />
+              <Star className="size-5 text-purple-600" />
               Z.AI - Recherche Excellence
             </CardTitle>
             <Badge variant="default" className="bg-purple-100 text-purple-700 hover:bg-purple-200">
@@ -47,7 +47,7 @@ export function FeaturedTools() {
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-xl flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-600" />
+              <Zap className="size-5 text-blue-600" />
               AI Studio - Analyse Pro
             </CardTitle>
             <Badge variant="default" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
@@ -82,7 +82,7 @@ export function FeaturedTools() {
       <Card className="md:col-span-2 border border-dashed border-green-300 bg-gradient-to-r from-green-50/50 via-blue-50/30 to-purple-50/30 dark:from-green-950/20 dark:via-blue-950/10 dark:to-purple-950/20">
         <CardHeader className="text-center pb-3">
           <CardTitle className="text-lg flex items-center justify-center gap-2">
-            <Shield className="w-5 h-5 text-green-600" />
+            <Shield className="size-5 text-green-600" />
             Le Core Kit Étudiant 2025
           </CardTitle>
           <CardDescription>

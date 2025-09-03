@@ -48,7 +48,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
       {/* Breadcrumb */}
       <div className="mb-8">
         <Link href="/workflows" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="w-4 h-4 mr-1" />
+          <ArrowLeft className="size-4 mr-1" />
           Retour aux workflows
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
       <div className="mb-12">
         <div className="flex items-center space-x-3 mb-4">
           <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Icon className="w-6 h-6 text-primary" />
+            <Icon className="size-6 text-primary" />
           </div>
           <div className="flex gap-2">
             <Badge variant="outline">{workflow.difficulty}</Badge>
@@ -124,7 +124,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* Le Problème */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+            <div className="size-6 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">1</span>
             </div>
             <h2 className="text-2xl font-bold">Le Problème</h2>
@@ -139,7 +139,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* Mon Approche Initiale */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+            <div className="size-6 bg-orange-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">2</span>
             </div>
             <h2 className="text-2xl font-bold">Mon Approche Initiale (et ses limites)</h2>
@@ -154,7 +154,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* La Stratégie Optimisée */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+            <div className="size-6 bg-green-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">3</span>
             </div>
             <h2 className="text-2xl font-bold">La Stratégie Optimisée</h2>
@@ -169,7 +169,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* Comparaison des Outils */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+            <div className="size-6 bg-blue-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">4</span>
             </div>
             <h2 className="text-2xl font-bold">Comparaison des Outils</h2>
@@ -184,7 +184,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* Le Prompt Final */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+            <div className="size-6 bg-purple-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">5</span>
             </div>
             <h2 className="text-2xl font-bold">Le Prompt Final (à adapter)</h2>
@@ -199,8 +199,8 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
         {/* Ce qu'il faut retenir */}
         <section>
           <div className="flex items-center space-x-2 mb-6">
-            <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-4 h-4 text-white" />
+            <div className="size-6 bg-gray-500 rounded-full flex items-center justify-center">
+              <CheckCircle className="size-4 text-white" />
             </div>
             <h2 className="text-2xl font-bold">Ce qu'il faut retenir</h2>
           </div>
@@ -208,7 +208,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
             <ul className="space-y-3">
               {workflow.keyTakeaways.map((takeaway, index) => (
                 <li key={index} className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="size-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <span>{takeaway}</span>
                 </li>
               ))}
@@ -244,14 +244,14 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
       <div className="mt-16 flex justify-between">
         <Link href="/workflows">
           <Button variant="outline">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="size-4 mr-2" />
             Tous les workflows
           </Button>
         </Link>
         <Link href="/par-ou-commencer">
           <Button>
             Guide débutant
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowRight className="size-4 ml-2" />
           </Button>
         </Link>
       </div>
