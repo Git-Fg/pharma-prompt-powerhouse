@@ -31,7 +31,7 @@ export default function HomePage() {
       <section className="max-w-4xl mx-auto mb-16">
         <div className="grid md:grid-cols-3 gap-4">
           <Alert>
-            <Zap className="h-4 w-4" />
+            <Zap className="size-4" />
             <AlertDescription>
               <strong>Performance :</strong> Les résultats présentés sont des exemples. 
               Le paysage de l'IA évolue constamment. Expérimentez pour trouver votre solution optimale.
@@ -39,7 +39,7 @@ export default function HomePage() {
           </Alert>
           
           <Alert>
-            <AlertTriangle className="h-4 w-4" />
+            <AlertTriangle className="size-4" />
             <AlertDescription>
               <strong>Fiabilité :</strong> Une IA peut commettre des erreurs ou "halluciner". 
               Vérifiez toujours les informations avec des sources fiables.
@@ -47,7 +47,7 @@ export default function HomePage() {
           </Alert>
           
           <Alert>
-            <Shield className="h-4 w-4" />
+            <Shield className="size-4" />
             <AlertDescription>
               <strong>Confidentialité :</strong> Si vous ne l'écririez pas sur une carte postale, 
               ne le mettez pas dans un prompt.
@@ -65,7 +65,7 @@ export default function HomePage() {
           <Card className="border-2 border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Target className="w-5 h-5" />
+                <Target className="size-5" />
                 <span>Nouveau ici ?</span>
               </CardTitle>
               <CardDescription>
@@ -76,7 +76,7 @@ export default function HomePage() {
               <Link href="/par-ou-commencer">
                 <Button className="w-full">
                   Par où commencer ?
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="size-4 ml-2" />
                 </Button>
               </Link>
             </CardContent>
@@ -86,7 +86,7 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <ExternalLink className="w-5 h-5" />
+                <ExternalLink className="size-5" />
                 <span>L'Arsenal IA 2025</span>
               </CardTitle>
               <CardDescription>
@@ -97,7 +97,7 @@ export default function HomePage() {
               <Link href="/l-arsenal-ia">
                 <Button variant="outline" className="w-full">
                   Voir les outils
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="size-4 ml-2" />
                 </Button>
               </Link>
             </CardContent>
@@ -107,7 +107,7 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <BookOpen className="w-5 h-5" />
+                <BookOpen className="size-5" />
                 <span>Tous les Workflows</span>
               </CardTitle>
               <CardDescription>
@@ -118,7 +118,7 @@ export default function HomePage() {
               <Link href="/workflows">
                 <Button variant="outline" className="w-full">
                   Explorer les workflows
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="size-4 ml-2" />
                 </Button>
               </Link>
             </CardContent>
@@ -133,7 +133,7 @@ export default function HomePage() {
           <Link href="/workflows">
             <Button variant="ghost">
               Voir tous
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="size-4 ml-2" />
             </Button>
           </Link>
         </div>

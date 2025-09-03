@@ -111,7 +111,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
                 className="flex-1"
                 disabled={!userPrompt.trim()}
               >
-                {copied ? <CheckCircle className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                {copied ? <CheckCircle className="size-4 mr-2" /> : <Copy className="size-4 mr-2" />}
                 Copier tout
               </Button>
               <Button 
@@ -119,7 +119,7 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
                 onClick={() => handleDownload(systemPrompt + '\n\n' + userPrompt, 'prompt.txt')}
                 disabled={!userPrompt.trim()}
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="size-4 mr-2" />
                 Télécharger
               </Button>
             </div>

@@ -27,7 +27,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <Globe className="w-6 h-6 text-primary" />
+              <Globe className="size-6 text-primary" />
             </div>
             <div className="flex-1">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
@@ -58,7 +58,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full" size="sm">
                 Visiter l'outil
-                <ArrowRight className="ml-1 h-4 w-4" />
+                <ArrowRight className="ml-1 size-4" />
               </Button>
             </a>
             <Link href={`/l-arsenal-ia/${tool.slug}`} className="flex-1">

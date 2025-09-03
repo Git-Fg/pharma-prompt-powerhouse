@@ -159,7 +159,7 @@ export default function ExternalToolsPage() {
                             rel="noopener noreferrer"
                             className="text-muted-foreground hover:text-primary"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="size-4" />
                           </a>
                         </div>
                       </TableCell>
@@ -190,7 +190,7 @@ export default function ExternalToolsPage() {
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary"
                   >
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="size-4" />
                   </a>
                 </CardTitle>
               </CardHeader>

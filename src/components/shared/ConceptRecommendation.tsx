@@ -51,13 +51,13 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
       )}
 
       <div className="flex items-center pt-2 border-t">
-        <Info className="mr-2 h-4 w-4 shrink-0 opacity-70" />
+        <Info className="mr-2 size-4 shrink-0 opacity-70" />
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
       
       <Button asChild size="sm" className="w-full">
         <Link href={`/concepts/${concept.slug}`} className="flex items-center gap-2">
-          <Lightbulb className="w-4 h-4" />
+          <Lightbulb className="size-4" />
           Explorer le concept
         </Link>
       </Button>

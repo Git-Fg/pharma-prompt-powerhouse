@@ -43,12 +43,12 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       >
         {copied ? (
           <>
-            <Check className="w-4 h-4 mr-1" />
+            <Check className="size-4 mr-1" />
             Copié !
           </>
         ) : (
           <>
-            <Copy className="w-4 h-4 mr-1" />
+            <Copy className="size-4 mr-1" />
             {children || label}
           </>
         )}

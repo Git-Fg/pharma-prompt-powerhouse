@@ -59,7 +59,7 @@ export function CodeBlock({
       {/* Header avec nom de fichier et bouton de copie */}
       <div className='flex items-center justify-between rounded-t-lg border border-border bg-muted px-4 py-2'>
         <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-          <FileCode className='h-4 w-4' />
+          <FileCode className='size-4' />
           {filename && <span className='font-mono'>{filename}</span>}
           {language && (
             <span className='rounded bg-background px-2 py-1 text-xs font-medium'>
@@ -70,14 +70,14 @@ export function CodeBlock({
         <Button
           variant='ghost'
           size='sm'
-          className='h-8 w-8 p-0 opacity-0 transition-opacity hover:bg-accent hover:text-accent-foreground group-hover:opacity-100'
+          className='size-8 p-0 opacity-0 transition-opacity hover:bg-accent hover:text-accent-foreground group-hover:opacity-100'
           onClick={copyToClipboard}
           aria-label={hasCopied ? 'Code copié !' : 'Copier le code'}
         >
           {hasCopied ? (
-            <Check className='h-4 w-4 text-green-600' />
+            <Check className='size-4 text-green-600' />
           ) : (
-            <Copy className='h-4 w-4' />
+            <Copy className='size-4' />
           )}
         </Button>
       </div>

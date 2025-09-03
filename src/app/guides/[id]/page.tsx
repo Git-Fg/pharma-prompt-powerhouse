@@ -76,7 +76,7 @@ export default async function GuideDetailPage({
       <div className="mb-8">
         <Link href="/guides">
           <Button variant="ghost" className="mb-4">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 size-4" />
             Retour aux guides
           </Button>
         </Link>
@@ -98,7 +98,7 @@ export default async function GuideDetailPage({
 
           {guide.estimatedTime && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
+              <Clock className="size-4" />
               <span>Temps de lecture estimé : {guide.estimatedTime}</span>
             </div>
           )}
@@ -129,7 +129,7 @@ export default async function GuideDetailPage({
           <CardContent className="space-y-4">
             <div className="space-y-3">
               <h3 className="font-semibold flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
+                <BookOpen className="size-4" />
                 Guides similaires
               </h3>
               {guide.relatedGuides.map((relatedGuide) => (

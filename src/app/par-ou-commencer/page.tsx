@@ -31,11 +31,11 @@ export default function ParOuCommencerPage() {
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="size-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 1
               </div>
               <CardTitle className="flex items-center space-x-2">
-                <Brain className="w-5 h-5" />
+                <Brain className="size-5" />
                 <span>Les Concepts Clés</span>
               </CardTitle>
             </div>
@@ -83,11 +83,11 @@ export default function ParOuCommencerPage() {
         <Card className="border-l-4 border-l-green-500">
           <CardHeader>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="size-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 2
               </div>
               <CardTitle className="flex items-center space-x-2">
-                <Target className="w-5 h-5" />
+                <Target className="size-5" />
                 <span>Votre Premier Workflow</span>
               </CardTitle>
             </div>
@@ -103,9 +103,9 @@ export default function ParOuCommencerPage() {
             
             <Link href="/workflows/creer-fiches-de-revision">
               <Button className="w-full md:w-auto">
-                <BookOpen className="w-4 h-4 mr-2" />
+                <BookOpen className="size-4 mr-2" />
                 Commencer avec les Fiches de Révision
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="size-4 ml-2" />
               </Button>
             </Link>
           </CardContent>
@@ -115,11 +115,11 @@ export default function ParOuCommencerPage() {
         <Card className="border-l-4 border-l-red-500">
           <CardHeader>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="size-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 3
               </div>
               <CardTitle className="flex items-center space-x-2">
-                <Shield className="w-5 h-5" />
+                <Shield className="size-5" />
                 <span>La Règle d'Or de la Sécurité</span>
               </CardTitle>
             </div>
@@ -129,7 +129,7 @@ export default function ParOuCommencerPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <Alert variant="destructive">
-              <Shield className="h-4 w-4" />
+              <Shield className="size-4" />
               <AlertDescription className="font-semibold">
                 Si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt.
               </AlertDescription>
@@ -175,11 +175,11 @@ export default function ParOuCommencerPage() {
         <Card className="border-l-4 border-l-purple-500">
           <CardHeader>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="size-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 4
               </div>
               <CardTitle className="flex items-center space-x-2">
-                <Zap className="w-5 h-5" />
+                <Zap className="size-5" />
                 <span>Et après ?</span>
               </CardTitle>
             </div>
@@ -218,7 +218,7 @@ export default function ParOuCommencerPage() {
               <Link href="/workflows">
                 <Button variant="outline" className="w-full md:w-auto">
                   Voir tous les workflows
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="size-4 ml-2" />
                 </Button>
               </Link>
             </div>
@@ -236,13 +236,13 @@ export default function ParOuCommencerPage() {
           <div className="space-x-2">
             <Link href="/concepts">
               <Button variant="outline">
-                <Brain className="w-4 h-4 mr-2" />
+                <Brain className="size-4 mr-2" />
                 Les Concepts
               </Button>
             </Link>
             <Link href="/workflows/creer-fiches-de-revision">
               <Button>
-                <BookOpen className="w-4 h-4 mr-2" />
+                <BookOpen className="size-4 mr-2" />
                 Mon Premier Workflow
               </Button>
             </Link>
