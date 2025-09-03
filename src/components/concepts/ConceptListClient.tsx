@@ -40,13 +40,13 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
     const guideCount = content.guides.filter((g) =>
       g.conceptSlugs?.includes(concept.slug)
     ).length;
-    const promptCount = content.prompts.filter((p) =>
-      p.conceptSlugs?.includes(concept.slug)
+    const workflowCount = content.workflows.filter((w) =>
+      w.conceptSlugs?.includes(concept.slug)
     ).length;
     return {
       ...concept,
       guideCount,
-      promptCount
+      workflowCount
     };
   });
 

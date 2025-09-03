@@ -48,7 +48,7 @@ export default function ConceptsPage() {
             </div>
             <h3 className="font-semibold mb-2">2. Découvrez les ressources</h3>
             <p className="text-sm text-muted-foreground">
-              Accédez aux guides, prompts et outils liés à ce concept
+              Accédez aux guides, workflows et outils liés à ce concept
             </p>
           </div>
           <div className="text-center">
@@ -58,7 +58,7 @@ export default function ConceptsPage() {
             <h3 className="font-semibold mb-2">3. Mettez en pratique</h3>
             <p className="text-sm text-muted-foreground">
               Utilisez l'éditeur de prompts pour tester et adapter les
-              techniques
+              workflows pratiques
             </p>
           </div>
         </div>

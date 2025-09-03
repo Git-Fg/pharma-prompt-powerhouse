@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { 
   contentBlockSchema,
-  promptSchema,
   externalToolSchema,
   workflowSchema
 } from '@/lib/content-schema'
@@ -163,39 +162,6 @@ describe('Content Schema Edge Cases', () => {
       }
       
       expect(() => workflowSchema.parse(invalidWorkflow)).toThrow()
-    })
-  })
-
-  describe('prompt schema alternatives', () => {
-    it('should validate alternative versions structure', () => {
-      const promptWithAlternatives = {
-        slug: 'test-prompt',
-        title: 'Test Prompt',
-        description: 'Test description',
-        category: 'Test Category', // Required for prompt
-        difficulty: 'beginner', // Required for prompt
-        systemPromptContent: 'System prompt',
-        variables: ['variable1', 'variable2'],
-        targetTool: 'chatgpt',
-        alternativeVersions: {
-          standard: 'Standard version',
-          xml: 'XML version',
-          aiStudio: {
-            systemPrompt: 'AI Studio system prompt',
-            userPrompt: 'AI Studio user prompt'
-          }
-        },
-        recommendedTools: {
-          standard: ['chatgpt', 'claude'],
-          xml: ['claude'],
-          aiStudio: ['gemini']
-        },
-        tags: [],
-        isFavorite: false,
-        content: []
-      }
-      
-      expect(() => promptSchema.parse(promptWithAlternatives)).not.toThrow()
     })
   })
 })

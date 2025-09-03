@@ -3,15 +3,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { content } from '@/lib/content-loader';
-import { Prompt as PromptType } from '@/lib/content-schema';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Copy, CheckCircle, Play, Sparkles, Download } from 'lucide-react';
+import { Copy, CheckCircle, Download } from 'lucide-react';
 import Link from 'next/link';
 
 interface PromptEditorProps {
@@ -19,256 +16,131 @@ interface PromptEditorProps {
 }
 
 export function PromptEditor({ templateToLoad }: PromptEditorProps) {
-  const [promptTemplate, setPromptTemplate] = useState<PromptType | null>(null);
-  const [variableValues, setVariableValues] = useState<Record<string, string>>({});
-  const [generatedPrompt, setGeneratedPrompt] = useState('');
-  const [generatedSystemPrompt, setGeneratedSystemPrompt] = useState('');
+  const [userPrompt, setUserPrompt] = useState('');
+  const [systemPrompt, setSystemPrompt] = useState('');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (templateToLoad) {
-      const foundPrompt = content.prompts.find(p => p.slug === templateToLoad);
-      if (foundPrompt) {
-        setPromptTemplate(foundPrompt);
-        const initialValues: Record<string, string> = {};
-        foundPrompt.variables?.forEach(variableName => {
-          initialValues[variableName] = '';
-        });
-        setVariableValues(initialValues);
-        setGeneratedPrompt('');
-        setGeneratedSystemPrompt('');
-      } else {
-        toast.error('Erreur', {
-          description: `Le template "${templateToLoad}" n'a pas été trouvé.`,
-        });
-      }
-    } else {
-      setPromptTemplate(null);
+      toast.info('Templates désactivés', {
+        description: 'Les templates sont maintenant intégrés dans les workflows. Consultez la section Workflows.',
+      });
     }
   }, [templateToLoad]);
 
-  const handleVariableChange = (name: string, value: string) => {
-    setVariableValues(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleGeneratePrompt = () => {
-    if (!promptTemplate?.promptContent) return;
-
-    let finalPrompt = promptTemplate.promptContent;
-    let finalSystemPrompt = promptTemplate.systemPromptContent || '';
-    
-    // Replace variables in both prompts using {{variable}} format
-    for (const [key, value] of Object.entries(variableValues)) {
-      const placeholder = `{{${key}}}`;
-      const replacement = value || `[${key}]`;
-      finalPrompt = finalPrompt.replaceAll(placeholder, replacement);
-      if (finalSystemPrompt) {
-        finalSystemPrompt = finalSystemPrompt.replaceAll(placeholder, replacement);
-      }
-    }
-    
-    setGeneratedPrompt(finalPrompt);
-    setGeneratedSystemPrompt(finalSystemPrompt);
-    
-    toast.success('Prompt généré !', {
-      description: "Vous pouvez maintenant le copier et l'utiliser.",
-    });
-  };
-
-  const handleCopy = async (content: string, type: 'prompt' | 'system' = 'prompt') => {
-    if (!content) return;
+  const handleCopy = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(content);
+      await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
       toast.success('Copié !', {
-        description: `Le ${type === 'system' ? 'system prompt' : 'prompt'} a été copié dans le presse-papiers.`
+        description: 'Le prompt a été copié dans votre presse-papiers.',
       });
+      setTimeout(() => setCopied(false), 2000);
     } catch (_err) {
       toast.error('Erreur', {
-        description: 'Impossible de copier.',
+        description: 'Impossible de copier le texte.',
       });
     }
   };
 
-  const handleDownload = () => {
-    if (!generatedPrompt) return;
-    
-    let content = '';
-    if (generatedSystemPrompt) {
-      content += '=== SYSTEM PROMPT ===\n\n';
-      content += generatedSystemPrompt;
-      content += '\n\n=== USER PROMPT ===\n\n';
-    }
-    content += generatedPrompt;
-    
-    const blob = new Blob([content], { type: 'text/plain' });
+  const handleDownload = (text: string, filename: string) => {
+    const blob = new Blob([text], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${promptTemplate?.slug || 'prompt'}.txt`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
     toast.success('Téléchargé !', {
-      description: 'Le prompt a été téléchargé en tant que fichier texte.'
+      description: `Le fichier ${filename} a été téléchargé.`,
     });
   };
 
-  if (!promptTemplate) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <Card className="max-w-lg mx-auto">
-          <CardHeader>
-            <Sparkles className="w-12 h-12 mx-auto text-muted-foreground" />
-            <CardTitle className="mt-4">Bienvenue dans l'Éditeur</CardTitle>
-            <CardDescription>
-              Sélectionnez un prompt depuis la bibliothèque pour commencer l'édition.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild>
-              <Link href="/prompts">Explorer les prompts</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
-    <div className="container mx-auto px-4 py-8 grid lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-1 space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Variables du Prompt</CardTitle>
-            <CardDescription>Remplissez les champs pour personnaliser le prompt.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {promptTemplate.variables?.map(varName => (
-              <div key={varName}>
-                <Label htmlFor={varName} className="font-mono text-sm">{`{{${varName}}}`}</Label>
-                <Input
-                  id={varName}
-                  value={variableValues[varName] || ''}
-                  onChange={(e) => handleVariableChange(varName, e.target.value)}
-                  placeholder={`Entrez une valeur pour ${varName}`}
-                />
-              </div>
-            ))}
-            <Button onClick={handleGeneratePrompt} className="w-full">
-              <Play className="w-4 h-4 mr-2" />
-              Générer le prompt
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="lg:col-span-2 space-y-6">
-        {/* System Prompt if it exists */}
-        {promptTemplate.systemPromptContent && (
-          <Card>
+    <div className="grid lg:grid-cols-1 gap-6">
+      <div className="space-y-6">
+        {/* Template Loading Notice */}
+        {templateToLoad && (
+          <Card className="border-yellow-200 bg-yellow-50">
             <CardHeader>
-              <CardTitle>🧠 System Prompt</CardTitle>
-              <CardDescription>Le rôle et les instructions pour l'IA</CardDescription>
+              <CardTitle className="text-yellow-800">Templates migrés</CardTitle>
+              <CardDescription className="text-yellow-700">
+                Les templates de prompts ont été intégrés dans les workflows. Visitez la section Workflows pour accéder aux prompts structurés.
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Textarea
-                value={promptTemplate.systemPromptContent || ''}
-                readOnly
-                className="min-h-[150px] font-mono bg-muted/50"
-              />
-            </CardContent>
           </Card>
         )}
 
-        {/* Main Prompt */}
+        {/* Manual Prompt Editor */}
         <Card>
           <CardHeader>
-            <CardTitle>🎯 {promptTemplate.systemPromptContent ? 'User Prompt' : 'Prompt Principal'}</CardTitle>
-            <CardDescription>{promptTemplate.title}</CardDescription>
+            <CardTitle>✏️ Éditeur de Prompts</CardTitle>
+            <CardDescription>
+              Créez et testez vos prompts manuellement
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <Textarea
-              value={promptTemplate.promptContent || ''}
-              readOnly
-              className="min-h-[200px] font-mono bg-muted/50"
-            />
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="system-prompt">System Prompt (optionnel)</Label>
+              <Textarea
+                id="system-prompt"
+                placeholder="Définissez le rôle et les instructions pour l'IA..."
+                value={systemPrompt}
+                onChange={(e) => setSystemPrompt(e.target.value)}
+                className="min-h-[100px]"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="user-prompt">User Prompt</Label>
+              <Textarea
+                id="user-prompt"
+                placeholder="Écrivez votre prompt principal ici..."
+                value={userPrompt}
+                onChange={(e) => setUserPrompt(e.target.value)}
+                className="min-h-[200px]"
+              />
+            </div>
+
+            <div className="flex gap-2">
+              <Button 
+                onClick={() => handleCopy(systemPrompt + '\n\n' + userPrompt)} 
+                className="flex-1"
+                disabled={!userPrompt.trim()}
+              >
+                {copied ? <CheckCircle className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                Copier tout
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => handleDownload(systemPrompt + '\n\n' + userPrompt, 'prompt.txt')}
+                disabled={!userPrompt.trim()}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Télécharger
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
-        {/* Generated content */}
-        {(generatedPrompt || generatedSystemPrompt) && (
-          <>
-            {generatedSystemPrompt && (
-              <Card className="border-blue-500/20">
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle>🧠 System Prompt Généré</CardTitle>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      onClick={() => handleCopy(generatedSystemPrompt, 'system')}
-                    >
-                      {copied ? <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> : <Copy className="w-4 h-4 mr-2" />}
-                      {copied ? 'Copié !' : 'Copier'}
-                    </Button>
-                  </div>
-                  <CardDescription>
-                    À coller dans le champ "System Prompt" de votre outil IA
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Textarea
-                    value={generatedSystemPrompt}
-                    readOnly
-                    className="min-h-[150px] font-mono"
-                  />
-                </CardContent>
-              </Card>
-            )}
-
-            {generatedPrompt && (
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle>🎯 {generatedSystemPrompt ? 'User Prompt' : 'Prompt Final'} Généré</CardTitle>
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={() => handleCopy(generatedPrompt)}
-                      >
-                        {copied ? <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> : <Copy className="w-4 h-4 mr-2" />}
-                        {copied ? 'Copié !' : 'Copier'}
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={handleDownload}
-                      >
-                        <Download className="w-4 h-4 mr-2" />
-                        Télécharger .txt
-                      </Button>
-                    </div>
-                  </div>
-                  <CardDescription>
-                    {generatedSystemPrompt ? 'Votre instruction principale' : 'Prêt à utiliser dans votre outil IA'}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Textarea
-                    value={generatedPrompt}
-                    readOnly
-                    className="min-h-[200px] font-mono"
-                  />
-                </CardContent>
-              </Card>
-            )}
-          </>
-        )}
+        {/* Help Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>💡 Conseil</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">
+              Pour des prompts pré-configurés et optimisés, consultez nos{' '}
+              <Link href="/workflows" className="text-primary hover:underline">
+                Workflows Stratégiques
+              </Link>{' '}
+              qui incluent des prompts testés et documentés.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

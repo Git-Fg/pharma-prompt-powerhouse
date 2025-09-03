@@ -83,9 +83,11 @@ export default async function ConceptDetailPage({
   }
 
   // Trouver les contenus liés à ce concept
-  const relatedPrompts = content.prompts.filter((p) => p.conceptSlugs?.includes(slug));
   const relatedGuides = content.guides.filter(
     (g) => g.conceptSlugs?.includes(slug)
+  );
+  const relatedWorkflows = content.workflows.filter(
+    (w) => w.conceptSlugs?.includes(slug)
   );
 
   return (
@@ -115,7 +117,7 @@ export default async function ConceptDetailPage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card className="text-center p-4">
               <div className="text-2xl font-bold text-primary">
-                {relatedGuides.length + relatedPrompts.length}
+                {relatedGuides.length + relatedWorkflows.length}
               </div>
               <div className="text-sm text-muted-foreground">
                 Ressources liées
@@ -129,9 +131,9 @@ export default async function ConceptDetailPage({
             </Card>
             <Card className="text-center p-4">
               <div className="text-2xl font-bold text-blue-600">
-                {relatedPrompts.length}
+                {relatedWorkflows.length}
               </div>
-              <div className="text-sm text-muted-foreground">Prompts</div>
+              <div className="text-sm text-muted-foreground">Workflows</div>
             </Card>
           </div>
         </div>
@@ -180,25 +182,25 @@ export default async function ConceptDetailPage({
           </section>
         )}
 
-        {/* 2. Les Prompts d'Application */}
-        {relatedPrompts.length > 0 && (
+        {/* 2. Les Workflows Pratiques */}
+        {relatedWorkflows.length > 0 && (
           <section>
             <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <Lightbulb className="w-8 h-8 text-yellow-500" /> Voir : Les
-              Prompts d'Application
+              <Lightbulb className="w-8 h-8 text-yellow-500" /> Appliquer : Les
+              Workflows Pratiques
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {relatedPrompts.map((prompt) => (
-                <Link href={`/prompts/${prompt.slug}`} key={prompt.slug}>
+              {relatedWorkflows.map((workflow) => (
+                <Link href={`/workflows/${workflow.slug}`} key={workflow.slug}>
                   <Card className="h-full hover:bg-accent/50 transition-colors">
                     <CardHeader>
-                      <CardTitle>{prompt.title}</CardTitle>
+                      <CardTitle>{workflow.title}</CardTitle>
                       <p className="text-sm text-muted-foreground line-clamp-2">
-                        {prompt.description}
+                        {workflow.description}
                       </p>
                       <div className="flex gap-2 pt-2">
-                        <Badge variant="outline">{prompt.category}</Badge>
-                        <Badge variant="secondary">{prompt.difficulty}</Badge>
+                        <Badge variant="outline">{workflow.category}</Badge>
+                        <Badge variant="secondary">{workflow.difficulty}</Badge>
                       </div>
                     </CardHeader>
                   </Card>

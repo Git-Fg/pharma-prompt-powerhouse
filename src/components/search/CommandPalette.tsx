@@ -50,9 +50,9 @@ export function CommandPalette() {
                         </CommandItem>
                     ))}
                 </CommandGroup>
-                <CommandGroup heading="Prompts">
-                    {content.prompts.map(item => (
-                        <CommandItem key={item.slug} onSelect={() => runCommand(() => router.push(`/prompts/${item.slug}`))}>
+                <CommandGroup heading="Workflows">
+                    {content.workflows.map(item => (
+                        <CommandItem key={item.slug} onSelect={() => runCommand(() => router.push(`/workflows/${item.slug}`))}>
                             {item.title}
                         </CommandItem>
                     ))}
