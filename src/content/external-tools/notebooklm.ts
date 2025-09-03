@@ -1,5 +1,5 @@
 // src/content/external-tools/notebooklm.ts
-import { ExternalTool, externalToolSchema } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalToolData = {
   "slug": "notebooklm",
@@ -109,4 +109,4 @@ const externalToolData = {
 };
 
 // Validation et export
-export const externalTool: ExternalTool = externalToolSchema.parse(externalToolData);
+export const externalTool = externalToolData satisfies ExternalTool;

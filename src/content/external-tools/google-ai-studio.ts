@@ -1,5 +1,5 @@
 // src/content/external-tools-new/google-ai-studio.ts
-import { ExternalTool, externalToolSchema } from '@/lib/content-schema';
+import type { ExternalTool } from '@/lib/content-schema';
 
 const externalToolData = {
   "slug": "google-ai-studio",
@@ -220,4 +220,4 @@ const externalToolData = {
 };
 
 // Validation et export
-export const externalTool: ExternalTool = externalToolSchema.parse(externalToolData);
+export const externalTool = externalToolData satisfies ExternalTool;
