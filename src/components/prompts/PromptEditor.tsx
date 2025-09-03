@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,22 +11,11 @@ import { toast } from 'sonner';
 import { Copy, CheckCircle, Download } from 'lucide-react';
 import Link from 'next/link';
 
-interface PromptEditorProps {
-  templateToLoad?: string | null;
-}
-
-export function PromptEditor({ templateToLoad }: PromptEditorProps) {
+// PromptEditor no longer takes any props - templates are integrated in workflows
+export function PromptEditor() {
   const [userPrompt, setUserPrompt] = useState('');
   const [systemPrompt, setSystemPrompt] = useState('');
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (templateToLoad) {
-      toast.info('Templates désactivés', {
-        description: 'Les templates sont maintenant intégrés dans les workflows. Consultez la section Workflows.',
-      });
-    }
-  }, [templateToLoad]);
 
   const handleCopy = async (text: string) => {
     try {
@@ -62,24 +51,12 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
   return (
     <div className="grid lg:grid-cols-1 gap-6">
       <div className="space-y-6">
-        {/* Template Loading Notice */}
-        {templateToLoad && (
-          <Card className="border-yellow-200 bg-yellow-50">
-            <CardHeader>
-              <CardTitle className="text-yellow-800">Templates migrés</CardTitle>
-              <CardDescription className="text-yellow-700">
-                Les templates de prompts ont été intégrés dans les workflows. Visitez la section Workflows pour accéder aux prompts structurés.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        )}
-
         {/* Manual Prompt Editor */}
         <Card>
           <CardHeader>
             <CardTitle>✏️ Éditeur de Prompts</CardTitle>
             <CardDescription>
-              Créez et testez vos prompts manuellement
+              Créez et testez vos prompts manuellement. Les templates structurés sont maintenant intégrés dans nos workflows.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

@@ -5,6 +5,7 @@ import { ExternalLink, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
+import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
 import ReactMarkdown from 'react-markdown';
 
 interface ToolPageProps {
@@ -182,6 +183,11 @@ export default function ToolPage({ params }: ToolPageProps) {
           <ContentRenderer content={tool.content} />
         </div>
       )}
+
+      {/* Disclaimer Banner */}
+      <div className="mt-8">
+        <DisclaimerBanner type="arsenal" />
+      </div>
     </article>
   );
 }

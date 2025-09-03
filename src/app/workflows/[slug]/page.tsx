@@ -8,6 +8,7 @@ import { Clock, Target, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 import Link from 'next/link';
 import { getIcon } from "@/types/icon-taxonomy";
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
+import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
 
 interface WorkflowPageProps {
   params: {
@@ -215,6 +216,11 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
             </ul>
           </div>
         </section>
+      </div>
+
+      {/* Disclaimer Banner */}
+      <div className="mt-16">
+        <DisclaimerBanner type="workflow" />
       </div>
 
       {/* Related Workflows */}
