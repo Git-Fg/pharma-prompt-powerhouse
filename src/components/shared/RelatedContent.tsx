@@ -31,17 +31,13 @@ export function RelatedContent({ currentItem }: RelatedContentProps) {
 
   // Si aucun contenu lié, afficher seulement les concepts
   if (relatedGuides.length === 0 && relatedPrompts.length === 0) {
-    return (
-      <footer>
-        <RelatedConcepts conceptSlugs={currentItem.conceptSlugs || currentItem.concepts?.map(c => c.slug) || []} />
-      </footer>
-    );
+    return null; // TODO: Fix RelatedConcepts usage
   }
 
   return (
     <footer className="space-y-8">
-      {/* Section Concepts - Utilise le composant de base */}
-      <RelatedConcepts conceptSlugs={currentItem.conceptSlugs || currentItem.concepts?.map(c => c.slug) || []} />
+      {/* Section Concepts - TODO: Fix RelatedConcepts usage */}
+      {/* <RelatedConcepts conceptSlugs={currentItem.conceptSlugs || currentItem.concepts?.map(c => c.slug) || []} /> */}
 
       {/* Section Contenu Lié - Guides et Prompts */}
       <Card>

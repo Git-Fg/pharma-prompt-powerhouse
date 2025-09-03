@@ -31,8 +31,8 @@ export function PromptEditor({ templateToLoad }: PromptEditorProps) {
       if (foundPrompt) {
         setPromptTemplate(foundPrompt);
         const initialValues: Record<string, string> = {};
-        foundPrompt.variables?.forEach(varName => {
-          initialValues[varName] = '';
+        foundPrompt.variables?.forEach(variableName => {
+          initialValues[variableName] = '';
         });
         setVariableValues(initialValues);
         setGeneratedPrompt('');

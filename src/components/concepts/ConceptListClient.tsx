@@ -104,12 +104,7 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
           {conceptsWithStats.map(concept => (
             <ConceptCard
               key={concept.slug}
-              slug={concept.slug}
-              title={concept.title}
-              description={concept.description}
-              icon={concept.icon}
-              guideCount={concept.guideCount}
-              promptCount={concept.promptCount}
+              concept={concept}
             />
           ))}
         </div>

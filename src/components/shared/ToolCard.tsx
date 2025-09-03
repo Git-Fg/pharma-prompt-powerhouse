@@ -2,110 +2,64 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, Button } from '@/components/ui';
-import { ArrowRight, CheckCircle, Globe, Tag, Star } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useFavorites } from '@/hooks/useFavorites';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Globe } from 'lucide-react';
+import type { ExternalTool } from '@/lib/content-schema';
 import { categoryLabels } from '@/lib/constants';
 
 interface ToolCardProps {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  pricing?: string;
-  url: string;
-  use_cases?: string[];
-  color: string;
+  tool: ExternalTool;
 }
 
-export const ToolCard: React.FC<ToolCardProps> = ({
-  slug,
-  title,
-  description,
-  category,
-  pricing,
-  url,
-  use_cases,
-  color,
-}) => {
-  const { toggleFavorite, isFavorite } = useFavorites('favoriteTools');
+export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
+  const categoryLabel = categoryLabels[tool.category] || tool.category;
 
   return (
-    <Card className="h-full flex-col hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-      <CardHeader>
-        <div className="flex justify-between items-start mb-4">
+    <Card className="h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group">
+      <CardHeader className="flex-grow">
+        <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform`} style={{ backgroundColor: color }}>
-              <span className="text-2xl font-bold text-white">{title.charAt(0)}</span>
+            <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
+              <Globe className="w-6 h-6 text-primary" />
             </div>
-            <div>
-              <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2">{title}</CardTitle>
-              <Badge variant="secondary" className="mt-1">
-                {categoryLabels[category as keyof typeof categoryLabels] || category}
-              </Badge>
+            <div className="flex-1">
+              <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                {tool.title}
+              </CardTitle>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="secondary">{categoryLabel}</Badge>
+              </div>
             </div>
-          </div>
-          <div className="flex-col items-end gap-1">
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Tag className="w-3 h-3" />
-              {pricing || 'Non spécifié'}
-            </Badge>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-8 h-8 p-0"
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFavorite(slug);
-              }}
-            >
-              <Star
-                className={cn(
-                  'w-4 h-4',
-                  isFavorite(slug) ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground'
-                )}
-              />
-            </Button>
           </div>
         </div>
-        <CardDescription className="text-sm leading-relaxed line-clamp-3">{description}</CardDescription>
+        <CardDescription className="text-sm text-muted-foreground line-clamp-3 mb-4">
+          {tool.description}
+        </CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow flex-col justify-between">
-        {use_cases && use_cases.length > 0 && (
-          <div>
-            <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-500" />
-              Idéal pour :
-            </h4>
-            <ul className="space-y-2 mb-6">
-              {use_cases.slice(0,3).map((useCase) => (
-                <li key={useCase} className="flex items-center gap-2 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                  {useCase}
-                </li>
-              ))}
-              {use_cases.length > 3 && (
-                <li className="text-sm text-muted-foreground">
-                  ... et {use_cases.length - 3} autres
-                </li>
-              )}
-            </ul>
+      <CardContent>
+        <div className="space-y-3">
+          <div className="flex flex-wrap gap-2">
+            {tool.tags.map((tag) => (
+              <Badge key={tag} variant="outline" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
           </div>
-        )}
-        <div className="flex-col sm:flex-row gap-2 mt-auto">
-          <Button asChild className="flex-1" variant="outline">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              <Globe className="w-4 h-4 mr-2" />
-              Visiter le Site Officiel
+          <div className="flex gap-2">
+            <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
+              <Button className="w-full" size="sm">
+                Visiter l'outil
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
             </a>
-          </Button>
-          <Button asChild className="flex-1 group">
-            <Link href={`/outils-externes/${slug}`}>
-              Voir mon guide
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"/>
+            <Link href={`/outils-externes/${tool.slug}`} className="flex-1">
+              <Button variant="outline" className="w-full" size="sm">
+                En savoir plus
+              </Button>
             </Link>
-          </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

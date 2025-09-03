@@ -37,22 +37,31 @@ const baseContentSchema = z.object({
 });
 
 export const conceptSchema = baseContentSchema.extend({
+  category: categorySchema,
   difficulty: difficultySchema,
   keyTakeaways: z.array(z.string()).min(1, 'Must have at least one key takeaway'),
   mainGuideSlug: slugSchema.optional(),
+  icon: z.string().optional(),
   content: z.array(contentBlockSchema),
 });
 
 export const guideSchema = baseContentSchema.extend({
   category: categorySchema,
   difficulty: difficultySchema,
+  estimatedTime: z.string().optional(),
+  keyTakeaways: z.array(z.string()).optional(),
+  isWorkflow: z.boolean().default(false),
   conceptSlugs: z.array(slugSchema).optional(),
+  icon: z.string().optional(),
   content: z.array(contentBlockSchema),
 });
 
 export const promptSchema = baseContentSchema.extend({
+    category: categorySchema,
+    difficulty: difficultySchema,
     promptContent: z.string().optional(),
-    variables: z.array(z.object({ name: z.string(), description: z.string() })).optional(),
+    systemPromptContent: z.string().optional(),
+    variables: z.array(z.string()).optional(), // Keep it simple as strings for now
     conceptSlugs: z.array(slugSchema).optional(),
     content: z.array(contentBlockSchema),
 });

@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { getPromptBySlug } from '@/lib/content-loader';
-import { ConceptCard } from '@/components/cards/ConceptCard';
 import { Badge } from '@/components/ui/badge';
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { CopyButton } from '@/components/ui/copy-button';
@@ -53,9 +52,9 @@ export default function PromptPage({ params }: PromptPageProps) {
                         <h2 className="text-2xl font-bold mb-4">Variables du Prompt</h2>
                         <ul className="space-y-4">
                             {prompt.variables.map(variable => (
-                                <li key={variable.name} className="p-4 border rounded-md">
-                                    <p className="font-mono text-base font-semibold">`{`{${variable.name}}`}`</p>
-                                    <p className="text-muted-foreground">{variable.description}</p>
+                                <li key={variable} className="p-4 border rounded-md">
+                                    <p className="font-mono text-base font-semibold">`{`{${variable}}`}`</p>
+                                    <p className="text-muted-foreground">Variable à remplacer par votre contenu</p>
                                 </li>
                             ))}
                         </ul>
