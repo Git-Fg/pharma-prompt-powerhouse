@@ -56,6 +56,26 @@
 - **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
 </css_architecture>
 
+<advanced_animations>
+**Système d'Animation Avancé (2025)**
+- **Framer Motion v12+ :** Intégration complète avec lazy loading pour les performances optimales.
+- **Animations Modernes :** Courbes d'accélération naturelles (`spring`, `bounce`, `smooth`) suivant les meilleures pratiques 2025.
+- **Micro-interactions :** Effets magnétiques, hover states, transitions fluides pour une UX premium.
+- **Composants Animés :** `ScrollAnimated`, `AnimatedList`, `StaggeredPage`, `MagneticCard`, `Interactive` pour des interfaces vivantes.
+- **Hooks Personnalisés :** `useScrollProgress`, `useInView`, `useMagneticEffect`, `useParallax` pour des animations contextuelles.
+- **Accessibilité :** Respect automatique de `prefers-reduced-motion` pour une expérience inclusive.
+- **Performance :** LazyMotion, staggering intelligent, et animations optimisées GPU pour une fluidité 60fps constante.
+</advanced_animations>
+
+<interaction_patterns>
+**Patterns d'Interaction Avancés**
+- **Transitions de Pages :** Système de navigation fluide avec `PageTransition` et variants contextuels.
+- **États de Chargement :** Composants `Skeleton`, `LoadingState`, `Spinner` avec animations progressives.
+- **Formulaires Enhancés :** `AnimatedInput`, `AnimatedSelect`, `AnimatedCheckbox` avec validation visuelle en temps réel.
+- **Feedback Utilisateur :** Toasts animés, progress bars fluides, états de succès/erreur avec micro-animations.
+- **Navigation Contextuelle :** Breadcrumbs animés, pagination fluide, filtres avec transitions.
+</interaction_patterns>
+
 <responsive_design_principles>
 **Principes de Design Responsif**
 - **Approche Mobile-First :** Toutes les interfaces commencent par la version mobile et s'enrichissent vers le desktop.
@@ -196,9 +216,15 @@ DO appliquer systématiquement l'approche mobile-first avec les breakpoints stan
 DO utiliser les composants de base définis dans `@layer components` plutôt que de recréer des styles.
 DO privilégier les utilitaires CSS personnalisés pour maintenir la cohérence visuelle.
 DO utiliser les tokens de design centralisés (variables CSS) plutôt que des valeurs hardcodées.
-DO NOT créer de nouveaux fichiers CSS ou de styles inline sans justification exceptionnelle.
+DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
+DO implémenter les micro-interactions avec les hooks personnalisés (`useScrollProgress`, `useInView`, etc.).
+DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
+DO optimiser les performances avec LazyMotion et le lazy loading des animations.
+DO créer de nouveaux fichiers CSS ou de styles inline sans justification exceptionnelle.
 DO NOT dupliquer des styles CSS existants - centraliser dans `globals.css`.
 DO NOT ignorer les breakpoints responsifs standard - tous les composants doivent être mobile-friendly.
+DO NOT créer d'animations sans considérer `prefers-reduced-motion` pour l'accessibilité.
+DO NOT surcharger l'interface avec des animations excessives - privilégier la subtilité et l'utilité.
 DO NOT utiliser de serveur personnalisé.
 DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
