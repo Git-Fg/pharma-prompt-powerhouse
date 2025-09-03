@@ -30,7 +30,7 @@ export default function ToolPage({ params }: ToolPageProps) {
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`w-4 h-4 ${
+            className={`size-4 ${
               i < score ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
             }`}
           />
@@ -50,7 +50,7 @@ export default function ToolPage({ params }: ToolPageProps) {
         <div className="flex justify-center">
           <Button asChild size="lg">
             <a href={tool.url} target="_blank" rel="noopener noreferrer">
-              Visiter l'outil <ExternalLink className="ml-2 w-4 h-4" />
+              Visiter l'outil <ExternalLink className="ml-2 size-4" />
             </a>
           </Button>
         </div>

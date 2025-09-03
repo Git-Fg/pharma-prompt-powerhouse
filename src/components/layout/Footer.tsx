@@ -41,7 +41,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Brain className="w-6 h-6 text-primary-foreground" />
+                <Brain className="size-6 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl">Pharma Prompt</span>
             </div>
@@ -69,7 +69,7 @@ export function Footer() {
                       )}
                     >
                       {link.icon !== ExternalLink && (
-                        <link.icon className="w-4 h-4" />
+                        <link.icon className="size-4" />
                       )}
                       <span>{link.name}</span>
                       {link.icon === ExternalLink && (

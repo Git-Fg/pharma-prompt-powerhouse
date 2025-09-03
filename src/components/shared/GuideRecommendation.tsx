@@ -72,13 +72,13 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
       )}
 
       <div className="flex items-center pt-2 border-t">
-        <Info className="mr-2 h-4 w-4 shrink-0 opacity-70" />
+        <Info className="mr-2 size-4 shrink-0 opacity-70" />
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
       
       <Button asChild size="sm" className="w-full">
         <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="size-4" />
           Lire le guide
         </Link>
       </Button>

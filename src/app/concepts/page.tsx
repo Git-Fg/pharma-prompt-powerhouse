@@ -34,7 +34,7 @@ export default function ConceptsPage() {
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-              <LucideIcons.BookOpen className="w-6 h-6 text-primary" />
+              <LucideIcons.BookOpen className="size-6 text-primary" />
             </div>
             <h3 className="font-semibold mb-2">1. Choisissez un concept</h3>
             <p className="text-sm text-muted-foreground">
@@ -44,7 +44,7 @@ export default function ConceptsPage() {
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-              <LucideIcons.Lightbulb className="w-6 h-6 text-primary" />
+              <LucideIcons.Lightbulb className="size-6 text-primary" />
             </div>
             <h3 className="font-semibold mb-2">2. Découvrez les ressources</h3>
             <p className="text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export default function ConceptsPage() {
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-              <LucideIcons.Wrench className="w-6 h-6 text-primary" />
+              <LucideIcons.Wrench className="size-6 text-primary" />
             </div>
             <h3 className="font-semibold mb-2">3. Mettez en pratique</h3>
             <p className="text-sm text-muted-foreground">

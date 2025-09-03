@@ -95,7 +95,7 @@ export default async function ConceptDetailPage({
       <header className="mb-8">
         <Button variant="ghost" size="sm" asChild className="mb-4">
           <Link href="/concepts">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="size-4 mr-2" />
             Retour aux concepts
           </Link>
         </Button>
@@ -146,7 +146,7 @@ export default async function ConceptDetailPage({
       <Card className="mb-8">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Target className="w-5 h-5" />À propos de ce concept
+            <Target className="size-5" />À propos de ce concept
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -163,7 +163,7 @@ export default async function ConceptDetailPage({
         {relatedGuides.length > 0 && (
           <section>
             <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <BookOpen className="w-8 h-8 text-primary" /> Guides liés à ce concept
+              <BookOpen className="size-8 text-primary" /> Guides liés à ce concept
             </h2>
             <div className="grid gap-4">
               {relatedGuides.map((guide) => (
@@ -186,7 +186,7 @@ export default async function ConceptDetailPage({
         {relatedWorkflows.length > 0 && (
           <section>
             <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <Lightbulb className="w-8 h-8 text-yellow-500" /> Appliquer : Les
+              <Lightbulb className="size-8 text-yellow-500" /> Appliquer : Les
               Workflows Pratiques
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -213,7 +213,7 @@ export default async function ConceptDetailPage({
         {/* 3. L'Outil pour Pratiquer */}
         <section>
           <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-            <Wrench className="w-8 h-8 text-destructive" /> Essayer : Mettre en
+            <Wrench className="size-8 text-destructive" /> Essayer : Mettre en
             Pratique
           </h2>
           <Card className="bg-muted/50">
@@ -228,7 +228,7 @@ export default async function ConceptDetailPage({
               <Button asChild size="lg" className="mt-4 md:mt-0">
                 <Link href="/boite-a-outils/prompt-editor">
                   Ouvrir l'Éditeur de Prompts{" "}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="size-4 ml-2" />
                 </Link>
               </Button>
             </CardHeader>

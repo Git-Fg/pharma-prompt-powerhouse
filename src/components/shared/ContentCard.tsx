@@ -69,7 +69,7 @@ export function ContentCard({
           <Button asChild className="w-full" size="sm">
             <a href={href}>
               Voir plus
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="size-4 ml-2" />
             </a>
           </Button>
         )}

@@ -35,8 +35,8 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-primary-foreground" />
+              <div className="size-8 bg-primary rounded-lg flex items-center justify-center">
+                <Brain className="size-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-lg">Pharma Prompt</span>
             </Link>
@@ -66,13 +66,13 @@ export function Header() {
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               >
-                <Sun className="w-4 h-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute w-4 h-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </Button>
 
               {/* User Profile */}
               <Button variant="ghost" size="icon">
-                <User className="w-4 h-4" />
+                <User className="size-4" />
               </Button>
             </div>
           </div>
@@ -84,14 +84,14 @@ export function Header() {
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
-              <Sun className="w-4 h-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute w-4 h-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="w-5 h-5" />
+                  <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[320px] sm:w-[400px]">
@@ -104,7 +104,7 @@ export function Header() {
                       onClick={() => setIsOpen(false)}
                     >
                       <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <Brain className="w-6 h-6 text-primary-foreground" />
+                        <Brain className="size-6 text-primary-foreground" />
                       </div>
                       <span className="font-bold text-xl">Pharma Prompt</span>
                     </Link>
@@ -142,7 +142,7 @@ export function Header() {
 
                       <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-                          <User className="w-5 h-5" />
+                          <User className="size-5" />
                         </div>
                         <div>
                           <div className="font-medium">Profil</div>

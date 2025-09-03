@@ -100,7 +100,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
       {filteredGuides.length === 0 && (
         <div className="text-center py-16">
           <div className="mx-auto mb-4 w-16 h-16 bg-muted rounded-full flex items-center justify-center">
-            <FileText className="w-8 h-8 text-muted-foreground" />
+            <FileText className="size-8 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
           <p className="text-muted-foreground mb-4 max-w-md mx-auto">
@@ -136,7 +136,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="w-8 h-8 -mt-2 -mr-2"
+                    className="size-8 -mt-2 -mr-2"
                     onClick={e => {
                       e.preventDefault();
                       toggleFavorite(guide.slug);
@@ -144,7 +144,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
                   >
                     <Heart
                       className={cn(
-                        'w-4 h-4',
+                        'size-4',
                         isFavorite(guide.slug)
                           ? 'fill-red-500 text-red-500'
                           : 'text-muted-foreground'
@@ -154,7 +154,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
                 </div>
                 <div className="flex items-center gap-3 mb-2">
                   <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
-                    <IconComponent className="w-5 h-5 text-primary" />
+                    <IconComponent className="size-5 text-primary" />
                   </div>
                   <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors">
                     {guide.title}
@@ -178,7 +178,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
                 <Button asChild className="w-full">
                   <Link href={`/guides/${guide.slug}`}>
                     Commencer
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <ArrowRight className="size-4 ml-2" />
                   </Link>
                 </Button>
               </CardContent>

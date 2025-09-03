@@ -24,7 +24,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <Lightbulb className="w-6 h-6 text-primary" />
+              <Lightbulb className="size-6 text-primary" />
             </div>
             <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
               {concept.title}
@@ -39,7 +39,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
         <div className="space-y-3">
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
-              <BookOpen className="w-4 h-4" />
+              <BookOpen className="size-4" />
               <span>Difficulté: {concept.difficulty}</span>
             </div>
           </div>

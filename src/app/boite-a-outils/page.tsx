@@ -160,7 +160,7 @@ export default function ToolboxPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-lg ${tool.color} text-white`}>
-                      <tool.icon className="w-5 h-5" />
+                      <tool.icon className="size-5" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{tool.title}</CardTitle>
@@ -199,7 +199,7 @@ export default function ToolboxPage() {
                     <Button asChild className="w-full">
                       <Link href={tool.href}>
                         Essayer l'outil
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        <ArrowRight className="size-4 ml-2" />
                       </Link>
                     </Button>
                   ) : (
