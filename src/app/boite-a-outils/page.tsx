@@ -18,6 +18,9 @@ import {
   BarChart3,
   ArrowRight,
 } from "lucide-react";
+import { ResponsiveContainer, ResponsiveSection } from '@/components/layout/ResponsiveContainer';
+import { ResponsiveGrid } from '@/components/layout/ResponsiveGrid';
+import { spacing } from '@/lib/design-system';
 
 // Données des outils avec statuts et catégories
 const toolsData = [
@@ -136,83 +139,87 @@ const statusColors: Record<string, string> = {
 
 export default function ToolboxPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold">Ma Boîte à Outils</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Une collection d'outils interactifs que j'ai développés pour mes
-          propres besoins et optimisés pour les workflows pharmaceutiques.
-        </p>
-      </div>
+    <ResponsiveSection>
+      <ResponsiveContainer>
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className={`${spacing.desktop.text.heading} ${spacing.mobile.text.heading} font-bold`}>
+            Ma Boîte à Outils
+          </h1>
+          <p className={`mt-4 ${spacing.desktop.text.subheading} ${spacing.mobile.text.subheading} text-muted-foreground`}>
+            Une collection d'outils interactifs que j'ai développés pour mes
+            propres besoins et optimisés pour les workflows pharmaceutiques.
+          </p>
+        </div>
 
-      {/* Outils Internes */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          Outils Interactifs
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {toolsData.map((tool) => (
-            <Card
-              key={tool.id}
-              className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-            >
-              <CardHeader className="flex-grow">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${tool.color} text-white`}>
-                      <tool.icon className="size-5" />
+        {/* Outils Internes */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-6 text-center">
+            Outils Interactifs
+          </h2>
+          <ResponsiveGrid cols={{ mobile: 1, tablet: 2, desktop: 3 }}>
+            {toolsData.map((tool) => (
+              <Card
+                key={tool.id}
+                className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
+                <CardHeader className="flex-grow">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2 rounded-lg ${tool.color} text-white`}>
+                        <tool.icon className="size-5" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-lg">{tool.title}</CardTitle>
+                        <Badge
+                          variant="secondary"
+                          className={`mt-1 ${statusColors[tool.status]}`}
+                        >
+                          {tool.status}
+                        </Badge>
+                      </div>
                     </div>
+                  </div>
+                  <CardDescription className="mt-3">
+                    {tool.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
                     <div>
-                      <CardTitle className="text-lg">{tool.title}</CardTitle>
-                      <Badge
-                        variant="secondary"
-                        className={`mt-1 ${statusColors[tool.status]}`}
-                      >
-                        {tool.status}
+                      <Badge variant="outline" className="text-xs">
+                        {categoryLabels[tool.category]}
                       </Badge>
                     </div>
+                    <ul className="space-y-1">
+                      {tool.features.map((feature, index) => (
+                        <li
+                          key={index}
+                          className="text-sm text-muted-foreground flex items-center gap-2"
+                        >
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    {tool.href !== "#" ? (
+                      <Button asChild className="w-full">
+                        <Link href={tool.href}>
+                          Essayer l'outil
+                          <ArrowRight className="size-4 ml-2" />
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button disabled className="w-full">
+                        Bientôt disponible
+                      </Button>
+                    )}
                   </div>
-                </div>
-                <CardDescription className="mt-3">
-                  {tool.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <Badge variant="outline" className="text-xs">
-                      {categoryLabels[tool.category]}
-                    </Badge>
-                  </div>
-                  <ul className="space-y-1">
-                    {tool.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="text-sm text-muted-foreground flex items-center gap-2"
-                      >
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  {tool.href !== "#" ? (
-                    <Button asChild className="w-full">
-                      <Link href={tool.href}>
-                        Essayer l'outil
-                        <ArrowRight className="size-4 ml-2" />
-                      </Link>
-                    </Button>
-                  ) : (
-                    <Button disabled className="w-full">
-                      Bientôt disponible
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))}
+          </ResponsiveGrid>
         </div>
-      </div>
-    </div>
+      </ResponsiveContainer>
+    </ResponsiveSection>
   );
 }
