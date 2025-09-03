@@ -10,7 +10,7 @@ export default function ExternalToolsPage() {
     if (!acc[tool.category]) {
       acc[tool.category] = [];
     }
-    acc[tool.category].push(tool);
+    acc[tool.category]!.push(tool);
     return acc;
   }, {});
 

@@ -1,38 +1,19 @@
-import { glob } from 'glob';
-import path from 'path';
-import { z } from 'zod';
-import {
-  guideSchema,
-  conceptSchema,
-  promptSchema,
-  externalToolSchema,
-  objectifSchema,
-  workflowSchema
-} from './content-schema';
+import { allConcepts } from '@/content/concepts';
+import { allGuides } from '@/content/guides';
+import { allPrompts } from '@/content/prompts';
+import { allExternalTools } from '@/content/external-tools';
+import { allObjectifs } from '@/content/objectifs';
 import type {
   Concept, EnrichedGuide, EnrichedConcept
 } from './content-schema';
 
-const CONTENT_PATH = path.join(process.cwd(), 'src/content');
-
-function loadCollection<T>(pattern: string, schema: z.Schema<T>): T[] {
-  return glob.sync(`${CONTENT_PATH}/${pattern}/**/*.ts`).map(file => {
-    // Use dynamic import to load the file content
-    // Note: This will need to be handled differently in a real build
-    // For now, we'll use a temporary approach
-    delete require.cache[require.resolve(file)];
-    const data = require(file).default;
-    return schema.parse(data);
-  });
-}
-
 export function loadContent() {
-  const concepts = loadCollection('concepts', conceptSchema);
-  const guides = loadCollection('guides', guideSchema);
-  const prompts = loadCollection('prompts', promptSchema);
-  const externalTools = loadCollection('external-tools', externalToolSchema);
-  const objectives = loadCollection('objectifs', objectifSchema);
-  const workflows = loadCollection('workflows', workflowSchema);
+  const concepts = allConcepts;
+  const guides = allGuides;
+  const prompts = allPrompts;
+  const externalTools = allExternalTools;
+  const objectives = allObjectifs;
+  const workflows: unknown[] = []; // TODO: Add workflows when available
 
   // --- Data Enrichment ---
 
