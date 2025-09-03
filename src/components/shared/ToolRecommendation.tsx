@@ -1,5 +1,5 @@
 import { content } from '@/lib/content-loader';
-import { ExternalToolCard } from '@/components/cards/ExternalToolCard';
+import { ToolCard } from '@/components/shared/ToolCard';
 import { ExternalTool } from '@/lib/content-schema';
 
 interface ToolRecommendationProps {
@@ -21,7 +21,7 @@ export function ToolRecommendation({ tags, currentSlug }: ToolRecommendationProp
       <h2 className="text-2xl font-bold mb-4">Outils Recommandés</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {recommendedTools.map(tool => (
-          <ExternalToolCard key={tool.slug} tool={tool} />
+          <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
     </section>
