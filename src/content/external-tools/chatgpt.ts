@@ -1,78 +1,48 @@
-// src/content/external-tools-new/chatgpt.ts
-import type { ExternalTool } from '@/lib/content-schema';
+import type { EnhancedExternalTool } from '@/lib/content-schema';
 
-const externalToolData = {
-  "slug": "chatgpt",
-  "title": "ChatGPT : L'Interface Conversationnelle d'OpenAI",
-  "description": "Explorez ChatGPT, l'interface de chat qui a démocratisé l'IA, et découvrez ses fonctionnalités pour les étudiants en pharmacie.",
-  "tags": ["chat", "openai", "gpt", "conversation"],
-  "isFavorite": false,
-  "conceptSlugs": ["chaîne-de-prompts"],
-  "url": "https://chatgpt.com/",
-  "category": "outils",
+const externalTool = {
+  slug: "chatgpt",
+  title: "ChatGPT",
+  description: "L'interface de chat d'OpenAI, mon point d'entrée pour l'IA et un excellent outil polyvalent.",
+  url: "https://chatgpt.com/",
+  category: "outils",
+  tags: ["conversationnel", "rédaction", "openai"],
+  isFavorite: false,
   
-  // Enhanced schema fields
-  "personalReview": "J'utilise ChatGPT principalement pour les conversations exploratoires et l'optimisation itérative de prompts. Sa mémoire conversationnelle en fait un partenaire idéal pour affiner progressivement mes demandes.",
-  
-  "strongPoints": [
-    "Interface conversationnelle très intuitive, parfaite pour les débutants",
-    "Mémoire de conversation qui permet l'optimisation itérative",
-    "Écosystème GPTs pour des applications spécialisées (version payante)",
-    "Fonction Deep Research pour la recherche approfondie (version payante)"
-  ],
-  
-  "vigilancePoints": [
-    "Modèles gratuits limités (GPT-4o mini principalement)",
-    "Pas de citations systématiques des sources",
-    "Peut manquer de précision sur des sujets très spécialisés",
-    "Limites d'usage quotidiennes sur la version gratuite"
-  ],
-  
-  "confidenceScore": 3,
-  "confidenceJustification": "Score modéré car ChatGPT est hébergé aux États-Unis avec des politiques de confidentialité standard. Évitez d'y saisir des données personnelles ou sensibles.",
-  
-  "freeVsPaidOffer": `| Fonctionnalité | Version Gratuite | ChatGPT Plus (~20€/mois) |
-|---|---|---|
-| **Modèles disponibles** | GPT-4o mini, accès limité GPT-5 | GPT-5 étendu, GPT-4.1, GPT-4o |
-| **Analyse de PDF** | Limitée | Avancée avec OCR |
-| **Deep Research** | Version "lite" (5/mois) | Illimitée avec export PDF |
-| **Voix** | Standard | Voix avancées temps réel |
-| **GPTs et Plugins** | ❌ | ✅ Accès complet |
-| **Génération d'images** | ❌ | ✅ DALL-E intégré |
+  personalReview: "ChatGPT est mon outil de tous les jours. C'est la première IA que j'ai utilisée et elle reste ma référence pour le brainstorming, la rédaction rapide et l'expérimentation de nouvelles idées. Sa capacité à maintenir une conversation fluide en fait un excellent partenaire pour affiner un prompt de manière itérative.",
 
-*Données : Septembre 2025*`,
-  
-  "tldr": "L'IA accessible à tous : interface conversationnelle intuitive d'OpenAI, parfaite pour débuter avec l'IA. Idéale pour assistance quotidienne et rédaction.",
-  "color": "bg-emerald-500",
-  "use_cases": [
-    "Conversations quotidiennes",
-    "Aide aux devoirs", 
-    "Rédaction simplifiée"
+  strongPoints: [
+    "Interface de chat très intuitive et facile à prendre en main.",
+    "Excellent pour les tâches créatives, la reformulation et le brainstorming.",
+    "Vaste écosystème de GPTs (version payante) pour des tâches spécialisées.",
+    "La mémoire conversationnelle permet d'améliorer les réponses pas à pas.",
   ],
-  "capabilities": ["conversation", "analyse_documents", "generation_texte"],
-  "keyTakeaways": [
-    "ChatGPT excelle dans l'interaction conversationnelle naturelle",
-    "La version payante débloque des fonctionnalités avancées comme Deep Research",
-    "Idéal pour l'apprentissage du prompt engineering grâce à sa mémoire conversationnelle"
+
+  vigilancePoints: [
+    "La version gratuite utilise des modèles moins puissants et peut être limitée.",
+    "Peut parfois être trop verbeux ou 'scolaire' dans ses réponses.",
+    "Les fonctionnalités les plus puissantes (analyse de PDF avancée, GPTs) sont payantes.",
+    "Comme tout outil cloud, la prudence est de mise avec les données que l'on soumet.",
   ],
-  
-  "content": [
+
+  confidenceScore: 4,
+  confidenceJustification: "Le score est élevé car c'est un produit mature d'un acteur majeur. Sa politique de confidentialité est claire (et on peut désactiver l'entraînement sur nos données). La version payante est très fiable, mais la version gratuite peut être moins performante.",
+
+  freeVsPaidOffer: `| Fonctionnalité | Version Gratuite | Version Payante (Plus) |\n| :--- | :--- | :--- |\n| **Modèle principal** | GPT-4o mini / GPT-5 (limité) | ✅ **GPT-5 (étendu)** |\n| **Analyse de PDF** | Limitée | ✅ **Avancée (OCR)** |\n| **GPTs personnalisés**| ❌ Non | ✅ **Accès illimité** |\n| **Génération d'images**| ❌ Non | ✅ **Intégrée** |`,
+
+  content: [
     {
-      "type": "markdown",
-      "content": "## Mon Expérience avec ChatGPT\n\nChatGPT est souvent le premier contact avec l'IA pour beaucoup d'étudiants. Son interface conversationnelle naturelle permet de poser des questions comme on le ferait avec un collègue expérimenté.\n\n**Ce que j'apprécie le plus :** La capacité à affiner progressivement mes demandes dans une même conversation. Contrairement à d'autres outils, je peux dire \"Non, ce n'est pas exactement ça, plutôt quelque chose comme...\" et l'IA s'adapte."
+      type: "card",
+      title: "Quand est-ce que j'utilise ChatGPT ?",
+      content: "J'utilise ChatGPT principalement pour :\n- **Obtenir des réponses rapides** sur des sujets généraux.\n- **Brainstormer** des idées pour un exposé ou un mémoire.\n- **Rédiger** des ébauches de textes, des emails ou des résumés.\n- **Traduire** des articles ou des documents de manière rapide.\n- **Dialoguer** avec l'IA pour affiner un prompt étape par étape (optimisation itérative)."
     },
     {
-      "type": "guideRecommendation",
-      "slug": "optimisation-de-prompts-la-methode-iterative",
-      "reason": "La mémoire conversationnelle de ChatGPT en fait l'outil idéal pour l'optimisation itérative de vos prompts."
-    },
-    {
-      "type": "conceptRecommendation",
-      "slug": "chaîne-de-prompts",
-      "reason": "Apprenez à créer des workflows structurés que vous pourrez ensuite appliquer naturellement dans les conversations ChatGPT."
+      type: "alert",
+      variant: "default",
+      title: "ChatGPT vs. OpenAI Playground : Mon Utilisation",
+      content: "Pour moi, **ChatGPT** est un **produit fini**, une application que j'utilise pour accomplir des tâches. **OpenAI Playground** est mon **laboratoire**, un outil d'expérimentation pour comprendre le fonctionnement des modèles et construire des prompts sur mesure. La maîtrise commence sur ChatGPT, mais l'expertise se développe dans le Playground."
     }
   ]
-};
+} satisfies EnhancedExternalTool;
 
-// Validation et export
-export const externalTool = externalToolData satisfies ExternalTool;
+export { externalTool };
