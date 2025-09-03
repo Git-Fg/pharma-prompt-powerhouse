@@ -8,16 +8,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 export default function ExternalToolsPage() {
   const tools = content.externalTools;
 
-  // Type assertion for enhanced schema fields
-  const enhancedTools = tools as (typeof tools[0] & {
-    personalReview?: string;
-    strongPoints?: string[];
-    vigilancePoints?: string[];
-    confidenceScore?: number;
-    confidenceJustification?: string;
-    freeVsPaidOffer?: string;
-  })[];
-
   const renderStarRating = (score?: number) => {
     if (!score) return <span className="text-muted-foreground">N/A</span>;
     
@@ -38,7 +28,7 @@ export default function ExternalToolsPage() {
     );
   };
 
-  const getAvailability = (tool: typeof enhancedTools[0]) => {
+  const getAvailability = (tool: typeof tools[0]) => {
     if (tool.freeVsPaidOffer && tool.freeVsPaidOffer.includes('Gratuit')) {
       return { label: 'Gratuit + Payant', color: 'bg-green-100 text-green-800' };
     }
@@ -57,24 +47,24 @@ export default function ExternalToolsPage() {
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
         <div className="p-4 border rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{enhancedTools.length}</div>
+          <div className="text-2xl font-bold text-blue-600">{tools.length}</div>
           <div className="text-sm text-muted-foreground">Outils testés</div>
         </div>
         <div className="p-4 border rounded-lg">
           <div className="text-2xl font-bold text-green-600">
-            {enhancedTools.filter(t => t.isFavorite).length}
+            {tools.filter(t => t.isFavorite).length}
           </div>
           <div className="text-sm text-muted-foreground">Favoris</div>
         </div>
         <div className="p-4 border rounded-lg">
           <div className="text-2xl font-bold text-purple-600">
-            {enhancedTools.filter(t => t.personalReview).length}
+            {tools.filter(t => t.personalReview).length}
           </div>
           <div className="text-sm text-muted-foreground">Avis détaillés</div>
         </div>
         <div className="p-4 border rounded-lg">
           <div className="text-2xl font-bold text-orange-600">
-            {enhancedTools.filter(t => !t.freeVsPaidOffer || t.freeVsPaidOffer.includes('Gratuit')).length}
+            {tools.filter(t => !t.freeVsPaidOffer || t.freeVsPaidOffer.includes('Gratuit')).length}
           </div>
           <div className="text-sm text-muted-foreground">Accès gratuit</div>
         </div>
@@ -99,7 +89,7 @@ export default function ExternalToolsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {enhancedTools.map((tool) => {
+                {tools.map((tool) => {
                   const availability = getAvailability(tool);
                   
                   return (
@@ -186,7 +176,7 @@ export default function ExternalToolsPage() {
       <div className="md:hidden space-y-4">
         <h2 className="text-xl font-semibold">Vue Cartes</h2>
         <div className="grid gap-4">
-          {enhancedTools.map((tool) => (
+          {tools.map((tool) => (
             <Card key={tool.slug} className="hover:border-primary transition-colors">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
