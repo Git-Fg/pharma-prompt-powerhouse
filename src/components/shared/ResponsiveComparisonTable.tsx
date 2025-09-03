@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Star } from "lucide-react"
 import Link from "next/link"
-import { table } from '@/lib/design-system'
+import { table, card } from '@/lib/design-system'
 
 interface ToolData {
   slug: string
@@ -33,7 +33,7 @@ interface ResponsiveComparisonTableProps {
 
 export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveComparisonTableProps) {
   const renderStarRating = (score?: number) => {
-    if (!score) return <span className="text-muted-foreground">N/A</span>
+    if (!score) return <span className="text-muted-foreground text-xs">N/A</span>
     
     return (
       <div className="flex items-center gap-1">
@@ -54,17 +54,17 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
 
   const getAvailability = (tool: ToolData) => {
     if (tool.freeVsPaidOffer && tool.freeVsPaidOffer.includes('Gratuit')) {
-      return { label: 'Gratuit + Payant', color: 'bg-green-100 text-green-800' }
+      return { label: 'Gratuit + Payant', color: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300' }
     }
-    return { label: 'Gratuit', color: 'bg-blue-100 text-blue-800' }
+    return { label: 'Gratuit', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300' }
   }
 
   return (
     <div className={className}>
-      {/* Desktop Table View */}
+      {/* Desktop Table View - Enhanced mobile-first approach */}
       <div className={table.mobile.tableView}>
-        <div className={table.responsive.container}>
-          <Table className={table.responsive.table}>
+        <div className={table.enhanced.container}>
+          <Table className={table.enhanced.table}>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[200px]">Outil</TableHead>
@@ -85,7 +85,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                 
                 return (
                   <TableRow key={tool.slug} className="group hover:bg-muted/50">
-                    <TableCell className={table.responsive.cell.normal}>
+                    <TableCell className={`${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop}`}>
                       <div className="space-y-1">
                         <div className="font-medium">
                           {tool.title}
@@ -95,15 +95,15 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                             </Badge>
                           )}
                         </div>
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm text-muted-foreground line-clamp-2">
                           {tool.description}
                         </div>
                       </div>
                     </TableCell>
                     
-                    <TableCell className={`max-w-xs ${table.responsive.cell.normal}`}>
+                    <TableCell className={`max-w-xs ${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop}`}>
                       {tool.personalReview ? (
-                        <p className="text-sm italic text-muted-foreground line-clamp-3">
+                        <p className="text-sm italic text-muted-foreground line-clamp-3 leading-relaxed">
                           "{tool.personalReview}"
                         </p>
                       ) : (
@@ -111,17 +111,17 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                       )}
                     </TableCell>
                     
-                    <TableCell className={`${table.responsive.cell.normal} ${table.mobile.hideColumns}`}>
+                    <TableCell className={`${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop} ${table.mobile.hideColumns}`}>
                       <Badge className={availability.color}>
                         {availability.label}
                       </Badge>
                     </TableCell>
                     
-                    <TableCell className={table.responsive.cell.normal}>
+                    <TableCell className={`${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop}`}>
                       {renderStarRating(tool.confidenceScore)}
                     </TableCell>
                     
-                    <TableCell className={`${table.responsive.cell.normal} ${table.mobile.hideColumns}`}>
+                    <TableCell className={`${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop} ${table.mobile.hideColumns}`}>
                       <div className="flex flex-wrap gap-1 max-w-xs">
                         {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
                           <Badge key={i} variant="outline" className="text-xs">
@@ -136,11 +136,11 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                       </div>
                     </TableCell>
                     
-                    <TableCell className={table.responsive.cell.normal}>
+                    <TableCell className={`${table.enhanced.cell.mobile} ${table.enhanced.cell.desktop}`}>
                       <div className="flex gap-2">
                         <Link 
                           href={`/l-arsenal-ia/${tool.slug}`}
-                          className="text-primary hover:underline text-sm"
+                          className="text-primary hover:underline text-sm font-medium"
                         >
                           Détails
                         </Link>
@@ -148,7 +148,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                           href={tool.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-primary"
+                          className="text-muted-foreground hover:text-primary transition-colors"
                         >
                           <ExternalLink className="size-4" />
                         </a>
@@ -162,7 +162,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
         </div>
       </div>
 
-      {/* Mobile Card View */}
+      {/* Mobile Card View - Enhanced with better spacing */}
       <div className={table.mobile.cardView}>
         <div className="space-y-4">
           {tools.map((tool) => {
@@ -170,7 +170,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
             
             return (
               <Card key={tool.slug} className="hover:border-primary transition-colors">
-                <CardHeader className="pb-3">
+                <CardHeader className={`${card.mobile.padding} ${card.desktop.padding} pb-3`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <CardTitle className="text-lg">
@@ -186,17 +186,17 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                       href={tool.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <ExternalLink className="size-4" />
                     </a>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <p className="text-sm text-muted-foreground">{tool.description}</p>
+                <CardContent className={`${card.mobile.padding} ${card.desktop.padding} ${card.mobile.spacing} ${card.desktop.spacing}`}>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{tool.description}</p>
                   
                   {tool.personalReview && (
-                    <blockquote className="text-sm italic border-l-2 border-muted pl-3">
+                    <blockquote className="text-sm italic border-l-2 border-muted pl-3 leading-relaxed">
                       "{tool.personalReview}"
                     </blockquote>
                   )}
@@ -212,8 +212,8 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                     ))}
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    {tool.confidenceScore && renderStarRating(tool.confidenceScore)}
+                  <div className="flex items-center justify-between pt-2">
+                    <div>{tool.confidenceScore && renderStarRating(tool.confidenceScore)}</div>
                     <Link 
                       href={`/l-arsenal-ia/${tool.slug}`}
                       className="text-primary hover:underline text-sm font-medium"

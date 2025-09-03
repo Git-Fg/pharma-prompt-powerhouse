@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search, Clock, Target, BookOpen } from "lucide-react";
 import { getIcon } from "@/types/icon-taxonomy";
+import { CollectionPageLayout } from "@/components/layout/CollectionPageLayout";
 
 function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target;
@@ -78,18 +79,32 @@ export default function WorkflowsPage() {
   });
 
   const difficulties = [...new Set(content.workflows.map(w => w.difficulty))];
+  
+  // Calculate statistics
+  const totalWorkflows = content.workflows.length;
+  const beginnerCount = content.workflows.filter(w => w.difficulty === 'Débutant').length;
+  const tagCount = new Set(content.workflows.flatMap(w => w.tags)).size;
+  const avgTime = Math.round(
+    content.workflows.reduce((acc, w) => {
+      const timeMatch = w.estimatedTime?.match(/\d+/);
+      return acc + (timeMatch ? parseInt(timeMatch[0]) : 15);
+    }, 0) / content.workflows.length
+  );
+
+  const stats = [
+    { value: totalWorkflows, label: 'Workflows disponibles', colorClass: 'text-blue-600 dark:text-blue-400', bgClass: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200 dark:border-blue-800' },
+    { value: beginnerCount, label: 'Pour débuter', colorClass: 'text-green-600 dark:text-green-400', bgClass: 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800' },
+    { value: tagCount, label: 'Cas d\'usage', colorClass: 'text-purple-600 dark:text-purple-400', bgClass: 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/50 dark:to-purple-900/30 border-purple-200 dark:border-purple-800' },
+    { value: `${avgTime}min`, label: 'Temps moyen', colorClass: 'text-orange-600 dark:text-orange-400', bgClass: 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800' },
+  ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Hero Section */}
-      <div className="text-center py-12">
-        <h1 className="text-4xl font-bold mb-4">Workflows Stratégiques</h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Mes méthodes éprouvées pour utiliser l'IA efficacement dans vos études. 
-          Chaque workflow est une étude de cas personnelle avec ma stratégie pas-à-pas.
-        </p>
-      </div>
-
+    <CollectionPageLayout
+      title="Workflows Stratégiques"
+      description="Mes méthodes éprouvées pour utiliser l'IA efficacement dans vos études. Chaque workflow est une étude de cas personnelle avec ma stratégie pas-à-pas."
+      stats={stats}
+      contentMaxWidth="6xl"
+    >
       {/* Search and Filters */}
       <div className="mb-8 space-y-4">
         <div className="relative max-w-md mx-auto">
@@ -124,7 +139,7 @@ export default function WorkflowsPage() {
       </div>
 
       {/* Workflows Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {filteredWorkflows.map((workflow) => (
           <WorkflowCard key={workflow.slug} workflow={workflow} />
         ))}
@@ -141,13 +156,13 @@ export default function WorkflowsPage() {
       )}
 
       {/* Bottom CTA */}
-      <div className="mt-16 text-center bg-muted p-8 rounded-lg">
-        <h3 className="text-2xl font-semibold mb-4">Nouveau dans l'IA ?</h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+      <div className="mt-16 text-center bg-muted p-6 md:p-8 rounded-lg">
+        <h3 className="text-xl md:text-2xl font-semibold mb-4">Nouveau dans l'IA ?</h3>
+        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
           Je recommande de commencer par comprendre les concepts essentiels avant de vous lancer 
           dans un workflow. Cela vous évitera les erreurs courantes que j'ai faites à mes débuts.
         </p>
-        <div className="space-x-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/par-ou-commencer">
             <Button>
               Par où commencer ?
@@ -161,6 +176,6 @@ export default function WorkflowsPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </CollectionPageLayout>
   );
 }
