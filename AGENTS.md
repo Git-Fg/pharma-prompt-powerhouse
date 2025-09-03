@@ -8,7 +8,7 @@
 - **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
 - **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
-- **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile.
+- **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile grâce au design system centralisé.
 </project_philosophy>
 
 <content_rules>
@@ -39,7 +39,31 @@
 **Stratégie de Documentation**
 - **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
 - **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances du projet. La constitution pour le développement et la création de contenu.
+- **`src/app/globals.css` :** Le design system centralisé avec Tailwind v4. Tous les tokens de design, utilitaires et composants de base.
 </project_documentation_rules>
+
+---
+
+# **Architecture CSS et Design System**
+
+<css_architecture>
+**Design System Centralisé (Tailwind v4 + Shadcn Canary)**
+- **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
+- **@utility :** Classes utilitaires personnalisées (`container`, `section-spacing`, `responsive-text`, etc.) pour un code cohérent.
+- **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
+- **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
+- **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
+</css_architecture>
+
+<responsive_design_principles>
+**Principes de Design Responsif**
+- **Approche Mobile-First :** Toutes les interfaces commencent par la version mobile et s'enrichissent vers le desktop.
+- **Breakpoints Standards :** `sm: 640px`, `md: 768px`, `lg: 1024px`, `xl: 1280px`, `2xl: 1536px`.
+- **Tableaux Responsifs :** Transformation automatique desktop → mobile avec `desktop-table` et `mobile-card`.
+- **Typography Responsive :** Système de classes `responsive-text`, `responsive-heading`, `responsive-subheading`.
+- **Spacing Cohérent :** Variables CSS centralisées pour les marges, paddings et gaps à travers tous les composants.
+</responsive_design_principles>
 
 ---
 
@@ -167,9 +191,14 @@ DO intégrer systématiquement les 3 avertissements (performance, fiabilité, co
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
 DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
 DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
-DO utiliser Sonner exclusivement pour les notifications et Vitest pour les tests.
-DO utiliser `useActionState` pour les formulaires React 19.
-DO comprendre que Next.js 15 ne met plus rien en cache par défaut.
+DO utiliser exclusivement les classes CSS centralisées du design system (`.container`, `.section-spacing`, `.responsive-text`, etc.).
+DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
+DO utiliser les composants de base définis dans `@layer components` plutôt que de recréer des styles.
+DO privilégier les utilitaires CSS personnalisés pour maintenir la cohérence visuelle.
+DO utiliser les tokens de design centralisés (variables CSS) plutôt que des valeurs hardcodées.
+DO NOT créer de nouveaux fichiers CSS ou de styles inline sans justification exceptionnelle.
+DO NOT dupliquer des styles CSS existants - centraliser dans `globals.css`.
+DO NOT ignorer les breakpoints responsifs standard - tous les composants doivent être mobile-friendly.
 DO NOT utiliser de serveur personnalisé.
 DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.

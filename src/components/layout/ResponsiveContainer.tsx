@@ -1,11 +1,10 @@
 // src/components/layout/ResponsiveContainer.tsx
 import { ReactNode } from 'react'
-import { container } from '@/lib/design-system'
 
 interface ResponsiveContainerProps {
   children: ReactNode
   className?: string
-  size?: keyof typeof container
+  size?: 'mobile' | 'tablet' | 'desktop' | 'content'
 }
 
 export function ResponsiveContainer({ 
@@ -13,8 +12,10 @@ export function ResponsiveContainer({
   className = '',
   size = 'desktop'
 }: ResponsiveContainerProps) {
+  const containerClass = size === 'content' ? 'container-content' : 'container'
+  
   return (
-    <div className={`container mx-auto px-4 ${container[size]} ${className}`}>
+    <div className={`${containerClass} ${className}`}>
       {children}
     </div>
   )
@@ -26,7 +27,7 @@ export function ResponsiveSection({
   className = '' 
 }: { children: ReactNode; className?: string }) {
   return (
-    <section className={`py-8 md:py-12 lg:py-16 ${className}`}>
+    <section className={`section-spacing ${className}`}>
       {children}
     </section>
   )
