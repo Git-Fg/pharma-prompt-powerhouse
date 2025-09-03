@@ -23,7 +23,7 @@ export default function ObjectifPage({ params }: ObjectifPageProps) {
     <article className="prose dark:prose-invert mx-auto py-8">
       <h1>{objectif.title}</h1>
       <p className="lead">{objectif.description}</p>
-      <ContentRenderer content={objectif.content} />
+      {objectif.content && <ContentRenderer content={objectif.content} />}
     </article>
   );
 }

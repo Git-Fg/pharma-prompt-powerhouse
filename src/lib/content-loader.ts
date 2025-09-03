@@ -12,7 +12,7 @@ export function loadContent() {
   const guides = allGuides;
   const prompts = allPrompts;
   const externalTools = allExternalTools;
-  const objectives = allObjectifs;
+  const objectifs = allObjectifs;
   const workflows: unknown[] = []; // TODO: Add workflows when available
 
   // --- Data Enrichment ---
@@ -36,7 +36,7 @@ export function loadContent() {
     concepts: enrichedConcepts,
     prompts,
     externalTools,
-    objectives,
+    objectifs,
     workflows,
   };
 }
@@ -49,4 +49,4 @@ export const getGuideBySlug = (slug: string) => content.guides.find(g => g.slug 
 export const getConceptBySlug = (slug: string) => content.concepts.find(c => c.slug === slug);
 export const getPromptBySlug = (slug: string) => content.prompts.find(p => p.slug === slug);
 export const getToolBySlug = (slug: string) => content.externalTools.find(t => t.slug === slug);
-export const getObjectifBySlug = (slug: string) => content.objectives.find(o => o.slug === slug);
+export const getObjectifBySlug = (slug: string) => content.objectifs.find(o => o.slug === slug);
