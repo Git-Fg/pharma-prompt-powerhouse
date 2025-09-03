@@ -1,14 +1,13 @@
 # Architecture des Types
 
-Ce dossier contient l'organisation des types TypeScript de l'application.
+Ce dossier contient les types globaux partagés de l'application.
 
 ## 🏗️ Structure
 
 ```
 src/types/
-├── index.ts          # Point d'entrée principal - ré-exporte tout
-├── content.ts        # Types générés par content-collections
-├── app.ts            # Types partagés spécifiques à l'application
+├── index.ts          # Point d'entrée principal - ré-exporte les types importants
+├── icon-taxonomy.ts  # Types et logique pour les icônes
 └── README.md         # Cette documentation
 ```
 
@@ -16,76 +15,26 @@ src/types/
 
 ### 1. **Source de Vérité Unique pour le Contenu**
 
-- Les types générés par `content-collections` sont la référence absolue
-- **Ne jamais** redéfinir ces types ailleurs
-- Utiliser `src/types/content.ts` comme point d'entrée
+-   **Tous les types de contenu** (`Concept`, `Guide`, `Prompt`, etc.) sont définis via des schémas Zod dans `src/lib/content-schema.ts`.
+-   Ce fichier est la **source de vérité unique**. Les types TypeScript sont inférés de ces schémas.
+-   **Ne jamais** redéfinir manuellement ces types ailleurs.
 
 ### 2. **Co-localisation des Props de Composants**
 
-- Les types spécifiques à un composant (comme ses props) doivent vivre **dans le même fichier**
-- Exemple : `PromptCardProps` est défini dans `PromptCard.tsx`
-- **Principe** : "Tout ce qui est lié reste ensemble"
+-   Les types spécifiques à un composant (comme ses props) doivent vivre **dans le même fichier que le composant**.
+-   Exemple : `PromptCardProps` est défini dans `PromptCard.tsx`.
 
 ### 3. **Types Globaux Partagés**
 
-- Le dossier `src/types/` est réservé aux types **partagés et réutilisés**
-- Ces types doivent être utilisés à **plusieurs endroits** de l'application
+-   Ce dossier `src/types/` est réservé aux types **partagés et réutilisés à travers toute l'application** qui ne sont pas liés au contenu.
+-   `index.ts` agit comme un point d'entrée pratique pour importer les types les plus courants, notamment ceux du contenu.
 
 ## 🔄 Utilisation
 
-### Import des Types de Contenu
-
 ```typescript
-import type { Prompt, Guide, Philosophy } from '@/types/content';
+// Importer un type spécifique de contenu
+import type { Prompt, Guide } from '@/types';
+
+// Importer un type de bloc de contenu
+import type { ContentBlock } from '@/types';
 ```
-
-### Import des Types Applicatifs
-
-```typescript
-import type { SearchResult, FilterOptions } from '@/types/app';
-```
-
-### Import de Tout (déconseillé, mais disponible)
-
-```typescript
-import type { Prompt, SearchResult } from '@/types';
-```
-
-## 📝 Ajouter un Nouveau Type
-
-### Question à se poser : "Où ce type sera-t-il utilisé ?"
-
-1. **Un seul composant** → Co-localiser dans le fichier du composant
-2. **Plusieurs composants** → Ajouter dans `src/types/app.ts`
-3. **Structure de contenu MDX** → Utiliser les types générés par `content-collections`
-
-### Exemple d'ajout dans `app.ts`
-
-```typescript
-// Types pour la gestion des utilisateurs
-export interface User {
-  id: string;
-  name: string;
-  preferences: UserPreferences;
-}
-
-export interface UserPreferences {
-  theme: 'light' | 'dark';
-  language: 'fr' | 'en';
-}
-```
-
-## 🚫 Ce qu'il ne faut PAS faire
-
-- ❌ Redéfinir des types déjà générés par `content-collections`
-- ❌ Mettre des types de props de composants dans `src/types/`
-- ❌ Créer des types "fourre-tout" sans responsabilité claire
-- ❌ Utiliser `any` ou `unknown` sans justification
-
-## ✅ Bonnes Pratiques
-
-- ✅ Utiliser des noms explicites et descriptifs
-- ✅ Documenter les types complexes avec des commentaires JSDoc
-- ✅ Préférer les `interface` pour les objets, les `type` pour les unions/intersections
-- ✅ Utiliser des types littéraux pour les valeurs constantes
-- ✅ Éviter les types trop larges, privilégier la spécificité
