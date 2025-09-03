@@ -1,4 +1,3 @@
-// src/content/prompts/resolveur-cas-cliniques-tot.ts
 import { Prompt, promptSchema } from '@/lib/content-schema';
 
 const promptData = {

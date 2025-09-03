@@ -1,17 +1,16 @@
-// src/content/prompts-new/generateur-questions-examen.ts
 import { Prompt, promptSchema } from '@/lib/content-schema';
 
 const promptData = {
   "slug": "generateur-questions-examen",
   "title": "Générateur de Questions d'Examen",
-  "description": "Transformez vos notes de cours en QCM et questions ouvertes pour une révision active et efficace.",
+  "description": "Un prompt pour générer des questions d'examen (QCM, questions ouvertes) basées sur un contenu de cours.",
   "icon": "HelpCircle",
-  "category": "apprentissage",
+  "category": "enseignement",
   "difficulty": "intermédiaire",
   "tags": [
-    "chatgpt",
-    "exemple-code",
-    "pedagogie",
+    "enseignement",
+    "examen",
+    "génération-contenu",
     "pharmacie",
     "prompting",
     "qcm",
@@ -20,89 +19,95 @@ const promptData = {
   ],
   "isFavorite": false,
   "keyTakeaways": [],
-  "conceptSlugs": [
-    "context-engineering"
-  ],
-  "targetTool": "ChatGPT",
+  "conceptSlugs": [],
   "variables": [
-    "course_content",
-    "question_types",
-    "difficulty_level",
-    "question_count"
+    "contenu_cours",
+    "type_questions",
+    "nombre_questions"
   ],
-  "promptContent": "<role>\nTu es un concepteur de sujets d'examen pour le concours de l'internat en pharmacie. Tu crées des questions pertinentes qui testent la compréhension profonde et non la simple mémorisation.\n</role>\n\n<texte_de_cours>\n{{course_content}}\n</texte_de_cours>\n\n<instructions>\nEn te basant exclusivement sur le texte de cours fourni, génère {{question_count}} questions de type \"{{question_types}}\" avec un niveau de difficulté \"{{difficulty_level}}\".\nPour les QCM, fournis la réponse correcte et une justification.\nPour les questions ouvertes, fournis les points clés de la réponse attendue.\n</instructions>\n",
+ "promptContent": "Tu es un expert en pédagogie pour des étudiants en pharmacie.\n\n<contenu_cours>\n{{contenu_cours}}\n</contenu_cours>\n\n<type_questions>\n{{type_questions}}\n</type_questions>\n\n<nombre_questions>\n{{nombre_questions}}\n</nombre_questions>\n\n<thinking_process>\n1. **Analyse du Contenu** : Identifie les concepts clés et les faits importants du cours.\n2. **Génération de Questions** : Crée des questions adaptées au type demandé (QCM, ouvertes).\n3. **Validation Pédagogique** : Assure-toi que les questions testent la compréhension, pas seulement la mémoire.\n</thinking_process>\n\n<format_sortie>\n- Fournis les questions numérotées.\n- Pour les QCM, inclue 4 options avec la bonne réponse en premier.\n- Pour les questions ouvertes, propose un exemple de réponse modèle.\n</format_sortie>",
+  "systemPromptContent": "Tu es un expert en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des questions d'examen (QCM, questions ouvertes) qui testent la compréhension et l'application des connaissances, basées sur un contenu de cours fourni.\n",
+  "alternativeVersions": {
+    "standard": "Tu es un expert en pédagogie pour des étudiants en pharmacie.\n\nGénère des questions d'examen basées sur le contenu de cours suivant.\n\n**Contenu du Cours :**\n{{contenu_cours}}\n\n**Type de Questions Souhaité :**\n{{type_questions}}\n\n**Nombre de Questions :**\n{{nombre_questions}}\n\nProcède ainsi :\n1. **Analyse du Contenu** : Identifie les concepts clés.\n2. **Génération de Questions** : Crée des questions adaptées.\n3. **Validation Pédagogique** : Assure-toi qu'elles testent la compréhension.\n\nFournis les questions numérotées. Pour les QCM, inclue 4 options avec la bonne réponse en premier. Pour les questions ouvertes, propose un exemple de réponse modèle.",
+    "xml": "Tu es un expert en pédagogie pour des étudiants en pharmacie.\n\n<contenu_cours>\n{{contenu_cours}}\n</contenu_cours>\n\n<type_questions>\n{{type_questions}}\n</type_questions>\n\n<nombre_questions>\n{{nombre_questions}}\n</nombre_questions>\n\n<thinking_process>\n1. **Analyse du Contenu** : Identifie les concepts clés et les faits importants du cours.\n2. **Génération de Questions** : Crée des questions adaptées au type demandé (QCM, ouvertes).\n3. **Validation Pédagogique** : Assure-toi que les questions testent la compréhension, pas seulement la mémoire.\n</thinking_process>\n\n<format_sortie>\n- Fournis les questions numérotées.\n- Pour les QCM, inclue 4 options avec la bonne réponse en premier.\n- Pour les questions ouvertes, propose un exemple de réponse modèle.\n</format_sortie>",
+    "aiStudio": {
+      "systemPrompt": "Tu es un expert en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des questions d'examen (QCM, questions ouvertes) qui testent la compréhension et l'application des connaissances, basées sur un contenu de cours fourni.\n",
+      "userPrompt": "Génère des questions d'examen basées sur le contenu de cours suivant.\n\n**Contenu du Cours :**\n{{contenu_cours}}\n\n**Type de Questions Souhaité :**\n{{type_questions}}\n\n**Nombre de Questions :**\n{{nombre_questions}}\n\nProcède ainsi :\n1. **Analyse du Contenu** : Identifie les concepts clés.\n2. **Génération de Questions** : Crée des questions adaptées.\n3. **Validation Pédagogique** : Assure-toi qu'elles testent la compréhension.\n\nFournis les questions numérotées. Pour les QCM, inclue 4 options avec la bonne réponse en premier. Pour les questions ouvertes, propose un exemple de réponse modèle."
+    }
+  },
+  "recommendedTools": {
+    "standard": [
+      "ChatGPT",
+      "Claude.ai"
+    ],
+    "xml": [
+      "Claude.ai"
+    ],
+    "aiStudio": [
+      "Google AI Studio",
+      "Qwen Chat"
+    ]
+  },
   "content": [
     {
-      "type": "alert",
-      "variant": "default",
-      "title": "🎯 Outil Recommandé",
-      "content": "**ChatGPT** avec son **Study Mode** est particulièrement adapté pour cette tâche grâce à son approche interactive d'apprentissage."
-    },
-    {
       "type": "markdown",
-      "content": "## Comment Utiliser ce Prompt"
+      "content": "## Création d'Examens avec IA\n\nCe prompt guide un LLM dans la création de questions d'examen pédagogiques (QCM, ouvertes) à partir d'un contenu de cours, en se concentrant sur la compréhension plutôt que la mémoire."
     },
     {
       "type": "card",
       "title": "Variables à Personnaliser",
-      "variant": "outline",
-      "content": "- **{{course_content}}** : Copiez-collez le contenu de votre cours ou de vos notes\n- **{{question_types}}** : \"QCM\", \"questions ouvertes\", ou \"mélange\"\n- **{{difficulty_level}}** : \"débutant\", \"intermédiaire\", ou \"avancé\"\n- **{{question_count}}** : Nombre de questions souhaitées (ex: 5, 10, 15)"
+      "content": "- **{{contenu_cours}}** : Le texte du cours sur lequel baser les questions\n- **{{type_questions}}** : 'QCM' ou 'questions ouvertes'\n- **{{nombre_questions}}** : Le nombre de questions à générer"
     },
     {
       "type": "tabs",
-      "defaultValue": "standard",
+      "defaultValue": "examples",
       "tabs": [
         {
-          "value": "standard",
-          "title": "Version Standard",
+          "value": "examples",
+          "title": "Exemples d'Usage",
           "content": [
             {
-              "type": "markdown",
-              "content": "Idéale pour tous les outils IA classiques."
-            },
-            {
-              "type": "codeBlock",
-              "language": "text",
-              "filename": "prompt-standard.txt",
-              "content": "Tu es un concepteur de sujets d'examen pour le concours de l'internat en pharmacie. Tu crées des questions pertinentes qui testent la compréhension profonde et non la simple mémorisation.\n\nEn te basant exclusivement sur le texte de cours suivant :\n\"\"\"\n{{course_content}}\n\"\"\"\n\nGénère {{question_count}} questions de type \"{{question_types}}\" avec un niveau de difficulté \"{{difficulty_level}}\".\n\nPour les QCM, fournis la réponse correcte et une justification.\nPour les questions ouvertes, fournis les points clés de la réponse attendue."
+              "type": "card",
+              "title": "Exemple : Questions sur les Antihypertenseurs",
+              "content": "**Contenu du Cours :**\nLes antihypertenseurs sont classés en plusieurs classes : diurétiques, bêta-bloquants, IEC, ARA, CCB. Chaque classe a un mécanisme d'action spécifique.\n\n**Type de Questions Souhaité :**\nQCM\n**Nombre de Questions :**\n3"
             }
           ]
         },
         {
-          "value": "chatgpt-study",
-          "title": "ChatGPT Study Mode",
+          "value": "formats",
+          "title": "Optimisation par Outil",
           "content": [
             {
-              "type": "alert",
-              "variant": "default",
-              "title": "💡 Astuce",
-              "content": "Activez le **Study Mode** dans ChatGPT avant d'envoyer ce prompt pour une expérience d'apprentissage interactive."
+              "type": "card",
+              "title": "Version Standard",
+              "content": "Parfait pour les interfaces de chat simples (ChatGPT, Claude). Format conversationnel naturel."
             },
             {
-              "type": "codeBlock",
-              "language": "markdown",
-              "filename": "chatgpt-study-mode.md",
-              "content": "# Objectif : Préparation à l'examen\n\nAgis en tant que mon tuteur pour l'internat en pharmacie.\nVoici mon support de cours sur lequel je veux m'entraîner :\n\"\"\"\n{{course_content}}\n\"\"\"\n\nGénère {{question_count}} questions de type \"{{question_types}}\" (difficulté : {{difficulty_level}}).\n\nAprès chaque question que je réponds, donne-moi :\n- La correction détaillée\n- Une explication pédagogique\n- Des conseils pour mémoriser"
+              "type": "card",
+              "title": "Version XML",
+              "variant": "outline",
+              "content": "Optimisé pour Claude qui excelle avec les balises structurées `<contenu_cours>`, `<type_questions>`."
+            },
+            {
+              "type": "card",
+              "title": "Version AI Studio",
+              "variant": "outline",
+              "content": "Sépare System/User pour un contrôle granulaire des paramètres de créativité. Idéal pour Qwen Chat."
             }
           ]
         }
       ]
     },
     {
-      "type": "card",
-      "title": "Exemple Concret d'Utilisation",
-      "content": "**Sujet** : Pharmacocinétique des bêta-bloquants\n\n**Variables personnalisées** :\n- `{{course_content}}` : *\"Les bêta-bloquants sont des antagonistes compétitifs des récepteurs β-adrénergiques...\"*\n- `{{question_types}}` : *\"QCM\"*\n- `{{difficulty_level}}` : *\"intermédiaire\"*\n- `{{question_count}}` : *\"8\"*"
-    },
-    {
       "type": "alert",
       "variant": "default",
-      "title": "📚 Conseil Pédagogique",
-      "content": "Pour maximiser l'efficacité, limitez le contenu de cours à un chapitre ou un concept à la fois. Cela permet des questions plus précises et ciblées."
+      "title": "⚠️ Validation Humaine",
+      "content": "Toujours valider les questions générées par un enseignant humain pour en garantir l'exactitude scientifique et la pertinence pédagogique."
     },
     {
-      "type": "conceptRecommendation",
-      "slug": "context-engineering",
-      "reason": "Apprenez à optimiser la structure de vos cours pour des questions plus pertinentes et un apprentissage plus efficace."
+      "type": "guideRecommendation",
+      "slug": "creation-evaluations",
+      "reason": "Découvrez les bonnes pratiques pour créer des évaluations efficaces en pharmacie."
     }
   ]
 };

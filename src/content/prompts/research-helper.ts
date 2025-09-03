@@ -1,4 +1,3 @@
-// src/content/prompts-new/research-helper.ts
 import { Prompt, promptSchema } from '@/lib/content-schema';
 
 const promptData = {

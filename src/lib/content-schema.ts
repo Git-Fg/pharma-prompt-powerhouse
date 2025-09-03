@@ -77,6 +77,52 @@ const tabsBlockSchema: z.ZodType<any> = z.lazy(() =>
   }).strict()
 );
 
+// --- NOUVEAUX SCHÉMAS DE BLOCS ---
+const keyTakeawaysBlockSchema = z.object({
+  type: z.literal('keyTakeaways'),
+  points: z.array(z.string()),
+});
+
+const beforeAfterPromptBlockSchema = z.object({
+  type: z.literal('beforeAfterPrompt'),
+  beforePrompt: z.string(),
+  afterPrompt: z.string(),
+  beforeImageSrc: z.string().optional(),
+  afterImageSrc: z.string().optional(),
+});
+
+const interactiveChecklistBlockSchema = z.object({
+  type: z.literal('interactiveChecklist'),
+  items: z.array(z.string()),
+});
+
+// Schéma récursif pour les accordéons (le contenu peut être d'autres blocs)
+type AccordionBlock = {
+  type: 'accordion';
+  items: Array<{
+    title: string;
+    content: ContentBlock[];
+  }>;
+};
+const accordionBlockSchema: z.ZodType<AccordionBlock> = z.lazy(() =>
+  z.object({
+    type: z.literal('accordion'),
+    items: z.array(
+      z.object({
+        title: z.string(),
+        content: z.array(contentBlockSchema),
+      })
+    ),
+  })
+);
+
+const tableBlockSchema = z.object({
+  type: z.literal('table'),
+  caption: z.string().optional(),
+  headers: z.array(z.string()),
+  rows: z.array(z.array(z.string())),
+});
+
 // Union de tous les blocs de contenu possibles
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const contentBlockSchema: z.ZodType<any> = z.union([
@@ -89,6 +135,12 @@ const contentBlockSchema: z.ZodType<any> = z.union([
   cardBlockSchema,
   tabsBlockSchema,
   multiFormatPromptBlockSchema,
+  // Ajout des nouveaux blocs
+  keyTakeawaysBlockSchema,
+  beforeAfterPromptBlockSchema,
+  interactiveChecklistBlockSchema,
+  accordionBlockSchema,
+  tableBlockSchema,
 ]);
 
 // Type TypeScript inféré pour un bloc de contenu
@@ -108,56 +160,60 @@ const baseContentSchema = z.object({
   icon: z.string().optional(),
   tags: z.array(z.string()).default([]),
   isFavorite: z.boolean().default(false),
+  conceptSlugs: z.array(slugSchema).optional(), // Déplacé ici pour être commun à tous
 });
 
 export const conceptSchema = baseContentSchema.extend({
   category: z.string(),
- difficulty: z.string(),
+  difficulty: z.string(),
   keyTakeaways: z.array(z.string()).min(1, 'Must have at least one key takeaway'),
   mainGuideSlug: slugSchema.optional(),
-  conceptSlugs: z.array(slugSchema).optional(),
   content: z.array(contentBlockSchema),
 }).strict();
 
 export const guideSchema = baseContentSchema.extend({
   category: z.string(),
   difficulty: z.string(),
- estimatedTime: z.string().optional(),
+  estimatedTime: z.string().optional(),
   keyTakeaways: z.array(z.string()).optional(),
   isWorkflow: z.boolean().default(false),
-  conceptSlugs: z.array(slugSchema).optional(),
   content: z.array(contentBlockSchema),
 }).strict();
 
 export const promptSchema = baseContentSchema.extend({
   category: z.string(),
   difficulty: z.string(),
+  keyTakeaways: z.array(z.string()).optional(), // Ajouté pour la cohérence
   promptContent: z.string().optional(),
   systemPromptContent: z.string().optional(),
   variables: z.array(z.string()).optional(),
   targetTool: z.string().optional(),
-  alternativeVersions: z.record(z.string(), z.object({
+  alternativeVersions: z.object({
     standard: z.string().optional(),
     xml: z.string().optional(),
     aiStudio: z.object({
       systemPrompt: z.string().optional(),
       userPrompt: z.string().optional(),
     }).optional(),
-  })).optional(),
-  recommendedTools: z.record(z.string(), z.array(z.string())).optional(),
-  conceptSlugs: z.array(slugSchema).optional(),
+  }).optional(),
+  recommendedTools: z.object({
+      standard: z.array(z.string()).optional(),
+      xml: z.array(z.string()).optional(),
+      aiStudio: z.array(z.string()).optional(),
+  }).optional(),
   content: z.array(contentBlockSchema),
 }).strict();
 
 export const externalToolSchema = baseContentSchema.extend({
   url: z.string().url(),
   logo: z.string().optional(),
-  category: z.string(), 
+  category: z.string(),
   tldr: z.string().optional(),
   color: z.string().optional(),
   use_cases: z.array(z.string()).optional(),
   capabilities: z.array(z.string()).optional(),
-  content: z.array(contentBlockSchema).optional(),
+  keyTakeaways: z.array(z.string()).optional(), // Ajouté pour la cohérence
+  content: z.array(contentBlockSchema), // Rendu obligatoire pour la cohérence
 }).strict();
 
 // Note: Le prompt dans l'objectif est une dépendance circulaire si on type fortement.
@@ -176,7 +232,7 @@ export const objectifSchema = baseContentSchema.extend({
   checklist: z.array(z.string()).min(1),
   relatedConcepts: z.array(z.string()),
   relatedGuides: z.array(z.string()),
- content: z.array(contentBlockSchema).optional(),
+  content: z.array(contentBlockSchema).optional(),
 }).strict();
 
 export const workflowSchema = baseContentSchema.extend({
@@ -203,6 +259,8 @@ export type Workflow = z.infer<typeof workflowSchema>;
 // Types enrichis pour le loader
 export type EnrichedGuide = Guide & {
   concepts: Concept[];
+  relatedGuides: Omit<Guide, 'content'>[];
+  relatedPrompts: Omit<Prompt, 'content'>[];
 };
 
 export type EnrichedConcept = Concept & {
