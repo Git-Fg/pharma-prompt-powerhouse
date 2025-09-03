@@ -225,7 +225,7 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation. 
 Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'implémentation en privilégiant l'édition manuelle, étape par étape des différents fichiers. 
 
-A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type, vitest et e2e. 
+A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type, vitest, e2e ainsi que de playwright tool te permettant de naviguer et vérifier les logs, prendre des screenshot, et globalement analyser le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. 
 
 Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus. 
 </copilot_contrainte>
