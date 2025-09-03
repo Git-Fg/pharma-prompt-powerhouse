@@ -9,7 +9,7 @@ interface ObjectifPageProps {
 }
 
 export async function generateStaticParams() {
-  return content.objectives.map((obj) => ({ slug: obj.slug }));
+  return content.objectifs.map((obj) => ({ slug: obj.slug }));
 }
 
 export default function ObjectifPage({ params }: ObjectifPageProps) {
