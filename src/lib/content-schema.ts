@@ -143,23 +143,6 @@ export const enhancedExternalToolSchema = baseContentSchema.extend({
   content: z.array(contentBlockSchema),
 });
 
-export const objectifSchema = baseContentSchema.extend({
-  masterPrompt: z.object({
-    description: z.string(),
-    prompt: z.record(z.string(), z.unknown()), 
-  }),
-  beforeAfter: z.object({
-    beforePrompt: z.string(),
-    afterPrompt: z.string(),
-    beforeImageSrc: z.string().optional(),
-    afterImageSrc: z.string().optional(),
-  }),
-  checklist: z.array(z.string()).min(1),
-  relatedConcepts: z.array(z.string()),
-  relatedGuides: z.array(z.string()),
-  content: z.array(contentBlockSchema).optional(),
-});
-
 
 // =================================================================
 // 3. EXPORTATION DES TYPES
@@ -171,7 +154,6 @@ export type Workflow = z.infer<typeof workflowSchema>;
 export type Prompt = z.infer<typeof promptSchema>;
 export type ExternalTool = z.infer<typeof externalToolSchema>;
 export type EnhancedExternalTool = z.infer<typeof enhancedExternalToolSchema>;
-export type Objectif = z.infer<typeof objectifSchema>;
 
 export type EnrichedWorkflow = Workflow & {
   concepts: Concept[];
