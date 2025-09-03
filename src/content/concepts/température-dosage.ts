@@ -67,7 +67,17 @@ export const concept = {
     {
       "type": "card",
       "title": "🔬 Où Régler la Température ?",
-      "content": "Ce paramètre n'est généralement **pas disponible** dans les interfaces de chat grand public comme ChatGPT ou Gemini.\n\n**Pour y accéder, vous devez utiliser les environnements d'expérimentation :**\n\n| Plateforme | Accès | Spécialité |\n|------------|-------|------------|\n| **Google AI Studio** | Gratuit | Écosystème Gemini complet |\n| **OpenAI Playground** | Payant | Modèles GPT |\n| **Anthropic Console** | Gratuit/Payant | Modèles Claude |\n\nCes plateformes sont de véritables **laboratoires conçus pour les non-développeurs** souhaitant maîtriser le prompt engineering."
+      "content": "Ce paramètre n'est généralement **pas disponible** dans les interfaces de chat grand public comme ChatGPT ou Gemini.\n\n**Pour y accéder, vous devez utiliser les environnements d'expérimentation :**"
+    },
+    {
+      "type": "table",
+      "headers": ["Plateforme", "Accès", "Spécialité"],
+      "rows": [
+        ["**Google AI Studio**", "Gratuit", "Écosystème Gemini complet"],
+        ["**OpenAI Playground**", "Payant", "Modèles GPT"],
+        ["**Anthropic Console**", "Gratuit/Payant", "Modèles Claude"]
+      ],
+      "caption": "Ces plateformes sont de véritables **laboratoires conçus pour les non-développeurs** souhaitant maîtriser le prompt engineering."
     },
     {
       "type": "alert",

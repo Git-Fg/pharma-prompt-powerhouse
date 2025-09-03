@@ -70,7 +70,17 @@ export const guide = {
     },
     {
       "type": "markdown",
-      "content": "### Tableau Comparatif des WebUIs de Chat (Offres Gratuites)\n\n| Critère | Perplexity AI | Gemini (Google) | ChatGPT (OpenAI) | Claude.ai | DeepSeek / Qwen / Z.AI |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **Point Fort** | **Recherche Fiable & Sourcée** | **Accès à Gemini 2.5 Flash** | **Écosystème & Popularité** | **Grande Fenêtre Contexte** | **Suite d'Outils Gratuits** |\n| **Analyse PDF** | Limitée | **Très Bonne (10 fichiers)** | Limitée | Bonne | **Excellente (50 fichiers)** |\n| **Confidentialité** | Standard (US) | Standard (US/EU) | Standard (US) | Standard (US) | ⚠️ **Très Faible (Asie)** |\n| **Idéal pour...** | Veille scientifique, réponses factuelles | Assistant polyvalent, analyse de doc | Tâches créatives, brainstorming | Analyse de longs documents, rédaction | Expérimentation, création (slides, code) |"
+      "content": "### Tableau Comparatif des WebUIs de Chat (Offres Gratuites)"
+    },
+    {
+      "type": "table",
+      "headers": ["Critère", "Perplexity AI", "Gemini (Google)", "ChatGPT (OpenAI)", "Claude.ai", "DeepSeek / Qwen / Z.AI"],
+      "rows": [
+        ["**Point Fort**", "**Recherche Fiable & Sourcée**", "**Accès à Gemini 2.5 Flash**", "**Écosystème & Popularité**", "**Grande Fenêtre Contexte**", "**Suite d'Outils Gratuits**"],
+        ["**Analyse PDF**", "Limitée", "**Très Bonne (10 fichiers)**", "Limitée", "Bonne", "**Excellente (50 fichiers)**"],
+        ["**Confidentialité**", "Standard (US)", "Standard (US/EU)", "Standard (US)", "Standard (US)", "⚠️ **Très Faible (Asie)**"],
+        ["**Idéal pour...**", "Veille scientifique, réponses factuelles", "Assistant polyvalent, analyse de doc", "Tâches créatives, brainstorming", "Analyse de longs documents, rédaction", "Expérimentation, création (slides, code)"]
+      ]
     },
     {
       "type": "markdown",
@@ -144,7 +154,19 @@ export const guide = {
     },
     {
       "type": "markdown",
-      "content": "### Tableau Comparatif des Environnements d'Expérimentation\n\n| Critère | Google AI Studio | OpenAI Playground | Anthropic Console |\n| :--- | :--- | :--- | :--- |\n| **Point Fort** | **Accès Gratuit & Généreux** | **Accès aux derniers modèles GPT** | **Outils d'Évaluation de Prompts** |\n| **Modèle Gratuit** | ✅ **Gemini 2.5 Pro (1M tokens)** | ❌ Non (nécessite une CB) | ❌ Non (nécessite une CB) |\n| **Contexte Max** | **1 Million de tokens** | 400 00 tokens | 200 000 tokens (1M en bêta) |\n| **Expérience Non-Dev**| **Excellente et intuitive** | Bonne, un peu plus technique | Bonne, orientée évaluation |\n| **Fonctionnalité Unique**| Contexte via URL, Sorties Structurées | Accès aux variantes (nano, mini) | **Workbench & Générateur de Prompts** |\n| **Idéal pour...**| **Apprendre sans frais, tester sur de longs textes**| Expérimenter avec l'écosystème GPT | Rédiger et évaluer des prompts de manière rigoureuse |"
+      "content": "### Tableau Comparatif des Environnements d'Expérimentation"
+    },
+    {
+      "type": "table",
+      "headers": ["Critère", "Google AI Studio", "OpenAI Playground", "Anthropic Console"],
+      "rows": [
+        ["**Point Fort**", "**Accès Gratuit & Généreux**", "**Accès aux derniers modèles GPT**", "**Outils d'Évaluation de Prompts**"],
+        ["**Modèle Gratuit**", "✅ **Gemini 2.5 Pro (1M tokens)**", "❌ Non (nécessite une CB)", "❌ Non (nécessite une CB)"],
+        ["**Contexte Max**", "**1 Million de tokens**", "400 00 tokens", "200 000 tokens (1M en bêta)"],
+        ["**Expérience Non-Dev**", "**Excellente et intuitive**", "Bonne, un peu plus technique", "Bonne, orientée évaluation"],
+        ["**Fonctionnalité Unique**", "Contexte via URL, Sorties Structurées", "Accès aux variantes (nano, mini)", "**Workbench & Générateur de Prompts**"],
+        ["**Idéal pour...**", "**Apprendre sans frais, tester sur de longs textes**", "Expérimenter avec l'écosystème GPT", "Rédiger et évaluer des prompts de manière rigoureuse"]
+      ]
     },
     {
       "type": "markdown",

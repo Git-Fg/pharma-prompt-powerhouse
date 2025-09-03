@@ -101,8 +101,21 @@ export const guide = {
     },
     {
       "type": "card",
-      "title": "Core Kit vs Solutions Payantes - Comparaison Réaliste",
-      "content": "| **Capacité** | **Core Kit Gratuit** | **Solutions Payantes** | **Verdict** |\n|--------------|---------------------|------------------------|-------------|\n| **Recherche web** | 🏆 Z.AI (GLM-4.5) | ⚖️ Perplexity Pro ($20) | **Avantage gratuit** |\n| **Contexte long** | 🏆 AI Studio (1M tokens) | ⚖️ Claude Pro (200K tokens) | **Avantage gratuit** |\n| **Multimodal** | 🏆 AI Studio (complet) | ⚖️ ChatGPT Plus ($20) | **Avantage gratuit** |\n| **Créativité** | 🎨 Z.AI (suite complète) | ⚖️ Limité ailleurs | **Avantage gratuit** |\n| **Confidentialité** | ⚠️ Risque (Asie/US) | ✅ Meilleur contrôle | Payant gagne |\n| **Support** | ❌ Communautaire | ✅ Support dédié | Payant gagne |\n| **Stabilité** | ⚡ Variable | ✅ SLA garantis | Payant gagne |\n\n**Conclusion** : Le core kit gratuit offre 95% des capacités pour 0% du coût"
+      "title": "Core Kit vs Solutions Payantes - Comparaison Réaliste"
+    },
+    {
+      "type": "table",
+      "headers": ["**Capacité**", "**Core Kit Gratuit**", "**Solutions Payantes**", "**Verdict**"],
+      "rows": [
+        ["**Recherche web**", "🏆 Z.AI (GLM-4.5)", "⚖️ Perplexity Pro ($20)", "**Avantage gratuit**"],
+        ["**Contexte long**", "🏆 AI Studio (1M tokens)", "⚖️ Claude Pro (200K tokens)", "**Avantage gratuit**"],
+        ["**Multimodal**", "🏆 AI Studio (complet)", "⚖️ ChatGPT Plus ($20)", "**Avantage gratuit**"],
+        ["**Créativité**", "🎨 Z.AI (suite complète)", "⚖️ Limité ailleurs", "**Avantage gratuit**"],
+        ["**Confidentialité**", "⚠️ Risque (Asie/US)", "✅ Meilleur contrôle", "Payant gagne"],
+        ["**Support**", "❌ Communautaire", "✅ Support dédié", "Payant gagne"],
+        ["**Stabilité**", "⚡ Variable", "✅ SLA garantis", "Payant gagne"]
+      ],
+      "caption": "**Conclusion** : Le core kit gratuit offre 95% des capacités pour 0% du coût"
     },
     {
       "type": "alert",
