@@ -6,7 +6,6 @@
 export type {
   Concept,
   Guide,
-  Prompt,
   Workflow,
   ExternalTool,
   EnhancedExternalTool,
@@ -20,6 +19,5 @@ export type {
 export type AnyContent = 
   | import("@/lib/content-schema").Concept 
   | import("@/lib/content-schema").Guide 
-  | import("@/lib/content-schema").Prompt 
   | import("@/lib/content-schema").Workflow
   | import("@/lib/content-schema").ExternalTool;
