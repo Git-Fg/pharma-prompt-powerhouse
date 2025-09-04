@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from "react";
 import { content } from '@/lib/content-loader';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +10,8 @@ import { ArrowRight, Search, Clock, Target, BookOpen } from "lucide-react";
 import { getIcon } from "@/types/icon-taxonomy";
 import { CollectionPageLayout } from "@/components/layout/CollectionPageLayout";
 import { useAutoAnimateList } from "@/hooks/useAutoAnimate";
+import { useContentFilter } from "@/hooks/useContentFilter";
+import { difficultyLabels } from "@/lib/constants";
 
 function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target;
@@ -65,24 +66,18 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
 }
 
 export default function WorkflowsPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
-  
-  // AutoAnimate ref for smooth filtering transitions
   const listRef = useAutoAnimateList();
-  
-  // Filter workflows based on search and difficulty
-  const filteredWorkflows = content.workflows.filter(workflow => {
-    const matchesSearch = workflow.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         workflow.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         workflow.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-                         
-    const matchesDifficulty = !selectedDifficulty || workflow.difficulty === selectedDifficulty;
-    
-    return matchesSearch && matchesDifficulty;
-  });
 
-  const difficulties = [...new Set(content.workflows.map(w => w.difficulty))];
+  // Use centralized content filtering
+  const {
+    filteredItems: filteredWorkflows,
+    searchTerm,
+    setSearchTerm,
+    selectedDifficulty,
+    setSelectedDifficulty,
+    availableDifficulties,
+    resetFilters,
+  } = useContentFilter(content.workflows);
   
   // Calculate statistics
   const totalWorkflows = content.workflows.length;
@@ -123,20 +118,20 @@ export default function WorkflowsPage() {
         
         <div className="flex justify-center gap-2 flex-wrap">
           <Button
-            variant={selectedDifficulty === null ? "default" : "outline"}
+            variant={selectedDifficulty === 'all' ? "default" : "outline"}
             size="sm"
-            onClick={() => setSelectedDifficulty(null)}
+            onClick={() => setSelectedDifficulty('all')}
           >
             Tous
           </Button>
-          {difficulties.map((difficulty) => (
+          {availableDifficulties.map((difficulty) => (
             <Button
               key={difficulty}
               variant={selectedDifficulty === difficulty ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedDifficulty(difficulty)}
             >
-              {difficulty}
+              {difficultyLabels[difficulty as keyof typeof difficultyLabels] || difficulty}
             </Button>
           ))}
         </div>
@@ -153,9 +148,12 @@ export default function WorkflowsPage() {
         <div className="text-center py-12">
           <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
           <h3 className="text-xl font-semibold mb-2">Aucun workflow trouvé</h3>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-4">
             Essayez de modifier votre recherche ou vos filtres.
           </p>
+          <Button variant="outline" onClick={resetFilters}>
+            Réinitialiser les filtres
+          </Button>
         </div>
       )}
 
