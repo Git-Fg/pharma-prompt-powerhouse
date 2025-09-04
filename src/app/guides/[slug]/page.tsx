@@ -15,7 +15,7 @@ import type { Metadata } from "next";
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
   return content.guides.map((guide) => ({
-    id: guide.slug,
+    slug: guide.slug,
   }));
 }
 
@@ -23,9 +23,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { slug: string };
 }): Promise<Metadata> {
-  const guide = getGuideBySlug(params.id);
+  const guide = getGuideBySlug(params.slug);
 
   if (!guide) {
     return {
@@ -41,9 +41,9 @@ export async function generateMetadata({
 export default async function GuideDetailPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: { slug: string } 
 }) {
-  const guide = getGuideBySlug(params.id);
+  const guide = getGuideBySlug(params.slug);
 
   if (!guide) {
     notFound();

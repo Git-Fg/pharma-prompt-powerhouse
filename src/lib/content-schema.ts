@@ -145,22 +145,30 @@ export const externalToolSchema = baseContentSchema.extend({
 
 
 // =================================================================
-// 3. EXPORTATION DES TYPES
+// 3. EXPORTATION DES TYPES - BASE ET ENRICHIS EXPLICITES  
 // =================================================================
 
-export type Concept = z.infer<typeof conceptSchema>;
-export type Guide = z.infer<typeof guideSchema>;
-export type Workflow = z.infer<typeof workflowSchema>;
-export type ExternalTool = z.infer<typeof externalToolSchema>;
+// Types de base correspondant exactement au contenu des fichiers
+export type BaseConcept = z.infer<typeof conceptSchema>;
+export type BaseGuide = z.infer<typeof guideSchema>;
+export type BaseWorkflow = z.infer<typeof workflowSchema>;
+export type BaseExternalTool = z.infer<typeof externalToolSchema>;
 
-export type EnrichedWorkflow = Workflow & {
-  concepts: Concept[];
-  relatedWorkflows: Omit<Workflow, 'content' | 'concepts' | 'relatedWorkflows'>[];
+// Types enrichis résultant du content-loader - explicites pour la sécurité de type
+export type EnrichedConcept = BaseConcept; // Les concepts ne sont pas enrichis actuellement
+
+export type EnrichedGuide = BaseGuide & {
+  concepts: BaseConcept[];
+  relatedGuides: Omit<BaseGuide, 'content' | 'conceptSlugs'>[];
 };
 
-export type EnrichedGuide = Guide & {
-  concepts: Concept[];
-  relatedGuides: Omit<Guide, 'content' | 'concepts' | 'relatedGuides'>[];
+export type EnrichedWorkflow = BaseWorkflow & {
+  concepts: BaseConcept[];
+  relatedWorkflows: Omit<BaseWorkflow, 'problem' | 'initialApproach' | 'optimizedStrategy' | 'toolComparison' | 'finalPrompt' | 'content' | 'conceptSlugs'>[];
 };
 
-export type EnrichedConcept = Concept;
+// Aliases pour compatibilité descendante - seront dépréciés progressivement
+export type Concept = BaseConcept;
+export type Guide = BaseGuide; 
+export type Workflow = BaseWorkflow;
+export type ExternalTool = BaseExternalTool;
