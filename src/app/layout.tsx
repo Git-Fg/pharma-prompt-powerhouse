@@ -5,6 +5,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({
@@ -62,8 +63,9 @@ export default function RootLayout({
         >
           <div className='min-h-screen flex flex-col'>
             <Header />
-            <main className='flex-1'>{children}</main>
+            <main className='flex-1 pb-20 md:pb-0'>{children}</main>
             <Footer />
+            <MobileBottomNav />
           </div>
           <Toaster />
         </ThemeProvider>
