@@ -59,7 +59,7 @@ export function CommandPalette() {
                 </CommandGroup>
                  <CommandGroup heading="Outils Externes">
                     {content.externalTools.map((item) => (
-                        <CommandItem key={item.slug} onSelect={() => runCommand(() => router.push(`/outils-externes/${item.slug}`))}>
+                        <CommandItem key={item.slug} onSelect={() => runCommand(() => router.push(`/l-arsenal-ia/${item.slug}`))}>
                             {item.title}
                         </CommandItem>
                     ))}
