@@ -19,11 +19,12 @@
 
 <persona_and_tone>
 **Persona, Ton et Voix de l'Auteur**
-- **Incarner le Persona :** Toujours écrire à la première personne ("Je", "Mon", "J'ai découvert"). Le site est un carnet de bord, pas une encyclopédie.
-- **Authenticité :** Partager les doutes, les échecs et les itérations. La section "Mon Approche Initiale (et ses limites)" dans les workflows est essentielle pour montrer que la maîtrise vient de l'expérimentation.
-- **Exemple de Ton :**
-    - **À proscrire :** "Il est possible d'utiliser l'IA pour générer des flashcards."
-    - **À adopter :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
+- **Incarner le Persona :** Le site est un carnet de bord personnel. Le ton doit refléter cette approche.
+- **Exemples de Ton :**
+    - **À proscrire (trop impersonnel) :** *"Nous verrons dans ce guide comment les outils d'IA peuvent être appliqués pour créer des fiches de révision."*
+    - **À adopter (spectre acceptable) :**
+        - **Idéal (Très personnel) :** *"J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."*
+        - **Acceptable (Direct) :** *"Il est possible d'utiliser l'IA pour générer des flashcards. Voici la méthode que j'utilise pour y parvenir."*
 </persona_and_tone>
 
 <essential_disclaimers>
@@ -44,15 +45,14 @@
 
 ---
 
-# **Architecture CSS et Design System**
+# **Architecture UI, CSS et Design System**
 
-<css_architecture>
-**Design System Centralisé (Tailwind v4 + Shadcn Canary)**
+<design_system_philosophy>
+**Philosophie du Design System**
 - **Source de Vérité Unique :** `src/app/globals.css` centralise l'intégralité du design system. C'est le seul endroit où les valeurs de design (couleurs, espacements, etc.) doivent être définies.
-- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) y sont définis sous forme de variables CSS.
-- **@utility :** Des classes utilitaires sémantiques (`container`, `section-spacing`, `responsive-heading`) sont créées pour standardiser les layouts et la typographie.
-- **@layer components :** Des styles de composants de base (cartes, grilles de stats) y sont définis pour éviter la duplication de code.
-</css_architecture>
+- **Tokens de Design (`@theme`) :** Tous les tokens (spacing, colors, typography, etc.) sont définis sous forme de variables CSS pour une cohérence maximale.
+- **Utilitaires Sémantiques (`@utility`) :** Des classes comme `responsive-heading` ou `section-spacing` sont créées pour standardiser les layouts et la typographie de manière sémantique.
+</design_system_philosophy>
 
 <design_system_golden_rules>
 **Principes d'Acier du Design System**
@@ -63,15 +63,30 @@
 5.  **Privilégier les Utilitaires Sémantiques.** Utiliser `@apply responsive-heading` est toujours préférable à `@apply text-2xl md:text-4xl`. Les utilitaires centralisent la logique responsive et garantissent la cohérence.
 </design_system_golden_rules>
 
-<advanced_animations>
-**Système d'Animation Avancé (2025)**
-- **Framer Motion v12+ :** Intégration complète avec lazy loading pour les performances optimales.
-- **Animations Modernes :** Courbes d'accélération naturelles (`spring`, `bounce`, `smooth`) suivant les meilleures pratiques 2025.
-- **Micro-interactions :** Effets magnétiques, hover states, transitions fluides pour une UX premium.
-- **Composants Animés :** `ScrollAnimated`, `AnimatedList`, `StaggeredPage`, `MagneticCard`, `Interactive` pour des interfaces vivantes.
-- **Accessibilité :** Respect automatique de `prefers-reduced-motion` pour une expérience inclusive.
-- **Performance :** LazyMotion, staggering intelligent, et animations optimisées GPU pour une fluidité 60fps constante.
-</advanced_animations>
+<animation_strategy>
+**Stratégie d'Animation : `auto-animate` vs `framer-motion`**
+- **Principe :** Utiliser le bon outil pour la bonne tâche afin d'équilibrer simplicité et puissance.
+- **`auto-animate` :**
+    - **Usage :** Pour les animations simples et automatiques sur des listes ou des grilles (ajout, suppression, réorganisation d'éléments).
+    - **Avantage :** Extrêmement léger, facile à implémenter (`useAutoAnimateList`), "fire-and-forget".
+    - **Exemple :** Filtrage d'une liste de guides ou de workflows.
+- **`framer-motion` :**
+    - **Usage :** Pour les animations complexes, orchestrées et interactives.
+    - **Avantage :** Contrôle total sur chaque aspect de l'animation (durée, easing, délais, etc.).
+    - **Exemple :** Transitions de pages, animations au scroll (`ScrollAnimated`), micro-interactions (`MagneticCard`).
+- **Règle :** Utiliser `auto-animate` pour la simplicité, `framer-motion` pour le contrôle.
+</animation_strategy>
+
+<pwa_strategy>
+**Stratégie PWA (Progressive Web App)**
+- **Bibliothèque :** `@serwist/next` est utilisé pour gérer le Service Worker et les stratégies de cache.
+- **Philosophie :** "Offline-first" pour le contenu essentiel. L'application doit rester fonctionnelle sans connexion internet.
+- **Stratégies de Cache :**
+    - **`CacheFirst` :** Pour les ressources statiques qui changent rarement (Google Fonts).
+    - **`StaleWhileRevalidate` :** Pour les assets (images, CSS, JS). L'utilisateur voit la version en cache instantanément, pendant que la nouvelle version se télécharge en arrière-plan.
+    - **`NetworkFirst` :** Pour les pages de navigation. L'application essaie d'abord de charger la version la plus récente depuis le réseau. Si le réseau échoue, elle sert la version en cache.
+- **Fallback Hors Ligne :** Si une page n'est pas en cache et que le réseau est indisponible, le Service Worker redirige automatiquement vers la page `/offline` dédiée.
+</pwa_strategy>
 
 ---
 
@@ -84,64 +99,65 @@
   <homepage>
   **A. Page d'Accueil**
   - **Titre :** Bienvenue sur Pharma Prompt Powerhouse.
-  - **Introduction :** Paragraphe à la première personne sur la genèse du projet. *"En tant qu'étudiant en pharmacie, je me suis vite senti dépassé... J'ai créé ce guide pour centraliser mes apprentissages..."*
+  - **Introduction :** Paragraphe à la première personne sur la genèse du projet.
   - **Accès Rapides :** 3 derniers workflows, lien vers "Par où commencer ?", lien vers "L'Arsenal IA 2025".
   </homepage>
 
   <getting_started>
   **B. Section : "Par où commencer ?"**
-  - **Étape 1 :** Concepts Clés (prompt, contexte, modèle).
-  - **Étape 2 :** Votre Premier Workflow (suggestion du plus simple).
-  - **Étape 3 :** La Règle d'Or de la Sécurité (rappel sur la confidentialité).
+  - **Étape 1 :** Concepts Clés.
+  - **Étape 2 :** Votre Premier Workflow.
+  - **Étape 3 :** La Règle d'Or de la Sécurité.
   </getting_started>
   
   <workflows_section>
   **C. Section : "Workflows Stratégiques" (Cœur du site)**
   - **Présentation :** Chaque workflow est une étude de cas personnelle et détaillée.
-  - **Structure :** Doit impérativement suivre le format `<workflow_structure>` ci-dessous.
   </workflows_section>
   
   <ia_arsenal_section>
   **D. Section : "L'Arsenal IA 2025"**
   - **Présentation :** Mon catalogue d'outils personnel.
-  - **Page Principale :** Table comparative synthétique avec filtres (gratuit/payant, analyse de fichiers, score de confiance).
-  - **Fiches Détaillées :** Chaque outil a sa propre page, suivant le format `<tool_card_structure>`.
+  - **Page Principale :** Table comparative synthétique.
+  - **Fiches Détaillées :** Chaque outil a sa propre page.
   </ia_arsenal_section>
 
   <concepts_section>
   **E. Section : "Concepts"**
-  - **Format :** Un lexique alphabétique. Chaque entrée suit la structure `<concept_structure>`.
+  - **Format :** Un lexique. Chaque entrée suit la structure conseillée.
   </concepts_section>
 </site_architecture>
 
 <workflow_structure>
-**Structure d'un Workflow**
-- **Chaque workflow doit impérativement contenir les 6 sections suivantes :**
+**Structure Conseillée pour un Workflow**
+- Il est fortement recommandé de suivre cette structure pour garantir la clarté et la valeur pédagogique :
   1.  **Le Problème :** Un scénario étudiant concret, précis et relatable.
   2.  **Mon Approche Initiale (et ses limites) :** Une première tentative simple qui a échoué, et l'explication du *pourquoi*.
-  3.  **La Stratégie Optimisée :** Le déroulé pas-à-pas de la méthode finale, en expliquant la logique de chaque étape.
-  4.  **Comparaison des Outils :** Le test de la stratégie sur 2-3 outils, avec les nuances de résultats et ma préférence personnelle *justifiée pour cette tâche*.
-  5.  **Le Prompt Final (à adapter) :** Le prompt complet dans un bloc de code, commenté pour expliquer le rôle de chaque partie.
-  6.  **Ce qu'il faut retenir :** Les grands principes méthodologiques appris, transférables à d'autres problèmes.
+  3.  **La Stratégie Optimisée :** Le déroulé pas-à-pas de la méthode finale.
+  4.  **Comparaison des Outils :** Le test de la stratégie sur 2-3 outils, avec une préférence justifiée.
+  5.  **Le Prompt Final (à adapter) :** Le prompt complet, commenté.
+  6.  **Ce qu'il faut retenir :** Les grands principes méthodologiques appris.
+  7.  **Pour aller plus loin :** Des liens vers des concepts, guides ou outils mentionnés.
 </workflow_structure>
 
 <tool_card_structure>
-**Structure d'une Fiche Outil ("Arsenal IA")**
-- **Chaque fiche doit impérativement contenir les sections suivantes :**
+**Structure Conseillée pour une Fiche Outil ("Arsenal IA")**
+- **Chaque fiche devrait contenir les sections suivantes :**
   - **Nom de l'outil.**
   - **Mon Avis en Bref :** *"J'utilise principalement cet outil pour..."*
   - **Points Forts (selon mon expérience) :** Liste à puces.
   - **Points de Vigilance :** Liste à puces.
-  - **Offre Gratuite vs Payante :** Tableau simple avec la date (ex: "Septembre 2025").
-  - **Score de Confiance et Justification :** Note (ex: ⭐️⭐️⭐️☆☆) suivie d'une justification basée sur des critères clairs (localisation des serveurs, politique de confidentialité, etc.).
+  - **Offre Gratuite vs Payante :** Tableau simple avec la date.
+  - **Score de Confiance et Justification :** Note et justification claire.
 </tool_card_structure>
 
 <concept_structure>
-**Structure d'une Définition de "Concept"**
-- **Chaque concept doit impérativement suivre cette structure en 3 temps :**
+**Structure Conseillée pour une Définition de "Concept"**
+- **Il est conseillé de suivre cette structure en 4 temps :**
   1.  **L'Analogie Simple :** Une comparaison non technique pour l'intuition.
   2.  **La Définition Formelle :** L'explication plus précise mais accessible.
   3.  **Pourquoi c'est important pour vous :** L'impact pratique pour un étudiant.
+  4.  **Pour aller plus loin :** Une sélection de 2-3 guides ou workflows où ce concept est mis en pratique.
 </concept_structure>
 
 ---
@@ -191,33 +207,6 @@
 - **Synchronisation du `ContentRenderer` :** Utiliser une union discriminée et une fonction `assertNever` dans le `switch` pour garantir que tous les types de blocs de contenu sont gérés, sous peine d'erreur de compilation.
 - **Configuration :** Maintenir le mode `strict` activé dans `tsconfig.json`.
 </typescript_rules>
-
-<instructions>
-DO rédiger tout le contenu à la première personne ("je") pour renforcer l'authenticité et la proximité.
-DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
-DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
-DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
-DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
-DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
-DO utiliser exclusivement les classes CSS centralisées du design system (`.container`, `.section-spacing`, `.responsive-text`, etc.).
-DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
-DO utiliser les composants de base définis dans `@layer components` plutôt que de recréer des styles.
-DO privilégier les utilitaires CSS personnalisés pour maintenir la cohérence visuelle.
-DO utiliser les tokens de design centralisés (variables CSS) plutôt que des valeurs hardcodées.
-DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
-DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
-DO utiliser `min-w-0` sur les conteneurs flex contenant du texte pour prévenir les problèmes de césure.
-DO NOT dupliquer des styles CSS existants - centraliser dans `globals.css`.
-DO NOT utiliser de valeurs "magiques" (pixels/rem hardcodés) ; tout doit provenir d'un token de design.
-DO NOT créer d'animations sans considérer `prefers-reduced-motion` pour l'accessibilité.
-DO NOT surcharger l'interface avec des animations excessives - privilégier la subtilité et l'utilité.
-DO NOT utiliser de serveur personnalisé.
-DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
-DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
-DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
-DO NOT créer de types manuels redondants pour le contenu.
-En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
-</instructions>
 
 ---
 
