@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
 import { Container, Section } from '@/components/layout/Container';
-import ReactMarkdown from 'react-markdown';
+import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
 
 interface ToolPageProps {
   params: {
@@ -142,7 +142,7 @@ export default function ToolPage({ params }: ToolPageProps) {
           </CardHeader>
           <CardContent>
             <div className="prose dark:prose-invert max-w-none">
-              <ReactMarkdown>{tool.freeVsPaidOffer}</ReactMarkdown>
+              <MarkdownRenderer content={tool.freeVsPaidOffer} />
             </div>
           </CardContent>
         </Card>

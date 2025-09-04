@@ -18,7 +18,7 @@ export default function HomePage() {
         <Container maxWidth="4xl">
           <div className="text-center space-y-6">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-              Bienvenue sur Prompt Santé
+              Bienvenue sur Pharma Prompt Powerhouse
             </h1>
             <div className="prose prose-lg mx-auto text-muted-foreground space-y-4">
               <p className="text-base md:text-lg leading-relaxed">
