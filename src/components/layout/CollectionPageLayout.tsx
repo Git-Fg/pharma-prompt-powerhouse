@@ -52,10 +52,7 @@ export function CollectionPageLayout({
                         <div className={cn("stat-number animate-bounce-subtle", stat.colorClass)}>
                           {stat.value}
                         </div>
-                        <div className={cn(
-                          "stat-label",
-                          stat.colorClass.replace('text-', 'text-').replace('-400', '-300/70').replace('-600', '-600/70')
-                        )}>
+                        <div className={cn("stat-label text-muted-foreground", stat.colorClass)}>
                           {stat.label}
                         </div>
                       </div>

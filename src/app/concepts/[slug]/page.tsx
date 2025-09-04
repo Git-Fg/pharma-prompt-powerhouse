@@ -73,10 +73,9 @@ export async function generateMetadata({
 export default async function ConceptDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
-  const concept = getConceptBySlug(slug);
+  const concept = getConceptBySlug(params.slug);
 
   if (!concept) {
     notFound();
@@ -84,10 +83,10 @@ export default async function ConceptDetailPage({
 
   // Trouver les contenus liés à ce concept
   const relatedGuides = content.guides.filter(
-    (g) => g.conceptSlugs?.includes(slug)
+    (g) => g.conceptSlugs?.includes(params.slug)
   );
   const relatedWorkflows = content.workflows.filter(
-    (w) => w.conceptSlugs?.includes(slug)
+    (w) => w.conceptSlugs?.includes(params.slug)
   );
 
   return (

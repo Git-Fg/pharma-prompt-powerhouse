@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
+import { Container, Section } from '@/components/layout/Container';
 import ReactMarkdown from 'react-markdown';
 
 interface ToolPageProps {
@@ -44,18 +45,20 @@ export default function ToolPage({ params }: ToolPageProps) {
   };
 
   return (
-    <article className="max-w-4xl mx-auto py-8 space-y-8">
-      <header className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">{tool.title}</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{tool.description}</p>
-        <div className="flex justify-center">
-          <Button asChild size="lg">
-            <a href={tool.url} target="_blank" rel="noopener noreferrer">
-              Visiter l'outil <ExternalLink className="ml-2 size-4" />
-            </a>
-          </Button>
-        </div>
-      </header>
+    <Section>
+      <Container maxWidth="4xl">
+        <article className="py-8 space-y-8">
+          <header className="text-center space-y-4">
+            <h1 className="text-4xl font-bold">{tool.title}</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{tool.description}</p>
+            <div className="flex justify-center">
+              <Button asChild size="lg">
+                <a href={tool.url} target="_blank" rel="noopener noreferrer">
+                  Visiter l'outil <ExternalLink className="ml-2 size-4" />
+                </a>
+              </Button>
+            </div>
+          </header>
 
       <div className="flex flex-wrap justify-center gap-2">
         {tool.tags.map((tag: string) => <Badge key={tag}>{tag}</Badge>)}
@@ -184,10 +187,12 @@ export default function ToolPage({ params }: ToolPageProps) {
         </div>
       )}
 
-      {/* Disclaimer Banner */}
-      <div className="mt-8">
-        <DisclaimerBanner type="arsenal" />
-      </div>
-    </article>
+          {/* Disclaimer Banner */}
+          <div className="mt-8">
+            <DisclaimerBanner type="arsenal" />
+          </div>
+        </article>
+      </Container>
+    </Section>
   );
 }
