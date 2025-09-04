@@ -8,7 +8,7 @@
 - **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
 - **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
-- **Approche Mobile-First :** La responsivité, UI et UX doivent être irréprochables pour un usage sur mobile. L'expérience mobile n'est pas une adaptation, c'est le point de départ de toute conception.
+- **Approche Mobile-First :** La responsivité, l'UI et l'UX doivent être irréprochables pour un usage sur mobile. L'expérience mobile n'est pas une adaptation, c'est le point de départ de toute conception.
 </project_philosophy>
 
 <content_rules>
@@ -19,14 +19,10 @@
 
 <persona_and_tone>
 **Persona, Ton et Voix de l'Auteur**
-- **Ton Principal : "Je".** L'utilisation de la première personne ("Je", "Mon", "J'ai découvert") est à privilégier pour incarner le persona de l'étudiant qui partage son expérience.
-- **Tolérance pour "Il" :** L'utilisation de "il" ou de tournures impersonnelles est acceptable pour décrire le fonctionnement d'un outil ou d'un concept de manière objective (ex: "Il est capable d'analyser des documents longs").
-- **Exclusion de "Nous" :** Le pronom "nous" est à proscrire. Il crée une distance et brise le lien personnel entre l'auteur et le lecteur.
+- **Voix Principale ("Je") :** Le "Je" est la voix par défaut pour incarner le persona de l'étudiant qui partage son expérience. Il renforce l'authenticité et la proximité.
+- **Voix Descriptive ("Il") :** Le "Il" impersonnel est toléré pour décrire des faits objectifs ou le comportement d'un outil. Exemple : "Claude est particulièrement bon pour cette tâche. Il a tendance à moins halluciner."
+- **Voix à Proscrire ("Nous") :** Le "Nous" est interdit. Il crée une distance et brise l'identité personnelle du projet.
 - **Authenticité :** Partager les doutes, les échecs et les itérations. La section "Mon Approche Initiale (et ses limites)" dans les workflows est essentielle pour montrer que la maîtrise vient de l'expérimentation.
-- **Exemple de Ton :**
-    - **À éviter :** "Nous allons voir comment l'IA peut générer des flashcards."
-    - **Acceptable :** "Il est possible d'utiliser l'IA pour générer des flashcards."
-    - **Idéal :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
 </persona_and_tone>
 
 <essential_disclaimers>
@@ -51,10 +47,12 @@
 
 <css_architecture>
 **Design System Centralisé (Tailwind v4 + Shadcn Canary)**
-- **Source de Vérité Unique :** `src/app/globals.css` centralise l'intégralité du design system. C'est le seul endroit où les valeurs de design (couleurs, espacements, etc.) doivent être définies.
-- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) y sont définis sous forme de variables CSS.
-- **@utility :** Des classes utilitaires sémantiques (`container`, `section-spacing`, `responsive-heading`) sont créées pour standardiser les layouts et la typographie.
-- **@layer components :** Des styles de composants de base (cartes, grilles de stats) y sont définis pour éviter la duplication de code.
+- **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
+- **@utility :** Classes utilitaires personnalisées (`container`, `section-spacing`, `responsive-text`, etc.) pour un code cohérent.
+- **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
+- **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
+- **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
 </css_architecture>
 
 <advanced_animations>
@@ -91,26 +89,26 @@
   
   <workflows_section>
   **C. Section : "Workflows Stratégiques" (Cœur du site)**
-  - **Présentation :** Chaque workflow est une étude de cas personnelle et détaillée.
-  - **Structure :** Doit impérativement suivre le format `<workflow_structure>` ci-dessous.
+  - **Présentation :** Chaque workflow est présenté comme une étude de cas personnelle et détaillée.
+  - **Structure :** Il est fortement recommandé de suivre le format `<workflow_structure>` ci-dessous pour la cohérence.
   </workflows_section>
   
   <ia_arsenal_section>
   **D. Section : "L'Arsenal IA 2025"**
   - **Présentation :** Mon catalogue d'outils personnel.
   - **Page Principale :** Table comparative synthétique avec filtres (gratuit/payant, analyse de fichiers, score de confiance).
-  - **Fiches Détaillées :** Chaque outil a sa propre page, suivant le format `<tool_card_structure>`.
+  - **Fiches Détaillées :** Chaque outil a sa propre page, en suivant les guidelines de `<tool_card_structure>`.
   </ia_arsenal_section>
 
   <concepts_section>
   **E. Section : "Concepts"**
-  - **Format :** Un lexique alphabétique. Chaque entrée suit la structure `<concept_structure>`.
+  - **Format :** Un lexique alphabétique. Chaque entrée suit les guidelines de `<concept_structure>`.
   </concepts_section>
 </site_architecture>
 
 <workflow_structure>
-**Structure d'un Workflow**
-- **Chaque workflow doit impérativement contenir les 6 sections suivantes :**
+**Guideline de Structure d'un Workflow**
+- **Pour une clarté maximale, il est recommandé d'inclure les 6 sections suivantes :**
   1.  **Le Problème :** Un scénario étudiant concret, précis et relatable.
   2.  **Mon Approche Initiale (et ses limites) :** Une première tentative simple qui a échoué, et l'explication du *pourquoi*.
   3.  **La Stratégie Optimisée :** Le déroulé pas-à-pas de la méthode finale, en expliquant la logique de chaque étape.
@@ -120,8 +118,8 @@
 </workflow_structure>
 
 <tool_card_structure>
-**Structure d'une Fiche Outil ("Arsenal IA")**
-- **Chaque fiche doit impérativement contenir les sections suivantes :**
+**Guideline de Structure d'une Fiche Outil ("Arsenal IA")**
+- **Pour une analyse complète, une fiche outil devrait inclure :**
   - **Nom de l'outil.**
   - **Mon Avis en Bref :** *"J'utilise principalement cet outil pour..."*
   - **Points Forts (selon mon expérience) :** Liste à puces.
@@ -131,11 +129,12 @@
 </tool_card_structure>
 
 <concept_structure>
-**Structure d'une Définition de "Concept"**
-- **Chaque concept doit impérativement suivre cette structure en 3 temps :**
+**Guideline de Structure d'une Définition de "Concept"**
+- **Un concept est idéalement structuré en 4 temps :**
   1.  **L'Analogie Simple :** Une comparaison non technique pour l'intuition.
   2.  **La Définition Formelle :** L'explication plus précise mais accessible.
   3.  **Pourquoi c'est important pour vous :** L'impact pratique pour un étudiant.
+  4.  **Pour aller plus loin (Notions Avancées) :** Une brève introduction à des techniques ou concepts liés plus complexes.
 </concept_structure>
 
 ---
@@ -187,18 +186,16 @@
 </typescript_rules>
 
 <instructions>
-DO rédiger le contenu en privilégiant la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO rédiger prioritairement à la première personne ("je") pour renforcer l'authenticité et la proximité.
 DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
 DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
 DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
 DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
+DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
 DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
 DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
-DO utiliser `min-w-0` sur les conteneurs flex contenant du texte pour prévenir les problèmes de césure.
-DO NOT utiliser le pronom "nous" pour maintenir un lien personnel avec le lecteur.
-DO NOT créer d'animations sans considérer `prefers-reduced-motion` pour l'accessibilité.
-DO NOT surcharger l'interface avec des animations excessives - privilégier la subtilité et l'utilité.
+DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
 DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
