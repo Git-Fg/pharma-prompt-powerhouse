@@ -51,7 +51,13 @@ Au début, j'ai essayé de demander simplement :
       type: 'markdown',
       content: `## La Stratégie Optimisée : Créativité Contrôlée et Personnalisée
 
-J'ai découvert qu'il fallait guider l'IA vers plus de créativité tout en spécifiant mon style d'apprentissage.`
+J'ai découvert qu'il fallait guider l'IA vers plus de créativité tout en spécifiant mon style d'apprentissage.
+Cette approche utilise la **température de dosage** pour contrôler la créativité.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'température-dosage',
+      reason: 'Comprendre comment ajuster la créativité de l\'IA vous permet de générer des mnémoniques plus originales et mémorables.'
     },
     {
       type: 'card',

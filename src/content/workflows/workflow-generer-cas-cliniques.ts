@@ -38,7 +38,12 @@ export const workflow = {
   "optimizedStrategy": [
     {
       "type": "markdown",
-      "content": "## Ma Stratégie Optimisée\n\nLa clé est de fournir un contexte riche et structuré :"
+      "content": "## Ma Stratégie Optimisée\n\nLa clé est de fournir un contexte riche et structuré. Cette approche utilise le **context engineering** pour maximiser la pertinence pédagogique."
+    },
+    {
+      "type": "conceptRecommendation",
+      "slug": "context-engineering",
+      "reason": "Un contexte bien structuré est essentiel pour générer des cas cliniques réalistes et pédagogiquement pertinents."
     },
     {
       "type": "card",
