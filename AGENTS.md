@@ -8,7 +8,7 @@
 - **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
 - **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
-- **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile grâce au design system centralisé.
+- **Approche Mobile-First :** La responsivité, UI et UX doivent être irréprochables pour un usage sur mobile. L'expérience mobile n'est pas une adaptation, c'est le point de départ de toute conception.
 </project_philosophy>
 
 <content_rules>
@@ -19,11 +19,14 @@
 
 <persona_and_tone>
 **Persona, Ton et Voix de l'Auteur**
-- **Incarner le Persona :** Toujours écrire à la première personne ("Je", "Mon", "J'ai découvert"). Le site est un carnet de bord, pas une encyclopédie.
+- **Ton Principal : "Je".** L'utilisation de la première personne ("Je", "Mon", "J'ai découvert") est à privilégier pour incarner le persona de l'étudiant qui partage son expérience.
+- **Tolérance pour "Il" :** L'utilisation de "il" ou de tournures impersonnelles est acceptable pour décrire le fonctionnement d'un outil ou d'un concept de manière objective (ex: "Il est capable d'analyser des documents longs").
+- **Exclusion de "Nous" :** Le pronom "nous" est à proscrire. Il crée une distance et brise le lien personnel entre l'auteur et le lecteur.
 - **Authenticité :** Partager les doutes, les échecs et les itérations. La section "Mon Approche Initiale (et ses limites)" dans les workflows est essentielle pour montrer que la maîtrise vient de l'expérimentation.
 - **Exemple de Ton :**
-    - **À proscrire :** "Il est possible d'utiliser l'IA pour générer des flashcards."
-    - **À adopter :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
+    - **À éviter :** "Nous allons voir comment l'IA peut générer des flashcards."
+    - **Acceptable :** "Il est possible d'utiliser l'IA pour générer des flashcards."
+    - **Idéal :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
 </persona_and_tone>
 
 <essential_disclaimers>
@@ -48,12 +51,10 @@
 
 <css_architecture>
 **Design System Centralisé (Tailwind v4 + Shadcn Canary)**
-- **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
-- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
-- **@utility :** Classes utilitaires personnalisées (`container`, `section-spacing`, `responsive-text`, etc.) pour un code cohérent.
-- **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
-- **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
-- **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
+- **Source de Vérité Unique :** `src/app/globals.css` centralise l'intégralité du design system. C'est le seul endroit où les valeurs de design (couleurs, espacements, etc.) doivent être définies.
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) y sont définis sous forme de variables CSS.
+- **@utility :** Des classes utilitaires sémantiques (`container`, `section-spacing`, `responsive-heading`) sont créées pour standardiser les layouts et la typographie.
+- **@layer components :** Des styles de composants de base (cartes, grilles de stats) y sont définis pour éviter la duplication de code.
 </css_architecture>
 
 <advanced_animations>
@@ -62,28 +63,9 @@
 - **Animations Modernes :** Courbes d'accélération naturelles (`spring`, `bounce`, `smooth`) suivant les meilleures pratiques 2025.
 - **Micro-interactions :** Effets magnétiques, hover states, transitions fluides pour une UX premium.
 - **Composants Animés :** `ScrollAnimated`, `AnimatedList`, `StaggeredPage`, `MagneticCard`, `Interactive` pour des interfaces vivantes.
-- **Hooks Personnalisés :** `useScrollProgress`, `useInView`, `useMagneticEffect`, `useParallax` pour des animations contextuelles.
 - **Accessibilité :** Respect automatique de `prefers-reduced-motion` pour une expérience inclusive.
 - **Performance :** LazyMotion, staggering intelligent, et animations optimisées GPU pour une fluidité 60fps constante.
 </advanced_animations>
-
-<interaction_patterns>
-**Patterns d'Interaction Avancés**
-- **Transitions de Pages :** Système de navigation fluide avec `PageTransition` et variants contextuels.
-- **États de Chargement :** Composants `Skeleton`, `LoadingState`, `Spinner` avec animations progressives.
-- **Formulaires Enhancés :** `AnimatedInput`, `AnimatedSelect`, `AnimatedCheckbox` avec validation visuelle en temps réel.
-- **Feedback Utilisateur :** Toasts animés, progress bars fluides, états de succès/erreur avec micro-animations.
-- **Navigation Contextuelle :** Breadcrumbs animés, pagination fluide, filtres avec transitions.
-</interaction_patterns>
-
-<responsive_design_principles>
-**Principes de Design Responsif**
-- **Approche Mobile-First :** Toutes les interfaces commencent par la version mobile et s'enrichissent vers le desktop.
-- **Breakpoints Standards :** `sm: 640px`, `md: 768px`, `lg: 1024px`, `xl: 1280px`, `2xl: 1536px`.
-- **Tableaux Responsifs :** Transformation automatique desktop → mobile avec `desktop-table` et `mobile-card`.
-- **Typography Responsive :** Système de classes `responsive-text`, `responsive-heading`, `responsive-subheading`.
-- **Spacing Cohérent :** Variables CSS centralisées pour les marges, paddings et gaps à travers tous les composants.
-</responsive_design_principles>
 
 ---
 
@@ -205,24 +187,16 @@
 </typescript_rules>
 
 <instructions>
-DO rédiger tout le contenu à la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO rédiger le contenu en privilégiant la première personne ("je") pour renforcer l'authenticité et la proximité.
 DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
 DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
 DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
 DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
-DO utiliser exclusivement les classes CSS centralisées du design system (`.container`, `.section-spacing`, `.responsive-text`, etc.).
-DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
-DO utiliser les composants de base définis dans `@layer components` plutôt que de recréer des styles.
-DO privilégier les utilitaires CSS personnalisés pour maintenir la cohérence visuelle.
-DO utiliser les tokens de design centralisés (variables CSS) plutôt que des valeurs hardcodées.
 DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
-DO implémenter les micro-interactions avec les hooks personnalisés (`useScrollProgress`, `useInView`, etc.).
 DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
-DO optimiser les performances avec LazyMotion et le lazy loading des animations.
-DO créer de nouveaux fichiers CSS ou de styles inline sans justification exceptionnelle.
-DO NOT dupliquer des styles CSS existants - centraliser dans `globals.css`.
-DO NOT ignorer les breakpoints responsifs standard - tous les composants doivent être mobile-friendly.
+DO utiliser `min-w-0` sur les conteneurs flex contenant du texte pour prévenir les problèmes de césure.
+DO NOT utiliser le pronom "nous" pour maintenir un lien personnel avec le lecteur.
 DO NOT créer d'animations sans considérer `prefers-reduced-motion` pour l'accessibilité.
 DO NOT surcharger l'interface avec des animations excessives - privilégier la subtilité et l'utilité.
 DO NOT utiliser de serveur personnalisé.
@@ -230,7 +204,6 @@ DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens ver
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
 DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
 DO NOT créer de types manuels redondants pour le contenu.
-DO NOT sacrifier la clarté pour la sophistication technique.
 En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
 </instructions>
 
