@@ -8,27 +8,8 @@ import { content, getGuideBySlug } from "@/lib/content-loader";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
+import { categoryLabels, difficultyLabels } from "@/lib/constants";
 import type { Metadata } from "next";
-
-const categoryLabels = {
-  prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
-  tools: "Outils 🛠️",
-  security: "Sécurité 🔒",
-  optimization: "Optimisation ⚡",
-  fondamentaux: "Fondamentaux 📚",
-  methodologie: "Méthodologie 🔬",
-  ressources: "Ressources 📖",
-  "techniques-avancees": "Techniques Avancées 🚀",
-  "cas-pratiques": "Cas Pratiques 💊",
-  "bonnes-pratiques": "Bonnes Pratiques 🛡️",
-};
-
-const difficultyLabels = {
-  débutant: "Débutant",
-  intermédiaire: "Intermédiaire",
-  avancé: "Avancé",
-};
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
@@ -59,10 +40,9 @@ export async function generateMetadata({
 export default async function GuideDetailPage({ 
   params 
 }: { 
-  params: Promise<{ id: string }> 
+  params: { id: string } 
 }) {
-  const { id } = await params;
-  const guide = getGuideBySlug(id);
+  const guide = getGuideBySlug(params.id);
 
   if (!guide) {
     notFound();

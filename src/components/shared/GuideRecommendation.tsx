@@ -7,30 +7,12 @@ import { BookOpen, Info, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
+import { categoryLabels, difficultyLabels } from '@/lib/constants';
 
 interface GuideRecommendationProps {
   guideSlug: string;
   reason: string;
 }
-
-const categoryLabels = {
-  prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
-  tools: "Outils 🛠️",
-  security: "Sécurité 🔒",
-  optimization: "Optimisation ⚡",
-  fondamentaux: "Fondamentaux 📚",
-  methodologie: "Méthodologie 🔬",
-  ressources: "Ressources 📖",
-  "techniques-avancees": "Techniques Avancées 🚀",
-  "cas-pratiques": "Cas Pratiques 💊",
-};
-
-const difficultyLabels = {
-  débutant: "Débutant",
-  intermédiaire: "Intermédiaire",
-  avancé: "Avancé",
-};
 
 export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
   const isMobile = useIsMobile();
