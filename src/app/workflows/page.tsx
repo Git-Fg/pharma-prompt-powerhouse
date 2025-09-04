@@ -24,11 +24,11 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
             <Icon className="size-5 text-primary" />
           </div>
           <div className="flex gap-2">
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="responsive-small-text">
               {workflow.difficulty}
             </Badge>
             {workflow.estimatedTime && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="responsive-small-text">
                 <Clock className="w-3 h-3 mr-1" />
                 {workflow.estimatedTime}
               </Badge>
@@ -40,13 +40,13 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
           {workflow.title}
         </CardTitle>
         
-        <CardDescription className="line-clamp-3 text-sm leading-relaxed">
+        <CardDescription className="line-clamp-3 responsive-small-text">
           {workflow.description}
         </CardDescription>
         
         <div className="flex flex-wrap gap-1 pt-3">
           {workflow.tags.slice(0, 3).map((tag: string) => (
-            <Badge key={tag} variant="outline" className="text-xs">
+            <Badge key={tag} variant="outline" className="responsive-small-text">
               {tag}
             </Badge>
           ))}
@@ -138,7 +138,7 @@ export default function WorkflowsPage() {
       </div>
 
       {/* Workflows Grid */}
-      <div ref={listRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div ref={listRef} className="content-grid md:grid-cols-2 lg:grid-cols-3 section-margin-bottom">
         {filteredWorkflows.map((workflow) => (
           <WorkflowCard key={workflow.slug} workflow={workflow} />
         ))}
@@ -147,7 +147,7 @@ export default function WorkflowsPage() {
       {filteredWorkflows.length === 0 && (
         <div className="text-center py-12">
           <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-semibold mb-2">Aucun workflow trouvé</h3>
+          <h3 className="responsive-section-title mb-2">Aucun workflow trouvé</h3>
           <p className="text-muted-foreground mb-4">
             Essayez de modifier votre recherche ou vos filtres.
           </p>
@@ -158,7 +158,7 @@ export default function WorkflowsPage() {
       )}
 
       {/* Bottom CTA */}
-      <div className="mt-16 text-center bg-muted p-6 md:p-8 rounded-lg">
+      <div className="section-margin-top text-center card-spacing rounded-lg bg-muted">
         <h3 className="responsive-subheading mb-4">Nouveau dans l'IA ?</h3>
         <p className="text-muted-foreground mb-6 max-w-none md:max-w-2xl mx-auto responsive-text">
           Je recommande de commencer par comprendre les concepts essentiels avant de vous lancer 

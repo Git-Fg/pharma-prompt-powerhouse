@@ -91,7 +91,7 @@ export default async function ConceptDetailPage({
   return (
     <Section>
       <Container maxWidth="4xl">
-        <header className="mb-8">
+        <header className="section-margin-bottom">
           <Button variant="ghost" size="sm" asChild className="mb-4">
             <Link href="/concepts">
               <ArrowLeft className="size-4 mr-2" />
@@ -103,17 +103,17 @@ export default async function ConceptDetailPage({
           <div className="space-y-6">
             <div className="flex items-start justify-between">
               <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight">
+                <h1 className="responsive-large-heading tracking-tight">
                   {concept.title}
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl">
+                <p className="responsive-section-title text-muted-foreground responsive-max-width-content">
                   {concept.description}
                 </p>
               </div>
             </div>
 
             {/* Statistiques du concept */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="content-grid md:grid-cols-3">
               <Card className="text-center p-4">
                 <div className="text-2xl font-bold text-primary">
                   {relatedGuides.length + relatedWorkflows.length}

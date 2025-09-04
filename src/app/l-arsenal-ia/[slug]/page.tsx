@@ -32,8 +32,8 @@ export default function ToolPage({ params }: ToolPageProps) {
       <Container maxWidth="4xl">
         <article className="py-8 space-y-8">
           <header className="text-center space-y-4">
-            <h1 className="text-4xl font-bold">{tool.title}</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{tool.description}</p>
+            <h1 className="responsive-large-heading">{tool.title}</h1>
+            <p className="responsive-section-title text-muted-foreground responsive-max-width-content mx-auto">{tool.description}</p>
             <div className="flex justify-center">
               <Button asChild size="lg">
                 <a href={tool.url} target="_blank" rel="noopener noreferrer">
@@ -49,12 +49,12 @@ export default function ToolPage({ params }: ToolPageProps) {
 
       {/* Enhanced Schema Content */}
       {(tool.personalReview || tool.strongPoints || tool.vigilancePoints || tool.confidenceScore) && (
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="content-grid md:grid-cols-2">
           {/* Mon Avis en Bref */}
           {tool.personalReview && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Mon Avis en Bref</CardTitle>
+                <CardTitle className="responsive-card-title">Mon Avis en Bref</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground italic">{tool.personalReview}</p>
