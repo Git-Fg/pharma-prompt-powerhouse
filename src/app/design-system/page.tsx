@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Design System | Pharma Prompt Powerhouse',
-  description: 'Modern design system with Tailwind v4 tokens and tailwind-variants recipes',
+  description: 'Modern design system with Tailwind v4 tokens and component variants',
 };
 
 export default function DesignSystemPage() {
@@ -19,7 +19,7 @@ export default function DesignSystemPage() {
               Design System
             </h1>
             <p className="text-lg text-muted-foreground paragraph-flow">
-              Modernised components with Tailwind v4 tokens and tailwind-variants recipes
+              Modernised components with Tailwind v4 tokens and component variants
             </p>
           </div>
 
@@ -152,7 +152,7 @@ export default function DesignSystemPage() {
                   <h4 className="font-semibold">🔧 Implementation</h4>
                   <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                     <li>Design tokens in src/app/globals.css @theme</li>
-                    <li>Component recipes in src/components/ui/recipes/</li>
+                    <li>Component variants using class-variance-authority</li>
                     <li>Enhanced existing components with modern interactions</li>
                     <li>Full TypeScript integration for variant props</li>
                   </ul>
