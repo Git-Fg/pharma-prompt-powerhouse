@@ -5,18 +5,31 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants';
-import { ArrowRight, Globe } from 'lucide-react';
+import { 
+  contentCardVariants, 
+  categoryBadgeVariants,
+  confidenceBadgeVariants,
+  getCategoryVariant,
+  getConfidenceVariant
+} from '@/components/ui/variants';
+import { ExternalLink, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ExternalTool } from '@/lib/content-schema';
-import { categoryLabels } from '@/lib/constants';
+import { 
+  getCategoryLabel,
+  getConfidenceInfo,
+  getContentUrl 
+} from '@/lib/ui-utils';
 
 interface ToolCardProps {
   tool: ExternalTool;
 }
 
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
-  const categoryLabel = categoryLabels[tool.category as keyof typeof categoryLabels] ?? tool.category;
+  // Utilisation des utilitaires centralisés
+  const categoryLabel = getCategoryLabel(tool.category);
+  const confidenceInfo = getConfidenceInfo(tool.confidenceScore);
+  const toolUrl = getContentUrl('tool', tool.slug);
 
   return (
     <Card className={cn(
@@ -34,8 +47,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                 {tool.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
+                <Badge className={categoryBadgeVariants({ category: getCategoryVariant(tool.category) })}>
                   {categoryLabel}
+                </Badge>
+                <Badge className={confidenceBadgeVariants({ confidence: getConfidenceVariant(tool.confidenceScore) })}>
+                  {confidenceInfo.label} Confiance
                 </Badge>
               </div>
             </div>
@@ -58,10 +74,10 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full" size="sm">
                 Visiter l'outil
-                <ArrowRight className="ml-1 size-4" />
+                <ExternalLink className="ml-1 size-4" />
               </Button>
             </a>
-            <Link href={`/l-arsenal-ia/${tool.slug}`} className="flex-1">
+            <Link href={toolUrl} className="flex-1">
               <Button variant="outline" className="w-full" size="sm">
                 En savoir plus
               </Button>
