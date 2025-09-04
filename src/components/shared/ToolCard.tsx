@@ -5,21 +5,12 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  contentCardVariants, 
-  categoryBadgeVariants,
-  confidenceBadgeVariants,
-  getCategoryVariant,
-  getConfidenceVariant
-} from '@/components/ui/variants';
+import { contentCardVariants } from '@/components/ui/variants';
+import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge';
 import { ExternalLink, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ExternalTool } from '@/lib/content-schema';
-import { 
-  getCategoryLabel,
-  getConfidenceInfo,
-  getContentUrl 
-} from '@/lib/ui-utils';
+import { getContentUrl } from '@/lib/ui-utils';
 import { InfoButton } from './InfoButton';
 
 interface ToolCardProps {
@@ -28,8 +19,6 @@ interface ToolCardProps {
 
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   // Utilisation des utilitaires centralisés
-  const categoryLabel = getCategoryLabel(tool.category);
-  const confidenceInfo = getConfidenceInfo(tool.confidenceScore);
   const toolUrl = getContentUrl('tool', tool.slug);
 
   return (
@@ -48,12 +37,8 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                 {tool.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge className={categoryBadgeVariants({ category: getCategoryVariant(tool.category) })}>
-                  {categoryLabel}
-                </Badge>
-                <Badge className={confidenceBadgeVariants({ confidence: getConfidenceVariant(tool.confidenceScore) })}>
-                  {confidenceInfo.label} Confiance
-                </Badge>
+                <CategoryBadge category={tool.category} />
+                <ConfidenceBadge score={tool.confidenceScore} />
               </div>
             </div>
           </div>
