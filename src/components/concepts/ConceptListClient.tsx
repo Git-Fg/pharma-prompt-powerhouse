@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { categoryLabels } from '@/lib/constants';
 import { useContentFilter } from '@/hooks/useContentFilter';
 import { content } from '@/lib/content-loader';
+import { useAutoAnimateList } from '@/hooks/useAutoAnimate';
 
 interface ConceptListClientProps {
   initialConcepts: Concept[];
@@ -29,6 +30,9 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
     setSelectedCategory,
     resetFilters
   } = useContentFilter<Concept>(initialConcepts);
+
+  // AutoAnimate ref for smooth transitions
+  const listRef = useAutoAnimateList();
 
  const categories = [
     'all',
@@ -100,7 +104,7 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
 
       {/* Concepts Grid */}
       {filteredConcepts.length > 0 && (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={listRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {conceptsWithStats.map(concept => (
             <ConceptCard
               key={concept.slug}
