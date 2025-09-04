@@ -109,10 +109,10 @@ export default function RootLayout({
               <Footer />
               <MobileBottomNav />
             </div>
-            <ConsentBanner />
+            {env.isProduction && <ConsentBanner />}
             <Toaster />
             <PWALifecycle />
-            <InstallPrompt />
+            {env.isProduction && <InstallPrompt />}
           </ThemeProvider>
         </ConsentProvider>
       </body>
