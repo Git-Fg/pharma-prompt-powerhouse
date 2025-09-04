@@ -1,5 +1,7 @@
 import { content } from '@/lib/content-loader';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Search } from 'lucide-react';
 
 import {
     CommandDialog,
@@ -11,7 +13,11 @@ import {
 } from '@/components/ui/command';
 import { useRouter } from 'next/navigation';
 
-export function CommandPalette() {
+interface CommandPaletteProps {
+  trigger?: React.ReactNode;
+}
+
+export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
     const [open, setOpen] = useState(false);
     const router = useRouter();
 
@@ -31,8 +37,22 @@ export function CommandPalette() {
         command();
     };
 
+    const defaultTrigger = (
+        <Button variant="outline" className="px-3 text-sm text-muted-foreground">
+            <Search className="size-4 mr-2" />
+            Rechercher...
+            <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">⌘</span>K
+            </kbd>
+        </Button>
+    );
+
     return (
-        <CommandDialog open={open} onOpenChange={setOpen}>
+        <>
+            <div onClick={() => setOpen(true)}>
+                {trigger || defaultTrigger}
+            </div>
+            <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Rechercher un contenu..." />
             <CommandList>
                 <CommandEmpty>Aucun résultat.</CommandEmpty>
@@ -66,5 +86,6 @@ export function CommandPalette() {
                 </CommandGroup>
             </CommandList>
         </CommandDialog>
+        </>
     );
 }

@@ -51,7 +51,13 @@ Je demandais directement :
       type: 'markdown',
       content: `## La Stratégie Optimisée : L'IA comme Assistant Méthodologique
 
-J'utilise désormais l'IA pour m'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.`
+J'utilise désormais l'IA pour m'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.
+Cette approche s'appuie sur la **structuration par balises** pour organiser l'information.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'structuration-par-balises',
+      reason: 'Structurer vos requêtes avec des balises améliore la précision de l\'analyse bibliographique et de la synthèse.'
     },
     {
       type: 'card',
@@ -145,6 +151,20 @@ Voici comment j'utilise chaque outil selon mes besoins :`
           ]
         }
       ]
+    },
+    {
+      type: 'markdown',
+      content: `### Outils Recommandés pour la Recherche Bibliographique`
+    },
+    {
+      type: 'toolRecommendation',
+      slug: 'perplexity-ai',
+      reason: 'Excellent point de départ pour explorer un sujet grâce à sa recherche web en temps réel avec sources citées et vérifiables.'
+    },
+    {
+      type: 'toolRecommendation',
+      slug: 'notebooklm',
+      reason: 'Révolutionnaire pour analyser vos PDFs d\'articles sans risque d\'hallucination, l\'IA travaille uniquement sur vos documents.'
     }
   ],
 

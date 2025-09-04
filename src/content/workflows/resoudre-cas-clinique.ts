@@ -53,7 +53,13 @@ Je posais directement le cas à l'IA en demandant :
       type: 'markdown',
       content: `## La Stratégie Optimisée : L'Analyse Guidée par Étapes
 
-J'ai développé une approche progressive qui m'accompagne dans l'apprentissage du raisonnement clinique plutôt que de me donner directement la réponse.`
+J'ai développé une approche progressive qui m'accompagne dans l'apprentissage du raisonnement clinique plutôt que de me donner directement la réponse.
+Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'chaîne-de-prompts',
+      reason: 'Cette technique est la base de notre workflow pour analyser un cas clinique de manière structurée.'
     },
     {
       type: 'card',
@@ -65,6 +71,11 @@ J'ai développé une approche progressive qui m'accompagne dans l'apprentissage 
 - Traitements en cours
 
 Cela m'aide à ne rien oublier dans l'analyse.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'structuration-par-balises',
+      reason: 'Utiliser des balises XML améliore la précision de l\'organisation des données cliniques.'
     },
     {
       type: 'card',
@@ -154,6 +165,20 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`
           ]
         }
       ]
+    },
+    {
+      type: 'markdown',
+      content: `### Outils Recommandés pour cette Approche`
+    },
+    {
+      type: 'toolRecommendation',
+      slug: 'claude-ai',
+      reason: 'Mon premier choix pour l\'analyse de cas cliniques grâce à son raisonnement médical avancé et sa gestion des nuances cliniques.'
+    },
+    {
+      type: 'toolRecommendation',
+      slug: 'google-ai-studio',
+      reason: 'Excellent pour analyser des cas avec beaucoup de données (tableaux biologiques, documents PDF).'
     }
   ],
 
