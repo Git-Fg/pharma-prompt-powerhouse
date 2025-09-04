@@ -51,7 +51,12 @@ export const workflow = {
   "optimizedStrategy": [
     {
       "type": "markdown",
-      "content": "## Ma Stratégie Optimisée avec Tree-of-Thought\n\nLe Tree-of-Thought force l'IA à explorer systématiquement plusieurs branches d'hypothèses :"
+      "content": "## Ma Stratégie Optimisée avec Tree-of-Thought\n\nLe Tree-of-Thought force l'IA à explorer systématiquement plusieurs branches d'hypothèses. Cette méthode utilise la **structuration par balises** pour organiser les données."
+    },
+    {
+      "type": "conceptRecommendation",
+      "slug": "structuration-par-balises",
+      "reason": "L'utilisation de balises XML permet de structurer clairement les données de pharmacovigilance et d'améliorer la précision de l'analyse."
     },
     {
       "type": "card",

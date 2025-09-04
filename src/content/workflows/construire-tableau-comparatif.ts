@@ -51,7 +51,13 @@ Au début, j'ai essayé de demander simplement :
       type: 'markdown',
       content: `## La Stratégie Optimisée : Structure Imposée par l'IA
 
-J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.`
+J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.
+Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'structuration-par-balises',
+      reason: 'L\'utilisation de balises XML permet de forcer l\'IA à respecter une structure de tableau précise et cohérente.'
     },
     {
       type: 'card',
