@@ -792,6 +792,32 @@
     text-wrap: pretty;
   }
 
+  /* Enhanced typography for modern text handling */
+  .text-stable {
+    text-wrap: stable;
+  }
+
+  /* Orphans and widows control */
+  .text-flow {
+    orphans: 2;
+    widows: 2;
+  }
+
+  /* Prevent awkward line breaks on titles */
+  .title-flow {
+    text-wrap: balance;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Optimal paragraph formatting */
+  .paragraph-flow {
+    text-wrap: pretty;
+    orphans: 2;
+    widows: 3;
+    line-height: 1.6;
+  }
+
   /* Mobile safe area padding for bottom navigation */
   .safe-area-padding-bottom {
     padding-bottom: env(safe-area-inset-bottom);
