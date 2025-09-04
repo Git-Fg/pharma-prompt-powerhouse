@@ -81,7 +81,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
             </div>
             <div className="pt-4 border-t bg-background/95 backdrop-blur p-4">
               <Button asChild size="default" className="w-full">
-                <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
+                <Link href={`/guides/${guide.slug}`} target="_blank" className="flex items-center gap-2">
                   <BookOpen className="size-4" />
                   Lire le guide
                 </Link>
@@ -102,6 +102,14 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <RecommendationContent includeTitle={true} />
+        <div className="mt-4 pt-4 border-t">
+          <Button asChild size="sm" className="w-full">
+            <Link href={`/guides/${guide.slug}`} target="_blank" className="flex items-center gap-2">
+              <BookOpen className="size-4" />
+              Lire le guide
+            </Link>
+          </Button>
+        </div>
       </HoverCardContent>
     </HoverCard>
   );
