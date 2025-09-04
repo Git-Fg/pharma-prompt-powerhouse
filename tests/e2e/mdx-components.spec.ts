@@ -5,10 +5,10 @@ test.describe('MDX Components Functionality', () => {
     await page.goto('/concepts/hallucination-effet-indesirable');
     
     // Check main title specifically in main content area - updated title
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hallucination : Effet Indésirable');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('Hallucination : Effet Indésirable');
     
     // Check for Alert components
-    const alerts = page.locator('[role="alert"], .alert, [data-state="open"]');
+    const alerts = page.getByRole('alert');
     if (await alerts.count() > 0) {
       await expect(alerts.first()).toBeVisible();
     }
@@ -31,7 +31,7 @@ test.describe('MDX Components Functionality', () => {
   test('context engineering concept renders correctly', async ({ page }) => {
     await page.goto('/concepts/context-engineering');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Context Engineering');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('Context Engineering');
     
     // Check that the concept content is visible
     await expect(page.locator('text=Optimisez la fenêtre de contexte')).toBeVisible();
@@ -50,7 +50,7 @@ test.describe('MDX Components Functionality', () => {
   test('memory concept with tabs renders correctly', async ({ page }) => {
     await page.goto('/concepts/memoire-ia');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Mémoire');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('Mémoire');
     
     // Check for tabs or structured content about RAM vs Disk
     const structuredContent = page.locator('text=RAM, text=Disque, text=contexte, .tabs, [role="tablist"]');
@@ -64,7 +64,7 @@ test.describe('MDX Components Functionality', () => {
   test('security guide with alerts renders correctly', async ({ page }) => {
     await page.goto('/guides/confidentialite-securite');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Confidentialité');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('Confidentialité');
     
     // Should have critical security alert
     await expect(page.locator('text=Règle absolue non négociable')).toBeVisible();
@@ -83,7 +83,7 @@ test.describe('MDX Components Functionality', () => {
     // Wait for page load
     await page.waitForLoadState('networkidle');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('DeepSeek');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('DeepSeek');
     
     // Should have warning alert about data privacy
     await expect(page.locator('text=Avertissement de Confidentialité')).toBeVisible();
@@ -98,7 +98,7 @@ test.describe('MDX Components Functionality', () => {
     // Wait for page load
     await page.waitForLoadState('networkidle');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Google AI Studio');
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText('Google AI Studio');
     
     // Should have success/advantage alert with Core Kit Quotidien - use more specific selector
     await expect(page.locator('[role="alert"] >> text=🚀 Core Kit Quotidien')).toBeVisible();

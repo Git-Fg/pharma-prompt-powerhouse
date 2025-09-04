@@ -16,8 +16,8 @@ test.describe('Core Site Navigation', () => {
     // Check main navigation elements - updated for new structure
     const navElements = ['Par où commencer ?', 'Workflows Stratégiques', 'L\'Arsenal IA', 'Concepts'];
     for (const navItem of navElements) {
-      // Use more flexible text matching
-      await expect(page.locator(`text=${navItem}`).first()).toBeVisible({ timeout: 10000 });
+      // Use more flexible text matching with getByRole
+      await expect(page.getByRole('link', { name: new RegExp(navItem, 'i') }).first()).toBeVisible({ timeout: 10000 });
     }
     
     await page.screenshot({ path: 'test-results/homepage.png', fullPage: true });
@@ -27,7 +27,7 @@ test.describe('Core Site Navigation', () => {
     await page.goto('/concepts');
     
     // Should show concepts listing - correct title
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hub de Concepts');
+    await expect(page.getByRole('heading', { name: 'Hub de Concepts' })).toBeVisible();
     
     // Should have concept content or links - use more flexible selector
     const conceptContent = page.locator('a[href*="/concepts/"], .concept, [class*="concept"], main a');
@@ -43,7 +43,7 @@ test.describe('Core Site Navigation', () => {
     await page.waitForLoadState('networkidle');
     
     // The actual title is "Mes Fiches & Méthodes" not "Guides"
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Mes Fiches');
+    await expect(page.getByRole('heading', { name: /Mes Fiches/ })).toBeVisible();
     
     // Should have guide listings - check for actual content
     const guideElements = page.locator('a[href*="/guides/"]');
@@ -61,7 +61,7 @@ test.describe('Core Site Navigation', () => {
     await page.goto('/workflows');
     
     // Updated to match actual title
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Workflows Stratégiques');
+    await expect(page.getByRole('heading', { name: /Workflows Stratégiques/ })).toBeVisible();
     
     await page.screenshot({ path: 'test-results/workflows-page.png', fullPage: true });
   });
@@ -70,7 +70,7 @@ test.describe('Core Site Navigation', () => {
     await page.goto('/l-arsenal-ia');
     
     // Updated to match actual title - "L'Arsenal IA 2025"
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText("L'Arsenal IA 2025");
+    await expect(page.getByRole('heading', { name: "L'Arsenal IA 2025" })).toBeVisible();
     
     await page.screenshot({ path: 'test-results/arsenal-ia-page.png', fullPage: true });
   });
@@ -79,7 +79,7 @@ test.describe('Core Site Navigation', () => {
     await page.goto('/par-ou-commencer');
     
     // This page should exist and load
-    await expect(page.locator('main h1, article h1, .content h1').first()).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     
     await page.screenshot({ path: 'test-results/par-ou-commencer-page.png', fullPage: true });
   });
