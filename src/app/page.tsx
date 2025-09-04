@@ -2,8 +2,8 @@ import { AlertTriangle, ArrowRight, BookOpen, Brain, ExternalLink, Shield, Targe
 import Link from 'next/link'
 import { Container, Section } from '@/components/layout/Container'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
 

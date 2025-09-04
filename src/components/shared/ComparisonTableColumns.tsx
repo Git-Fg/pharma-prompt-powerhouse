@@ -5,7 +5,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { ExternalTool } from '@/lib/content-schema'
 import { ExternalLink, Star } from 'lucide-react'
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
+import Badge from '@/components/ui/badge'
 import { getStarRatingProps } from '@/lib/ui-utils'
 
 // Helper pour le rendu des étoiles

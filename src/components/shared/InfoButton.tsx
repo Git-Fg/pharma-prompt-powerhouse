@@ -3,8 +3,8 @@
 import type { Concept, ExternalTool } from '@/lib/content-schema'
 import { ExternalLink, Globe, Info, Lightbulb } from 'lucide-react'
 import React from 'react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 

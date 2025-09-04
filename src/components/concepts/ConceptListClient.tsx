@@ -3,7 +3,7 @@
 import type { Concept } from '@/lib/content-schema'
 import { FileText } from 'lucide-react'
 import { ConceptCard } from '@/components/shared/ConceptCard'
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { SearchInput } from '@/components/ui/search-input'
 import {
   Select,

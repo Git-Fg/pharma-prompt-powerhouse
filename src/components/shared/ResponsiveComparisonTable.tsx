@@ -10,7 +10,7 @@ import { ExternalLink, Star } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { AnimatedItem, AnimatedList, ScrollAnimated } from '@/components/ui/animated'
-import { Badge } from '@/components/ui/badge'
+import Badge from '@/components/ui/badge'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MagneticCard } from '@/components/ui/interactions'
 import {

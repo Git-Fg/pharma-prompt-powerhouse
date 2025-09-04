@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
-import { easings } from './animated'
+import { easings } from './animation-constants'
 
 // Enhanced button with micro-interactions
 interface AnimatedButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
