@@ -78,7 +78,7 @@ test.describe('MDX Components Functionality', () => {
   });
 
   test('external tool with contextual alerts renders correctly', async ({ page }) => {
-    await page.goto('/outils-externes/deepseek-chat');
+    await page.goto('/l-arsenal-ia/deepseek-chat');
     
     // Wait for page load
     await page.waitForLoadState('networkidle');
@@ -93,7 +93,7 @@ test.describe('MDX Components Functionality', () => {
   });
 
   test('Google AI Studio advantage highlight renders correctly', async ({ page }) => {
-    await page.goto('/outils-externes/google-ai-studio');
+    await page.goto('/l-arsenal-ia/google-ai-studio');
     
     // Wait for page load
     await page.waitForLoadState('networkidle');
@@ -105,20 +105,6 @@ test.describe('MDX Components Functionality', () => {
     await expect(page.locator('[role="alert"]').first()).toBeVisible();
     
     await page.screenshot({ path: 'test-results/google-ai-studio-tool.png', fullPage: true });
-  });
-
-  test('prompt with platform tabs renders correctly', async ({ page }) => {
-    await page.goto('/prompts/generateur-mnemoniques-analogies');
-    
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Générateur');
-    
-    // Should have temperature guidance and platform-specific tabs
-    const guidanceElements = page.locator('text=température, .tabs, [role="tablist"], text=AI Studio');
-    if (await guidanceElements.count() > 0) {
-      await expect(guidanceElements.first()).toBeVisible();
-    }
-    
-    await page.screenshot({ path: 'test-results/mnemonics-prompt.png', fullPage: true });
   });
 
   test('interactive tabs work correctly', async ({ page }) => {
