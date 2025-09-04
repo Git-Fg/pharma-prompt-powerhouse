@@ -195,7 +195,7 @@ npm run test:e2e
 - **Package Manager**: npm (default) / pnpm (local development)
 - **Testing**: Vitest avec jsdom (5-10x plus rapide que Jest)
 - **Type Checking**: TypeScript strict avec validation Zod
-- **Linting**: ESLint avec règles React 19 et Next.js 15
+- **Linting**: @antfu/eslint-config avec règles React 19 et Next.js 15
 - **Content Validation**: Build-time validation avec schémas Zod
 
 ### **Scripts Utiles**
@@ -213,12 +213,13 @@ npm run build && npm run test && npm run lint
 - **Build**: ✅ Compilation sans erreur (Next.js 15 + React 19)
 - **Tests**: ✅ 49/49 tests passent (Vitest)
 - **TypeScript**: ✅ 100% type safe (mode strict)
-- **Linting**: ✅ Zero erreur ESLint
+- **Linting**: ✅ Zero erreur (@antfu/eslint-config)
 - **Security**: ✅ Zero vulnérabilités (audit résolu)
 - **Performance**: ✅ Bundle optimisé, 51 pages statiques
 - **SEO**: ✅ MetadataBase configuré pour réseaux sociaux
 
 ### **Migrations et Optimisations Complétées**
+- ✅ **ESLint Configuration**: Migration vers @antfu/eslint-config (99% réduction des erreurs)
 - ✅ **Toast System**: Unifié sur Sonner (suppression Radix toast)
 - ✅ **Testing**: Jest → Vitest (5-10x plus rapide)
 - ✅ **Server**: Suppression server.ts (Next.js 15 natif)
