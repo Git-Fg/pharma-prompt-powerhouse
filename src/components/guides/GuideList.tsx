@@ -25,6 +25,7 @@ import { getIcon } from '@/types/icon-taxonomy';
 import { categoryLabels, difficultyLabels } from '@/lib/constants';
 import { useContentFilter } from '@/hooks/useContentFilter';
 import { Guide } from '@/lib/content-schema';
+import { useAutoAnimateList } from '@/hooks/useAutoAnimate';
 
 interface GuideListProps {
   initialGuides: Guide[];
@@ -42,6 +43,9 @@ export function GuideList({ initialGuides }: GuideListProps) {
     resetFilters
   } = useContentFilter<Guide>(initialGuides);
   const { toggleFavorite, isFavorite } = useFavorites('favoriteGuides');
+
+  // AutoAnimate ref for smooth transitions
+  const listRef = useAutoAnimateList();
 
   const categories = [
     'all',
@@ -119,7 +123,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
 
       {/* Guides Grid */}
       {filteredGuides.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={listRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGuides.map(guide => {
             const IconComponent = getIcon(guide.icon);
             

@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Search, Clock, Target, BookOpen } from "lucide-react";
 import { getIcon } from "@/types/icon-taxonomy";
 import { CollectionPageLayout } from "@/components/layout/CollectionPageLayout";
+import { useAutoAnimateList } from "@/hooks/useAutoAnimate";
 
 function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target;
@@ -66,6 +67,9 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
 export default function WorkflowsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
+  
+  // AutoAnimate ref for smooth filtering transitions
+  const listRef = useAutoAnimateList();
   
   // Filter workflows based on search and difficulty
   const filteredWorkflows = content.workflows.filter(workflow => {
@@ -139,7 +143,7 @@ export default function WorkflowsPage() {
       </div>
 
       {/* Workflows Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div ref={listRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {filteredWorkflows.map((workflow) => (
           <WorkflowCard key={workflow.slug} workflow={workflow} />
         ))}
