@@ -29,8 +29,7 @@
     "exactOptionalPropertyTypes": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "target": "ES2022",
-    "types": ["node", "vitest/globals"]
+    "target": "ES2022"
   },
   "include": [
     "next-env.d.ts",
