@@ -46,7 +46,7 @@ export default function HomePage() {
       {/* Disclaimers Section */}
       <Section>
         <Container maxWidth="6xl">
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="content-grid md:grid-cols-3">
             <Alert>
               <Zap className="size-4" />
               <AlertDescription>
@@ -77,9 +77,9 @@ export default function HomePage() {
       {/* Quick Access Section */}
       <Section>
         <Container maxWidth="6xl">
-          <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
+          <h2 className="responsive-subheading text-center section-margin-bottom">Accès Rapides</h2>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="content-grid md:grid-cols-3">
             {/* Pour les nouveaux visiteurs */}
             <Card className="border-2 border-primary/20">
               <CardHeader>
@@ -149,7 +149,7 @@ export default function HomePage() {
       {/* Featured Workflows */}
       <Section>
         <Container maxWidth="6xl">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between section-margin-bottom">
             <h2 className="responsive-subheading">
               {favoriteWorkflows.length >= 3 ? 'Workflows Recommandés' : 'Derniers Workflows Publiés'}
             </h2>
@@ -161,7 +161,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="content-grid md:grid-cols-3">
             {featuredWorkflows.map((workflow) => (
               <Card key={workflow.slug} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -174,16 +174,16 @@ export default function HomePage() {
                         </Badge>
                       )}
                     </div>
-                    <span className="text-sm text-muted-foreground">{workflow.estimatedTime}</span>
+                    <span className="responsive-small-text text-muted-foreground">{workflow.estimatedTime}</span>
                   </div>
-                  <CardTitle className="text-lg">{workflow.title}</CardTitle>
+                  <CardTitle className="responsive-card-title">{workflow.title}</CardTitle>
                   <CardDescription>{workflow.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
                     <div className="flex flex-wrap gap-1">
                       {workflow.tags.slice(0, 2).map((tag: string) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
+                        <Badge key={tag} variant="outline" className="responsive-small-text">
                           {tag}
                         </Badge>
                       ))}
@@ -206,10 +206,10 @@ export default function HomePage() {
       <Section>
         <Container maxWidth="4xl">
           <div className="text-center">
-            <div className="bg-muted p-6 md:p-8 rounded-lg">
+            <div className="card-spacing rounded-lg bg-muted">
               <Brain className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
-              <p className="text-muted-foreground leading-relaxed text-pretty">
+              <h3 className="responsive-section-title text-center mb-4">Mon Approche</h3>
+              <p className="text-muted-foreground responsive-text text-pretty text-center">
                 Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses 
                 sont basées sur mon expérience personnelle et mes recherches. 
                 <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>

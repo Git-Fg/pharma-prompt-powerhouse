@@ -21,8 +21,8 @@ export default function ParOuCommencerPage() {
             <Badge variant="outline" className="mb-4">
               Guide pour débutants
             </Badge>
-            <h1 className="text-2xl md:text-4xl font-bold leading-tight">Par où commencer ?</h1>
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <h1 className="responsive-large-heading">Par où commencer ?</h1>
+            <p className="responsive-section-title text-muted-foreground responsive-max-width-content mx-auto">
               Vous découvrez l'IA ? Parfait ! J'ai conçu ce parcours pour vous accompagner 
               pas à pas dans votre apprentissage. Suivez ces étapes dans l'ordre.
             </p>
@@ -55,7 +55,7 @@ export default function ParOuCommencerPage() {
                   J'ai sélectionné les 3 concepts les plus importants à maîtriser avant tout :
                 </p>
                 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="content-grid md:grid-cols-3">
                   <Link href="/concepts/context-engineering" className="block">
                     <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
                       <h4 className="font-semibold mb-2">Context Engineering</h4>
@@ -168,8 +168,8 @@ export default function ParOuCommencerPage() {
                   </div>
                 </div>
 
-                <div className="bg-muted p-4 rounded-lg">
-                  <p className="text-sm">
+                <div className="card-spacing rounded-lg bg-muted">
+                  <p className="responsive-small-text">
                     <strong>Ma règle personnelle :</strong> J'utilise exclusivement des cas fictifs 
                     et je vérifie systématiquement toute information médicale avec mes cours 
                     ou des sources officielles.
@@ -239,9 +239,9 @@ export default function ParOuCommencerPage() {
       <Section>
         <Container maxWidth="4xl">
           <div className="text-center">
-            <div className="bg-muted p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-2">Prêt à commencer ?</h3>
-              <p className="text-muted-foreground mb-4">
+            <div className="card-spacing rounded-lg bg-muted">
+              <h3 className="responsive-card-title mb-2">Prêt à commencer ?</h3>
+              <p className="text-muted-foreground responsive-text mb-4">
                 Commencez par comprendre les concepts clés, puis lancez-vous dans votre premier workflow.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 justify-center">
