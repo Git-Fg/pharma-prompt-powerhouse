@@ -22,6 +22,7 @@ import { AnimatedList, AnimatedItem, ScrollAnimated } from "@/components/ui/anim
 import { MagneticCard } from "@/components/ui/interactions";
 import { ExternalTool } from '@/lib/content-schema';
 import { comparisonTableColumns } from './ComparisonTableColumns';
+import { getStarRatingProps } from '@/lib/ui-utils';
 
 interface ResponsiveComparisonTableProps {
   tools: ExternalTool[];
@@ -35,26 +36,6 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
     columns: comparisonTableColumns,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  const renderStarRating = (score?: number) => {
-    if (!score) return <span className="text-muted-foreground text-xs">N/A</span>
-    
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`w-3 h-3 ${
-              i < score ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-            }`}
-          />
-        ))}
-        <span className="ml-1 text-xs text-muted-foreground">
-          {score}/5
-        </span>
-      </div>
-    )
-  }
 
   const getAvailability = (tool: ExternalTool) => {
     if (tool.freeVsPaidOffer && tool.freeVsPaidOffer.includes('Gratuit')) {
@@ -165,7 +146,24 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                     </div>
                     
                     <div className="card-footer">
-                      <div>{tool.confidenceScore && renderStarRating(tool.confidenceScore)}</div>
+                      <div>
+                        {tool.confidenceScore && (
+                          <div className="flex items-center gap-1">
+                            {getStarRatingProps(tool.confidenceScore).stars.map((star) => (
+                              <Star
+                                key={star.index}
+                                className={`w-3 h-3 ${star.className}`}
+                              />
+                            ))}
+                            <span className="ml-1 text-xs text-muted-foreground">
+                              {tool.confidenceScore}/5
+                            </span>
+                          </div>
+                        )}
+                        {!tool.confidenceScore && (
+                          <span className="text-muted-foreground text-xs">N/A</span>
+                        )}
+                      </div>
                       <Link 
                         href={`/l-arsenal-ia/${tool.slug}`}
                         className="text-primary hover:underline text-sm font-medium focus-ring hover-lift inline-flex items-center gap-1"

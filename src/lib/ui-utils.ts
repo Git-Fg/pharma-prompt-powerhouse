@@ -40,6 +40,24 @@ export function getConfidenceInfo(score: number) {
   return confidenceLevels[key];
 }
 
+/**
+ * Génère les propriétés CSS pour l'affichage d'étoiles de notation
+ * Utilisé pour créer des composants d'étoiles cohérents
+ */
+export function getStarRatingProps(score: number, totalStars: number = 5) {
+  const validScore = Math.max(0, Math.min(totalStars, Math.round(score)));
+  
+  return {
+    score: validScore,
+    totalStars,
+    stars: Array.from({ length: totalStars }, (_, i) => ({
+      index: i,
+      filled: i < validScore,
+      className: i < validScore ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+    }))
+  };
+}
+
 // =================================================================
 // UTILITAIRES DE FORMATAGE
 // =================================================================

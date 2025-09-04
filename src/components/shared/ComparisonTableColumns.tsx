@@ -6,18 +6,19 @@ import { ExternalTool } from '@/lib/content-schema';
 import { Badge } from '@/components/ui/badge';
 import { Star, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { getStarRatingProps } from '@/lib/ui-utils';
 
 // Helper pour le rendu des étoiles
 const renderStarRating = (score?: number) => {
   if (!score) return <span className="text-muted-foreground text-xs">N/A</span>;
+  
+  const starProps = getStarRatingProps(score);
   return (
     <div className="flex items-center gap-1">
-      {[...Array(5)].map((_, i) => (
+      {starProps.stars.map((star) => (
         <Star
-          key={i}
-          className={`w-3 h-3 ${
-            i < score ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-          }`}
+          key={star.index}
+          className={`w-3 h-3 ${star.className}`}
         />
       ))}
       <span className="ml-1 text-xs text-muted-foreground">
