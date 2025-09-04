@@ -69,9 +69,40 @@ Le danger caché : ces combinaisons peuvent rendre une personne identifiable`
             },
             {
               type: 'markdown',
-              content: `- Une **combinaison de faits rares**
+              content: `### Exemples Concrets de Réidentification Indirecte
+
+Même avec de "bonnes intentions", certaines combinaisons apparemment innocentes permettent la réidentification :
+
+**🚨 Cas concret #1 - Le piège géographique et temporel :**
+- "Homme de 34 ans, intoxication au monoxyde de carbone, admis aux urgences de Marseille le 15 janvier 2024"
+→ Combiné aux données publiques (faits divers, archives presse), cette personne devient identifiable
+
+**🚨 Cas concret #2 - Le piège des pathologies rares :**
+- "Patiente de 28 ans, maladie de Kawasaki, résidant dans l'Ain"
+→ Avec une prévalence de 1/10 000, la probabilité qu'il y ait plusieurs cas similaires dans ce département est très faible
+
+**🚨 Cas concret #3 - Le piège des métadonnées professionnelles :**
+- "Chirurgien-dentiste de 45 ans, cabinet en centre-ville de Dijon, accident d'exposition au sang"
+→ Le croisement profession + âge + localisation précise rend l'identification possible
+
+**🚨 Cas concret #4 - Le piège des antécédents multiples :**
+- "Patient diabétique, insuffisance rénale, greffé hépatique, suivi cardiologie"
+→ Cette combinaison rare de pathologies peut permettre l'identification même sans autres données`
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              content: `**Principe de précaution maximale :** Même si vous pensez avoir "bien anonymisé", demandez-vous toujours : "Si cette description paraissait dans un journal local, la personne concernée pourrait-elle être reconnue par son entourage ?"`
+            },
+            {
+              type: 'markdown',
+              content: `### Règles de Sécurité pour l'Anonymisation
+
+- Une **combinaison de faits rares** (pathologie + localisation + âge précis)
 - Un **récit très détaillé** d'un cas clinique avec éléments personnels
-- Des **données géographiques précises** combinées à d'autres facteurs`
+- Des **données géographiques précises** combinées à d'autres facteurs
+- Des **métadonnées temporelles** (dates précises d'admission, de traitement)
+- Des **caractéristiques professionnelles ou sociales** spécifiques`
             }
           ]
         }
@@ -228,7 +259,24 @@ La seule manière de garantir une confidentialité à 100% est de faire tourner 
 - **Inconvénients :** Demande plus de compétences techniques, et vous serez limité à des modèles plus petits et moins puissants que les modèles propriétaires de pointe comme GPT-5 ou Gemini 2.5 Pro.
 - **Quand l'utiliser ?** C'est la solution à envisager si un laboratoire vous confie des données de recherche confidentielles (non encore publiées) ou des informations stratégiques.
 
-## Conclusion : Une Hygiène Numérique à Adopter
+## ⚖️ Avertissement Important - Limites de Compétence`
+    },
+    {
+      type: 'alert',
+      variant: 'default',
+      content: `**Je ne suis pas juriste ni expert en droit médical.** Les conseils partagés ici sont des **"principes de base"** issus de mon expérience personnelle et de ma compréhension générale des enjeux de confidentialité. Ces recommandations peuvent être **insuffisantes ou incomplètes** selon votre contexte spécifique.
+
+**Pour toute situation impliquant des données de santé réelles :**
+- **Consultez systématiquement** le service juridique de votre établissement
+- **Référez-vous aux directives** de votre ordre professionnel 
+- **Vérifiez auprès du DPO** (Délégué à la Protection des Données) de votre institution
+- **Consultez les recommandations officielles** de la CNIL et des autorités compétentes
+
+**Le droit évolue rapidement,** particulièrement dans le domaine de l'IA et des données de santé. Seules des sources officielles et à jour peuvent vous garantir une conformité légale complète.`
+    },
+    {
+      type: 'markdown',
+      content: `## Conclusion : Une Hygiène Numérique à Adopter
 
 Votre stratégie de confidentialité doit être un réflexe, pas une réflexion :
 
@@ -238,10 +286,6 @@ Votre stratégie de confidentialité doit être un réflexe, pas une réflexion 
 4.  **Données d'Identification de Santé (PHI) :** **INTERDIT** sur toute IA grand public. Seules les solutions professionnelles validées dans un cadre hospitalier sont autorisées.
 
 En appliquant cette grille de lecture, vous pouvez bénéficier de la puissance de l'IA tout en respectant scrupuleusement vos obligations éthiques et légales.`
-    },
-    {
-      "type": "markdown",
-      "content": "## Le Seul Vrai Coffre-Fort : L'Hébergement Local"
     },
     {
       "type": "guideRecommendation",
