@@ -21,7 +21,7 @@ export function usePWAStatus(): PWAStatus {
     // Check if installed (standalone mode)
     const checkInstalled = () => {
       return window.matchMedia('(display-mode: standalone)').matches
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line ts/no-explicit-any
         || (window.navigator as any).standalone === true
     }
 

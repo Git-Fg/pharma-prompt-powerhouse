@@ -2,7 +2,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, use, useCallback, useEffect, useState } from 'react'
 
 type ConsentStatus = 'pending' | 'accepted' | 'declined'
 interface ConsentContextType {

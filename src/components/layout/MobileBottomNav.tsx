@@ -39,12 +39,14 @@ function createMobileNavItems(): MobileNavItem[] {
           isActive: (pathname: string) => pathname === '/',
         }
       : null,
-    workflowsLink ? {
-      name: 'Workflows', // Shorter name for mobile
-      href: workflowsLink.href,
-      icon: workflowsLink.icon,
-      isActive: (pathname: string) => pathname.startsWith('/workflows'),
-    } : null,
+    workflowsLink
+      ? {
+          name: 'Workflows', // Shorter name for mobile
+          href: workflowsLink.href,
+          icon: workflowsLink.icon,
+          isActive: (pathname: string) => pathname.startsWith('/workflows'),
+        }
+      : null,
     {
       name: 'Recherche',
       href: '#',
@@ -52,12 +54,14 @@ function createMobileNavItems(): MobileNavItem[] {
       isActive: () => false,
       isSearch: true,
     },
-    arsenalLink ? {
-      name: 'Arsenal IA', // Shorter name for mobile
-      href: arsenalLink.href,
-      icon: arsenalLink.icon,
-      isActive: (pathname: string) => pathname.startsWith('/l-arsenal-ia'),
-    } : null,
+    arsenalLink
+      ? {
+          name: 'Arsenal IA', // Shorter name for mobile
+          href: arsenalLink.href,
+          icon: arsenalLink.icon,
+          isActive: (pathname: string) => pathname.startsWith('/l-arsenal-ia'),
+        }
+      : null,
     {
       name: 'Guides',
       href: '/guides',
@@ -87,7 +91,7 @@ export function MobileBottomNav() {
               <div key={item.name} className="flex flex-col items-center p-1">
                 <CommandPalette
                   trigger={(
-                    <button className="flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 hover:bg-accent active:scale-95">
+                    <button type="button" className="flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 hover:bg-accent active:scale-95">
                       <Icon className="size-5 text-muted-foreground transition-colors" />
                       <span className="text-xs text-muted-foreground mt-1 font-medium">
                         {item.name}

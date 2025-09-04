@@ -38,15 +38,17 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
               [key: string]: unknown
             }
             const match = /language-(\w+)/.exec(className || '')
-            return !inline && match ? (
-              <CodeBlock language={match[1]}>{String(children).replace(/\n$/, '')}</CodeBlock>
-            ) : (
-              <code {...rest}>
-                {' '}
-                {/* Uses centralized .prose code styles */}
-                {children}
-              </code>
-            )
+            return !inline && match
+              ? (
+                  <CodeBlock language={match[1]}>{String(children).replace(/\n$/, '')}</CodeBlock>
+                )
+              : (
+                  <code {...rest}>
+                    {' '}
+                    {/* Uses centralized .prose code styles */}
+                    {children}
+                  </code>
+                )
           },
         }}
       >
