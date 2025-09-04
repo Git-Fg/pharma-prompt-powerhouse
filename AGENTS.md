@@ -283,4 +283,6 @@ Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'imp
 A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type et tests d'intégration/units ainsi que de playwright tool te permettant de naviguer et vérifier les logs, prendre des screenshot, et globalement analyser le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi de playwright mcp tool et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace. 
 
 Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus. 
+
+Aide toi de tes outils de façon extensive, par exemple, n'hésite jamais à utiliser les outils github pour vérifier les comit, surveiller les commentaires ... , context7 pour confirmer l'implémentation optimale selon les normes en 2025 de modernité/simplicité ou si tu rencontres un problème, playwright tool pour vérifier que tout fonctionne correctement voir effectuer des recherches complémentaires ... 
 </copilot_contrainte>
