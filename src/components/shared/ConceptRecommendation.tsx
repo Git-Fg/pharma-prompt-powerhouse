@@ -13,20 +13,8 @@ interface ConceptRecommendationProps {
   reason: string
 }
 
-export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommendationProps) {
-  const isMobile = useIsMobile()
-  const concept = content.concepts.find(c => c.slug === conceptSlug)
-
-  if (!concept) {
-    return (
-      <Badge variant="destructive">
-        Concept introuvable:
-        {conceptSlug}
-      </Badge>
-    )
-  }
-
-  const RecommendationContent = () => (
+function RecommendationContent({ concept, reason }: { concept: any, reason: string }) {
+  return (
     <div className="flex flex-col gap-4">
       <div>
         <h4 className="text-sm font-semibold">{concept.title}</h4>
@@ -35,7 +23,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
 
       {concept.tags && concept.tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {concept.tags.slice(0, 3).map(tag => (
+          {concept.tags.slice(0, 3).map((tag: string) => (
             <Badge key={tag} variant="outline" className="bg-background">
               {tag}
             </Badge>
@@ -64,8 +52,28 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         <Info className="mr-2 size-4 shrink-0 opacity-70" />
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
+
+      <Button variant="outline" size="sm" asChild>
+        <Link href={`/concepts/${concept.slug}`}>
+          En savoir plus
+        </Link>
+      </Button>
     </div>
   )
+}
+
+export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommendationProps) {
+  const isMobile = useIsMobile()
+  const concept = content.concepts.find(c => c.slug === conceptSlug)
+
+  if (!concept) {
+    return (
+      <Badge variant="destructive">
+        Concept introuvable:
+        {conceptSlug}
+      </Badge>
+    )
+  }
 
   if (isMobile) {
     return (
@@ -82,7 +90,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
               <SheetDescription className="text-sm">{concept.description}</SheetDescription>
             </SheetHeader>
             <div className="flex-1 overflow-y-auto">
-              <RecommendationContent />
+              <RecommendationContent concept={concept} reason={reason} />
             </div>
             <div className="pt-4 border-t bg-background/95 backdrop-blur">
               <Button asChild size="default" className="w-full">
@@ -106,7 +114,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         </span>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <RecommendationContent />
+        <RecommendationContent concept={concept} reason={reason} />
         <div className="mt-4 pt-4 border-t">
           <Button asChild size="sm" className="w-full">
             <Link href={`/concepts/${concept.slug}`} target="_blank" className="flex items-center gap-2">

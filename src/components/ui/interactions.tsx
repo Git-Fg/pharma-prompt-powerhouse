@@ -114,7 +114,7 @@ interface MagneticCardProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   disabled?: boolean
 }
 
-export function MagneticCard({ ref, children, className, intensity = 0.3, distance = 150, disabled = false, ...props }: MagneticCardProps & { ref?: React.RefObject<HTMLDivElement | null> }) {
+export function MagneticCard({ ref: _ref, children, className, intensity = 0.3, distance = 150, disabled = false, ...props }: MagneticCardProps & { ref?: React.RefObject<HTMLDivElement | null> }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -449,6 +449,7 @@ export function AnimatedToast({
       <span className="text-sm font-medium">{message}</span>
       {onClose && (
         <button
+          type="button"
           onClick={onClose}
           className="ml-auto hover:opacity-70 transition-opacity"
         >
