@@ -10,6 +10,7 @@ import { BookOpen, Lightbulb } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Concept } from '@/lib/content-schema';
 import { InfoButton } from './InfoButton';
+import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils';
 
 interface ConceptCardProps {
   concept: Concept;
@@ -47,12 +48,12 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <BookOpen className="size-4" />
-              <span>Difficulté: {concept.difficulty}</span>
+              <span>Difficulté: {getDifficultyLabel(concept.difficulty)}</span>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
-              {concept.category}
+              {getCategoryLabel(concept.category)}
             </Badge>
             {concept.tags.map((tag) => (
               <Badge key={tag} variant="outline" className="text-xs">

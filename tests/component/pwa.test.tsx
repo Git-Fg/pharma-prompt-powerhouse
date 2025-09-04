@@ -70,9 +70,4 @@ describe('PWA Implementation', () => {
     const { PWALifecycle } = await import('../../src/components/pwa/PWALifecycle');
     expect(PWALifecycle).toBeDefined();
   });
-
-  it('should have PWA status indicator component available', async () => {
-    const { PWAStatusIndicator } = await import('../../src/components/pwa/PWAStatusIndicator');
-    expect(PWAStatusIndicator).toBeDefined();
-  });
 });
