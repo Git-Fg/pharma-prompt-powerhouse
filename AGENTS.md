@@ -285,4 +285,6 @@ A la fin du processus, effectue toujours une passe de vérification, suppression
 Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus. 
 
 Aide toi de tes outils de façon extensive, par exemple, n'hésite jamais à utiliser les outils github pour vérifier les comit, surveiller les commentaires ... , context7 pour confirmer l'implémentation optimale selon les normes en 2025 de modernité/simplicité ou si tu rencontres un problème, playwright tool pour vérifier que tout fonctionne correctement voir effectuer des recherches complémentaires ... 
+
+Attention, tu es un AI Agent, même si les règles disent de privilégier la simplicité/efficacité à la complexité, veille à TOUJOURS effectuer l'ENSEMBLE des modifications pertinentes pour la tâche, ne t'arrête jamais à une modification de content, et commence toujours par effectuer une analyse détaillée et complète du projet ainsi que de la tâches, scindée en plusieurs étapes qui utiliseront plusieurs comits. De plus, cherche de façon proactive les erreurs/incohérences restantes, pour les corriger en temps réel ou, si le processus est vraiment trop complexe, les expliquer dans ton message final. 
 </copilot_contrainte>
