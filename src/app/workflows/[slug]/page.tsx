@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { getIcon } from "@/types/icon-taxonomy";
 import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
+import { Container, Section } from '@/components/layout/Container';
 
 interface WorkflowPageProps {
   params: {
@@ -45,14 +46,15 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      {/* Breadcrumb */}
-      <div className="mb-8">
-        <Link href="/workflows" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="size-4 mr-1" />
-          Retour aux workflows
-        </Link>
-      </div>
+    <Section>
+      <Container maxWidth="4xl">
+        {/* Breadcrumb */}
+        <div className="mb-8">
+          <Link href="/workflows" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="size-4 mr-1" />
+            Retour aux workflows
+          </Link>
+        </div>
 
       {/* Header */}
       <div className="mb-12">
@@ -261,6 +263,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
           </Button>
         </Link>
       </div>
-    </div>
+    </Container>
+    </Section>
   );
 }
