@@ -99,6 +99,7 @@
   --section-padding-desktop: 3rem 0;
   --content-gap-mobile: 1.5rem;
   --content-gap-desktop: 2rem;
+  --mobile-nav-height: 5rem;
   
   /* Typography Scale */
   --text-xs: 0.75rem;
