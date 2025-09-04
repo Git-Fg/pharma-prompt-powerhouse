@@ -252,7 +252,6 @@ export const interactiveElementVariants = tv({
 // TYPES FOR TYPESCRIPT INTEGRATION
 // =================================================================
 
-export type ContentCardVariants = VariantProps<typeof contentCardVariants>
 export type StatusBadgeVariants = VariantProps<typeof statusBadgeVariants>
 export type DifficultyBadgeVariants = VariantProps<typeof difficultyBadgeVariants>
 export type CategoryBadgeVariants = VariantProps<typeof categoryBadgeVariants>
