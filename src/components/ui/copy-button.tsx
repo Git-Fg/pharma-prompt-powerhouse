@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react'
 import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface CopyButtonProps extends Omit<ComponentProps<typeof Button>, 'onClick'> {

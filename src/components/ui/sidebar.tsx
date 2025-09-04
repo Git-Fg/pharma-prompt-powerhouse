@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority'
 import { PanelLeftIcon } from 'lucide-react'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -291,6 +291,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
       data-sidebar="rail"
       data-slot="sidebar-rail"
       aria-label="Toggle Sidebar"
+      type="button"
       tabIndex={-1}
       onClick={toggleSidebar}
       title="Toggle Sidebar"

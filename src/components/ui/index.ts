@@ -20,7 +20,7 @@ export {
 export { AspectRatio } from './aspect-ratio'
 // Composants d'interface
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
-export { Badge } from './badge'
+export { default as Badge } from './badge'
 export {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,7 +30,7 @@ export {
   BreadcrumbSeparator,
 } from './breadcrumb'
 // Composants de base
-export { Button } from './button'
+export { default as Button } from './button'
 export { Calendar } from './calendar'
 
 // Composants de mise en page

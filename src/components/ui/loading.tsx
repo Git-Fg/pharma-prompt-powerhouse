@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { easings } from './animated'
+import { easings } from './animation-constants'
 
 // Enhanced skeleton with modern shimmer effect
 interface SkeletonProps {

@@ -2,7 +2,7 @@
 
 import { Download, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface BeforeInstallPromptEvent extends Event {
@@ -58,12 +58,12 @@ export function InstallPrompt() {
 
     if (outcome === 'accepted') {
       if (process.env.NODE_ENV === 'development') {
-        console.log('User accepted the install prompt')
+        console.warn('User accepted the install prompt')
       }
     }
     else {
       if (process.env.NODE_ENV === 'development') {
-        console.log('User dismissed the install prompt')
+        console.warn('User dismissed the install prompt')
       }
     }
 

@@ -12,7 +12,7 @@ export function PWALifecycle() {
       navigator.serviceWorker.register('/sw.js').then((registration) => {
         // Service worker registered successfully
         if (process.env.NODE_ENV === 'development') {
-          console.log('Service Worker registered:', registration)
+          console.warn('Service Worker registered:', registration)
         }
 
         // Listen for service worker updates
@@ -23,7 +23,7 @@ export function PWALifecycle() {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 // In production, you might want to show a toast notification here
                 if (process.env.NODE_ENV === 'development') {
-                  console.log('New version available! Please refresh to update.')
+                  console.warn('New version available! Please refresh to update.')
                 }
               }
             })
@@ -32,7 +32,7 @@ export function PWALifecycle() {
       }).catch((error) => {
         // Service worker registration failed - only log in development
         if (process.env.NODE_ENV === 'development') {
-          console.log('Service Worker registration failed:', error)
+          console.warn('Service Worker registration failed:', error)
         }
       })
 
