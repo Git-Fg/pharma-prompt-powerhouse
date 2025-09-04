@@ -1,9 +1,9 @@
-import { MetadataRoute } from 'next';
-import { content } from '@/lib/content-loader';
-import { env } from '@/lib/env';
+import type { MetadataRoute } from 'next'
+import { content } from '@/lib/content-loader'
+import { env } from '@/lib/env'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = env.baseUrl;
+  const baseUrl = env.baseUrl
 
   // Static pages
   const staticPages = [
@@ -43,39 +43,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
-  ];
+  ]
 
   // Dynamic workflow pages
-  const workflowPages = content.workflows.map((workflow) => ({
+  const workflowPages = content.workflows.map(workflow => ({
     url: `${baseUrl}/workflows/${workflow.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: workflow.isFavorite ? 0.9 : 0.7,
-  }));
+  }))
 
   // Dynamic guide pages
-  const guidePages = content.guides.map((guide) => ({
+  const guidePages = content.guides.map(guide => ({
     url: `${baseUrl}/guides/${guide.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: guide.isFavorite ? 0.8 : 0.6,
-  }));
+  }))
 
   // Dynamic concept pages
-  const conceptPages = content.concepts.map((concept) => ({
+  const conceptPages = content.concepts.map(concept => ({
     url: `${baseUrl}/concepts/${concept.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: concept.isFavorite ? 0.7 : 0.5,
-  }));
+  }))
 
   // Dynamic external tool pages
-  const toolPages = content.externalTools.map((tool) => ({
+  const toolPages = content.externalTools.map(tool => ({
     url: `${baseUrl}/l-arsenal-ia/${tool.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: tool.isFavorite ? 0.7 : 0.5,
-  }));
+  }))
 
   return [
     ...staticPages,
@@ -83,5 +83,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...guidePages,
     ...conceptPages,
     ...toolPages,
-  ];
+  ]
 }

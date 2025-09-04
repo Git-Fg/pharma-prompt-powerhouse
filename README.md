@@ -11,7 +11,7 @@
 Transformer les étudiants en pharmacie de "passagers" à "pilotes" de l'IA, en leur fournissant :
 
 - **Des fondamentals solides** : Concepts clés du prompt engineering appliqué à la pharmacie
-- **Des méthodes éprouvées** : Guides pratiques basés sur l'expérience terrain  
+- **Des méthodes éprouvées** : Guides pratiques basés sur l'expérience terrain
 - **Des outils performants** : Workflows interactifs et système de recommandations contextuelles
 - **Un écosystème cohérent** : Interconnexions intelligentes entre tous les contenus
 
@@ -53,7 +53,7 @@ Bundle Size Improvements:
 - Chaque concept avec définition analogique + formelle + importance pratique
 - **Smart Interconnections**: Recommandations contextuelles vers workflows et outils pertinents
 
-#### **14 Guides Stratégiques** 
+#### **14 Guides Stratégiques**
 - Les 5 Piliers d'un Prompt Efficace, Méthode XML, Optimisation Itérative
 - **Core Kit Étudiant 2025** : Maîtriser Z.AI + AI Studio sans carte bancaire
 - **IA en Local** : Guide confidentialité 100% avec modèles comme Qwen3-4B
@@ -79,7 +79,7 @@ Bundle Size Improvements:
 - Export multi-plateformes optimisé
 
 #### **Générateur de Flashcards IA**
-- Création automatique de cartes Anki à partir de cours  
+- Création automatique de cartes Anki à partir de cours
 - **AutoAnimate Integration**: Transitions fluides pour UX premium
 - Integration directe avec les concepts de la plateforme
 
@@ -106,7 +106,7 @@ Bundle Size Improvements:
 - **Tailwind v4 + tailwind-variants** : Design system moderne avec recipes
 
 ### **Content & Testing**
-- **Type-Safe Content**: Validation Zod à la compilation + runtime  
+- **Type-Safe Content**: Validation Zod à la compilation + runtime
 - **49 Tests Passing**: Unit + Integration + Component avec 100% success
 - **SEO Automatique**: `sitemap.xml` et `robots.txt` générés dynamiquement
 - **Zero Config Production**: Build ready sans configuration additionnelle
@@ -117,7 +117,7 @@ Bundle Size Improvements:
 src/
 ├── app/                       # Next.js 15 App Router avec 54 pages statiques
 │   ├── concepts/[slug]/       # 8 concepts fondamentaux interconnectés
-│   ├── guides/[slug]/         # 14 guides pratiques avec recommandations  
+│   ├── guides/[slug]/         # 14 guides pratiques avec recommandations
 │   ├── workflows/[slug]/      # 7 workflows interactifs optimisés
 │   ├── l-arsenal-ia/[slug]/   # 10 outils IA avec évaluations détaillées
 │   ├── boite-a-outils/        # Éditeurs et générateurs interactifs
@@ -127,7 +127,7 @@ src/
 ├── components/
 │   ├── shared/                # Smart recommendation system
 │   │   ├── ConceptRecommendation.tsx
-│   │   ├── ToolRecommendation.tsx  
+│   │   ├── ToolRecommendation.tsx
 │   │   └── ResponsiveComparisonTable.tsx (TanStack Table)
 │   ├── ui/                    # shadcn/ui + tailwind-variants
 │   │   ├── recipes/           # Component variant recipes
@@ -166,7 +166,7 @@ src/
 git clone https://github.com/Git-Fg/pharma-prompt-powerhouse
 cd pharma-prompt-powerhouse
 
-# Installer les dépendances  
+# Installer les dépendances
 npm install
 
 # Développement avec hot-reload
@@ -192,7 +192,7 @@ npm run test:e2e
 ## 🔧 Outils de Développement
 
 ### **Modern Development Stack**
-- **Package Manager**: npm (default) / pnpm (local development) 
+- **Package Manager**: npm (default) / pnpm (local development)
 - **Testing**: Vitest avec jsdom (5-10x plus rapide que Jest)
 - **Type Checking**: TypeScript strict avec validation Zod
 - **Linting**: ESLint avec règles React 19 et Next.js 15
@@ -235,7 +235,7 @@ npm run build && npm run test && npm run lint
 Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à **augmenter** les capacités des professionnels :
 
 - **Amplifier la réflexion** : L'IA comme partenaire de brainstorming et d'analyse
-- **Accélérer les tâches** : Automatisation des processus répétitifs (synthèses, fiches)  
+- **Accélérer les tâches** : Automatisation des processus répétitifs (synthèses, fiches)
 - **Sécuriser la pratique** : Méthodes anti-hallucination et vérification systématique
 - **Personnaliser l'apprentissage** : Outils adaptés au niveau et aux besoins individuels
 
@@ -264,7 +264,7 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 
 ### **Standards de Qualité**
 
-- **Tests Required** : 49 tests automatisés pour validation continue  
+- **Tests Required** : 49 tests automatisés pour validation continue
 - **Type Safety** : TypeScript strict avec génération de types automatique
 - **Content Validation** : Vérification automatique des références et métadonnées
 - **Performance Focus** : 51 pages statiques générées, optimisées pour la vitesse
@@ -286,7 +286,7 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 - ✅ **10 outils IA** analysés avec retours terrain
 - ✅ **Validation croisée** automatique des références
 
-### **Expérience Utilisateur Finalisée**  
+### **Expérience Utilisateur Finalisée**
 - ✅ **Navigation cohérente** entre tous types de contenu
 - ✅ **Recommandations intelligentes** : outil/guide/concept contextuel
 - ✅ **Parcours d'apprentissage** guidé débutant → avancé
@@ -302,7 +302,7 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 ⚠️ **Important** : Cette plateforme est un outil d'apprentissage et d'aide à la formation. L'utilisation de l'IA en pratique pharmaceutique nécessite :
 
 - **Validation systématique** des informations critiques par des sources officielles
-- **Supervision professionnelle** appropriée selon le contexte d'usage  
+- **Supervision professionnelle** appropriée selon le contexte d'usage
 - **Respect des réglementations** locales sur l'usage de l'IA en santé
 - **Esprit critique constant** - L'IA peut halluciner et ne remplace pas l'expertise humaine
 
@@ -310,7 +310,7 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 
 Optimisé pour déploiement sur :
 - **Vercel** (recommandé) : Configuration automatique
-- **Netlify** : Build statique compatible  
+- **Netlify** : Build statique compatible
 - **GitHub Pages** : Export statique possible
 - **Serveur propre** : Node.js + builds statiques
 
@@ -326,7 +326,7 @@ npm run export
 
 ### **Contributions Welcomes**
 - **Issues** : Rapports de bugs et suggestions d'améliorations
-- **Pull Requests** : Nouveaux contenus, corrections, améliorations techniques  
+- **Pull Requests** : Nouveaux contenus, corrections, améliorations techniques
 - **Discussions** : Partage d'expériences et cas d'usage
 
 ### **Roadmap Future**

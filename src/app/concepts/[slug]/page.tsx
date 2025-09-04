@@ -1,60 +1,60 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { content, getConceptBySlug } from '@/lib/content-loader';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import type { Metadata } from 'next'
 import {
   ArrowLeft,
   BookOpen,
   Lightbulb,
   Target,
-} from "lucide-react";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
-import { Container, Section } from "@/components/layout/Container";
-import type { Metadata } from "next";
+} from 'lucide-react'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { Container, Section } from '@/components/layout/Container'
+import { ContentRenderer } from '@/components/shared/ContentRenderer'
+import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { content, getConceptBySlug } from '@/lib/content-loader'
 
 // Génération des pages statiques au build
 export async function generateStaticParams() {
-  return content.concepts.map((concept) => ({
+  return content.concepts.map(concept => ({
     slug: concept.slug,
-  }));
+  }))
 }
 
 // Génération des métadonnées dynamiques pour le SEO
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
-  const concept = getConceptBySlug(params.slug);
+  const concept = getConceptBySlug(params.slug)
 
   if (!concept) {
     return {
-      title: "Concept non trouvé - Pharma Prompt Powerhouse",
-      description: "Le concept que vous recherchez n'existe pas.",
-    };
+      title: 'Concept non trouvé - Pharma Prompt Powerhouse',
+      description: 'Le concept que vous recherchez n\'existe pas.',
+    }
   }
   return {
     title: `${concept.title} - Concepts | Pharma Prompt Powerhouse`,
     description: concept.description,
     keywords: [
-      "pharmacie",
-      "prompt engineering",
-      "intelligence artificielle",
-      "formation",
+      'pharmacie',
+      'prompt engineering',
+      'intelligence artificielle',
+      'formation',
       concept.title,
-      ...(concept.tags || [])
+      ...(concept.tags || []),
     ],
     openGraph: {
       title: concept.title,
       description: concept.description,
-      type: "article",
+      type: 'article',
       images: [
         {
-          url: "/icon-512x512.png",
+          url: '/icon-512x512.png',
           width: 512,
           height: 512,
           alt: concept.title,
@@ -62,31 +62,31 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: concept.title,
       description: concept.description,
     },
-  };
+  }
 }
 
 export default async function ConceptDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const concept = getConceptBySlug(params.slug);
+  const concept = getConceptBySlug(params.slug)
 
   if (!concept) {
-    notFound();
+    notFound()
   }
 
   // Trouver les contenus liés à ce concept
   const relatedGuides = content.guides.filter(
-    (g) => g.conceptSlugs?.includes(params.slug)
-  );
+    g => g.conceptSlugs?.includes(params.slug),
+  )
   const relatedWorkflows = content.workflows.filter(
-    (w) => w.conceptSlugs?.includes(params.slug)
-  );
+    w => w.conceptSlugs?.includes(params.slug),
+  )
 
   return (
     <Section>
@@ -145,7 +145,8 @@ export default async function ConceptDetailPage({
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Target className="size-5" />À propos de ce concept
+              <Target className="size-5" />
+              À propos de ce concept
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -162,10 +163,12 @@ export default async function ConceptDetailPage({
           {relatedGuides.length > 0 && (
             <section>
               <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-                <BookOpen className="size-8 text-primary" /> Guides liés à ce concept
+                <BookOpen className="size-8 text-primary" />
+                {' '}
+                Guides liés à ce concept
               </h2>
               <div className="grid gap-4">
-                {relatedGuides.map((guide) => (
+                {relatedGuides.map(guide => (
                   <Link href={`/guides/${guide.slug}`} key={guide.slug}>
                     <Card className="hover:bg-accent/50 transition-colors">
                       <CardHeader>
@@ -185,11 +188,13 @@ export default async function ConceptDetailPage({
           {relatedWorkflows.length > 0 && (
             <section>
               <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-                <Lightbulb className="size-8 text-yellow-500" /> Appliquer : Les
+                <Lightbulb className="size-8 text-yellow-500" />
+                {' '}
+                Appliquer : Les
                 Workflows Pratiques
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {relatedWorkflows.map((workflow) => (
+                {relatedWorkflows.map(workflow => (
                   <Link href={`/workflows/${workflow.slug}`} key={workflow.slug}>
                     <Card className="h-full hover:bg-accent/50 transition-colors">
                       <CardHeader>
@@ -211,5 +216,5 @@ export default async function ConceptDetailPage({
         </main>
       </Container>
     </Section>
-  );
+  )
 }

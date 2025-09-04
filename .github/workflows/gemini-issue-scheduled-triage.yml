@@ -1,4 +1,4 @@
-name: '📋 Gemini Scheduled Issue Triage'
+name: 📋 Gemini Scheduled Issue Triage
 
 on:
   schedule:
@@ -11,33 +11,33 @@ concurrency:
 
 defaults:
   run:
-    shell: 'bash'
+    shell: bash
 
 permissions:
-  contents: 'read'
-  id-token: 'write'
-  issues: 'write'
-  statuses: 'write'
+  contents: read
+  id-token: write
+  issues: write
+  statuses: write
 
 jobs:
   triage-issues:
     timeout-minutes: 5
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout repository'
-        uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # ratchet:actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # ratchet:actions/checkout@v4
 
-      - name: 'Generate GitHub App Token'
-        id: 'generate_token'
+      - name: Generate GitHub App Token
+        id: generate_token
         if: |-
           ${{ vars.APP_ID }}
-        uses: 'actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e' # ratchet:actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # ratchet:actions/create-github-app-token@v2
         with:
           app-id: '${{ vars.APP_ID }}'
           private-key: '${{ secrets.APP_PRIVATE_KEY }}'
 
-      - name: 'Find untriaged issues'
-        id: 'find_issues'
+      - name: Find untriaged issues
+        id: find_issues
         env:
           GITHUB_TOKEN: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           GITHUB_REPOSITORY: '${{ github.repository }}'
@@ -62,9 +62,9 @@ jobs:
           ISSUE_COUNT="$(echo "${ISSUES}" | jq 'length')"
           echo "✅ Found ${ISSUE_COUNT} issues to triage! 🎯"
 
-      - name: 'Get Repository Labels'
-        id: 'get_labels'
-        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
+      - name: Get Repository Labels
+        id: get_labels
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           github-token: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           script: |-
@@ -77,11 +77,11 @@ jobs:
             core.info(`Found ${labelNames.length} labels: ${labelNames.join(', ')}`);
             return labelNames;
 
-      - name: 'Run Gemini Issue Analysis'
+      - name: Run Gemini Issue Analysis
         if: |-
           ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
-        uses: 'google-github-actions/run-gemini-cli@v0'
-        id: 'gemini_issue_analysis'
+        uses: google-github-actions/run-gemini-cli@v0
+        id: gemini_issue_analysis
         env:
           GITHUB_TOKEN: '' # Do not pass any auth token here since this runs on untrusted inputs
           ISSUES_TO_TRIAGE: '${{ steps.find_issues.outputs.issues_to_triage }}'
@@ -145,14 +145,14 @@ jobs:
             - Output only valid JSON format
             - Do not include any explanation or additional text, just the JSON
 
-      - name: 'Apply Labels to Issues'
+      - name: Apply Labels to Issues
         if: |-
           ${{ steps.gemini_issue_analysis.outcome == 'success' &&
               steps.gemini_issue_analysis.outputs.summary != '[]' }}
         env:
           REPOSITORY: '${{ github.repository }}'
           LABELS_OUTPUT: '${{ steps.gemini_issue_analysis.outputs.summary }}'
-        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           github-token: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           script: |-

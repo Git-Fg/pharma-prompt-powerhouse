@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { WifiOff, RefreshCw, Home, Book, Workflow } from 'lucide-react';
+import { Book, Home, RefreshCw, WifiOff, Workflow } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function OfflinePage() {
   return (
@@ -52,8 +52,8 @@ export default function OfflinePage() {
 
         <Card>
           <CardContent className="pt-6">
-            <Button 
-              variant="default" 
+            <Button
+              variant="default"
               className="w-full"
               onClick={() => window.location.reload()}
             >
@@ -72,5 +72,5 @@ export default function OfflinePage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

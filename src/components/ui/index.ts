@@ -1,80 +1,11 @@
-// Composants de base
-export { Button } from './button';
-export { Input } from './input';
-export { Label } from './label';
-export { Textarea } from './textarea';
-export {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from './select';
-export { Checkbox } from './checkbox';
-export { RadioGroup, RadioGroupItem } from './radio-group';
-export { Switch } from './switch';
-export { Slider } from './slider';
-
-// Composants de mise en page
-export {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from './card';
-export { Badge } from './badge';
-export { Separator } from './separator';
-export { AspectRatio } from './aspect-ratio';
-export { ScrollArea } from './scroll-area';
-export {
-  ResizablePanel,
-  ResizablePanelGroup,
-  ResizableHandle,
-} from './resizable';
-
-// Composants de navigation
-export {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from './navigation-menu';
-export {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from './breadcrumb';
-export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from './accordion';
-export {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from './collapsible';
-
-// Composants de dialogue
-export {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from './dialog';
+} from './accordion'
+// Composants de feedback
+export { Alert, AlertDescription, AlertTitle } from './alert'
 export {
   AlertDialog,
   AlertDialogAction,
@@ -85,65 +16,47 @@ export {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from './alert-dialog';
-export { Popover, PopoverContent, PopoverTrigger } from './popover';
-export { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card';
-export {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from './tooltip';
-export {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from './sheet';
-export { Drawer } from './drawer';
-
-// Composants de formulaire
-export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp';
-
-// Composants de données
-export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from './table';
-export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from './pagination';
-
-// Composants de feedback
-export { Alert, AlertDescription, AlertTitle } from './alert';
-export { Toaster } from './sonner';
-export { Progress } from './progress';
-export { Skeleton } from './skeleton';
-
+} from './alert-dialog'
+export { AspectRatio } from './aspect-ratio'
 // Composants d'interface
-export { Avatar, AvatarFallback, AvatarImage } from './avatar';
-export { Calendar } from './calendar';
+export { Avatar, AvatarFallback, AvatarImage } from './avatar'
+export { Badge } from './badge'
+export {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from './breadcrumb'
+// Composants de base
+export { Button } from './button'
+export { Calendar } from './calendar'
+
+// Composants de mise en page
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './card'
 export {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from './carousel';
+} from './carousel'
+export { Checkbox } from './checkbox'
+// Composants personnalisés
+export { CodeBlock } from './code-block'
+export {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './collapsible'
 export {
   Command,
   CommandDialog,
@@ -154,7 +67,8 @@ export {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from './command';
+} from './command'
+
 export {
   ContextMenu,
   ContextMenuContent,
@@ -168,7 +82,18 @@ export {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from './context-menu';
+} from './context-menu'
+// Composants de dialogue
+export {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from './dialog'
+export { Drawer } from './drawer'
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -185,15 +110,21 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from './dropdown-menu';
+} from './dropdown-menu'
+export { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card'
+
+export { Input } from './input'
+// Composants de formulaire
+export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp'
+export { Label } from './label'
 export {
   Menubar,
   MenubarCheckboxItem,
   MenubarContent,
+  MenubarGroup,
   MenubarItem,
   MenubarLabel,
   MenubarMenu,
-  MenubarGroup,
   MenubarPortal,
   MenubarRadioGroup,
   MenubarRadioItem,
@@ -203,8 +134,77 @@ export {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from './menubar';
-export { ToggleGroup, ToggleGroupItem } from './toggle-group';
+} from './menubar'
+// Composants de navigation
+export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from './navigation-menu'
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from './pagination'
+export { Popover, PopoverContent, PopoverTrigger } from './popover'
 
-// Composants personnalisés
-export { CodeBlock } from './code-block';
+export { Progress } from './progress'
+
+export { RadioGroup, RadioGroupItem } from './radio-group'
+export {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from './resizable'
+
+export { ScrollArea } from './scroll-area'
+export {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './select'
+export { Separator } from './separator'
+export {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './sheet'
+
+export { Skeleton } from './skeleton'
+export { Slider } from './slider'
+export { Toaster } from './sonner'
+export { Switch } from './switch'
+// Composants de données
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './table'
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
+export { Textarea } from './textarea'
+export { ToggleGroup, ToggleGroupItem } from './toggle-group'
+
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './tooltip'

@@ -1,4 +1,4 @@
-import type { Workflow } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'memoriser-concepts-difficiles',
@@ -11,7 +11,7 @@ export const workflow = {
   difficulty: 'intermédiaire',
   estimatedTime: '12 min',
   conceptSlugs: ['température-dosage'],
-  
+
   problem: [
     {
       type: 'markdown',
@@ -23,8 +23,8 @@ Les difficultés classiques :
 - **Listes trop longues :** Impossible de retenir 15 effets secondaires par cœur
 - **Concepts abstraits :** Difficile de visualiser des mécanismes moléculaires
 - **Pas de liens logiques :** Informations isolées sans connexion
-- **Oubli rapide :** Ce qui est mémorisé mécaniquement s'efface vite`
-    }
+- **Oubli rapide :** Ce qui est mémorisé mécaniquement s'efface vite`,
+    },
   ],
 
   initialApproach: [
@@ -36,14 +36,14 @@ Au début, j'ai essayé de demander simplement :
 
 > *"Donne-moi un moyen de retenir les effets des bêta-bloquants."*
 
-**Résultat :** Une liste d'acronymes génériques et peu mémorables, sans personnalisation ni créativité.`
+**Résultat :** Une liste d'acronymes génériques et peu mémorables, sans personnalisation ni créativité.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L'IA propose des solutions "bateau" sans créativité. Les mnémoniques générés sont souvent artificiels et peu mémorables car ils ne s'adaptent pas à votre style d'apprentissage.`
-    }
+      content: `L'IA propose des solutions "bateau" sans créativité. Les mnémoniques générés sont souvent artificiels et peu mémorables car ils ne s'adaptent pas à votre style d'apprentissage.`,
+    },
   ],
 
   optimizedStrategy: [
@@ -52,12 +52,12 @@ Au début, j'ai essayé de demander simplement :
       content: `## La Stratégie Optimisée : Créativité Contrôlée et Personnalisée
 
 J'ai découvert qu'il fallait guider l'IA vers plus de créativité tout en spécifiant mon style d'apprentissage.
-Cette approche utilise la **température de dosage** pour contrôler la créativité.`
+Cette approche utilise la **température de dosage** pour contrôler la créativité.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'température-dosage',
-      reason: 'Comprendre comment ajuster la créativité de l\'IA vous permet de générer des mnémoniques plus originales et mémorables.'
+      reason: 'Comprendre comment ajuster la créativité de l\'IA vous permet de générer des mnémoniques plus originales et mémorables.',
     },
     {
       type: 'card',
@@ -65,7 +65,7 @@ Cette approche utilise la **température de dosage** pour contrôler la créativ
       content: `**Techniques pour plus d'originalité :**
 - Demander des approches "originales", "inattendues", "humoristiques"
 - Augmenter la température (Google AI Studio)
-- Spécifier un style (narratif, visuel, métaphorique)`
+- Spécifier un style (narratif, visuel, métaphorique)`,
     },
     {
       type: 'card',
@@ -73,7 +73,7 @@ Cette approche utilise la **température de dosage** pour contrôler la créativ
       content: `**Adapter à votre style d'apprentissage :**
 - Visuel → Demander des images mentales, des couleurs
 - Auditif → Demander des rimes, des chansons
-- Kinesthésique → Demander des gestes, des mouvements`
+- Kinesthésique → Demander des gestes, des mouvements`,
     },
     {
       type: 'card',
@@ -81,8 +81,8 @@ Cette approche utilise la **température de dosage** pour contrôler la créativ
       content: `**Affiner la mémorabilité :**
 - Demander 2-3 alternatives différentes
 - Tester mentalement la facilité de rappel
-- Combiner les meilleures parties de chaque proposition`
-    }
+- Combiner les meilleures parties de chaque proposition`,
+    },
   ],
 
   toolComparison: [
@@ -90,7 +90,7 @@ Cette approche utilise la **température de dosage** pour contrôler la créativ
       type: 'markdown',
       content: `## Comparaison des Outils : Mon Retour d'Expérience
 
-J'ai testé différentes plateformes pour optimiser la création de mnémoniques :`
+J'ai testé différentes plateformes pour optimiser la création de mnémoniques :`,
     },
     {
       type: 'tabs',
@@ -111,9 +111,9 @@ J'ai testé différentes plateformes pour optimiser la création de mnémoniques
 - **Température 0.8-0.9** : Pour des mnémoniques créatifs
 - **Température 0.2-0.4** : Pour des associations logiques
 
-**Mon usage :** Mon outil de référence pour générer des mnémoniques originaux grâce au contrôle de créativité.`
-            }
-          ]
+**Mon usage :** Mon outil de référence pour générer des mnémoniques originaux grâce au contrôle de créativité.`,
+            },
+          ],
         },
         {
           value: 'chatgpt',
@@ -131,9 +131,9 @@ J'ai testé différentes plateformes pour optimiser la création de mnémoniques
 - Demander plusieurs styles différents
 - Utiliser le mode "brainstorming"
 
-**Mon usage :** Parfait pour itérer et personnaliser des mnémoniques en conversationnel.`
-            }
-          ]
+**Mon usage :** Parfait pour itérer et personnaliser des mnémoniques en conversationnel.`,
+            },
+          ],
         },
         {
           value: 'claude',
@@ -150,12 +150,12 @@ J'ai testé différentes plateformes pour optimiser la création de mnémoniques
 - Pas de contrôle de température
 - Limite de messages en gratuit
 
-**Mon usage :** Excellent pour créer des analogies narratives complexes et des histoires mémorables.`
-            }
-          ]
-        }
-      ]
-    }
+**Mon usage :** Excellent pour créer des analogies narratives complexes et des histoires mémorables.`,
+            },
+          ],
+        },
+      ],
+    },
   ],
 
   finalPrompt: [
@@ -163,7 +163,7 @@ J'ai testé différentes plateformes pour optimiser la création de mnémoniques
       type: 'markdown',
       content: `## Le Prompt Final : Template pour Mnémoniques Créatifs
 
-Voici mon template optimisé pour générer des mnémoniques mémorables :`
+Voici mon template optimisé pour générer des mnémoniques mémorables :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -235,27 +235,27 @@ Procède ainsi :
 3. **Analogie** : Formule une métaphore visuelle/narrative  
 4. **Explication** : Explique chaque lien
 
-Température élevée recommandée (0.8-0.9) pour plus de créativité !`
-        }
+Température élevée recommandée (0.8-0.9) pour plus de créativité !`,
+        },
       },
       recommendedTools: {
         standard: ['ChatGPT', 'Claude AI'],
         xml: ['Claude AI'],
-        aiStudio: ['Google AI Studio', 'DeepSeek Chat']
+        aiStudio: ['Google AI Studio', 'DeepSeek Chat'],
       },
       variables: [
         'concept_complexe : Le concept difficile à mémoriser (liste, mécanisme, etc.)',
         'style_apprentissage : Votre profil (visuel, auditif, kinesthésique)',
-        'contexte_apprentissage : Le niveau (L1, L2, PACES) et objectifs'
-      ]
-    }
+        'contexte_apprentissage : Le niveau (L1, L2, PACES) et objectifs',
+      ],
+    },
   ],
 
   keyTakeaways: [
-    "La créativité de l'IA peut être contrôlée : utilisez des adjectifs comme 'original', 'inattendu' dans vos prompts.",
-    "Spécifier votre style d'apprentissage (visuel/auditif/kinesthésique) améliore drastiquement la mémorabilité.",
-    "Google AI Studio permet un contrôle précis de la créativité via le paramètre Température (0.8-0.9 recommandé).",
-    "Toujours demander 2-3 alternatives différentes pour choisir la plus mémorable pour vous.",
-    "Les mnémoniques personnalisés battent toujours les solutions génériques trouvées sur internet."
-  ]
-} satisfies Workflow;
+    'La créativité de l\'IA peut être contrôlée : utilisez des adjectifs comme \'original\', \'inattendu\' dans vos prompts.',
+    'Spécifier votre style d\'apprentissage (visuel/auditif/kinesthésique) améliore drastiquement la mémorabilité.',
+    'Google AI Studio permet un contrôle précis de la créativité via le paramètre Température (0.8-0.9 recommandé).',
+    'Toujours demander 2-3 alternatives différentes pour choisir la plus mémorable pour vous.',
+    'Les mnémoniques personnalisés battent toujours les solutions génériques trouvées sur internet.',
+  ],
+} satisfies Workflow

@@ -1,19 +1,19 @@
-import { content } from '@/lib/content-loader';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowRight, Brain, Shield, Zap, BookOpen, Target, ExternalLink, AlertTriangle } from 'lucide-react';
-import Link from 'next/link';
-import { Container, Section } from '@/components/layout/Container';
+import { AlertTriangle, ArrowRight, BookOpen, Brain, ExternalLink, Shield, Target, Zap } from 'lucide-react'
+import Link from 'next/link'
+import { Container, Section } from '@/components/layout/Container'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { content } from '@/lib/content-loader'
 
 export default function HomePage() {
-  // Get favorite workflows first, then fill with recent ones if needed 
-  const favoriteWorkflows = content.workflows.filter(w => w.isFavorite);
-  const recentWorkflows = content.workflows.slice(0, 3);
-  const featuredWorkflows = favoriteWorkflows.length >= 3 
-    ? favoriteWorkflows.slice(0, 3) 
-    : [...favoriteWorkflows, ...recentWorkflows].slice(0, 3);
+  // Get favorite workflows first, then fill with recent ones if needed
+  const favoriteWorkflows = content.workflows.filter(w => w.isFavorite)
+  const recentWorkflows = content.workflows.slice(0, 3)
+  const featuredWorkflows = favoriteWorkflows.length >= 3
+    ? favoriteWorkflows.slice(0, 3)
+    : [...favoriteWorkflows, ...recentWorkflows].slice(0, 3)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -22,20 +22,24 @@ export default function HomePage() {
         <Container maxWidth="4xl">
           <div className="text-center space-y-6">
             <h1 className="responsive-heading">
-              Bienvenue sur<br />
+              Bienvenue sur
+              <br />
               Pharma Prompt Powerhouse
             </h1>
             <div className="prose prose-lg mx-auto text-muted-foreground space-y-4">
               <p className="responsive-text leading-relaxed text-pretty">
-                Bonjour ! Je suis un étudiant en pharmacie,<br />
+                Bonjour ! Je suis un étudiant en pharmacie,
+                <br />
                 comme vous peut-être.
               </p>
               <p className="responsive-text leading-relaxed text-pretty">
-                J'ai passé du temps à explorer l'IA pour mes études<br />
+                J'ai passé du temps à explorer l'IA pour mes études
+                <br />
                 et je partage ici mes méthodes, mes découvertes et mes doutes.
               </p>
               <p className="font-medium text-foreground responsive-text text-pretty">
-                Ce site est le carnet de bord de mon exploration,<br />
+                Ce site est le carnet de bord de mon exploration,
+                <br />
                 structuré pour vous faire gagner du temps.
               </p>
             </div>
@@ -50,23 +54,29 @@ export default function HomePage() {
             <Alert>
               <Zap className="size-4" />
               <AlertDescription>
-                <strong>Performance :</strong> Le paysage de l'IA évolue constamment. 
+                <strong>Performance :</strong>
+                {' '}
+                Le paysage de l'IA évolue constamment.
                 Expérimentez pour trouver votre solution optimale.
               </AlertDescription>
             </Alert>
-            
+
             <Alert>
               <AlertTriangle className="size-4" />
               <AlertDescription>
-                <strong>Fiabilité :</strong> Une IA peut "halluciner". 
+                <strong>Fiabilité :</strong>
+                {' '}
+                Une IA peut "halluciner".
                 Vérifiez toujours avec des sources fiables.
               </AlertDescription>
             </Alert>
-            
+
             <Alert>
               <Shield className="size-4" />
               <AlertDescription>
-                <strong>Confidentialité :</strong> Si vous ne l'écririez pas sur une carte postale, 
+                <strong>Confidentialité :</strong>
+                {' '}
+                Si vous ne l'écririez pas sur une carte postale,
                 ne le mettez pas dans un prompt.
               </AlertDescription>
             </Alert>
@@ -78,7 +88,7 @@ export default function HomePage() {
       <Section>
         <Container maxWidth="6xl">
           <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             {/* Pour les nouveaux visiteurs */}
             <Card className="border-2 border-primary/20">
@@ -162,7 +172,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {featuredWorkflows.map((workflow) => (
+            {featuredWorkflows.map(workflow => (
               <Card key={workflow.slug} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -210,8 +220,8 @@ export default function HomePage() {
               <Brain className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
               <p className="text-muted-foreground leading-relaxed text-pretty">
-                Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses 
-                sont basées sur mon expérience personnelle et mes recherches. 
+                Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses
+                sont basées sur mon expérience personnelle et mes recherches.
                 <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
               </p>
             </div>
@@ -219,5 +229,5 @@ export default function HomePage() {
         </Container>
       </Section>
     </div>
-  );
+  )
 }

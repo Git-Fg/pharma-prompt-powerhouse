@@ -1,23 +1,30 @@
-'use client';
-import Link from 'next/link';
-import { content } from '@/lib/content-loader';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Button } from '@/components/ui/button';
-import { Lightbulb, Info } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
+'use client'
+import { Info, Lightbulb } from 'lucide-react'
+import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { content } from '@/lib/content-loader'
 
 interface ConceptRecommendationProps {
-  conceptSlug: string;
-  reason: string;
+  conceptSlug: string
+  reason: string
 }
 
 export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommendationProps) {
-  const isMobile = useIsMobile();
-  const concept = content.concepts.find(c => c.slug === conceptSlug);
+  const isMobile = useIsMobile()
+  const concept = content.concepts.find(c => c.slug === conceptSlug)
 
-  if (!concept) return <Badge variant="destructive">Concept introuvable: {conceptSlug}</Badge>;
+  if (!concept) {
+    return (
+      <Badge variant="destructive">
+        Concept introuvable:
+        {conceptSlug}
+      </Badge>
+    )
+  }
 
   const RecommendationContent = () => (
     <div className="flex flex-col gap-4">
@@ -25,17 +32,18 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         <h4 className="text-sm font-semibold">{concept.title}</h4>
         <p className="text-sm text-muted-foreground">{concept.description}</p>
       </div>
-      
+
       {concept.tags && concept.tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {concept.tags.slice(0, 3).map((tag) => (
+          {concept.tags.slice(0, 3).map(tag => (
             <Badge key={tag} variant="outline" className="bg-background">
               {tag}
             </Badge>
           ))}
           {concept.tags.length > 3 && (
             <Badge variant="outline" className="bg-background text-xs">
-              +{concept.tags.length - 3}
+              +
+              {concept.tags.length - 3}
             </Badge>
           )}
         </div>
@@ -45,7 +53,9 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         <div>
           <p className="text-xs font-medium mb-1">TLDR :</p>
           <p className="text-xs text-muted-foreground">
-            {concept.keyTakeaways[0]} {concept.keyTakeaways.length > 1 && `+ ${concept.keyTakeaways.length - 1} points clés`}
+            {concept.keyTakeaways[0]}
+            {' '}
+            {concept.keyTakeaways.length > 1 && `+ ${concept.keyTakeaways.length - 1} points clés`}
           </p>
         </div>
       )}
@@ -55,7 +65,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
     </div>
-  );
+  )
 
   if (isMobile) {
     return (
@@ -85,7 +95,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
           </div>
         </SheetContent>
       </Sheet>
-    );
+    )
   }
 
   return (
@@ -107,5 +117,5 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
         </div>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }

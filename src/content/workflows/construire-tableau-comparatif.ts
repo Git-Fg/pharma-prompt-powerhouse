@@ -1,4 +1,4 @@
-import type { Workflow } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'construire-tableau-comparatif',
@@ -11,7 +11,7 @@ export const workflow = {
   difficulty: 'intermédiaire',
   estimatedTime: '10 min',
   conceptSlugs: ['structuration-par-balises'],
-  
+
   problem: [
     {
       type: 'markdown',
@@ -23,8 +23,8 @@ Le problème avec les comparaisons textuelles :
 - **Information noyée :** Difficile de retrouver rapidement une différence
 - **Pas de vue d'ensemble :** Impossible de voir les patterns
 - **Révisions inefficaces :** Pas adapté à la mémorisation rapide
-- **Erreurs d'omission :** Certains aspects oubliés dans la comparaison`
-    }
+- **Erreurs d'omission :** Certains aspects oubliés dans la comparaison`,
+    },
   ],
 
   initialApproach: [
@@ -36,14 +36,14 @@ Au début, j'ai essayé de demander simplement :
 
 > *"Compare les ISRS et les IRSN."*
 
-**Résultat :** Deux paragraphes de texte décrivant similitudes et différences, sans structure claire.`
+**Résultat :** Deux paragraphes de texte décrivant similitudes et différences, sans structure claire.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`
-    }
+      content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
+    },
   ],
 
   optimizedStrategy: [
@@ -52,12 +52,12 @@ Au début, j'ai essayé de demander simplement :
       content: `## La Stratégie Optimisée : Structure Imposée par l'IA
 
 J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.
-Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`
+Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: 'L\'utilisation de balises XML permet de forcer l\'IA à respecter une structure de tableau précise et cohérente.'
+      reason: 'L\'utilisation de balises XML permet de forcer l\'IA à respecter une structure de tableau précise et cohérente.',
     },
     {
       type: 'card',
@@ -65,7 +65,7 @@ Cette méthode s'appuie sur la **structuration par balises** pour garantir la co
       content: `**Spécifier clairement :**
 - Les éléments à comparer (colonnes)
 - Les critères de comparaison (lignes)
-- Le format de sortie souhaité (tableau Markdown)`
+- Le format de sortie souhaité (tableau Markdown)`,
     },
     {
       type: 'card',
@@ -78,7 +78,7 @@ Crée un tableau comparatif des [ÉLÉMENTS] avec les critères :
 Format : Tableau Markdown
 Utilise des symboles (✅, ⚠️, ❌) pour une lecture rapide
 Ajoute une synthèse sous le tableau
-\`\`\``
+\`\`\``,
     },
     {
       type: 'card',
@@ -86,8 +86,8 @@ Ajoute une synthèse sous le tableau
       content: `**Adaptation par plateforme :**
 - **ChatGPT/Claude :** Prompt structuré simple
 - **Google AI Studio :** Structured Output pour format garanti
-- **Claude :** Balises XML pour structure claire`
-    }
+- **Claude :** Balises XML pour structure claire`,
+    },
   ],
 
   toolComparison: [
@@ -95,7 +95,7 @@ Ajoute une synthèse sous le tableau
       type: 'markdown',
       content: `## Comparaison des Outils : Mon Retour d'Expérience
 
-J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`
+J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
     },
     {
       type: 'tabs',
@@ -116,9 +116,9 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Parfois trop verbeux dans les cellules
 - Peut "oublier" la structure en cours de génération
 
-**Mon usage :** Idéal pour des tableaux simples à moyennement complexes avec ajustements itératifs.`
-            }
-          ]
+**Mon usage :** Idéal pour des tableaux simples à moyennement complexes avec ajustements itératifs.`,
+            },
+          ],
         },
         {
           value: 'claude',
@@ -135,9 +135,9 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Limite de messages par jour en version gratuite
 - Moins flexible pour les ajustements rapides
 
-**Mon usage :** Parfait pour des tableaux complexes nécessitant une précision académique.`
-            }
-          ]
+**Mon usage :** Parfait pour des tableaux complexes nécessitant une précision académique.`,
+            },
+          ],
         },
         {
           value: 'google-ai-studio',
@@ -154,12 +154,12 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Interface moins intuitive pour l'usage ponctuel
 - Nécessite configuration initiale du schéma JSON
 
-**Mon usage :** Quand j'ai besoin d'une fiabilité absolue du format pour réutilisation automatisée.`
-            }
-          ]
-        }
-      ]
-    }
+**Mon usage :** Quand j'ai besoin d'une fiabilité absolue du format pour réutilisation automatisée.`,
+            },
+          ],
+        },
+      ],
+    },
   ],
 
   finalPrompt: [
@@ -167,7 +167,7 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
       type: 'markdown',
       content: `## Le Prompt Final : Template Universel
 
-Voici le prompt que j'utilise maintenant, adapté selon l'outil :`
+Voici le prompt que j'utilise maintenant, adapté selon l'outil :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -213,26 +213,26 @@ Procède ainsi :
 3. **Structuration du Tableau** : Organise en lignes/colonnes.
 4. **Remplissage des Données** : Complète chaque cellule.
 
-Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (✅, ⚠️, ❌) et ajoute une légende.`
-        }
+Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (✅, ⚠️, ❌) et ajoute une légende.`,
+        },
       },
       recommendedTools: {
         standard: ['ChatGPT', 'Claude AI'],
         xml: ['Claude AI'],
-        aiStudio: ['Google AI Studio', 'Qwen Chat']
+        aiStudio: ['Google AI Studio', 'Qwen Chat'],
       },
       variables: [
         'classes_medicaments : Liste des classes thérapeutiques à comparer',
-        'caracteristiques_comparees : Liste des caractéristiques (efficacité, effets secondaires, etc.)'
-      ]
-    }
+        'caracteristiques_comparees : Liste des caractéristiques (efficacité, effets secondaires, etc.)',
+      ],
+    },
   ],
 
   keyTakeaways: [
-    "Toujours définir explicitement les éléments ET les critères de comparaison pour éviter l'improvisation de l'IA.",
-    "Le format 'Tableau Markdown' est universel et facilite la copie-colle vers tous vos outils de révision.",
-    "Les symboles visuels (✅, ⚠️, ❌) améliorent considérablement la mémorisation et la révision rapide.",
-    "Google AI Studio avec Structured Output garantit une fiabilité de format à 100% pour l'automatisation.",
-    "Un bon tableau comparatif vaut tous les paragraphes du monde pour réviser efficacement."
-  ]
-} satisfies Workflow;
+    'Toujours définir explicitement les éléments ET les critères de comparaison pour éviter l\'improvisation de l\'IA.',
+    'Le format \'Tableau Markdown\' est universel et facilite la copie-colle vers tous vos outils de révision.',
+    'Les symboles visuels (✅, ⚠️, ❌) améliorent considérablement la mémorisation et la révision rapide.',
+    'Google AI Studio avec Structured Output garantit une fiabilité de format à 100% pour l\'automatisation.',
+    'Un bon tableau comparatif vaut tous les paragraphes du monde pour réviser efficacement.',
+  ],
+} satisfies Workflow

@@ -33,8 +33,8 @@ src/types/
 
 ```typescript
 // Importer un type spécifique de contenu
-import type { Prompt, Guide } from '@/types';
+import type { Guide, Prompt } from '@/types'
 
 // Importer un type de bloc de contenu
-import type { ContentBlock } from '@/types';
+import type { ContentBlock } from '@/types'
 ```

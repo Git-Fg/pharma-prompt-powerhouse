@@ -29,4 +29,3 @@ Les outils suivants sont en phase de conception et ne sont pas encore implément
 ## 📝 Note
 
 Ces outils complèteraient l'écosystème actuel centré sur les workflows stratégiques et les guides pratiques. Leur développement dépendra des retours utilisateurs et des besoins identifiés.
-

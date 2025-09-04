@@ -1,11 +1,11 @@
+import React from 'react'
+import { vi } from 'vitest'
 // Test setup file for Vitest
 // Global test configuration
 import '@testing-library/jest-dom'
-import { vi } from 'vitest'
-import React from 'react'
 
 // Mock ResizeObserver for components that use it (like cmdk)
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -33,7 +33,7 @@ vi.mock('next/navigation', () => ({
 // Mock next/link for component tests
 vi.mock('next/link', () => ({
   __esModule: true,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   default: ({ children, href, ...props }: any) => {
     return React.createElement('a', { href, ...props }, children)
   },

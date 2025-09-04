@@ -1,4 +1,4 @@
-import type { Workflow } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'resoudre-cas-clinique',
@@ -11,7 +11,7 @@ export const workflow = {
   difficulty: 'avancé',
   estimatedTime: '25 min',
   conceptSlugs: ['chaîne-de-prompts', 'structuration-par-balises'],
-  
+
   problem: [
     {
       type: 'markdown',
@@ -25,8 +25,8 @@ Face à un cas clinique, j'avais tendance à me disperser. Je voyais plein de d�
 - Oublier de considérer le profil complet du patient
 - Proposer des solutions sans les justifier
 
-Résultat : des réponses partielles et peu convaincantes aux examens.`
-    }
+Résultat : des réponses partielles et peu convaincantes aux examens.`,
+    },
   ],
 
   initialApproach: [
@@ -38,14 +38,14 @@ Je posais directement le cas à l'IA en demandant :
 
 > *"Analyse ce cas clinique et donne-moi la réponse."*
 
-**Problème :** L'IA me donnait une analyse complète d'un coup, sans m'aider à développer mon propre raisonnement clinique.`
+**Problème :** L'IA me donnait une analyse complète d'un coup, sans m'aider à développer mon propre raisonnement clinique.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Le piège de la solution immédiate',
-      content: `Obtenir directement la réponse ne m'apprenait pas à raisonner. J'étais dépendant de l'IA sans développer mon expertise clinique personnelle.`
-    }
+      content: `Obtenir directement la réponse ne m'apprenait pas à raisonner. J'étais dépendant de l'IA sans développer mon expertise clinique personnelle.`,
+    },
   ],
 
   optimizedStrategy: [
@@ -54,12 +54,12 @@ Je posais directement le cas à l'IA en demandant :
       content: `## La Stratégie Optimisée : L'Analyse Guidée par Étapes
 
 J'ai développé une approche progressive qui m'accompagne dans l'apprentissage du raisonnement clinique plutôt que de me donner directement la réponse.
-Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.`
+Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'chaîne-de-prompts',
-      reason: 'Cette technique est la base de notre workflow pour analyser un cas clinique de manière structurée.'
+      reason: 'Cette technique est la base de notre workflow pour analyser un cas clinique de manière structurée.',
     },
     {
       type: 'card',
@@ -70,12 +70,12 @@ Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.
 - Résultats d'examens complémentaires
 - Traitements en cours
 
-Cela m'aide à ne rien oublier dans l'analyse.`
+Cela m'aide à ne rien oublier dans l'analyse.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: 'Utiliser des balises XML améliore la précision de l\'organisation des données cliniques.'
+      reason: 'Utiliser des balises XML améliore la précision de l\'organisation des données cliniques.',
     },
     {
       type: 'card',
@@ -85,7 +85,7 @@ Cela m'aide à ne rien oublier dans l'analyse.`
 - Arguments pour et contre chaque hypothèse
 - Hiérarchisation par probabilité
 
-L'IA devient un partenaire de réflexion, pas un oracle.`
+L'IA devient un partenaire de réflexion, pas un oracle.`,
     },
     {
       type: 'card',
@@ -94,8 +94,8 @@ L'IA devient un partenaire de réflexion, pas un oracle.`
 - Efficacité des traitements proposés
 - Contre-indications spécifiques au patient
 - Interactions médicamenteuses potentielles
-- Surveillance nécessaire`
-    }
+- Surveillance nécessaire`,
+    },
   ],
 
   toolComparison: [
@@ -103,7 +103,7 @@ L'IA devient un partenaire de réflexion, pas un oracle.`
       type: 'markdown',
       content: `## Comparaison des Outils : Mon Expérience Pratique
 
-Chaque outil a ses forces pour l'analyse de cas cliniques :`
+Chaque outil a ses forces pour l'analyse de cas cliniques :`,
     },
     {
       type: 'tabs',
@@ -122,9 +122,9 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`
 
 **Exemple concret :** Sur un cas de patient polymédicamenté, Claude a identifié des interactions subtiles que d'autres outils avaient ratées.
 
-**Limite :** Quota restrictif en version gratuite pour les cas longs.`
-            }
-          ]
+**Limite :** Quota restrictif en version gratuite pour les cas longs.`,
+            },
+          ],
         },
         {
           value: 'chatgpt',
@@ -141,9 +141,9 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`
 - Parfois moins précis sur les spécificités pharmacologiques
 - Peut être trop "généraliste" pour des cas très techniques
 
-**Mon usage :** Parfait pour apprendre la méthodologie avant de passer à des outils plus spécialisés.`
-            }
-          ]
+**Mon usage :** Parfait pour apprendre la méthodologie avant de passer à des outils plus spécialisés.`,
+            },
+          ],
         },
         {
           value: 'gemini',
@@ -160,26 +160,26 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`
 - Interface moins intuitive pour une conversation pédagogique
 - Nécessite plus de structuration dans les prompts
 
-**Mon verdict :** Idéal pour les cas complexes avec beaucoup de données à traiter.`
-            }
-          ]
-        }
-      ]
+**Mon verdict :** Idéal pour les cas complexes avec beaucoup de données à traiter.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'markdown',
-      content: `### Outils Recommandés pour cette Approche`
+      content: `### Outils Recommandés pour cette Approche`,
     },
     {
       type: 'toolRecommendation',
       slug: 'claude-ai',
-      reason: 'Mon premier choix pour l\'analyse de cas cliniques grâce à son raisonnement médical avancé et sa gestion des nuances cliniques.'
+      reason: 'Mon premier choix pour l\'analyse de cas cliniques grâce à son raisonnement médical avancé et sa gestion des nuances cliniques.',
     },
     {
       type: 'toolRecommendation',
       slug: 'google-ai-studio',
-      reason: 'Excellent pour analyser des cas avec beaucoup de données (tableaux biologiques, documents PDF).'
-    }
+      reason: 'Excellent pour analyser des cas avec beaucoup de données (tableaux biologiques, documents PDF).',
+    },
   ],
 
   finalPrompt: [
@@ -187,7 +187,7 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`
       type: 'markdown',
       content: `## Le Prompt Final : Analyse Guidée par Étapes
 
-Voici ma séquence de prompts que j'utilise pour chaque cas. Je les enchaîne dans une même conversation pour maintenir le contexte :`
+Voici ma séquence de prompts que j'utilise pour chaque cas. Je les enchaîne dans une même conversation pour maintenir le contexte :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -221,7 +221,7 @@ Pour l'hypothèse diagnostique la plus probable, analysons les options thérapeu
 - Y a-t-il des contre-indications chez ce patient ?
 - Quelles interactions médicamenteuses dois-je surveiller ?
 - Quelle surveillance faut-il mettre en place ?`,
-        
+
         aiStudio: {
           systemPrompt: `Tu es un pharmacien clinicien expert avec 15 ans d'expérience. Tu accompagnes un étudiant dans l'apprentissage de l'analyse de cas cliniques. 
 
@@ -230,7 +230,7 @@ Ton approche :
 - Structurer l'analyse de manière méthodique
 - Souligner les points critiques de sécurité du patient
 - Justifier chaque recommandation par des arguments scientifiques`,
-          
+
           userPrompt: `Je te présente ce cas clinique. Commençons par l'analyse systématique.
 
 CAS :
@@ -238,20 +238,20 @@ CAS :
 
 Étape 1 : Peux-tu organiser les informations disponibles et identifier les données manquantes qui seraient importantes pour l'analyse ?
 
-Ne propose pas encore de diagnostic, concentre-toi sur la structuration des données.`
-        }
+Ne propose pas encore de diagnostic, concentre-toi sur la structuration des données.`,
+        },
       },
       variables: [
-        'VOTRE_CAS_CLINIQUE : Copiez l\'intégralité du cas avec tous les détails disponibles'
-      ]
-    }
+        'VOTRE_CAS_CLINIQUE : Copiez l\'intégralité du cas avec tous les détails disponibles',
+      ],
+    },
   ],
 
   keyTakeaways: [
-    "L'analyse par étapes évite de sauter aux conclusions et développe le raisonnement clinique personnel.",
-    "Faire structurer les données par l'IA aide à repérer les informations manquantes cruciales.",
-    "Une approche conversationnelle permet d'approfondir chaque aspect du cas progressivement.",
-    "La vérification systématique des interactions médicamenteuses est indispensable en pharmacie clinique.",
-    "L'IA est un excellent partenaire pédagogique, mais les décisions cliniques doivent toujours être validées par un professionnel."
-  ]
-} satisfies Workflow;
+    'L\'analyse par étapes évite de sauter aux conclusions et développe le raisonnement clinique personnel.',
+    'Faire structurer les données par l\'IA aide à repérer les informations manquantes cruciales.',
+    'Une approche conversationnelle permet d\'approfondir chaque aspect du cas progressivement.',
+    'La vérification systématique des interactions médicamenteuses est indispensable en pharmacie clinique.',
+    'L\'IA est un excellent partenaire pédagogique, mais les décisions cliniques doivent toujours être validées par un professionnel.',
+  ],
+} satisfies Workflow
