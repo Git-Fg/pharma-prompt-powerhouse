@@ -40,11 +40,11 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
     )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 min-w-0">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
               <BookOpen className="size-6 text-primary" />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
                 {guide.title}
               </CardTitle>

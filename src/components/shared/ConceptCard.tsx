@@ -24,11 +24,11 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
     )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-4 flex-1">
+          <div className="flex items-center gap-4 flex-1 min-w-0">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
               <Lightbulb className="size-6 text-primary" />
             </div>
-            <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 flex-1">
+            <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
               {concept.title}
             </CardTitle>
           </div>
