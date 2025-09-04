@@ -53,7 +53,7 @@ test.describe('Application E2E Tests', () => {
     await expect(page.getByRole('heading', { name: /Workflows Stratégiques/ })).toBeVisible();
     
     // Check workflow cards are visible
-    await expect(page.getByRole('link', { href: /\/workflows\// }).first()).toBeVisible();
+    await expect(page.locator('a[href*="/workflows/"]').first()).toBeVisible();
   });
 
   test('arsenal IA page loads', async ({ page }) => {
