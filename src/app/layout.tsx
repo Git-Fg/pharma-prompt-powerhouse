@@ -7,6 +7,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { Toaster } from '@/components/ui/sonner';
+import { env } from '@/lib/env';
 
 const inter = Inter({
   variable: '--font-sans',
@@ -19,6 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(env.publicBaseUrl),
   title: "Pharma Prompt Powerhouse - Maîtrisez l'ingénierie de prompts",
   description:
     "Plateforme d'apprentissage dédiée à l'ingénierie de prompts appliquée aux sciences pharmaceutiques et de la santé.",
