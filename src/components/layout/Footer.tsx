@@ -24,18 +24,17 @@ export function Footer() {
   return (
     <footer className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Section - Expanded */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="xl:col-span-2 space-y-6">
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
                 <Brain className="size-7 text-primary-foreground" />
               </div>
               <span className="font-bold text-2xl">Pharma Prompt</span>
             </div>
-            <p className="text-muted-foreground leading-relaxed max-w-md text-lg">
-              Mon carnet de notes personnel pour travailler avec l'IA en
-              pharmacie, partagé avec ❤️ pour la communauté.
+            <p className="text-muted-foreground leading-relaxed max-w-lg text-lg">
+              Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.
             </p>
           </div>
 
