@@ -1,40 +1,38 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Workbox } from 'workbox-window';
-
-declare global {
-  interface Window {
-    workbox: Workbox;
-  }
-}
 
 export function PWALifecycle() {
   useEffect(() => {
     if (
       typeof window !== 'undefined' &&
-      'serviceWorker' in navigator &&
-      window.workbox !== undefined
+      'serviceWorker' in navigator
     ) {
-      const wb = window.workbox;
-      
-      // Add event listeners to handle PWA lifecycle events
-      wb.addEventListener('controlling', () => {
-        window.location.reload();
-      });
-
-      wb.addEventListener('waiting', () => {
-        // Show notification to user about update availability
-        // You can implement a custom notification here
-        console.log('New version available! Please refresh to update.');
-      });
-
-      wb.addEventListener('activated', () => {
-        console.log('Service Worker activated');
-      });
-
       // Register the service worker
-      wb.register();
+      navigator.serviceWorker.register('/sw.js').then((registration) => {
+        console.log('Service Worker registered:', registration);
+        
+        // Listen for service worker updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                console.log('New version available! Please refresh to update.');
+              }
+            });
+          }
+        });
+      }).catch((error) => {
+        console.log('Service Worker registration failed:', error);
+      });
+
+      // Listen for service worker messages
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'SKIP_WAITING') {
+          window.location.reload();
+        }
+      });
     }
   }, []);
 

@@ -20,6 +20,7 @@ import {
   getConfidenceInfo,
   getContentUrl 
 } from '@/lib/ui-utils';
+import { InfoButton } from './InfoButton';
 
 interface ToolCardProps {
   tool: ExternalTool;
@@ -38,11 +39,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     )}>
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-1">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
               <Globe className="size-6 text-primary" />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
                 {tool.title}
               </CardTitle>
@@ -56,6 +57,12 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
               </div>
             </div>
           </div>
+          <InfoButton 
+            variant="tool" 
+            item={tool}
+            size="md"
+            className="ml-2 flex-shrink-0"
+          />
         </div>
         <CardDescription className="text-sm text-muted-foreground line-clamp-3 mb-4">
           {tool.description}
