@@ -21,20 +21,20 @@ export default function HomePage() {
       <Section size="lg">
         <Container maxWidth="4xl">
           <div className="text-center space-y-6">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight text-pretty">
+            <h1 className="responsive-heading">
               Bienvenue sur<br />
               Pharma Prompt Powerhouse
             </h1>
             <div className="prose prose-lg mx-auto text-muted-foreground space-y-4">
-              <p className="text-base md:text-lg leading-relaxed text-pretty">
+              <p className="responsive-text leading-relaxed text-pretty">
                 Bonjour ! Je suis un étudiant en pharmacie,<br />
                 comme vous peut-être.
               </p>
-              <p className="text-base md:text-lg leading-relaxed text-pretty">
+              <p className="responsive-text leading-relaxed text-pretty">
                 J'ai passé du temps à explorer l'IA pour mes études<br />
                 et je partage ici mes méthodes, mes découvertes et mes doutes.
               </p>
-              <p className="font-medium text-foreground text-base md:text-lg text-pretty">
+              <p className="font-medium text-foreground responsive-text text-pretty">
                 Ce site est le carnet de bord de mon exploration,<br />
                 structuré pour vous faire gagner du temps.
               </p>
@@ -77,7 +77,7 @@ export default function HomePage() {
       {/* Quick Access Section */}
       <Section>
         <Container maxWidth="6xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Accès Rapides</h2>
+          <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
             {/* Pour les nouveaux visiteurs */}
@@ -150,7 +150,7 @@ export default function HomePage() {
       <Section>
         <Container maxWidth="6xl">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold">
+            <h2 className="responsive-subheading">
               {favoriteWorkflows.length >= 3 ? 'Workflows Recommandés' : 'Derniers Workflows Publiés'}
             </h2>
             <Link href="/workflows">
