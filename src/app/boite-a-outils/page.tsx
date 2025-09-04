@@ -135,6 +135,69 @@ const statusColors: Record<string, string> = {
   "En développement": "bg-blue-100 text-blue-800",
 };
 
+// Internal ToolCard component for cleaner code
+function ToolCard({ tool }: { tool: (typeof toolsData)[0] }) {
+  const isAvailable = tool.status === "Disponible";
+  
+  return (
+    <Card className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <CardHeader className="flex-grow">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <div className={`p-2 rounded-lg ${tool.color} text-white`}>
+              <tool.icon className="size-5" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">{tool.title}</CardTitle>
+              <Badge
+                variant="secondary"
+                className={`mt-1 ${statusColors[tool.status]}`}
+              >
+                {tool.status}
+              </Badge>
+            </div>
+          </div>
+        </div>
+        <CardDescription className="mt-3">
+          {tool.description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          <div>
+            <Badge variant="outline" className="text-xs">
+              {categoryLabels[tool.category]}
+            </Badge>
+          </div>
+          <ul className="space-y-1">
+            {tool.features.map((feature, index) => (
+              <li
+                key={index}
+                className="text-sm text-muted-foreground flex items-center gap-2"
+              >
+                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          {isAvailable ? (
+            <Button asChild className="w-full">
+              <Link href={tool.href}>
+                Essayer l'outil
+                <ArrowRight className="size-4 ml-2" />
+              </Link>
+            </Button>
+          ) : (
+            <Button disabled className="w-full">
+              {tool.status}
+            </Button>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function ToolboxPage() {
   // Calculate statistics
   const totalTools = toolsData.length;
@@ -159,64 +222,7 @@ export default function ToolboxPage() {
       {/* Outils Internes */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {toolsData.map((tool) => (
-          <Card
-            key={tool.id}
-            className="group flex flex-col hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-          >
-            <CardHeader className="flex-grow">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tool.color} text-white`}>
-                    <tool.icon className="size-5" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">{tool.title}</CardTitle>
-                    <Badge
-                      variant="secondary"
-                      className={`mt-1 ${statusColors[tool.status]}`}
-                    >
-                      {tool.status}
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-              <CardDescription className="mt-3">
-                {tool.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div>
-                  <Badge variant="outline" className="text-xs">
-                    {categoryLabels[tool.category]}
-                  </Badge>
-                </div>
-                <ul className="space-y-1">
-                  {tool.features.map((feature, index) => (
-                    <li
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                {tool.href !== "#" ? (
-                  <Button asChild className="w-full">
-                    <Link href={tool.href}>
-                      Essayer l'outil
-                      <ArrowRight className="size-4 ml-2" />
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button disabled className="w-full">
-                    Bientôt disponible
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+          <ToolCard key={tool.id} tool={tool} />
         ))}
       </div>
     </CollectionPageLayout>
