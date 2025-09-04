@@ -7,6 +7,8 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { Toaster } from '@/components/ui/sonner';
+import { ConsentProvider } from '@/hooks/useConsent';
+import { ConsentBanner } from '@/components/consent/ConsentBanner';
 import { env } from '@/lib/env';
 
 const inter = Inter({
@@ -57,20 +59,23 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}
       >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className='min-h-screen flex flex-col'>
-            <Header />
-            <main className='flex-1 pb-20 md:pb-0'>{children}</main>
-            <Footer />
-            <MobileBottomNav />
-          </div>
-          <Toaster />
-        </ThemeProvider>
+        <ConsentProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className='min-h-screen flex flex-col'>
+              <Header />
+              <main className='flex-1 pb-20 md:pb-0'>{children}</main>
+              <Footer />
+              <MobileBottomNav />
+            </div>
+            <ConsentBanner />
+            <Toaster />
+          </ThemeProvider>
+        </ConsentProvider>
       </body>
     </html>
   );
