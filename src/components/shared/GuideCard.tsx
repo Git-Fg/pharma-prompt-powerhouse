@@ -5,19 +5,33 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants';
+import { 
+  contentCardVariants, 
+  categoryBadgeVariants, 
+  difficultyBadgeVariants,
+  getCategoryVariant,
+  getDifficultyVariant
+} from '@/components/ui/variants';
 import { ArrowRight, Clock, BookOpen, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EnrichedGuide } from '@/lib/content-schema';
-import { categoryLabels, difficultyLabels } from '@/lib/constants';
+import { 
+  getCategoryLabel, 
+  getDifficultyLabel, 
+  formatEstimatedTime,
+  getContentUrl 
+} from '@/lib/ui-utils';
 
 interface GuideCardProps {
   guide: EnrichedGuide;
 }
 
 export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
-  const categoryLabel = categoryLabels[guide.category as keyof typeof categoryLabels] ?? guide.category;
-  const difficultyLabel = difficultyLabels[guide.difficulty as keyof typeof difficultyLabels] ?? guide.difficulty;
+  // Utilisation des utilitaires centralisés
+  const categoryLabel = getCategoryLabel(guide.category);
+  const difficultyLabel = getDifficultyLabel(guide.difficulty);
+  const estimatedTime = formatEstimatedTime(guide.estimatedTime, 'guide');
+  const guideUrl = getContentUrl('guide', guide.slug);
 
   return (
     <Card className={cn(
@@ -35,10 +49,12 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
                 {guide.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className={statusBadgeVariants({ status: "available" })}>
+                <Badge className={categoryBadgeVariants({ category: getCategoryVariant(guide.category) })}>
                   {categoryLabel}
                 </Badge>
-                <Badge variant="outline">{difficultyLabel}</Badge>
+                <Badge className={difficultyBadgeVariants({ difficulty: getDifficultyVariant(guide.difficulty) })}>
+                  {difficultyLabel}
+                </Badge>
                 {guide.isWorkflow && (
                   <Badge variant="default">
                     <Target className="mr-1 h-3 w-3" />
@@ -55,13 +71,11 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          {guide.estimatedTime && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="size-4" />
-              <span>Temps de lecture : {guide.estimatedTime}</span>
-            </div>
-          )}
-          <Link href={`/guides/${guide.slug}`} className="block">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Clock className="size-4" />
+            <span>Temps de lecture : {estimatedTime}</span>
+          </div>
+          <Link href={guideUrl} className="block">
             <Button className="w-full" size="sm">
               Lire le guide
               <ArrowRight className="ml-1 size-4" />

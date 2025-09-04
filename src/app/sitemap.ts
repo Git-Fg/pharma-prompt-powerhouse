@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { content } from '@/lib/content-loader';
+import { env } from '@/lib/env';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pharma-prompt-powerhouse.vercel.app'; // Update with your actual domain
+  const baseUrl = env.baseUrl;
 
   // Static pages
   const staticPages = [

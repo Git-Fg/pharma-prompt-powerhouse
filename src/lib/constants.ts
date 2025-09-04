@@ -1,39 +1,42 @@
-// Centralized constants for filtering and labeling
+// =================================================================
+// SOURCE DE VÉRITÉ UNIQUE - CONSTANTES DE CONTENU
+// =================================================================
 
-// SOURCE DE VÉRITÉ UNIQUE - Toutes les catégories utilisées dans le contenu
-
-// Type Category défini ici pour labels stricts
+// Types stricts pour les catégories et difficultés
 export type Category =
   | 'fondamentaux'
-  | 'methodologie'
+  | 'methodologie' 
   | 'ressources'
   | 'techniques-avancees'
-  | 'cas-pratiques';
+  | 'cas-pratiques'
+  | 'prompting'
+  | 'security'
+  | 'optimization'
+  | 'bonnes-pratiques';
 
 export type Difficulty = 'débutant' | 'intermédiaire' | 'avancé';
 
+// Labels des catégories - source de vérité unique
 export const categoryLabels = {
-  // Workflow/Guide categories
   fondamentaux: 'Fondamentaux 📚',
   methodologie: 'Méthodologie 🔬',
   ressources: 'Ressources 📖',
   'techniques-avancees': 'Techniques Avancées 🚀',
   'cas-pratiques': 'Cas Pratiques 💊',
-  // Additional categories
-  prompting: "Prompting 🎯",
-  methodology: "Méthodologie 🔬",
-  tools: "Outils 🛠️",
-  security: "Sécurité 🔒",
-  optimization: "Optimisation ⚡",
-  "bonnes-pratiques": "Bonnes Pratiques 🛡️",
-} as const satisfies Record<string, string>;
+  prompting: 'Prompting 🎯',
+  security: 'Sécurité 🔒',
+  optimization: 'Optimisation ⚡',
+  'bonnes-pratiques': 'Bonnes Pratiques 🛡️',
+} as const satisfies Record<Category, string>;
 
+// Labels des difficultés
 export const difficultyLabels = {
-  débutant: 'Débutant',
-  intermédiaire: 'Intermédiaire',
-  avancé: 'Avancé',
+  débutant: 'Débutant 🌱',
+  intermédiaire: 'Intermédiaire 🌿', 
+  avancé: 'Avancé 🌳',
 } as const satisfies Record<Difficulty, string>;
 
+// Labels des outils IA
 export const toolLabels = {
   chatgpt: 'ChatGPT',
   claude: 'Claude',
@@ -42,36 +45,84 @@ export const toolLabels = {
   'z-ai': 'Z.AI',
   deepseek: 'DeepSeek',
   qwen: 'Qwen',
+  'ai-studio': 'AI Studio',
+  cursor: 'Cursor',
+  codium: 'Codium',
 } as const;
 
-// Legacy constants for backward compatibility
-export const CATEGORIES = {
- CONCEPTS: {
-    FONDAMENTAUX: "Fondamentaux",
-    TECHNIQUES_AVANCEES: "Techniques Avancées",
-    METHODOLOGIE: "Méthodologie"
-  },
-  
-  GUIDES: {
-    FONDAMENTAUX: "fondamentaux",
-    METHODOLOGIE: "methodologie",
-    TECHNIQUES_AVANCEES: "techniques-avancees",
-    CAS_PRATIQUES: "cas-pratiques",
-    RESSOURCES: "ressources"
-  },
-  
-  PROMPTS: {
-    ANALYSE: "analyse",
-    CREATION: "créatif",
-    RECHERCHE: "recherche",
-    DOCUMENTATION: "documentation",
-    EVALUATION: "évaluation"
-  },
-  
-  EXTERNAL_TOOLS: {
-    GENERALISTE: "LLM Généraliste",
-    SPECIALISE_SANTE: "Spécialisé Santé"
-  }
+// Couleurs associées aux catégories pour l'UI
+export const categoryColors = {
+  fondamentaux: 'blue',
+  methodologie: 'green', 
+  ressources: 'purple',
+  'techniques-avancees': 'orange',
+  'cas-pratiques': 'red',
+  prompting: 'cyan',
+  security: 'yellow',
+  optimization: 'pink',
+  'bonnes-pratiques': 'indigo',
+} as const satisfies Record<Category, string>;
+
+// Niveaux de confiance pour les outils
+export const confidenceLevels = {
+  1: { label: '⭐☆☆☆☆', description: 'Très faible confiance' },
+  2: { label: '⭐⭐☆☆☆', description: 'Faible confiance' },
+  3: { label: '⭐⭐⭐☆☆', description: 'Confiance modérée' },
+  4: { label: '⭐⭐⭐⭐☆', description: 'Bonne confiance' },
+  5: { label: '⭐⭐⭐⭐⭐', description: 'Très haute confiance' },
 } as const;
 
-// export type Category = typeof CATEGORIES; // supprimé car doublon et non utilisé
+// =================================================================
+// FONCTIONS UTILITAIRES POUR L'UI
+// =================================================================
+
+// Obtenir le label d'une catégorie avec fallback sécurisé
+export function getCategoryLabel(category: string): string {
+  return categoryLabels[category as Category] ?? category;
+}
+
+// Obtenir le label d'une difficulté avec fallback sécurisé  
+export function getDifficultyLabel(difficulty: string): string {
+  return difficultyLabels[difficulty as Difficulty] ?? difficulty;
+}
+
+// Obtenir la couleur d'une catégorie
+export function getCategoryColor(category: string): string {
+  return categoryColors[category as Category] ?? 'gray';
+}
+
+// Obtenir les informations de confiance pour un score
+export function getConfidenceInfo(score: number) {
+  return confidenceLevels[score as keyof typeof confidenceLevels] ?? confidenceLevels[3];
+}
+
+// =================================================================
+// CONSTANTES DE L'APPLICATION
+// =================================================================
+
+// URLs et métadonnées
+export const APP_CONFIG = {
+  name: 'Pharma Prompt Powerhouse',
+  description: 'Mon carnet de notes, partagé avec ❤️ pour la communauté.',
+  author: 'Git-Fg',
+  version: '1.0.0',
+  repository: 'https://github.com/Git-Fg/pharma-prompt-powerhouse',
+} as const;
+
+// Limites et contraintes
+export const CONTENT_LIMITS = {
+  maxTitleLength: 100,
+  maxDescriptionLength: 300,
+  maxTagsPerItem: 10,
+  maxKeyTakeaways: 8,
+  itemsPerPage: 12,
+  maxSearchResults: 50,
+} as const;
+
+// Temps estimés par défaut
+export const DEFAULT_ESTIMATED_TIMES = {
+  concept: '5-10 min',
+  guide: '15-30 min',
+  workflow: '30-60 min',
+  tool: '5-15 min',
+} as const;
