@@ -8,7 +8,7 @@ import { content, getGuideBySlug } from "@/lib/content-loader";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
-import { categoryLabels, difficultyLabels } from "@/lib/constants";
+import { getCategoryLabel, getDifficultyLabel } from "@/lib/ui-utils";
 import { Container, Section } from "@/components/layout/Container";
 import type { Metadata } from "next";
 
@@ -49,8 +49,8 @@ export default async function GuideDetailPage({
     notFound();
   }
 
-  const categoryLabel = categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category;
-  const difficultyLabel = difficultyLabels[guide.difficulty as keyof typeof difficultyLabels] || guide.difficulty;
+  const categoryLabel = getCategoryLabel(guide.category);
+  const difficultyLabel = getDifficultyLabel(guide.difficulty);
 
   return (
     <Section>

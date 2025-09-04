@@ -81,7 +81,7 @@ export default function WorkflowsPage() {
   
   // Calculate statistics
   const totalWorkflows = content.workflows.length;
-  const beginnerCount = content.workflows.filter(w => w.difficulty === 'Débutant').length;
+  const beginnerCount = content.workflows.filter(w => w.difficulty === 'débutant').length;
   const tagCount = new Set(content.workflows.flatMap(w => w.tags)).size;
   const avgTime = Math.round(
     content.workflows.reduce((acc, w) => {

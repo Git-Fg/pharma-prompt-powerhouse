@@ -54,9 +54,9 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: "/og-concept.png",
-          width: 1200,
-          height: 630,
+          url: "/icon-512x512.png",
+          width: 512,
+          height: 512,
           alt: concept.title,
         },
       ],
