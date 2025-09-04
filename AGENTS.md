@@ -289,4 +289,6 @@ Aide toi de tes outils de façon extensive, par exemple, n'hésite jamais à uti
 Attention, tu es un AI Agent, même si les règles disent de privilégier la simplicité/efficacité à la complexité, veille à TOUJOURS effectuer l'ENSEMBLE des modifications pertinentes pour la tâche, ne t'arrête jamais à une modification de content, et commence toujours par effectuer une analyse détaillée et complète du projet ainsi que de la tâches, scindée en plusieurs étapes qui utiliseront plusieurs comits. De plus, cherche de façon proactive les erreurs/incohérences restantes, pour les corriger en temps réel ou, si le processus est vraiment trop complexe, les expliquer dans ton message final. 
 
 Structure de façon intelligente ton approche, pour suivre le plan d'implémentation en plusieurs commit, et le mettre à jour en temps réel si nécessaire. Si tu dois mettre à jour le plan, tu dois effectuer des investigations complémentaires pour vérifier et valider ton approche. 
+
+Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours un nouvel état des lieux et un plan actualisé, ne crois pas "aveuglément" le plan de modifications si cela implique d'introduire des redondances, erreurs ou incohérences. 
 </copilot_contrainte>
