@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { cn } from '@/lib/utils'
 
-describe('Utility Functions', () => {
+describe('utility Functions', () => {
   describe('cn (className utility)', () => {
     it('should combine class names correctly', () => {
       const result = cn('class1', 'class2', 'class3')
@@ -38,9 +38,9 @@ describe('Utility Functions', () => {
 
     it('should handle objects with boolean values', () => {
       const result = cn({
-        'base': true,
-        'active': true,
-        'hidden': false,
+        base: true,
+        active: true,
+        hidden: false,
       })
       expect(result).toBe('base active')
     })
@@ -50,7 +50,7 @@ describe('Utility Functions', () => {
       const result = cn(
         'bg-blue-500 text-white p-4',
         'bg-red-500 p-2',
-        'hover:bg-green-500'
+        'hover:bg-green-500',
       )
       expect(result).toBe('text-white bg-red-500 p-2 hover:bg-green-500')
     })
@@ -59,7 +59,7 @@ describe('Utility Functions', () => {
       const result = cn(
         'flex items-center justify-center',
         'bg-blue-500',
-        'text-white font-bold'
+        'text-white font-bold',
       )
       expect(result).toBe('flex items-center justify-center bg-blue-500 text-white font-bold')
     })

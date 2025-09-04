@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest'
-import { 
+import { describe, expect, it } from 'vitest'
+import {
   contentBlockSchema,
   externalToolSchema,
-  workflowSchema
+  workflowSchema,
 } from '@/lib/content-schema'
 
-describe('Content Schema Edge Cases', () => {
+describe('content Schema Edge Cases', () => {
   describe('contentBlockSchema', () => {
     it('should validate markdown blocks correctly', () => {
       const validMarkdown = {
         type: 'markdown' as const,
-        content: '# Hello World\n\nThis is markdown content.'
+        content: '# Hello World\n\nThis is markdown content.',
       }
-      
+
       expect(() => contentBlockSchema.parse(validMarkdown)).not.toThrow()
     })
 
@@ -21,21 +21,21 @@ describe('Content Schema Edge Cases', () => {
         type: 'markdown' as const,
         // content is missing
       }
-      
+
       expect(() => contentBlockSchema.parse(invalidMarkdown)).toThrow()
     })
 
     it('should validate alert blocks with all variants', () => {
       const variants = ['default', 'destructive'] as const
-      
-      variants.forEach(variant => {
+
+      variants.forEach((variant) => {
         const validAlert = {
           type: 'alert' as const,
           variant,
           title: 'Test Alert',
-          content: 'Alert content'
+          content: 'Alert content',
         }
-        
+
         expect(() => contentBlockSchema.parse(validAlert)).not.toThrow()
       })
     })
@@ -44,17 +44,17 @@ describe('Content Schema Edge Cases', () => {
       const minimalCode = {
         type: 'codeBlock' as const,
         language: 'typescript',
-        content: 'const hello = "world";'
+        content: 'const hello = "world";',
       }
-      
+
       const fullCode = {
         type: 'codeBlock' as const,
         language: 'javascript',
         filename: 'example.js',
         showLineNumbers: true,
-        content: 'console.log("Hello, World!");'
+        content: 'console.log("Hello, World!");',
       }
-      
+
       expect(() => contentBlockSchema.parse(minimalCode)).not.toThrow()
       expect(() => contentBlockSchema.parse(fullCode)).not.toThrow()
     })
@@ -70,9 +70,9 @@ describe('Content Schema Edge Cases', () => {
             content: [
               {
                 type: 'markdown' as const,
-                content: 'Content in first tab'
-              }
-            ]
+                content: 'Content in first tab',
+              },
+            ],
           },
           {
             value: 'tab2',
@@ -80,13 +80,13 @@ describe('Content Schema Edge Cases', () => {
             content: [
               {
                 type: 'alert' as const,
-                content: 'Alert in second tab'
-              }
-            ]
-          }
-        ]
+                content: 'Alert in second tab',
+              },
+            ],
+          },
+        ],
       }
-      
+
       expect(() => contentBlockSchema.parse(tabsBlock)).not.toThrow()
     })
   })
@@ -107,9 +107,9 @@ describe('Content Schema Edge Cases', () => {
         freeVsPaidOffer: '| Feature | Free | Paid |\n|---------|------|------|\n| Basic | Yes | Yes |',
         tags: [],
         isFavorite: false,
-        content: []
+        content: [],
       }
-      
+
       expect(() => externalToolSchema.parse(validTool)).not.toThrow()
     })
 
@@ -128,9 +128,9 @@ describe('Content Schema Edge Cases', () => {
         freeVsPaidOffer: '| Feature | Free | Paid |\n|---------|------|------|\n| Basic | Yes | Yes |',
         tags: [],
         isFavorite: false,
-        content: []
+        content: [],
       }
-      
+
       expect(() => externalToolSchema.parse(invalidTool)).toThrow()
     })
   })
@@ -150,9 +150,9 @@ describe('Content Schema Edge Cases', () => {
         optimizedStrategy: [{ type: 'markdown' as const, content: 'Test strategy' }],
         toolComparison: [{ type: 'markdown' as const, content: 'Test comparison' }],
         finalPrompt: [{ type: 'markdown' as const, content: 'Test prompt' }],
-        keyTakeaways: ['At least one takeaway']
+        keyTakeaways: ['At least one takeaway'],
       }
-      
+
       expect(() => workflowSchema.parse(validWorkflow)).not.toThrow()
     })
 
@@ -170,9 +170,9 @@ describe('Content Schema Edge Cases', () => {
         optimizedStrategy: [{ type: 'markdown' as const, content: 'Test strategy' }],
         toolComparison: [{ type: 'markdown' as const, content: 'Test comparison' }],
         finalPrompt: [{ type: 'markdown' as const, content: 'Test prompt' }],
-        keyTakeaways: [] // Empty keyTakeaways should fail
+        keyTakeaways: [], // Empty keyTakeaways should fail
       }
-      
+
       expect(() => workflowSchema.parse(invalidWorkflow)).toThrow()
     })
   })

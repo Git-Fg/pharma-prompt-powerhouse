@@ -1,4 +1,4 @@
-import type { Workflow } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'faire-recherche-bibliographique',
@@ -11,7 +11,7 @@ export const workflow = {
   difficulty: 'intermédiaire',
   estimatedTime: '20 min',
   conceptSlugs: ['structuration-par-balises'],
-  
+
   problem: [
     {
       type: 'markdown',
@@ -23,8 +23,8 @@ Quand j'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d'in
 - Identifier les mots-clés pertinents
 - Trier les sources fiables des moins crédibles
 - Synthétiser des informations complexes et parfois contradictoires
-- Organiser ma bibliographie de façon logique`
-    }
+- Organiser ma bibliographie de façon logique`,
+    },
   ],
 
   initialApproach: [
@@ -36,14 +36,14 @@ Je demandais directement :
 
 > *"Trouve-moi des articles sur [mon sujet]"*
 
-**Résultat :** L'IA me citait des références qu'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.`
+**Résultat :** L'IA me citait des références qu'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Le risque des références inventées',
-      content: `L'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n'existent pas. JAMAIS de recherche bibliographique sans vérification !`
-    }
+      content: `L'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n'existent pas. JAMAIS de recherche bibliographique sans vérification !`,
+    },
   ],
 
   optimizedStrategy: [
@@ -52,12 +52,12 @@ Je demandais directement :
       content: `## La Stratégie Optimisée : L'IA comme Assistant Méthodologique
 
 J'utilise désormais l'IA pour m'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.
-Cette approche s'appuie sur la **structuration par balises** pour organiser l'information.`
+Cette approche s'appuie sur la **structuration par balises** pour organiser l'information.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: 'Structurer vos requêtes avec des balises améliore la précision de l\'analyse bibliographique et de la synthèse.'
+      reason: 'Structurer vos requêtes avec des balises améliore la précision de l\'analyse bibliographique et de la synthèse.',
     },
     {
       type: 'card',
@@ -66,7 +66,7 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
 - Identifier les mots-clés pertinents et leurs synonymes
 - Structurer ma question de recherche (PICO : Patient, Intervention, Comparaison, Outcome)
 - Suggérer des bases de données spécialisées
-- Définir des critères d'inclusion/exclusion`
+- Définir des critères d'inclusion/exclusion`,
     },
     {
       type: 'card',
@@ -75,7 +75,7 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
 - Je copie les abstracts dans l'IA pour obtenir une synthèse structurée
 - Je demande une analyse critique des méthodologies
 - Je fais identifier les points de convergence et divergence entre études
-- J'obtiens une hiérarchisation par niveau de preuve`
+- J'obtiens une hiérarchisation par niveau de preuve`,
     },
     {
       type: 'card',
@@ -84,8 +84,8 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
 - Structurer ma revue de littérature de façon logique
 - Identifier les lacunes dans mes recherches
 - Reformuler les idées complexes dans mes propres mots
-- Créer des tableaux comparatifs des études`
-    }
+- Créer des tableaux comparatifs des études`,
+    },
   ],
 
   toolComparison: [
@@ -93,7 +93,7 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
       type: 'markdown',
       content: `## Comparaison des Outils : Mon Retour d'Expérience
 
-Voici comment j'utilise chaque outil selon mes besoins :`
+Voici comment j'utilise chaque outil selon mes besoins :`,
     },
     {
       type: 'tabs',
@@ -112,9 +112,9 @@ Voici comment j'utilise chaque outil selon mes besoins :`
 
 **Mon usage :** Point de départ pour explorer un sujet et identifier les tendances récentes.
 
-**Limite importante :** Vérifie toujours les sources originales car les résumés peuvent parfois déformer le contenu.`
-            }
-          ]
+**Limite importante :** Vérifie toujours les sources originales car les résumés peuvent parfois déformer le contenu.`,
+            },
+          ],
         },
         {
           value: 'notebooklm',
@@ -129,9 +129,9 @@ Voici comment j'utilise chaque outil selon mes besoins :`
 
 **Mon workflow :** J'uploade tous mes PDFs d'articles et je crée une "bibliothèque" personnalisée.
 
-**Avantage énorme :** Zéro risque d'hallucination car l'IA travaille uniquement sur MES documents.`
-            }
-          ]
+**Avantage énorme :** Zéro risque d'hallucination car l'IA travaille uniquement sur MES documents.`,
+            },
+          ],
         },
         {
           value: 'claude',
@@ -146,26 +146,26 @@ Voici comment j'utilise chaque outil selon mes besoins :`
 
 **Mon usage :** Analyse approfondie d'articles individuels et comparaison de méthodologies.
 
-**Point fort :** Très bon pour identifier les limites et biais des études.`
-            }
-          ]
-        }
-      ]
+**Point fort :** Très bon pour identifier les limites et biais des études.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'markdown',
-      content: `### Outils Recommandés pour la Recherche Bibliographique`
+      content: `### Outils Recommandés pour la Recherche Bibliographique`,
     },
     {
       type: 'toolRecommendation',
       slug: 'perplexity-ai',
-      reason: 'Excellent point de départ pour explorer un sujet grâce à sa recherche web en temps réel avec sources citées et vérifiables.'
+      reason: 'Excellent point de départ pour explorer un sujet grâce à sa recherche web en temps réel avec sources citées et vérifiables.',
     },
     {
       type: 'toolRecommendation',
       slug: 'notebooklm',
-      reason: 'Révolutionnaire pour analyser vos PDFs d\'articles sans risque d\'hallucination, l\'IA travaille uniquement sur vos documents.'
-    }
+      reason: 'Révolutionnaire pour analyser vos PDFs d\'articles sans risque d\'hallucination, l\'IA travaille uniquement sur vos documents.',
+    },
   ],
 
   finalPrompt: [
@@ -173,7 +173,7 @@ Voici comment j'utilise chaque outil selon mes besoins :`
       type: 'markdown',
       content: `## Mes Prompts Types pour Chaque Étape
 
-Voici ma séquence testée et éprouvée :`
+Voici ma séquence testée et éprouvée :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -213,7 +213,7 @@ Peux-tu :
 **ÉTAPE 3 - Structuration finale :**
 
 Aide-moi à organiser ces informations en plan de revue de littérature cohérent, avec pour chaque section les articles les plus pertinents à citer.`,
-        
+
         aiStudio: {
           systemPrompt: `Tu es un expert en méthodologie de recherche bibliographique avec une spécialisation en sciences pharmaceutiques et médicales. 
 
@@ -224,7 +224,7 @@ Ton expertise :
 - Synthèse et organisation de littérature scientifique
 
 Tu accompagnes un étudiant dans l'apprentissage de la recherche bibliographique rigoureuse.`,
-          
+
           userPrompt: `Je commence une recherche bibliographique sur : {{VOTRE_SUJET}}
 
 Objectif de ma revue : {{OBJECTIF_REVISION}}
@@ -234,21 +234,21 @@ Peux-tu m'aider à :
 2. Identifier les mots-clés et termes MeSH appropriés
 3. Suggérer des critères de qualité pour sélectionner mes sources
 
-Ne me donne pas de références spécifiques, concentre-toi sur la méthodologie.`
-        }
+Ne me donne pas de références spécifiques, concentre-toi sur la méthodologie.`,
+        },
       },
       variables: [
         'VOTRE_SUJET : Le sujet précis de votre recherche bibliographique',
-        'OBJECTIF_REVISION : L\'objectif de votre revue (mémoire, article, cours...)'
-      ]
-    }
+        'OBJECTIF_REVISION : L\'objectif de votre revue (mémoire, article, cours...)',
+      ],
+    },
   ],
 
   keyTakeaways: [
-    "L'IA excelle pour la MÉTHODE de recherche, mais ne remplace jamais la vérification des sources primaires.",
-    "NotebookLM révolutionne l'analyse d'articles en évitant les risques d'hallucination.",
-    "La recherche par étapes (stratégie → analyse → synthèse) est plus efficace que la recherche directe.",
-    "Toujours croiser plusieurs bases de données et ne jamais se fier à une seule source d'information.",
-    "L'analyse critique des méthodologies est aussi importante que la collecte d'informations."
-  ]
-} satisfies Workflow;
+    'L\'IA excelle pour la MÉTHODE de recherche, mais ne remplace jamais la vérification des sources primaires.',
+    'NotebookLM révolutionne l\'analyse d\'articles en évitant les risques d\'hallucination.',
+    'La recherche par étapes (stratégie → analyse → synthèse) est plus efficace que la recherche directe.',
+    'Toujours croiser plusieurs bases de données et ne jamais se fier à une seule source d\'information.',
+    'L\'analyse critique des méthodologies est aussi importante que la collecte d\'informations.',
+  ],
+} satisfies Workflow

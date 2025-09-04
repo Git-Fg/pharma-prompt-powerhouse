@@ -1,89 +1,90 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Download, X } from 'lucide-react';
+import { Download, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface BeforeInstallPromptEvent extends Event {
-  prompt(): Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+  prompt: () => Promise<void>
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
 export function InstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [showInstallPrompt, setShowInstallPrompt] = useState(false);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
+  const [showInstallPrompt, setShowInstallPrompt] = useState(false)
+  const [isInstalled, setIsInstalled] = useState(false)
 
   useEffect(() => {
     // Check if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      setIsInstalled(true);
-      return;
+      setIsInstalled(true)
+      return
     }
 
     const handleBeforeInstallPrompt = (e: Event) => {
       // Prevent the mini-infobar from appearing on mobile
-      e.preventDefault();
+      e.preventDefault()
       // Stash the event so it can be triggered later
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      setDeferredPrompt(e as BeforeInstallPromptEvent)
       // Show our custom install prompt
-      setShowInstallPrompt(true);
-    };
+      setShowInstallPrompt(true)
+    }
 
     const handleAppInstalled = () => {
-      setIsInstalled(true);
-      setShowInstallPrompt(false);
-      setDeferredPrompt(null);
-    };
+      setIsInstalled(true)
+      setShowInstallPrompt(false)
+      setDeferredPrompt(null)
+    }
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    window.addEventListener('appinstalled', handleAppInstalled)
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-    };
-  }, []);
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+      window.removeEventListener('appinstalled', handleAppInstalled)
+    }
+  }, [])
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) { return }
 
     // Show the install prompt
-    deferredPrompt.prompt();
-    
+    deferredPrompt.prompt()
+
     // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    
+    const { outcome } = await deferredPrompt.userChoice
+
     if (outcome === 'accepted') {
       if (process.env.NODE_ENV === 'development') {
-        console.log('User accepted the install prompt');
-      }
-    } else {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('User dismissed the install prompt');
+        console.log('User accepted the install prompt')
       }
     }
-    
+    else {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('User dismissed the install prompt')
+      }
+    }
+
     // Clear the deferredPrompt
-    setDeferredPrompt(null);
-    setShowInstallPrompt(false);
-  };
+    setDeferredPrompt(null)
+    setShowInstallPrompt(false)
+  }
 
   const handleDismiss = () => {
-    setShowInstallPrompt(false);
+    setShowInstallPrompt(false)
     // Don't show again for this session
-    sessionStorage.setItem('pwa-install-dismissed', 'true');
-  };
+    sessionStorage.setItem('pwa-install-dismissed', 'true')
+  }
 
   // Don't show if already installed or dismissed this session
   if (
-    isInstalled || 
-    !showInstallPrompt || 
-    !deferredPrompt ||
-    sessionStorage.getItem('pwa-install-dismissed')
+    isInstalled
+    || !showInstallPrompt
+    || !deferredPrompt
+    || sessionStorage.getItem('pwa-install-dismissed')
   ) {
-    return null;
+    return null
   }
 
   return (
@@ -106,7 +107,7 @@ export function InstallPrompt() {
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
-          <Button 
+          <Button
             onClick={handleInstallClick}
             className="w-full"
             size="sm"
@@ -117,5 +118,5 @@ export function InstallPrompt() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

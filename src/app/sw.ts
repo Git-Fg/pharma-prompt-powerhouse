@@ -1,6 +1,6 @@
-import { defaultCache } from "@serwist/next/worker";
-import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { Serwist, CacheFirst, StaleWhileRevalidate, NetworkFirst, ExpirationPlugin } from "serwist";
+import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
+import { defaultCache } from '@serwist/next/worker'
+import { CacheFirst, ExpirationPlugin, NetworkFirst, Serwist, StaleWhileRevalidate } from 'serwist'
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -8,11 +8,11 @@ import { Serwist, CacheFirst, StaleWhileRevalidate, NetworkFirst, ExpirationPlug
 // `"self.__SW_MANIFEST"`.
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
-    __SW_MANIFEST: (PrecacheEntry | string)[] | undefined;
+    __SW_MANIFEST: (PrecacheEntry | string)[] | undefined
   }
 }
 
-declare const self: ServiceWorkerGlobalScope;
+declare const self: ServiceWorkerGlobalScope
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
@@ -23,12 +23,12 @@ const serwist = new Serwist({
   runtimeCaching: [
     // Extend default cache with our custom caching strategies
     ...defaultCache,
-    
+
     // Google Fonts - Cache First Strategy
     {
       matcher: /^https:\/\/fonts\.googleapis\.com\/.*/i,
       handler: new CacheFirst({
-        cacheName: "google-fonts-stylesheets",
+        cacheName: 'google-fonts-stylesheets',
         plugins: [
           new ExpirationPlugin({
             maxEntries: 4,
@@ -40,7 +40,7 @@ const serwist = new Serwist({
     {
       matcher: /^https:\/\/fonts\.gstatic\.com\/.*/i,
       handler: new CacheFirst({
-        cacheName: "google-fonts-webfonts",
+        cacheName: 'google-fonts-webfonts',
         plugins: [
           new ExpirationPlugin({
             maxEntries: 4,
@@ -49,12 +49,12 @@ const serwist = new Serwist({
         ],
       }),
     },
-    
+
     // Images - Stale While Revalidate
     {
       matcher: /\.(?:png|jpg|jpeg|svg|gif|webp|avif)$/i,
       handler: new StaleWhileRevalidate({
-        cacheName: "images",
+        cacheName: 'images',
         plugins: [
           new ExpirationPlugin({
             maxEntries: 60,
@@ -63,12 +63,12 @@ const serwist = new Serwist({
         ],
       }),
     },
-    
+
     // Static Resources - Stale While Revalidate
     {
       matcher: /\.(?:js|css)$/i,
       handler: new StaleWhileRevalidate({
-        cacheName: "static-resources",
+        cacheName: 'static-resources',
         plugins: [
           new ExpirationPlugin({
             maxEntries: 30,
@@ -77,12 +77,12 @@ const serwist = new Serwist({
         ],
       }),
     },
-    
+
     // Navigation Requests - Network First with Offline Fallback
     {
-      matcher: ({ request }) => request.mode === "navigate",
+      matcher: ({ request }) => request.mode === 'navigate',
       handler: new NetworkFirst({
-        cacheName: "pages",
+        cacheName: 'pages',
         networkTimeoutSeconds: 3,
         plugins: [
           new ExpirationPlugin({
@@ -91,13 +91,13 @@ const serwist = new Serwist({
           }),
           {
             handlerDidError: async () => {
-              return Response.redirect("/offline", 302);
+              return Response.redirect('/offline', 302)
             },
           },
         ],
       }),
     },
   ],
-});
+})
 
-serwist.addEventListeners();
+serwist.addEventListeners()

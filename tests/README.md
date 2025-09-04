@@ -7,11 +7,12 @@ This project uses a comprehensive testing strategy with **Vitest** for unit/inte
 The project leverages **Zod schemas with TypeScript `satisfies`** for compile-time validation, so our tests focus on:
 
 1. **Business logic** not covered by type safety
-2. **Content relationships** and enrichment workflows  
+2. **Content relationships** and enrichment workflows
 3. **Component behavior** and user interactions
 4. **Edge cases** beyond basic type conformance
 
 What we **DON'T** test (already covered by build-time validation):
+
 - Basic schema structure (handled by `satisfies` operator)
 - Type conformance (handled by TypeScript compilation)
 - Content file structure validation (fails at build time if incorrect)

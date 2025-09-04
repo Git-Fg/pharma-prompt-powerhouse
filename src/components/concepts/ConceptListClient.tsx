@@ -1,58 +1,58 @@
-'use client';
+'use client'
 
-import { Concept } from '@/lib/content-schema';
-import { SearchInput } from '@/components/ui/search-input';
+import { FileText } from 'lucide-react'
+import type { Concept } from '@/lib/content-schema'
+import { ConceptCard } from '@/components/shared/ConceptCard'
+import { Button } from '@/components/ui/button'
+import { SearchInput } from '@/components/ui/search-input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { FileText } from 'lucide-react';
-import { ConceptCard } from '@/components/shared/ConceptCard';
-import { Button } from '@/components/ui/button';
-import { categoryLabels } from '@/lib/constants';
-import { useContentFilter } from '@/hooks/useContentFilter';
-import { content } from '@/lib/content-loader';
-import { useAutoAnimateList } from '@/hooks/useAutoAnimate';
+} from '@/components/ui/select'
+import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
+import { useContentFilter } from '@/hooks/useContentFilter'
+import { categoryLabels } from '@/lib/constants'
+import { content } from '@/lib/content-loader'
 
 interface ConceptListClientProps {
-  initialConcepts: Concept[];
+  initialConcepts: Concept[]
 }
 
 export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
-    const {
+  const {
     filteredItems: filteredConcepts,
     searchTerm,
     selectedCategory,
     setSearchTerm,
     setSelectedCategory,
-    resetFilters
-  } = useContentFilter<Concept>(initialConcepts);
+    resetFilters,
+  } = useContentFilter<Concept>(initialConcepts)
 
   // AutoAnimate ref for smooth transitions
-  const listRef = useAutoAnimateList();
+  const listRef = useAutoAnimateList()
 
- const categories = [
+  const categories = [
     'all',
     ...Array.from(new Set(initialConcepts.map(c => c.category))),
-  ];
+  ]
 
   // Calculate guide and prompt counts for each concept
   const conceptsWithStats = filteredConcepts.map((concept) => {
-    const guideCount = content.guides.filter((g) =>
-      g.conceptSlugs?.includes(concept.slug)
-    ).length;
-    const workflowCount = content.workflows.filter((w) =>
-      w.conceptSlugs?.includes(concept.slug)
-    ).length;
+    const guideCount = content.guides.filter(g =>
+      g.conceptSlugs?.includes(concept.slug),
+    ).length
+    const workflowCount = content.workflows.filter(w =>
+      w.conceptSlugs?.includes(concept.slug),
+    ).length
     return {
       ...concept,
       guideCount,
-      workflowCount
-    };
-  });
+      workflowCount,
+    }
+  })
 
   return (
     <>
@@ -114,5 +114,5 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
         </div>
       )}
     </>
-  );
+  )
 }

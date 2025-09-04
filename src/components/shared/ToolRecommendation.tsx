@@ -1,18 +1,18 @@
-import { content } from '@/lib/content-loader';
-import { ToolCard } from '@/components/shared/ToolCard';
+import { ToolCard } from '@/components/shared/ToolCard'
+import { content } from '@/lib/content-loader'
 
 interface ToolRecommendationProps {
-  tags: string[];
-  currentSlug: string;
+  tags: string[]
+  currentSlug: string
 }
 
 export function ToolRecommendation({ tags, currentSlug }: ToolRecommendationProps) {
-  const recommendedTools = content.externalTools.filter(t => 
-    t.slug !== currentSlug && t.tags.some((tag: string) => tags.includes(tag))
-  ).slice(0, 2);
+  const recommendedTools = content.externalTools.filter(t =>
+    t.slug !== currentSlug && t.tags.some((tag: string) => tags.includes(tag)),
+  ).slice(0, 2)
 
   if (recommendedTools.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -24,5 +24,5 @@ export function ToolRecommendation({ tags, currentSlug }: ToolRecommendationProp
         ))}
       </div>
     </section>
-  );
+  )
 }

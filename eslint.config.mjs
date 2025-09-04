@@ -1,127 +1,120 @@
 // @ts-check
-import js from "@eslint/js";
-import nextPlugin from "@next/eslint-plugin-next";
-import reactPlugin from "eslint-plugin-react";
-import hooksPlugin from "eslint-plugin-react-hooks";
-import reactCompilerPlugin from "eslint-plugin-react-compiler";
-import tseslint from "typescript-eslint";
-import { FlatCompat } from "@eslint/eslintrc";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import antfu from '@antfu/eslint-config'
+import reactCompilerPlugin from 'eslint-plugin-react-compiler'
 
-// Déclarer __filename et __dirname immédiatement après les imports
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+export default antfu(
+  {
+    // Configuration de base antfu avec TypeScript et React
+    typescript: true,
+    react: true,
+    formatters: {
+      css: true,
+      html: true,
+      markdown: 'prettier', // Use prettier for markdown
+    },
 
-// Maintenant vous pouvez utiliser __dirname en toute sécurité
-const compat = new FlatCompat({
-  baseDirectory: __dirname
-});
-
-const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript"), {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
-}, // Fichiers à ignorer
-{
-  ignores: [
-    "node_modules/",
-    ".next/",
-    ".content-collections/",
-    "out/",
-    "build/",
-    "components.json",
-    "postcss.config.mjs",
-    "tailwind.config.ts",
-    "**/*.d.ts",
-    "coverage/",
-    "playwright-report/",
-    "test-results/",
-    "**/*.min.js"
-  ],
-}, // Configuration de base ESLint
-js.configs.recommended, // Configuration TypeScript
-...tseslint.configs.recommended, // Configuration React
-{
-  files: ["**/*.{ts,tsx,js,jsx}"],
-  plugins: {
-    react: reactPlugin,
+    // Fichiers à ignorer
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      '.content-collections/**',
+      'out/**',
+      'build/**',
+      'components.json',
+      'postcss.config.mjs',
+      'tailwind.config.ts',
+      '**/*.d.ts',
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**',
+      '**/*.min.js',
+      'next-env.d.ts',
+      // Documentation files that contain code examples
+      'docs/**/*.md',
+      '**/README.md',
+      '.github/**',
+    ],
   },
-  rules: {
-    ...reactPlugin.configs["jsx-runtime"].rules,
-    "react/no-unescaped-entities": "off"
-  },
-  settings: {
-    react: {
-      version: "detect",
+
+  // Configuration spécifique React Compiler
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      'react-compiler': reactCompilerPlugin,
+    },
+    rules: {
+      'react-compiler/react-compiler': 'error',
     },
   },
-}, // Configuration React Hooks
-{
-  files: ["**/*.{ts,tsx,js,jsx}"],
-  plugins: {
-    "react-hooks": hooksPlugin,
-  },
-  rules: {
-    ...hooksPlugin.configs.recommended.rules,
-  },
-}, // Configuration React Compiler
-{
-  files: ["**/*.{ts,tsx}"],
-  plugins: {
-    "react-compiler": reactCompilerPlugin,
-  },
-  rules: {
-    "react-compiler/react-compiler": "error",
-  },
-}, // Configuration Next.js
-{
-  files: ["**/*.{ts,tsx,js,jsx}"],
-  plugins: {
-    "@next/next": nextPlugin,
-  },
-  rules: {
-    ...nextPlugin.configs.recommended.rules,
-    ...nextPlugin.configs["core-web-vitals"].rules,
-  },
-}, // Configuration générale pour les variables non utilisées
-{
-  files: ["**/*.{ts,tsx}"],
-  rules: {
-    "no-unused-vars": "off", // Désactivé car géré par TypeScript
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
-      },
-    ],
-    "prefer-const": "error",
-  },
-}, // Configuration pour les composants UI shadcn
-{
-  files: ["src/components/ui/**/*.{ts,tsx}"],
-  rules: {
-    "react/display-name": "off",
-    "prefer-const": "warn",
-    "@typescript-eslint/no-unused-vars": "off",
-  },
-}, // Configuration pour les fichiers de configuration et scripts
-{
-  files: [
-    "**/*.config.{js,mjs,ts}",
-    "**/*.config.*.{js,mjs,ts}",
-    "scripts/**/*",
-    "server.ts",
-    "content-collections.ts",
-  ],
-  rules: {
-    "no-console": "off",
-    "@typescript-eslint/no-var-requires": "off",
-  },
-}, // Configuration pour les fichiers JavaScript purs
-{
-  files: ["**/*.{js,mjs,jsx}"],
-  ...tseslint.configs.disableTypeChecked,
-}];
 
-export default eslintConfig;
+  // Configuration pour les composants UI shadcn
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react/display-name': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+
+  // Configuration pour les fichiers de configuration et scripts
+  {
+    files: [
+      '**/*.config.{js,mjs,ts}',
+      '**/*.config.*.{js,mjs,ts}',
+      'scripts/**/*',
+      'server.ts',
+      'content-collections.ts',
+    ],
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
+      'node/prefer-global/process': 'off',
+    },
+  },
+
+  // Configuration pour les tests
+  {
+    files: ['tests/**/*', '**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
+    rules: {
+      'react-hooks-extra/no-unnecessary-use-prefix': 'off',
+      'test/prefer-lowercase-title': 'off',
+      'no-restricted-globals': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+
+  // Règles globales personnalisées
+  {
+    rules: {
+      // Maintenir la compatibilité avec les entités non échappées de React
+      'react/no-unescaped-entities': 'off',
+
+      // Configuration optimisée pour les variables non utilisées
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+
+      // Style antfu mais adapté au projet
+      'style/max-statements-per-line': 'off',
+      'curly': ['error', 'multi-line', 'consistent'],
+
+      // Relaxer certaines règles de perfectionist pour le projet
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          type: 'natural',
+          order: 'asc',
+          newlinesBetween: 'ignore',
+        },
+      ],
+
+      // Désactiver les règles JSON trop strictes
+      'jsonc/sort-keys': 'off',
+    },
+  },
+)

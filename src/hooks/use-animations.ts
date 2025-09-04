@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
 import { useMotionValue, useSpring } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 // Hook for scroll-driven animations
 export function useScrollProgress() {
@@ -30,7 +30,7 @@ export function useInView(threshold = 0.1) {
 
   useEffect(() => {
     const element = ref.current
-    if (!element) return
+    if (!element) { return }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,7 +39,7 @@ export function useInView(threshold = 0.1) {
           setIsInView(entry.isIntersecting)
         }
       },
-      { threshold }
+      { threshold },
     )
 
     observer.observe(element)
@@ -84,7 +84,7 @@ export function useMagneticEffect(strength = 0.3, distance = 150) {
 
   useEffect(() => {
     const element = ref.current
-    if (!element) return
+    if (!element) { return }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = element.getBoundingClientRect()
@@ -125,7 +125,7 @@ export function useParallax(speed = 0.5) {
 
   useEffect(() => {
     const element = ref.current
-    if (!element) return
+    if (!element) { return }
 
     const handleScroll = () => {
       const scrolled = window.scrollY
@@ -150,7 +150,7 @@ export function useStagger<T>(items: T[], delay = 0.1) {
 
   useEffect(() => {
     setVisibleItems([])
-    
+
     items.forEach((item, index) => {
       setTimeout(() => {
         setVisibleItems(prev => [...prev, item])
@@ -192,16 +192,17 @@ export function useCounterAnimation(end: number, duration = 1000, start = 0) {
     const updateCounter = () => {
       const now = Date.now()
       const progress = Math.min((now - startTime) / duration, 1)
-      
+
       // Easing function for smooth animation
       const easedProgress = 1 - Math.cos(progress * Math.PI / 2)
       const currentValue = Math.floor(startValue + (end - startValue) * easedProgress)
-      
+
       setCount(currentValue)
 
       if (progress < 1) {
         requestAnimationFrame(updateCounter)
-      } else {
+      }
+      else {
         setIsAnimating(false)
       }
     }
@@ -226,7 +227,8 @@ export function useTypewriter(text: string, speed = 50) {
       if (index < text.length) {
         setDisplayedText(prev => prev + text[index])
         index++
-      } else {
+      }
+      else {
         setIsComplete(true)
         clearInterval(timer)
       }

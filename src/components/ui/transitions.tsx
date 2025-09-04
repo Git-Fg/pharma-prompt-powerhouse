@@ -1,7 +1,8 @@
 'use client'
 
-import { motion, AnimatePresence, HTMLMotionProps } from 'framer-motion'
-import { ReactNode } from 'react'
+import type { HTMLMotionProps } from 'framer-motion'
+import type { ReactNode } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { easings } from './animated'
 
@@ -121,14 +122,14 @@ interface PageTransitionProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   className?: string
 }
 
-export function PageTransition({ 
-  children, 
-  variant = 'fade', 
+export function PageTransition({
+  children,
+  variant = 'fade',
   className = '',
-  ...props 
+  ...props
 }: PageTransitionProps) {
   const pathname = usePathname()
-  
+
   const variants = {
     fade: pageVariants,
     slide: slideVariants,
@@ -157,10 +158,10 @@ interface StaggeredPageProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   className?: string
 }
 
-export function StaggeredPage({ 
-  children, 
+export function StaggeredPage({
+  children,
   className = '',
-  ...props 
+  ...props
 }: StaggeredPageProps) {
   const pathname = usePathname()
 
@@ -181,11 +182,11 @@ export function StaggeredPage({
   )
 }
 
-export function StaggeredItem({ 
-  children, 
+export function StaggeredItem({
+  children,
   className = '',
-  ...props 
-}: { children: ReactNode; className?: string } & HTMLMotionProps<'div'>) {
+  ...props
+}: { children: ReactNode, className?: string } & HTMLMotionProps<'div'>) {
   return (
     <motion.div
       className={className}
@@ -225,42 +226,44 @@ interface LoadingTransitionProps {
   className?: string
 }
 
-export function LoadingTransition({ 
-  isLoading, 
-  children, 
+export function LoadingTransition({
+  isLoading,
+  children,
   loadingComponent,
-  className = ''
+  className = '',
 }: LoadingTransitionProps) {
   return (
     <AnimatePresence mode="wait">
-      {isLoading ? (
-        <motion.div
-          key="loading"
-          className={className}
-          initial="initial"
-          animate="loading"
-          exit="loaded"
-          variants={loadingVariants}
-        >
-          {loadingComponent || (
-            <div className="flex items-center justify-center py-8">
-              <div className="animate-pulse-subtle text-muted-foreground">
-                Chargement...
-              </div>
-            </div>
+      {isLoading
+        ? (
+            <motion.div
+              key="loading"
+              className={className}
+              initial="initial"
+              animate="loading"
+              exit="loaded"
+              variants={loadingVariants}
+            >
+              {loadingComponent || (
+                <div className="flex items-center justify-center py-8">
+                  <div className="animate-pulse-subtle text-muted-foreground">
+                    Chargement...
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )
+        : (
+            <motion.div
+              key="content"
+              className={className}
+              initial="initial"
+              animate="enter"
+              variants={pageVariants}
+            >
+              {children}
+            </motion.div>
           )}
-        </motion.div>
-      ) : (
-        <motion.div
-          key="content"
-          className={className}
-          initial="initial"
-          animate="enter"
-          variants={pageVariants}
-        >
-          {children}
-        </motion.div>
-      )}
     </AnimatePresence>
   )
 }
@@ -317,11 +320,11 @@ interface ModalTransitionProps {
   className?: string
 }
 
-export function ModalTransition({ 
-  isOpen, 
-  children, 
+export function ModalTransition({
+  isOpen,
+  children,
   onClose,
-  className = ''
+  className = '',
 }: ModalTransitionProps) {
   return (
     <AnimatePresence>
@@ -336,7 +339,7 @@ export function ModalTransition({
             variants={backdropVariants}
             onClick={onClose}
           />
-          
+
           {/* Modal content */}
           <motion.div
             className={`fixed inset-0 flex items-center justify-center z-modal p-4 ${className}`}

@@ -1,62 +1,63 @@
 // src/hooks/useConsent.ts
-'use client';
+'use client'
 
-import { useState, useEffect, createContext, useContext, ReactNode, useCallback } from 'react';
+import type { ReactNode } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react'
 
-type ConsentStatus = 'pending' | 'accepted' | 'declined';
-type ConsentContextType = {
-  status: ConsentStatus;
-  accept: () => void;
-  decline: () => void;
-};
+type ConsentStatus = 'pending' | 'accepted' | 'declined'
+interface ConsentContextType {
+  status: ConsentStatus
+  accept: () => void
+  decline: () => void
+}
 
-const ConsentContext = createContext<ConsentContextType | null>(null);
+const ConsentContext = createContext<ConsentContextType | null>(null)
 
-const STORAGE_KEY = 'pharma-consent-status';
+const STORAGE_KEY = 'pharma-consent-status'
 
 /**
  * Provider pour gérer le consentement utilisateur en conformité avec la loi européenne.
  * Philosophie : simplicité respectueuse - un interrupteur ON/OFF simple.
  */
 export function ConsentProvider({ children }: { children: ReactNode }) {
-  const [status, setStatus] = useState<ConsentStatus>('pending');
+  const [status, setStatus] = useState<ConsentStatus>('pending')
 
   // Charger le statut de consentement au montage
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored === 'accepted' || stored === 'declined') {
-      setStatus(stored as ConsentStatus);
+      setStatus(stored as ConsentStatus)
     }
-  }, []);
+  }, [])
 
   const accept = useCallback(() => {
-    setStatus('accepted');
-    localStorage.setItem(STORAGE_KEY, 'accepted');
-  }, []);
+    setStatus('accepted')
+    localStorage.setItem(STORAGE_KEY, 'accepted')
+  }, [])
 
   const decline = useCallback(() => {
-    setStatus('declined');
-    localStorage.setItem(STORAGE_KEY, 'declined');
+    setStatus('declined')
+    localStorage.setItem(STORAGE_KEY, 'declined')
     // Nettoyer toute donnée existante si l'utilisateur refuse
-    clearStoredData();
-  }, []);
+    clearStoredData()
+  }, [])
 
   return (
-    <ConsentContext.Provider value={{ status, accept, decline }}>
+    <ConsentContext value={{ status, accept, decline }}>
       {children}
-    </ConsentContext.Provider>
-  );
+    </ConsentContext>
+  )
 }
 
 /**
  * Hook pour utiliser le contexte de consentement
  */
 export function useConsent() {
-  const context = useContext(ConsentContext);
+  const context = use(ConsentContext)
   if (!context) {
-    throw new Error('useConsent doit être utilisé dans un ConsentProvider');
+    throw new Error('useConsent doit être utilisé dans un ConsentProvider')
   }
-  return context;
+  return context
 }
 
 /**
@@ -68,11 +69,11 @@ function clearStoredData() {
     'theme', // thème utilisateur
     'favorites', // favoris
     'user-preferences', // autres préférences
-  ];
-  
-  keysToRemove.forEach(key => {
-    localStorage.removeItem(key);
-  });
+  ]
+
+  keysToRemove.forEach((key) => {
+    localStorage.removeItem(key)
+  })
 }
 
 /**
@@ -80,27 +81,27 @@ function clearStoredData() {
  * Permet de stocker des données seulement si l'utilisateur a consenti
  */
 export function useConsentStorage() {
-  const { status } = useConsent();
+  const { status } = useConsent()
 
   const setItem = useCallback((key: string, value: string) => {
     if (status === 'accepted') {
-      localStorage.setItem(key, value);
+      localStorage.setItem(key, value)
     }
     // Si décliné, on ne stocke rien
     // Les fonctionnalités marchent pour la session en cours
-  }, [status]);
+  }, [status])
 
   const getItem = useCallback((key: string): string | null => {
     if (status === 'accepted') {
-      return localStorage.getItem(key);
+      return localStorage.getItem(key)
     }
     // Si décliné, on ne lit pas depuis le stockage persistant
-    return null;
-  }, [status]);
+    return null
+  }, [status])
 
   const removeItem = useCallback((key: string) => {
-    localStorage.removeItem(key);
-  }, []);
+    localStorage.removeItem(key)
+  }, [])
 
-  return { setItem, getItem, removeItem };
+  return { setItem, getItem, removeItem }
 }

@@ -11,25 +11,28 @@
 Transformer les étudiants en pharmacie de "passagers" à "pilotes" de l'IA, en leur fournissant :
 
 - **Des fondamentals solides** : Concepts clés du prompt engineering appliqué à la pharmacie
-- **Des méthodes éprouvées** : Guides pratiques basés sur l'expérience terrain  
+- **Des méthodes éprouvées** : Guides pratiques basés sur l'expérience terrain
 - **Des outils performants** : Workflows interactifs et système de recommandations contextuelles
 - **Un écosystème cohérent** : Interconnexions intelligentes entre tous les contenus
 
 ## 🏗️ Architecture Moderne (2025)
 
 ### **Design System Complet**
+
 - **Tailwind v4 + tailwind-variants**: Design tokens centralisés avec `@theme inline` et recipes systématiques
 - **Mobile-First UX**: Navigation adaptive avec bottom bar mobile et interactions modernes
 - **AutoAnimate Integration**: Transitions fluides respectant les préférences d'accessibilité
 - **Modern Typography**: `text-pretty`, `text-balance`, `text-flow` pour une lisibilité optimale
 
 ### **Content Architecture TypeScript**
+
 - **100% Type-Safe**: Validation Zod à la compilation + runtime avec schémas centralisés
 - **Smart Interconnections**: Système de recommandations contextuelles (concepts ↔ workflows ↔ tools)
 - **Performance O(1)**: Chargement optimisé avec Maps pour toutes les relations
 - **SEO Ready**: `sitemap.xml` et `robots.txt` générés automatiquement (54 routes)
 
 ### **Modern Stack**
+
 - **React 19** + **Next.js 15**: Server Components avec App Router
 - **TypeScript**: 100% type safety avec mode strict
 - **Vitest**: Tests modernes 5-10x plus rapides que Jest
@@ -37,6 +40,7 @@ Transformer les étudiants en pharmacie de "passagers" à "pilotes" de l'IA, en 
 - **shadcn/ui**: Composants standardisés et accessibles
 
 ### **Performance Optimizations**
+
 ```
 Bundle Size Improvements:
 /outils-externes:  97% reduction (4.16 kB → 175 B)
@@ -49,11 +53,13 @@ Bundle Size Improvements:
 ### 🧠 **Système de Connaissances Interconnectées**
 
 #### **8 Concepts Fondamentaux**
+
 - Context Engineering, Chaîne de Prompts, Hallucination, Memory IA, etc.
 - Chaque concept avec définition analogique + formelle + importance pratique
 - **Smart Interconnections**: Recommandations contextuelles vers workflows et outils pertinents
 
-#### **14 Guides Stratégiques** 
+#### **14 Guides Stratégiques**
+
 - Les 5 Piliers d'un Prompt Efficace, Méthode XML, Optimisation Itérative
 - **Core Kit Étudiant 2025** : Maîtriser Z.AI + AI Studio sans carte bancaire
 - **IA en Local** : Guide confidentialité 100% avec modèles comme Qwen3-4B
@@ -61,11 +67,13 @@ Bundle Size Improvements:
 - Tous enrichis avec système de recommandations contextuelles
 
 #### **7 Workflows Interactifs**
+
 - **Production Ready**: Résoudre cas clinique, créer fiches révision, recherche bibliographique
 - **Smart Contextual Recommendations**: Chaque étape enrichie avec suggestions de concepts et outils
 - Approche structurée avec prompts optimisés et guide d'usage multi-plateforme
 
 #### **10 Outils Externes Évalués**
+
 - **TanStack Table Integration**: Tableaux comparatifs performants avec tri et recherche
 - **Core Kit Recommandé** : Z.AI (recherche fiable) + AI Studio (multimodal avancé)
 - **Évaluations 360°**: Performance, confidentialité, cas d'usage avec notation étoiles
@@ -74,24 +82,28 @@ Bundle Size Improvements:
 ### 🛠️ **Outils Interactifs Intégrés**
 
 #### **Éditeur de Prompts Avancé**
+
 - Interface moderne avec prévisualisation temps réel
 - Templates intégrés et variables dynamiques `{{nom_variable}}`
 - Export multi-plateformes optimisé
 
 #### **Générateur de Flashcards IA**
-- Création automatique de cartes Anki à partir de cours  
+
+- Création automatique de cartes Anki à partir de cours
 - **AutoAnimate Integration**: Transitions fluides pour UX premium
 - Integration directe avec les concepts de la plateforme
 
 ## 🚀 **Innovations Techniques 2025**
 
 ### **Smart Interconnection System**
+
 - **ConceptRecommendation** : Recommandations contextuelles avec justifications
 - **ToolRecommendation** : Outils suggérés au bon moment du workflow
 - **GuideRecommendation** : Guides liés avec raisons d'utilité précises
 - **Hover Cards + Mobile Sheets**: UX non-intrusive pour exploration
 
 ### **Modern UX Architecture**
+
 - **AutoAnimate**: Transitions automatiques respectant `prefers-reduced-motion`
 - **Hybrid Animation System**: AutoAnimate pour layout + Framer Motion pour complexité
 - **Mobile-First Navigation**: Bottom bar ergonomique + interactions modernes
@@ -100,13 +112,15 @@ Bundle Size Improvements:
 ## 🏗️ Stack Technique Production
 
 ### **Frontend Excellence**
+
 - **Next.js 15** : 54 pages statiques avec performance optimale
 - **React 19** : Server Components avec React Compiler activé
 - **TypeScript Strict** : 100% type safety avec noUncheckedIndexedAccess
 - **Tailwind v4 + tailwind-variants** : Design system moderne avec recipes
 
 ### **Content & Testing**
-- **Type-Safe Content**: Validation Zod à la compilation + runtime  
+
+- **Type-Safe Content**: Validation Zod à la compilation + runtime
 - **49 Tests Passing**: Unit + Integration + Component avec 100% success
 - **SEO Automatique**: `sitemap.xml` et `robots.txt` générés dynamiquement
 - **Zero Config Production**: Build ready sans configuration additionnelle
@@ -117,7 +131,7 @@ Bundle Size Improvements:
 src/
 ├── app/                       # Next.js 15 App Router avec 54 pages statiques
 │   ├── concepts/[slug]/       # 8 concepts fondamentaux interconnectés
-│   ├── guides/[slug]/         # 14 guides pratiques avec recommandations  
+│   ├── guides/[slug]/         # 14 guides pratiques avec recommandations
 │   ├── workflows/[slug]/      # 7 workflows interactifs optimisés
 │   ├── l-arsenal-ia/[slug]/   # 10 outils IA avec évaluations détaillées
 │   ├── boite-a-outils/        # Éditeurs et générateurs interactifs
@@ -127,7 +141,7 @@ src/
 ├── components/
 │   ├── shared/                # Smart recommendation system
 │   │   ├── ConceptRecommendation.tsx
-│   │   ├── ToolRecommendation.tsx  
+│   │   ├── ToolRecommendation.tsx
 │   │   └── ResponsiveComparisonTable.tsx (TanStack Table)
 │   ├── ui/                    # shadcn/ui + tailwind-variants
 │   │   ├── recipes/           # Component variant recipes
@@ -156,6 +170,7 @@ src/
 ## 🚀 Démarrage Rapide
 
 ### **Prérequis**
+
 - Node.js 18+
 - npm/pnpm pour la gestion des dépendances
 
@@ -166,7 +181,7 @@ src/
 git clone https://github.com/Git-Fg/pharma-prompt-powerhouse
 cd pharma-prompt-powerhouse
 
-# Installer les dépendances  
+# Installer les dépendances
 npm install
 
 # Développement avec hot-reload
@@ -192,13 +207,15 @@ npm run test:e2e
 ## 🔧 Outils de Développement
 
 ### **Modern Development Stack**
-- **Package Manager**: npm (default) / pnpm (local development) 
+
+- **Package Manager**: npm (default) / pnpm (local development)
 - **Testing**: Vitest avec jsdom (5-10x plus rapide que Jest)
 - **Type Checking**: TypeScript strict avec validation Zod
 - **Linting**: ESLint avec règles React 19 et Next.js 15
 - **Content Validation**: Build-time validation avec schémas Zod
 
 ### **Scripts Utiles**
+
 ```bash
 # Nettoyage complet
 npm run clean && npm run reinstall
@@ -210,6 +227,7 @@ npm run build && npm run test && npm run lint
 ## 📊 État du Projet - Production Ready (2025)
 
 ### **Status Complet** 🚀
+
 - **Build**: ✅ Compilation sans erreur (Next.js 15 + React 19)
 - **Tests**: ✅ 49/49 tests passent (Vitest)
 - **TypeScript**: ✅ 100% type safe (mode strict)
@@ -219,6 +237,7 @@ npm run build && npm run test && npm run lint
 - **SEO**: ✅ MetadataBase configuré pour réseaux sociaux
 
 ### **Migrations et Optimisations Complétées**
+
 - ✅ **Toast System**: Unifié sur Sonner (suppression Radix toast)
 - ✅ **Testing**: Jest → Vitest (5-10x plus rapide)
 - ✅ **Server**: Suppression server.ts (Next.js 15 natif)
@@ -235,7 +254,7 @@ npm run build && npm run test && npm run lint
 Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à **augmenter** les capacités des professionnels :
 
 - **Amplifier la réflexion** : L'IA comme partenaire de brainstorming et d'analyse
-- **Accélérer les tâches** : Automatisation des processus répétitifs (synthèses, fiches)  
+- **Accélérer les tâches** : Automatisation des processus répétitifs (synthèses, fiches)
 - **Sécuriser la pratique** : Méthodes anti-hallucination et vérification systématique
 - **Personnaliser l'apprentissage** : Outils adaptés au niveau et aux besoins individuels
 
@@ -264,14 +283,16 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 
 ### **Standards de Qualité**
 
-- **Tests Required** : 49 tests automatisés pour validation continue  
+- **Tests Required** : 49 tests automatisés pour validation continue
 - **Type Safety** : TypeScript strict avec génération de types automatique
 - **Content Validation** : Vérification automatique des références et métadonnées
 - **Performance Focus** : 51 pages statiques générées, optimisées pour la vitesse
 - **Security First** : Audit de sécurité automatique, zero vulnérabilités
+
 ## 🎯 État du Projet - Production Ready
 
 ### **Métriques de Performance**
+
 - ✅ **51 pages statiques** générées sans erreur
 - ✅ **39 documents** de contenu interconnectés
 - ✅ **49 tests** unitaires et de validation
@@ -280,13 +301,15 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 - ✅ **Temps de build** optimisé (< 30 secondes)
 
 ### **Qualité du Contenu**
+
 - ✅ **8 concepts fondamentaux** avec guides principaux
 - ✅ **16 guides pratiques** enrichis d'interconnexions (dont Core Kit 2025)
 - ✅ **5 prompts professionnels** multi-plateformes
 - ✅ **10 outils IA** analysés avec retours terrain
 - ✅ **Validation croisée** automatique des références
 
-### **Expérience Utilisateur Finalisée**  
+### **Expérience Utilisateur Finalisée**
+
 - ✅ **Navigation cohérente** entre tous types de contenu
 - ✅ **Recommandations intelligentes** : outil/guide/concept contextuel
 - ✅ **Parcours d'apprentissage** guidé débutant → avancé
@@ -302,15 +325,16 @@ Ce projet ne vise pas à remplacer l'expertise pharmaceutique par l'IA, mais à 
 ⚠️ **Important** : Cette plateforme est un outil d'apprentissage et d'aide à la formation. L'utilisation de l'IA en pratique pharmaceutique nécessite :
 
 - **Validation systématique** des informations critiques par des sources officielles
-- **Supervision professionnelle** appropriée selon le contexte d'usage  
+- **Supervision professionnelle** appropriée selon le contexte d'usage
 - **Respect des réglementations** locales sur l'usage de l'IA en santé
 - **Esprit critique constant** - L'IA peut halluciner et ne remplace pas l'expertise humaine
 
 ## 🚀 Déploiement & Production
 
 Optimisé pour déploiement sur :
+
 - **Vercel** (recommandé) : Configuration automatique
-- **Netlify** : Build statique compatible  
+- **Netlify** : Build statique compatible
 - **GitHub Pages** : Export statique possible
 - **Serveur propre** : Node.js + builds statiques
 
@@ -325,11 +349,13 @@ npm run export
 ## 🤝 Communauté & Support
 
 ### **Contributions Welcomes**
+
 - **Issues** : Rapports de bugs et suggestions d'améliorations
-- **Pull Requests** : Nouveaux contenus, corrections, améliorations techniques  
+- **Pull Requests** : Nouveaux contenus, corrections, améliorations techniques
 - **Discussions** : Partage d'expériences et cas d'usage
 
 ### **Roadmap Future**
+
 - **Intégration API** : Connexion directe avec outils IA
 - **Système d'annotations** : Commentaires communautaires sur contenus
 - **Analytics d'usage** : Optimisation basée sur métriques utilisateurs
@@ -337,6 +363,6 @@ npm run export
 
 ---
 
-**🎓 Pharma Prompt Powerhouse** - *Transforming pharmacy students from AI passengers to AI pilots*
+**🎓 Pharma Prompt Powerhouse** - _Transforming pharmacy students from AI passengers to AI pilots_
 
-*Développé avec ❤️ pour la communauté pharmaceutique par [Git-Fg](https://github.com/Git-Fg)*
+_Développé avec ❤️ pour la communauté pharmaceutique par [Git-Fg](https://github.com/Git-Fg)_

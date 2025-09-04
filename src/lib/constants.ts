@@ -3,65 +3,65 @@
 // =================================================================
 
 // Types stricts pour les catégories et difficultés
-export type Category =
-  | 'fondamentaux'
-  | 'methodologie' 
-  | 'ressources'
-  | 'techniques-avancees'
-  | 'cas-pratiques'
-  | 'prompting'
-  | 'security'
-  | 'optimization'
-  | 'bonnes-pratiques';
+export type Category
+  = | 'fondamentaux'
+    | 'methodologie'
+    | 'ressources'
+    | 'techniques-avancees'
+    | 'cas-pratiques'
+    | 'prompting'
+    | 'security'
+    | 'optimization'
+    | 'bonnes-pratiques'
 
-export type Difficulty = 'débutant' | 'intermédiaire' | 'avancé';
+export type Difficulty = 'débutant' | 'intermédiaire' | 'avancé'
 
 // Labels des catégories - source de vérité unique
 export const categoryLabels = {
-  fondamentaux: 'Fondamentaux 📚',
-  methodologie: 'Méthodologie 🔬',
-  ressources: 'Ressources 📖',
+  'fondamentaux': 'Fondamentaux 📚',
+  'methodologie': 'Méthodologie 🔬',
+  'ressources': 'Ressources 📖',
   'techniques-avancees': 'Techniques Avancées 🚀',
   'cas-pratiques': 'Cas Pratiques 💊',
-  prompting: 'Prompting 🎯',
-  security: 'Sécurité 🔒',
-  optimization: 'Optimisation ⚡',
+  'prompting': 'Prompting 🎯',
+  'security': 'Sécurité 🔒',
+  'optimization': 'Optimisation ⚡',
   'bonnes-pratiques': 'Bonnes Pratiques 🛡️',
-} as const satisfies Record<Category, string>;
+} as const satisfies Record<Category, string>
 
 // Labels des difficultés
 export const difficultyLabels = {
   débutant: 'Débutant 🌱',
-  intermédiaire: 'Intermédiaire 🌿', 
+  intermédiaire: 'Intermédiaire 🌿',
   avancé: 'Avancé 🌳',
-} as const satisfies Record<Difficulty, string>;
+} as const satisfies Record<Difficulty, string>
 
 // Labels des outils IA
 export const toolLabels = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  perplexity: 'Perplexity',
-  gemini: 'Gemini',
+  'chatgpt': 'ChatGPT',
+  'claude': 'Claude',
+  'perplexity': 'Perplexity',
+  'gemini': 'Gemini',
   'z-ai': 'Z.AI',
-  deepseek: 'DeepSeek',
-  qwen: 'Qwen',
+  'deepseek': 'DeepSeek',
+  'qwen': 'Qwen',
   'ai-studio': 'AI Studio',
-  cursor: 'Cursor',
-  codium: 'Codium',
-} as const;
+  'cursor': 'Cursor',
+  'codium': 'Codium',
+} as const
 
 // Couleurs associées aux catégories pour l'UI
 export const categoryColors = {
-  fondamentaux: 'blue',
-  methodologie: 'green', 
-  ressources: 'purple',
+  'fondamentaux': 'blue',
+  'methodologie': 'green',
+  'ressources': 'purple',
   'techniques-avancees': 'orange',
   'cas-pratiques': 'red',
-  prompting: 'cyan',
-  security: 'yellow',
-  optimization: 'pink',
+  'prompting': 'cyan',
+  'security': 'yellow',
+  'optimization': 'pink',
   'bonnes-pratiques': 'indigo',
-} as const satisfies Record<Category, string>;
+} as const satisfies Record<Category, string>
 
 // Niveaux de confiance pour les outils
 export const confidenceLevels = {
@@ -70,7 +70,7 @@ export const confidenceLevels = {
   3: { label: '⭐⭐⭐☆☆', description: 'Confiance modérée' },
   4: { label: '⭐⭐⭐⭐☆', description: 'Bonne confiance' },
   5: { label: '⭐⭐⭐⭐⭐', description: 'Très haute confiance' },
-} as const;
+} as const
 
 // =================================================================
 // FONCTIONS UTILITAIRES POUR L'UI
@@ -78,22 +78,22 @@ export const confidenceLevels = {
 
 // Obtenir le label d'une catégorie avec fallback sécurisé
 export function getCategoryLabel(category: string): string {
-  return categoryLabels[category as Category] ?? category;
+  return categoryLabels[category as Category] ?? category
 }
 
-// Obtenir le label d'une difficulté avec fallback sécurisé  
+// Obtenir le label d'une difficulté avec fallback sécurisé
 export function getDifficultyLabel(difficulty: string): string {
-  return difficultyLabels[difficulty as Difficulty] ?? difficulty;
+  return difficultyLabels[difficulty as Difficulty] ?? difficulty
 }
 
 // Obtenir la couleur d'une catégorie
 export function getCategoryColor(category: string): string {
-  return categoryColors[category as Category] ?? 'gray';
+  return categoryColors[category as Category] ?? 'gray'
 }
 
 // Obtenir les informations de confiance pour un score
 export function getConfidenceInfo(score: number) {
-  return confidenceLevels[score as keyof typeof confidenceLevels] ?? confidenceLevels[3];
+  return confidenceLevels[score as keyof typeof confidenceLevels] ?? confidenceLevels[3]
 }
 
 // =================================================================
@@ -107,7 +107,7 @@ export const APP_CONFIG = {
   author: 'Git-Fg',
   version: '1.0.0',
   repository: 'https://github.com/Git-Fg/pharma-prompt-powerhouse',
-} as const;
+} as const
 
 // Limites et contraintes
 export const CONTENT_LIMITS = {
@@ -117,7 +117,7 @@ export const CONTENT_LIMITS = {
   maxKeyTakeaways: 8,
   itemsPerPage: 12,
   maxSearchResults: 50,
-} as const;
+} as const
 
 // Temps estimés par défaut
 export const DEFAULT_ESTIMATED_TIMES = {
@@ -125,4 +125,4 @@ export const DEFAULT_ESTIMATED_TIMES = {
   guide: '15-30 min',
   workflow: '30-60 min',
   tool: '5-15 min',
-} as const;
+} as const

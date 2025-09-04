@@ -1,20 +1,21 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Info, CheckCircle } from "lucide-react";
+import { CheckCircle, Info } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface KeyTakeawaysProps {
-  points: string[];
+  points: string[]
 }
 
 export function KeyTakeaways({ points }: KeyTakeawaysProps) {
   if (!points || points.length === 0) {
-    return null;
+    return null
   }
 
   return (
     <Card className="my-8 bg-primary/5 border-primary/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-lg text-primary">
-          <Info className="size-6" />À Retenir (TL;DR)
+          <Info className="size-6" />
+          À Retenir (TL;DR)
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -28,5 +29,5 @@ export function KeyTakeaways({ points }: KeyTakeawaysProps) {
         </ul>
       </CardContent>
     </Card>
-  );
+  )
 }

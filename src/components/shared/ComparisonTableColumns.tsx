@@ -1,48 +1,49 @@
 // src/components/shared/ComparisonTableColumns.tsx
-'use client';
+'use client'
 
-import { ColumnDef } from '@tanstack/react-table';
-import { ExternalTool } from '@/lib/content-schema';
-import { Badge } from '@/components/ui/badge';
-import { Star, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
-import { getStarRatingProps } from '@/lib/ui-utils';
+import type { ColumnDef } from '@tanstack/react-table'
+import { ExternalLink, Star } from 'lucide-react'
+import Link from 'next/link'
+import type { ExternalTool } from '@/lib/content-schema'
+import { Badge } from '@/components/ui/badge'
+import { getStarRatingProps } from '@/lib/ui-utils'
 
 // Helper pour le rendu des étoiles
-const renderStarRating = (score?: number) => {
-  if (!score) return <span className="text-muted-foreground text-xs">N/A</span>;
-  
-  const starProps = getStarRatingProps(score);
+function renderStarRating(score?: number) {
+  if (!score) { return <span className="text-muted-foreground text-xs">N/A</span> }
+
+  const starProps = getStarRatingProps(score)
   return (
     <div className="flex items-center gap-1">
-      {starProps.stars.map((star) => (
+      {starProps.stars.map(star => (
         <Star
           key={star.index}
           className={`w-3 h-3 ${star.className}`}
         />
       ))}
       <span className="ml-1 text-xs text-muted-foreground">
-        {score}/5
+        {score}
+        /5
       </span>
     </div>
-  );
-};
+  )
+}
 
 // Helper pour la disponibilité
-const getAvailabilityBadge = (tool: ExternalTool) => {
+function getAvailabilityBadge(tool: ExternalTool) {
   if (tool.freeVsPaidOffer && tool.freeVsPaidOffer.includes('Gratuit')) {
     return (
       <Badge className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
         Gratuit + Payant
       </Badge>
-    );
+    )
   }
   return (
     <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300">
       Gratuit
     </Badge>
-  );
-};
+  )
+}
 
 // Définitions des colonnes pour TanStack Table
 export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
@@ -50,7 +51,7 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
     accessorKey: 'title',
     header: 'Outil',
     cell: ({ row }) => {
-      const tool = row.original;
+      const tool = row.original
       return (
         <div className="space-y-1">
           <div className="font-medium responsive-text">
@@ -65,7 +66,7 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
             {tool.description}
           </div>
         </div>
-      );
+      )
     },
     size: 200,
   },
@@ -73,14 +74,18 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
     accessorKey: 'personalReview',
     header: 'Mon Avis',
     cell: ({ getValue }) => {
-      const personalReview = getValue() as string;
-      return personalReview ? (
-        <p className="text-sm italic text-muted-foreground line-clamp-3 leading-relaxed text-pretty">
-          "{personalReview}"
-        </p>
-      ) : (
-        <span className="text-muted-foreground">-</span>
-      );
+      const personalReview = getValue() as string
+      return personalReview
+        ? (
+            <p className="text-sm italic text-muted-foreground line-clamp-3 leading-relaxed text-pretty">
+              "
+              {personalReview}
+              "
+            </p>
+          )
+        : (
+            <span className="text-muted-foreground">-</span>
+          )
     },
     size: 300,
   },
@@ -103,21 +108,24 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
     accessorKey: 'use_cases',
     header: 'Cas d\'Usage',
     cell: ({ getValue }) => {
-      const useCases = getValue() as string[];
-      return useCases ? (
-        <div className="flex flex-wrap gap-1 max-w-xs">
-          {useCases.slice(0, 2).map((useCase: string, i: number) => (
-            <Badge key={i} variant="outline" className="text-xs hover-scale text-pretty">
-              {useCase}
-            </Badge>
-          ))}
-          {useCases.length > 2 && (
-            <Badge variant="outline" className="text-xs hover-scale">
-              +{useCases.length - 2}
-            </Badge>
-          )}
-        </div>
-      ) : null;
+      const useCases = getValue() as string[]
+      return useCases
+        ? (
+            <div className="flex flex-wrap gap-1 max-w-xs">
+              {useCases.slice(0, 2).map((useCase: string, i: number) => (
+                <Badge key={i} variant="outline" className="text-xs hover-scale text-pretty">
+                  {useCase}
+                </Badge>
+              ))}
+              {useCases.length > 2 && (
+                <Badge variant="outline" className="text-xs hover-scale">
+                  +
+                  {useCases.length - 2}
+                </Badge>
+              )}
+            </div>
+          )
+        : null
     },
     size: 200,
     meta: {
@@ -128,10 +136,10 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
     id: 'actions',
     header: 'Actions',
     cell: ({ row }) => {
-      const tool = row.original;
+      const tool = row.original
       return (
         <div className="flex gap-2">
-          <Link 
+          <Link
             href={`/l-arsenal-ia/${tool.slug}`}
             className="text-primary hover:underline text-sm font-medium focus-ring hover-lift"
           >
@@ -146,8 +154,8 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
             <ExternalLink className="size-4" />
           </a>
         </div>
-      );
+      )
     },
     size: 100,
   },
-];
+]

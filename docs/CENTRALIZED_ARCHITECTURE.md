@@ -14,15 +14,15 @@ L'architecture suit le principe **DRY (Don't Repeat Yourself)** et centralise to
 
 ```typescript
 // ✅ FAIRE - Utiliser les constantes centralisées
-import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils';
+import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils'
 
-const categoryDisplay = getCategoryLabel(guide.category);
-const difficultyDisplay = getDifficultyLabel(guide.difficulty);
+const categoryDisplay = getCategoryLabel(guide.category)
+const difficultyDisplay = getDifficultyLabel(guide.difficulty)
 ```
 
 ```typescript
 // ❌ ÉVITER - Hardcoder les labels
-const categoryDisplay = guide.category === 'fondamentaux' ? 'Fondamentaux 📚' : guide.category;
+const categoryDisplay = guide.category === 'fondamentaux' ? 'Fondamentaux 📚' : guide.category
 ```
 
 ### 2. `/src/lib/env.ts` - Configuration d'Environnement
@@ -31,14 +31,14 @@ const categoryDisplay = guide.category === 'fondamentaux' ? 'Fondamentaux 📚' 
 
 ```typescript
 // ✅ FAIRE - Utiliser la configuration centralisée
-import { env } from '@/lib/env';
+import { env } from '@/lib/env'
 
-const baseUrl = env.baseUrl; // Adapté automatiquement selon l'environnement
+const baseUrl = env.baseUrl // Adapté automatiquement selon l'environnement
 ```
 
 ```typescript
 // ❌ ÉVITER - Hardcoder les URLs
-const baseUrl = 'https://pharma-prompt-powerhouse.vercel.app';
+const baseUrl = 'https://pharma-prompt-powerhouse.vercel.app'
 ```
 
 ### 3. `/src/hooks/useContentFilter.ts` - Logique de Filtrage
@@ -47,15 +47,15 @@ const baseUrl = 'https://pharma-prompt-powerhouse.vercel.app';
 
 ```typescript
 // ✅ FAIRE - Utiliser le hook centralisé
-const { filteredItems, searchTerm, setSearchTerm, resetFilters } = useContentFilter(guides);
+const { filteredItems, searchTerm, setSearchTerm, resetFilters } = useContentFilter(guides)
 ```
 
 ```typescript
 // ❌ ÉVITER - Dupliquer la logique de filtrage
-const [searchTerm, setSearchTerm] = useState('');
-const filteredItems = guides.filter(guide => 
+const [searchTerm, setSearchTerm] = useState('')
+const filteredItems = guides.filter(guide =>
   guide.title.toLowerCase().includes(searchTerm.toLowerCase())
-);
+)
 ```
 
 ### 4. `/src/components/ui/variants.ts` - Styles Centralisés
@@ -83,13 +83,14 @@ import { contentCardVariants } from '@/components/ui/variants';
 ### Ajouter une Nouvelle Catégorie
 
 1. **Mise à jour de `/src/lib/constants.ts`** :
+
 ```typescript
-export type Category = 
-  | 'fondamentaux'
-  | 'ma-nouvelle-categorie'; // ← Ajouter ici
+export type Category
+  = | 'fondamentaux'
+    | 'ma-nouvelle-categorie' // ← Ajouter ici
 
 export const categoryLabels = {
-  fondamentaux: 'Fondamentaux 📚',
+  'fondamentaux': 'Fondamentaux 📚',
   'ma-nouvelle-categorie': 'Ma Nouvelle Catégorie 🆕', // ← Et ici
 }
 ```
@@ -103,12 +104,13 @@ export const categoryLabels = {
 ### Ajouter un Nouveau Filtre
 
 1. **Étendre le hook `useContentFilter`** :
+
 ```typescript
 // Dans useContentFilter.ts
-const [newFilter, setNewFilter] = useState('all');
+const [newFilter, setNewFilter] = useState('all')
 
 // Dans la logique de filtrage
-const matchesNewFilter = newFilter === 'all' || item.someProperty === newFilter;
+const matchesNewFilter = newFilter === 'all' || item.someProperty === newFilter
 ```
 
 2. **Le nouveau filtre sera disponible pour tous les composants** qui utilisent le hook.
@@ -116,14 +118,15 @@ const matchesNewFilter = newFilter === 'all' || item.someProperty === newFilter;
 ### Ajouter une Nouvelle Variante de Style
 
 1. **Étendre `/src/components/ui/variants.ts`** :
+
 ```typescript
 export const contentCardVariants = cva(
-  "base-classes",
+  'base-classes',
   {
     variants: {
       variant: {
-        concept: "border-l-blue-500",
-        "ma-nouvelle-variante": "border-l-pink-500", // ← Ajouter ici
+        'concept': 'border-l-blue-500',
+        'ma-nouvelle-variante': 'border-l-pink-500', // ← Ajouter ici
       }
     }
   }
@@ -165,18 +168,22 @@ npm run lint
 ## 🎯 Avantages de cette Architecture
 
 ### ✅ Maintenabilité
+
 - **Un seul endroit à modifier** pour changer un label ou une configuration
 - **Propagation automatique** des changements dans toute l'application
 
 ### ✅ Cohérence
+
 - **Styles uniformes** grâce aux variantes centralisées
 - **Comportements identiques** grâce aux hooks partagés
 
 ### ✅ Sécurité de Type
+
 - **Validation TypeScript** automatique pour toutes les constantes
 - **Autocomplétion** dans l'IDE pour tous les développeurs
 
 ### ✅ Performance
+
 - **Réutilisation du code** réduit la taille du bundle
 - **Hooks optimisés** avec `useMemo` et `useCallback`
 
