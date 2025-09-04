@@ -159,8 +159,8 @@ export default function WorkflowsPage() {
 
       {/* Bottom CTA */}
       <div className="mt-16 text-center bg-muted p-6 md:p-8 rounded-lg">
-        <h3 className="text-xl md:text-2xl font-semibold mb-4">Nouveau dans l'IA ?</h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
+        <h3 className="responsive-subheading mb-4">Nouveau dans l'IA ?</h3>
+        <p className="text-muted-foreground mb-6 max-w-none md:max-w-2xl mx-auto responsive-text">
           Je recommande de commencer par comprendre les concepts essentiels avant de vous lancer 
           dans un workflow. Cela vous évitera les erreurs courantes que j'ai faites à mes débuts.
         </p>
