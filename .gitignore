@@ -67,3 +67,7 @@ playwright/.cache/
 
 # Ignorer les screenshots de test si générés localement
 **/__screenshots__/
+
+@ Gemini CLI
+.gemini
+gha-creds-*.json
