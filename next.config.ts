@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
-import withSerwistInit from "@serwist/next";
+import type { NextConfig } from 'next'
+import withSerwistInit from '@serwist/next'
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -17,18 +17,18 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
     optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-icons",
+      'lucide-react',
+      '@radix-ui/react-icons',
     ],
   },
 
   // Image optimization
   images: {
-    formats: ["image/webp", "image/avif"],
+    formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
     // Optimisations pour Vercel
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
 
   // Compression
@@ -44,32 +44,32 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
-            key: "X-Frame-Options",
-            value: "DENY",
+            key: 'X-Frame-Options',
+            value: 'DENY',
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
           },
         ],
       },
-    ];
+    ]
   },
-};
+}
 
 const withSerwist = withSerwistInit({
-  swSrc: "src/app/sw.ts",
-  swDest: "public/sw.js",
+  swSrc: 'src/app/sw.ts',
+  swDest: 'public/sw.js',
   cacheOnNavigation: true,
   reloadOnOnline: true,
-  disable: process.env.NODE_ENV !== "production",
-});
+  disable: process.env.NODE_ENV !== 'production',
+})
 
-export default withSerwist(nextConfig);
+export default withSerwist(nextConfig)

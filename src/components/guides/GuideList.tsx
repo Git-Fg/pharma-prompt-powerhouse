@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import { SearchInput } from '@/components/ui/search-input';
+import type { EnrichedGuide } from '@/lib/content-schema'
+import { FileText } from 'lucide-react'
+import { GuideCard } from '@/components/shared/GuideCard'
+import { Button } from '@/components/ui/button'
+import { SearchInput } from '@/components/ui/search-input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-import { FileText } from 'lucide-react';
-import { GuideCard } from '@/components/shared/GuideCard';
-import { categoryLabels, difficultyLabels } from '@/lib/constants';
-import { useContentFilter } from '@/hooks/useContentFilter';
-import { EnrichedGuide } from '@/lib/content-schema';
-import { useAutoAnimateList } from '@/hooks/useAutoAnimate';
+} from '@/components/ui/select'
+import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
+import { useContentFilter } from '@/hooks/useContentFilter'
+import { categoryLabels, difficultyLabels } from '@/lib/constants'
 
 interface GuideListProps {
-  initialGuides: EnrichedGuide[];
+  initialGuides: EnrichedGuide[]
 }
 
 export function GuideList({ initialGuides }: GuideListProps) {
@@ -29,20 +29,20 @@ export function GuideList({ initialGuides }: GuideListProps) {
     setSearchTerm,
     setSelectedCategory,
     setSelectedDifficulty,
-    resetFilters
-  } = useContentFilter<EnrichedGuide>(initialGuides);
+    resetFilters,
+  } = useContentFilter<EnrichedGuide>(initialGuides)
 
   // AutoAnimate ref for smooth transitions
-  const listRef = useAutoAnimateList();
+  const listRef = useAutoAnimateList()
 
   const categories = [
     'all',
     ...Array.from(new Set(initialGuides.map(g => g.category))),
-  ];
+  ]
   const difficulties = [
     'all',
     ...Array.from(new Set(initialGuides.map(g => g.difficulty))),
-  ];
+  ]
 
   return (
     <>
@@ -96,12 +96,12 @@ export function GuideList({ initialGuides }: GuideListProps) {
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
           <p className="text-muted-foreground mb-4 max-w-md mx-auto">
-            {searchTerm 
+            {searchTerm
               ? `Aucun guide ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
               : 'Aucun guide ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}
           </p>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={resetFilters}
           >
             Réinitialiser les filtres
@@ -118,5 +118,5 @@ export function GuideList({ initialGuides }: GuideListProps) {
         </div>
       )}
     </>
-  );
+  )
 }

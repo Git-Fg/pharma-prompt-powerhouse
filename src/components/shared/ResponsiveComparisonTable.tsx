@@ -1,11 +1,18 @@
-'use client';
+'use client'
 
-import React from 'react';
+import type { ExternalTool } from '@/lib/content-schema'
 import {
-  useReactTable,
-  getCoreRowModel,
   flexRender,
-} from '@tanstack/react-table';
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { ExternalLink, Star } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { AnimatedItem, AnimatedList, ScrollAnimated } from '@/components/ui/animated'
+import { Badge } from '@/components/ui/badge'
+import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { MagneticCard } from '@/components/ui/interactions'
 import {
   Table,
   TableBody,
@@ -13,20 +20,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Star } from "lucide-react";
-import Link from "next/link";
-import { AnimatedList, AnimatedItem, ScrollAnimated } from "@/components/ui/animated";
-import { MagneticCard } from "@/components/ui/interactions";
-import { ExternalTool } from '@/lib/content-schema';
-import { comparisonTableColumns } from './ComparisonTableColumns';
-import { getStarRatingProps } from '@/lib/ui-utils';
+} from '@/components/ui/table'
+import { getStarRatingProps } from '@/lib/ui-utils'
+import { comparisonTableColumns } from './ComparisonTableColumns'
 
 interface ResponsiveComparisonTableProps {
-  tools: ExternalTool[];
-  className?: string;
+  tools: ExternalTool[]
+  className?: string
 }
 
 export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveComparisonTableProps) {
@@ -35,7 +35,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
     data: tools,
     columns: comparisonTableColumns,
     getCoreRowModel: getCoreRowModel(),
-  });
+  })
 
   const getAvailability = (tool: ExternalTool) => {
     if (tool.freeVsPaidOffer && tool.freeVsPaidOffer.includes('Gratuit')) {
@@ -51,41 +51,40 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
         <div className="table-wrapper">
           <Table className="table-responsive">
             <TableHeader className="table-header">
-              {table.getHeaderGroups().map((headerGroup) => (
+              {table.getHeaderGroups().map(headerGroup => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     // Type assertion for meta className - TanStack Table supports this pattern
-                    const metaClass = (header.column.columnDef.meta as { className?: string })?.className || '';
+                    const metaClass = (header.column.columnDef.meta as { className?: string })?.className || ''
                     return (
-                      <TableHead 
+                      <TableHead
                         key={header.id}
                         className={`table-header-cell ${metaClass}`}
                         style={{ width: header.getSize() }}
                       >
                         {header.isPlaceholder
                           ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())
-                        }
+                          : flexRender(header.column.columnDef.header, header.getContext())}
                       </TableHead>
-                    );
+                    )
                   })}
                 </TableRow>
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows.map((row) => (
+              {table.getRowModel().rows.map(row => (
                 <TableRow key={row.id} className="group hover:bg-muted/50 hover-lift transition-all duration-200">
                   {row.getVisibleCells().map((cell) => {
                     // Type assertion for meta className
-                    const metaClass = (cell.column.columnDef.meta as { className?: string })?.className || '';
+                    const metaClass = (cell.column.columnDef.meta as { className?: string })?.className || ''
                     return (
-                      <TableCell 
+                      <TableCell
                         key={cell.id}
                         className={`table-cell ${metaClass}`}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
-                    );
+                    )
                   })}
                 </TableRow>
               ))}
@@ -99,7 +98,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
         <AnimatedList className="content-spacing flex flex-col" staggerDelay={0.1}>
           {tools.map((tool, index) => {
             const availability = getAvailability(tool)
-            
+
             return (
               <AnimatedItem key={tool.slug} delay={index * 0.1}>
                 <MagneticCard className="hover:border-primary transition-colors duration-300">
@@ -127,13 +126,15 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                   </CardHeader>
                   <CardContent className="card-content">
                     <p className="responsive-text text-muted-foreground leading-relaxed text-pretty">{tool.description}</p>
-                    
+
                     {tool.personalReview && (
                       <blockquote className="text-sm italic border-l-2 border-muted pl-3 leading-relaxed text-pretty">
-                        "{tool.personalReview}"
+                        "
+                        {tool.personalReview}
+                        "
                       </blockquote>
                     )}
-                    
+
                     <div className="flex flex-wrap gap-2">
                       <Badge className={availability.color}>
                         {availability.label}
@@ -144,19 +145,20 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                         </Badge>
                       ))}
                     </div>
-                    
+
                     <div className="card-footer">
                       <div>
                         {tool.confidenceScore && (
                           <div className="flex items-center gap-1">
-                            {getStarRatingProps(tool.confidenceScore).stars.map((star) => (
+                            {getStarRatingProps(tool.confidenceScore).stars.map(star => (
                               <Star
                                 key={star.index}
                                 className={`w-3 h-3 ${star.className}`}
                               />
                             ))}
                             <span className="ml-1 text-xs text-muted-foreground">
-                              {tool.confidenceScore}/5
+                              {tool.confidenceScore}
+                              /5
                             </span>
                           </div>
                         )}
@@ -164,7 +166,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                           <span className="text-muted-foreground text-xs">N/A</span>
                         )}
                       </div>
-                      <Link 
+                      <Link
                         href={`/l-arsenal-ia/${tool.slug}`}
                         className="text-primary hover:underline text-sm font-medium focus-ring hover-lift inline-flex items-center gap-1"
                       >

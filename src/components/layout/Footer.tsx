@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { Brain, ArrowRight } from "lucide-react";
-import { getNavigationLinksBySection } from "@/lib/navigation";
-import { content } from "@/lib/content-loader"; // Pour le contenu dynamique
+import { ArrowRight, Brain } from 'lucide-react'
+import Link from 'next/link'
+import { content } from '@/lib/content-loader' // Pour le contenu dynamique
+import { getNavigationLinksBySection } from '@/lib/navigation'
 
 export function Footer() {
   // Get navigation links from centralized source
-  const navigationLinks = getNavigationLinksBySection('main');
-  const legalLinks = getNavigationLinksBySection('legal');
-  
+  const navigationLinks = getNavigationLinksBySection('main')
+  const legalLinks = getNavigationLinksBySection('legal')
+
   // Get recent workflows (prioritize favorites, then first 3)
   const recentWorkflows = content.workflows
     .filter(workflow => workflow.isFavorite)
@@ -17,9 +17,9 @@ export function Footer() {
     .concat(
       content.workflows
         .filter(workflow => !workflow.isFavorite)
-        .slice(0, 3 - content.workflows.filter(workflow => workflow.isFavorite).length)
+        .slice(0, 3 - content.workflows.filter(workflow => workflow.isFavorite).length),
     )
-    .slice(0, 3);
+    .slice(0, 3)
 
   return (
     <footer className="bg-muted/50 border-t">
@@ -45,7 +45,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               {navigationLinks.map((link) => {
-                const Icon = link.icon;
+                const Icon = link.icon
                 return (
                   <li key={link.name}>
                     <Link
@@ -58,7 +58,7 @@ export function Footer() {
                       </span>
                     </Link>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -70,7 +70,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               {legalLinks.map((link) => {
-                const Icon = link.icon;
+                const Icon = link.icon
                 return (
                   <li key={link.name}>
                     <Link
@@ -83,7 +83,7 @@ export function Footer() {
                       </span>
                     </Link>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -94,7 +94,7 @@ export function Footer() {
               Derniers Workflows
             </h3>
             <div className="space-y-4">
-              {recentWorkflows.map((workflow) => (
+              {recentWorkflows.map(workflow => (
                 <Link
                   key={workflow.slug}
                   href={`/workflows/${workflow.slug}`}
@@ -106,7 +106,7 @@ export function Footer() {
                   </div>
                 </Link>
               ))}
-              
+
               <Link
                 href="/workflows"
                 className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 mt-4"
@@ -122,7 +122,11 @@ export function Footer() {
         <div className="border-t mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Pharma Prompt Powerhouse. Tous droits réservés.
+              ©
+              {' '}
+              {new Date().getFullYear()}
+              {' '}
+              Pharma Prompt Powerhouse. Tous droits réservés.
             </p>
             <p className="text-sm text-muted-foreground mt-4 md:mt-0">
               Mon carnet de notes, partagé avec ❤️ pour la communauté.
@@ -131,5 +135,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

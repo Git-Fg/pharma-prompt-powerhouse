@@ -1,4 +1,4 @@
-import type { Workflow } from '@/lib/content-schema';
+import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'creer-fiches-de-revision',
@@ -11,7 +11,7 @@ export const workflow = {
   difficulty: 'débutant',
   estimatedTime: '15 min',
   conceptSlugs: ['context-engineering', 'structuration-par-balises'],
-  
+
   problem: [
     {
       type: 'markdown',
@@ -23,8 +23,8 @@ Le problème avec la révision traditionnelle :
 - **Illusion de connaissance :** Relire donne une fausse impression de maîtrise
 - **Pas d'auto-évaluation :** Impossible de savoir si on a vraiment compris
 - **Révisions monotones :** Difficile de rester concentré sur du contenu statique
-- **Manque de variété :** Toujours les mêmes exemples, aucune généralisation`
-    }
+- **Manque de variété :** Toujours les mêmes exemples, aucune généralisation`,
+    },
   ],
 
   initialApproach: [
@@ -36,14 +36,14 @@ Au début, j'ai essayé de demander directement à ChatGPT :
 
 > *"Fais-moi un QCM sur les bêta-bloquants."*
 
-**Résultat :** Des questions trop génériques, sans rapport avec mon cours spécifique, souvent avec des erreurs factuelles.`
+**Résultat :** Des questions trop génériques, sans rapport avec mon cours spécifique, souvent avec des erreurs factuelles.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L'IA n'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`
-    }
+      content: `L'IA n'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`,
+    },
   ],
 
   optimizedStrategy: [
@@ -52,12 +52,12 @@ Au début, j'ai essayé de demander directement à ChatGPT :
       content: `## La Stratégie Optimisée : Le Prompt "Professeur"
 
 J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.
-Cette approche utilise le **context engineering** pour maximiser la précision.`
+Cette approche utilise le **context engineering** pour maximiser la précision.`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'context-engineering',
-      reason: 'Comprendre comment structurer le contexte améliore drastiquement la qualité des fiches de révision générées.'
+      reason: 'Comprendre comment structurer le contexte améliore drastiquement la qualité des fiches de révision générées.',
     },
     {
       type: 'card',
@@ -65,7 +65,7 @@ Cette approche utilise le **context engineering** pour maximiser la précision.`
       content: `**Avant de donner votre cours :**
 - Précisez votre niveau (L2, L3, Master...)
 - Indiquez le type d'évaluation (QCM, cas cliniques...)
-- Définissez le niveau de difficulté souhaité`
+- Définissez le niveau de difficulté souhaité`,
     },
     {
       type: 'card',
@@ -76,12 +76,12 @@ Cette approche utilise le **context engineering** pour maximiser la précision.`
 - Les classifications et exemples
 - Les contre-indications et effets indésirables
 
-Plus vous donnez d'informations, plus les questions seront précises !`
+Plus vous donnez d'informations, plus les questions seront précises !`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: 'L\'utilisation de balises XML permet d\'organiser le contenu de cours et d\'améliorer la génération de QCM ciblés.'
+      reason: 'L\'utilisation de balises XML permet d\'organiser le contenu de cours et d\'améliorer la génération de QCM ciblés.',
     },
     {
       type: 'card',
@@ -90,8 +90,8 @@ Plus vous donnez d'informations, plus les questions seront précises !`
 - Nombre exact de questions
 - Répartition par difficulté
 - Justifications détaillées obligatoires
-- Format de présentation (tableau, liste...)`
-    }
+- Format de présentation (tableau, liste...)`,
+    },
   ],
 
   toolComparison: [
@@ -99,7 +99,7 @@ Plus vous donnez d'informations, plus les questions seront précises !`
       type: 'markdown',
       content: `## Comparaison des Outils : Mon Retour d'Expérience
 
-J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`
+J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
     },
     {
       type: 'tabs',
@@ -120,9 +120,9 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Parfois trop "scolaire" dans le ton
 - Peut manquer de créativité pour les cas complexes
 
-**Mon verdict :** Excellent point de départ. J'utilise ChatGPT pour mes premières fiches.`
-            }
-          ]
+**Mon verdict :** Excellent point de départ. J'utilise ChatGPT pour mes premières fiches.`,
+            },
+          ],
         },
         {
           value: 'claude',
@@ -139,9 +139,9 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Interface moins intuitive que ChatGPT
 - Quota plus restrictif en version gratuite
 
-**Mon verdict :** Mon choix pour des sujets complexes ou des cas cliniques.`
-            }
-          ]
+**Mon verdict :** Mon choix pour des sujets complexes ou des cas cliniques.`,
+            },
+          ],
         },
         {
           value: 'gemini',
@@ -158,12 +158,12 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
 - Interface plus technique (moins "grand public")
 - Courbe d'apprentissage plus raide
 
-**Mon verdict :** Parfait une fois qu'on maîtrise l'interface. Mon outil de prédilection pour les gros volumes.`
-            }
-          ]
-        }
-      ]
-    }
+**Mon verdict :** Parfait une fois qu'on maîtrise l'interface. Mon outil de prédilection pour les gros volumes.`,
+            },
+          ],
+        },
+      ],
+    },
   ],
 
   finalPrompt: [
@@ -171,7 +171,7 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
       type: 'markdown',
       content: `## Le Prompt Final (à Adapter à Votre Cas)
 
-Voici le template que j'utilise systématiquement. Remplacez les variables entre {{}} par vos informations :`
+Voici le template que j'utilise systématiquement. Remplacez les variables entre {{}} par vos informations :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -190,7 +190,7 @@ FORMAT ATTENDU :
 - Indication du niveau de difficulté (facile/moyen/difficile)
 
 Assure-toi que les questions couvrent l'ensemble du cours et testent la compréhension, pas seulement la mémorisation.`,
-        
+
         aiStudio: {
           systemPrompt: `Tu es un professeur expérimenté spécialisé en pharmacie, expert dans la création d'outils de révision pédagogiques. Tu conçois des questions qui testent la compréhension approfondie, pas seulement la mémorisation.`,
           userPrompt: `Crée {{NOMBRE}} {{TYPE_QUESTIONS}} de niveau {{DIFFICULTE}} pour des étudiants de {{NIVEAU}} à partir du cours suivant :
@@ -203,8 +203,8 @@ Structure chaque question avec :
 3. Réponse correcte justifiée
 4. Explication des erreurs courantes
 
-Varie les types de raisonnement : mémorisation, compréhension, application, analyse.`
-        }
+Varie les types de raisonnement : mémorisation, compréhension, application, analyse.`,
+        },
       },
       variables: [
         'MATIERE : Pharmacologie, Chimie thérapeutique, Pharmacocinétique...',
@@ -212,16 +212,16 @@ Varie les types de raisonnement : mémorisation, compréhension, application, an
         'NOMBRE : 5, 10, 15... selon vos besoins',
         'TYPE_QUESTIONS : QCM, QROC, Cas cliniques courts...',
         'DIFFICULTE : Facile, Intermédiaire, Difficile',
-        'VOTRE_COURS_INTEGRAL : Copiez-collez l\'intégralité de votre cours'
-      ]
-    }
+        'VOTRE_COURS_INTEGRAL : Copiez-collez l\'intégralité de votre cours',
+      ],
+    },
   ],
 
   keyTakeaways: [
-    "La clé du succès : fournir le cours COMPLET à l'IA pour obtenir des questions précises et pertinentes.",
-    "Définir clairement le rôle de 'professeur' permet d'obtenir une approche pédagogique cohérente.",
-    "Tester plusieurs outils aide à trouver celui qui correspond le mieux à votre style d'apprentissage.",
-    "Les questions générées ne remplacent jamais la vérification avec vos cours et sources officielles.",
-    "La variété des formats (QCM, QROC, cas) optimise l'ancrage mémoriel et la compréhension."
-  ]
-} satisfies Workflow;
+    'La clé du succès : fournir le cours COMPLET à l\'IA pour obtenir des questions précises et pertinentes.',
+    'Définir clairement le rôle de \'professeur\' permet d\'obtenir une approche pédagogique cohérente.',
+    'Tester plusieurs outils aide à trouver celui qui correspond le mieux à votre style d\'apprentissage.',
+    'Les questions générées ne remplacent jamais la vérification avec vos cours et sources officielles.',
+    'La variété des formats (QCM, QROC, cas) optimise l\'ancrage mémoriel et la compréhension.',
+  ],
+} satisfies Workflow

@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ReactNode, HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 import { easings } from './animated'
 
@@ -24,7 +23,7 @@ export function Skeleton({
   animate = true,
 }: SkeletonProps) {
   const baseClasses = 'bg-muted'
-  
+
   const variantClasses = {
     rectangular: 'rounded-md',
     circular: 'rounded-full',
@@ -42,7 +41,7 @@ export function Skeleton({
               baseClasses,
               variantClasses[variant],
               animate && 'animate-pulse-subtle',
-              className
+              className,
             )}
             style={{
               width: index === lines - 1 ? '75%' : width,
@@ -50,11 +49,13 @@ export function Skeleton({
             }}
             initial={animate ? { opacity: 0 } : false}
             animate={animate ? { opacity: 1 } : false}
-            transition={animate ? { 
-              delay: index * 0.1,
-              duration: 0.3,
-              ease: easings.smooth 
-            } : undefined}
+            transition={animate
+              ? {
+                  delay: index * 0.1,
+                  duration: 0.3,
+                  ease: easings.smooth,
+                }
+              : undefined}
           />
         ))}
       </div>
@@ -67,15 +68,17 @@ export function Skeleton({
         baseClasses,
         variantClasses[variant],
         animate && 'animate-pulse-subtle',
-        className
+        className,
       )}
       style={{ width, height }}
       initial={animate ? { opacity: 0 } : false}
       animate={animate ? { opacity: 1 } : false}
-      transition={animate ? { 
-        duration: 0.3,
-        ease: easings.smooth 
-      } : undefined}
+      transition={animate
+        ? {
+            duration: 0.3,
+            ease: easings.smooth,
+          }
+        : undefined}
     />
   )
 }
@@ -115,21 +118,21 @@ export function CardSkeleton({
           variant="rounded"
         />
       )}
-      
+
       <Skeleton
         variant="text"
         lines={titleLines}
         height="1.25rem"
         className="mb-3"
       />
-      
+
       <Skeleton
         variant="text"
         lines={descriptionLines}
         height="0.875rem"
         className="mb-4"
       />
-      
+
       {showActions && (
         <div className="flex gap-2">
           <Skeleton width="80px" height="36px" variant="rounded" />
@@ -173,11 +176,11 @@ export function ListSkeleton({
               variant="rounded"
             />
           )}
-          
+
           <div className="flex-1 space-y-2">
             <Skeleton variant="text" height="1.125rem" width="75%" />
             <Skeleton variant="text" lines={2} height="0.875rem" />
-            
+
             <div className="flex gap-2 mt-3">
               <Skeleton width="60px" height="20px" variant="rounded" />
               <Skeleton width="80px" height="20px" variant="rounded" />
@@ -216,7 +219,7 @@ export function TableSkeleton({
           ))}
         </div>
       </div>
-      
+
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <motion.div
@@ -253,10 +256,10 @@ interface SpinnerProps {
   label?: string
 }
 
-export function Spinner({ 
-  size = 'md', 
+export function Spinner({
+  size = 'md',
   className,
-  label = 'Chargement...'
+  label = 'Chargement...',
 }: SpinnerProps) {
   const sizes = {
     sm: 'w-4 h-4',
@@ -269,7 +272,7 @@ export function Spinner({
       <motion.div
         className={cn(
           'border-2 border-primary/20 border-t-primary rounded-full',
-          sizes[size]
+          sizes[size],
         )}
         animate={{ rotate: 360 }}
         transition={{
@@ -315,7 +318,7 @@ export function LoadingState({
     return (
       <div className={cn('flex items-center justify-center py-8', className)}>
         <div className="flex space-x-2">
-          {[0, 1, 2].map((index) => (
+          {[0, 1, 2].map(index => (
             <motion.div
               key={index}
               className="w-2 h-2 bg-primary rounded-full"

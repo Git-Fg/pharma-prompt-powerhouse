@@ -1,13 +1,13 @@
-import { ConceptCard } from '@/components/shared/ConceptCard';
-import { EnrichedGuide } from '@/lib/content-schema';
+import type { EnrichedGuide } from '@/lib/content-schema'
+import { ConceptCard } from '@/components/shared/ConceptCard'
 
 interface RelatedConceptsProps {
-  guide: EnrichedGuide;
+  guide: EnrichedGuide
 }
 
 export function RelatedConcepts({ guide }: RelatedConceptsProps) {
   if (!guide.concepts || guide.concepts.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -19,5 +19,5 @@ export function RelatedConcepts({ guide }: RelatedConceptsProps) {
         ))}
       </div>
     </section>
-  );
+  )
 }
