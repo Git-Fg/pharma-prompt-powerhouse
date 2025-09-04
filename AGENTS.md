@@ -170,6 +170,24 @@
 - **Enrichissement des Données :** `src/lib/content-loader.ts` centralise le chargement et la liaison des données.
 </content_structure_rules>
 
+<eslint_rules>
+**ESLint (@antfu/eslint-config)**
+- **Configuration Moderne :** **Standardiser exclusivement sur @antfu/eslint-config** pour une configuration simplifiée et optimale.
+- **Gestion Automatique des Plugins :** @antfu/eslint-config gère automatiquement tous les plugins ESLint nécessaires (React, TypeScript, Next.js).
+- **Philosophie :** Configuration déclarative avec des règles opiniâtres mais sensées, évitant la complexité manuelle.
+- **Structure :** `eslint.config.js` utilise l'API de configuration ESLint v9+ avec des overrides spécifiques par type de fichier.
+- **Intégrations :**
+  - **Next.js** : Règles recommandées et core-web-vitals intégrées
+  - **React Compiler** : Support natif pour React 19 Compiler
+  - **TypeScript** : Validation stricte avec règles modernes
+- **Personnalisations Projet :**
+  - Règles spécifiques pour les composants shadcn/ui (`src/components/ui/**`)
+  - Configuration allégée pour les tests (`**/*.test.ts?(x)`)
+  - Exclusions intelligentes pour les fichiers de documentation et exemples
+- **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025)
+- **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes
+</eslint_rules>
+
 <testing_rules>
 **Tests (Vitest)**
 - **Framework de Test :** **Standardiser exclusivement sur Vitest**. Supprimer complètement Jest.
@@ -195,13 +213,16 @@ DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la valida
 DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
 DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
 DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
+DO utiliser @antfu/eslint-config pour une configuration ESLint simplifiée et moderne.
 DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
+DO NOT utiliser Jest - standardiser exclusivement sur Vitest.
+DO NOT configurer ESLint manuellement - utiliser @antfu/eslint-config avec des overrides minimaux.
 DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens vers des communautés.
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
 DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
 DO NOT créer de types manuels redondants pour le contenu.
-En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest, @antfu/eslint-config et shadcn/ui.
 </instructions>
 
 ---
