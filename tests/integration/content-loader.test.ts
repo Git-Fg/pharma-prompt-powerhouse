@@ -33,7 +33,7 @@ describe('Content Loader Integration', () => {
 
     it('should have content items with required properties', () => {
       if (loadedContent.guides.length > 0) {
-        const guide = loadedContent.guides[0]
+        const guide = loadedContent.guides[0]!
         expect(guide.slug).toBeDefined()
         expect(guide.title).toBeDefined()
         expect(guide.description).toBeDefined()
@@ -41,7 +41,7 @@ describe('Content Loader Integration', () => {
       }
 
       if (loadedContent.concepts.length > 0) {
-        const concept = loadedContent.concepts[0]
+        const concept = loadedContent.concepts[0]!
         expect(concept.slug).toBeDefined()
         expect(concept.title).toBeDefined()
         expect(concept.description).toBeDefined()
@@ -50,7 +50,7 @@ describe('Content Loader Integration', () => {
       }
 
       if (loadedContent.workflows.length > 0) {
-        const workflow = loadedContent.workflows[0]
+        const workflow = loadedContent.workflows[0]!
         expect(workflow.slug).toBeDefined()
         expect(workflow.title).toBeDefined()
         expect(workflow.description).toBeDefined()
@@ -72,8 +72,8 @@ describe('Content Loader Integration', () => {
         expect(Array.isArray(enrichedGuide.concepts)).toBe(true)
         
         if (enrichedGuide.concepts.length > 0) {
-          expect(enrichedGuide.concepts[0].slug).toBeDefined()
-          expect(enrichedGuide.concepts[0].title).toBeDefined()
+          expect(enrichedGuide.concepts[0]!.slug).toBeDefined()
+          expect(enrichedGuide.concepts[0]!.title).toBeDefined()
         }
       }
     })
@@ -96,7 +96,7 @@ describe('Content Loader Integration', () => {
       )
 
       if (workflowsWithConcepts.length > 0) {
-        const enrichedWorkflow = workflowsWithConcepts[0]
+        const enrichedWorkflow = workflowsWithConcepts[0]!
         expect(enrichedWorkflow.relatedWorkflows).toBeDefined()
         expect(Array.isArray(enrichedWorkflow.relatedWorkflows)).toBe(true)
       }
@@ -189,13 +189,13 @@ describe('Content Loader Integration', () => {
       // Perform multiple lookups
       for (let i = 0; i < 100; i++) {
         if (loadedContent.guides.length > 0) {
-          getGuideBySlug(loadedContent.guides[0].slug)
+          getGuideBySlug(loadedContent.guides[0]!.slug)
         }
         if (loadedContent.concepts.length > 0) {
-          getConceptBySlug(loadedContent.concepts[0].slug)
+          getConceptBySlug(loadedContent.concepts[0]!.slug)
         }
         if (loadedContent.workflows.length > 0) {
-          getWorkflowBySlug(loadedContent.workflows[0].slug)
+          getWorkflowBySlug(loadedContent.workflows[0]!.slug)
         }
       }
       
