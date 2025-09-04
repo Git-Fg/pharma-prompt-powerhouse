@@ -8,8 +8,12 @@ import Link from 'next/link';
 import { Container, Section } from '@/components/layout/Container';
 
 export default function HomePage() {
-  // Get latest workflows (first 3 for now since we just created them)
-  const latestWorkflows = content.workflows.slice(0, 3);
+  // Get favorite workflows first, then fill with recent ones if needed 
+  const favoriteWorkflows = content.workflows.filter(w => w.isFavorite);
+  const recentWorkflows = content.workflows.slice(0, 3);
+  const featuredWorkflows = favoriteWorkflows.length >= 3 
+    ? favoriteWorkflows.slice(0, 3) 
+    : [...favoriteWorkflows, ...recentWorkflows].slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -137,11 +141,13 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* Latest Workflows */}
+      {/* Featured Workflows */}
       <Section>
         <Container maxWidth="6xl">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold">Derniers Workflows Publiés</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">
+              {favoriteWorkflows.length >= 3 ? 'Workflows Recommandés' : 'Derniers Workflows Publiés'}
+            </h2>
             <Link href="/workflows">
               <Button variant="ghost">
                 Voir tous
@@ -151,11 +157,18 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {latestWorkflows.map((workflow) => (
+            {featuredWorkflows.map((workflow) => (
               <Card key={workflow.slug} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <Badge variant="secondary">{workflow.difficulty}</Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{workflow.difficulty}</Badge>
+                      {workflow.isFavorite && (
+                        <Badge variant="default" className="bg-yellow-500 text-yellow-50 hover:bg-yellow-600">
+                          ⭐ Recommandé
+                        </Badge>
+                      )}
+                    </div>
                     <span className="text-sm text-muted-foreground">{workflow.estimatedTime}</span>
                   </div>
                   <CardTitle className="text-lg">{workflow.title}</CardTitle>

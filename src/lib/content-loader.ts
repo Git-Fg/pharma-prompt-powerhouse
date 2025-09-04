@@ -2,24 +2,32 @@ import { allConcepts } from '@/content/concepts';
 import { allGuides } from '@/content/guides';
 import { allExternalTools } from '@/content/external-tools';
 import { allWorkflows } from '@/content/workflows';
-import type { Concept, Guide, Workflow, ExternalTool, EnrichedGuide, EnrichedConcept, EnrichedWorkflow } from './content-schema';
+import type { 
+  BaseConcept, 
+  BaseGuide, 
+  BaseWorkflow, 
+  BaseExternalTool, 
+  EnrichedGuide, 
+  EnrichedConcept, 
+  EnrichedWorkflow 
+} from './content-schema';
 
-type ContentItem = Guide | Workflow;
+type BaseContentItem = BaseGuide | BaseWorkflow;
 
 export function loadContent() {
-  const concepts: Concept[] = allConcepts;
-  const guides: Guide[] = allGuides;
-  const workflows: Workflow[] = allWorkflows;
-  const externalTools: ExternalTool[] = allExternalTools;
+  const concepts: BaseConcept[] = allConcepts;
+  const guides: BaseGuide[] = allGuides;
+  const workflows: BaseWorkflow[] = allWorkflows;
+  const externalTools: BaseExternalTool[] = allExternalTools;
 
-  const conceptMap = new Map<string, Concept>(concepts.map(c => [c.slug, c]));
-  const guideMap = new Map<string, Guide>(guides.map(g => [g.slug, g]));
-  const workflowMap = new Map<string, Workflow>(workflows.map(w => [w.slug, w]));
-  const allContent: ContentItem[] = [...guides, ...workflows];
+  const conceptMap = new Map<string, BaseConcept>(concepts.map(c => [c.slug, c]));
+  const guideMap = new Map<string, BaseGuide>(guides.map(g => [g.slug, g]));
+  const workflowMap = new Map<string, BaseWorkflow>(workflows.map(w => [w.slug, w]));
+  const allContent: BaseContentItem[] = [...guides, ...workflows];
 
   // Enrich workflows
   const enrichedWorkflows: EnrichedWorkflow[] = workflows.map(workflow => {
-    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is Concept => c !== undefined) || [];
+    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is BaseConcept => c !== undefined) || [];
     const relatedWorkflows: EnrichedWorkflow['relatedWorkflows'] = [];
     
     // Find related workflows based on shared concepts
@@ -46,7 +54,7 @@ export function loadContent() {
 
   // Enrich guides
   const enrichedGuides: EnrichedGuide[] = guides.map(guide => {
-    const conceptsForGuide = guide.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is Concept => c !== undefined) || [];
+    const conceptsForGuide = guide.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is BaseConcept => c !== undefined) || [];
     const relatedGuides: EnrichedGuide['relatedGuides'] = [];
     
     if (guide.conceptSlugs) {
