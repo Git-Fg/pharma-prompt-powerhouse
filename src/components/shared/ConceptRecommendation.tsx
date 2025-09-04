@@ -76,7 +76,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
             </div>
             <div className="pt-4 border-t bg-background/95 backdrop-blur">
               <Button asChild size="default" className="w-full">
-                <Link href={`/concepts/${concept.slug}`} className="flex items-center gap-2">
+                <Link href={`/concepts/${concept.slug}`} target="_blank" className="flex items-center gap-2">
                   <Lightbulb className="size-4" />
                   Explorer le concept
                 </Link>
@@ -97,6 +97,14 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <RecommendationContent />
+        <div className="mt-4 pt-4 border-t">
+          <Button asChild size="sm" className="w-full">
+            <Link href={`/concepts/${concept.slug}`} target="_blank" className="flex items-center gap-2">
+              <Lightbulb className="size-4" />
+              Explorer le concept
+            </Link>
+          </Button>
+        </div>
       </HoverCardContent>
     </HoverCard>
   );

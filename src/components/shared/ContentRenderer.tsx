@@ -62,22 +62,26 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
       );
     case "tabs":
       return (
-        <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value} className="my-6">
-          <TabsList>
-            {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
-              <TabsTrigger key={tab.value} value={tab.value}>
-                {tab.title}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
-            <TabsContent key={tab.value} value={tab.value}>
-              {tab.content.map((subBlock: ContentBlock, idx: number) => (
-                <BlockSwitch key={idx} block={subBlock} />
+        <Card className="my-6">
+          <CardContent className="p-4">
+            <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value}>
+              <TabsList className={`grid w-full grid-cols-${block.tabs.length}`}>
+                {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
+                  <TabsTrigger key={tab.value} value={tab.value}>
+                    {tab.title}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
+                <TabsContent key={tab.value} value={tab.value} className="mt-4">
+                  {tab.content.map((subBlock: ContentBlock, idx: number) => (
+                    <BlockSwitch key={idx} block={subBlock} />
+                  ))}
+                </TabsContent>
               ))}
-            </TabsContent>
-          ))}
-        </Tabs>
+            </Tabs>
+          </CardContent>
+        </Card>
       );
     // --- NOUVEAUX CAS DE RENDU ---
     case 'keyTakeaways':
