@@ -13,12 +13,20 @@ export type Category =
 export type Difficulty = 'débutant' | 'intermédiaire' | 'avancé';
 
 export const categoryLabels = {
+  // Workflow/Guide categories
   fondamentaux: 'Fondamentaux 📚',
   methodologie: 'Méthodologie 🔬',
   ressources: 'Ressources 📖',
   'techniques-avancees': 'Techniques Avancées 🚀',
   'cas-pratiques': 'Cas Pratiques 💊',
-} as const satisfies Record<Category, string>;
+  // Additional categories
+  prompting: "Prompting 🎯",
+  methodology: "Méthodologie 🔬",
+  tools: "Outils 🛠️",
+  security: "Sécurité 🔒",
+  optimization: "Optimisation ⚡",
+  "bonnes-pratiques": "Bonnes Pratiques 🛡️",
+} as const satisfies Record<string, string>;
 
 export const difficultyLabels = {
   débutant: 'Débutant',
