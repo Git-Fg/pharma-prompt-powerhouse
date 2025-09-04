@@ -9,6 +9,8 @@ import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { Toaster } from '@/components/ui/sonner';
 import { ConsentProvider } from '@/hooks/useConsent';
 import { ConsentBanner } from '@/components/consent/ConsentBanner';
+import { PWALifecycle } from '@/components/pwa/PWALifecycle';
+import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import { env } from '@/lib/env';
 
 const inter = Inter({
@@ -35,6 +37,7 @@ export const metadata: Metadata = {
     'ingénierie de prompts',
   ],
   authors: [{ name: 'Pharma Prompt Team' }],
+  manifest: "/manifest.json",
   openGraph: {
     title: 'Pharma Prompt Powerhouse',
     description:
@@ -46,6 +49,23 @@ export const metadata: Metadata = {
     title: 'Pharma Prompt Powerhouse',
     description:
       "Plateforme d'apprentissage dédiée à l'ingénierie de prompts appliquée aux sciences pharmaceutiques",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Pharma PWA",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Pharma PWA",
+    "application-name": "Pharma PWA",
+    "msapplication-TileColor": "#2563eb",
+    "msapplication-tap-highlight": "no",
   },
 };
 
@@ -74,6 +94,8 @@ export default function RootLayout({
             </div>
             <ConsentBanner />
             <Toaster />
+            <PWALifecycle />
+            <InstallPrompt />
           </ThemeProvider>
         </ConsentProvider>
       </body>
