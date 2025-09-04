@@ -41,9 +41,9 @@ export default function ParOuCommencerPage() {
                   <div className="size-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     1
                   </div>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Brain className="size-5" />
-                    <span>Les Concepts Clés</span>
+                  <CardTitle className="flex items-center space-x-2 min-w-0">
+                    <Brain className="size-5 flex-shrink-0" />
+                    <span className="truncate">Les Concepts Clés</span>
                   </CardTitle>
                 </div>
                 <CardDescription>
@@ -93,9 +93,9 @@ export default function ParOuCommencerPage() {
                   <div className="size-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     2
                   </div>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Target className="size-5" />
-                    <span>Votre Premier Workflow</span>
+                  <CardTitle className="flex items-center space-x-2 min-w-0">
+                    <Target className="size-5 flex-shrink-0" />
+                    <span className="truncate">Votre Premier Workflow</span>
                   </CardTitle>
                 </div>
                 <CardDescription>
@@ -125,9 +125,9 @@ export default function ParOuCommencerPage() {
                   <div className="size-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     3
                   </div>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Shield className="size-5" />
-                    <span>La Règle d'Or de la Sécurité</span>
+                  <CardTitle className="flex items-center space-x-2 min-w-0">
+                    <Shield className="size-5 flex-shrink-0" />
+                    <span className="truncate">La Règle d'Or de la Sécurité</span>
                   </CardTitle>
                 </div>
                 <CardDescription>
@@ -185,9 +185,9 @@ export default function ParOuCommencerPage() {
                   <div className="size-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     4
                   </div>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Zap className="size-5" />
-                    <span>Et après ?</span>
+                  <CardTitle className="flex items-center space-x-2 min-w-0">
+                    <Zap className="size-5 flex-shrink-0" />
+                    <span className="truncate">Et après ?</span>
                   </CardTitle>
                 </div>
                 <CardDescription>

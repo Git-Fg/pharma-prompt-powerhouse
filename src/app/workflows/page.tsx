@@ -20,7 +20,7 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
     <Card className="flex flex-col h-full hover:shadow-lg transition-all duration-200 group">
       <CardHeader className="flex-grow">
         <div className="flex items-center justify-between mb-3">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <div className="size-12 rounded-lg bg-primary/10 flex items-center justify-center">
             <Icon className="size-5 text-primary" />
           </div>
           <div className="flex gap-2">
@@ -146,7 +146,7 @@ export default function WorkflowsPage() {
 
       {filteredWorkflows.length === 0 && (
         <div className="text-center py-12">
-          <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+          <BookOpen className="size-16 mx-auto mb-4 text-muted-foreground" />
           <h3 className="responsive-section-title mb-2">Aucun workflow trouvé</h3>
           <p className="text-muted-foreground mb-4">
             Essayez de modifier votre recherche ou vos filtres.
