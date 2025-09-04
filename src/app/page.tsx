@@ -21,17 +21,22 @@ export default function HomePage() {
       <Section size="lg">
         <Container maxWidth="4xl">
           <div className="text-center space-y-6">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-              Bienvenue sur Pharma Prompt Powerhouse
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight text-pretty">
+              Bienvenue sur<br />
+              Pharma Prompt Powerhouse
             </h1>
             <div className="prose prose-lg mx-auto text-muted-foreground space-y-4">
-              <p className="text-base md:text-lg leading-relaxed">
-                Bonjour ! Je suis un étudiant en pharmacie, comme vous peut-être. En tant qu'étudiant, 
-                j'ai passé du temps à explorer l'IA pour mes études et je partage ici mes méthodes, 
-                mes découvertes et mes doutes.
+              <p className="text-base md:text-lg leading-relaxed text-pretty">
+                Bonjour ! Je suis un étudiant en pharmacie,<br />
+                comme vous peut-être.
               </p>
-              <p className="font-medium text-foreground text-base md:text-lg">
-                Ce site est le carnet de bord de mon exploration, structuré pour vous faire gagner du temps.
+              <p className="text-base md:text-lg leading-relaxed text-pretty">
+                J'ai passé du temps à explorer l'IA pour mes études<br />
+                et je partage ici mes méthodes, mes découvertes et mes doutes.
+              </p>
+              <p className="font-medium text-foreground text-base md:text-lg text-pretty">
+                Ce site est le carnet de bord de mon exploration,<br />
+                structuré pour vous faire gagner du temps.
               </p>
             </div>
           </div>
@@ -45,16 +50,16 @@ export default function HomePage() {
             <Alert>
               <Zap className="size-4" />
               <AlertDescription>
-                <strong>Performance :</strong> Les résultats présentés sont des exemples. 
-                Le paysage de l'IA évolue constamment. Expérimentez pour trouver votre solution optimale.
+                <strong>Performance :</strong> Le paysage de l'IA évolue constamment. 
+                Expérimentez pour trouver votre solution optimale.
               </AlertDescription>
             </Alert>
             
             <Alert>
               <AlertTriangle className="size-4" />
               <AlertDescription>
-                <strong>Fiabilité :</strong> Une IA peut commettre des erreurs ou "halluciner". 
-                Vérifiez toujours les informations avec des sources fiables.
+                <strong>Fiabilité :</strong> Une IA peut "halluciner". 
+                Vérifiez toujours avec des sources fiables.
               </AlertDescription>
             </Alert>
             
@@ -204,10 +209,10 @@ export default function HomePage() {
             <div className="bg-muted p-6 md:p-8 rounded-lg">
               <Brain className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-pretty">
                 Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses 
                 sont basées sur mon expérience personnelle et mes recherches. 
-                <strong className="text-foreground"> Je vous encourage systématiquement à tester par vous-même.</strong>
+                <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
               </p>
             </div>
           </div>
