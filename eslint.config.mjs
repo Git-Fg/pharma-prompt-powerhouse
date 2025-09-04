@@ -3,10 +3,15 @@ import js from "@eslint/js";
 import nextPlugin from "@next/eslint-plugin-next";
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
+// import tailwindcssPlugin from "eslint-plugin-tailwindcss"; // Disabled for v4 compatibility
 import tseslint from "typescript-eslint";
 import { FlatCompat } from "@eslint/eslintrc";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+
+// Import custom rules
+import noHardcodedValues from "./eslint-rules/no-hardcoded-values.js";
+import noArbitraryTailwindValues from "./eslint-rules/no-arbitrary-tailwind-values.js";
 
 // Déclarer __filename et __dirname immédiatement après les imports
 const __filename = fileURLToPath(import.meta.url);
@@ -34,7 +39,8 @@ const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript
     "coverage/",
     "playwright-report/",
     "test-results/",
-    "**/*.min.js"
+    "**/*.min.js",
+    "eslint-rules/", // Ignore custom rule files
   ],
 }, // Configuration de base ESLint
 js.configs.recommended, // Configuration TypeScript
@@ -72,9 +78,82 @@ js.configs.recommended, // Configuration TypeScript
     ...nextPlugin.configs.recommended.rules,
     ...nextPlugin.configs["core-web-vitals"].rules,
   },
+}, // Configuration Tailwind CSS - Disabled due to v4 compatibility issues
+// {
+//   files: ["**/*.{ts,tsx,js,jsx}"],
+//   plugins: {
+//     tailwindcss: tailwindcssPlugin,
+//   },
+//   rules: {
+//     // Tailwind-specific rules
+//     "tailwindcss/classnames-order": "error",
+//     "tailwindcss/enforces-negative-arbitrary-values": "error",
+//     "tailwindcss/enforces-shorthand": "error",
+//     "tailwindcss/migration-from-tailwind-2": "error",
+//     "tailwindcss/no-arbitrary-value": "warn",
+//     "tailwindcss/no-custom-classname": "error",
+//     "tailwindcss/no-unnecessary-arbitrary-value": "error",
+//   },
+//   settings: {
+//     tailwindcss: {
+//       config: "src/app/globals.css", // Point to CSS file with @theme
+//       cssFiles: ["src/app/globals.css"],
+//     },
+//   },
+// }, // Configuration Design System Enforcement
+{
+  files: ["src/**/*.{ts,tsx,js,jsx}"],
+  ignores: [
+    "src/lib/design-tokens.ts", // Allow design token definitions
+    "src/lib/design-system-migrator.ts", // Allow migrator utilities
+    "src/components/ui/**/*.{ts,tsx}", // Allow shadcn components
+  ],
+  plugins: {
+    local: {
+      rules: {
+        "no-hardcoded-values": noHardcodedValues,
+        "no-arbitrary-tailwind-values": noArbitraryTailwindValues,
+      },
+    },
+  },
+  rules: {
+    // Custom rules for design system enforcement
+    "local/no-hardcoded-values": ["warn", { // Changed from error to warn
+      allowedPatterns: [
+        "^var\\(--", // Allow CSS custom properties
+        "^calc\\(", // Allow CSS calc functions
+        "^theme\\(", // Allow Tailwind theme function
+        "^hsl\\(", // Allow HSL functions with variables
+        "^oklch\\(", // Allow OKLCH functions with variables
+      ],
+      enforceDesignTokens: true
+    }],
+    "local/no-arbitrary-tailwind-values": ["warn", { // Changed from error to warn
+      allowedArbitraryValues: [
+        "100vh", "100vw", "100%", "50%", "50vh", "50vw",
+        "auto", "inherit", "initial", "unset", "none",
+        "1fr", "minmax(0,1fr)", "1px", "2px", // Allow small borders
+      ],
+      strictMode: false
+    }],
+    
+    // Enhanced React rules for better practices
+    "react/jsx-props-no-spreading": "warn",
+    "react/prop-types": "off", // TypeScript handles this
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-curly-brace-presence": ["error", "never"],
+    "react/self-closing-comp": "error",
+    "react/jsx-fragments": ["error", "syntax"],
+  },
 }, // Configuration générale pour les variables non utilisées
 {
   files: ["**/*.{ts,tsx}"],
+  languageOptions: {
+    parserOptions: {
+      project: './tsconfig.json',
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
   rules: {
     "no-unused-vars": "off", // Désactivé car géré par TypeScript
     "@typescript-eslint/no-unused-vars": [
@@ -86,6 +165,31 @@ js.configs.recommended, // Configuration TypeScript
       },
     ],
     "prefer-const": "error",
+    
+    // Enhanced TypeScript rules
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    // Disable rules that require type information for config files
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/prefer-optional-chain": "off",
+  },
+}, // Configuration for config files without type checking
+{
+  files: [
+    "**/*.config.{js,mjs,ts}",
+    "**/*.config.*.{js,mjs,ts}",
+    "eslint.config.mjs",
+    "next.config.ts",
+    "tailwind.config.ts",
+    "postcss.config.mjs",
+    "vitest.config.ts",
+    "playwright.config.ts",
+  ],
+  ...tseslint.configs.disableTypeChecked,
+  rules: {
+    "no-console": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "off",
   },
 }, // Configuration pour les composants UI shadcn
 {
@@ -94,19 +198,6 @@ js.configs.recommended, // Configuration TypeScript
     "react/display-name": "off",
     "prefer-const": "warn",
     "@typescript-eslint/no-unused-vars": "off",
-  },
-}, // Configuration pour les fichiers de configuration et scripts
-{
-  files: [
-    "**/*.config.{js,mjs,ts}",
-    "**/*.config.*.{js,mjs,ts}",
-    "scripts/**/*",
-    "server.ts",
-    "content-collections.ts",
-  ],
-  rules: {
-    "no-console": "off",
-    "@typescript-eslint/no-var-requires": "off",
   },
 }, // Configuration pour les fichiers JavaScript purs
 {
