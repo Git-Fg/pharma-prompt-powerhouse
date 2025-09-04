@@ -14,20 +14,8 @@ interface GuideRecommendationProps {
   reason: string
 }
 
-export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
-  const isMobile = useIsMobile()
-  const guide = content.guides.find(g => g.slug === guideSlug)
-
-  if (!guide) {
-    return (
-      <Badge variant="destructive">
-        Guide introuvable:
-        {guideSlug}
-      </Badge>
-    )
-  }
-
-  const RecommendationContent = ({ includeTitle = true }: { includeTitle?: boolean }) => (
+function GuideRecommendationContent({ guide, reason, includeTitle = true }: { guide: any, reason: string, includeTitle?: boolean }) {
+  return (
     <div className="flex flex-col gap-4">
       {includeTitle && (
         <div>
@@ -46,30 +34,39 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
           </Badge>
         )}
         {guide.estimatedTime && (
-          <Badge variant="outline">
-            <Clock className="w-3 h-3 mr-1" />
+          <Badge variant="outline" className="bg-background text-xs">
+            <Clock className="mr-1 size-3" />
             {guide.estimatedTime}
           </Badge>
         )}
       </div>
 
-      {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-        <div>
-          <p className="text-xs font-medium mb-1">TLDR :</p>
-          <p className="text-xs text-muted-foreground">
-            {guide.keyTakeaways[0]}
-            {' '}
-            {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
-          </p>
-        </div>
-      )}
-
       <div className="flex items-center pt-2 border-t">
         <Info className="mr-2 size-4 shrink-0 opacity-70" />
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
+
+      <Button variant="outline" size="sm" asChild>
+        <Link href={`/guides/${guide.slug}`}>
+          Consulter le guide
+        </Link>
+      </Button>
     </div>
   )
+}
+
+export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
+  const isMobile = useIsMobile()
+  const guide = content.guides.find(g => g.slug === guideSlug)
+
+  if (!guide) {
+    return (
+      <Badge variant="destructive">
+        Guide introuvable:
+        {guideSlug}
+      </Badge>
+    )
+  }
 
   if (isMobile) {
     return (
@@ -86,7 +83,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
               <SheetDescription className="text-sm">{guide.description}</SheetDescription>
             </SheetHeader>
             <div className="flex-1 overflow-y-auto p-4">
-              <RecommendationContent includeTitle={false} />
+              <GuideRecommendationContent guide={guide} reason={reason} includeTitle={false} />
             </div>
             <div className="pt-4 border-t bg-background/95 backdrop-blur p-4">
               <Button asChild size="default" className="w-full">
@@ -110,7 +107,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         </span>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <RecommendationContent includeTitle={true} />
+        <GuideRecommendationContent guide={guide} reason={reason} includeTitle={true} />
         <div className="mt-4 pt-4 border-t">
           <Button asChild size="sm" className="w-full">
             <Link href={`/guides/${guide.slug}`} target="_blank" className="flex items-center gap-2">

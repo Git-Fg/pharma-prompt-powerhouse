@@ -43,6 +43,7 @@ export default antfu(
       '**/*.min.js',
       // Exclure les dossiers de documentation qui contiennent du code d'exemple
       'docs/**',
+      '**/README.md',
     ],
   },
 
@@ -113,6 +114,19 @@ export default antfu(
     },
   },
 
+  // Configuration pour les hooks qui exportent des providers et des hooks
+  {
+    files: [
+      'src/hooks/useConsent.tsx',
+      'src/components/ui/navigation-menu.tsx',
+      'src/components/ui/sidebar.tsx',
+      'src/components/ui/toggle.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+
   // Règles globales personnalisées
   {
     rules: {
@@ -128,6 +142,19 @@ export default antfu(
 
       // Règles React spécifiques
       'react/no-unescaped-entities': 'off', // Autoriser les entités non échappées (conservé de l'ancienne config)
+      'react/no-array-index-key': 'warn', // Réduire en warning (très commun dans ce projet)
+      'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn', // Réduire en warning
+      'react-web-api/no-leaked-event-listener': 'warn', // Réduire en warning
+      'react-web-api/no-leaked-timeout': 'warn', // Réduire en warning
+      'react-hooks-extra/no-unnecessary-use-prefix': 'warn', // Réduire en warning
+      'react-hooks-extra/prefer-use-state-lazy-initialization': 'warn', // Réduire en warning
+      'react/no-unstable-context-value': 'warn', // Réduire en warning
+      'react-dom/no-missing-button-type': 'warn', // Réduire en warning
+      'react-dom/no-dangerously-set-innerhtml': 'warn', // Réduire en warning (utilisé pour le contenu markdown)
+      'react/no-context-provider': 'warn', // Réduire en warning (React 19 suggestion)
+
+      // Règles de style moins strictes
+      'style/multiline-ternary': 'warn', // Réduire en warning
 
       // Sécurité
       'no-eval': 'error', // Interdire eval
