@@ -20,12 +20,14 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
 
   if (!guide) return <Badge variant="destructive">Guide introuvable: {guideSlug}</Badge>;
 
-  const RecommendationContent = () => (
+  const RecommendationContent = ({ includeTitle = true }: { includeTitle?: boolean }) => (
     <div className="flex flex-col gap-4">
-      <div>
-        <h4 className="text-sm font-semibold">{guide.title}</h4>
-        <p className="text-sm text-muted-foreground">{guide.description}</p>
-      </div>
+      {includeTitle && (
+        <div>
+          <h4 className="text-sm font-semibold">{guide.title}</h4>
+          <p className="text-sm text-muted-foreground">{guide.description}</p>
+        </div>
+      )}
       
       <div className="flex flex-wrap gap-2">
         <Badge variant="outline" className="bg-background">
@@ -74,10 +76,10 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
               <SheetTitle className="text-lg">{guide.title}</SheetTitle>
               <SheetDescription className="text-sm">{guide.description}</SheetDescription>
             </SheetHeader>
-            <div className="flex-1 overflow-y-auto">
-              <RecommendationContent />
+            <div className="flex-1 overflow-y-auto p-4">
+              <RecommendationContent includeTitle={false} />
             </div>
-            <div className="pt-4 border-t bg-background/95 backdrop-blur">
+            <div className="pt-4 border-t bg-background/95 backdrop-blur p-4">
               <Button asChild size="default" className="w-full">
                 <Link href={`/guides/${guide.slug}`} className="flex items-center gap-2">
                   <BookOpen className="size-4" />
@@ -99,7 +101,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         </span>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <RecommendationContent />
+        <RecommendationContent includeTitle={true} />
       </HoverCardContent>
     </HoverCard>
   );
