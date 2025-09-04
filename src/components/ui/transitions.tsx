@@ -4,7 +4,7 @@ import type { HTMLMotionProps } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { easings } from './animated'
+import { easings } from './animation-constants'
 
 // Page transition variants - Modern 2025 patterns
 const pageVariants = {

@@ -3,7 +3,7 @@
 import type { EnrichedGuide } from '@/lib/content-schema'
 import { FileText } from 'lucide-react'
 import { GuideCard } from '@/components/shared/GuideCard'
-import { Button } from '@/components/ui/button'
+import Button from '@/components/ui/button'
 import { SearchInput } from '@/components/ui/search-input'
 import {
   Select,
