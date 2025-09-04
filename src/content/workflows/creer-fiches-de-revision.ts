@@ -51,7 +51,13 @@ Au début, j'ai essayé de demander directement à ChatGPT :
       type: 'markdown',
       content: `## La Stratégie Optimisée : Le Prompt "Professeur"
 
-J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.`
+J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.
+Cette approche utilise le **context engineering** pour maximiser la précision.`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'context-engineering',
+      reason: 'Comprendre comment structurer le contexte améliore drastiquement la qualité des fiches de révision générées.'
     },
     {
       type: 'card',
@@ -71,6 +77,11 @@ J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours e
 - Les contre-indications et effets indésirables
 
 Plus vous donnez d'informations, plus les questions seront précises !`
+    },
+    {
+      type: 'conceptRecommendation',
+      slug: 'structuration-par-balises',
+      reason: 'L\'utilisation de balises XML permet d\'organiser le contenu de cours et d\'améliorer la génération de QCM ciblés.'
     },
     {
       type: 'card',
