@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className='container mx-auto px-4 py-16 text-center'>
       <div className='max-w-2xl mx-auto'>
-        <div className='w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-6'>
+        <div className='size-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-6'>
           <Search className='size-8 text-muted-foreground' />
         </div>
 

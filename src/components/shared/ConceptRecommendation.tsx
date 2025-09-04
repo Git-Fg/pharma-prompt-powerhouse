@@ -95,7 +95,7 @@ export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommenda
           {concept.title}
         </span>
       </HoverCardTrigger>
-      <HoverCardContent className="w-80">
+      <HoverCardContent className="max-w-sm">
         <RecommendationContent />
         <div className="mt-4 pt-4 border-t">
           <Button asChild size="sm" className="w-full">

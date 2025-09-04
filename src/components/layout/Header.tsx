@@ -89,7 +89,7 @@ export function Header() {
                   <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[320px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[var(--sheet-width-mobile)] sm:w-[var(--sheet-width-sm)]">
                 <div className="flex flex-col h-full">
                   {/* Header du menu mobile */}
                   <div className="flex items-center justify-between pb-6 border-b border-border/50">

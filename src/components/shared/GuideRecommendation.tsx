@@ -100,7 +100,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
           {guide.title}
         </span>
       </HoverCardTrigger>
-      <HoverCardContent className="w-80">
+      <HoverCardContent className="max-w-sm">
         <RecommendationContent includeTitle={true} />
         <div className="mt-4 pt-4 border-t">
           <Button asChild size="sm" className="w-full">

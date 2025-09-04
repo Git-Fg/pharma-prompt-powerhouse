@@ -100,6 +100,9 @@
   --content-gap-mobile: 1.5rem;
   --content-gap-desktop: 2rem;
   --mobile-nav-height: 5rem;
+  --sheet-width-mobile: 320px;
+  --sheet-width-sm: 400px;
+  --command-list-max-height: 18.75rem; /* 300px in rem */
   
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -110,6 +113,7 @@
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
+  --text-kbd: 0.625rem; /* 10px */
   
   /* Animation System - 2025 Best Practices */
   --animate-accordion-down: accordion-down 0.2s ease-out;

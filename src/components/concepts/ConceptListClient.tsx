@@ -66,7 +66,7 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
           />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full lg:w-[240px]">
+          <SelectTrigger className="w-full lg:max-w-xs">
             <SelectValue placeholder="Catégorie" />
           </SelectTrigger>
           <SelectContent>

@@ -56,7 +56,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
           />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full lg:w-[200px]">
+          <SelectTrigger className="w-full lg:max-w-sm">
             <SelectValue placeholder="Catégorie" />
           </SelectTrigger>
           <SelectContent>
@@ -73,7 +73,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
           value={selectedDifficulty}
           onValueChange={setSelectedDifficulty}
         >
-          <SelectTrigger className="w-full lg:w-[180px]">
+          <SelectTrigger className="w-full lg:max-w-xs">
             <SelectValue placeholder="Difficulté" />
           </SelectTrigger>
           <SelectContent>
