@@ -14,19 +14,14 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/search/CommandPalette";
-
-// Navigation structure according to Blueprint.md
-const mainNavigation = [
-  { name: "Accueil", href: "/", icon: null },
-  { name: "Par où commencer ?", href: "/par-ou-commencer", icon: null },
-  { name: "Workflows Stratégiques", href: "/workflows", icon: null },
-  { name: "L'Arsenal IA", href: "/l-arsenal-ia", icon: null },
-  { name: "Concepts", href: "/concepts", icon: null },
-];
+import { getMainNavigationLinks } from "@/lib/navigation";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Get navigation links from centralized source
+  const mainNavigation = getMainNavigationLinks();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
