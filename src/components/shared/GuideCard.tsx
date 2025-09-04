@@ -5,19 +5,12 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  contentCardVariants, 
-  categoryBadgeVariants, 
-  difficultyBadgeVariants,
-  getCategoryVariant,
-  getDifficultyVariant
-} from '@/components/ui/variants';
+import { contentCardVariants } from '@/components/ui/variants';
+import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge';
 import { ArrowRight, Clock, BookOpen, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EnrichedGuide } from '@/lib/content-schema';
 import { 
-  getCategoryLabel, 
-  getDifficultyLabel, 
   formatEstimatedTime,
   getContentUrl 
 } from '@/lib/ui-utils';
@@ -28,8 +21,6 @@ interface GuideCardProps {
 
 export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
   // Utilisation des utilitaires centralisés
-  const categoryLabel = getCategoryLabel(guide.category);
-  const difficultyLabel = getDifficultyLabel(guide.difficulty);
   const estimatedTime = formatEstimatedTime(guide.estimatedTime, 'guide');
   const guideUrl = getContentUrl('guide', guide.slug);
 
@@ -49,12 +40,8 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
                 {guide.title}
               </CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge className={categoryBadgeVariants({ category: getCategoryVariant(guide.category) })}>
-                  {categoryLabel}
-                </Badge>
-                <Badge className={difficultyBadgeVariants({ difficulty: getDifficultyVariant(guide.difficulty) })}>
-                  {difficultyLabel}
-                </Badge>
+                <CategoryBadge category={guide.category} />
+                <DifficultyBadge difficulty={guide.difficulty} />
                 {guide.isWorkflow && (
                   <Badge variant="default">
                     <Target className="mr-1 h-3 w-3" />

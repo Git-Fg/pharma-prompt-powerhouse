@@ -150,7 +150,7 @@ export default function ToolPage({ params }: ToolPageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-blue-700 dark:text-blue-300">{("tldr" in tool) ? tool.tldr : ""}</p>
+            <p className="text-blue-700 dark:text-blue-300">{tool.tldr}</p>
           </CardContent>
         </Card>
       )}

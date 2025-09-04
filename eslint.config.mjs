@@ -3,6 +3,7 @@ import js from "@eslint/js";
 import nextPlugin from "@next/eslint-plugin-next";
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
+import reactCompilerPlugin from "eslint-plugin-react-compiler";
 import tseslint from "typescript-eslint";
 import { FlatCompat } from "@eslint/eslintrc";
 import { fileURLToPath } from "url";
@@ -61,6 +62,15 @@ js.configs.recommended, // Configuration TypeScript
   },
   rules: {
     ...hooksPlugin.configs.recommended.rules,
+  },
+}, // Configuration React Compiler
+{
+  files: ["**/*.{ts,tsx}"],
+  plugins: {
+    "react-compiler": reactCompilerPlugin,
+  },
+  rules: {
+    "react-compiler/react-compiler": "error",
   },
 }, // Configuration Next.js
 {

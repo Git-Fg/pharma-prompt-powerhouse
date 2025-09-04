@@ -106,7 +106,6 @@ export {
 export { Drawer } from './drawer';
 
 // Composants de formulaire
-// Form component removed - using React 19 useActionState instead
 export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp';
 
 // Composants de données
