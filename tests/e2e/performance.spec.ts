@@ -17,7 +17,7 @@ test.describe('Content Accessibility and Performance', () => {
       await page.goto(url);
       
       // Basic accessibility checks
-      await expect(page.locator('main h1, article h1, .content h1').first()).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
       
       // Check for proper heading structure
       const headings = page.locator('h1, h2, h3, h4, h5, h6');
@@ -53,24 +53,25 @@ test.describe('Content Accessibility and Performance', () => {
     await page.goto('/concepts');
     const conceptLinks = page.locator('a[href*="/concepts/"]');
     const conceptCount = await conceptLinks.count();
-    expect(conceptCount).toBeGreaterThanOrEqual(5); // We have exactly 8 concepts, so >= 5 is appropriate
+    expect(conceptCount).toBeGreaterThan(5); // At least 5 concepts visible
     
     // Workflows page
     await page.goto('/workflows');
-    const workflowCards = page.locator('h1:has-text("Workflows")');
-    await expect(workflowCards.first()).toBeVisible();
+    const workflowLinks = page.locator('a[href*="/workflows/"]');
+    const workflowCount = await workflowLinks.count();
+    expect(workflowCount).toBeGreaterThan(5); // At least 5 workflows visible
     
     // Guides page
     await page.goto('/guides');
     const guideLinks = page.locator('a[href*="/guides/"]');
     const guideCount = await guideLinks.count();
-    expect(guideCount).toBeGreaterThan(10);
+    expect(guideCount).toBeGreaterThan(10); // At least 10 guides visible
     
     // Arsenal IA page - updated route
     await page.goto('/l-arsenal-ia');
     const toolLinks = page.locator('a[href*="/l-arsenal-ia/"]');
     const toolCount = await toolLinks.count();
-    expect(toolCount).toBeGreaterThan(5);
+    expect(toolCount).toBeGreaterThan(10); // At least 10 tool links visible (table has multiple links per tool)
   });
 
   test('responsive design works', async ({ page }) => {

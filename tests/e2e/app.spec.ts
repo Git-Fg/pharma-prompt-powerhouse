@@ -9,71 +9,71 @@ test.describe('Application E2E Tests', () => {
     await expect(page).toHaveTitle(/Pharma Prompt Powerhouse/);
     
     // Check main heading - it's split across lines with "Bienvenue sur" and "Pharma Prompt Powerhouse"
-    await expect(page.locator('h1')).toContainText('Pharma Prompt Powerhouse');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Pharma Prompt Powerhouse');
     
     // Check workflows section exists (replaces objectifs)
-    await expect(page.locator('text=Workflows')).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Workflows/ })).toBeVisible();
     
     // Check navigation is working
-    await expect(page.locator('text=Arsenal IA')).toBeVisible();
+    await expect(page.getByRole('link', { name: /Arsenal IA/ })).toBeVisible();
   });
 
   test('concepts page navigation and content', async ({ page }) => {
     await page.goto('/concepts');
     
     // Check concepts page loads - correct title is "Hub de Concepts"
-    await expect(page.locator('h1')).toContainText('Hub de Concepts');
+    await expect(page.getByRole('heading', { name: 'Hub de Concepts' })).toBeVisible();
     
     // Check concepts are displayed
-    await expect(page.locator('text=Context Engineering')).toBeVisible();
+    await expect(page.getByRole('link', { name: /Context Engineering/ })).toBeVisible();
     
     // Test concept navigation
-    await page.click('text=Context Engineering');
+    await page.getByRole('link', { name: /Context Engineering/ }).click();
     await expect(page).toHaveURL(/\/concepts\/context-engineering/);
-    await expect(page.locator('h1')).toContainText('Context Engineering');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Context Engineering');
   });
 
   test('guides page functionality', async ({ page }) => {
     await page.goto('/guides');
     
     // Check guides page loads
-    await expect(page.locator('h1')).toContainText('Mes Fiches & Méthodes');
+    await expect(page.getByRole('heading', { name: 'Mes Fiches & Méthodes' })).toBeVisible();
     
     // Check search functionality exists
-    await expect(page.locator('input[placeholder*="Rechercher"]')).toBeVisible();
+    await expect(page.getByPlaceholder(/Rechercher/)).toBeVisible();
     
     // Check at least one guide is visible
-    await expect(page.locator('text=Commencer')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Lire le guide/ })).toBeVisible();
   });
 
   test('workflows page displays correctly', async ({ page }) => {
     await page.goto('/workflows');
     
     // Check workflows page loads - updated to match actual title
-    await expect(page.locator('h1')).toContainText('Workflows Stratégiques');
+    await expect(page.getByRole('heading', { name: /Workflows Stratégiques/ })).toBeVisible();
     
     // Check workflow cards are visible
-    await expect(page.locator('a[href*="/workflows/"]')).toBeVisible();
+    await expect(page.getByRole('link', { href: /\/workflows\// }).first()).toBeVisible();
   });
 
   test('arsenal IA page loads', async ({ page }) => {
     await page.goto('/l-arsenal-ia');
     
     // Check page loads - correct title is "L'Arsenal IA 2025"
-    await expect(page.locator('h1')).toContainText("L'Arsenal IA 2025");
+    await expect(page.getByRole('heading', { name: "L'Arsenal IA 2025" })).toBeVisible();
     
     // Check comparative table exists
-    await expect(page.locator('text=Tableau Comparatif')).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Tableau Comparatif/ })).toBeVisible();
     
     // Check tool cards/rows exist
-    await expect(page.locator('text=ChatGPT')).toBeVisible();
+    await expect(page.getByText('ChatGPT')).toBeVisible();
   });
 
   test('par où commencer page loads', async ({ page }) => {
     await page.goto('/par-ou-commencer');
     
     // Check page loads
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   });
 
   test('no console errors on main pages', async ({ page }) => {
