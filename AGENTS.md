@@ -291,4 +291,6 @@ Attention, tu es un AI Agent, même si les règles disent de privilégier la sim
 Structure de façon intelligente ton approche, pour suivre le plan d'implémentation en plusieurs commit, et le mettre à jour en temps réel si nécessaire. Si tu dois mettre à jour le plan, tu dois effectuer des investigations complémentaires pour vérifier et valider ton approche. 
 
 Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours un nouvel état des lieux et un plan actualisé, ne crois pas "aveuglément" le plan de modifications si cela implique d'introduire des redondances, erreurs ou incohérences. 
+
+Contrainte absolue : Tu DOIS structurer tes approches en plusieurs phases, avec plusieurs comit, mis à jour continuellement. N'hésite pas à ajouter des commentaires sur des commits pour préciser les incohérences/erreurs introduites, ou diverses informations complémentairs : tu as beaucoup d'outils github, utilise les de façon extensive et optimale. 
 </copilot_contrainte>
