@@ -8,6 +8,7 @@ import { ContentRenderer } from '@/components/shared/ContentRenderer';
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner';
 import { Container, Section } from '@/components/layout/Container';
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
+import { getStarRatingProps } from '@/lib/ui-utils';
 
 interface ToolPageProps {
   params: {
@@ -25,24 +26,6 @@ export default function ToolPage({ params }: ToolPageProps) {
   if (!tool) {
     notFound();
   }
-
-  const renderStarRating = (score: number) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`size-4 ${
-              i < score ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-            }`}
-          />
-        ))}
-        <span className="ml-2 text-sm text-muted-foreground">
-          {score}/5
-        </span>
-      </div>
-    );
-  };
 
   return (
     <Section>
@@ -86,7 +69,17 @@ export default function ToolPage({ params }: ToolPageProps) {
                 <CardTitle className="text-lg">Score de Confiance</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {renderStarRating(tool.confidenceScore)}
+                <div className="flex items-center gap-1">
+                  {getStarRatingProps(tool.confidenceScore).stars.map((star) => (
+                    <Star
+                      key={star.index}
+                      className={`size-4 ${star.className}`}
+                    />
+                  ))}
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    {tool.confidenceScore}/5
+                  </span>
+                </div>
                 {tool.confidenceJustification && (
                   <p className="text-sm text-muted-foreground">{tool.confidenceJustification}</p>
                 )}
