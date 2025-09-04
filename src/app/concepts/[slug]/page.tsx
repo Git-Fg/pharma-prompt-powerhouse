@@ -9,8 +9,6 @@ import {
   ArrowLeft,
   BookOpen,
   Lightbulb,
-  Wrench,
-  ArrowRight,
   Target,
 } from "lucide-react";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
@@ -210,31 +208,6 @@ export default async function ConceptDetailPage({
               </div>
             </section>
           )}
-
-          {/* 3. L'Outil pour Pratiquer */}
-          <section>
-            <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-              <Wrench className="size-8 text-destructive" /> Essayer : Mettre en
-              Pratique
-            </h2>
-            <Card className="bg-muted/50">
-              <CardHeader className="md:flex-row md:items-center md:justify-between">
-                <div>
-                  <CardTitle>Prêt à tester ?</CardTitle>
-                  <p className="text-muted-foreground mt-2">
-                    Ouvrez l'éditeur pour expérimenter avec ce concept et adapter
-                    les prompts à vos besoins.
-                  </p>
-                </div>
-                <Button asChild size="lg" className="mt-4 md:mt-0">
-                  <Link href="/boite-a-outils/prompt-editor">
-                    Ouvrir l'Éditeur de Prompts{" "}
-                    <ArrowRight className="size-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardHeader>
-            </Card>
-          </section>
         </main>
       </Container>
     </Section>

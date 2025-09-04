@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Brain, BookOpen, Shield, ExternalLink, Wrench, Target } from "lucide-react";
+import { Brain, BookOpen, Shield, ExternalLink, Target } from "lucide-react";
 
 const footerSections = [
   {
@@ -12,12 +12,6 @@ const footerSections = [
       { name: "Workflows Stratégiques", href: "/workflows", icon: BookOpen },
       { name: "L'Arsenal IA", href: "/l-arsenal-ia", icon: ExternalLink },
       { name: "Concepts", href: "/concepts", icon: Brain },
-    ],
-  },
-  {
-    title: "Outils",
-    links: [
-      { name: "Ma Boîte à Outils", href: "/boite-a-outils", icon: Wrench },
     ],
   },
   {
