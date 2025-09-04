@@ -1,22 +1,25 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import { useConsentStorage } from './useConsent';
 
 export const useFavorites = (storageKey: string) => {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const { getItem, setItem } = useConsentStorage();
 
-  // Charger les favoris depuis localStorage au montage
+  // Charger les favoris depuis le stockage avec consentement au montage
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(storageKey);
+      const stored = getItem(storageKey);
       if (stored) {
         setFavorites(new Set(JSON.parse(stored)));
       }
     } catch (error) {
-      console.error('Failed to load favorites from localStorage', error);
+      console.error('Failed to load favorites from storage', error);
     }
-  }, [storageKey]);
+  }, [storageKey, getItem]);
 
   // Écouter les changements de localStorage (pour la synchronisation entre onglets)
+  // Note: Seulement si le consentement est accordé
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === storageKey && e.newValue !== null) {
@@ -42,20 +45,20 @@ export const useFavorites = (storageKey: string) => {
           newFavorites.add(id);
         }
 
-        // Sauvegarder dans localStorage
+        // Sauvegarder avec respect du consentement
         try {
-          localStorage.setItem(
+          setItem(
             storageKey,
             JSON.stringify(Array.from(newFavorites))
           );
         } catch (error) {
-          console.error('Failed to save favorites to localStorage', error);
+          console.error('Failed to save favorites to storage', error);
         }
 
         return newFavorites;
       });
     },
-    [storageKey]
+    [storageKey, setItem]
   );
 
   const isFavorite = useCallback(
