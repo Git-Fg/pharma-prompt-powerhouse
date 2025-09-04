@@ -5,52 +5,73 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { 
-  Home, 
   BookOpen, 
   Search,
-  Brain,
-  Target,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { CommandPalette } from '@/components/search/CommandPalette';
 import { useAutoAnimateLayout } from '@/hooks/useAutoAnimate';
+import { getMainNavigationLinks } from '@/lib/navigation';
 
-const bottomNavItems = [
-  {
-    name: 'Accueil',
-    href: '/',
-    icon: Home,
-    isActive: (pathname: string) => pathname === '/',
-  },
-  {
-    name: 'Workflows',
-    href: '/workflows',
-    icon: Target,
-    isActive: (pathname: string) => pathname.startsWith('/workflows'),
-  },
-  {
-    name: 'Recherche',
-    href: '#',
-    icon: Search,
-    isActive: () => false,
-    isSearch: true,
-  },
-  {
-    name: 'Arsenal IA',
-    href: '/l-arsenal-ia',
-    icon: Brain,
-    isActive: (pathname: string) => pathname.startsWith('/l-arsenal-ia'),
-  },
-  {
-    name: 'Guides',
-    href: '/guides',
-    icon: BookOpen,
-    isActive: (pathname: string) => pathname.startsWith('/guides') || pathname.startsWith('/concepts'),
-  },
-];
+interface MobileNavItem {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+  isActive: (pathname: string) => boolean;
+  isSearch?: boolean;
+}
+
+// Create mobile-specific nav items based on centralized navigation
+function createMobileNavItems(): MobileNavItem[] {
+  const mainNavLinks = getMainNavigationLinks();
+  
+  // Find specific nav items
+  const homeLink = mainNavLinks.find(link => link.href === '/');
+  const workflowsLink = mainNavLinks.find(link => link.href === '/workflows');
+  const arsenalLink = mainNavLinks.find(link => link.href === '/l-arsenal-ia');
+  
+  const baseItems: (MobileNavItem | null)[] = [
+    homeLink ? {
+      name: homeLink.name,
+      href: homeLink.href,
+      icon: homeLink.icon,
+      isActive: (pathname: string) => pathname === '/',
+    } : null,
+    workflowsLink ? {
+      name: 'Workflows', // Shorter name for mobile
+      href: workflowsLink.href,
+      icon: workflowsLink.icon,
+      isActive: (pathname: string) => pathname.startsWith('/workflows'),
+    } : null,
+    {
+      name: 'Recherche',
+      href: '#',
+      icon: Search,
+      isActive: () => false,
+      isSearch: true,
+    },
+    arsenalLink ? {
+      name: 'Arsenal IA', // Shorter name for mobile
+      href: arsenalLink.href,
+      icon: arsenalLink.icon,
+      isActive: (pathname: string) => pathname.startsWith('/l-arsenal-ia'),
+    } : null,
+    {
+      name: 'Guides',
+      href: '/guides',
+      icon: BookOpen,
+      isActive: (pathname: string) => pathname.startsWith('/guides') || pathname.startsWith('/concepts'),
+    },
+  ];
+  
+  return baseItems.filter((item): item is MobileNavItem => item !== null);
+}
 
 export function MobileBottomNav() {
   const pathname = usePathname();
   const navRef = useAutoAnimateLayout();
+  
+  const bottomNavItems = createMobileNavItems();
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border">
