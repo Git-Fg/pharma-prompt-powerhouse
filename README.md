@@ -1,6 +1,6 @@
 # 🎯 Pharma Prompt Powerhouse
 
-**Status**: 🚀 **Production Ready** | Build: ✅ | Tests: 49/49 ✅ | CSS: Centralized ✅
+**Status**: 🚀 **Production Ready** | Build: ✅ 54 pages | Tests: 49/49 ✅ | TypeScript: Clean ✅
 
 ## 👋 Vision du Projet
 
@@ -12,22 +12,22 @@ Transformer les étudiants en pharmacie de "passagers" à "pilotes" de l'IA, en 
 
 - **Des fondamentals solides** : Concepts clés du prompt engineering appliqué à la pharmacie
 - **Des méthodes éprouvées** : Guides pratiques basés sur l'expérience terrain  
-- **Des outils performants** : Prompts prêts à l'emploi et éditeurs interactifs
+- **Des outils performants** : Workflows interactifs et système de recommandations contextuelles
 - **Un écosystème cohérent** : Interconnexions intelligentes entre tous les contenus
 
 ## 🏗️ Architecture Moderne (2025)
 
-### **Design System Centralisé**
-- **Tailwind v4 + Shadcn Canary**: Architecture CSS moderne avec `@theme inline`, `@utility`, et `@layer components`
-- **Mobile-First**: Responsive design optimisé avec breakpoints cohérents et composants adaptatifs
-- **Performance CSS**: Variables CSS centralisées, utilitaires réutilisables et zéro duplication
-- **Single Source Design**: Tous les tokens dans `src/app/globals.css` (spacing, colors, typography, etc.)
+### **Design System Complet**
+- **Tailwind v4 + tailwind-variants**: Design tokens centralisés avec `@theme inline` et recipes systématiques
+- **Mobile-First UX**: Navigation adaptive avec bottom bar mobile et interactions modernes
+- **AutoAnimate Integration**: Transitions fluides respectant les préférences d'accessibilité
+- **Modern Typography**: `text-pretty`, `text-balance`, `text-flow` pour une lisibilité optimale
 
-### **TypeScript Content System**
-- **Type-Safe Content**: Migration complète vers TypeScript avec validation Zod
-- **O(1) Performance**: Chargement optimisé avec Maps pour les relations
-- **Runtime Validation**: Validation stricte à la compilation et à l'exécution
-- **Single Source of Truth**: Schémas centralisés dans `src/lib/content-schema.ts`
+### **Content Architecture TypeScript**
+- **100% Type-Safe**: Validation Zod à la compilation + runtime avec schémas centralisés
+- **Smart Interconnections**: Système de recommandations contextuelles (concepts ↔ workflows ↔ tools)
+- **Performance O(1)**: Chargement optimisé avec Maps pour toutes les relations
+- **SEO Ready**: `sitemap.xml` et `robots.txt` générés automatiquement (54 routes)
 
 ### **Modern Stack**
 - **React 19** + **Next.js 15**: Server Components avec App Router
@@ -50,97 +50,108 @@ Bundle Size Improvements:
 
 #### **8 Concepts Fondamentaux**
 - Context Engineering, Chaîne de Prompts, Hallucination, Memory IA, etc.
-- Chaque concept avec guide principal + ressources liées
+- Chaque concept avec définition analogique + formelle + importance pratique
+- **Smart Interconnections**: Recommandations contextuelles vers workflows et outils pertinents
 
-#### **16 Guides Pratiques** 
+#### **14 Guides Stratégiques** 
 - Les 5 Piliers d'un Prompt Efficace, Méthode XML, Optimisation Itérative
 - **Core Kit Étudiant 2025** : Maîtriser Z.AI + AI Studio sans carte bancaire
 - **IA en Local** : Guide confidentialité 100% avec modèles comme Qwen3-4B
-- Workflows spécialisés : Cas Cliniques, Données Fiables, Gestion Mémoire
-- Enrichis avec recommandations contextuelles d'outils et concepts
+- **Migration guides/[id] → guides/[slug]**: URLs cohérentes et SEO-optimisées
+- Tous enrichis avec système de recommandations contextuelles
 
-#### **5 Prompts Professionnels**
-- Assistant d'Analyse Document, Générateur de Mnémotiques, Tableaux Comparatifs
-- Templates multi-plateformes (ChatGPT, Claude, Gemini) avec guides d'usage
+#### **7 Workflows Interactifs**
+- **Production Ready**: Résoudre cas clinique, créer fiches révision, recherche bibliographique
+- **Smart Contextual Recommendations**: Chaque étape enrichie avec suggestions de concepts et outils
+- Approche structurée avec prompts optimisés et guide d'usage multi-plateforme
 
 #### **10 Outils Externes Évalués**
-- **Core Kit Recommandé** : Z.AI (recherche fiable) + AI Studio (multimodal)
-- ChatGPT, Claude AI, Perplexity, DeepSeek, Qwen Chat, etc.
-- Analyses détaillées : cas d'usage, forces/faiblesses, retours terrain
-- **Confidentialité & Sécurité** : Guide complet des bonnes pratiques
+- **TanStack Table Integration**: Tableaux comparatifs performants avec tri et recherche
+- **Core Kit Recommandé** : Z.AI (recherche fiable) + AI Studio (multimodal avancé)
+- **Évaluations 360°**: Performance, confidentialité, cas d'usage avec notation étoiles
+- **Responsive Design**: Desktop table + mobile cards avec animations fluides
 
 ### 🛠️ **Outils Interactifs Intégrés**
 
 #### **Éditeur de Prompts Avancé**
-- Interface WYSIWYG avec prévisualisation temps réel
-- Templates intégrés et variables dynamiques  
+- Interface moderne avec prévisualisation temps réel
+- Templates intégrés et variables dynamiques `{{nom_variable}}`
 - Export multi-plateformes optimisé
 
 #### **Générateur de Flashcards IA**
-- Création automatique de cartes Anki à partir de cours
-- Algorithmes d'optimisation pour la mémorisation
+- Création automatique de cartes Anki à partir de cours  
+- **AutoAnimate Integration**: Transitions fluides pour UX premium
 - Integration directe avec les concepts de la plateforme
 
-## 🚀 **Innovations Techniques**
+## 🚀 **Innovations Techniques 2025**
 
-### **Système d'Interconnexions Intelligentes**
-- **GuideRecommendation** : Suggestions contextuelles de guides avec aperçu des takeaways
-- **ConceptRecommendation** : Liens vers concepts fondamentaux avec explications
-- **ToolRecommendation** : Recommandations d'outils avec cas d'usage spécifiques
-- **Parcours d'apprentissage** : Navigation guidée Débutant → Intermédiaire → Avancé
+### **Smart Interconnection System**
+- **ConceptRecommendation** : Recommandations contextuelles avec justifications
+- **ToolRecommendation** : Outils suggérés au bon moment du workflow
+- **GuideRecommendation** : Guides liés avec raisons d'utilité précises
+- **Hover Cards + Mobile Sheets**: UX non-intrusive pour exploration
 
-### **Architecture de Contenu Moderne**
-- **TypeScript Content System** : Contenu structuré en TypeScript avec validation Zod
-- **Validation automatique** : Vérification des références croisées au build
-- **Type Safety** : TypeScript strict sur tous les contenus et métadonnées
+### **Modern UX Architecture**
+- **AutoAnimate**: Transitions automatiques respectant `prefers-reduced-motion`
+- **Hybrid Animation System**: AutoAnimate pour layout + Framer Motion pour complexité
+- **Mobile-First Navigation**: Bottom bar ergonomique + interactions modernes
+- **Typography Moderne**: `text-pretty`, `text-balance`, orphans/widows control
 
 ## 🏗️ Stack Technique Production
 
-### **Frontend Moderne**
-- **Next.js 15** : App Router, Static Generation, React Server Components
-- **React 19** : Actions, Hook `use`, Optimisations automatiques
-- **TypeScript** : Typage strict avec inférence Zod pour le contenu
-- **Tailwind CSS + shadcn/ui** : Design system cohérent et accessible
+### **Frontend Excellence**
+- **Next.js 15** : 54 pages statiques avec performance optimale
+- **React 19** : Server Components avec React Compiler activé
+- **TypeScript Strict** : 100% type safety avec noUncheckedIndexedAccess
+- **Tailwind v4 + tailwind-variants** : Design system moderne avec recipes
 
-### **Gestion de Contenu Avancée**
-- **TypeScript Content System** : Contenu structuré en fichiers TypeScript avec schémas Zod
-- **Zod Validation** : Schémas stricts pour concepts, guides, prompts, outils
-- **Cross-Reference Engine** : Validation automatique des liens entre contenus
-
-### **Qualité et Performance**
-- **52 Pages Statiques** : Génération complète au build pour performance optimale
-- **Tests Complets** : 40+ tests unitaires, validation de contenu, build verification
-- **Linting/TypeScript** : Code quality avec ESLint et type checking strict
+### **Content & Testing**
+- **Type-Safe Content**: Validation Zod à la compilation + runtime  
+- **49 Tests Passing**: Unit + Integration + Component avec 100% success
+- **SEO Automatique**: `sitemap.xml` et `robots.txt` générés dynamiquement
+- **Zero Config Production**: Build ready sans configuration additionnelle
 
 ## 📁 Architecture du Projet
 
 ```
 src/
-├── app/                      # Pages et routes Next.js 15 App Router
-│   ├── concepts/[slug]/      # Hub de concepts fondamentaux
-│   ├── guides/[id]/          # Guides pratiques et méthodes
-│   ├── prompts/[id]/         # Collection de prompts professionnels  
-│   ├── outils-externes/[slug]/ # Outils IA externes évalués
-│   └── boite-a-outils/       # Éditeur de prompts et générateurs
-├── components/               # Système de composants réutilisables
-│   ├── shared/              # Composants de recommandations interconnectées
-│   ├── prompts/             # Éditeur et affichage multi-format
-│   └── ui/                  # Design system shadcn/ui
-├── content/                  # Contenu structuré (36+ documents MDX)
-│   ├── concepts/            # 8 concepts fondamentaux  
-│   ├── guides/              # 14 guides pratiques
-│   ├── prompts/             # 5 prompts professionnels
-│   └── external-tools/      # 9 outils externes évalués
-└── types/                   # Types TypeScript et taxonomies
+├── app/                       # Next.js 15 App Router avec 54 pages statiques
+│   ├── concepts/[slug]/       # 8 concepts fondamentaux interconnectés
+│   ├── guides/[slug]/         # 14 guides pratiques avec recommandations  
+│   ├── workflows/[slug]/      # 7 workflows interactifs optimisés
+│   ├── l-arsenal-ia/[slug]/   # 10 outils IA avec évaluations détaillées
+│   ├── boite-a-outils/        # Éditeurs et générateurs interactifs
+│   ├── design-system/         # Showcase du design system moderne
+│   ├── sitemap.xml            # SEO automatique avec toutes les routes
+│   └── robots.txt             # Configuration SEO production
+├── components/
+│   ├── shared/                # Smart recommendation system
+│   │   ├── ConceptRecommendation.tsx
+│   │   ├── ToolRecommendation.tsx  
+│   │   └── ResponsiveComparisonTable.tsx (TanStack Table)
+│   ├── ui/                    # shadcn/ui + tailwind-variants
+│   │   ├── recipes/           # Component variant recipes
+│   │   └── components enhanced with modern animations
+│   └── navigation/            # Mobile-first navigation system
+├── content/                   # TypeScript content with Zod validation
+│   ├── concepts/              # 8 concepts avec schémas stricts
+│   ├── guides/                # 14 guides validés à la compilation
+│   ├── workflows/             # 7 workflows avec recommandations
+│   └── external-tools/        # 10 outils avec scoring avancé
+├── lib/
+│   ├── content-schema.ts      # Source de vérité pour tous les types
+│   ├── content-loader.ts      # Smart loading avec O(1) performance
+│   └── utils.ts               # Utilitaires avec tests complets
+└── hooks/                     # Custom hooks pour animations modernes
 ```
 
-### **Architecture "Content-First" Moderne**
+### **Production-Ready Architecture**
 
-**Génération Statique Optimale** : Content Collections transforme tout le contenu MDX en données typées au build, éliminant les requêtes runtime et garantissant des performances maximales.
+**Zero Runtime Content Loading** : Tout le contenu est chargé, validé et interconnecté au build time avec Maps pour performance O(1).
 
-**Interconnexions Intelligentes** : Système de recommandations contextuelles (GuideRecommendation, ConceptRecommendation, ToolRecommendation) géré automatiquement avec validation des références croisées.
+**Smart Recommendations** : Système contextuel qui suggère automatiquement concepts, outils et workflows au moment optimal de l'apprentissage.
 
-**Type Safety Complète** : Zod schemas + TypeScript strict sur tous les contenus, avec génération automatique de types pour une maintenance facilitée.
+**Modern UX Stack** : AutoAnimate + Framer Motion hybride, navigation mobile ergonomique, design tokens centralisés avec Tailwind v4.
 
 ## 🚀 Démarrage Rapide
 
