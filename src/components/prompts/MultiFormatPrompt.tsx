@@ -1,53 +1,54 @@
-"use client"
+'use client'
 
-import { useState } from 'react';
-import { Copy, Check, ExternalLink, Settings } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
+import { Check, Copy, ExternalLink, Settings } from 'lucide-react'
+import { useState } from 'react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 interface MultiFormatPromptProps {
   alternativeVersions?: {
-    standard?: string;
-    xml?: string;
+    standard?: string
+    xml?: string
     aiStudio?: {
-      systemPrompt?: string;
-      userPrompt?: string;
-    };
-  };
+      systemPrompt?: string
+      userPrompt?: string
+    }
+  }
   recommendedTools?: {
-    standard?: string[];
-    xml?: string[];
-    aiStudio?: string[];
-  };
-  variables?: string[];
-  className?: string;
+    standard?: string[]
+    xml?: string[]
+    aiStudio?: string[]
+  }
+  variables?: string[]
+  className?: string
 }
 
-export default function MultiFormatPrompt({ 
-  alternativeVersions, 
+export default function MultiFormatPrompt({
+  alternativeVersions,
   recommendedTools,
   variables,
-  className = ""
+  className = '',
 }: MultiFormatPromptProps) {
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({})
 
   const copyToClipboard = async (text: string, key: string) => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopiedStates(prev => ({ ...prev, [key]: true }));
+      await navigator.clipboard.writeText(text)
+      setCopiedStates(prev => ({ ...prev, [key]: true }))
       setTimeout(() => {
-        setCopiedStates(prev => ({ ...prev, [key]: false }));
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+        setCopiedStates(prev => ({ ...prev, [key]: false }))
+      }, 2000)
     }
-  };
+    catch (err) {
+      console.error('Failed to copy text: ', err)
+    }
+  }
 
-  const hasMultipleFormats = alternativeVersions && 
-    Object.values(alternativeVersions).filter(Boolean).length > 1;
+  const hasMultipleFormats = alternativeVersions
+    && Object.values(alternativeVersions).filter(Boolean).length > 1
 
   if (!hasMultipleFormats && alternativeVersions?.standard) {
     // Single format display
@@ -62,7 +63,7 @@ export default function MultiFormatPrompt({
               onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
               className="ml-2"
             >
-              {copiedStates['standard'] ? <Check className="size-4" /> : <Copy className="size-4" />}
+              {copiedStates.standard ? <Check className="size-4" /> : <Copy className="size-4" />}
             </Button>
           </CardTitle>
         </CardHeader>
@@ -72,11 +73,11 @@ export default function MultiFormatPrompt({
           </pre>
         </CardContent>
       </Card>
-    );
+    )
   }
 
   if (!hasMultipleFormats) {
-    return null;
+    return null
   }
 
   return (
@@ -93,7 +94,7 @@ export default function MultiFormatPrompt({
             <TabsTrigger value="aiStudio">AI Studio</TabsTrigger>
           )}
         </TabsList>
-        
+
         {alternativeVersions?.standard && (
           <TabsContent value="standard" className="mt-4">
             <Card>
@@ -105,7 +106,7 @@ export default function MultiFormatPrompt({
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
                   >
-                    {copiedStates['standard'] ? <Check className="size-4" /> : <Copy className="size-4" />}
+                    {copiedStates.standard ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -116,7 +117,7 @@ export default function MultiFormatPrompt({
                 <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm">
                   {alternativeVersions.standard}
                 </pre>
-                
+
                 {recommendedTools?.standard && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
@@ -143,7 +144,7 @@ export default function MultiFormatPrompt({
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.xml!, 'xml')}
                   >
-                    {copiedStates['xml'] ? <Check className="size-4" /> : <Copy className="size-4" />}
+                    {copiedStates.xml ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -157,11 +158,11 @@ export default function MultiFormatPrompt({
                     Cette version utilise des balises XML pour une structuration claire des instructions et une meilleure fiabilité des réponses.
                   </AlertDescription>
                 </Alert>
-                
+
                 <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm">
                   {alternativeVersions.xml}
                 </pre>
-                
+
                 {recommendedTools?.xml && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
@@ -189,7 +190,7 @@ export default function MultiFormatPrompt({
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.systemPrompt || '', 'system')}
                     >
-                      {copiedStates['system'] ? <Check className="size-4" /> : <Copy className="size-4" />}
+                      {copiedStates.system ? <Check className="size-4" /> : <Copy className="size-4" />}
                       System
                     </Button>
                     <Button
@@ -197,7 +198,7 @@ export default function MultiFormatPrompt({
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.userPrompt || '', 'user')}
                     >
-                      {copiedStates['user'] ? <Check className="size-4" /> : <Copy className="size-4" />}
+                      {copiedStates.user ? <Check className="size-4" /> : <Copy className="size-4" />}
                       User
                     </Button>
                   </div>
@@ -227,7 +228,7 @@ export default function MultiFormatPrompt({
                     {alternativeVersions.aiStudio.userPrompt}
                   </pre>
                 </div>
-                
+
                 {recommendedTools?.aiStudio && (
                   <div>
                     <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
@@ -261,5 +262,5 @@ export default function MultiFormatPrompt({
         </Card>
       )}
     </div>
-  );
+  )
 }

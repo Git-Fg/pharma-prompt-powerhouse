@@ -34,7 +34,7 @@
 - **Sur la Confidentialité :** *"La règle d'or : si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt. N'utilisez **jamais** de données personnelles, identifiables ou de patient sur une plateforme en ligne. Je précise le niveau de risque perçu pour chaque outil, mais la prudence absolue reste votre meilleure protection."*
 </essential_disclaimers>
 </content_rules>
-  
+
 <project_documentation_rules>
 **Stratégie de Documentation**
 - **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
@@ -62,13 +62,13 @@
   - **Étape 2 :** Votre Premier Workflow (suggestion du plus simple).
   - **Étape 3 :** La Règle d'Or de la Sécurité (rappel sur la confidentialité).
   </getting_started>
-  
+
   <workflows_section>
   **C. Section : "Workflows Stratégiques" (Cœur du site)**
   - **Présentation :** Chaque workflow est une étude de cas personnelle et détaillée.
   - **Structure :** Doit impérativement suivre le format `<workflow_structure>` ci-dessous.
   </workflows_section>
-  
+
   <ia_arsenal_section>
   **D. Section : "L'Arsenal IA 2025"**
   - **Présentation :** Mon catalogue d'outils personnel.

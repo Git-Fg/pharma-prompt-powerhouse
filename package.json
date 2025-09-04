@@ -1,5 +1,6 @@
 {
   "name": "pharmapp",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -89,6 +90,8 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^5.2.2",
+    "@eslint-react/eslint-plugin": "^1.53.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.34.0",
     "@next/eslint-plugin-next": "^15.5.2",
@@ -105,8 +108,10 @@
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
     "eslint": "^9.34.0",
     "eslint-config-next": "^15.5.2",
+    "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "glob": "^11.0.3",
     "jsdom": "^26.1.0",
     "serwist": "^9.2.1",

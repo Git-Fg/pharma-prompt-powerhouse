@@ -1,34 +1,35 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { contentCardVariants } from '@/components/ui/variants';
-import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge';
-import { ArrowRight, Clock, BookOpen, Target } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { EnrichedGuide } from '@/lib/content-schema';
-import { 
+import type { EnrichedGuide } from '@/lib/content-schema'
+import { ArrowRight, BookOpen, Clock, Target } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
+import { contentCardVariants } from '@/components/ui/variants'
+import {
   formatEstimatedTime,
-  getContentUrl 
-} from '@/lib/ui-utils';
+  getContentUrl,
+} from '@/lib/ui-utils'
+import { cn } from '@/lib/utils'
 
 interface GuideCardProps {
-  guide: EnrichedGuide;
+  guide: EnrichedGuide
 }
 
 export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
   // Utilisation des utilitaires centralisés
-  const estimatedTime = formatEstimatedTime(guide.estimatedTime, 'guide');
-  const guideUrl = getContentUrl('guide', guide.slug);
+  const estimatedTime = formatEstimatedTime(guide.estimatedTime, 'guide')
+  const guideUrl = getContentUrl('guide', guide.slug)
 
   return (
     <Card className={cn(
-      contentCardVariants({ variant: "guide", size: "default" }),
-      "h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group"
-    )}>
+      contentCardVariants({ variant: 'guide', size: 'default' }),
+      'h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group',
+    )}
+    >
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4">
@@ -60,7 +61,10 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="size-4" />
-            <span>Temps de lecture : {estimatedTime}</span>
+            <span>
+              Temps de lecture :
+              {estimatedTime}
+            </span>
           </div>
           <Link href={guideUrl} className="block">
             <Button className="w-full" size="sm">
@@ -71,5 +75,5 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}

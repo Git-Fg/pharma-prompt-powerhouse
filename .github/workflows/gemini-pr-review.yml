@@ -1,25 +1,25 @@
-name: '🧐 Gemini Pull Request Review'
+name: 🧐 Gemini Pull Request Review
 
 on:
-  #pull_request:
+  # pull_request:
   #  types:
   #    - 'opened'
   #    - 'reopened'
   issue_comment:
     types:
-      - 'created'
+      - created
   pull_request_review_comment:
     types:
-      - 'created'
-  #pull_request_review:
+      - created
+  # pull_request_review:
   #  types:
   #    - 'submitted'
   workflow_dispatch:
     inputs:
       pr_number:
-        description: 'PR number to review'
+        description: PR number to review
         required: true
-        type: 'number'
+        type: number
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.head_ref || github.ref }}'
@@ -27,14 +27,14 @@ concurrency:
 
 defaults:
   run:
-    shell: 'bash'
+    shell: bash
 
 permissions:
-  contents: 'read'
-  id-token: 'write'
-  issues: 'write'
-  pull-requests: 'write'
-  statuses: 'write'
+  contents: read
+  id-token: write
+  issues: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   review-pr:
@@ -73,22 +73,22 @@ jobs:
         )
       )
     timeout-minutes: 5
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout PR code'
-        uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # ratchet:actions/checkout@v4
+      - name: Checkout PR code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # ratchet:actions/checkout@v4
 
-      - name: 'Generate GitHub App Token'
-        id: 'generate_token'
+      - name: Generate GitHub App Token
+        id: generate_token
         if: |-
           ${{ vars.APP_ID }}
-        uses: 'actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e' # ratchet:actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # ratchet:actions/create-github-app-token@v2
         with:
           app-id: '${{ vars.APP_ID }}'
           private-key: '${{ secrets.APP_PRIVATE_KEY }}'
 
       - name: 'Get PR details (pull_request & workflow_dispatch)'
-        id: 'get_pr'
+        id: get_pr
         if: |-
           ${{ github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' }}
         env:
@@ -119,9 +119,8 @@ jobs:
             echo "EOF"
           } >> "${GITHUB_OUTPUT}"
 
-
       - name: 'Get PR details (issue_comment & reviews)'
-        id: 'get_pr_comment'
+        id: get_pr_comment
         if: |-
           ${{ github.event_name == 'issue_comment' || github.event_name == 'pull_request_review' || github.event_name == 'pull_request_review_comment' }}
         env:
@@ -151,9 +150,9 @@ jobs:
             echo "EOF"
           } >> "${GITHUB_OUTPUT}"
 
-      - name: 'Run Gemini PR Review'
-        uses: 'google-github-actions/run-gemini-cli@v0'
-        id: 'gemini_pr_review'
+      - name: Run Gemini PR Review
+        uses: google-github-actions/run-gemini-cli@v0
+        id: gemini_pr_review
         env:
           GITHUB_TOKEN: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           PR_NUMBER: '${{ steps.get_pr.outputs.pr_number || steps.get_pr_comment.outputs.pr_number }}'
@@ -452,11 +451,10 @@ jobs:
 
             Remember, you are running in a VM and no one reviewing your output. Your review must be posted to GitHub using the MCP tools to create a pending review, add comments to the pending review, and submit the pending review.
 
-
-      - name: 'Post PR review failure comment'
+      - name: Post PR review failure comment
         if: |-
           ${{ failure() && steps.gemini_pr_review.outcome == 'failure' }}
-        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           github-token: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           script: |-

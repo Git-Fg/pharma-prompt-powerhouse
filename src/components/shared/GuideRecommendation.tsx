@@ -1,24 +1,31 @@
-'use client';
-import Link from 'next/link';
-import { content } from '@/lib/content-loader';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Button } from '@/components/ui/button';
-import { BookOpen, Info, Clock } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
-import { categoryLabels, difficultyLabels } from '@/lib/constants';
+'use client'
+import { BookOpen, Clock, Info } from 'lucide-react'
+import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { categoryLabels, difficultyLabels } from '@/lib/constants'
+import { content } from '@/lib/content-loader'
 
 interface GuideRecommendationProps {
-  guideSlug: string;
-  reason: string;
+  guideSlug: string
+  reason: string
 }
 
 export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationProps) {
-  const isMobile = useIsMobile();
-  const guide = content.guides.find(g => g.slug === guideSlug);
+  const isMobile = useIsMobile()
+  const guide = content.guides.find(g => g.slug === guideSlug)
 
-  if (!guide) return <Badge variant="destructive">Guide introuvable: {guideSlug}</Badge>;
+  if (!guide) {
+    return (
+      <Badge variant="destructive">
+        Guide introuvable:
+        {guideSlug}
+      </Badge>
+    )
+  }
 
   const RecommendationContent = ({ includeTitle = true }: { includeTitle?: boolean }) => (
     <div className="flex flex-col gap-4">
@@ -28,7 +35,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
           <p className="text-sm text-muted-foreground">{guide.description}</p>
         </div>
       )}
-      
+
       <div className="flex flex-wrap gap-2">
         <Badge variant="outline" className="bg-background">
           {categoryLabels[guide.category as keyof typeof categoryLabels] || guide.category}
@@ -50,7 +57,9 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         <div>
           <p className="text-xs font-medium mb-1">TLDR :</p>
           <p className="text-xs text-muted-foreground">
-            {guide.keyTakeaways[0]} {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
+            {guide.keyTakeaways[0]}
+            {' '}
+            {guide.keyTakeaways.length > 1 && `+ ${guide.keyTakeaways.length - 1} points`}
           </p>
         </div>
       )}
@@ -60,7 +69,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
     </div>
-  );
+  )
 
   if (isMobile) {
     return (
@@ -90,7 +99,7 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
           </div>
         </SheetContent>
       </Sheet>
-    );
+    )
   }
 
   return (
@@ -112,5 +121,5 @@ export function GuideRecommendation({ guideSlug, reason }: GuideRecommendationPr
         </div>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }

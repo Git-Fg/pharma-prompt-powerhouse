@@ -1,56 +1,56 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clock, Target, BookOpen } from "lucide-react";
-import { content, getGuideBySlug } from "@/lib/content-loader";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { KeyTakeaways } from "@/components/shared/KeyTakeaways";
-import { getCategoryLabel, getDifficultyLabel } from "@/lib/ui-utils";
-import { Container, Section } from "@/components/layout/Container";
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import { ArrowLeft, BookOpen, Clock, Target } from 'lucide-react'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { Container, Section } from '@/components/layout/Container'
+import { ContentRenderer } from '@/components/shared/ContentRenderer'
+import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { content, getGuideBySlug } from '@/lib/content-loader'
+import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils'
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
-  return content.guides.map((guide) => ({
+  return content.guides.map(guide => ({
     slug: guide.slug,
-  }));
+  }))
 }
 
 // Génération des métadonnées dynamiques pour le SEO
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
-  const guide = getGuideBySlug(params.slug);
+  const guide = getGuideBySlug(params.slug)
 
   if (!guide) {
     return {
-      title: "Guide non trouvé",
-    };
+      title: 'Guide non trouvé',
+    }
   }
   return {
     title: `Guide : ${guide.title} | Pharma Prompt Powerhouse`,
     description: guide.description,
-  };
+  }
 }
 
-export default async function GuideDetailPage({ 
-  params 
-}: { 
-  params: { slug: string } 
+export default async function GuideDetailPage({
+  params,
+}: {
+  params: { slug: string }
 }) {
-  const guide = getGuideBySlug(params.slug);
+  const guide = getGuideBySlug(params.slug)
 
   if (!guide) {
-    notFound();
+    notFound()
   }
 
-  const categoryLabel = getCategoryLabel(guide.category);
-  const difficultyLabel = getDifficultyLabel(guide.difficulty);
+  const categoryLabel = getCategoryLabel(guide.category)
+  const difficultyLabel = getDifficultyLabel(guide.difficulty)
 
   return (
     <Section>
@@ -81,7 +81,10 @@ export default async function GuideDetailPage({
             {guide.estimatedTime && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Clock className="size-4" />
-                <span>Temps de lecture estimé : {guide.estimatedTime}</span>
+                <span>
+                  Temps de lecture estimé :
+                  {guide.estimatedTime}
+                </span>
               </div>
             )}
           </div>
@@ -101,7 +104,7 @@ export default async function GuideDetailPage({
         </main>
 
         <Separator className="my-12" />
-        
+
         {/* Related Guides - Moved after main content */}
         {guide.relatedGuides && guide.relatedGuides.length > 0 && (
           <Card>
@@ -114,7 +117,7 @@ export default async function GuideDetailPage({
                   <BookOpen className="size-4" />
                   Guides similaires
                 </h3>
-                {guide.relatedGuides.map((relatedGuide) => (
+                {guide.relatedGuides.map(relatedGuide => (
                   <Link
                     href={`/guides/${relatedGuide.slug}`}
                     key={relatedGuide.slug}
@@ -132,5 +135,5 @@ export default async function GuideDetailPage({
         )}
       </Container>
     </Section>
-  );
+  )
 }

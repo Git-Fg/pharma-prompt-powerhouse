@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  Menu,
   Brain,
+  Menu,
   Moon,
   Sun,
   User,
-} from "lucide-react";
-import { useTheme } from "next-themes";
-import { CommandPalette } from "@/components/search/CommandPalette";
-import { getMainNavigationLinks } from "@/lib/navigation";
+} from 'lucide-react'
+import { useTheme } from 'next-themes'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import { CommandPalette } from '@/components/search/CommandPalette'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { getMainNavigationLinks } from '@/lib/navigation'
+import { cn } from '@/lib/utils'
 
 export function Header() {
-  const { theme, setTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
-  
+  const { theme, setTheme } = useTheme()
+  const [isOpen, setIsOpen] = useState(false)
+
   // Get navigation links from centralized source
-  const mainNavigation = getMainNavigationLinks();
+  const mainNavigation = getMainNavigationLinks()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -40,7 +40,7 @@ export function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex items-center space-x-6">
-              {mainNavigation.slice(1).map((item) => (
+              {mainNavigation.slice(1).map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -59,7 +59,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               >
                 <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -77,7 +77,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
               <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -109,13 +109,13 @@ export function Header() {
                   <div className="flex-1 py-6">
                     <div className="space-y-2">
                       {/* Navigation Links */}
-                      {mainNavigation.slice(1).map((item) => (
+                      {mainNavigation.slice(1).map(item => (
                         <Link
                           key={item.name}
                           href={item.href}
                           onClick={() => setIsOpen(false)}
                           className={cn(
-                            "flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground rounded-lg"
+                            'flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground rounded-lg',
                           )}
                         >
                           {item.name}
@@ -135,7 +135,7 @@ export function Header() {
                     <div className="space-y-2">
                       <CommandPalette />
 
-                      <button className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
+                      <button type="button" className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
                         <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                           <User className="size-5" />
                         </div>
@@ -155,5 +155,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

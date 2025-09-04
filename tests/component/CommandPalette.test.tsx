@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest'
 import { render } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
 import { CommandPalette } from '@/components/search/CommandPalette'
 
 // Mock the content loader with simpler data
@@ -8,8 +8,8 @@ vi.mock('@/lib/content-loader', () => ({
     guides: [],
     concepts: [],
     workflows: [],
-    externalTools: []
-  }
+    externalTools: [],
+  },
 }))
 
 // Mock router
@@ -28,7 +28,7 @@ vi.mock('next/navigation', () => ({
   notFound: vi.fn(),
 }))
 
-describe('CommandPalette', () => {
+describe('commandPalette', () => {
   it('should render without crashing', () => {
     expect(() => {
       render(<CommandPalette />)
@@ -37,19 +37,19 @@ describe('CommandPalette', () => {
 
   it('should set up keyboard event listeners', () => {
     const addEventListenerSpy = vi.spyOn(document, 'addEventListener')
-    
+
     render(<CommandPalette />)
-    
+
     expect(addEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function))
   })
 
   it('should clean up event listeners on unmount', () => {
     const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener')
-    
+
     const { unmount } = render(<CommandPalette />)
-    
+
     unmount()
-    
+
     expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function))
   })
 })

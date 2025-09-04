@@ -11,16 +11,16 @@ export const env = {
   get baseUrl(): string {
     // En production Vercel, utiliser VERCEL_URL si disponible
     if (process.env.VERCEL_URL && process.env.NODE_ENV === 'production') {
-      return `https://${process.env.VERCEL_URL}`;
+      return `https://${process.env.VERCEL_URL}`
     }
-    
+
     // Sinon utiliser NEXT_PUBLIC_BASE_URL ou fallback
-    return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   },
 
   // URL publique (pour le client)
   get publicBaseUrl(): string {
-    return process.env.NEXT_PUBLIC_BASE_URL || 'https://pharma-prompt-powerhouse.vercel.app';
+    return process.env.NEXT_PUBLIC_BASE_URL || 'https://pharma-prompt-powerhouse.vercel.app'
   },
 
   // Configuration de l'application
@@ -31,20 +31,20 @@ export const env = {
       author: 'Git-Fg',
       repository: 'https://github.com/Git-Fg/pharma-prompt-powerhouse',
       version: process.env.npm_package_version || '1.0.0',
-    };
+    }
   },
 
   // Environnement actuel
   get isDevelopment(): boolean {
-    return process.env.NODE_ENV === 'development';
+    return process.env.NODE_ENV === 'development'
   },
 
   get isProduction(): boolean {
-    return process.env.NODE_ENV === 'production';
+    return process.env.NODE_ENV === 'production'
   },
 
   get isTest(): boolean {
-    return process.env.NODE_ENV === 'test';
+    return process.env.NODE_ENV === 'test'
   },
 
   // Configuration Analytics (si utilisée)
@@ -52,9 +52,9 @@ export const env = {
     return {
       vercelAnalyticsId: process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID,
       googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID,
-    };
+    }
   },
-} as const;
+} as const
 
 /**
  * Valide les variables d'environnement critiques au démarrage
@@ -62,29 +62,30 @@ export const env = {
 export function validateEnvironment(): void {
   const requiredVars: Array<[string, string | undefined]> = [
     ['NODE_ENV', process.env.NODE_ENV],
-  ];
+  ]
 
   const missingVars = requiredVars
     .filter(([, value]) => !value)
-    .map(([name]) => name);
+    .map(([name]) => name)
 
   if (missingVars.length > 0) {
     throw new Error(
-      `Variables d'environnement manquantes: ${missingVars.join(', ')}`
-    );
+      `Variables d'environnement manquantes: ${missingVars.join(', ')}`,
+    )
   }
 
   // Avertissements pour les variables optionnelles mais recommandées
   if (!process.env.NEXT_PUBLIC_BASE_URL && process.env.NODE_ENV === 'production') {
-    console.warn('⚠️ NEXT_PUBLIC_BASE_URL non définie en production');
+    console.warn('⚠️ NEXT_PUBLIC_BASE_URL non définie en production')
   }
 }
 
 // Validation automatique en développement
 if (env.isDevelopment) {
   try {
-    validateEnvironment();
-  } catch (error) {
-    console.error('❌ Erreur de configuration:', error);
+    validateEnvironment()
+  }
+  catch (error) {
+    console.error('❌ Erreur de configuration:', error)
   }
 }

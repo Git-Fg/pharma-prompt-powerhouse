@@ -1,99 +1,95 @@
 // src/components/ui/enhanced-badge.tsx
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { 
+import { getCategoryLabel, getConfidenceInfo, getDifficultyLabel } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+import {
   categoryBadgeVariants,
-  difficultyBadgeVariants,
   confidenceBadgeVariants,
-  statusBadgeVariants,
+  difficultyBadgeVariants,
   getCategoryVariant,
-  getDifficultyVariant,
   getConfidenceVariant,
-  type CategoryBadgeVariants,
-  type DifficultyBadgeVariants,
-  type ConfidenceBadgeVariants,
-  type StatusBadgeVariants
-} from './variants';
-import { getCategoryLabel, getDifficultyLabel, getConfidenceInfo } from '@/lib/constants';
+  getDifficultyVariant,
+  statusBadgeVariants,
+} from './variants'
 
 interface CategoryBadgeProps {
-  category: string;
-  className?: string;
-  size?: 'sm' | 'default' | 'lg';
+  category: string
+  className?: string
+  size?: 'sm' | 'default' | 'lg'
 }
 
 interface DifficultyBadgeProps {
-  difficulty: string;
-  className?: string;
-  size?: 'sm' | 'default' | 'lg';
+  difficulty: string
+  className?: string
+  size?: 'sm' | 'default' | 'lg'
 }
 
 interface ConfidenceBadgeProps {
-  score: number;
-  showLabel?: boolean;
-  className?: string;
-  size?: 'sm' | 'default' | 'lg';
+  score: number
+  showLabel?: boolean
+  className?: string
+  size?: 'sm' | 'default' | 'lg'
 }
 
 interface StatusBadgeProps {
-  status: 'available' | 'coming-soon' | 'development' | 'deprecated' | 'experimental' | 'beta';
-  className?: string;
-  size?: 'sm' | 'default' | 'lg';
+  status: 'available' | 'coming-soon' | 'development' | 'deprecated' | 'experimental' | 'beta'
+  className?: string
+  size?: 'sm' | 'default' | 'lg'
 }
 
 /**
  * Enhanced Category Badge with semantic styling and type safety
  */
 export function CategoryBadge({ category, className, size = 'default' }: CategoryBadgeProps) {
-  const variant = getCategoryVariant(category);
-  const label = getCategoryLabel(category);
-  
+  const variant = getCategoryVariant(category)
+  const label = getCategoryLabel(category)
+
   const sizeStyles = {
     sm: 'px-2 py-0.5 text-xs',
     default: 'px-3 py-1 text-xs',
-    lg: 'px-4 py-1.5 text-sm'
-  };
+    lg: 'px-4 py-1.5 text-sm',
+  }
 
   return (
     <span
       className={cn(
         categoryBadgeVariants({ category: variant }),
         sizeStyles[size],
-        className
+        className,
       )}
       title={`Catégorie: ${label}`}
     >
       {label}
     </span>
-  );
+  )
 }
 
 /**
  * Enhanced Difficulty Badge with semantic styling and accessibility
  */
 export function DifficultyBadge({ difficulty, className, size = 'default' }: DifficultyBadgeProps) {
-  const variant = getDifficultyVariant(difficulty);
-  const label = getDifficultyLabel(difficulty);
-  
+  const variant = getDifficultyVariant(difficulty)
+  const label = getDifficultyLabel(difficulty)
+
   const sizeStyles = {
     sm: 'px-2 py-0.5 text-xs',
     default: 'px-3 py-1 text-xs',
-    lg: 'px-4 py-1.5 text-sm'
-  };
+    lg: 'px-4 py-1.5 text-sm',
+  }
 
   const icons = {
-    'débutant': '🌱',
-    'intermédiaire': '🚀',
-    'avancé': '⭐'
-  };
+    débutant: '🌱',
+    intermédiaire: '🚀',
+    avancé: '⭐',
+  }
 
   return (
     <span
       className={cn(
         difficultyBadgeVariants({ difficulty: variant }),
         sizeStyles[size],
-        className
+        className,
       )}
       title={`Niveau: ${label}`}
     >
@@ -102,28 +98,28 @@ export function DifficultyBadge({ difficulty, className, size = 'default' }: Dif
       </span>
       {label}
     </span>
-  );
+  )
 }
 
 /**
  * Enhanced Confidence Badge with visual score indicator
  */
 export function ConfidenceBadge({ score, showLabel = true, className, size = 'default' }: ConfidenceBadgeProps) {
-  const variant = getConfidenceVariant(score);
-  const confidenceInfo = getConfidenceInfo(score);
-  
+  const variant = getConfidenceVariant(score)
+  const confidenceInfo = getConfidenceInfo(score)
+
   const sizeStyles = {
     sm: 'px-2 py-0.5 text-xs',
     default: 'px-3 py-1 text-xs',
-    lg: 'px-4 py-1.5 text-sm'
-  };
+    lg: 'px-4 py-1.5 text-sm',
+  }
 
   return (
     <span
       className={cn(
         confidenceBadgeVariants({ confidence: variant }),
         sizeStyles[size],
-        className
+        className,
       )}
       title={confidenceInfo.description}
     >
@@ -132,7 +128,7 @@ export function ConfidenceBadge({ score, showLabel = true, className, size = 'de
       </span>
       {showLabel && `Confiance ${score}/5`}
     </span>
-  );
+  )
 }
 
 /**
@@ -142,33 +138,33 @@ export function StatusBadge({ status, className, size = 'default' }: StatusBadge
   const sizeStyles = {
     sm: 'px-2 py-0.5 text-xs',
     default: 'px-3 py-1 text-xs',
-    lg: 'px-4 py-1.5 text-sm'
-  };
+    lg: 'px-4 py-1.5 text-sm',
+  }
 
   const statusLabels = {
-    available: 'Disponible',
+    'available': 'Disponible',
     'coming-soon': 'Bientôt',
-    development: 'En développement',
-    deprecated: 'Déprécié',
-    experimental: 'Expérimental',
-    beta: 'Beta'
-  };
+    'development': 'En développement',
+    'deprecated': 'Déprécié',
+    'experimental': 'Expérimental',
+    'beta': 'Beta',
+  }
 
   const statusIcons = {
-    available: '✅',
+    'available': '✅',
     'coming-soon': '⏳',
-    development: '🚧',
-    deprecated: '❌',
-    experimental: '🧪',
-    beta: '🔬'
-  };
+    'development': '🚧',
+    'deprecated': '❌',
+    'experimental': '🧪',
+    'beta': '🔬',
+  }
 
   return (
     <span
       className={cn(
         statusBadgeVariants({ status }),
         sizeStyles[size],
-        className
+        className,
       )}
       title={`Status: ${statusLabels[status]}`}
     >
@@ -177,7 +173,7 @@ export function StatusBadge({ status, className, size = 'default' }: StatusBadge
       </span>
       {statusLabels[status]}
     </span>
-  );
+  )
 }
 
 // =================================================================
@@ -185,31 +181,31 @@ export function StatusBadge({ status, className, size = 'default' }: StatusBadge
 // =================================================================
 
 interface ContentBadgeGroupProps {
-  category?: string;
-  difficulty?: string;
-  confidence?: number;
-  status?: StatusBadgeProps['status'];
-  className?: string;
-  size?: 'sm' | 'default' | 'lg';
-  layout?: 'inline' | 'stacked';
+  category?: string
+  difficulty?: string
+  confidence?: number
+  status?: StatusBadgeProps['status']
+  className?: string
+  size?: 'sm' | 'default' | 'lg'
+  layout?: 'inline' | 'stacked'
 }
 
 /**
  * Composite badge group for content items (guides, concepts, tools, etc.)
  */
-export function ContentBadgeGroup({ 
-  category, 
-  difficulty, 
-  confidence, 
+export function ContentBadgeGroup({
+  category,
+  difficulty,
+  confidence,
   status,
   className,
   size = 'default',
-  layout = 'inline'
+  layout = 'inline',
 }: ContentBadgeGroupProps) {
   const layoutStyles = {
     inline: 'flex flex-wrap gap-2',
-    stacked: 'flex flex-col gap-1'
-  };
+    stacked: 'flex flex-col gap-1',
+  }
 
   return (
     <div className={cn(layoutStyles[layout], className)}>
@@ -218,5 +214,5 @@ export function ContentBadgeGroup({
       {confidence && <ConfidenceBadge score={confidence} size={size} />}
       {status && <StatusBadge status={status} size={size} />}
     </div>
-  );
+  )
 }

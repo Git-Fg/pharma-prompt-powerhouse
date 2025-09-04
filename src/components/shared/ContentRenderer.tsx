@@ -1,44 +1,44 @@
 // src/components/shared/ContentRenderer.tsx
-'use client';
+'use client'
 
-import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeBlock } from '@/components/ui/code-block';
-import { ToolRecommendation } from './ToolRecommendation';
-import { GuideRecommendation } from './GuideRecommendation';
-import { ConceptRecommendation } from './ConceptRecommendation';
-import { KeyTakeaways } from './KeyTakeaways';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import MultiFormatPrompt from '../prompts/MultiFormatPrompt';
-import type { ContentBlock } from '@/lib/content-schema';
+import type { ContentBlock } from '@/lib/content-schema'
+import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CodeBlock } from '@/components/ui/code-block'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import MultiFormatPrompt from '../prompts/MultiFormatPrompt'
+import { ConceptRecommendation } from './ConceptRecommendation'
+import { GuideRecommendation } from './GuideRecommendation'
+import { KeyTakeaways } from './KeyTakeaways'
+import { ToolRecommendation } from './ToolRecommendation'
 
 function assertNever(x: never): never {
-  throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`);
+  throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`)
 }
 
-const BlockSwitch = ({ block }: { block: ContentBlock }) => {
+function BlockSwitch({ block }: { block: ContentBlock }) {
   switch (block.type) {
-    case "markdown":
-      return <MarkdownRenderer content={block.content} />;
-    case "alert":
+    case 'markdown':
+      return <MarkdownRenderer content={block.content} />
+    case 'alert':
       return (
         <Alert variant={block.variant} className="my-6">
-          {typeof block.title === "string" && <AlertTitle>{block.title}</AlertTitle>}
+          {typeof block.title === 'string' && <AlertTitle>{block.title}</AlertTitle>}
           <AlertDescription>
             <MarkdownRenderer content={block.content} />
           </AlertDescription>
         </Alert>
-      );
-    case "toolRecommendation":
-      return <ToolRecommendation tags={[]} currentSlug={String(block.slug || "")} />;
-    case "guideRecommendation":
-      return <GuideRecommendation guideSlug={String(block.slug || "")} reason={String(block.reason || "")} />;
-    case "conceptRecommendation":
-      return <ConceptRecommendation conceptSlug={String(block.slug || "")} reason={String(block.reason || "")} />;
-    case "codeBlock":
+      )
+    case 'toolRecommendation':
+      return <ToolRecommendation tags={[]} currentSlug={String(block.slug || '')} />
+    case 'guideRecommendation':
+      return <GuideRecommendation guideSlug={String(block.slug || '')} reason={String(block.reason || '')} />
+    case 'conceptRecommendation':
+      return <ConceptRecommendation conceptSlug={String(block.slug || '')} reason={String(block.reason || '')} />
+    case 'codeBlock':
       return (
         <CodeBlock
           language={block.language}
@@ -47,8 +47,8 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
         >
           {block.content}
         </CodeBlock>
-      );
-    case "card":
+      )
+    case 'card':
       return (
         <Card className="my-6">
           <CardHeader>
@@ -59,20 +59,20 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
             <MarkdownRenderer content={block.content} />
           </CardContent>
         </Card>
-      );
-    case "tabs":
+      )
+    case 'tabs':
       return (
         <Card className="my-6">
           <CardContent className="p-4">
             <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value}>
               <TabsList className={`grid w-full grid-cols-${block.tabs.length}`}>
-                {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
+                {block.tabs.map((tab: { value: string, title: string, content: ContentBlock[] }) => (
                   <TabsTrigger key={tab.value} value={tab.value}>
                     {tab.title}
                   </TabsTrigger>
                 ))}
               </TabsList>
-              {block.tabs.map((tab: { value: string; title: string; content: ContentBlock[] }) => (
+              {block.tabs.map((tab: { value: string, title: string, content: ContentBlock[] }) => (
                 <TabsContent key={tab.value} value={tab.value} className="mt-4">
                   {tab.content.map((subBlock: ContentBlock, idx: number) => (
                     <BlockSwitch key={idx} block={subBlock} />
@@ -82,15 +82,15 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
             </Tabs>
           </CardContent>
         </Card>
-      );
+      )
     // --- NOUVEAUX CAS DE RENDU ---
     case 'keyTakeaways':
-      return <KeyTakeaways points={block.points} />;
+      return <KeyTakeaways points={block.points} />
 
     case 'accordion':
       return (
         <Accordion type="single" collapsible className="w-full my-6">
-          {block.items.map((item: { title: string; content: ContentBlock[] }, index: number) => (
+          {block.items.map((item: { title: string, content: ContentBlock[] }, index: number) => (
             <AccordionItem value={`item-${index}`} key={index}>
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <AccordionContent>
@@ -99,7 +99,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
             </AccordionItem>
           ))}
         </Accordion>
-      );
+      )
 
     case 'table':
       return (
@@ -130,7 +130,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
               </TableBody>
             </Table>
           </div>
-          
+
           {/* Mobile Card View - Enhanced with better spacing */}
           <div className="block md:hidden space-y-4">
             {block.rows.map((row: string[], rowIndex: number) => (
@@ -154,7 +154,7 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
             )}
           </div>
         </div>
-      );
+      )
 
     case 'multiFormatPrompt':
       return (
@@ -164,23 +164,24 @@ const BlockSwitch = ({ block }: { block: ContentBlock }) => {
           variables={block.variables}
           className="my-6"
         />
-      );
+      )
 
     default:
-      return assertNever(block as never);
+      return assertNever(block as never)
   }
-};
+}
 
 // Suppression du code dupliqué et conservation du switch exhaustif
 
-  export function ContentRenderer({ content }: { content: ContentBlock[] }) {
-  if (!content || content.length === 0) return null;
-  
+export function ContentRenderer({ content }: { content: ContentBlock[] }) {
+  if (!content || content.length === 0)
+    return null
+
   return (
     <>
       {content.map((block, index) => (
         <BlockSwitch key={index} block={block} />
       ))}
     </>
-  );
+  )
 }

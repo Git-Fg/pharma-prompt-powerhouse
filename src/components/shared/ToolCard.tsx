@@ -1,31 +1,32 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { contentCardVariants } from '@/components/ui/variants';
-import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge';
-import { ExternalLink, Globe } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { ExternalTool } from '@/lib/content-schema';
-import { getContentUrl } from '@/lib/ui-utils';
-import { InfoButton } from './InfoButton';
+import type { ExternalTool } from '@/lib/content-schema'
+import { ExternalLink, Globe } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge'
+import { contentCardVariants } from '@/components/ui/variants'
+import { getContentUrl } from '@/lib/ui-utils'
+import { cn } from '@/lib/utils'
+import { InfoButton } from './InfoButton'
 
 interface ToolCardProps {
-  tool: ExternalTool;
+  tool: ExternalTool
 }
 
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   // Utilisation des utilitaires centralisés
-  const toolUrl = getContentUrl('tool', tool.slug);
+  const toolUrl = getContentUrl('tool', tool.slug)
 
   return (
     <Card className={cn(
-      contentCardVariants({ variant: "tool", size: "default" }),
-      "h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group"
-    )}>
+      contentCardVariants({ variant: 'tool', size: 'default' }),
+      'h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group',
+    )}
+    >
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4 flex-1">
@@ -42,8 +43,8 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
               </div>
             </div>
           </div>
-          <InfoButton 
-            variant="tool" 
+          <InfoButton
+            variant="tool"
             item={tool}
             size="md"
             className="ml-2 flex-shrink-0"
@@ -56,7 +57,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
       <CardContent>
         <div className="space-y-3">
           <div className="flex flex-wrap gap-2">
-            {tool.tags.map((tag) => (
+            {tool.tags.map(tag => (
               <Badge key={tag} variant="outline" className="text-xs">
                 {tag}
               </Badge>
@@ -78,5 +79,5 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
