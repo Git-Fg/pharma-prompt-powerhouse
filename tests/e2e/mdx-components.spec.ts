@@ -4,8 +4,8 @@ test.describe('MDX Components Functionality', () => {
   test('modernized concept with React components renders correctly', async ({ page }) => {
     await page.goto('/concepts/hallucination-effet-indesirable');
     
-    // Check main title specifically in main content area
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hallucination');
+    // Check main title specifically in main content area - updated title
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hallucination : Effet Indésirable');
     
     // Check for Alert components
     const alerts = page.locator('[role="alert"], .alert, [data-state="open"]');

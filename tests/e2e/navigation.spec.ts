@@ -26,8 +26,8 @@ test.describe('Core Site Navigation', () => {
   test('concepts page navigation works', async ({ page }) => {
     await page.goto('/concepts');
     
-    // Should show concepts listing
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Concepts');
+    // Should show concepts listing - correct title
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Hub de Concepts');
     
     // Should have concept content or links - use more flexible selector
     const conceptContent = page.locator('a[href*="/concepts/"], .concept, [class*="concept"], main a');
@@ -60,7 +60,8 @@ test.describe('Core Site Navigation', () => {
   test('workflows page navigation works', async ({ page }) => {
     await page.goto('/workflows');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Workflow');
+    // Updated to match actual title
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Workflows Stratégiques');
     
     await page.screenshot({ path: 'test-results/workflows-page.png', fullPage: true });
   });
@@ -68,7 +69,8 @@ test.describe('Core Site Navigation', () => {
   test('arsenal IA page navigation works', async ({ page }) => {
     await page.goto('/l-arsenal-ia');
     
-    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText('Arsenal IA');
+    // Updated to match actual title - "L'Arsenal IA 2025"
+    await expect(page.locator('main h1, article h1, .content h1').first()).toContainText("L'Arsenal IA 2025");
     
     await page.screenshot({ path: 'test-results/arsenal-ia-page.png', fullPage: true });
   });

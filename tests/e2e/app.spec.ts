@@ -8,7 +8,7 @@ test.describe('Application E2E Tests', () => {
     // Check page loads
     await expect(page).toHaveTitle(/Pharma Prompt Powerhouse/);
     
-    // Check main heading
+    // Check main heading - it's split across lines with "Bienvenue sur" and "Pharma Prompt Powerhouse"
     await expect(page.locator('h1')).toContainText('Pharma Prompt Powerhouse');
     
     // Check workflows section exists (replaces objectifs)
@@ -21,7 +21,7 @@ test.describe('Application E2E Tests', () => {
   test('concepts page navigation and content', async ({ page }) => {
     await page.goto('/concepts');
     
-    // Check concepts page loads
+    // Check concepts page loads - correct title is "Hub de Concepts"
     await expect(page.locator('h1')).toContainText('Hub de Concepts');
     
     // Check concepts are displayed
@@ -49,8 +49,8 @@ test.describe('Application E2E Tests', () => {
   test('workflows page displays correctly', async ({ page }) => {
     await page.goto('/workflows');
     
-    // Check workflows page loads
-    await expect(page.locator('h1')).toContainText('Workflows');
+    // Check workflows page loads - updated to match actual title
+    await expect(page.locator('h1')).toContainText('Workflows Stratégiques');
     
     // Check workflow cards are visible
     await expect(page.locator('a[href*="/workflows/"]')).toBeVisible();
@@ -59,8 +59,8 @@ test.describe('Application E2E Tests', () => {
   test('arsenal IA page loads', async ({ page }) => {
     await page.goto('/l-arsenal-ia');
     
-    // Check page loads
-    await expect(page.locator('h1')).toContainText('Arsenal IA');
+    // Check page loads - correct title is "L'Arsenal IA 2025"
+    await expect(page.locator('h1')).toContainText("L'Arsenal IA 2025");
     
     // Check comparative table exists
     await expect(page.locator('text=Tableau Comparatif')).toBeVisible();
