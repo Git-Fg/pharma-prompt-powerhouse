@@ -16,8 +16,23 @@ export const guide = {
     'Personnalisez l\'IA avec des instructions persistantes et créez des GPTs spécialisés pour des tâches récurrentes.',
     'Une gestion proactive de la mémoire transforme l\'IA d\'un outil générique en un assistant personnel puissant.',
   ],
-  conceptSlugs: [],
+  conceptSlugs: ['memoire-ia', 'context-engineering'],
   content: [
+    {
+      type: 'prerequisites',
+      items: [
+        {
+          type: 'concept',
+          slug: 'memoire-ia',
+          reason: 'Ce guide est l\'application pratique des concepts théoriques de la mémoire de l\'IA.',
+        },
+        {
+          type: 'concept',
+          slug: 'context-engineering',
+          reason: 'La gestion de mémoire est une forme avancée d\'ingénierie de contexte.',
+        },
+      ],
+    },
     {
       type: 'alert',
       variant: 'default',
@@ -114,6 +129,45 @@ export const guide = {
       type: 'card',
       title: 'Conclusion : Une Discipline à Cultiver',
       content: 'La gestion de la mémoire de l\'IA est une discipline. Prenez l\'habitude de faire des points de sauvegarde dans les longues conversations, de corriger activement la trajectoire quand vous vous égarez, et de passer du temps à configurer vos instructions personnalisées et vos GPTs.\n\nL\'investissement initial est largement récompensé par des interactions plus rapides, plus pertinentes et une IA qui se comporte moins comme un outil générique et plus comme un véritable assistant personnel à votre service.',
+    },
+    {
+      type: 'actionChecklist',
+      title: 'Plan d\'action : Transformez votre pratique',
+      description: 'Mettez en pratique ces techniques de gestion de mémoire pour devenir un pilote efficace de l\'IA :',
+      variant: 'card',
+      allowChecking: true,
+      items: [
+        {
+          id: 'configure-instructions',
+          title: 'Configurer vos instructions personnalisées',
+          description: 'Créez un profil personnalisé avec votre contexte professionnel, vos préférences de communication et vos domaines d\'expertise.',
+          priority: 'high',
+        },
+        {
+          id: 'practice-savepoints',
+          title: 'Pratiquer les points de sauvegarde',
+          description: 'Dans votre prochaine conversation longue, testez le prompt de point de sauvegarde toutes les 10-15 interactions.',
+          priority: 'high',
+        },
+        {
+          id: 'create-specialized-gpt',
+          title: 'Créer votre premier GPT spécialisé',
+          description: 'Identifiez une tâche récurrente et créez un GPT dédié avec des instructions précises et une base de connaissances.',
+          priority: 'medium',
+        },
+        {
+          id: 'trajectory-correction',
+          title: 'Maîtriser la correction de trajectoire',
+          description: 'Expérimentez avec les prompts de correction quand une conversation dérive de votre objectif initial.',
+          priority: 'medium',
+        },
+        {
+          id: 'document-templates',
+          title: 'Créer vos modèles de prompts',
+          description: 'Adaptez les templates fournis à vos besoins spécifiques et constituez votre bibliothèque personnelle.',
+          priority: 'low',
+        },
+      ],
     },
     {
       type: 'toolRecommendation',

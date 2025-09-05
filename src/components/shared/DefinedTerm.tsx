@@ -1,5 +1,7 @@
-import { useState } from 'react'
 import { HelpCircle } from 'lucide-react'
+
+import { useState } from 'react'
+
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import {
@@ -24,21 +26,16 @@ interface DefinedTermProps {
   showIcon?: boolean
 }
 
-export function DefinedTerm({ 
-  term, 
-  children, 
-  variant = 'inline',
-  showIcon = true 
-}: DefinedTermProps) {
-  const [open, setOpen] = useState(false)
-  const definition = glossary[term.toLowerCase()]
-
-  if (!definition) {
-    // Si le terme n'est pas dans le glossaire, on renvoie le contenu tel quel
-    return <>{children}</>
+interface DefinitionContentProps {
+  definition: {
+    term: string
+    category?: string
+    definition: string
   }
+}
 
-  const DefinitionContent = () => (
+function DefinitionContent({ definition }: DefinitionContentProps) {
+  return (
     <div className="space-y-3">
       <div>
         <h4 className="font-semibold text-sm">{definition.term}</h4>
@@ -51,6 +48,21 @@ export function DefinedTerm({
       <p className="text-sm leading-relaxed">{definition.definition}</p>
     </div>
   )
+}
+
+export function DefinedTerm({
+  term,
+  children,
+  variant = 'inline',
+  showIcon = true,
+}: DefinedTermProps) {
+  const [open, setOpen] = useState(false)
+  const definition = glossary[term.toLowerCase()]
+
+  if (!definition) {
+    // Si le terme n'est pas dans le glossaire, on renvoie le contenu tel quel
+    return <>{children}</>
+  }
 
   if (variant === 'button') {
     return (
@@ -65,7 +77,7 @@ export function DefinedTerm({
           <DialogHeader>
             <DialogTitle>Définition</DialogTitle>
             <DialogDescription asChild>
-              <DefinitionContent />
+              <DefinitionContent definition={definition} />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
@@ -85,7 +97,7 @@ export function DefinedTerm({
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-80" side="top">
-        <DefinitionContent />
+        <DefinitionContent definition={definition} />
       </PopoverContent>
     </Popover>
   )
