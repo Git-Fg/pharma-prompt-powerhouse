@@ -3,20 +3,23 @@ import { useCallback, useEffect, useState } from 'react'
 import { useConsentStorage } from './useConsent'
 
 export function useFavorites(storageKey: string) {
-  const [favorites, setFavorites] = useState<Set<string>>(new Set())
+  const [favorites, setFavorites] = useState<Set<string>>(() => new Set())
   const { getItem, setItem } = useConsentStorage()
 
   // Charger les favoris depuis le stockage avec consentement au montage
   useEffect(() => {
-    try {
-      const stored = getItem(storageKey)
-      if (stored) {
-        setFavorites(new Set(JSON.parse(stored)))
+    const loadFavorites = () => {
+      try {
+        const stored = getItem(storageKey)
+        if (stored) {
+          setFavorites(new Set(JSON.parse(stored)))
+        }
+      }
+      catch (error) {
+        console.error('Failed to load favorites from storage', error)
       }
     }
-    catch (error) {
-      console.error('Failed to load favorites from storage', error)
-    }
+    loadFavorites()
   }, [storageKey, getItem])
 
   // Écouter les changements de localStorage (pour la synchronisation entre onglets)
