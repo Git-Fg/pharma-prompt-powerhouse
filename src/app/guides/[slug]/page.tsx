@@ -8,9 +8,9 @@ import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { Separator } from '@/components/ui/separator'
 import { content, getGuideBySlug } from '@/lib/content-loader'
-import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils'
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
@@ -49,9 +49,6 @@ export default async function GuideDetailPage({
     notFound()
   }
 
-  const categoryLabel = getCategoryLabel(guide.category)
-  const difficultyLabel = getDifficultyLabel(guide.difficulty)
-
   return (
     <Section>
       <Container maxWidth="4xl">
@@ -65,8 +62,8 @@ export default async function GuideDetailPage({
 
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">{categoryLabel}</Badge>
-              <Badge variant="outline">{difficultyLabel}</Badge>
+              <CategoryBadge category={guide.category} />
+              <DifficultyBadge difficulty={guide.difficulty} />
               {guide.isWorkflow && (
                 <Badge variant="default">
                   <Target className="mr-1 h-3 w-3" />

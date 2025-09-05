@@ -11,7 +11,7 @@ Transform pharmacy students from "passengers" to "pilots" of AI by providing:
 - Powerful tools with interactive workflows
 - A coherent ecosystem with intelligent content interconnections
 - Always priorize elegance and simplicty over unrelevant complexity
-- Always verify you're not duplicating a source of truth when implementing change, even when you're fixing lint/type issue. 
+- Always verify you're not duplicating a source of truth when implementing change, even when you're fixing lint/type issue.
 
 ### Technologies & Architecture
 
@@ -226,7 +226,7 @@ This platform is a learning tool and educational aid. Using AI in pharmaceutical
 - ✅ **GEO**: Generative Engine Optimisation - Always implement best methodology to reflect recent change in 2025 in SEO, where being readable by AI Agents is primordial.
 
 ### Absolute Constraints
-Always priorise to manually read files (Readfile tool) instead of using grep. 
-Avoid creating script that would make a lot of change in the codebase, as it is generally a bad idea and introduces issues, always priorize to proceed manually with your tools to read and edit files. 
+Always priorise to manually read files (Readfile tool) instead of using grep.
+Avoid creating script that would make a lot of change in the codebase, as it is generally a bad idea and introduces issues, always priorize to proceed manually with your tools to read and edit files.
 Always use your todolist tool to structurate your approach, and do not hesitate to update it in real time.
 Always avoid as much as possible to manually edit shadcn components from components/ui

@@ -15,7 +15,7 @@ export function Container({
   const maxWidthClasses = {
     'sm': 'max-w-sm',
     'md': 'max-w-md',
-    'lg': 'container-lg-width',
+    'lg': 'container-constrained',
     'xl': 'max-w-xl',
     '2xl': 'max-w-2xl',
     '4xl': 'max-w-4xl',

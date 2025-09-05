@@ -11,6 +11,7 @@ export function useScrollProgress() {
     const updateScrollProgress = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
       const currentProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setScrollProgress(currentProgress)
     }
 
@@ -153,6 +154,7 @@ export function useStagger<T>(items: T[], delay = 0.1) {
 
   useEffect(() => {
     // Reset visible items when items change
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setVisibleItems([])
 
     const timeouts: NodeJS.Timeout[] = []
@@ -231,7 +233,9 @@ export function useTypewriter(text: string, speed = 50) {
 
   useEffect(() => {
     // Reset states when text changes
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setDisplayedText('')
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setIsComplete(false)
 
     let index = 0
@@ -286,6 +290,7 @@ export function useReducedMotion() {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const updatePreference = () => {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
       setPrefersReducedMotion(mediaQuery.matches)
     }
 

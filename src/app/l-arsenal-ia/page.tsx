@@ -13,10 +13,10 @@ export default function ExternalToolsPage() {
   const freeCount = tools.filter(t => !t.freeVsPaidOffer || t.freeVsPaidOffer.includes('Gratuit')).length
 
   const stats = [
-    { value: totalTools, label: 'Outils testés', colorClass: 'text-blue-600 dark:text-blue-400', bgClass: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200 dark:border-blue-800' },
-    { value: favoriteCount, label: 'Favoris', colorClass: 'text-green-600 dark:text-green-400', bgClass: 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800' },
-    { value: reviewedCount, label: 'Avis détaillés', colorClass: 'text-purple-600 dark:text-purple-400', bgClass: 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/50 dark:to-purple-900/30 border-purple-200 dark:border-purple-800' },
-    { value: freeCount, label: 'Accès gratuit', colorClass: 'text-orange-600 dark:text-orange-400', bgClass: 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800' },
+    { value: totalTools, label: 'Outils testés', type: 'tools' },
+    { value: favoriteCount, label: 'Favoris', type: 'primary' },
+    { value: reviewedCount, label: 'Avis détaillés', type: 'workflows' },
+    { value: freeCount, label: 'Accès gratuit', type: 'guides' },
   ]
 
   return (

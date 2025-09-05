@@ -7,8 +7,8 @@ import React from 'react'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { contentCardVariants, statusBadgeVariants } from '@/components/ui/variants'
-import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils'
+import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
+import { contentCardVariants } from '@/components/ui/variants'
 import { cn } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
 
@@ -51,14 +51,12 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
               <BookOpen className="size-4" />
               <span>
                 Difficulté:
-                {getDifficultyLabel(concept.difficulty)}
+                <DifficultyBadge difficulty={concept.difficulty} />
               </span>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className={statusBadgeVariants({ status: 'available' })}>
-              {getCategoryLabel(concept.category)}
-            </Badge>
+            <CategoryBadge category={concept.category} />
             {concept.tags.map(tag => (
               <Badge key={tag} variant="outline" className="text-xs">
                 {tag}

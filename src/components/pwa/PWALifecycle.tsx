@@ -45,9 +45,22 @@ export function PWALifecycle() {
           console.warn('Service Worker registered:', registration)
         }
 
-        // Listen for service worker updates and store cleanup
-        registration.addEventListener('updatefound', handleUpdateFound)
+        // Listen for service worker updates
+        reg.addEventListener('updatefound', handleUpdateFound)
+
+        // Store cleanup function
+        const updateFoundCleanup = () => reg.removeEventListener('updatefound', handleUpdateFound)
+
+        // Handle initial update found if any
         workerCleanup = handleUpdateFound()
+
+        // Cleanup function for this registration
+        return () => {
+          updateFoundCleanup()
+          if (workerCleanup) {
+            workerCleanup()
+          }
+        }
       }).catch((error) => {
         // Service worker registration failed - only log in development
         if (process.env.NODE_ENV === 'development') {
@@ -58,14 +71,9 @@ export function PWALifecycle() {
       // Listen for service worker messages
       navigator.serviceWorker.addEventListener('message', handleMessage)
 
-      // Cleanup function
+      // Main cleanup function
       return () => {
-        if (registration) {
-          registration.removeEventListener('updatefound', handleUpdateFound)
-        }
-        if (workerCleanup) {
-          workerCleanup()
-        }
+        // Remove message listener
         navigator.serviceWorker.removeEventListener('message', handleMessage)
       }
     }

@@ -33,7 +33,7 @@ vi.mock('@/lib/navigation', () => ({
         { name: 'Accueil', href: '/', icon: () => null },
         { name: 'Par où commencer ?', href: '/par-ou-commencer', icon: () => null },
         { name: 'Workflows Stratégiques', href: '/workflows', icon: () => null },
-        { name: "L'Arsenal IA", href: '/l-arsenal-ia', icon: () => null },
+        { name: 'L\'Arsenal IA', href: '/l-arsenal-ia', icon: () => null },
         { name: 'Concepts', href: '/concepts', icon: () => null },
       ]
     }
@@ -46,12 +46,12 @@ vi.mock('@/lib/navigation', () => ({
   },
 }))
 
-describe('Footer Component', () => {
+describe('footer Component', () => {
   beforeEach(() => {
     render(<Footer />)
   })
 
-  describe('Brand Section', () => {
+  describe('brand Section', () => {
     it('renders the brand logo and name', () => {
       expect(screen.getByText('Pharma Prompt')).toBeInTheDocument()
     })
@@ -68,7 +68,7 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Navigation Section', () => {
+  describe('navigation Section', () => {
     it('renders navigation section title', () => {
       expect(screen.getByText('Navigation')).toBeInTheDocument()
     })
@@ -87,7 +87,7 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Legal Section', () => {
+  describe('legal Section', () => {
     it('renders legal section title', () => {
       expect(screen.getByText('Sécurité & Légal')).toBeInTheDocument()
     })
@@ -98,7 +98,7 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Recent Workflows Section', () => {
+  describe('recent Workflows Section', () => {
     it('renders workflows section title', () => {
       expect(screen.getByText('Derniers Workflows')).toBeInTheDocument()
     })
@@ -119,7 +119,7 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Grid Layout', () => {
+  describe('grid Layout', () => {
     it('applies responsive grid classes', () => {
       const grid = screen.getByText('Pharma Prompt').closest('.grid')
       expect(grid).toHaveClass('grid', 'grid-cols-1', 'md:grid-cols-2', 'xl:grid-cols-4')
@@ -131,14 +131,14 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Copyright Section', () => {
+  describe('copyright Section', () => {
     it('renders copyright notice', () => {
       const currentYear = new Date().getFullYear()
       expect(screen.getByText(`© ${currentYear} Pharma Prompt Powerhouse. Tous droits réservés.`)).toBeInTheDocument()
     })
   })
 
-  describe('Accessibility', () => {
+  describe('accessibility', () => {
     it('uses proper semantic footer element', () => {
       expect(screen.getByRole('contentinfo')).toBeInTheDocument()
     })

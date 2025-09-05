@@ -1,16 +1,16 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 // Test semantic utilities by verifying they're defined in globals.css
-describe('Semantic CSS Utilities', () => {
+describe('semantic CSS Utilities', () => {
   // Read globals.css content for testing
-  const fs = require('fs')
-  const path = require('path')
   const globalsCSS = fs.readFileSync(
     path.join(__dirname, '../../src/app/globals.css'),
-    'utf8'
+    'utf8',
   )
 
-  describe('Typography Utilities', () => {
+  describe('typography Utilities', () => {
     it('prose-slogan utility is defined', () => {
       expect(globalsCSS).toContain('@utility prose-slogan')
       expect(globalsCSS).toContain('text-muted-foreground')
@@ -36,7 +36,7 @@ describe('Semantic CSS Utilities', () => {
     })
   })
 
-  describe('Width Utilities - Tailwind v4 Bug Fixes', () => {
+  describe('width Utilities - Tailwind v4 Bug Fixes', () => {
     it('container-content-width utility is defined', () => {
       expect(globalsCSS).toContain('@utility container-content-width')
       expect(globalsCSS).toContain('max-width: 32rem')
@@ -62,7 +62,7 @@ describe('Semantic CSS Utilities', () => {
     })
   })
 
-  describe('Container Variables - Tailwind v4 Bug Fix', () => {
+  describe('container Variables - Tailwind v4 Bug Fix', () => {
     it('defines container variables to fix max-w-* bug', () => {
       expect(globalsCSS).toContain('--container-3xs: 16rem')
       expect(globalsCSS).toContain('--container-2xs: 18rem')
@@ -84,7 +84,7 @@ describe('Semantic CSS Utilities', () => {
     })
   })
 
-  describe('Base Responsive Utilities', () => {
+  describe('base Responsive Utilities', () => {
     it('responsive-text utility is defined', () => {
       expect(globalsCSS).toContain('@utility responsive-text')
     })
@@ -106,10 +106,10 @@ describe('Semantic CSS Utilities', () => {
     })
   })
 
-  describe('ESLint Configuration for Semantic Utilities', () => {
+  describe('eSLint Configuration for Semantic Utilities', () => {
     const eslintConfig = fs.readFileSync(
       path.join(__dirname, '../../eslint.config.js'),
-      'utf8'
+      'utf8',
     )
 
     it('includes support for Tailwind v4 semantic utilities', () => {
