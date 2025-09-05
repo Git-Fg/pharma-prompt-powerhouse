@@ -13,7 +13,7 @@ interface SkeletonProps {
   lines?: number
   animate?: boolean
   style?: React.CSSProperties
-  'data-sidebar'?: string
+  dataSidebar?: string
   [key: string]: any // Allow any data attributes
 }
 
@@ -25,6 +25,7 @@ export function Skeleton({
   lines = 1,
   animate = true,
   style,
+  dataSidebar,
   ...props
 }: SkeletonProps) {
   const baseClasses = 'bg-muted'
@@ -63,6 +64,7 @@ export function Skeleton({
                 }
               : undefined}
             {...props}
+            data-sidebar={dataSidebar}
           />
         ))}
       </div>
@@ -87,6 +89,7 @@ export function Skeleton({
           }
         : undefined}
       {...props}
+      data-sidebar={dataSidebar}
     />
   )
 }

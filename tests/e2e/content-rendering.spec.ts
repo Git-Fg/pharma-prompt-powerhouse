@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test.describe('MDX Components Functionality', () => {
+test.describe('Content Rendering Functionality', () => {
   test('modernized concept with React components renders correctly', async ({ page }) => {
     await page.goto('/concepts/hallucination-effet-indesirable')
 
