@@ -8,7 +8,7 @@ export const easings = {
   snappy: [0.4, 0, 0.6, 1],
 } as const
 
-// Animation variants following 2025 patterns
+// Animation variants following 2025 patterns - optimized timing (150-300ms)
 export const fadeInVariants: Variants = {
   hidden: {
     opacity: 0,
@@ -16,7 +16,7 @@ export const fadeInVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: easings.smooth,
     },
   },
@@ -25,13 +25,13 @@ export const fadeInVariants: Variants = {
 export const slideUpVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 16,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.25,
       ease: easings.spring,
     },
   },
@@ -40,13 +40,13 @@ export const slideUpVariants: Variants = {
 export const slideDownVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: -20,
+    y: -16,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.25,
       ease: easings.spring,
     },
   },
@@ -55,13 +55,13 @@ export const slideDownVariants: Variants = {
 export const scaleVariants: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.95,
+    scale: 0.96,
   },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: easings.spring,
     },
   },

@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, Copy, FileCode } from 'lucide-react'
+import { Check, Copy, FileCode, User, Settings, Brain } from 'lucide-react'
 import { useState } from 'react'
 import Button from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -11,6 +11,72 @@ interface CodeBlockProps {
   filename?: string
   className?: string
   showLineNumbers?: boolean
+  /**
+   * Enable semantic highlighting for prompt engineering
+   * Highlights roles, tasks, context, and variables with distinct colors
+   */
+  semanticHighlighting?: boolean
+  /**
+   * Type of prompt content for semantic analysis
+   */
+  promptType?: 'medical' | 'research' | 'analysis' | 'creative' | 'general'
+}
+
+// Semantic patterns for prompt engineering
+const SEMANTIC_PATTERNS = {
+  role: {
+    patterns: [
+      /Tu es un(e)?\s+([^.]+)/gi,
+      /Agis en tant que ([^.]+)/gi,
+      /En tant que ([^.]+)/gi,
+      /Rôle\s*:\s*([^\n]+)/gi,
+      /You are (a|an)?\s*([^.]+)/gi,
+      /Act as (a|an)?\s*([^.]+)/gi,
+    ],
+    icon: User,
+    color: 'text-blue-600 dark:text-blue-400',
+    bg: 'bg-blue-50 dark:bg-blue-950/50',
+  },
+  task: {
+    patterns: [
+      /Tâche\s*:\s*([^\n]+)/gi,
+      /Objectif\s*:\s*([^\n]+)/gi,
+      /Génère\s+([^.]+)/gi,
+      /Créé\s+([^.]+)/gi,
+      /Analyse\s+([^.]+)/gi,
+      /Explique\s+([^.]+)/gi,
+      /Task\s*:\s*([^\n]+)/gi,
+      /Generate\s+([^.]+)/gi,
+      /Create\s+([^.]+)/gi,
+      /Analyze\s+([^.]+)/gi,
+    ],
+    icon: Settings,
+    color: 'text-green-600 dark:text-green-400',
+    bg: 'bg-green-50 dark:bg-green-950/50',
+  },
+  context: {
+    patterns: [
+      /Contexte\s*:\s*([^\n]+)/gi,
+      /Dans le contexte de ([^.]+)/gi,
+      /Considérant que ([^.]+)/gi,
+      /Background\s*:\s*([^\n]+)/gi,
+      /Context\s*:\s*([^\n]+)/gi,
+      /Given that ([^.]+)/gi,
+    ],
+    icon: Brain,
+    color: 'text-purple-600 dark:text-purple-400',
+    bg: 'bg-purple-50 dark:bg-purple-950/50',
+  },
+  variable: {
+    patterns: [
+      /\{\{([^}]+)\}\}/gi,
+      /\$\{([^}]+)\}/gi,
+      /\[([^\]]+)\]/gi,
+    ],
+    icon: FileCode,
+    color: 'text-orange-600 dark:text-orange-400',
+    bg: 'bg-orange-50 dark:bg-orange-950/50',
+  },
 }
 
 export function CodeBlock({
@@ -19,6 +85,8 @@ export function CodeBlock({
   filename,
   className,
   showLineNumbers = false,
+  semanticHighlighting = false,
+  promptType = 'general',
 }: CodeBlockProps) {
   const [hasCopied, setHasCopied] = useState(false)
   const code = String(children).replace(/\n$/, '')
@@ -51,9 +119,51 @@ export function CodeBlock({
       shell: 'Shell',
       yaml: 'YAML',
       yml: 'YAML',
+      prompt: 'Prompt Engineering',
+      medical: 'Prompt Médical',
+      research: 'Prompt Recherche',
     }
     return languageMap[lang] || lang.toUpperCase()
   }
+
+  // Apply semantic highlighting for prompt content
+  const processSemanticHighlighting = (text: string) => {
+    if (!semanticHighlighting) return text
+
+    let processedText = text
+    const highlights: Array<{ type: string; start: number; end: number; content: string }> = []
+
+    // Find all semantic patterns
+    Object.entries(SEMANTIC_PATTERNS).forEach(([type, config]) => {
+      config.patterns.forEach(pattern => {
+        let match
+        while ((match = pattern.exec(text)) !== null) {
+          highlights.push({
+            type,
+            start: match.index,
+            end: match.index + match[0].length,
+            content: match[0],
+          })
+        }
+      })
+    })
+
+    // Sort highlights by position (reverse to avoid position shifts)
+    highlights.sort((a, b) => b.start - a.start)
+
+    // Apply highlights
+    highlights.forEach(highlight => {
+      const { type, start, end, content } = highlight
+      const config = SEMANTIC_PATTERNS[type as keyof typeof SEMANTIC_PATTERNS]
+      const highlightedContent = `<span class="semantic-highlight semantic-${type} ${config.color} ${config.bg} px-1 py-0.5 rounded text-xs font-medium">${content}</span>`
+      
+      processedText = processedText.slice(0, start) + highlightedContent + processedText.slice(end)
+    })
+
+    return processedText
+  }
+
+  const processedCode = semanticHighlighting ? processSemanticHighlighting(code) : code
 
   return (
     <div className={cn('group relative my-6', className)}>
@@ -62,28 +172,65 @@ export function CodeBlock({
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <FileCode className="size-4" />
           {filename && <span className="font-mono">{filename}</span>}
-          {language && (
-            <span className="rounded bg-background px-2 py-1 text-xs font-medium">
-              {getLanguageLabel(language)}
+          <span className="rounded bg-background px-2 py-1 text-xs font-medium">
+            {getLanguageLabel(language)}
+          </span>
+          {semanticHighlighting && promptType && (
+            <span className="rounded bg-primary/10 text-primary px-2 py-1 text-xs font-medium">
+              Prompt {promptType}
             </span>
           )}
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="size-8 p-0 opacity-0 transition-opacity hover:bg-accent hover:text-accent-foreground group-hover:opacity-100"
-          onClick={copyToClipboard}
-          aria-label={hasCopied ? 'Code copié !' : 'Copier le code'}
-        >
-          {hasCopied
-            ? (
-                <Check className="size-4 text-green-600" />
-              )
-            : (
-                <Copy className="size-4" />
-              )}
-        </Button>
+        <div className="flex items-center gap-2">
+          {semanticHighlighting && (
+            <div className="flex items-center gap-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+              <User className="size-3 text-blue-500" />
+              <Settings className="size-3 text-green-500" />
+              <Brain className="size-3 text-purple-500" />
+              <FileCode className="size-3 text-orange-500" />
+            </div>
+          )}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="size-8 p-0 opacity-0 transition-opacity hover:bg-accent hover:text-accent-foreground group-hover:opacity-100"
+            onClick={copyToClipboard}
+            aria-label={hasCopied ? 'Code copié !' : 'Copier le code'}
+          >
+            {hasCopied
+              ? (
+                  <Check className="size-4 text-green-600" />
+                )
+              : (
+                  <Copy className="size-4" />
+                )}
+          </Button>
+        </div>
       </div>
+
+      {/* Légende des couleurs sémantiques */}
+      {semanticHighlighting && (
+        <div className="border-x border-border bg-muted/50 px-4 py-2 text-xs">
+          <div className="flex flex-wrap gap-3 text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <User className="size-3 text-blue-500" />
+              <span>Rôle</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Settings className="size-3 text-green-500" />
+              <span>Tâche</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Brain className="size-3 text-purple-500" />
+              <span>Contexte</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <FileCode className="size-3 text-orange-500" />
+              <span>Variables</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bloc de code */}
       <div className="relative overflow-hidden rounded-b-lg border border-t-0 border-border bg-background">
@@ -102,16 +249,53 @@ export function CodeBlock({
             showLineNumbers && 'pl-16',
           )}
         >
-          <code
-            className={cn(
-              'font-mono text-foreground',
-              language && `language-${language}`,
-            )}
-          >
-            {code}
-          </code>
+          {semanticHighlighting ? (
+            <code
+              className={cn(
+                'font-mono text-foreground',
+                language && `language-${language}`,
+              )}
+              dangerouslySetInnerHTML={{ __html: processedCode }}
+            />
+          ) : (
+            <code
+              className={cn(
+                'font-mono text-foreground',
+                language && `language-${language}`,
+              )}
+            >
+              {code}
+            </code>
+          )}
         </pre>
       </div>
+
+      {/* Style CSS pour les highlights sémantiques */}
+      <style jsx>{`
+        .semantic-highlight {
+          display: inline-block;
+          margin: 0 1px;
+          border-radius: 3px;
+          font-weight: 500;
+        }
+        
+        .semantic-role {
+          border-left: 3px solid rgb(59 130 246);
+        }
+        
+        .semantic-task {
+          border-left: 3px solid rgb(34 197 94);
+        }
+        
+        .semantic-context {
+          border-left: 3px solid rgb(147 51 234);
+        }
+        
+        .semantic-variable {
+          border-left: 3px solid rgb(249 115 22);
+          font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
+        }
+      `}</style>
     </div>
   )
 }
