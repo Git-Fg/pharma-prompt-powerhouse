@@ -2,8 +2,6 @@
 import { useCallback } from 'react'
 import { useConsent } from './useConsent'
 
-const STORAGE_KEY = 'pharma-consent-status'
-
 /**
  * Nettoie toutes les données stockées (thème, favoris, etc.)
  */

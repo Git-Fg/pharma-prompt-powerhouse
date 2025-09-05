@@ -2,7 +2,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { createContext, use, useCallback, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { clearStoredData, useConsentStorage } from './useConsentUtils'
 
 type ConsentStatus = 'pending' | 'accepted' | 'declined'
@@ -58,17 +58,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       {children}
     </ConsentContext>
   )
-}
-
-/**
- * Hook pour utiliser le contexte de consentement
- */
-export function useConsent() {
-  const context = use(ConsentContext)
-  if (!context) {
-    throw new Error('useConsent doit être utilisé dans un ConsentProvider')
-  }
-  return context
 }
 
 export { useConsentStorage }
