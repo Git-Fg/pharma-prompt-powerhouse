@@ -5,7 +5,7 @@ import Button from '@/components/ui/button'
 export default function NotFound() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="text-center max-w-2xl mx-auto">
+      <div className="text-center text-content-width">  
         <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
           <Search className="size-8 text-muted-foreground" />
         </div>

@@ -425,7 +425,7 @@ export function AnimatedToast({
         'fixed top-6 right-6 z-toast',
         'px-4 py-3 rounded-lg shadow-lg',
         'flex items-center gap-3',
-        'max-w-sm',
+        'text-content-width',
         colors[type],
       )}
       initial={{ opacity: 0, x: 100, scale: 0.95 }}

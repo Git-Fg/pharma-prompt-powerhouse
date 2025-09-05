@@ -36,7 +36,7 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
   }[size]
 
   const renderConceptContent = (concept: Concept) => (
-    <div className="space-y-3 max-w-sm">
+    <div className="space-y-3 text-content-width">
       <div className="flex items-start gap-3">
         <div className="bg-primary/10 p-2 rounded-lg flex-shrink-0">
           <Lightbulb className="size-4 text-primary" />
@@ -81,7 +81,7 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
   )
 
   const renderToolContent = (tool: ExternalTool) => (
-    <div className="space-y-3 max-w-sm">
+    <div className="space-y-3 text-content-width">
       <div className="flex items-start gap-3">
         <div className="bg-primary/10 p-2 rounded-lg flex-shrink-0">
           <Globe className="size-4 text-primary" />

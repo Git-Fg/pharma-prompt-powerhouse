@@ -57,7 +57,7 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
   return (
     <>
       {/* Search and Filter Controls */}
-      <div className="flex flex-col lg:flex-row gap-4 max-w-4xl mx-auto mb-8">
+      <div className="flex flex-col lg:flex-row gap-4 container mx-auto mb-8">
         <div className="flex-1">
           <SearchInput
             placeholder="Rechercher un concept..."

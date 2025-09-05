@@ -42,14 +42,16 @@ Grâce à la quantification au format **GGUF Q4_K_M** (une version optimisée de
     },
     {
         type: 'markdown',
-        content: `
+      content: `
 ## Pour aller plus loin (Notions Avancées)
 
-- **GGUF (Georgi Gerganov Universal Format) :** C\'est le format de fichier le plus populaire pour les modèles quantifiés. Il est devenu le standard de facto pour les outils comme LM Studio, Ollama, et Jan.ai car il est très performant sur CPU et peut être partiellement ou totalement "déchargé" sur un GPU.
+- **GGUF (Georgi Gerganov Universal Format) :** C'est le format de fichier le plus populaire pour les modèles quantifiés. Il est devenu le standard de facto pour les outils comme LM Studio, Ollama, et Jan.ai car il est très performant sur CPU et peut être partiellement ou totalement "déchargé" sur un GPU.
 
-- **Variantes de Quantification :** Il existe de nombreuses "recettes" de quantification. Vous verrez souvent des noms comme `Q4_K_M`, `Q5_K_S`, `Q8_0`. Celles-ci indiquent le niveau de précision et la méthode utilisée. `Q4_K_M` est généralement considéré comme le meilleur compromis performance/qualité pour les modèles 7B.
+- **Variantes de Quantification :** Il existe de nombreuses "recettes" de quantification. Vous verrez souvent des noms comme Q4_K_M, Q5_K_S, Q8_0. Celles-ci indiquent le niveau de précision et la méthode utilisée. Q4_K_M est généralement considéré comme le meilleur compromis performance/qualité pour les modèles 7B.
 
-- **AWQ (Activation-aware Weight Quantization) / GPTQ (Generalized Post-Training Quantization) :** Ce sont d\'autres méthodes de quantification, souvent utilisées dans des environnements plus techniques (Python). GGUF reste le format le plus simple et le plus utilisé dans les interfaces graphiques.`
+- **AWQ (Activation-aware Weight Quantization) / GPTQ (Generalized Post-Training Quantization) :** Ce sont d'autres méthodes de quantification, souvent utilisées dans des environnements plus techniques (Python). GGUF reste le format le plus simple et le plus utilisé dans les interfaces graphiques.`
     }
   ],
-} satisfies Concept;
+} satisfies Concept
+
+export default concept
