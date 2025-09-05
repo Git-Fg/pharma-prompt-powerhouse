@@ -73,7 +73,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows.map(row => (
-                <TableRow key={row.id} className="group hover:bg-muted/50 hover-lift transition-all duration-200">
+                <TableRow key={row.id} className="group hover:bg-muted/50 hover-lift transition-all duration-200 even:bg-muted/30">
                   {row.getVisibleCells().map((cell) => {
                     // Type assertion for meta className
                     const metaClass = (cell.column.columnDef.meta as { className?: string })?.className || ''

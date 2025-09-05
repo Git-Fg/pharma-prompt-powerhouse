@@ -178,7 +178,7 @@ export default function ToolPage({ params }: ToolPageProps) {
 
           {/* Main Content */}
           {tool.content && tool.content.length > 0 && (
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="prose dark:prose-invert">
               <ContentRenderer content={tool.content} />
             </div>
           )}
