@@ -6,5 +6,8 @@ npm run lint
 # 2. Lancer la validation des types pour s'assurer qu'il n'y a pas d'erreurs TypeScript
 npm run typecheck
 
+# 3. Lancer les tests d'intégration pour vérifier l'intégrité du contenu
+npm run test:integration
+
 # Si l'une des commandes ci-dessus échoue, le commit sera bloqué.
 echo "Pre-commit checks passed!"
