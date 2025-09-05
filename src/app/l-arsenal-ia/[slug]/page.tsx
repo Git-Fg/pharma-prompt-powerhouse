@@ -137,7 +137,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                 <CardTitle className="text-xl">Offre Gratuite vs Payante</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="prose dark:prose-invert max-w-none">
+                <div className="prose dark:prose-invert">
                   <MarkdownRenderer content={tool.freeVsPaidOffer} />
                 </div>
               </CardContent>

@@ -150,7 +150,7 @@ export default async function ConceptDetailPage({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="prose dark:prose-invert">
               <ContentRenderer content={concept.content} />
             </div>
           </CardContent>
