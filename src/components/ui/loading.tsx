@@ -42,7 +42,7 @@ export function Skeleton({
       <div className="space-y-2">
         {Array.from({ length: lines }).map((_, index) => (
           <motion.div
-            key={index}
+            key={`text-line-${index}`}
             className={cn(
               baseClasses,
               variantClasses[variant],

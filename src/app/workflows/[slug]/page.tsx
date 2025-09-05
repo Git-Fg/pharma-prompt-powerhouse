@@ -210,7 +210,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
             <div className="bg-muted p-6 rounded-lg">
               <ul className="space-y-3">
                 {workflow.keyTakeaways.map((takeaway, index) => (
-                  <li key={index} className="flex items-start space-x-3">
+                  <li key={`takeaway-${takeaway.slice(0, 30).replace(/\s+/g, '-')}-${index}`} className="flex items-start space-x-3">
                     <CheckCircle className="size-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span>{takeaway}</span>
                   </li>
