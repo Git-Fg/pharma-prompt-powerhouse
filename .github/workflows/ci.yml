@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main, develop]
 
+# Cancel in-progress runs for the same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Job 1: Lint, Type Check, and Test
   test:
@@ -57,7 +62,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Build application
         run: npm run build
@@ -71,35 +76,4 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
-
-  # Job 3: Build and Deploy (only on main branch)
-  deploy:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
-    needs: [test, e2e]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build for production
-        run: npm run build
-
-      - name: Export static files
-        run: npm run export
-        continue-on-error: true
-
-      # Add your deployment step here (Vercel, Netlify, etc.)
-      - name: Deploy to production
-        run: echo "Add your deployment commands here"
+          retention-days: 7
