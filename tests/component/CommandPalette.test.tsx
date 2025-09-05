@@ -22,9 +22,9 @@ vi.mock('next/navigation', () => ({
     refresh: vi.fn(),
     prefetch: vi.fn(),
   }),
-  // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
+
   useSearchParams: () => new URLSearchParams(),
-  // eslint-disable-next-line react-hooks-extra/no-unnecessary-use-prefix
+
   usePathname: () => '/',
   redirect: vi.fn(),
   notFound: vi.fn(),
