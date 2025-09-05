@@ -207,15 +207,15 @@ describe('content Loader Integration', () => {
     it('should load content efficiently (optimized from O(N²) to O(N))', () => {
       // Test that content loading is reasonably fast
       const start = performance.now()
-      
+
       // Load content multiple times to test performance
       for (let i = 0; i < 10; i++) {
         loadContent()
       }
-      
+
       const end = performance.now()
       const duration = end - start
-      
+
       // Should complete 10 content loads in under 100ms on reasonable hardware
       // This verifies that the O(N²) → O(N) optimization is working
       expect(duration).toBeLessThan(100)

@@ -25,24 +25,24 @@ export function loadContent() {
   const conceptMap = new Map<string, BaseConcept>(concepts.map(c => [c.slug, c]))
   const guideMap = new Map<string, BaseGuide>(guides.map(g => [g.slug, g]))
   const workflowMap = new Map<string, BaseWorkflow>(workflows.map(w => [w.slug, w]))
-  
+
   // Préparez un objet pour stocker les relations inverses (back-relations)
   const backRelations = {
     concepts: new Map<string, { guides: BaseGuide[], workflows: BaseWorkflow[] }>(),
   }
 
   // Initialisez la map des back-relations pour chaque concept
-  conceptMap.forEach(concept => {
+  conceptMap.forEach((concept) => {
     backRelations.concepts.set(concept.slug, { guides: [], workflows: [] })
   })
 
   // Créer un index concept -> contenus pour optimiser la recherche de contenus liés (O(N) au lieu de O(N²))
   const conceptToContentMap = new Map<string, BaseContentItem[]>()
   const allContent: BaseContentItem[] = [...guides, ...workflows]
-  
+
   // Indexer tous les contenus par leurs concepts (une seule passe O(N))
-  allContent.forEach(item => {
-    item.conceptSlugs?.forEach(conceptSlug => {
+  allContent.forEach((item) => {
+    item.conceptSlugs?.forEach((conceptSlug) => {
       if (!conceptToContentMap.has(conceptSlug)) {
         conceptToContentMap.set(conceptSlug, [])
       }
@@ -55,7 +55,7 @@ export function loadContent() {
   // Enrichir les workflows
   const enrichedWorkflows: EnrichedWorkflow[] = workflows.map((workflow) => {
     // 1. Validation d'intégrité & enrichissement des concepts liés
-    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => {
+    const conceptsForWorkflow = workflow.conceptSlugs?.map((slug) => {
       const concept = conceptMap.get(slug)
       if (!concept) {
         // Le lien est brisé : faire échouer le build immédiatement !
@@ -71,11 +71,11 @@ export function loadContent() {
     // Optimisé: Trouver les workflows liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
     if (workflow.conceptSlugs) {
       const relatedContentSet = new Set<BaseContentItem>()
-      
+
       // Pour chaque concept de ce workflow, récupérer tous les contenus liés
-      workflow.conceptSlugs.forEach(conceptSlug => {
+      workflow.conceptSlugs.forEach((conceptSlug) => {
         const relatedContent = conceptToContentMap.get(conceptSlug) || []
-        relatedContent.forEach(item => {
+        relatedContent.forEach((item) => {
           if (item.slug !== workflow.slug) {
             relatedContentSet.add(item)
           }
@@ -101,7 +101,7 @@ export function loadContent() {
   // Enrichir les guides
   const enrichedGuides: EnrichedGuide[] = guides.map((guide) => {
     // 1. Validation d'intégrité & enrichissement des concepts liés
-    const conceptsForGuide = guide.conceptSlugs?.map(slug => {
+    const conceptsForGuide = guide.conceptSlugs?.map((slug) => {
       const concept = conceptMap.get(slug)
       if (!concept) {
         // Le lien est brisé : faire échouer le build immédiatement !
@@ -117,11 +117,11 @@ export function loadContent() {
     // Optimisé: Trouver les guides liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
     if (guide.conceptSlugs) {
       const relatedContentSet = new Set<BaseContentItem>()
-      
+
       // Pour chaque concept de ce guide, récupérer tous les contenus liés
-      guide.conceptSlugs.forEach(conceptSlug => {
+      guide.conceptSlugs.forEach((conceptSlug) => {
         const relatedContent = conceptToContentMap.get(conceptSlug) || []
-        relatedContent.forEach(item => {
+        relatedContent.forEach((item) => {
           if (item.slug !== guide.slug) {
             relatedContentSet.add(item)
           }
