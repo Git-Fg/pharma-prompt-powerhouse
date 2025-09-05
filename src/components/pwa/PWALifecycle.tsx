@@ -9,6 +9,7 @@ export function PWALifecycle() {
       && 'serviceWorker' in navigator
     ) {
       let registration: ServiceWorkerRegistration | undefined
+      let workerCleanup: (() => void) | undefined
 
       const handleUpdateFound = () => {
         const newWorker = registration?.installing
@@ -23,7 +24,11 @@ export function PWALifecycle() {
           }
 
           newWorker.addEventListener('statechange', handleStateChange)
+
+          // Store the cleanup function for this specific worker
+          return () => newWorker.removeEventListener('statechange', handleStateChange)
         }
+        return undefined
       }
 
       const handleMessage = (event: MessageEvent) => {
@@ -40,8 +45,9 @@ export function PWALifecycle() {
           console.warn('Service Worker registered:', registration)
         }
 
-        // Listen for service worker updates
+        // Listen for service worker updates and store cleanup
         registration.addEventListener('updatefound', handleUpdateFound)
+        workerCleanup = handleUpdateFound()
       }).catch((error) => {
         // Service worker registration failed - only log in development
         if (process.env.NODE_ENV === 'development') {
@@ -56,6 +62,9 @@ export function PWALifecycle() {
       return () => {
         if (registration) {
           registration.removeEventListener('updatefound', handleUpdateFound)
+        }
+        if (workerCleanup) {
+          workerCleanup()
         }
         navigator.serviceWorker.removeEventListener('message', handleMessage)
       }

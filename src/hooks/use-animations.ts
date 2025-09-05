@@ -10,7 +10,7 @@ export function useScrollProgress() {
   useEffect(() => {
     const updateScrollProgress = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      const currentProgress = window.scrollY / scrollHeight
+      const currentProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0
       setScrollProgress(currentProgress)
     }
 
@@ -152,6 +152,7 @@ export function useStagger<T>(items: T[], delay = 0.1) {
   const [visibleItems, setVisibleItems] = useState<T[]>([])
 
   useEffect(() => {
+    // Reset visible items when items change
     setVisibleItems([])
 
     const timeouts: NodeJS.Timeout[] = []
@@ -229,26 +230,21 @@ export function useTypewriter(text: string, speed = 50) {
   const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
-    const resetAndAnimate = () => {
-      setDisplayedText('')
-      setIsComplete(false)
+    // Reset states when text changes
+    setDisplayedText('')
+    setIsComplete(false)
 
-      let index = 0
-      const timer = setInterval(() => {
-        if (index < text.length) {
-          setDisplayedText(prev => prev + text[index])
-          index++
-        }
-        else {
-          setIsComplete(true)
-          clearInterval(timer)
-        }
-      }, speed)
-
-      return timer
-    }
-
-    const timer = resetAndAnimate()
+    let index = 0
+    const timer = setInterval(() => {
+      if (index < text.length) {
+        setDisplayedText(prev => prev + text[index])
+        index++
+      }
+      else {
+        setIsComplete(true)
+        clearInterval(timer)
+      }
+    }, speed)
 
     return () => clearInterval(timer)
   }, [text, speed])
@@ -295,14 +291,10 @@ export function useReducedMotion() {
 
     updatePreference()
 
-    const handleChange = () => {
-      updatePreference()
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
+    mediaQuery.addEventListener('change', updatePreference)
 
     return () => {
-      mediaQuery.removeEventListener('change', handleChange)
+      mediaQuery.removeEventListener('change', updatePreference)
     }
   }, [])
 

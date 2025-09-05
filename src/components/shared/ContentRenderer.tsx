@@ -75,7 +75,7 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
               {block.tabs.map((tab: { value: string, title: string, content: ContentBlock[] }) => (
                 <TabsContent key={tab.value} value={tab.value} className="mt-4">
                   {tab.content.map((subBlock: ContentBlock, idx: number) => (
-                    <BlockSwitch key={idx} block={subBlock} />
+                    <BlockSwitch key={`${tab.value}-${subBlock.type}-${idx}`} block={subBlock} />
                   ))}
                 </TabsContent>
               ))}
@@ -91,7 +91,7 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
       return (
         <Accordion type="single" collapsible className="w-full my-6">
           {block.items.map((item: { title: string, content: ContentBlock[] }, index: number) => (
-            <AccordionItem value={`item-${index}`} key={index}>
+            <AccordionItem value={`item-${index}`} key={`accordion-${item.title.replace(/\s+/g, '-').toLowerCase()}-${index}`}>
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <AccordionContent>
                 <ContentRenderer content={item.content} />
@@ -111,7 +111,7 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
               <TableHeader>
                 <TableRow>
                   {block.headers.map((header: string, index: number) => (
-                    <TableHead key={index} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
+                    <TableHead key={`header-${header.replace(/\s+/g, '-').toLowerCase()}-${index}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
                       {header}
                     </TableHead>
                   ))}
@@ -119,9 +119,9 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
               </TableHeader>
               <TableBody>
                 {block.rows.map((row: string[], rowIndex: number) => (
-                  <TableRow key={rowIndex}>
+                  <TableRow key={`row-${rowIndex}`}>
                     {row.map((cell: string, cellIndex: number) => (
-                      <TableCell key={cellIndex} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
+                      <TableCell key={`cell-${rowIndex}-${cellIndex}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
                         <MarkdownRenderer content={cell} />
                       </TableCell>
                     ))}
@@ -134,9 +134,9 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
           {/* Mobile Card View - Enhanced with better spacing */}
           <div className="block md:hidden space-y-4">
             {block.rows.map((row: string[], rowIndex: number) => (
-              <Card key={rowIndex} className="p-4">
+              <Card key={`mobile-row-${rowIndex}`} className="p-4">
                 {row.map((cell: string, cellIndex: number) => (
-                  <div key={cellIndex} className="mb-3 last:mb-0">
+                  <div key={`mobile-cell-${rowIndex}-${cellIndex}`} className="mb-3 last:mb-0">
                     <div className="text-sm font-medium text-muted-foreground mb-1">
                       {block.headers[cellIndex]}
                     </div>
@@ -180,7 +180,7 @@ export function ContentRenderer({ content }: { content: ContentBlock[] }) {
   return (
     <>
       {content.map((block, index) => (
-        <BlockSwitch key={index} block={block} />
+        <BlockSwitch key={`content-${block.type}-${index}`} block={block} />
       ))}
     </>
   )
