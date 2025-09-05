@@ -36,7 +36,19 @@ export function loadContent() {
     backRelations.concepts.set(concept.slug, { guides: [], workflows: [] })
   })
 
+  // Créer un index concept -> contenus pour optimiser la recherche de contenus liés (O(N) au lieu de O(N²))
+  const conceptToContentMap = new Map<string, BaseContentItem[]>()
   const allContent: BaseContentItem[] = [...guides, ...workflows]
+  
+  // Indexer tous les contenus par leurs concepts (une seule passe O(N))
+  allContent.forEach(item => {
+    item.conceptSlugs?.forEach(conceptSlug => {
+      if (!conceptToContentMap.has(conceptSlug)) {
+        conceptToContentMap.set(conceptSlug, [])
+      }
+      conceptToContentMap.get(conceptSlug)!.push(item)
+    })
+  })
 
   // --- PASSE 2: ENRICHISSEMENT, VALIDATION & BACK-RELATIONS (Complexité O(N)) ---
 
@@ -56,14 +68,22 @@ export function loadContent() {
 
     const relatedWorkflows: EnrichedWorkflow['relatedWorkflows'] = []
 
-    // Find related workflows based on shared concepts
+    // Optimisé: Trouver les workflows liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
     if (workflow.conceptSlugs) {
-      const relatedContent = allContent.filter(item =>
-        item.slug !== workflow.slug
-        && item.conceptSlugs?.some(slug => workflow.conceptSlugs!.includes(slug)),
-      )
+      const relatedContentSet = new Set<BaseContentItem>()
+      
+      // Pour chaque concept de ce workflow, récupérer tous les contenus liés
+      workflow.conceptSlugs.forEach(conceptSlug => {
+        const relatedContent = conceptToContentMap.get(conceptSlug) || []
+        relatedContent.forEach(item => {
+          if (item.slug !== workflow.slug) {
+            relatedContentSet.add(item)
+          }
+        })
+      })
 
-      relatedContent.forEach((item) => {
+      // Filtrer uniquement les workflows et éviter les doublons
+      relatedContentSet.forEach((item) => {
         if (workflowMap.has(item.slug) && !relatedWorkflows.some(w => w.slug === item.slug)) {
           const { content: _content, concepts: _concepts, relatedWorkflows: _rw, ...workflowWithoutContent } = item as EnrichedWorkflow
           relatedWorkflows.push(workflowWithoutContent)
@@ -94,13 +114,22 @@ export function loadContent() {
 
     const relatedGuides: EnrichedGuide['relatedGuides'] = []
 
+    // Optimisé: Trouver les guides liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
     if (guide.conceptSlugs) {
-      const relatedContent = allContent.filter(item =>
-        item.slug !== guide.slug
-        && item.conceptSlugs?.some(slug => guide.conceptSlugs!.includes(slug)),
-      )
+      const relatedContentSet = new Set<BaseContentItem>()
+      
+      // Pour chaque concept de ce guide, récupérer tous les contenus liés
+      guide.conceptSlugs.forEach(conceptSlug => {
+        const relatedContent = conceptToContentMap.get(conceptSlug) || []
+        relatedContent.forEach(item => {
+          if (item.slug !== guide.slug) {
+            relatedContentSet.add(item)
+          }
+        })
+      })
 
-      relatedContent.forEach((item) => {
+      // Filtrer uniquement les guides et éviter les doublons
+      relatedContentSet.forEach((item) => {
         if (guideMap.has(item.slug) && !relatedGuides.some(g => g.slug === item.slug)) {
           const { content: _content, concepts: _concepts, relatedGuides: _rg, ...guideWithoutContent } = item as EnrichedGuide
           relatedGuides.push(guideWithoutContent)
