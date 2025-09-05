@@ -7,6 +7,7 @@
 - **Humilité Intellectuelle :** Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle. J'encourage systématiquement à tester par soi-même.
 - **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
+- **Code Sémantique et Maintenable :** Privilégier des abstractions (utilitaires sémantiques, composants) qui décrivent l'intention ("ce que c'est") plutôt que l'implémentation ("à quoi ça ressemble").
 - **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
 - **Approche Mobile-First :** La responsivité, l'UI et l'UX doivent être irréprochables pour un usage sur mobile. L'expérience mobile n'est pas une adaptation, c'est le point de départ de toute conception.
 </project_philosophy>
@@ -48,12 +49,14 @@
 <css_architecture>
 **Design System Centralisé (Tailwind v4 + Shadcn Canary)**
 - **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
-- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement. La correction pour le bug `max-w-*` de Tailwind v4 y est également implémentée.
-- **@utility (Utilitaires Sémantiques) :** Des classes sémantiques personnalisées (ex: `prose-description`, `prose-slogan`) sont créées pour encapsuler des styles récurrents. Cela rend le code des composants plus lisible et maintenable en se concentrant sur le "quoi" (sémantique) plutôt que sur le "comment" (style).
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
+
+> ⚠️ **Avertissement Bug Tailwind v4 :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug où les classes `max-w-*` (ex: `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). Pour contourner ce problème, les variables `--container-*` sont explicitement redéfinies dans la section `@theme` de `globals.css` pour forcer l'utilisation des bonnes valeurs.
+
+- **@utility (Utilitaires Sémantiques) :** En plus des utilitaires de base (`container`, etc.), nous créons des utilitaires sémantiques pour les styles récurrents (ex: `prose-slogan`, `prose-description`). Cela améliore la lisibilité et la maintenabilité en donnant un sens métier aux styles, au lieu de répéter de longues chaînes de classes.
 - **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
 - **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
 - **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
-- **Composants Variantes :** L'utilisation de `tailwind-variants` dans `src/components/ui/variants.ts` est la norme pour créer des composants complexes avec des styles multiples (ex: badges sémantiques).
 </css_architecture>
 
 <advanced_animations>
@@ -175,10 +178,19 @@
 **ESLint (@antfu/eslint-config)**
 - **Configuration Moderne :** **Standardiser exclusivement sur @antfu/eslint-config** pour une configuration simplifiée et optimale.
 - **Gestion Automatique des Plugins :** @antfu/eslint-config gère automatiquement tous les plugins ESLint nécessaires (React, TypeScript, Next.js).
+- **Support Tailwind v4 :** Le plugin officiel `eslint-plugin-tailwindcss` n'est pas encore pleinement compatible avec la configuration sans-fichier de v4. Il est recommandé de le désactiver ou de configurer sa règle `no-custom-classname` avec une liste `allow` pour les utilitaires sémantiques personnalisés (ex: `prose-*`, `container-*`).
 - **Philosophie :** Configuration déclarative avec des règles opiniâtres mais sensées, évitant la complexité manuelle.
-- **Support Tailwind v4 :** La configuration est adaptée pour fonctionner avec les utilitaires sémantiques personnalisés de Tailwind v4. Le plugin `eslint-plugin-tailwindcss` est ajouté et configuré pour autoriser les classes préfixées (ex: `prose-*`), évitant ainsi les faux positifs.
-- **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025).
-- **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes.
+- **Structure :** `eslint.config.js` utilise l'API de configuration ESLint v9+ avec des overrides spécifiques par type de fichier.
+- **Intégrations :**
+  - **Next.js** : Règles recommandées et core-web-vitals intégrées
+  - **React Compiler** : Support natif pour React 19 Compiler
+  - **TypeScript** : Validation stricte avec règles modernes
+- **Personnalisations Projet :**
+  - Règles spécifiques pour les composants shadcn/ui (`src/components/ui/**`)
+  - Configuration allégée pour les tests (`**/*.test.ts?(x)`)
+  - Exclusions intelligentes pour les fichiers de documentation et exemples
+- **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025)
+- **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes
 </eslint_rules>
 
 <testing_rules>
@@ -198,6 +210,7 @@
 
 <instructions>
 DO rédiger prioritairement à la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO créer et utiliser des utilitaires sémantiques (`@utility`) pour les styles récurrents afin de garantir la cohérence et la maintenabilité.
 DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
 DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
@@ -207,6 +220,7 @@ DO appliquer systématiquement l'approche mobile-first avec les breakpoints stan
 DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
 DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
 DO utiliser @antfu/eslint-config pour une configuration ESLint simplifiée et moderne.
+DO NOT répéter de longues chaînes de classes utilitaires ; préférer la création d'un utilitaire sémantique.
 DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
 DO NOT utiliser Jest - standardiser exclusivement sur Vitest.
