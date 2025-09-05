@@ -20,14 +20,40 @@ export function loadContent() {
   const workflows: BaseWorkflow[] = allWorkflows
   const externalTools: BaseExternalTool[] = allExternalTools
 
+  // --- PASSE 1: INDEXATION (Complexité O(N)) ---
+  // Crée des dictionnaires rapides pour un accès instantané par slug.
   const conceptMap = new Map<string, BaseConcept>(concepts.map(c => [c.slug, c]))
   const guideMap = new Map<string, BaseGuide>(guides.map(g => [g.slug, g]))
   const workflowMap = new Map<string, BaseWorkflow>(workflows.map(w => [w.slug, w]))
+  
+  // Préparez un objet pour stocker les relations inverses (back-relations)
+  const backRelations = {
+    concepts: new Map<string, { guides: BaseGuide[], workflows: BaseWorkflow[] }>(),
+  }
+
+  // Initialisez la map des back-relations pour chaque concept
+  conceptMap.forEach(concept => {
+    backRelations.concepts.set(concept.slug, { guides: [], workflows: [] })
+  })
+
   const allContent: BaseContentItem[] = [...guides, ...workflows]
 
-  // Enrich workflows
+  // --- PASSE 2: ENRICHISSEMENT, VALIDATION & BACK-RELATIONS (Complexité O(N)) ---
+
+  // Enrichir les workflows
   const enrichedWorkflows: EnrichedWorkflow[] = workflows.map((workflow) => {
-    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is BaseConcept => c !== undefined) || []
+    // 1. Validation d'intégrité & enrichissement des concepts liés
+    const conceptsForWorkflow = workflow.conceptSlugs?.map(slug => {
+      const concept = conceptMap.get(slug)
+      if (!concept) {
+        // Le lien est brisé : faire échouer le build immédiatement !
+        throw new Error(`Erreur d'intégrité : Le workflow "${workflow.slug}" référence un concept inexistant "${slug}".`)
+      }
+      // 2. Création de la back-relation
+      backRelations.concepts.get(slug)!.workflows.push(workflow)
+      return concept
+    }) || []
+
     const relatedWorkflows: EnrichedWorkflow['relatedWorkflows'] = []
 
     // Find related workflows based on shared concepts
@@ -52,9 +78,20 @@ export function loadContent() {
     }
   })
 
-  // Enrich guides
+  // Enrichir les guides
   const enrichedGuides: EnrichedGuide[] = guides.map((guide) => {
-    const conceptsForGuide = guide.conceptSlugs?.map(slug => conceptMap.get(slug)).filter((c): c is BaseConcept => c !== undefined) || []
+    // 1. Validation d'intégrité & enrichissement des concepts liés
+    const conceptsForGuide = guide.conceptSlugs?.map(slug => {
+      const concept = conceptMap.get(slug)
+      if (!concept) {
+        // Le lien est brisé : faire échouer le build immédiatement !
+        throw new Error(`Erreur d'intégrité : Le guide "${guide.slug}" référence un concept inexistant "${slug}".`)
+      }
+      // 2. Création de la back-relation
+      backRelations.concepts.get(slug)!.guides.push(guide)
+      return concept
+    }) || []
+
     const relatedGuides: EnrichedGuide['relatedGuides'] = []
 
     if (guide.conceptSlugs) {
