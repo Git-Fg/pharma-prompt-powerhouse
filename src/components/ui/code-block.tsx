@@ -90,7 +90,7 @@ export function CodeBlock({
         {showLineNumbers && (
           <div className="absolute left-0 top-0 z-10 h-full w-12 select-none border-r border-border bg-muted/50 px-2 py-4 text-right text-xs text-muted-foreground">
             {code.split('\n').map((line, index) => (
-              <div key={`line-${index}-${line.substring(0, 10).replace(/[^a-zA-Z0-9]/g, '')}`} className="leading-6">
+              <div key={`line-${index}-${line.substring(0, 10).replace(/[^a-z0-9]/gi, '')}`} className="leading-6">
                 {index + 1}
               </div>
             ))}
