@@ -12,6 +12,9 @@ interface SkeletonProps {
   variant?: 'rectangular' | 'circular' | 'rounded' | 'text'
   lines?: number
   animate?: boolean
+  style?: React.CSSProperties
+  'data-sidebar'?: string
+  [key: string]: any // Allow any data attributes
 }
 
 export function Skeleton({
@@ -21,6 +24,8 @@ export function Skeleton({
   variant = 'rectangular',
   lines = 1,
   animate = true,
+  style,
+  ...props
 }: SkeletonProps) {
   const baseClasses = 'bg-muted'
 
@@ -46,6 +51,7 @@ export function Skeleton({
             style={{
               width: index === lines - 1 ? '75%' : width,
               height,
+              ...style,
             }}
             initial={animate ? { opacity: 0 } : false}
             animate={animate ? { opacity: 1 } : false}
@@ -56,6 +62,7 @@ export function Skeleton({
                   ease: easings.smooth,
                 }
               : undefined}
+            {...props}
           />
         ))}
       </div>
@@ -70,7 +77,7 @@ export function Skeleton({
         animate && 'animate-pulse-subtle',
         className,
       )}
-      style={{ width, height }}
+      style={{ width, height, ...style }}
       initial={animate ? { opacity: 0 } : false}
       animate={animate ? { opacity: 1 } : false}
       transition={animate
@@ -79,6 +86,7 @@ export function Skeleton({
             ease: easings.smooth,
           }
         : undefined}
+      {...props}
     />
   )
 }

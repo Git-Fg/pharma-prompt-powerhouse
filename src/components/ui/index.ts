@@ -184,7 +184,7 @@ export {
   SheetTrigger,
 } from './sheet'
 
-export { Skeleton } from './skeleton'
+export { Skeleton } from './loading'
 export { Slider } from './slider'
 export { Toaster } from './sonner'
 export { Switch } from './switch'

@@ -1,7 +1,7 @@
 // src/components/ui/enhanced-badge.tsx
 'use client'
 
-import { getCategoryLabel, getConfidenceInfo, getDifficultyLabel } from '@/lib/constants'
+import { getCategoryLabel, getConfidenceInfo, getDifficultyLabel } from '@/lib/ui-utils'
 import { cn } from '@/lib/utils'
 import {
   categoryBadgeVariants,
