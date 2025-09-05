@@ -497,7 +497,7 @@
 }
 
 @utility container-content-width {
-  @apply max-w-lg;
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
 }
 
 @utility responsive-text {
