@@ -22,7 +22,7 @@ export default function ParOuCommencerPage() {
               Guide pour débutants
             </Badge>
             <h1 className="text-2xl md:text-4xl font-bold leading-tight text-center">Par où commencer ?</h1>
-            <p className="prose-description leading-relaxed">
+            <p className="prose-description">
               Vous découvrez l'IA ? Parfait ! J'ai conçu ce parcours pour vous accompagner
               pas à pas dans votre apprentissage. Suivez ces étapes dans l'ordre.
             </p>
