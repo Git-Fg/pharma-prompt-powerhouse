@@ -76,10 +76,10 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
                 <TabsContent key={tab.value} value={tab.value} className="mt-4">
                   {tab.content.map((subBlock: ContentBlock, idx: number) => {
                     // Create a more stable key using the block's properties when available
-                    const blockKey = 'id' in subBlock && typeof subBlock.id === 'string' 
-                      ? subBlock.id 
-                      : `${subBlock.type}-${idx}`;
-                    return <BlockSwitch key={`${tab.value}-${blockKey}`} block={subBlock} />;
+                    const blockKey = 'id' in subBlock && typeof subBlock.id === 'string'
+                      ? subBlock.id
+                      : `${subBlock.type}-${idx}`
+                    return <BlockSwitch key={`${tab.value}-${blockKey}`} block={subBlock} />
                   })}
                 </TabsContent>
               ))}
@@ -125,7 +125,7 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
                 {block.rows.map((row: string[], rowIndex: number) => (
                   <TableRow key={`row-${rowIndex}`}>
                     {row.map((cell: string, cellIndex: number) => (
-                      <TableCell key={`cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-zA-Z0-9]/g, '')}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
+                      <TableCell key={`cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-z0-9]/gi, '')}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
                         <MarkdownRenderer content={cell} />
                       </TableCell>
                     ))}
@@ -140,7 +140,7 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
             {block.rows.map((row: string[], rowIndex: number) => (
               <Card key={`mobile-row-${rowIndex}`} className="p-4">
                 {row.map((cell: string, cellIndex: number) => (
-                  <div key={`mobile-cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-zA-Z0-9]/g, '')}`} className="mb-3 last:mb-0">
+                  <div key={`mobile-cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-z0-9]/gi, '')}`} className="mb-3 last:mb-0">
                     <div className="text-sm font-medium text-muted-foreground mb-1">
                       {block.headers[cellIndex]}
                     </div>
@@ -185,10 +185,10 @@ export function ContentRenderer({ content }: { content: ContentBlock[] }) {
     <>
       {content.map((block, index) => {
         // Create a more stable key using the block's properties when available
-        const blockKey = 'id' in block && typeof block.id === 'string' 
-          ? block.id 
-          : `${block.type}-${index}`;
-        return <BlockSwitch key={`content-${blockKey}`} block={block} />;
+        const blockKey = 'id' in block && typeof block.id === 'string'
+          ? block.id
+          : `${block.type}-${index}`
+        return <BlockSwitch key={`content-${blockKey}`} block={block} />
       })}
     </>
   )

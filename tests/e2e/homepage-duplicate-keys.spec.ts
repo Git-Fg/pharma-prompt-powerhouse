@@ -21,8 +21,7 @@ test.describe('Homepage Duplicate Keys Fix', () => {
 
     // Additional verification: check that workflows section renders correctly
     const workflowCards = page.locator('h2:contains("Workflows"), .text-lg, [role="heading"]')
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const visibleCards = await workflowCards.count()
+    const _visibleCards = await workflowCards.count()
 
     // Just verify the section exists without requiring specific card count
     // since that can vary based on content

@@ -1,6 +1,6 @@
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { GuideList } from '@/components/guides/GuideList'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { content } from '@/lib/content-loader'
 
 export default function GuidesPage() {
