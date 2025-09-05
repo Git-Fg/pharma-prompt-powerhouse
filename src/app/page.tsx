@@ -20,8 +20,8 @@ export default function HomePage() {
       {/* Hero Section - Personal Introduction */}
       <Section size="lg">
         <Container maxWidth="4xl">
-          <div className="text-center space-y-6">
-            <h1 className="responsive-heading">
+          <div className="space-y-6">
+            <h1 className="responsive-heading text-center">
               Bienvenue sur
               <br />
               Pharma Prompt Powerhouse

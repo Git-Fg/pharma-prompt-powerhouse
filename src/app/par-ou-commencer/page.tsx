@@ -17,12 +17,12 @@ export default function ParOuCommencerPage() {
       {/* Hero Section */}
       <Section size="lg">
         <Container maxWidth="4xl">
-          <div className="text-center space-y-4">
+          <div className="flex flex-col items-center space-y-4">
             <Badge variant="outline" className="mb-4">
               Guide pour débutants
             </Badge>
-            <h1 className="text-2xl md:text-4xl font-bold leading-tight">Par où commencer ?</h1>
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <h1 className="text-2xl md:text-4xl font-bold leading-tight text-center">Par où commencer ?</h1>
+            <p className="text-base md:text-xl text-muted-foreground max-w-2xl text-center leading-relaxed">
               Vous découvrez l'IA ? Parfait ! J'ai conçu ce parcours pour vous accompagner
               pas à pas dans votre apprentissage. Suivez ces étapes dans l'ordre.
             </p>
