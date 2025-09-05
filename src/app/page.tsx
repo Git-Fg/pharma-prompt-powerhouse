@@ -102,12 +102,12 @@ export default function HomePage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href="/par-ou-commencer">
-                  <Button className="w-full">
+                <Button className="w-full" asChild>
+                  <Link href="/par-ou-commencer">
                     Par où commencer ?
                     <ArrowRight className="size-4 ml-2" />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
 
