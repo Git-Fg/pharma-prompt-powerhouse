@@ -95,7 +95,7 @@ export function GuideList({ initialGuides }: GuideListProps) {
             <FileText className="size-8 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
-          <p className="text-muted-foreground mb-4 max-w-md mx-auto">
+          <p className="prose-description mb-4">
             {searchTerm
               ? `Aucun guide ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
               : 'Aucun guide ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}

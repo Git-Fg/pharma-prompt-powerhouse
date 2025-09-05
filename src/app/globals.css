@@ -500,10 +500,6 @@
   max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
 }
 
-@utility responsive-text {
-  @apply text-sm sm:text-base;
-}
-
 @utility container {
   width: 100%;
   margin-inline: auto;
@@ -599,10 +595,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
-  }
-
-  .page-description {
-    @apply prose-description;
   }
 
   .stats-grid {

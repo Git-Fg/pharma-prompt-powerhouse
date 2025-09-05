@@ -88,7 +88,7 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
             <FileText className="size-8 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun concept trouvé</h3>
-          <p className="text-muted-foreground mb-4 max-w-md mx-auto">
+          <p className="prose-description mb-4">
             {searchTerm
               ? `Aucun concept ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
               : 'Aucun concept ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}
