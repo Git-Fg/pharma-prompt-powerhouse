@@ -35,6 +35,31 @@ const keyTakeawaysBlockSchema = z.object({
   points: z.array(z.string()),
 })
 
+const prerequisitesBlockSchema = z.object({
+  type: z.literal('prerequisites'),
+  items: z.array(z.object({
+    type: z.enum(['concept', 'guide', 'workflow', 'external']),
+    slug: z.string().optional(),
+    title: z.string().optional(),
+    url: z.string().optional(),
+    reason: z.string(),
+  })),
+})
+
+const actionChecklistBlockSchema = z.object({
+  type: z.literal('actionChecklist'),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  items: z.array(z.object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string().optional(),
+    priority: z.enum(['high', 'medium', 'low']).optional(),
+  })),
+  variant: z.enum(['default', 'card', 'alert']).optional(),
+  allowChecking: z.boolean().optional(),
+})
+
 // Recursive schemas need to be declared with z.lazy for circular references
 const accordionBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   type: z.literal('accordion'),
@@ -74,6 +99,8 @@ export const contentBlockSchema = z.union([
   tabsBlockSchema,
   multiFormatPromptBlockSchema,
   keyTakeawaysBlockSchema,
+  prerequisitesBlockSchema,
+  actionChecklistBlockSchema,
   accordionBlockSchema,
   tableBlockSchema,
 ])

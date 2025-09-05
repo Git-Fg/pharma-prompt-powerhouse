@@ -3,8 +3,10 @@ import { BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
+import { ConceptListSection } from '@/components/shared/ConceptListSection'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
+import { SimilarContentSection } from '@/components/shared/SimilarContentSection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { content, getGuideBySlug } from '@/lib/content-loader'
@@ -48,6 +50,14 @@ export default async function GuideDetailPage({
 
   return (
     <ContentPageLayout item={guide}>
+      {/* Concepts fondamentaux abordés */}
+      {guide.concepts && guide.concepts.length > 0 && (
+        <>
+          <ConceptListSection concepts={guide.concepts} />
+          <Separator className="my-8" />
+        </>
+      )}
+
       {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
         <>
           <KeyTakeaways points={guide.keyTakeaways} />
@@ -58,6 +68,18 @@ export default async function GuideDetailPage({
       <ContentRenderer content={guide.content} />
 
       <Separator className="my-12" />
+
+      {/* Similar content based on tags */}
+      {guide.tags && guide.tags.length > 0 && (
+        <>
+          <SimilarContentSection
+            currentSlug={guide.slug}
+            currentTags={guide.tags}
+            contentType="guide"
+          />
+          <Separator className="my-8" />
+        </>
+      )}
 
       {/* Related Guides - Moved after main content */}
       {guide.relatedGuides && guide.relatedGuides.length > 0 && (

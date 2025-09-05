@@ -2,8 +2,10 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
+import { ConceptListSection } from '@/components/shared/ConceptListSection'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
+import { SimilarContentSection } from '@/components/shared/SimilarContentSection'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -45,6 +47,14 @@ export default async function WorkflowPage({ params }: WorkflowPageProps) {
 
   return (
     <ContentPageLayout item={workflow} prose={false}>
+      {/* Concepts fondamentaux abordés */}
+      {workflow.concepts && workflow.concepts.length > 0 && (
+        <>
+          <ConceptListSection concepts={workflow.concepts} />
+          <Separator className="my-8" />
+        </>
+      )}
+
       {/* Table of Contents */}
       <Card className="mb-8">
         <CardHeader>
@@ -182,6 +192,17 @@ export default async function WorkflowPage({ params }: WorkflowPageProps) {
       <div className="mt-16">
         <DisclaimerBanner type="workflow" />
       </div>
+
+      {/* Similar content based on tags */}
+      {workflow.tags && workflow.tags.length > 0 && (
+        <div className="mt-16">
+          <SimilarContentSection
+            currentSlug={workflow.slug}
+            currentTags={workflow.tags}
+            contentType="workflow"
+          />
+        </div>
+      )}
 
       {/* Related Workflows */}
       {workflow.relatedWorkflows.length > 0 && (
