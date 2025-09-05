@@ -3,8 +3,8 @@
  * Modern testing patterns for React 19 + Next.js 15
  */
 
-import { beforeEach, describe, expect, it } from 'vitest'
-import { renderServerComponent, testAccessibility } from '@/tests/utils/testing-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { renderServerComponent, testAccessibility } from '../utils/testing-utils'
 
 // Mock content for testing
 const mockWorkflow = {
@@ -12,8 +12,14 @@ const mockWorkflow = {
   slug: 'test-workflow',
   title: 'Test Workflow',
   description: 'A test workflow for demonstration',
-  category: 'research' as const,
+  category: 'research',
   tags: ['test', 'demo'],
+  isFavorite: false,
+  difficulty: 'beginner',
+  isWorkflow: true as const,
+  content: [],
+  concepts: [],
+  relatedGuides: [],
   steps: [
     {
       id: 'step-1',
@@ -126,7 +132,7 @@ describe('server Components Testing', () => {
 
   describe('performance Testing', () => {
     it('renders components within performance budget', async () => {
-      const { measureRenderPerformance } = await import('@/tests/utils/testing-utils')
+      const { measureRenderPerformance } = await import('../utils/testing-utils')
 
       const performance = measureRenderPerformance(
         () => renderServerComponent(async () => {

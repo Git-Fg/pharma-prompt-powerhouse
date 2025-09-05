@@ -29,21 +29,25 @@ export const test = base.extend<{
 }>({
   userPage: async ({ page }, use) => {
     const userPage = new UserPage(page)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     await use(userPage)
   },
 
   networkMocker: async ({ page }, use) => {
     const networkMocker = new NetworkMocker(page)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     await use(networkMocker)
   },
 
   a11yTester: async ({ page }, use) => {
     const a11yTester = new A11yTester(page)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     await use(a11yTester)
   },
 
   perfMonitor: async ({ page }, use) => {
     const perfMonitor = new PerformanceMonitor(page)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     await use(perfMonitor)
   },
 })
