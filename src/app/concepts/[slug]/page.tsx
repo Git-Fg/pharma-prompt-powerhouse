@@ -15,11 +15,12 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { content, getConceptBySlug } from '@/lib/content-loader'
+import { normalizeSlug } from '@/lib/utils'
 
 // Génération des pages statiques au build
 export async function generateStaticParams() {
   return content.concepts.map(concept => ({
-    slug: concept.slug,
+    slug: normalizeSlug(concept.slug),
   }))
 }
 

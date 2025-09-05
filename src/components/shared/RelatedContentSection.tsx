@@ -3,6 +3,7 @@ import type { Concept, ExternalTool, Guide, Workflow } from '@/lib/content-schem
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { normalizeSlug } from '@/lib/utils'
 
 interface RelatedContentSectionProps {
   title: string
@@ -27,10 +28,12 @@ export function RelatedContentSection({
 
   const renderItem = (item: Guide | Workflow | Concept | ExternalTool) => {
     const itemSlug = item.slug
+    // Normalise les slugs de concepts pour la compatibilité URL
+    const urlSlug = type === 'concepts' ? normalizeSlug(itemSlug) : itemSlug
     const basePath = type === 'workflows' ? '/workflows' : `/${type}`
 
     return (
-      <Link href={`${basePath}/${itemSlug}`} key={itemSlug}>
+      <Link href={`${basePath}/${urlSlug}`} key={itemSlug}>
         <Card className="hover:bg-accent/50 transition-colors">
           <CardHeader>
             <CardTitle>{item.title}</CardTitle>

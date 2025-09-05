@@ -555,6 +555,18 @@
   max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for offline page */
 }
 
+@utility footer-description-width {
+  max-width: 20rem; /* 320px - Direct value to bypass Tailwind v4 max-w-xs bug for footer */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@utility text-content-width {
+  max-width: 28rem; /* 448px - Direct value to bypass Tailwind v4 max-w-md bug for text content */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @utility section-spacing {
   padding-block: var(--spacing-xl);
 
