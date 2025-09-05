@@ -106,7 +106,7 @@ export default async function ConceptDetailPage({
                 <h1 className="text-4xl font-bold tracking-tight">
                   {concept.title}
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl">
+                <p className="prose-description text-xl">
                   {concept.description}
                 </p>
               </div>

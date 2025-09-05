@@ -33,7 +33,7 @@ export default function ToolPage({ params }: ToolPageProps) {
         <article className="py-8 space-y-8">
           <header className="text-center space-y-4">
             <h1 className="text-4xl font-bold">{tool.title}</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{tool.description}</p>
+            <p className="prose-description text-lg">{tool.description}</p>
             <div className="flex justify-center">
               <Button asChild size="lg">
                 <a href={tool.url} target="_blank" rel="noopener noreferrer">
