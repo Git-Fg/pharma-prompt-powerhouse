@@ -500,6 +500,18 @@
   max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
 }
 
+@utility container-lg-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
+}
+
+@utility dialog-content-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for dialogs */
+}
+
+@utility offline-container-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for offline page */
+}
+
 @utility container {
   width: 100%;
   margin-inline: auto;
