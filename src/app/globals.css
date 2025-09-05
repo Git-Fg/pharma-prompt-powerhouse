@@ -1,7 +1,7 @@
 /**
  * Global Styles - Pharma Prompt Powerhouse
  * Modular design system built with Tailwind CSS v4
- * 
+ *
  * Architecture:
  * - tokens.css: Design tokens and foundational values
  * - base.css: Base styles and CSS resets
@@ -11,10 +11,10 @@
  */
 
 @import 'tailwindcss';
-@import './styles/tokens.css';
-@import './styles/base.css';
-@import './styles/components.css';
-@import './styles/utilities.css';
-@import './styles/animations.css';
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/components.css';
+@import '../styles/utilities.css';
+@import '../styles/animations.css';
 
 @custom-variant dark (&:is(.dark *));

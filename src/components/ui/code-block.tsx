@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, Copy, FileCode, User, Settings, Brain } from 'lucide-react'
+import { Brain, Check, Copy, FileCode, Settings, User } from 'lucide-react'
 import { useState } from 'react'
 import Button from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -69,9 +69,9 @@ const SEMANTIC_PATTERNS = {
   },
   variable: {
     patterns: [
-      /\{\{([^}]+)\}\}/gi,
-      /\$\{([^}]+)\}/gi,
-      /\[([^\]]+)\]/gi,
+      /\{\{([^}]+)\}\}/g,
+      /\$\{([^}]+)\}/g,
+      /\[([^\]]+)\]/g,
     ],
     icon: FileCode,
     color: 'text-orange-600 dark:text-orange-400',
@@ -128,14 +128,15 @@ export function CodeBlock({
 
   // Apply semantic highlighting for prompt content
   const processSemanticHighlighting = (text: string) => {
-    if (!semanticHighlighting) return text
+    if (!semanticHighlighting)
+      return text
 
     let processedText = text
-    const highlights: Array<{ type: string; start: number; end: number; content: string }> = []
+    const highlights: Array<{ type: string, start: number, end: number, content: string }> = []
 
     // Find all semantic patterns
     Object.entries(SEMANTIC_PATTERNS).forEach(([type, config]) => {
-      config.patterns.forEach(pattern => {
+      config.patterns.forEach((pattern) => {
         let match
         while ((match = pattern.exec(text)) !== null) {
           highlights.push({
@@ -152,11 +153,11 @@ export function CodeBlock({
     highlights.sort((a, b) => b.start - a.start)
 
     // Apply highlights
-    highlights.forEach(highlight => {
+    highlights.forEach((highlight) => {
       const { type, start, end, content } = highlight
       const config = SEMANTIC_PATTERNS[type as keyof typeof SEMANTIC_PATTERNS]
       const highlightedContent = `<span class="semantic-highlight semantic-${type} ${config.color} ${config.bg} px-1 py-0.5 rounded text-xs font-medium">${content}</span>`
-      
+
       processedText = processedText.slice(0, start) + highlightedContent + processedText.slice(end)
     })
 
@@ -177,7 +178,9 @@ export function CodeBlock({
           </span>
           {semanticHighlighting && promptType && (
             <span className="rounded bg-primary/10 text-primary px-2 py-1 text-xs font-medium">
-              Prompt {promptType}
+              Prompt
+              {' '}
+              {promptType}
             </span>
           )}
         </div>
@@ -249,29 +252,32 @@ export function CodeBlock({
             showLineNumbers && 'pl-16',
           )}
         >
-          {semanticHighlighting ? (
-            <code
-              className={cn(
-                'font-mono text-foreground',
-                language && `language-${language}`,
+          {semanticHighlighting
+            ? (
+                <code
+                  className={cn(
+                    'font-mono text-foreground',
+                    language && `language-${language}`,
+                  )}
+                  dangerouslySetInnerHTML={{ __html: processedCode }}
+                />
+              )
+            : (
+                <code
+                  className={cn(
+                    'font-mono text-foreground',
+                    language && `language-${language}`,
+                  )}
+                >
+                  {code}
+                </code>
               )}
-              dangerouslySetInnerHTML={{ __html: processedCode }}
-            />
-          ) : (
-            <code
-              className={cn(
-                'font-mono text-foreground',
-                language && `language-${language}`,
-              )}
-            >
-              {code}
-            </code>
-          )}
         </pre>
       </div>
 
       {/* Style CSS pour les highlights sémantiques */}
-      <style jsx>{`
+      <style jsx>
+        {`
         .semantic-highlight {
           display: inline-block;
           margin: 0 1px;
@@ -295,7 +301,8 @@ export function CodeBlock({
           border-left: 3px solid rgb(249 115 22);
           font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }

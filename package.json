@@ -84,6 +84,7 @@
     "react-resizable-panels": "^3.0.5",
     "recharts": "^2.15.4",
     "remark-gfm": "^4.0.1",
+    "schema-dts": "^1.1.5",
     "shiki": "^3.12.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",

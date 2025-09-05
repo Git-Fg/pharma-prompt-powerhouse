@@ -3,7 +3,7 @@
  * Modern testing patterns for React 19 + Next.js 15
  */
 
-import { describe, expect, it, beforeEach } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { renderServerComponent, testAccessibility } from '@/tests/utils/testing-utils'
 
 // Mock content for testing
@@ -19,7 +19,7 @@ const mockWorkflow = {
       id: 'step-1',
       title: 'First Step',
       content: 'This is the first step',
-    }
+    },
   ],
   keyTakeaways: ['Key takeaway 1', 'Key takeaway 2'],
   relatedContent: {
@@ -30,27 +30,27 @@ const mockWorkflow = {
   lastUpdated: '2024-01-01',
 }
 
-describe('Server Components Testing', () => {
+describe('server Components Testing', () => {
   beforeEach(() => {
     // Reset any global state before each test
     vi.clearAllMocks()
   })
 
-  describe('WorkflowCard Server Component', () => {
+  describe('workflowCard Server Component', () => {
     // Example of testing a Server Component as an async function
     async function WorkflowCardServer() {
       // Simulate Server Component data fetching
       const workflow = await Promise.resolve(mockWorkflow)
-      
+
       // Import the component dynamically to avoid SSR issues in tests
       const { WorkflowCard } = await import('@/components/shared/WorkflowCard')
-      
+
       return <WorkflowCard workflow={workflow} />
     }
 
     it('renders workflow card with correct data', async () => {
       const { getByText, getByRole } = await renderServerComponent(WorkflowCardServer)
-      
+
       expect(getByText('Test Workflow')).toBeInTheDocument()
       expect(getByText('A test workflow for demonstration')).toBeInTheDocument()
       expect(getByRole('link', { name: /voir le guide/i })).toBeInTheDocument()
@@ -58,12 +58,12 @@ describe('Server Components Testing', () => {
 
     it('meets accessibility standards', async () => {
       const renderResult = await renderServerComponent(WorkflowCardServer)
-      
+
       await testAccessibility(renderResult, {
         rules: {
           'link-name': { enabled: true },
           'heading-order': { enabled: true },
-        }
+        },
       })
     })
 
@@ -80,14 +80,14 @@ describe('Server Components Testing', () => {
       }
 
       const { container } = await renderServerComponent(LongContentWorkflowCard)
-      
+
       // Verify text truncation classes are applied
       const titleElement = container.querySelector('.line-clamp-2')
       expect(titleElement).toBeInTheDocument()
     })
   })
 
-  describe('ContentRenderer Server Component', () => {
+  describe('contentRenderer Server Component', () => {
     async function ContentRendererServer() {
       const content = [
         {
@@ -98,7 +98,7 @@ describe('Server Components Testing', () => {
           type: 'code' as const,
           content: 'console.log("Hello, World!")',
           language: 'javascript',
-        }
+        },
       ]
 
       const { ContentRenderer } = await import('@/components/shared/ContentRenderer')
@@ -107,49 +107,49 @@ describe('Server Components Testing', () => {
 
     it('renders different content types correctly', async () => {
       const { getByText } = await renderServerComponent(ContentRendererServer)
-      
+
       expect(getByText('This is a test paragraph')).toBeInTheDocument()
       expect(getByText('console.log("Hello, World!")')).toBeInTheDocument()
     })
 
     it('applies correct semantic markup', async () => {
       const { container } = await renderServerComponent(ContentRendererServer)
-      
+
       // Check for proper semantic elements
       const paragraph = container.querySelector('p')
       const codeBlock = container.querySelector('pre code')
-      
+
       expect(paragraph).toBeInTheDocument()
       expect(codeBlock).toBeInTheDocument()
     })
   })
 
-  describe('Performance Testing', () => {
+  describe('performance Testing', () => {
     it('renders components within performance budget', async () => {
       const { measureRenderPerformance } = await import('@/tests/utils/testing-utils')
-      
+
       const performance = measureRenderPerformance(
         () => renderServerComponent(async () => {
           const { WorkflowCard } = await import('@/components/shared/WorkflowCard')
           return <WorkflowCard workflow={mockWorkflow} />
         }),
-        5
+        5,
       )
-      
+
       // Expect render time to be under 16ms (60fps budget)
       performance.expectFastRender(16)
     })
   })
 })
 
-describe('Integration Testing with Multiple Components', () => {
+describe('integration Testing with Multiple Components', () => {
   async function WorkflowPageServer() {
     // Simulate page-level Server Component
     const workflows = await Promise.resolve([mockWorkflow])
-    
+
     const { StaggeredContainer } = await import('@/components/ui/css-animations')
     const { WorkflowCard } = await import('@/components/shared/WorkflowCard')
-    
+
     return (
       <div>
         <h1>Workflows</h1>
@@ -164,19 +164,19 @@ describe('Integration Testing with Multiple Components', () => {
 
   it('renders page with multiple components correctly', async () => {
     const { getByRole, getByText } = await renderServerComponent(WorkflowPageServer)
-    
+
     expect(getByRole('heading', { level: 1, name: 'Workflows' })).toBeInTheDocument()
     expect(getByText('Test Workflow')).toBeInTheDocument()
   })
 
   it('maintains accessibility across component composition', async () => {
     const renderResult = await renderServerComponent(WorkflowPageServer)
-    
+
     await testAccessibility(renderResult, {
       rules: {
         'page-has-heading-one': { enabled: true },
         'region': { enabled: true },
-      }
+      },
     })
   })
 })

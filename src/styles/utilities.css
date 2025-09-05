@@ -200,7 +200,7 @@
   .btn-ghost {
     @apply border-2;
   }
-  
+
   .card-interactive,
   .card-feature,
   .card-minimal {
