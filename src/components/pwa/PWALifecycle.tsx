@@ -75,12 +75,12 @@ export function PWALifecycle() {
       return () => {
         // Remove message listener
         navigator.serviceWorker.removeEventListener('message', handleMessage)
-        
+
         // Cleanup registration if it exists
         if (registration) {
           registration.removeEventListener('updatefound', handleUpdateFound)
         }
-        
+
         // Cleanup worker if it exists
         if (workerCleanup) {
           workerCleanup()

@@ -533,6 +533,23 @@
   padding-inline: var(--spacing-md);
 }
 
+/* Additional width utilities for Tailwind v4 bug workaround */
+@utility container-content-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
+}
+
+@utility container-lg-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
+}
+
+@utility dialog-content-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for dialogs */
+}
+
+@utility offline-container-width {
+  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for offline page */
+}
+
 @utility section-spacing {
   padding-block: var(--spacing-xl);
 

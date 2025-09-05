@@ -1,7 +1,7 @@
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import * as LucideIcons from 'lucide-react'
 import { ConceptListClient } from '@/components/concepts/ConceptListClient'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 

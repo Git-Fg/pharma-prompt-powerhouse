@@ -1,5 +1,5 @@
-import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
+import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { ResponsiveComparisonTable } from '@/components/shared/ResponsiveComparisonTable'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'

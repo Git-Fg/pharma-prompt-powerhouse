@@ -62,8 +62,8 @@ describe('footer Component', () => {
       expect(description).toHaveClass('prose-slogan')
     })
 
-    it('applies container-content-width utility to brand description container', () => {
-      const brandContainer = screen.getByText(/Mon carnet de notes personnel/).closest('.container-content-width')
+    it('applies container-constrained utility to brand description container', () => {
+      const brandContainer = screen.getByText(/Mon carnet de notes personnel/).closest('.container-constrained')
       expect(brandContainer).toBeInTheDocument()
     })
   })
