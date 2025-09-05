@@ -33,7 +33,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-2xl">Pharma Prompt</span>
             </div>
-            <div className="max-w-xs">
+            <div className="footer-description-width">
               {' '}
               {/* Limite la largeur du texte pour une meilleure lisibilité */}
               <p className="prose-slogan">
