@@ -78,20 +78,30 @@ const serwist = new Serwist({
       }),
     },
 
-    // Navigation Requests - Network First with Offline Fallback
+    // Navigation Requests - Stale While Revalidate for instant loading
     {
       matcher: ({ request }) => request.mode === 'navigate',
-      handler: new NetworkFirst({
+      handler: new StaleWhileRevalidate({
         cacheName: 'pages',
-        networkTimeoutSeconds: 3,
         plugins: [
           new ExpirationPlugin({
-            maxEntries: 30,
-            maxAgeSeconds: 24 * 60 * 60, // 1 day
+            maxEntries: 50,
+            maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
           }),
           {
+            // Modern offline experience - return cached content with notification
             handlerDidError: async () => {
-              return Response.redirect('/offline', 302)
+              // Instead of redirecting to /offline, let the app handle it gracefully
+              return new Response(
+                JSON.stringify({ 
+                  offline: true, 
+                  message: 'Contenu disponible hors ligne' 
+                }),
+                {
+                  headers: { 'Content-Type': 'application/json' },
+                  status: 200
+                }
+              )
             },
           },
         ],

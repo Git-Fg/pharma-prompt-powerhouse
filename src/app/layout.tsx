@@ -7,6 +7,7 @@ import { Header } from '@/components/layout/Header'
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
 import { InstallPrompt } from '@/components/pwa/InstallPrompt'
 import { PWALifecycle } from '@/components/pwa/PWALifecycle'
+import { PWAOfflineManager } from '@/components/pwa/PWAOfflineManager'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { ConsentProvider } from '@/hooks/useConsent'
@@ -112,6 +113,7 @@ export default function RootLayout({
             {env.isProduction && <ConsentBanner />}
             <Toaster />
             <PWALifecycle />
+            <PWAOfflineManager />
             {env.isProduction && <InstallPrompt />}
           </ThemeProvider>
         </ConsentProvider>

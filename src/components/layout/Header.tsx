@@ -19,7 +19,14 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { 
+  Sheet, 
+  SheetContent, 
+  SheetDescription, 
+  SheetHeader, 
+  SheetTitle, 
+  SheetTrigger 
+} from '@/components/ui/sheet'
 import { getMainNavigationLinks } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -105,6 +112,14 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[320px] sm:w-[400px]">
+                {/* Hidden accessibility headers */}
+                <SheetHeader className="sr-only">
+                  <SheetTitle>Menu de navigation principal</SheetTitle>
+                  <SheetDescription>
+                    Menu de navigation mobile avec accès aux principales sections du site
+                  </SheetDescription>
+                </SheetHeader>
+                
                 <div className="flex flex-col h-full">
                   {/* Header du menu mobile */}
                   <div className="flex items-center justify-between pb-6 border-b border-border/50">

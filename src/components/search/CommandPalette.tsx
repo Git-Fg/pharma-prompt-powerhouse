@@ -19,6 +19,7 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
   const [open, setOpen] = useState(false)
+  const [searchResults, setSearchResults] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
@@ -37,6 +38,15 @@ export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
     command()
   }
 
+  // Count results for announcement
+  const totalItems = content.guides.length + content.concepts.length + content.workflows.length + content.externalTools.length
+
+  useEffect(() => {
+    if (open) {
+      setSearchResults(`${totalItems} résultats disponibles dans la recherche`)
+    }
+  }, [open, totalItems])
+
   const defaultTrigger = (
     <Button variant="outline" className="px-3 text-sm text-muted-foreground">
       <Search className="size-4 mr-2" />
@@ -53,10 +63,24 @@ export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
       <div onClick={() => setOpen(true)}>
         {trigger || defaultTrigger}
       </div>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog 
+        open={open} 
+        onOpenChange={setOpen}
+        title="Palette de recherche de contenu"
+        description="Recherchez parmi les guides, concepts, workflows et outils disponibles"
+      >
+        {/* Live region for search results announcements */}
+        <div 
+          aria-live="polite" 
+          aria-atomic="true"
+          className="sr-only"
+        >
+          {searchResults}
+        </div>
+        
         <CommandInput placeholder="Rechercher un contenu..." />
         <CommandList>
-          <CommandEmpty>Aucun résultat.</CommandEmpty>
+          <CommandEmpty>Aucun résultat trouvé pour votre recherche.</CommandEmpty>
           <CommandGroup heading="Guides">
             {content.guides.map(item => (
               <CommandItem key={item.slug} onSelect={() => runCommand(() => router.push(`/guides/${item.slug}`))}>
