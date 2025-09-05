@@ -188,7 +188,7 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
               </h4>
               <div className="space-y-1">
                 {workflow.keyTakeaways.slice(0, 2).map((takeaway, index) => (
-                  <div key={index} className="flex items-start gap-2 text-sm">
+                  <div key={`takeaway-${takeaway.slice(0, 20).replace(/\s+/g, '-')}-${index}`} className="flex items-start gap-2 text-sm">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
                     <span className="text-muted-foreground line-clamp-1">{takeaway}</span>
                   </div>
