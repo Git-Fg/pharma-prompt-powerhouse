@@ -101,8 +101,8 @@ export function Prerequisites({
           </p>
           <div className="grid gap-3">
             {items.map((item, index) => (
-              <div 
-                key={`${item.type}-${item.slug || index}`} 
+              <div
+                key={`${item.type}-${item.slug || index}`}
                 className="flex items-center justify-between p-3 border rounded-lg bg-background"
               >
                 <div className="flex-1 min-w-0">
