@@ -53,7 +53,7 @@
 - **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
 - **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
 
-> ⚠️ **Bug Critique Tailwind v4 - Affichage "Un Mot Par Ligne" :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug majeur où les classes `max-w-*` (ex: `max-w-xs`, `max-w-md`, `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). **Symptôme :** Le texte s'affiche un mot par ligne sur mobile, rendant le contenu illisible. **Solutions implémentées :** 
+> ⚠️ **Bug Critique Tailwind v4 - Affichage "Un Mot Par Ligne" :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug majeur où les classes `max-w-*` (ex: `max-w-xs`, `max-w-md`, `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). **Symptôme :** Le texte s'affiche un mot par ligne sur mobile, rendant le contenu illisible. **Solutions implémentées :**
 > 1. Redéfinition explicite des variables `--container-*` dans `@theme`
 > 2. Création d'utilitaires sémantiques personnalisés (`footer-description-width`, `text-content-width`) avec valeurs directes
 > 3. Documentation complète dans `/docs/tailwind-v4-text-width-bug.md`
@@ -297,8 +297,12 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 **🔍 Vérification Rapide :**
 ```css
 /* Dans les outils développeur, vérifier que : */
-.max-w-xs { max-width: 20rem; } /* ✅ Correct */
-.max-w-xs { max-width: 0.25rem; } /* ❌ Bug détecté */
+.max-w-xs {
+  max-width: 20rem;
+} /* ✅ Correct */
+.max-w-xs {
+  max-width: 0.25rem;
+} /* ❌ Bug détecté */
 ```
 
 **📚 Documentation Complète :** Voir `/docs/tailwind-v4-text-width-bug.md` pour le guide détaillé.

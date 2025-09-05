@@ -2,13 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-describe('Centralized Design System in globals.css', () => {
+describe('centralized Design System in globals.css', () => {
   const globalsCSS = fs.readFileSync(
     path.join(__dirname, '../../src/app/globals.css'),
     'utf8',
   )
 
-  describe('Semantic Typography Utilities', () => {
+  describe('semantic Typography Utilities', () => {
     it('defines @utility prose-slogan', () => {
       expect(globalsCSS).toContain('@utility prose-slogan {')
       expect(globalsCSS).toContain('text-xl/relaxed text-muted-foreground')
@@ -20,7 +20,7 @@ describe('Centralized Design System in globals.css', () => {
     })
   })
 
-  describe('Semantic Layout Utilities', () => {
+  describe('semantic Layout Utilities', () => {
     it('defines @utility section-spacing', () => {
       expect(globalsCSS).toContain('@utility section-spacing {')
       expect(globalsCSS).toContain('py-12 md:py-16 lg:py-20')
@@ -42,7 +42,7 @@ describe('Centralized Design System in globals.css', () => {
     })
   })
 
-  describe('CSS Architecture Philosophy', () => {
+  describe('cSS Architecture Philosophy', () => {
     it('contains the @theme definition block for design tokens', () => {
       expect(globalsCSS).toContain('@theme {')
     })

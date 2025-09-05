@@ -1,7 +1,6 @@
 import { AlertTriangle, ArrowRight, BookOpen, Brain, ExternalLink, Shield, Star, Target, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { Container, Section } from '@/components/layout/Container'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,7 +20,7 @@ export default function HomePage() {
   return (
     // Utilisation de StaggeredPage pour une animation d'entrée élégante
     <StaggeredPage className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      
+
       {/* 1. HERO SECTION CORRIGÉE : Contenue dans une Card pour un impact visuel fort */}
       <Section size="lg">
         <Container maxWidth="4xl">
@@ -95,29 +94,53 @@ export default function HomePage() {
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="border-2 border-primary/50 shadow-primary/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-2"><Target className="size-5" /><span>Nouveau ici ?</span></CardTitle>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Target className="size-5" />
+                    <span>Nouveau ici ?</span>
+                  </CardTitle>
                   <CardDescription>Je vous accompagne pour découvrir l'essentiel de l'IA</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full" asChild><Link href="/par-ou-commencer">Par où commencer ?<ArrowRight className="size-4 ml-2" /></Link></Button>
+                  <Button className="w-full" asChild>
+                    <Link href="/par-ou-commencer">
+                      Par où commencer ?
+                      <ArrowRight className="size-4 ml-2" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-2"><ExternalLink className="size-5" /><span>L'Arsenal IA 2025</span></CardTitle>
+                  <CardTitle className="flex items-center space-x-2">
+                    <ExternalLink className="size-5" />
+                    <span>L'Arsenal IA 2025</span>
+                  </CardTitle>
                   <CardDescription>Mes tests personnels et retours d'expérience sur les outils</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full" asChild><Link href="/l-arsenal-ia">Voir les outils<ArrowRight className="size-4 ml-2" /></Link></Button>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link href="/l-arsenal-ia">
+                      Voir les outils
+                      <ArrowRight className="size-4 ml-2" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-2"><BookOpen className="size-5" /><span>Tous les Workflows</span></CardTitle>
+                  <CardTitle className="flex items-center space-x-2">
+                    <BookOpen className="size-5" />
+                    <span>Tous les Workflows</span>
+                  </CardTitle>
                   <CardDescription>Mes méthodes testées pour vos cas d'usage</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full" asChild><Link href="/workflows">Explorer les workflows<ArrowRight className="size-4 ml-2" /></Link></Button>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link href="/workflows">
+                      Explorer les workflows
+                      <ArrowRight className="size-4 ml-2" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -133,7 +156,12 @@ export default function HomePage() {
           <StaggeredItem>
             <div className="flex items-center justify-between mb-8">
               <h2 className="responsive-subheading">Workflows à la Une</h2>
-              <Button variant="ghost" asChild><Link href="/workflows">Voir tous<ArrowRight className="size-4 ml-2" /></Link></Button>
+              <Button variant="ghost" asChild>
+                <Link href="/workflows">
+                  Voir tous
+                  <ArrowRight className="size-4 ml-2" />
+                </Link>
+              </Button>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {featuredWorkflows.map(workflow => (
@@ -145,7 +173,9 @@ export default function HomePage() {
                     </div>
                     {workflow.isFavorite && (
                       <Badge variant="default" className="bg-amber-500 text-white hover:bg-amber-600 mb-2">
-                        <Star className="size-3 mr-1.5" /> Recommandé
+                        <Star className="size-3 mr-1.5" />
+                        {' '}
+                        Recommandé
                       </Badge>
                     )}
                     <CardTitle className="text-lg">{workflow.title}</CardTitle>
@@ -158,7 +188,10 @@ export default function HomePage() {
                       ))}
                     </div>
                     <Button size="sm" variant="outline" className="w-full" asChild>
-                      <Link href={`/workflows/${workflow.slug}`}>Découvrir<ArrowRight className="w-3 h-3 ml-2" /></Link>
+                      <Link href={`/workflows/${workflow.slug}`}>
+                        Découvrir
+                        <ArrowRight className="w-3 h-3 ml-2" />
+                      </Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -167,7 +200,7 @@ export default function HomePage() {
           </StaggeredItem>
         </Container>
       </Section>
-      
+
       {/* 5. PERSONAL NOTE : Design unifié */}
       <Section>
         <Container maxWidth="4xl">

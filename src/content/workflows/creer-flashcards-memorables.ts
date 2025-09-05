@@ -58,7 +58,7 @@ const workflow = {
 Je suis un étudiant en pharmacie qui prépare ses examens. Je veux créer des flashcards de révision active, conçues pour maximiser la rétention et la compréhension en profondeur. Je vais utiliser le logiciel Anki, donc je veux une sortie au format CSV (recto;verso).
 
 # RÔLE
-Tu es un ingénieur pédagogique spécialisé dans les sciences cognitives. Ton but est de transformer un sujet complexe en une série de questions de révision active qui forcent la réflexion, l'application et la connexion des connaissances.
+Tu es un ingénieur pédagogique spécialisé dans les sciences cognitives. Ton but est de transformer un sujet complexe en une série de questions de révision active qui forcent la réflexion, l\'application et la connexion des connaissances.
 
 # INSTRUCTIONS
 

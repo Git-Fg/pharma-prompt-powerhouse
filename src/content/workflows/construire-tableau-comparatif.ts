@@ -15,20 +15,20 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `Quand j'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
+      content: `Quand j\'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
 
 Le problème avec les comparaisons textuelles :
 - **Information noyée :** Difficile de retrouver rapidement une différence
-- **Pas de vue d'ensemble :** Impossible de voir les patterns
+- **Pas de vue d\'ensemble :** Impossible de voir les patterns
 - **Révisions inefficaces :** Pas adapté à la mémorisation rapide
-- **Erreurs d'omission :** Certains aspects oubliés dans la comparaison`,
+- **Erreurs d\'omission :** Certains aspects oubliés dans la comparaison`,
     },
   ],
 
   initialApproach: [
     {
       type: 'markdown',
-      content: `Au début, j'ai essayé de demander simplement :
+      content: `Au début, j\'ai essayé de demander simplement :
 
 > *"Compare les ISRS et les IRSN."*
 
@@ -38,17 +38,17 @@ Le problème avec les comparaisons textuelles :
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
+      content: `L\'IA génère du texte libre sans structure imposée. Le résultat n\'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
     },
   ],
 
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `Structure Imposée par l'IA
+      content: `Structure Imposée par l\'IA
 
-J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.
-Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`,
+J\'ai développé une approche qui force l\'IA à créer directement un tableau structuré et visuel.
+Cette méthode s\'appuie sur la **structuration par balises** pour garantir la cohérence.`,
     },
     {
       type: 'conceptRecommendation',
@@ -89,9 +89,9 @@ Ajoute une synthèse sous le tableau
   toolComparison: [
     {
       type: 'markdown',
-      content: `## Comparaison des Outils : Mon Retour d'Expérience
+      content: `## Comparaison des Outils : Mon Retour d\'Expérience
 
-J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
+J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
     },
     {
       type: 'tabs',
@@ -106,7 +106,7 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
               content: `**Points forts :**
 - Format Markdown natif, parfait pour les tableaux
 - Bonne compréhension des instructions de structure
-- Facilité d'ajustement en conversationnel
+- Facilité d\'ajustement en conversationnel
 
 **Points faibles :**
 - Parfois trop verbeux dans les cellules
@@ -143,14 +143,14 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
               type: 'markdown',
               content: `**Points forts :**
 - Structured Output : format JSON garanti à 100%
-- Excellent pour l'intégration dans d'autres outils
+- Excellent pour l\'intégration dans d\'autres outils
 - Gratuit avec quota généreux
 
 **Points faibles :**
-- Interface moins intuitive pour l'usage ponctuel
+- Interface moins intuitive pour l\'usage ponctuel
 - Nécessite configuration initiale du schéma JSON
 
-**Mon usage :** Quand j'ai besoin d'une fiabilité absolue du format pour réutilisation automatisée.`,
+**Mon usage :** Quand j\'ai besoin d\'une fiabilité absolue du format pour réutilisation automatisée.`,
             },
           ],
         },
@@ -163,7 +163,7 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
       type: 'markdown',
       content: `## Le Prompt Final : Template Universel
 
-Voici le prompt que j'utilise maintenant, adapté selon l'outil :`,
+Voici le prompt que j\'utilise maintenant, adapté selon l\'outil :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -190,7 +190,7 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
 1. **Identification des Classes** : Liste toutes les classes de médicaments à comparer.
 2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes pour la comparaison.  
 3. **Structuration du Tableau** : Organise les classes en lignes et les caractéristiques en colonnes.
-4. **Remplissage des Données** : Complète chaque cellule avec l'information pertinente.
+4. **Remplissage des Données** : Complète chaque cellule avec l\'information pertinente.
 </thinking_process>
 
 <format_sortie>
@@ -199,7 +199,7 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
 - Ajoute une légende si nécessaire pour les symboles.
 </format_sortie>`,
         aiStudio: {
-          systemPrompt: `Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l'apprentissage de classes thérapeutiques.`,
+          systemPrompt: `Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l\'apprentissage de classes thérapeutiques.`,
           userPrompt: `Crée un tableau comparatif des {{classes_medicaments}} avec les critères :
 {{caracteristiques_comparees}}
 
