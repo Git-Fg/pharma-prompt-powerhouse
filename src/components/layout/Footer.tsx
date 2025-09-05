@@ -23,114 +23,101 @@ export function Footer() {
 
   return (
     <footer className="bg-muted/50 border-t">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Section - Expanded */}
-          <div className="xl:col-span-2 space-y-6">
-            <div className="flex items-center space-x-3 mb-6">
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+          {/* Brand Section - Ajusté pour la nouvelle grille */}
+          <div className="md:col-span-12 xl:col-span-5 space-y-4">
+            <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
                 <Brain className="size-7 text-primary-foreground" />
               </div>
               <span className="font-bold text-2xl">Pharma Prompt</span>
             </div>
-            <div className="container-constrained">
+            <div className="max-w-xs"> {/* Limite la largeur du texte pour une meilleure lisibilité */}
               <p className="prose-slogan">
                 Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.
               </p>
             </div>
           </div>
 
-          {/* Navigation Section */}
-          <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6 text-foreground">
-              Navigation
-            </h3>
-            <ul className="space-y-4">
-              {navigationLinks.map((link) => {
-                const Icon = link.icon
-                return (
+          {/* Wrapper pour les colonnes de liens - C'est ici que la magie opère */}
+          <div className="md:col-span-12 xl:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            
+            {/* Navigation Section */}
+            <div className="col-span-1">
+              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
+                Navigation
+              </h3>
+              <ul className="space-y-3">
+                {navigationLinks.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-3"
+                      className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"
                     >
-                      <Icon className="size-4 group-hover:text-primary transition-colors" />
-                      <span className="group-hover:translate-x-0.5 transition-transform">
-                        {link.name}
-                      </span>
+                      {/* Icônes masquées sur les très petits écrans pour gagner de la place */}
+                      <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                      <span>{link.name}</span>
                     </Link>
                   </li>
-                )
-              })}
-            </ul>
-          </div>
+                ))}
+              </ul>
+            </div>
 
-          {/* Legal Section */}
-          <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6 text-foreground">
-              Sécurité & Légal
-            </h3>
-            <ul className="space-y-4">
-              {legalLinks.map((link) => {
-                const Icon = link.icon
-                return (
-                  <li key={link.name}>
+            {/* Legal & Workflows combinés pour une meilleure densité */}
+            <div className="col-span-1 sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                {/* Legal Section */}
+                <div>
+                  <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
+                    Sécurité & Légal
+                  </h3>
+                  <ul className="space-y-3">
+                    {legalLinks.map((link) => (
+                      <li key={link.name}>
+                        <Link
+                          href={link.href}
+                          className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"
+                        >
+                          <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                          <span>{link.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Recent Workflows Section */}
+                <div>
+                  <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
+                    Workflows
+                  </h3>
+                  <div className="space-y-3">
+                    {recentWorkflows.map(workflow => (
+                      <Link
+                        key={workflow.slug}
+                        href={`/workflows/${workflow.slug}`}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors group line-clamp-2 block"
+                      >
+                          <span>{workflow.title}</span>
+                      </Link>
+                    ))}
                     <Link
-                      href={link.href}
-                      className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-3"
+                      href="/workflows"
+                      className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 pt-2"
                     >
-                      <Icon className="size-4 group-hover:text-primary transition-colors" />
-                      <span className="group-hover:translate-x-0.5 transition-transform">
-                        {link.name}
-                      </span>
+                      <span>Voir tous</span>
+                      <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          {/* Recent Workflows Section - Dynamic */}
-          <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6 text-foreground">
-              Derniers Workflows
-            </h3>
-            <div className="space-y-4">
-              {recentWorkflows.map(workflow => (
-                <Link
-                  key={workflow.slug}
-                  href={`/workflows/${workflow.slug}`}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors group line-clamp-2 block"
-                >
-                  <div className="flex items-start space-x-2">
-                    <ArrowRight className="size-3 mt-0.5 text-muted-foreground/50 group-hover:text-primary transition-colors flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                    <span>{workflow.title}</span>
                   </div>
-                </Link>
-              ))}
-
-              <Link
-                href="/workflows"
-                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 mt-4"
-              >
-                <span>Voir tous les workflows</span>
-                <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
+                </div>
             </div>
           </div>
         </div>
 
         {/* Ligne de Séparation et Copyright */}
-        <div className="border-t mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-center items-center text-center">
+        <div className="border-t mt-12 pt-8 text-center">
             <p className="text-sm text-muted-foreground">
-              ©
-              {' '}
-              {new Date().getFullYear()}
-              {' '}
-              Pharma Prompt Powerhouse. Tous droits réservés.
+              © {new Date().getFullYear()} Pharma Prompt Powerhouse. Tous droits réservés.
             </p>
-          </div>
         </div>
       </div>
     </footer>
