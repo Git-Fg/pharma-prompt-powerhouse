@@ -39,7 +39,6 @@ export function loadContent() {
 
       relatedContent.forEach((item) => {
         if (workflowMap.has(item.slug) && !relatedWorkflows.some(w => w.slug === item.slug)) {
-          // eslint-disable-next-line ts/no-unused-vars
           const { content: _content, concepts: _concepts, relatedWorkflows: _rw, ...workflowWithoutContent } = item as EnrichedWorkflow
           relatedWorkflows.push(workflowWithoutContent)
         }
@@ -66,7 +65,6 @@ export function loadContent() {
 
       relatedContent.forEach((item) => {
         if (guideMap.has(item.slug) && !relatedGuides.some(g => g.slug === item.slug)) {
-          // eslint-disable-next-line ts/no-unused-vars
           const { content: _content, concepts: _concepts, relatedGuides: _rg, ...guideWithoutContent } = item as EnrichedGuide
           relatedGuides.push(guideWithoutContent)
         }
