@@ -10,9 +10,11 @@ import { CodeBlock } from '@/components/ui/code-block'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import MultiFormatPrompt from '../prompts/MultiFormatPrompt'
+import { ActionChecklist } from './ActionChecklist'
 import { ConceptRecommendation } from './ConceptRecommendation'
 import { GuideRecommendation } from './GuideRecommendation'
 import { KeyTakeaways } from './KeyTakeaways'
+import { Prerequisites } from './Prerequisites'
 import { ToolRecommendation } from './ToolRecommendation'
 
 function assertNever(x: never): never {
@@ -90,6 +92,20 @@ function BlockSwitch({ block }: { block: ContentBlock }) {
     // --- NOUVEAUX CAS DE RENDU ---
     case 'keyTakeaways':
       return <KeyTakeaways points={block.points} />
+
+    case 'prerequisites':
+      return <Prerequisites items={block.items} />
+
+    case 'actionChecklist':
+      return (
+        <ActionChecklist
+          title={block.title}
+          description={block.description}
+          items={block.items}
+          variant={block.variant}
+          allowChecking={block.allowChecking}
+        />
+      )
 
     case 'accordion':
       return (
