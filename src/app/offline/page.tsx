@@ -29,24 +29,24 @@ export default function OfflinePage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            <Link href="/" className="block">
-              <Button variant="outline" className="w-full justify-start">
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link href="/">
                 <Home className="h-4 w-4 mr-2" />
                 Accueil
-              </Button>
-            </Link>
-            <Link href="/workflows" className="block">
-              <Button variant="outline" className="w-full justify-start">
+              </Link>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link href="/workflows">
                 <Workflow className="h-4 w-4 mr-2" />
                 Workflows (en cache)
-              </Button>
-            </Link>
-            <Link href="/guides" className="block">
-              <Button variant="outline" className="w-full justify-start">
+              </Link>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link href="/guides">
                 <Book className="h-4 w-4 mr-2" />
                 Guides (en cache)
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </CardContent>
         </Card>
 

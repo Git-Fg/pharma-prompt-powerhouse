@@ -14,6 +14,8 @@ export {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './alert-dialog'
@@ -86,14 +88,28 @@ export {
 // Composants de dialogue
 export {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
   DialogTrigger,
 } from './dialog'
-export { Drawer } from './drawer'
+export {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
+} from './drawer'
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -177,6 +193,7 @@ export {
 export { Separator } from './separator'
 export {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
