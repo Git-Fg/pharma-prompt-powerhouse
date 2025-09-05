@@ -120,16 +120,13 @@ export function Footer() {
 
         {/* Ligne de Séparation et Copyright */}
         <div className="border-t mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+          <div className="flex flex-col md:flex-row justify-center items-center text-center">
             <p className="text-sm text-muted-foreground">
               ©
               {' '}
               {new Date().getFullYear()}
               {' '}
               Pharma Prompt Powerhouse. Tous droits réservés.
-            </p>
-            <p className="text-sm text-muted-foreground mt-4 md:mt-0">
-              Mon carnet de notes, partagé avec ❤️ pour la communauté.
             </p>
           </div>
         </div>

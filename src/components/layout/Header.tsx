@@ -5,7 +5,6 @@ import {
   Menu,
   Moon,
   Sun,
-  User,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
@@ -63,11 +62,6 @@ export function Header() {
               >
                 <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              </Button>
-
-              {/* User Profile */}
-              <Button variant="ghost" size="icon">
-                <User className="size-4" />
               </Button>
             </div>
           </div>
@@ -134,18 +128,6 @@ export function Header() {
 
                     <div className="space-y-2">
                       <CommandPalette />
-
-                      <button type="button" className="flex items-center space-x-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground w-full text-left">
-                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-                          <User className="size-5" />
-                        </div>
-                        <div>
-                          <div className="font-medium">Profil</div>
-                          <div className="text-xs text-muted-foreground">
-                            Gérer votre compte
-                          </div>
-                        </div>
-                      </button>
                     </div>
                   </div>
                 </div>
