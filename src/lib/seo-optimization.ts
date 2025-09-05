@@ -181,7 +181,6 @@ export function generateStructuredData(config: SEOConfig & {
     'name': 'Pharma Prompt Powerhouse',
     'url': 'https://pharma-prompt-powerhouse.vercel.app',
     'description': 'Plateforme experte en intelligence artificielle pour professionnels de santé',
-    'expertise': 'Medical AI and Healthcare Technology',
     'foundingDate': '2024',
     'knowsAbout': [
       'Intelligence Artificielle Médicale',
@@ -212,12 +211,11 @@ export function generateStructuredData(config: SEOConfig & {
         '@type': 'EntryPoint',
         'urlTemplate': 'https://pharma-prompt-powerhouse.vercel.app/search?q={search_term_string}',
       },
-      'query-input': 'required name=search_term_string',
     },
   })
 
   // 3. Article/Guide Schema (Content-specific)
-  const articleSchema: WithContext<JsonLd> = {
+  const articleSchema: any = {
     '@context': 'https://schema.org',
     '@type': contentType === 'guide'
       ? 'Article'
@@ -253,10 +251,6 @@ export function generateStructuredData(config: SEOConfig & {
         'height': 630,
       })),
     }),
-    // E-E-A-T signals
-    'expertise': 'Medical AI',
-    'authorityLevel': 'Expert',
-    'trustworthiness': 'High',
     // Content metadata
     ...(estimatedReadingTime && { timeRequired: `PT${estimatedReadingTime}M` }),
     ...(difficulty && {
@@ -275,8 +269,7 @@ export function generateStructuredData(config: SEOConfig & {
       'audienceType': 'Healthcare Professionals',
       'geographicArea': 'Global',
     },
-    // Industry context
-    'industry': 'Healthcare Technology',
+    // Application category for medical AI tools
     'applicationCategory': 'Medical AI Tools',
   }
 
@@ -362,7 +355,7 @@ export function generateHowToSchema(config: {
     })),
     ...(tools.length > 0 && {
       tool: tools.map(tool => ({
-        '@type': tool.url ? 'SoftwareApplication' : 'Thing',
+        '@type': 'HowToTool',
         'name': tool.name,
         ...(tool.url && { url: tool.url }),
       })),
