@@ -56,12 +56,12 @@ export default async function GuideDetailPage({
     <Section>
       <Container maxWidth="4xl">
         <div className="mb-8">
-          <Link href="/guides">
-            <Button variant="ghost" className="mb-4">
+          <Button variant="ghost" className="mb-4" asChild>
+            <Link href="/guides">
               <ArrowLeft className="mr-2 size-4" />
               Retour aux guides
-            </Button>
-          </Link>
+            </Link>
+          </Button>
 
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">
