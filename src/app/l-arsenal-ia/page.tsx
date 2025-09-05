@@ -1,4 +1,5 @@
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { ResponsiveComparisonTable } from '@/components/shared/ResponsiveComparisonTable'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
@@ -12,7 +13,7 @@ export default function ExternalToolsPage() {
   const reviewedCount = tools.filter(t => t.personalReview).length
   const freeCount = tools.filter(t => !t.freeVsPaidOffer || t.freeVsPaidOffer.includes('Gratuit')).length
 
-  const stats = [
+  const stats: StatCardProps[] = [
     { value: totalTools, label: 'Outils testés', type: 'tools' },
     { value: favoriteCount, label: 'Favoris', type: 'primary' },
     { value: reviewedCount, label: 'Avis détaillés', type: 'workflows' },
