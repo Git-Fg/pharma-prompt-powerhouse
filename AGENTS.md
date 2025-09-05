@@ -48,11 +48,12 @@
 <css_architecture>
 **Design System Centralisé (Tailwind v4 + Shadcn Canary)**
 - **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
-- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
-- **@utility :** Classes utilitaires personnalisées (`container`, `section-spacing`, `responsive-text`, etc.) pour un code cohérent.
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement. La correction pour le bug `max-w-*` de Tailwind v4 y est également implémentée.
+- **@utility (Utilitaires Sémantiques) :** Des classes sémantiques personnalisées (ex: `prose-description`, `prose-slogan`) sont créées pour encapsuler des styles récurrents. Cela rend le code des composants plus lisible et maintenable en se concentrant sur le "quoi" (sémantique) plutôt que sur le "comment" (style).
 - **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
 - **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
 - **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
+- **Composants Variantes :** L'utilisation de `tailwind-variants` dans `src/components/ui/variants.ts` est la norme pour créer des composants complexes avec des styles multiples (ex: badges sémantiques).
 </css_architecture>
 
 <advanced_animations>
@@ -175,17 +176,9 @@
 - **Configuration Moderne :** **Standardiser exclusivement sur @antfu/eslint-config** pour une configuration simplifiée et optimale.
 - **Gestion Automatique des Plugins :** @antfu/eslint-config gère automatiquement tous les plugins ESLint nécessaires (React, TypeScript, Next.js).
 - **Philosophie :** Configuration déclarative avec des règles opiniâtres mais sensées, évitant la complexité manuelle.
-- **Structure :** `eslint.config.js` utilise l'API de configuration ESLint v9+ avec des overrides spécifiques par type de fichier.
-- **Intégrations :**
-  - **Next.js** : Règles recommandées et core-web-vitals intégrées
-  - **React Compiler** : Support natif pour React 19 Compiler
-  - **TypeScript** : Validation stricte avec règles modernes
-- **Personnalisations Projet :**
-  - Règles spécifiques pour les composants shadcn/ui (`src/components/ui/**`)
-  - Configuration allégée pour les tests (`**/*.test.ts?(x)`)
-  - Exclusions intelligentes pour les fichiers de documentation et exemples
-- **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025)
-- **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes
+- **Support Tailwind v4 :** La configuration est adaptée pour fonctionner avec les utilitaires sémantiques personnalisés de Tailwind v4. Le plugin `eslint-plugin-tailwindcss` est ajouté et configuré pour autoriser les classes préfixées (ex: `prose-*`), évitant ainsi les faux positifs.
+- **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025).
+- **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes.
 </eslint_rules>
 
 <testing_rules>
