@@ -11,6 +11,7 @@ import { allConcepts } from '@/content/concepts'
 import { allExternalTools } from '@/content/external-tools'
 import { allGuides } from '@/content/guides'
 import { allWorkflows } from '@/content/workflows'
+import { normalizeSlug } from './utils'
 
 // Imports conditionnels pour Node.js uniquement (build time)
 /* eslint-disable ts/no-require-imports */
@@ -306,7 +307,19 @@ export function loadContent(): ContentData {
 
 export const content = loadContent()
 
-export const getGuideBySlug = (slug: string): EnrichedGuide | undefined => content.guides.find((g: EnrichedGuide) => g.slug === slug)
-export const getWorkflowBySlug = (slug: string): EnrichedWorkflow | undefined => content.workflows.find((w: EnrichedWorkflow) => w.slug === slug)
-export const getConceptBySlug = (slug: string): EnrichedConcept | undefined => content.concepts.find((c: EnrichedConcept) => c.slug === slug)
-export const getExternalToolBySlug = (slug: string): BaseExternalTool | undefined => content.externalTools.find((t: BaseExternalTool) => t.slug === slug)
+export function getGuideBySlug(slug: string): EnrichedGuide | undefined {
+  return content.guides.find((g: EnrichedGuide) => g.slug === slug)
+}
+
+export function getWorkflowBySlug(slug: string): EnrichedWorkflow | undefined {
+  return content.workflows.find((w: EnrichedWorkflow) => w.slug === slug)
+}
+
+export function getConceptBySlug(slug: string): EnrichedConcept | undefined {
+  // Essaie d'abord avec le slug exact, puis avec la normalisation
+  return content.concepts.find((c: EnrichedConcept) => c.slug === slug || normalizeSlug(c.slug) === slug)
+}
+
+export function getExternalToolBySlug(slug: string): BaseExternalTool | undefined {
+  return content.externalTools.find((t: BaseExternalTool) => t.slug === slug)
+}
