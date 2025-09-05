@@ -40,6 +40,8 @@
 - **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
 - **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances du projet. La constitution pour le développement et la création de contenu.
 - **`src/app/globals.css` :** Le design system centralisé avec Tailwind v4. Tous les tokens de design, utilitaires et composants de base.
+- **`docs/` :** Documentation technique spécialisée et guides de résolution de problèmes.
+  - **`tailwind-v4-text-width-bug.md` :** Guide complet sur le bug "un mot par ligne" et ses solutions.
 </project_documentation_rules>
 
 ---
@@ -51,7 +53,10 @@
 - **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
 - **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
 
-> ⚠️ **Avertissement Bug Tailwind v4 :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug où les classes `max-w-*` (ex: `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). Pour contourner ce problème, les variables `--container-*` sont explicitement redéfinies dans la section `@theme` de `globals.css` pour forcer l'utilisation des bonnes valeurs.
+> ⚠️ **Bug Critique Tailwind v4 - Affichage "Un Mot Par Ligne" :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug majeur où les classes `max-w-*` (ex: `max-w-xs`, `max-w-md`, `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). **Symptôme :** Le texte s'affiche un mot par ligne sur mobile, rendant le contenu illisible. **Solutions implémentées :** 
+> 1. Redéfinition explicite des variables `--container-*` dans `@theme`
+> 2. Création d'utilitaires sémantiques personnalisés (`footer-description-width`, `text-content-width`) avec valeurs directes
+> 3. Documentation complète dans `/docs/tailwind-v4-text-width-bug.md`
 
 - **@utility (Utilitaires Sémantiques) :** En plus des utilitaires de base (`container`, etc.), nous créons des utilitaires sémantiques pour les styles récurrents (ex: `prose-slogan`, `prose-description`). Cela améliore la lisibilité et la maintenabilité en donnant un sens métier aux styles, au lieu de répéter de longues chaînes de classes.
 - **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
@@ -273,6 +278,33 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 - **Premium Recommandé :** Gemini Advanced. Les rapports "Deep Research" sont excellents et peuvent servir de contexte de haute qualité dans d'autres outils comme AI Studio.
 </personal_recommendations>
 </webui_informations>
+
+---
+
+# **Bonnes Pratiques CSS et Résolution de Problèmes**
+
+<tailwind_v4_best_practices>
+**Prévention du Bug "Un Mot Par Ligne" (Tailwind v4)**
+
+**⚠️ Classes À Éviter Temporairement :**
+- `max-w-xs`, `max-w-sm`, `max-w-md`, `max-w-lg` → Peuvent causer l'affichage "un mot par ligne"
+
+**✅ Solutions Recommandées :**
+- **Utiliser les utilitaires sémantiques :** `footer-description-width`, `text-content-width`, `dialog-content-width`
+- **Tester systématiquement sur mobile** avant validation
+- **Inspecter les variables CSS** en cas de comportement suspect
+
+**🔍 Vérification Rapide :**
+```css
+/* Dans les outils développeur, vérifier que : */
+.max-w-xs { max-width: 20rem; } /* ✅ Correct */
+.max-w-xs { max-width: 0.25rem; } /* ❌ Bug détecté */
+```
+
+**📚 Documentation Complète :** Voir `/docs/tailwind-v4-text-width-bug.md` pour le guide détaillé.
+</tailwind_v4_best_practices>
+
+---
 
 <copilot_contrainte>
 Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation.
