@@ -21,7 +21,7 @@ export function KeyTakeaways({ points }: KeyTakeawaysProps) {
       <CardContent>
         <ul className="space-y-3">
           {points.map((point, index) => (
-            <li key={index} className="flex items-start gap-3">
+            <li key={`takeaway-${point.slice(0, 30).replace(/\s+/g, '-')}-${index}`} className="flex items-start gap-3">
               <CheckCircle className="size-5 text-green-600 mt-1 flex-shrink-0" />
               <p className="text-muted-foreground">{point}</p>
             </li>
