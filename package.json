@@ -21,6 +21,8 @@
     "test:component": "vitest run tests/component/",
     "test:e2e": "playwright test",
     "e2e:image": "playwright test tests/e2e/screenshot.spec.ts",
+    "content:prepare": "node scripts/generate-valid-slugs.mjs",
+    "content:validate-links": "node scripts/validate-links.mjs",
     "prepare": "husky"
   },
   "dependencies": {
@@ -114,6 +116,7 @@
     "glob": "^11.0.3",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "markdown-link-check": "^3.13.7",
     "serwist": "^9.2.1",
     "typescript": "5.9.2",
     "vitest": "^3.2.4"

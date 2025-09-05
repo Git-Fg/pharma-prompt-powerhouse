@@ -6,7 +6,16 @@ npm run lint
 # 2. Lancer la validation des types pour s'assurer qu'il n'y a pas d'erreurs TypeScript
 npm run typecheck
 
-# 3. Lancer les tests d'intégration pour vérifier l'intégrité du contenu
+# 3. Valider les liens dans le contenu (uniquement si le cache existe)
+if [ -f ".content-cache/content.json" ]; then
+  echo "🔗 Validating links in content..."
+  npm run content:validate-links
+else
+  echo "⏭️  Skipping link validation (no content cache found)"
+  echo "💡 Run 'npm run build' first to enable link validation"
+fi
+
+# 4. Lancer les tests d'intégration pour vérifier l'intégrité du contenu
 npm run test:integration
 
 # Si l'une des commandes ci-dessus échoue, le commit sera bloqué.
