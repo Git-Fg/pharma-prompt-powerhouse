@@ -117,6 +117,7 @@ export { Input } from './input'
 // Composants de formulaire
 export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp'
 export { Label } from './label'
+export { Skeleton } from './loading'
 export {
   Menubar,
   MenubarCheckboxItem,
@@ -183,8 +184,6 @@ export {
   SheetTitle,
   SheetTrigger,
 } from './sheet'
-
-export { Skeleton } from './loading'
 export { Slider } from './slider'
 export { Toaster } from './sonner'
 export { Switch } from './switch'
