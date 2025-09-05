@@ -47,7 +47,7 @@ export function CollectionPageLayout({
               {stats && stats.length > 0 && (
                 <AnimatedList className="stats-grid" staggerDelay={0.15}>
                   {stats.map((stat, index) => (
-                    <AnimatedItem key={index} delay={index * 0.1}>
+                    <AnimatedItem key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}-${index}`} delay={index * 0.1}>
                       <div className={cn('stat-card hover-glow hover-scale cursor-pointer', stat.bgClass)}>
                         <div className={cn('stat-number animate-bounce-subtle', stat.colorClass)}>
                           {stat.value}
