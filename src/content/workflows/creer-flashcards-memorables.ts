@@ -3,7 +3,7 @@ import type { Workflow } from '@/lib/content-schema/workflow'
 const workflow = {
   slug: 'creer-flashcards-memorables',
   title: 'Le Générateur de Flashcards Actives',
-  description: 'Un workflow pour créer des flashcards qui forcent la réflexion et l\'application, bien plus efficaces que de simples paires question/réponse.',
+  description: 'Un workflow pour créer des flashcards qui forcent la réflexion et l'application, bien plus efficaces que de simples paires question/réponse.',
   area: 'creation-contenu',
   tags: ['flashcards', 'apprentissage', 'mémorisation', 'révision-active'],
   isFavorite: false,
@@ -13,7 +13,7 @@ const workflow = {
     {
       type: 'introduction',
       title: 'Le Problème : Les Flashcards Passives ne Suffisent Pas',
-      content: 'Le format classique de flashcard (Terme au recto, Définition au verso) est utile, mais limité. Il teste principalement la reconnaissance et la mémorisation brute. Pour un apprentissage en profondeur, il faut des flashcards qui nous obligent à **réfléchir, appliquer et connecter** les connaissances, pas seulement à les réciter. C\'est le principe de la révision active.'
+      content: 'Le format classique de flashcard (Terme au recto, Définition au verso) est utile, mais limité. Il teste principalement la reconnaissance et la mémorisation brute. Pour un apprentissage en profondeur, il faut des flashcards qui nous obligent à **réfléchir, appliquer et connecter** les connaissances, pas seulement à les réciter. C'est le principe de la révision active.'
     },
     {
       type: 'section',
@@ -21,7 +21,7 @@ const workflow = {
       content: [
         {
           type: 'markdown',
-          content: 'L\'idée est de demander à l\'IA de se comporter comme un ingénieur pédagogique et de transformer une notion brute en une série de mini-exercices sous forme de flashcards. On va lui fournir une typologie de questions pour qu\'elle puisse varier les angles d\'attaque.'
+          content: 'L'idée est de demander à l'IA de se comporter comme un ingénieur pédagogique et de transformer une notion brute en une série de mini-exercices sous forme de flashcards. On va lui fournir une typologie de questions pour qu'elle puisse varier les angles d'attaque.'
         },
         {
           type: 'card-list',
@@ -32,15 +32,15 @@ const workflow = {
             },
             {
               title: 'Flashcard de Comparaison',
-              content: '**Objectif :** Distinguer des concepts proches. **Exemple :** "Quelles sont les 3 différences clés entre la maladie de Crohn et la rectocolite hémorragique en termes de localisation et de type d\'inflammation ?"'
+              content: '**Objectif :** Distinguer des concepts proches. **Exemple :** "Quelles sont les 3 différences clés entre la maladie de Crohn et la rectocolite hémorragique en termes de localisation et de type d'inflammation ?"'
             },
             {
               title: 'Flashcard \"Pourquoi\" ou \"Comment\" (Mécanistique)',
-              content: '**Objectif :** Expliquer un mécanisme d\'action. **Exemple :** "Expliquez par quel mécanisme simple les IEC peuvent provoquer une toux sèche."',
+              content: '**Objectif :** Expliquer un mécanisme d'action. **Exemple :** "Expliquez par quel mécanisme simple les IEC peuvent provoquer une toux sèche."',
             },
             {
               title: 'Flashcard \"Avocat du Diable\"',
-              content: '**Objectif :** Challenger une idée reçue. **Exemple :** "Pourquoi l\'association Bêta-bloquant + Vérapamil est-elle généralement contre-indiquée, alors que les deux sont des anti-hypertenseurs ?"'
+              content: '**Objectif :** Challenger une idée reçue. **Exemple :** "Pourquoi l'association Bêta-bloquant + Vérapamil est-elle généralement contre-indiquée, alors que les deux sont des anti-hypertenseurs ?"'
             }
           ]
         }
@@ -58,7 +58,7 @@ const workflow = {
 Je suis un étudiant en pharmacie qui prépare ses examens. Je veux créer des flashcards de révision active, conçues pour maximiser la rétention et la compréhension en profondeur. Je vais utiliser le logiciel Anki, donc je veux une sortie au format CSV (recto;verso).
 
 # RÔLE
-Tu es un ingénieur pédagogique spécialisé dans les sciences cognitives. Ton but est de transformer un sujet complexe en une série de questions de révision active qui forcent la réflexion, l\'application et la connexion des connaissances.
+Tu es un ingénieur pédagogique spécialisé dans les sciences cognitives. Ton but est de transformer un sujet complexe en une série de questions de révision active qui forcent la réflexion, l'application et la connexion des connaissances.
 
 # INSTRUCTIONS
 
@@ -85,8 +85,8 @@ Le sujet à transformer en flashcards est le suivant :
     },
     {
       type: 'conclusion',
-      title: 'Ce qu\'il faut retenir : La Qualité plutôt que la Quantité',
-      content: 'Ce workflow prend un peu plus de temps que de simplement copier-coller son cours. Cependant, créer 10 flashcards actives de ce type est infiniment plus rentable sur le plan cognitif que d\'en créer 50 qui ne font que gratter la surface de la connaissance. C\'est un investissement qui paie le jour de l\'examen, où la capacité à appliquer et à raisonner est bien plus importante que la simple mémorisation.'
+      title: 'Ce qu'il faut retenir : La Qualité plutôt que la Quantité',
+      content: 'Ce workflow prend un peu plus de temps que de simplement copier-coller son cours. Cependant, créer 10 flashcards actives de ce type est infiniment plus rentable sur le plan cognitif que d'en créer 50 qui ne font que gratter la surface de la connaissance. C'est un investissement qui paie le jour de l'examen, où la capacité à appliquer et à raisonner est bien plus importante que la simple mémorisation.'
     }
   ],
 } satisfies Workflow

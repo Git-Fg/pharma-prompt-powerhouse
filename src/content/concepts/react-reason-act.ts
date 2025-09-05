@@ -18,11 +18,13 @@ const concept = {
     {
       type: 'analogy',
       title: 'L\'Analogie du Pharmacien à l\'Officine',
-      content: 'Un pharmacien qui prépare une ordonnance suit une boucle ReAct : 
+      content: `Un pharmacien qui prépare une ordonnance suit une boucle ReAct : 
+
 1.  **Pensée (Reason) :** "Je dois préparer cette ordonnance. Je commence par lire la première ligne : Paracétamol 1g."
 2.  **Action (Act) :** Il se tourne vers le tiroir des antalgiques et prend la boîte de Paracétamol.
-3.  **Observation :** Il vérifie la boîte. "C\'est bien du 1g. La date de péremption est bonne."
-Il recommence ensuite la boucle pour le médicament suivant, s\'ajustant à chaque étape. L\'agent ReAct fonctionne de la même manière, en utilisant des "outils" (comme une recherche web, une calculatrice, etc.) à chaque étape.'
+3.  **Observation :** Il vérifie la boîte. "C'est bien du 1g. La date de péremption est bonne."
+
+Il recommence ensuite la boucle pour le médicament suivant, s'ajustant à chaque étape. L'agent ReAct fonctionne de la même manière, en utilisant des "outils" (comme une recherche web, une calculatrice, etc.) à chaque étape.`,
     },
     {
       type: 'section',

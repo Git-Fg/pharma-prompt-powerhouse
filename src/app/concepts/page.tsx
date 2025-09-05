@@ -32,7 +32,7 @@ export default function ConceptsPage() {
         <h2 className="text-2xl font-semibold mb-4">
           Comment utiliser le Hub de Concepts ?
         </h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 container mx-auto">  
           <div className="text-center">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
               <LucideIcons.BookOpen className="size-6 text-primary" />

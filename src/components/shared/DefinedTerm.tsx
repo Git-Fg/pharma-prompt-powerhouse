@@ -73,7 +73,7 @@ export function DefinedTerm({
             {showIcon && <HelpCircle className="size-3 ml-1" />}
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:text-content-width">
           <DialogHeader>
             <DialogTitle>Définition</DialogTitle>
             <DialogDescription asChild>

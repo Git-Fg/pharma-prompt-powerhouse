@@ -36,7 +36,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-2xl">Pharma Prompt</span>
             </Link>
-            <p className="prose-slogan max-w-lg mx-0">Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
+            <p className="prose-slogan dialog-content-width mx-0">Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
 
           {/* Links Wrapper */}
@@ -130,7 +130,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-xl">Pharma Prompt</span>
             </Link>
-            <p className="prose-slogan text-xs mx-auto max-w-xs">Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
+            <p className="prose-slogan text-xs mx-auto footer-description-width">Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
         </div>
 

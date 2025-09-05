@@ -106,7 +106,7 @@ export default function WorkflowsPage() {
     >
       {/* Search and Filters */}
       <div className="mb-8 space-y-4">
-        <div className="relative max-w-md mx-auto">
+        <div className="relative text-content-width mx-auto">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
           <Input
             placeholder="Rechercher un workflow..."

@@ -148,7 +148,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Separator className="my-8 max-w-4xl mx-auto" />
+      <Separator className="my-8 container mx-auto" />
 
       {/* 4. FEATURED WORKFLOWS : Titre plus engageant et structure de carte améliorée */}
       <Section>
@@ -208,7 +208,7 @@ export default function HomePage() {
             <Card className="bg-muted/50 border-dashed text-center p-6 md:p-8">
               <Brain className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
-              <p className="prose-personal-note max-w-2xl mx-auto">
+              <p className="prose-personal-note container mx-auto">
                 Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle et mes recherches.
                 <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
               </p>
