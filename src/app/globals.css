@@ -476,8 +476,28 @@
   @apply text-pretty max-w-2xl mx-auto text-muted-foreground leading-relaxed;
 }
 
+@utility prose-slogan {
+  @apply text-muted-foreground leading-relaxed responsive-text text-pretty;
+}
+
+@utility prose-description {
+  @apply text-muted-foreground responsive-text max-w-2xl mx-auto text-pretty;
+}
+
+@utility prose-intro {
+  @apply text-muted-foreground leading-relaxed responsive-text text-pretty max-w-none;
+}
+
+@utility prose-personal-note {
+  @apply text-muted-foreground leading-relaxed text-pretty;
+}
+
 @utility container-narrow {
   @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@utility container-content-width {
+  @apply max-w-lg;
 }
 
 @utility responsive-text {
@@ -582,7 +602,7 @@
   }
 
   .page-description {
-    @apply text-muted-foreground responsive-text max-w-2xl mx-auto;
+    @apply prose-description;
   }
 
   .stats-grid {
