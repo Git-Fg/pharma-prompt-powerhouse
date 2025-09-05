@@ -1,6 +1,6 @@
 import analyseDeCasClinique from './analyse-de-cas-clinique'
-import creerFlashcardsMemorables from './creer-flashcards-memorables'
 import analysePharmacovigilance from './analyse-pharmacovigilance'
+import creerFlashcardsMemorables from './creer-flashcards-memorables'
 
 const workflows = [
   analyseDeCasClinique,

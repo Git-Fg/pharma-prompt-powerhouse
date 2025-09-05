@@ -2,9 +2,9 @@
   "name": "eslint-plugin-pharma",
   "version": "1.0.0",
   "description": "Custom ESLint rules for Pharma Prompt Powerhouse project",
-  "main": "index.js",
-  "keywords": ["eslint", "eslint-plugin", "pharma"],
   "license": "MIT",
+  "keywords": ["eslint", "eslint-plugin", "pharma"],
+  "main": "index.js",
   "dependencies": {
   }
 }

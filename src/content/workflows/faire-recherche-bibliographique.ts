@@ -15,7 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `Quand j'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d'informations disponibles. PubMed me donnait des centaines de résultats, mais je ne savais pas par où commencer ni comment évaluer la pertinence des articles.
+      content: `Quand j\'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d\'informations disponibles. PubMed me donnait des centaines de résultats, mais je ne savais pas par où commencer ni comment évaluer la pertinence des articles.
 
 **Mes difficultés :**
 - Identifier les mots-clés pertinents
@@ -32,23 +32,23 @@ export const workflow = {
 
 > *"Trouve-moi des articles sur [mon sujet]"*
 
-**Résultat :** L'IA me citait des références qu'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.`,
+**Résultat :** L\'IA me citait des références qu\'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.`,
     },
     {
       type: 'alert',
       variant: 'destructive',
       title: 'Le risque des références inventées',
-      content: `L'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n'existent pas. JAMAIS de recherche bibliographique sans vérification !`,
+      content: `L\'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n\'existent pas. JAMAIS de recherche bibliographique sans vérification !`,
     },
   ],
 
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `L'IA comme Assistant Méthodologique
+      content: `L\'IA comme Assistant Méthodologique
 
-J'utilise désormais l'IA pour m'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.
-Cette approche s'appuie sur la **structuration par balises** pour organiser l'information.`,
+J\'utilise désormais l\'IA pour m\'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.
+Cette approche s\'appuie sur la **structuration par balises** pour organiser l\'information.`,
     },
     {
       type: 'conceptRecommendation',
@@ -58,25 +58,25 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
     {
       type: 'card',
       title: '🎯 Étape 1 : Définition de la Stratégie de Recherche',
-      content: `**L'IA m'aide à :**
+      content: `**L\'IA m\'aide à :**
 - Identifier les mots-clés pertinents et leurs synonymes
 - Structurer ma question de recherche (PICO : Patient, Intervention, Comparaison, Outcome)
 - Suggérer des bases de données spécialisées
-- Définir des critères d'inclusion/exclusion`,
+- Définir des critères d\'inclusion/exclusion`,
     },
     {
       type: 'card',
       title: '📊 Étape 2 : Analyse et Synthèse des Articles Trouvés',
       content: `**Une fois mes articles récupérés :**
-- Je copie les abstracts dans l'IA pour obtenir une synthèse structurée
+- Je copie les abstracts dans l\'IA pour obtenir une synthèse structurée
 - Je demande une analyse critique des méthodologies
 - Je fais identifier les points de convergence et divergence entre études
-- J'obtiens une hiérarchisation par niveau de preuve`,
+- J\'obtiens une hiérarchisation par niveau de preuve`,
     },
     {
       type: 'card',
       title: '📝 Étape 3 : Organisation et Rédaction',
-      content: `**L'IA m'aide à :**
+      content: `**L\'IA m\'aide à :**
 - Structurer ma revue de littérature de façon logique
 - Identifier les lacunes dans mes recherches
 - Reformuler les idées complexes dans mes propres mots
@@ -87,9 +87,9 @@ Cette approche s'appuie sur la **structuration par balises** pour organiser l'in
   toolComparison: [
     {
       type: 'markdown',
-      content: `## Comparaison des Outils : Mon Retour d'Expérience
+      content: `## Comparaison des Outils : Mon Retour d\'Expérience
 
-Voici comment j'utilise chaque outil selon mes besoins :`,
+Voici comment j\'utilise chaque outil selon mes besoins :`,
     },
     {
       type: 'tabs',
@@ -101,7 +101,7 @@ Voici comment j'utilise chaque outil selon mes besoins :`,
           content: [
             {
               type: 'markdown',
-              content: `**Pourquoi c'est devenu indispensable :**
+              content: `**Pourquoi c\'est devenu indispensable :**
 - Recherche web en temps réel avec sources citées
 - Mode "Deep Research" pour des synthèses approfondies
 - Citations automatiques et vérifiables
@@ -118,14 +118,14 @@ Voici comment j'utilise chaque outil selon mes besoins :`,
           content: [
             {
               type: 'markdown',
-              content: `**Révolutionnaire pour l'analyse d'articles :**
-- Upload de PDFs d'articles directement
+              content: `**Révolutionnaire pour l\'analyse d\'articles :**
+- Upload de PDFs d\'articles directement
 - Création de synthèses personnalisées sur mes documents
 - Questions-réponses avec citations exactes du texte
 
-**Mon workflow :** J'uploade tous mes PDFs d'articles et je crée une "bibliothèque" personnalisée.
+**Mon workflow :** J\'uploade tous mes PDFs d\'articles et je crée une "bibliothèque" personnalisée.
 
-**Avantage énorme :** Zéro risque d'hallucination car l'IA travaille uniquement sur MES documents.`,
+**Avantage énorme :** Zéro risque d\'hallucination car l\'IA travaille uniquement sur MES documents.`,
             },
           ],
         },
@@ -135,12 +135,12 @@ Voici comment j'utilise chaque outil selon mes besoins :`,
           content: [
             {
               type: 'markdown',
-              content: `**Excellent pour l'analyse critique :**
-- Capacité d'analyse de longs documents (200k tokens)
+              content: `**Excellent pour l\'analyse critique :**
+- Capacité d\'analyse de longs documents (200k tokens)
 - Bon sens critique et identification des biais méthodologiques
 - Synthèse nuancée de recherches complexes
 
-**Mon usage :** Analyse approfondie d'articles individuels et comparaison de méthodologies.
+**Mon usage :** Analyse approfondie d\'articles individuels et comparaison de méthodologies.
 
 **Point fort :** Très bon pour identifier les limites et biais des études.`,
             },
@@ -188,15 +188,15 @@ Aide-moi à construire une stratégie de recherche efficace :
 2. STRATÉGIE DE RECHERCHE :
    - Quelle équation de recherche booléenne recommandes-tu ?
    - Quelles bases de données privilégier pour ce sujet ?
-   - Quels critères d'inclusion/exclusion appliquer ?
+   - Quels critères d\'inclusion/exclusion appliquer ?
 
 3. ÉVALUATION :
    - Quels critères utiliser pour évaluer la qualité des études ?
    - Comment hiérarchiser les niveaux de preuve ?
 
-**ÉTAPE 2 - Analyse d'articles (avec abstracts récupérés) :**
+**ÉTAPE 2 - Analyse d\'articles (avec abstracts récupérés) :**
 
-Voici [X] abstracts d'articles sur {{SUJET}}. 
+Voici [X] abstracts d\'articles sur {{SUJET}}. 
 
 Peux-tu :
 1. Créer un tableau comparatif des études (design, population, résultats principaux)
@@ -219,13 +219,13 @@ Ton expertise :
 - Identification des biais et limitations des études
 - Synthèse et organisation de littérature scientifique
 
-Tu accompagnes un étudiant dans l'apprentissage de la recherche bibliographique rigoureuse.`,
+Tu accompagnes un étudiant dans l\'apprentissage de la recherche bibliographique rigoureuse.`,
 
           userPrompt: `Je commence une recherche bibliographique sur : {{VOTRE_SUJET}}
 
 Objectif de ma revue : {{OBJECTIF_REVISION}}
 
-Peux-tu m'aider à :
+Peux-tu m\'aider à :
 1. Définir une stratégie de recherche méthodique
 2. Identifier les mots-clés et termes MeSH appropriés
 3. Suggérer des critères de qualité pour sélectionner mes sources

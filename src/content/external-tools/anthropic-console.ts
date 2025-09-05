@@ -27,7 +27,7 @@ const externalTool = {
   confidenceScore: 4,
   confidenceJustification: 'Je lui attribue ce score élevé car c\'est un outil professionnel et transparent d\'une entreprise américaine majeure. La politique de données est claire, mais il reste un service cloud, d\'où la prudence de mise.',
 
-  freeVsPaidOffer: `| Fonctionnalité | Offre Gratuite (Crédits initiaux) | Payant (API) |\n| :--- | :--- | :--- |\n| **Accès aux modèles** | ✅ Tous les modèles | ✅ Tous les modèles |\n| **Contrôle des paramètres** | ✅ Complet | ✅ Complet |\n| **Coût** | Crédits gratuits de départ | Paiement à l'usage (tokens) |\n| **Sauvegarde** | ✅ Workbench pour projets | ✅ Workbench pour projets |`,
+  freeVsPaidOffer: `| Fonctionnalité | Offre Gratuite (Crédits initiaux) | Payant (API) |\n| :--- | :--- | :--- |\n| **Accès aux modèles** | ✅ Tous les modèles | ✅ Tous les modèles |\n| **Contrôle des paramètres** | ✅ Complet | ✅ Complet |\n| **Coût** | Crédits gratuits de départ | Paiement à l\'usage (tokens) |\n| **Sauvegarde** | ✅ Workbench pour projets | ✅ Workbench pour projets |`,
 
   content: [
     {

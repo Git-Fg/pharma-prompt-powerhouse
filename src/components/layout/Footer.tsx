@@ -4,7 +4,6 @@ import { ArrowRight, Brain } from 'lucide-react'
 import Link from 'next/link'
 import { content } from '@/lib/content-loader'
 import { getNavigationLinksBySection } from '@/lib/navigation'
-import { cn } from '@/lib/utils'
 
 export function Footer() {
   // La logique de récupération des données reste la même
@@ -47,7 +46,12 @@ export function Footer() {
               <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Navigation</h3>
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
-                  <li key={link.name}><Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"><link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" /><span>{link.name}</span></Link></li>
+                  <li key={link.name}>
+                    <Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2">
+                      <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                      <span>{link.name}</span>
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -57,7 +61,12 @@ export function Footer() {
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Sécurité & Légal</h3>
                 <ul className="space-y-3">
                   {legalLinks.map(link => (
-                    <li key={link.name}><Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"><link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" /><span>{link.name}</span></Link></li>
+                    <li key={link.name}>
+                      <Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2">
+                        <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                        <span>{link.name}</span>
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -67,7 +76,10 @@ export function Footer() {
                   {recentWorkflows.map(workflow => (
                     <Link key={workflow.slug} href={`/workflows/${workflow.slug}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors group line-clamp-2 block"><span>{workflow.title}</span></Link>
                   ))}
-                  <Link href="/workflows" className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 pt-2"><span>Voir tous</span><ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" /></Link>
+                  <Link href="/workflows" className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 pt-2">
+                    <span>Voir tous</span>
+                    <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -109,7 +121,7 @@ export function Footer() {
               </ul>
             </div>
           </div>
-          
+
           {/* Brand & Description centrés en bas pour mobile */}
           <div className="text-center mt-12 pt-8 border-t">
             <Link href="/" className="inline-flex items-center space-x-3 mb-4">
@@ -121,12 +133,17 @@ export function Footer() {
             <p className="prose-slogan text-xs mx-auto max-w-xs">Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
         </div>
-        
+
         {/* ====================================================================== */}
         {/* == 3. COPYRIGHT - Commun aux deux layouts pour éviter la duplication == */}
         {/* ====================================================================== */}
         <div className="border-t mt-12 pt-8 text-center">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Pharma Prompt Powerhouse. Tous droits réservés.</p>
+          <p className="text-sm text-muted-foreground">
+            ©
+            {new Date().getFullYear()}
+            {' '}
+            Pharma Prompt Powerhouse. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>

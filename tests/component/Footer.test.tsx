@@ -22,7 +22,7 @@ vi.mock('@/lib/navigation', () => ({
         { name: 'Accueil', href: '/' },
         { name: 'Par où commencer', href: '/par-ou-commencer' },
         { name: 'Workflows Stratégiques', href: '/workflows' },
-        { name: "L'Arsenal IA", href: '/l-arsenal-ia' },
+        { name: 'L\'Arsenal IA', href: '/l-arsenal-ia' },
         { name: 'Concepts', href: '/concepts' },
       ]
     }
@@ -33,7 +33,7 @@ vi.mock('@/lib/navigation', () => ({
   },
 }))
 
-describe('Footer Component', () => {
+describe('footer Component', () => {
   let desktopFooter: HTMLElement
   let mobileFooter: HTMLElement
 
@@ -47,7 +47,7 @@ describe('Footer Component', () => {
   })
 
   // Test the desktop view
-  describe('Desktop Footer View', () => {
+  describe('desktop Footer View', () => {
     it('renders the brand name', () => {
       expect(within(desktopFooter).getByText('Pharma Prompt')).toBeInTheDocument()
     })
@@ -83,7 +83,7 @@ describe('Footer Component', () => {
   })
 
   // Test the mobile view
-  describe('Mobile Footer View', () => {
+  describe('mobile Footer View', () => {
     it('renders the brand name', () => {
       expect(within(mobileFooter).getByText('Pharma Prompt')).toBeInTheDocument()
     })
@@ -100,7 +100,7 @@ describe('Footer Component', () => {
   })
 
   // General tests applicable to both views
-  describe('Copyright and Accessibility', () => {
+  describe('copyright and Accessibility', () => {
     it('renders copyright notice', () => {
       // Test is simplified to check for presence, as year can change.
       expect(screen.getByText(/Pharma Prompt Powerhouse. Tous droits réservés./)).toBeInTheDocument()

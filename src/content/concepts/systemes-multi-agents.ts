@@ -36,7 +36,7 @@ const concept = {
         {
           type: 'card',
           title: 'Analyse Plus Exhaustive',
-          content: 'Chaque agent est focalisé sur sa tâche, ce qui permet d'explorer chaque facette d'un problème avec plus de profondeur qu'une IA généraliste qui essaierait de tout faire en même temps.'
+          content: 'Chaque agent est focalisé sur sa tâche, ce qui permet d\'explorer chaque facette d\'un problème avec plus de profondeur qu\'une IA généraliste qui essaierait de tout faire en même temps.'
         },
         {
           type: 'card',
