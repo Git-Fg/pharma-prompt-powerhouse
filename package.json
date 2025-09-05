@@ -66,6 +66,7 @@
     "date-fns": "^4.1.0",
     "diff": "^8.0.2",
     "embla-carousel-react": "^8.6.0",
+    "eslint-plugin-pharma": "file:tools/eslint-plugin-pharma",
     "eslint-plugin-react-compiler": "^19.1.0-rc.2",
     "framer-motion": "^12.23.12",
     "geist": "^1.4.2",

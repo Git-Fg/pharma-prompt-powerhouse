@@ -1,119 +1,130 @@
 import type { Guide } from '@/lib/content-schema'
 
-export const guide = {
+const guide = {
   slug: 'techniques-avancees-fiabilisation',
-  title: 'Techniques de Fiabilisation des Réponses IA',
-  description: 'Maîtrisez les techniques avancées pour améliorer la fiabilité et la cohérence de vos interactions avec l\'IA',
+  title: "Techniques de Fiabilisation 2025 : De l'Instruction à la Vérification Autonome",
+  description: "Le guide de référence sur les techniques de fiabilisation pour les LLMs de 2025 : Chain-of-Verification (CoVe), Step-Back Prompting, RASC et l'évolution du Tree-of-Thought.",
   icon: 'ShieldCheck',
   category: 'techniques-avancees',
   difficulty: 'avancé',
-  estimatedTime: '40 minutes',
+  estimatedTime: '30 minutes',
   tags: [
-    'chain-of-thought',
-    'clinique',
-    'exemple-code',
-    'guide',
-    'pedagogie',
-    'pharmacie',
-    'self-consistency',
-    'tree-of-thought',
+    'fiabilisation',
+    'CoVe',
+    'Step-Back',
+    'RASC',
+    'Chain-of-Thought',
+    'Tree-of-Thought',
+    'Self-Consistency',
+    'prompt-engineering',
+    '2025',
   ],
   isFavorite: true,
   isWorkflow: false,
   keyTakeaways: [
-    'Utilisez le \'Chain-of-Thought\' (CoT) en demandant à l\'IA de raisonner \'étape par étape\' pour améliorer la transparence et la logique.',
-    'Appliquez le \'Tree-of-Thoughts\' (ToT) pour explorer plusieurs hypothèses en parallèle, idéal pour les cas cliniques complexes.',
-    'Fiabilisez les réponses critiques avec la \'Self-Consistency\' : posez la même question plusieurs fois et vérifiez la convergence des résultats.',
+    "Le Chain-of-Thought reste fondamental pour structurer le raisonnement des modèles les plus puissants.",
+    "Le Chain-of-Verification (CoVe) transforme l'IA en son propre fact-checker pour une meilleure fiabilité factuelle.",
+    "Le Step-Back Prompting améliore la résolution de problèmes en forçant l'IA à raisonner sur des principes généraux avant d'aborder les détails.",
+    "La Self-Consistency évolue vers une analyse de la qualité du raisonnement (RASC) plutôt qu'un simple vote majoritaire.",
+    "Le Tree-of-Thought est de plus en plus assisté par des outils natifs des plateformes (scaffolding).",
   ],
   conceptSlugs: [
+    'chain-of-thought',
     'tree-of-thought',
+    'chain-of-verification',
+    'step-back-prompting',
+    'self-consistency',
   ],
   content: [
     {
       type: 'markdown',
-      content: '# Techniques Avancées de Fiabilisation 2025 : Maîtrisez l\'Art de l\'IA\n\nCe guide fusionne les techniques de fiabilisation éprouvées avec les innovations 2025 pour transformer l\'IA d\'un "oracle" potentiellement trompeur en un "collègue" dont vous pouvez vérifier le travail.',
-    },
-    {
-      type: 'markdown',
-      content: '## 🚀 Nouvelles Techniques de Prompting 2025\n\n### 1. Chain-of-Thought (CoT) Amélioré\n\n#### Principe Fondamental\n\nLe Chain-of-Thought améliore la qualité des réponses en forçant l\'IA à exposer son raisonnement étape par étape, comme un expert qui réfléchit à voix haute.',
-    },
-    {
-      type: 'card',
-      title: 'Exemple en Pharmacie',
-      content: 'Analyse de l\'interaction warfarine-amiodarone en 5 étapes justifiées.',
-    },
-    {
-      type: 'codeBlock',
-      language: 'text',
-      content: 'Analyse l\'interaction entre la warfarine et l\'amiodarone en procédant étape par étape :\n\n1. D\'abord, explique le métabolisme normal de la warfarine\n2. Ensuite, détaille comment l\'amiodarone affecte ce métabolisme\n3. Identifie les conséquences cliniques de cette interaction\n4. Propose des solutions de gestion\n5. Donne des recommandations de monitoring\n\nÀ chaque étape, justifie ton raisonnement et cite les mécanismes impliqués.',
-    },
-    {
-      type: 'markdown',
-      content: '### 2. Tree-of-Thoughts (ToT) - L\'Arbre de Réflexion\n\n#### Concept Révolutionnaire\n\nLe Tree-of-Thoughts permet à l\'IA d\'explorer plusieurs pistes de réflexion simultanément, comme un expert qui considère différentes hypothèses.',
+      content: `## Fiabilisation 2025 : De l'Instruction à la Vérification Autonome
+      
+      En 2025, la fiabilisation des LLMs a changé de paradigme. Il ne s'agit plus seulement de bien instruire l'IA, mais de lui faire intégrer des mécanismes d'**auto-vérification**. Ce guide présente les techniques de pointe pour transformer un modèle puissant en un partenaire de raisonnement fiable.`,
     },
     {
       type: 'card',
-      title: 'Implémentation en Pharmacie',
-      content: 'Explorer plusieurs approches pour optimiser le traitement d\'un patient diabétique.',
-    },
-    {
-      type: 'codeBlock',
-      language: 'text',
-      content: 'Pour optimiser le traitement d\'un patient diabétique de type 2 avec HbA1c 8.5%, explore plusieurs approches :\n\nBRANCHE 1 : Intensification de la metformine\n- Avantages : [explore]\n- Inconvénients : [explore]\n- Risques : [explore]\n\nBRANCHE 2 : Ajout d\'un inhibiteur SGLT2\n- Avantages : [explore]\n- Inconvénients : [explore]\n- Risques : [explore]\n\nBRANCHE 3 : Ajout d\'un agoniste GLP-1\n- Avantages : [explore]\n- Inconvénients : [explore]\n- Risques : [explore]\n\nPour chaque branche, évalue la pertinence selon le profil du patient et recommande la meilleure approche.',
-    },
-    {
-      type: 'markdown',
-      content: '### 3. Self-Consistency avec Validation Croisée\n\n#### Principe de Robustesse\n\nRéduire le risque d\'une réponse aberrante en vérifiant si plusieurs "avis" de l\'IA convergent et en validant avec des sources fiables.',
-    },
-    {
-      type: 'codeBlock',
-      language: 'text',
-      content: '[ÉTAPE 1] Analyse initiale\nAnalyse l\'interaction entre la warfarine et l\'amiodarone.\n\n[ÉTAPE 2] Validation croisée\nMaintenant, agis en tant que pharmacien senior et vérifie cette analyse.\nY a-t-il des points manqués ou des erreurs ?\n\n[ÉTAPE 3] Vérification externe\nVérifie que tes recommandations sont cohérentes avec :\n- Les recommandations HAS 2023\n- Le Vidal 2025\n- Les guidelines ESC 2024',
+      title: 'Le Paradoxe du Chain-of-Thought (CoT) : Plus Essentiel que Jamais',
+      description: 'Pourquoi les modèles les plus puissants en ont le plus besoin.',
+      content: `Contrairement à l'intuition, les modèles de 2025 (GPT-5, Gemini 2.5) sont si puissants que sans un guidage séquentiel comme le CoT, ils risquent de prendre des raccourcis logiques erronés. Le CoT agit comme un "canaliseur" qui force le modèle à exploiter sa puissance de manière structurée.
+      
+      **Benchmark GPT-5 (Fiabilité domaine médical) :**
+      - **Taux d'erreur sans CoT :** 11.6%
+      - **Taux d'erreur AVEC CoT :** **4.8%**
+      
+      Le CoT n'est plus une simple astuce, c'est une condition sine qua non pour la fiabilité.`,
     },
     {
       type: 'markdown',
-      content: '## 🛡️ Techniques de Fiabilisation Éprouvées\n\n### 1. La Technique du "Pas à Pas" (Chain of Thought - CoT)\n\n#### Le principe\n\nForcer l\'IA à exposer son raisonnement avant de donner sa conclusion. Cela l\'oblige à suivre un chemin logique et réduit les erreurs "d\'inattention".',
+      content: `## Les Nouvelles Techniques d'Auto-Vérification`,
+    },
+    {
+      type: 'accordion',
+      items: [
+        {
+          title: "1. Chain-of-Verification (CoVe) : L'Auto-Correction Factuelle",
+          content: [
+            {
+              type: 'markdown',
+              content: `Le CoVe dote le modèle d'un processus d'auto-correction. L'IA génère une réponse, puis planifie et exécute des vérifications factuelles sur ses propres affirmations avant de livrer une réponse finale corrigée.`,
+            },
+            {
+              type: 'codeBlock',
+              language: 'text',
+              filename: 'prompt-cove-exemple.txt',
+              content: `# QUESTION
+Quels sont les principaux effets indésirables de la metformine?
+
+# INSTRUCTIONS
+Suis le processus Chain-of-Verification (CoVe) :
+1. **Réponse Initiale :** Rédige une réponse initiale.
+2. **Plan de Vérification :** Génère 3 questions pour vérifier les faits que tu as avancés.
+3. **Exécution :** Réponds à chaque question de vérification de manière indépendante.
+4. **Réponse Finale :** Rédige une réponse finale corrigée en te basant sur tes vérifications.`,
+            },
+          ],
+        },
+        {
+          title: "2. Step-Back Prompting : Le Pouvoir de l'Abstraction",
+          content: [
+            {
+              type: 'markdown',
+              content: `Cette technique force l'IA à prendre du recul sur une question spécifique pour d'abord raisonner sur les principes généraux sous-jacents. Cela ancre la solution dans des fondamentaux solides et évite les erreurs dues aux détails trompeurs.`,
+            },
+            {
+              type: 'codeBlock',
+              language: 'xml',
+              filename: 'prompt-step-back-exemple.xml',
+              content: `# QUESTION INITIALE
+Un patient sous warfarine commence un traitement par amiodarone. Faut-il ajuster la posologie de la warfarine?
+
+# TÂCHE
+1. Formule une question "step-back" plus générale qui capture le principe pharmacologique.
+2. Réponds à cette question générale pour établir les principes.
+3. Utilise ces principes pour répondre à la question initiale.
+
+# SORTIE ATTENDUE
+<question_step_back>[Ta question générale ici]</question_step_back>
+<principes_generaux>[Tes principes ici]</principes_generaux>
+<reponse_finale>[Ta réponse finale ici]</reponse_finale>`,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'markdown',
+      content: `## Évolution des Techniques Établies`,
     },
     {
       type: 'card',
-      title: '2. La Technique du Consensus (Self-Consistency)',
-      content: 'Réduire le risque d\'une réponse aberrante en vérifiant si plusieurs "avis" de l\'IA convergent. Pour une question importante, ouvrez 3 conversations distinctes et posez exactement le même prompt.',
+      title: 'Évolution du Tree-of-Thoughts (ToT) : Le Scaffolding Natif',
+      content: `Le ToT n'est plus un simple "hack" de prompting. Les plateformes comme Anthropic (Claude) proposent désormais des outils natifs (comme l'outil \\\`<thinking>\\\`) qui permettent de construire des arbres de pensée de manière plus structurée et fiable. L'orchestration reste à la charge de l'utilisateur, mais l'implémentation est assistée.`,
     },
     {
       type: 'card',
-      title: '3. La Technique du "Double Vérificateur"',
-      content: 'Demander à l\'IA de vérifier sa propre réponse en adoptant un rôle différent.',
-    },
-    {
-      type: 'card',
-      title: '4. La Technique de la "Question Inversée"',
-      content: 'Au lieu de demander "Quelle est la dose ?", demandez "Pourquoi cette dose serait-elle incorrecte ?". Cela force l\'IA à considérer les cas limites.',
-    },
-    {
-      type: 'card',
-      title: '5. La Technique du "Contexte Délimité"',
-      content: 'Utiliser des délimiteurs clairs pour séparer vos instructions du contexte fourni, en utilisant par exemple des balises ou des triples guillemets.',
-    },
-    {
-      type: 'markdown',
-      content: '## 🔍 Nouvelles Techniques de Validation 2025\n\n### 1. Validation par Schémas Structurés\n\nUtiliser des formats de sortie contraints (ex: YAML) pour réduire la variance et améliorer la cohérence.',
-    },
-    {
-      type: 'codeBlock',
-      language: 'yaml',
-      content: 'Réponds UNIQUEMENT dans ce format YAML :\n\nanalyse_interaction:\n  medicament_1: "warfarine"\n  medicament_2: "amiodarone"\n  mecanisme: "inhibition CYP2C9"\n  consequence: "augmentation INR"\n  risque: "saignements"\n  solution: "surveillance renforcée"\n  monitoring: "INR 2x/semaine"',
-    },
-    {
-      type: 'markdown',
-      content: '### 2. Validation par Contraintes Logiques\n\nImposer des règles logiques que l\'IA doit respecter, comme l\'adaptation des posologies si ClCr < 30 mL/min.',
-    },
-    {
-      type: 'markdown',
-      content: '### 3. Validation par Métriques Quantitatives\n\nDemander à l\'IA de s\'auto-évaluer sur des critères mesurables comme la complétude et la précision.',
-    },
-    {
-      type: 'markdown',
-      content: '## Conclusion\n\nCes techniques transforment l\'IA d\'un "oracle" potentiellement trompeur en un "collègue" dont vous pouvez vérifier le travail. La fiabilité n\'est pas une question de chance, c\'est le résultat d\'une approche méthodique et rigoureuse.',
+      title: 'Optimisation de la Self-Consistency (RASC)',
+      content: `La technique a évolué. Au lieu de simplement générer beaucoup de réponses à haute température et de prendre la plus fréquente, la nouvelle approche **Reasoning-Aware Self-Consistency (RASC)** analyse aussi la **qualité du raisonnement** de chaque réponse. Un raisonnement solide a plus de poids dans le "vote" final. Cela permet d'obtenir une fiabilité égale ou supérieure avec moins de calculs et une température plus modérée (0.5-0.7).`,
     },
   ],
 } satisfies Guide

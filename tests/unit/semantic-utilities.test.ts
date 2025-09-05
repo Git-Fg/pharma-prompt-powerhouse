@@ -2,78 +2,58 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-// Test semantic utilities by verifying they're defined in utilities.css
-describe('semantic CSS Utilities', () => {
-  // Read utilities.css content for testing (modular architecture)
-  const utilitiesCSS = fs.readFileSync(
-    path.join(__dirname, '../../src/styles/utilities.css'),
-    'utf8',
-  )
-
-  // Also read globals.css for integration tests that need the full assembled CSS
+describe('Centralized Design System in globals.css', () => {
   const globalsCSS = fs.readFileSync(
     path.join(__dirname, '../../src/app/globals.css'),
     'utf8',
   )
 
-  describe('typography Utilities', () => {
-    it('prose-slogan utility is defined', () => {
-      expect(utilitiesCSS).toContain('@utility prose-slogan')
-      expect(utilitiesCSS).toContain('text-muted-foreground')
-      expect(utilitiesCSS).toContain('leading-relaxed')
+  describe('Semantic Typography Utilities', () => {
+    it('defines @utility prose-slogan', () => {
+      expect(globalsCSS).toContain('@utility prose-slogan {')
+      expect(globalsCSS).toContain('text-xl/relaxed text-muted-foreground')
     })
 
-    it('prose-description utility is defined', () => {
-      expect(utilitiesCSS).toContain('@utility prose-description')
-      expect(utilitiesCSS).toContain('text-muted-foreground')
-      expect(utilitiesCSS).toContain('leading-relaxed')
-    })
-
-    // These utilities don't exist in the new structure, removing obsolete tests
-  })
-
-  // Removing obsolete width utilities tests - these were specific workarounds
-  // that are no longer needed in the new modular architecture
-
-  // Removing container variables tests - these are now in tokens.css
-
-  describe('base Responsive Utilities', () => {
-    it('section-spacing utility is defined', () => {
-      expect(utilitiesCSS).toContain('@utility section-spacing')
-    })
-
-    it('container utilities are defined', () => {
-      expect(utilitiesCSS).toContain('@utility container-page')
-      expect(utilitiesCSS).toContain('@utility container-content')
-      expect(utilitiesCSS).toContain('@utility container-narrow')
+    it('defines @utility prose-description', () => {
+      expect(globalsCSS).toContain('@utility prose-description {')
+      expect(globalsCSS).toContain('text-base/relaxed')
     })
   })
 
-  describe('integration with globals.css', () => {
-    it('imports utilities.css correctly', () => {
-      expect(globalsCSS).toContain('@import \'../styles/utilities.css\'')
+  describe('Semantic Layout Utilities', () => {
+    it('defines @utility section-spacing', () => {
+      expect(globalsCSS).toContain('@utility section-spacing {')
+      expect(globalsCSS).toContain('py-12 md:py-16 lg:py-20')
     })
 
-    it('uses modular architecture', () => {
-      expect(globalsCSS).toContain('@import \'../styles/tokens.css\'')
-      expect(globalsCSS).toContain('@import \'../styles/base.css\'')
-      expect(globalsCSS).toContain('@import \'../styles/components.css\'')
-      expect(globalsCSS).toContain('@import \'../styles/animations.css\'')
+    it('defines @utility container-page', () => {
+      expect(globalsCSS).toContain('@utility container-page {')
+      expect(globalsCSS).toContain('container mx-auto px-4')
+    })
+
+    it('defines @utility container-content', () => {
+      expect(globalsCSS).toContain('@utility container-content {')
+      expect(globalsCSS).toContain('w-full max-w-4xl')
+    })
+
+    it('defines @utility container-narrow', () => {
+      expect(globalsCSS).toContain('@utility container-narrow {')
+      expect(globalsCSS).toContain('w-full max-w-2xl')
     })
   })
 
-  describe('eSLint Configuration for Semantic Utilities', () => {
-    const eslintConfig = fs.readFileSync(
-      path.join(__dirname, '../../eslint.config.js'),
-      'utf8',
-    )
+  describe('CSS Architecture Philosophy', () => {
+    it('contains the @theme definition block for design tokens', () => {
+      expect(globalsCSS).toContain('@theme {')
+    })
 
-    it('includes support for Tailwind v4 semantic utilities', () => {
-      // Since eslint-plugin-tailwindcss doesn't support Tailwind v4 yet,
-      // we verify the comment explaining this limitation
-      expect(eslintConfig).toContain('Tailwind v4 semantic utilities support')
-      expect(eslintConfig).toContain('eslint-plugin-tailwindcss doesn\'t support Tailwind v4 yet')
-      expect(eslintConfig).toContain('semantic utilities (prose-*, container-*, etc.)')
+    it('uses @layer components for custom component styles', () => {
+      expect(globalsCSS).toContain('@layer components {')
+    })
+
+    it('includes the Tailwind v4 max-width bug workaround', () => {
+      expect(globalsCSS).toContain('/* Tailwind v4 max-w-* Bug Workaround */')
+      expect(globalsCSS).toContain('--container-xs:')
     })
   })
 })

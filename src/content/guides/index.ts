@@ -1,4 +1,4 @@
-// src/content/guides-new/index.ts
+import { guide as choisirSonAgentDeRecherche } from './choisir-son-agent-de-recherche'
 import { guide as choisirSesOutilsIa2025 } from './choisir-ses-outils-ia-en-2025-chat-vs-studio'
 import { guide as confidentialiteSecurite } from './confidentialite-securite'
 import { guide as gestionMemoireIa } from './gestion-memoire-ia'
@@ -14,6 +14,7 @@ import { guide as techniquesAvanceesFiabilisation } from './techniques-avancees-
 import { guide as treeOfThoughtClinique } from './tree-of-thought-clinique'
 
 export const allGuides = [
+  choisirSonAgentDeRecherche,
   choisirSesOutilsIa2025,
   confidentialiteSecurite,
   gestionMemoireIa,
