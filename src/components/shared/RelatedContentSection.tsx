@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
-import Link from 'next/link'
 import type { Concept, ExternalTool, Guide, Workflow } from '@/lib/content-schema'
+import Link from 'next/link'
 import Badge from '@/components/ui/badge'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 
