@@ -15,9 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `## Le Problème : Perdre le Fil dans les Comparaisons
-
-Quand j'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
+      content: `Quand j'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
 
 Le problème avec les comparaisons textuelles :
 - **Information noyée :** Difficile de retrouver rapidement une différence
@@ -30,9 +28,7 @@ Le problème avec les comparaisons textuelles :
   initialApproach: [
     {
       type: 'markdown',
-      content: `## Mon Approche Initiale (et ses Limites)
-
-Au début, j'ai essayé de demander simplement :
+      content: `Au début, j'ai essayé de demander simplement :
 
 > *"Compare les ISRS et les IRSN."*
 
@@ -49,7 +45,7 @@ Au début, j'ai essayé de demander simplement :
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `## La Stratégie Optimisée : Structure Imposée par l'IA
+      content: `Structure Imposée par l'IA
 
 J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.
 Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`,

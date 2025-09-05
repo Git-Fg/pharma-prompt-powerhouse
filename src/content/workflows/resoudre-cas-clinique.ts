@@ -15,9 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `## Le Problème : L'Analyse Désorganisée
-
-Face à un cas clinique, j'avais tendance à me disperser. Je voyais plein de détails sans pouvoir les hiérarchiser ni construire un raisonnement structuré.
+      content: `Face à un cas clinique, j'avais tendance à me disperser. Je voyais plein de détails sans pouvoir les hiérarchiser ni construire un raisonnement structuré.
 
 **Mes erreurs typiques :**
 - Sauter aux conclusions sans analyse systématique
@@ -32,9 +30,7 @@ Résultat : des réponses partielles et peu convaincantes aux examens.`,
   initialApproach: [
     {
       type: 'markdown',
-      content: `## Mon Approche Initiale (et ses Limites)
-
-Je posais directement le cas à l'IA en demandant :
+      content: `Je posais directement le cas à l'IA en demandant :
 
 > *"Analyse ce cas clinique et donne-moi la réponse."*
 
@@ -51,9 +47,7 @@ Je posais directement le cas à l'IA en demandant :
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `## La Stratégie Optimisée : L'Analyse Guidée par Étapes
-
-J'ai développé une approche progressive qui m'accompagne dans l'apprentissage du raisonnement clinique plutôt que de me donner directement la réponse.
+      content: `J'ai développé une approche progressive qui m'accompagne dans l'apprentissage du raisonnement clinique plutôt que de me donner directement la réponse.
 Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.`,
     },
     {

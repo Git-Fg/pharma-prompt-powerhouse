@@ -15,9 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `## Le Problème : La Mémorisation par Cœur Ne Fonctionne Plus
-
-Face à des listes interminables (effets des bêta-bloquants, étapes du cycle de Krebs, classification des antibiotiques...), la mémorisation brute atteignait ses limites.
+      content: `Face à des listes interminables (effets des bêta-bloquants, étapes du cycle de Krebs, classification des antibiotiques...), la mémorisation brute atteignait ses limites.
 
 Les difficultés classiques :
 - **Listes trop longues :** Impossible de retenir 15 effets secondaires par cœur
@@ -30,9 +28,7 @@ Les difficultés classiques :
   initialApproach: [
     {
       type: 'markdown',
-      content: `## Mon Approche Initiale (et ses Limites)
-
-Au début, j'ai essayé de demander simplement :
+      content: `Au début, j'ai essayé de demander simplement :
 
 > *"Donne-moi un moyen de retenir les effets des bêta-bloquants."*
 
@@ -49,9 +45,7 @@ Au début, j'ai essayé de demander simplement :
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `## La Stratégie Optimisée : Créativité Contrôlée et Personnalisée
-
-J'ai découvert qu'il fallait guider l'IA vers plus de créativité tout en spécifiant mon style d'apprentissage.
+      content: `J'ai découvert qu'il fallait guider l'IA vers plus de créativité tout en spécifiant mon style d'apprentissage.
 Cette approche utilise la **température de dosage** pour contrôler la créativité.`,
     },
     {
