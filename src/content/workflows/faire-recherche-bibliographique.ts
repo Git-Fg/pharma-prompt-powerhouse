@@ -15,9 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `## Le Problème : La Noyade dans l'Information
-
-Quand j'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d'informations disponibles. PubMed me donnait des centaines de résultats, mais je ne savais pas par où commencer ni comment évaluer la pertinence des articles.
+      content: `Quand j'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d'informations disponibles. PubMed me donnait des centaines de résultats, mais je ne savais pas par où commencer ni comment évaluer la pertinence des articles.
 
 **Mes difficultés :**
 - Identifier les mots-clés pertinents
@@ -30,9 +28,7 @@ Quand j'ai commencé à rédiger mon mémoire, j'étais perdu dans la masse d'in
   initialApproach: [
     {
       type: 'markdown',
-      content: `## Mon Approche Initiale (et ses Limites)
-
-Je demandais directement :
+      content: `Je demandais directement :
 
 > *"Trouve-moi des articles sur [mon sujet]"*
 
@@ -49,7 +45,7 @@ Je demandais directement :
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `## La Stratégie Optimisée : L'IA comme Assistant Méthodologique
+      content: `L'IA comme Assistant Méthodologique
 
 J'utilise désormais l'IA pour m'aider dans la MÉTHODE de recherche, pas pour me fournir directement les références.
 Cette approche s'appuie sur la **structuration par balises** pour organiser l'information.`,
