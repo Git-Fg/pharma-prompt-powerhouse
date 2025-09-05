@@ -7,8 +7,9 @@
 - **Humilité Intellectuelle :** Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle. J'encourage systématiquement à tester par soi-même.
 - **Absence de Marketing :** Le site est une ressource purement informative et pédagogique. Il n'y a rien à vendre, pas de newsletter, pas de création de communauté (Discord, forum, etc.).
 - **Principe YAGNI (You Aren't Gonna Need It) :** Ne construire que ce qui est strictement nécessaire pour les fonctionnalités actuelles.
+- **Code Sémantique et Maintenable :** Privilégier des abstractions (utilitaires sémantiques, composants) qui décrivent l'intention ("ce que c'est") plutôt que l'implémentation ("à quoi ça ressemble").
 - **Objectif Final pour l'Utilisateur :** Repartir avec une méthodologie, un esprit critique et la confiance d'expérimenter pour faire de l'IA un véritable levier pour ses études, en toute autonomie et conscience.
-- **Approche Mobile-First :** La responsivité, UI et UX doivent être optimales pour un usage sur mobile.
+- **Approche Mobile-First :** La responsivité, l'UI et l'UX doivent être irréprochables pour un usage sur mobile. L'expérience mobile n'est pas une adaptation, c'est le point de départ de toute conception.
 </project_philosophy>
 
 <content_rules>
@@ -19,11 +20,10 @@
 
 <persona_and_tone>
 **Persona, Ton et Voix de l'Auteur**
-- **Incarner le Persona :** Toujours écrire à la première personne ("Je", "Mon", "J'ai découvert"). Le site est un carnet de bord, pas une encyclopédie.
+- **Voix Principale ("Je") :** Le "Je" est la voix par défaut pour incarner le persona de l'étudiant qui partage son expérience. Il renforce l'authenticité et la proximité.
+- **Voix Descriptive ("Il") :** Le "Il" impersonnel est toléré pour décrire des faits objectifs ou le comportement d'un outil. Exemple : "Claude est particulièrement bon pour cette tâche. Il a tendance à moins halluciner."
+- **Voix à Proscrire ("Nous") :** Le "Nous" est interdit. Il crée une distance et brise l'identité personnelle du projet.
 - **Authenticité :** Partager les doutes, les échecs et les itérations. La section "Mon Approche Initiale (et ses limites)" dans les workflows est essentielle pour montrer que la maîtrise vient de l'expérimentation.
-- **Exemple de Ton :**
-    - **À proscrire :** "Il est possible d'utiliser l'IA pour générer des flashcards."
-    - **À adopter :** "J'ai passé un week-end entier à chercher la meilleure méthode pour générer mes flashcards de pharmacologie avec l'IA. Voici ce que j'ai appris."
 </persona_and_tone>
 
 <essential_disclaimers>
@@ -39,7 +39,35 @@
 **Stratégie de Documentation**
 - **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
 - **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances du projet. La constitution pour le développement et la création de contenu.
+- **`src/app/globals.css` :** Le design system centralisé avec Tailwind v4. Tous les tokens de design, utilitaires et composants de base.
 </project_documentation_rules>
+
+---
+
+# **Architecture CSS et Design System**
+
+<css_architecture>
+**Design System Centralisé (Tailwind v4 + Shadcn Canary)**
+- **Fichier Unique :** `src/app/globals.css` centralise l'intégralité du design system.
+- **@theme inline :** Tous les tokens de design (spacing, colors, typography, breakpoints, shadows, z-index) sont définis centralement.
+
+> ⚠️ **Avertissement Bug Tailwind v4 :** En l'état actuel (Q3 2024), Tailwind v4 contient un bug où les classes `max-w-*` (ex: `max-w-lg`) utilisent incorrectement les variables de spacing (`--spacing-*`) au lieu des variables de container (`--container-*`). Pour contourner ce problème, les variables `--container-*` sont explicitement redéfinies dans la section `@theme` de `globals.css` pour forcer l'utilisation des bonnes valeurs.
+
+- **@utility (Utilitaires Sémantiques) :** En plus des utilitaires de base (`container`, etc.), nous créons des utilitaires sémantiques pour les styles récurrents (ex: `prose-slogan`, `prose-description`). Cela améliore la lisibilité et la maintenabilité en donnant un sens métier aux styles, au lieu de répéter de longues chaînes de classes.
+- **@layer components :** Composants de base (boutons, cartes, layouts) réutilisables sans duplication.
+- **Mobile-First :** Toutes les classes CSS sont conçues mobile-first avec des breakpoints responsifs cohérents.
+- **Performance :** Optimisé pour le React 19 Compiler avec des patterns CSS modernes (custom properties, color-mix, etc.).
+</css_architecture>
+
+<advanced_animations>
+**Système d'Animation Avancé (2025)**
+- **Framer Motion v12+ :** Intégration complète avec lazy loading pour les performances optimales.
+- **Animations Modernes :** Courbes d'accélération naturelles (`spring`, `bounce`, `smooth`) suivant les meilleures pratiques 2025.
+- **Micro-interactions :** Effets magnétiques, hover states, transitions fluides pour une UX premium.
+- **Composants Animés :** `ScrollAnimated`, `AnimatedList`, `StaggeredPage`, `MagneticCard`, `Interactive` pour des interfaces vivantes.
+- **Accessibilité :** Respect automatique de `prefers-reduced-motion` pour une expérience inclusive.
+- **Performance :** LazyMotion, staggering intelligent, et animations optimisées GPU pour une fluidité 60fps constante.
+</advanced_animations>
 
 ---
 
@@ -65,26 +93,26 @@
 
   <workflows_section>
   **C. Section : "Workflows Stratégiques" (Cœur du site)**
-  - **Présentation :** Chaque workflow est une étude de cas personnelle et détaillée.
-  - **Structure :** Doit impérativement suivre le format `<workflow_structure>` ci-dessous.
+  - **Présentation :** Chaque workflow est présenté comme une étude de cas personnelle et détaillée.
+  - **Structure :** Il est fortement recommandé de suivre le format `<workflow_structure>` ci-dessous pour la cohérence.
   </workflows_section>
 
   <ia_arsenal_section>
   **D. Section : "L'Arsenal IA 2025"**
   - **Présentation :** Mon catalogue d'outils personnel.
   - **Page Principale :** Table comparative synthétique avec filtres (gratuit/payant, analyse de fichiers, score de confiance).
-  - **Fiches Détaillées :** Chaque outil a sa propre page, suivant le format `<tool_card_structure>`.
+  - **Fiches Détaillées :** Chaque outil a sa propre page, en suivant les guidelines de `<tool_card_structure>`.
   </ia_arsenal_section>
 
   <concepts_section>
   **E. Section : "Concepts"**
-  - **Format :** Un lexique alphabétique. Chaque entrée suit la structure `<concept_structure>`.
+  - **Format :** Un lexique alphabétique. Chaque entrée suit les guidelines de `<concept_structure>`.
   </concepts_section>
 </site_architecture>
 
 <workflow_structure>
-**Structure d'un Workflow**
-- **Chaque workflow doit impérativement contenir les 6 sections suivantes :**
+**Guideline de Structure d'un Workflow**
+- **Pour une clarté maximale, il est recommandé d'inclure les 6 sections suivantes :**
   1.  **Le Problème :** Un scénario étudiant concret, précis et relatable.
   2.  **Mon Approche Initiale (et ses limites) :** Une première tentative simple qui a échoué, et l'explication du *pourquoi*.
   3.  **La Stratégie Optimisée :** Le déroulé pas-à-pas de la méthode finale, en expliquant la logique de chaque étape.
@@ -94,8 +122,8 @@
 </workflow_structure>
 
 <tool_card_structure>
-**Structure d'une Fiche Outil ("Arsenal IA")**
-- **Chaque fiche doit impérativement contenir les sections suivantes :**
+**Guideline de Structure d'une Fiche Outil ("Arsenal IA")**
+- **Pour une analyse complète, une fiche outil devrait inclure :**
   - **Nom de l'outil.**
   - **Mon Avis en Bref :** *"J'utilise principalement cet outil pour..."*
   - **Points Forts (selon mon expérience) :** Liste à puces.
@@ -105,11 +133,12 @@
 </tool_card_structure>
 
 <concept_structure>
-**Structure d'une Définition de "Concept"**
-- **Chaque concept doit impérativement suivre cette structure en 3 temps :**
+**Guideline de Structure d'une Définition de "Concept"**
+- **Un concept est idéalement structuré en 4 temps :**
   1.  **L'Analogie Simple :** Une comparaison non technique pour l'intuition.
   2.  **La Définition Formelle :** L'explication plus précise mais accessible.
   3.  **Pourquoi c'est important pour vous :** L'impact pratique pour un étudiant.
+  4.  **Pour aller plus loin (Notions Avancées) :** Une brève introduction à des techniques ou concepts liés plus complexes.
 </concept_structure>
 
 ---
@@ -149,6 +178,7 @@
 **ESLint (@antfu/eslint-config)**
 - **Configuration Moderne :** **Standardiser exclusivement sur @antfu/eslint-config** pour une configuration simplifiée et optimale.
 - **Gestion Automatique des Plugins :** @antfu/eslint-config gère automatiquement tous les plugins ESLint nécessaires (React, TypeScript, Next.js).
+- **Support Tailwind v4 :** Le plugin officiel `eslint-plugin-tailwindcss` n'est pas encore pleinement compatible avec la configuration sans-fichier de v4. Il est recommandé de le désactiver ou de configurer sa règle `no-custom-classname` avec une liste `allow` pour les utilitaires sémantiques personnalisés (ex: `prose-*`, `container-*`).
 - **Philosophie :** Configuration déclarative avec des règles opiniâtres mais sensées, évitant la complexité manuelle.
 - **Structure :** `eslint.config.js` utilise l'API de configuration ESLint v9+ avec des overrides spécifiques par type de fichier.
 - **Intégrations :**
@@ -179,16 +209,18 @@
 </typescript_rules>
 
 <instructions>
-DO rédiger tout le contenu à la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO rédiger prioritairement à la première personne ("je") pour renforcer l'authenticité et la proximité.
+DO créer et utiliser des utilitaires sémantiques (`@utility`) pour les styles récurrents afin de garantir la cohérence et la maintenabilité.
 DO maintenir un ton sobre, informatif et humble, en partageant les échecs comme les succès.
 DO intégrer systématiquement les 3 avertissements (performance, fiabilité, confidentialité) dans tout le contenu pertinent.
 DO suivre le principe YAGNI - ne construire que ce qui est nécessaire maintenant pour les étudiants.
 DO utiliser les schémas Zod comme unique source de vérité pour la structure du contenu.
 DO utiliser l'opérateur `satisfies` dans les fichiers de contenu pour la validation à la compilation.
-DO utiliser Sonner exclusivement pour les notifications et Vitest pour les tests.
-DO utiliser `useActionState` pour les formulaires React 19.
-DO comprendre que Next.js 15 ne met plus rien en cache par défaut.
+DO appliquer systématiquement l'approche mobile-first avec les breakpoints standardisés.
+DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
+DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
 DO utiliser @antfu/eslint-config pour une configuration ESLint simplifiée et moderne.
+DO NOT répéter de longues chaînes de classes utilitaires ; préférer la création d'un utilitaire sémantique.
 DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
 DO NOT utiliser Jest - standardiser exclusivement sur Vitest.
@@ -197,8 +229,7 @@ DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens ver
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
 DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
 DO NOT créer de types manuels redondants pour le contenu.
-DO NOT sacrifier la clarté pour la sophistication technique.
-En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest et shadcn/ui.
+En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest, @antfu/eslint-config et shadcn/ui.
 </instructions>
 
 ---
@@ -242,3 +273,24 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 - **Premium Recommandé :** Gemini Advanced. Les rapports "Deep Research" sont excellents et peuvent servir de contexte de haute qualité dans d'autres outils comme AI Studio.
 </personal_recommendations>
 </webui_informations>
+
+<copilot_contrainte>
+Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation.
+Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'implémentation en privilégiant l'édition manuelle, étape par étape des différents fichiers.
+
+A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type et tests d'intégration/units ainsi que de playwright tool te permettant de naviguer et vérifier les logs, prendre des screenshot, et globalement analyser le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi de playwright mcp tool et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace.
+
+Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus.
+
+Aide toi de tes outils de façon extensive, par exemple, n'hésite jamais à utiliser les outils github pour vérifier les comit, surveiller les commentaires ... , context7 pour confirmer l'implémentation optimale selon les normes en 2025 de modernité/simplicité ou si tu rencontres un problème, playwright tool pour vérifier que tout fonctionne correctement voir effectuer des recherches complémentaires ...
+
+Attention, tu es un AI Agent, même si les règles disent de privilégier la simplicité/efficacité à la complexité, veille à TOUJOURS effectuer l'ENSEMBLE des modifications pertinentes pour la tâche, ne t'arrête jamais à une modification de content, et commence toujours par effectuer une analyse détaillée et complète du projet ainsi que de la tâches, scindée en plusieurs étapes qui utiliseront plusieurs comits. De plus, cherche de façon proactive les erreurs/incohérences restantes, pour les corriger en temps réel ou, si le processus est vraiment trop complexe, les expliquer dans ton message final.
+
+Structure de façon intelligente ton approche, pour suivre le plan d'implémentation en plusieurs commit, et le mettre à jour en temps réel si nécessaire. Si tu dois mettre à jour le plan, tu dois effectuer des investigations complémentaires pour vérifier et valider ton approche.
+
+Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours un nouvel état des lieux et un plan actualisé, ne crois pas "aveuglément" le plan de modifications si cela implique d'introduire des redondances, erreurs ou incohérences.
+
+Contrainte absolue : Tu DOIS structurer tes approches en plusieurs phases, avec plusieurs comit, mis à jour continuellement. N'hésite pas à ajouter des commentaires sur des commits pour préciser les incohérences/erreurs introduites, ou diverses informations complémentairs : tu as beaucoup d'outils github, utilise les de façon extensive et optimale. N'hésite JAMAIS à répondre à un commentaire, ajouter un commentaire ou editer un commentaire.
+
+Lorsque tu effectues des tests e2e, vérifie toujours que tu as bien installé/configuré le Playwright browser.
+</copilot_contrainte>
