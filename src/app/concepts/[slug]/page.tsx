@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation'
 import { Container, Section } from '@/components/layout/Container'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
-import Badge from '@/components/ui/badge'
+import { RelatedContentSection } from '@/components/shared/RelatedContentSection'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -160,59 +160,20 @@ export default async function ConceptDetailPage({
 
         <main className="space-y-12">
           {/* Guides liés */}
-          {relatedGuides.length > 0 && (
-            <section>
-              <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-                <BookOpen className="size-8 text-primary" />
-                {' '}
-                Guides liés à ce concept
-              </h2>
-              <div className="grid gap-4">
-                {relatedGuides.map(guide => (
-                  <Link href={`/guides/${guide.slug}`} key={guide.slug}>
-                    <Card className="hover:bg-accent/50 transition-colors">
-                      <CardHeader>
-                        <CardTitle>{guide.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {guide.description}
-                        </p>
-                      </CardHeader>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
+          <RelatedContentSection
+            title="Guides liés à ce concept"
+            icon={BookOpen}
+            items={relatedGuides}
+            type="guides"
+          />
 
-          {/* 2. Les Workflows Pratiques */}
-          {relatedWorkflows.length > 0 && (
-            <section>
-              <h2 className="text-3xl font-semibold flex items-center gap-3 mb-4">
-                <Lightbulb className="size-8 text-yellow-500" />
-                {' '}
-                Appliquer : Les
-                Workflows Pratiques
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {relatedWorkflows.map(workflow => (
-                  <Link href={`/workflows/${workflow.slug}`} key={workflow.slug}>
-                    <Card className="h-full hover:bg-accent/50 transition-colors">
-                      <CardHeader>
-                        <CardTitle>{workflow.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {workflow.description}
-                        </p>
-                        <div className="flex gap-2 pt-2">
-                          <Badge variant="outline">{workflow.category}</Badge>
-                          <Badge variant="secondary">{workflow.difficulty}</Badge>
-                        </div>
-                      </CardHeader>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
+          {/* Workflows pratiques */}
+          <RelatedContentSection
+            title="Appliquer : Les Workflows Pratiques"
+            icon={Lightbulb}
+            items={relatedWorkflows}
+            type="workflows"
+          />
         </main>
       </Container>
     </Section>

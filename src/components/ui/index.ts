@@ -19,9 +19,6 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './alert-dialog'
-export { AspectRatio } from './aspect-ratio'
-// Composants d'interface
-export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { default as Badge } from './badge'
 export {
   Breadcrumb,
@@ -33,7 +30,6 @@ export {
 } from './breadcrumb'
 // Composants de base
 export { default as Button } from './button'
-export { Calendar } from './calendar'
 
 // Composants de mise en page
 export {
@@ -131,27 +127,8 @@ export { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card'
 
 export { Input } from './input'
 // Composants de formulaire
-export { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp'
 export { Label } from './label'
 export { Skeleton } from './loading'
-export {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarGroup,
-  MenubarItem,
-  MenubarLabel,
-  MenubarMenu,
-  MenubarPortal,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from './menubar'
 // Composants de navigation
 export {
   NavigationMenu,
@@ -162,25 +139,7 @@ export {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from './navigation-menu'
-export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from './pagination'
 export { Popover, PopoverContent, PopoverTrigger } from './popover'
-
-export { Progress } from './progress'
-
-export { RadioGroup, RadioGroupItem } from './radio-group'
-export {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from './resizable'
 
 export { ScrollArea } from './scroll-area'
 export {
@@ -201,7 +160,6 @@ export {
   SheetTitle,
   SheetTrigger,
 } from './sheet'
-export { Slider } from './slider'
 export { Toaster } from './sonner'
 export { Switch } from './switch'
 // Composants de données
@@ -216,7 +174,6 @@ export {
 } from './table'
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 export { Textarea } from './textarea'
-export { ToggleGroup, ToggleGroupItem } from './toggle-group'
 
 export {
   Tooltip,
