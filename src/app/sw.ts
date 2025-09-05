@@ -1,6 +1,6 @@
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
-import { CacheFirst, ExpirationPlugin, NetworkFirst, Serwist, StaleWhileRevalidate } from 'serwist'
+import { CacheFirst, ExpirationPlugin, Serwist, StaleWhileRevalidate } from 'serwist'
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -93,14 +93,14 @@ const serwist = new Serwist({
             handlerDidError: async () => {
               // Instead of redirecting to /offline, let the app handle it gracefully
               return new Response(
-                JSON.stringify({ 
-                  offline: true, 
-                  message: 'Contenu disponible hors ligne' 
+                JSON.stringify({
+                  offline: true,
+                  message: 'Contenu disponible hors ligne',
                 }),
                 {
                   headers: { 'Content-Type': 'application/json' },
-                  status: 200
-                }
+                  status: 200,
+                },
               )
             },
           },

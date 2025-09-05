@@ -12,12 +12,16 @@
   }
 
   .card-interactive {
-    @apply card-base hover:shadow-md hover:scale-[1.02] cursor-pointer;
-    @apply focus-visible;
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm;
+    @apply transform transition-all duration-200;
+    @apply hover:shadow-md hover:scale-[1.02] cursor-pointer;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
 
   .card-feature {
-    @apply card-base p-6;
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm;
+    @apply transform transition-all duration-200;
+    @apply p-6;
     @apply hover:shadow-lg hover:bg-card/95;
   }
 
@@ -25,27 +29,42 @@
   .btn-base {
     @apply inline-flex items-center justify-center gap-2;
     @apply rounded-md font-medium text-sm transition-all duration-200;
-    @apply focus-visible disabled:pointer-events-none disabled:opacity-50;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
     @apply px-4 py-2 min-h-10;
   }
 
   .btn-primary {
-    @apply btn-base bg-primary text-primary-foreground;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-md font-medium text-sm transition-all duration-200;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply px-4 py-2 min-h-10;
+    @apply bg-primary text-primary-foreground;
     @apply hover:bg-primary/90 active:scale-95;
   }
 
   .btn-secondary {
-    @apply btn-base bg-secondary text-secondary-foreground;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-md font-medium text-sm transition-all duration-200;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply px-4 py-2 min-h-10;
+    @apply bg-secondary text-secondary-foreground;
     @apply hover:bg-secondary/80 active:scale-95;
   }
 
   .btn-outline {
-    @apply btn-base border border-input bg-background;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-md font-medium text-sm transition-all duration-200;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply px-4 py-2 min-h-10;
+    @apply border border-input bg-background;
     @apply hover:bg-accent hover:text-accent-foreground active:scale-95;
   }
 
   .btn-ghost {
-    @apply btn-base;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-md font-medium text-sm transition-all duration-200;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply px-4 py-2 min-h-10;
     @apply hover:bg-accent hover:text-accent-foreground active:scale-95;
   }
 
@@ -60,7 +79,7 @@
     @apply bg-background px-3 py-2 text-sm ring-offset-background;
     @apply file:border-0 file:bg-transparent file:text-sm file:font-medium;
     @apply placeholder:text-muted-foreground;
-    @apply focus-visible disabled:cursor-not-allowed disabled:opacity-50;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .input-error {
@@ -96,7 +115,7 @@
   .nav-item {
     @apply flex items-center gap-3 rounded-lg px-3 py-2;
     @apply text-muted-foreground transition-all hover:text-foreground;
-    @apply focus-visible;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
 
   .nav-item-active {
@@ -124,7 +143,7 @@
   .shimmer::after {
     @apply absolute inset-0 -translate-x-full;
     @apply bg-gradient-to-r from-transparent via-white/20 to-transparent;
-    @apply animate-shimmer;
+    @apply bg-gradient-to-r from-muted via-muted/50 to-muted;
     content: '';
   }
 
@@ -185,7 +204,7 @@
 
   /* Magnetic interaction for cards */
   .magnetic-card {
-    @apply transform transition-all duration-300 ease-spring;
+    @apply transform transition-all duration-300;
     @apply hover:scale-105 hover:-translate-y-1 hover:shadow-xl;
   }
 

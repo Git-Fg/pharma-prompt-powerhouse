@@ -30,20 +30,20 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. */
     trace: 'on-first-retry',
-    
+
     /* Take screenshot on failure */
     screenshot: 'only-on-failure',
-    
+
     /* Record video on failure */
     video: 'retain-on-failure',
 
     /* Modern best practices */
     // Prefer user-centric locators
     testIdAttribute: 'data-testid',
-    
+
     // Respect user's motion preferences
     reducedMotion: 'reduce',
-    
+
     // Optimize for CI performance
     actionTimeout: 15000,
     navigationTimeout: 30000,
@@ -57,7 +57,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
         // Modern viewport for 2025
         viewport: { width: 1920, height: 1080 },
@@ -66,7 +66,7 @@ export default defineConfig({
     },
     {
       name: 'firefox',
-      use: { 
+      use: {
         ...devices['Desktop Firefox'],
         viewport: { width: 1920, height: 1080 },
       },
@@ -74,7 +74,7 @@ export default defineConfig({
     },
     {
       name: 'webkit',
-      use: { 
+      use: {
         ...devices['Desktop Safari'],
         viewport: { width: 1920, height: 1080 },
       },

@@ -9,7 +9,7 @@ on:
 # Global environment variables
 env:
   NODE_VERSION: '20'
-  CACHE_KEY_PREFIX: 'v1'
+  CACHE_KEY_PREFIX: v1
 
 # Cancel in-progress runs for the same PR
 concurrency:
@@ -71,7 +71,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -111,7 +111,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -151,7 +151,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -192,7 +192,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -246,7 +246,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -295,7 +295,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -325,7 +325,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -359,7 +359,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Restore node_modules
         uses: actions/cache@v3
@@ -382,12 +382,12 @@ jobs:
     steps:
       - name: Check all jobs status
         run: |
-          if [[ "${{ needs.lint-and-typecheck.result }}" == "failure" || 
-                "${{ needs.test-unit.result }}" == "failure" || 
-                "${{ needs.build.result }}" == "failure" || 
-                "${{ needs.test-e2e.result }}" == "failure" || 
-                "${{ needs.security-audit.result }}" == "failure" || 
-                "${{ needs.performance-test.result }}" == "failure" || 
+          if [[ "${{ needs.lint-and-typecheck.result }}" == "failure" ||
+                "${{ needs.test-unit.result }}" == "failure" ||
+                "${{ needs.build.result }}" == "failure" ||
+                "${{ needs.test-e2e.result }}" == "failure" ||
+                "${{ needs.security-audit.result }}" == "failure" ||
+                "${{ needs.performance-test.result }}" == "failure" ||
                 "${{ needs.validate-content.result }}" == "failure" ]]; then
             echo "One or more jobs failed"
             exit 1

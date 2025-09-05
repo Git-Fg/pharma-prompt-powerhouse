@@ -1,14 +1,14 @@
 'use client'
 
 import type { EnrichedGuide } from '@/lib/content-schema'
-import { ArrowRight, BookOpen, Clock, Target, Star, Users, Zap } from 'lucide-react'
+import { ArrowRight, BookOpen, Clock, Star, Target, Users, Zap } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { MagneticHover } from '@/components/ui/css-animations'
+import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import {
   formatEstimatedTime,
   getContentUrl,
@@ -34,11 +34,11 @@ interface WorkflowCardProps {
   variant?: 'default' | 'featured' | 'compact'
 }
 
-export const WorkflowCard: React.FC<WorkflowCardProps> = ({ 
-  workflow, 
+export const WorkflowCard: React.FC<WorkflowCardProps> = ({
+  workflow,
   enhanced = true,
   showStats = false,
-  variant = 'default'
+  variant = 'default',
 }) => {
   const estimatedTime = formatEstimatedTime(workflow.estimatedTime, 'guide')
   const workflowUrl = getContentUrl('guide', workflow.slug)
@@ -87,7 +87,8 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
         cardVariants[variant],
         'flex-col hover:shadow-xl hover:border-primary/50 transition-all duration-300 group overflow-hidden',
         variant === 'featured' && 'shadow-lg',
-      )}>
+      )}
+      >
         {/* Zone 1: GLIMPSE - Quick Visual Scan */}
         <div className="relative">
           {variant === 'featured' && (
@@ -98,21 +99,23 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
               </Badge>
             </div>
           )}
-          
+
           <CardHeader className="pb-3">
             <div className="flex items-start gap-4">
               {/* Visual Anchor - Icon with status indicator */}
               <div className="relative">
                 <div className={cn(
                   'p-3 rounded-xl transition-all duration-300 group-hover:scale-110',
-                  variant === 'featured' 
-                    ? 'bg-primary/20 group-hover:bg-primary/30' 
-                    : 'bg-primary/10 group-hover:bg-primary/20'
-                )}>
+                  variant === 'featured'
+                    ? 'bg-primary/20 group-hover:bg-primary/30'
+                    : 'bg-primary/10 group-hover:bg-primary/20',
+                )}
+                >
                   <Target className={cn(
                     'size-6 transition-colors',
                     variant === 'featured' ? 'text-primary' : 'text-primary',
-                  )} />
+                  )}
+                  />
                 </div>
                 {/* Difficulty indicator dot */}
                 <div className={cn(
@@ -120,7 +123,8 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
                   workflow.difficulty === 'beginner' && 'bg-green-500',
                   workflow.difficulty === 'intermediate' && 'bg-yellow-500',
                   workflow.difficulty === 'advanced' && 'bg-red-500',
-                )} />
+                )}
+                />
               </div>
 
               {/* Title and Primary Metadata */}
@@ -128,10 +132,11 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
                 <CardTitle className={cn(
                   'group-hover:text-primary transition-colors line-clamp-2 mb-2',
                   variant === 'featured' ? 'text-lg' : 'text-base',
-                )}>
+                )}
+                >
                   {workflow.title}
                 </CardTitle>
-                
+
                 {/* Quick Scan Badges */}
                 <div className="flex flex-wrap gap-2">
                   <CategoryBadge category={workflow.category} />
@@ -151,7 +156,8 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
           <CardDescription className={cn(
             'text-sm text-muted-foreground mb-4',
             variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3',
-          )}>
+          )}
+          >
             {workflow.description}
           </CardDescription>
 
@@ -161,11 +167,15 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
               <Clock className="size-4 text-primary/70" />
               <span>{estimatedTime}</span>
             </div>
-            
+
             {showStats && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Users className="size-4 text-primary/70" />
-                <span>{mockStats.completions} complétions</span>
+                <span>
+                  {mockStats.completions}
+                  {' '}
+                  complétions
+                </span>
               </div>
             )}
           </div>
@@ -185,7 +195,10 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
                 ))}
                 {workflow.keyTakeaways.length > 2 && (
                   <div className="text-xs text-muted-foreground/70">
-                    +{workflow.keyTakeaways.length - 2} autres points
+                    +
+                    {workflow.keyTakeaways.length - 2}
+                    {' '}
+                    autres points
                   </div>
                 )}
               </div>
@@ -203,7 +216,9 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
                   <span className="font-medium">{mockStats.rating}</span>
                 </div>
                 <div className="text-muted-foreground">
-                  {mockStats.saves} sauvegardes
+                  {mockStats.saves}
+                  {' '}
+                  sauvegardes
                 </div>
               </div>
             </div>
@@ -211,18 +226,18 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
 
           <div className="flex gap-2">
             <Link href={workflowUrl} className="flex-1">
-              <Button 
+              <Button
                 className={cn(
                   'w-full transition-all duration-200 group-hover:shadow-md',
                   variant === 'featured' && 'bg-primary hover:bg-primary/90',
-                )} 
+                )}
                 size="sm"
               >
                 Démarrer le workflow
                 <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            
+
             {variant === 'featured' && (
               <Button variant="outline" size="sm" className="px-3">
                 <BookOpen className="size-4" />

@@ -1,8 +1,8 @@
 'use client'
 
+import { Wifi, WifiOff } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import { WifiOff, Wifi } from 'lucide-react'
 
 /**
  * PWA Offline Status Manager
@@ -20,7 +20,7 @@ export function PWAOfflineManager() {
     const handleOnline = () => {
       setIsOnline(true)
       setHasShownOfflineToast(false)
-      
+
       // Welcome back toast
       toast.success('Connexion rétablie', {
         description: 'Toutes les fonctionnalités sont à nouveau disponibles',
@@ -31,10 +31,10 @@ export function PWAOfflineManager() {
 
     const handleOffline = () => {
       setIsOnline(false)
-      
+
       if (!hasShownOfflineToast) {
         setHasShownOfflineToast(true)
-        
+
         // Offline notification with helpful message
         toast.error('Mode hors ligne activé', {
           description: 'Le contenu en cache reste accessible. La synchronisation reprendra automatiquement.',

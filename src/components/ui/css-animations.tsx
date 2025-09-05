@@ -22,11 +22,11 @@ interface StaggeredContainerProps {
   triggerOnView?: boolean
 }
 
-export function StaggeredContainer({ 
-  children, 
-  className, 
+export function StaggeredContainer({
+  children,
+  className,
   staggerDelay = 100,
-  triggerOnView = true 
+  triggerOnView = true,
 }: StaggeredContainerProps) {
   // Generate custom CSS variables for dynamic stagger timing
   const style = {
@@ -34,11 +34,11 @@ export function StaggeredContainer({
   } as React.CSSProperties
 
   return (
-    <div 
+    <div
       className={cn(
         'stagger-container',
         triggerOnView && 'stagger-on-view',
-        className
+        className,
       )}
       style={style}
     >
@@ -58,22 +58,22 @@ interface AnimatedElementProps {
   delay?: number
 }
 
-export function AnimatedElement({ 
-  children, 
-  className, 
+export function AnimatedElement({
+  children,
+  className,
   variant = 'slideUp',
-  delay = 0 
+  delay = 0,
 }: AnimatedElementProps) {
   const style = {
     '--animation-delay': `${delay}ms`,
   } as React.CSSProperties
 
   return (
-    <div 
+    <div
       className={cn(
         'animate-on-view',
         `animate-${variant}`,
-        className
+        className,
       )}
       style={style}
     >
@@ -92,10 +92,10 @@ interface MagneticHoverProps {
   intensity?: 'subtle' | 'normal' | 'strong'
 }
 
-export function MagneticHover({ 
-  children, 
-  className, 
-  intensity = 'normal' 
+export function MagneticHover({
+  children,
+  className,
+  intensity = 'normal',
 }: MagneticHoverProps) {
   const intensityClass = {
     subtle: 'magnetic-hover-subtle',
