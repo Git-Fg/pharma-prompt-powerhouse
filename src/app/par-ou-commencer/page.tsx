@@ -22,7 +22,7 @@ export default function ParOuCommencerPage() {
               Guide pour débutants
             </Badge>
             <h1 className="text-2xl md:text-4xl font-bold leading-tight text-center">Par où commencer ?</h1>
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl text-center leading-relaxed">
+            <p className="prose-description leading-relaxed">
               Vous découvrez l'IA ? Parfait ! J'ai conçu ce parcours pour vous accompagner
               pas à pas dans votre apprentissage. Suivez ces étapes dans l'ordre.
             </p>
@@ -243,7 +243,7 @@ export default function ParOuCommencerPage() {
           <div className="text-center">
             <div className="bg-muted p-6 rounded-lg">
               <h3 className="text-lg font-semibold mb-2">Prêt à commencer ?</h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="prose-personal-note mb-4">
                 Commencez par comprendre les concepts clés, puis lancez-vous dans votre premier workflow.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 justify-center">

@@ -39,7 +39,7 @@ export function CollectionPageLayout({
                 <h1 className="page-title text-balance animate-fade-in">
                   {title}
                 </h1>
-                <p className="page-description text-pretty animate-slide-up">
+                <p className="prose-description text-pretty animate-slide-up">
                   {description}
                 </p>
               </div>

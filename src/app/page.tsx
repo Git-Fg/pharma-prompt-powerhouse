@@ -27,17 +27,17 @@ export default function HomePage() {
               Pharma Prompt Powerhouse
             </h1>
             <div className="prose prose-lg mx-auto text-muted-foreground space-y-4">
-              <p className="responsive-text leading-relaxed text-pretty">
+              <p className="prose-intro">
                 Bonjour ! Je suis un étudiant en pharmacie,
                 <br />
                 comme vous peut-être.
               </p>
-              <p className="responsive-text leading-relaxed text-pretty">
+              <p className="prose-intro">
                 J'ai passé du temps à explorer l'IA pour mes études
                 <br />
                 et je partage ici mes méthodes, mes découvertes et mes doutes.
               </p>
-              <p className="font-medium text-foreground responsive-text text-pretty">
+              <p className="font-medium text-foreground prose-intro">
                 Ce site est le carnet de bord de mon exploration,
                 <br />
                 structuré pour vous faire gagner du temps.
@@ -219,7 +219,7 @@ export default function HomePage() {
             <div className="bg-muted p-6 md:p-8 rounded-lg">
               <Brain className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
-              <p className="text-muted-foreground leading-relaxed text-pretty">
+              <p className="prose-personal-note">
                 Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses
                 sont basées sur mon expérience personnelle et mes recherches.
                 <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
