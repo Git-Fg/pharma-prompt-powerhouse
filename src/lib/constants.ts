@@ -73,30 +73,6 @@ export const confidenceLevels = {
 } as const
 
 // =================================================================
-// FONCTIONS UTILITAIRES POUR L'UI
-// =================================================================
-
-// Obtenir le label d'une catégorie avec fallback sécurisé
-export function getCategoryLabel(category: string): string {
-  return categoryLabels[category as Category] ?? category
-}
-
-// Obtenir le label d'une difficulté avec fallback sécurisé
-export function getDifficultyLabel(difficulty: string): string {
-  return difficultyLabels[difficulty as Difficulty] ?? difficulty
-}
-
-// Obtenir la couleur d'une catégorie
-export function getCategoryColor(category: string): string {
-  return categoryColors[category as Category] ?? 'gray'
-}
-
-// Obtenir les informations de confiance pour un score
-export function getConfidenceInfo(score: number) {
-  return confidenceLevels[score as keyof typeof confidenceLevels] ?? confidenceLevels[3]
-}
-
-// =================================================================
 // CONSTANTES DE L'APPLICATION
 // =================================================================
 
