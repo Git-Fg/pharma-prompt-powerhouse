@@ -47,7 +47,7 @@
 }
 
 @utility container-prose {
-  @apply max-w-none mx-auto px-4 sm:px-6 prose prose-slate dark:prose-invert;
+  @apply max-w-none mx-auto px-4 sm:px-6;
 }
 
 @utility container-constrained {

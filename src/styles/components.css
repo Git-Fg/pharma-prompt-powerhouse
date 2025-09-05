@@ -93,22 +93,30 @@
   }
 
   .badge-default {
-    @apply badge-base border-transparent bg-primary text-primary-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply border-transparent bg-primary text-primary-foreground;
     @apply hover:bg-primary/80;
   }
 
   .badge-secondary {
-    @apply badge-base border-transparent bg-secondary text-secondary-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply border-transparent bg-secondary text-secondary-foreground;
     @apply hover:bg-secondary/80;
   }
 
   .badge-destructive {
-    @apply badge-base border-transparent bg-destructive text-destructive-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply border-transparent bg-destructive text-destructive-foreground;
     @apply hover:bg-destructive/80;
   }
 
   .badge-outline {
-    @apply badge-base text-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply text-foreground;
   }
 
   /* Navigation Components */
@@ -155,11 +163,17 @@
   }
 
   .alert-default {
-    @apply alert-base bg-background text-foreground;
+    @apply relative w-full rounded-lg border p-4;
+    @apply [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute;
+    @apply [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground;
+    @apply bg-background text-foreground;
   }
 
   .alert-destructive {
-    @apply alert-base border-destructive/50 text-destructive;
+    @apply relative w-full rounded-lg border p-4;
+    @apply [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute;
+    @apply [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground;
+    @apply border-destructive/50 text-destructive;
     @apply dark:border-destructive [&>svg]:text-destructive;
   }
 

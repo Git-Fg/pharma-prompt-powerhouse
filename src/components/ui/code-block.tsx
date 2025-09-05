@@ -137,14 +137,15 @@ export function CodeBlock({
     // Find all semantic patterns
     Object.entries(SEMANTIC_PATTERNS).forEach(([type, config]) => {
       config.patterns.forEach((pattern) => {
-        let match
-        while ((match = pattern.exec(text)) !== null) {
+        let match = pattern.exec(text)
+        while (match !== null) {
           highlights.push({
             type,
             start: match.index,
             end: match.index + match[0].length,
             content: match[0],
           })
+          match = pattern.exec(text)
         }
       })
     })
