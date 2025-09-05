@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running pre-commit hook..."
+
+# 1. Lancer le linter pour vérifier la qualité du code
+npm run lint
+
+# 2. Lancer la validation des types pour s'assurer qu'il n'y a pas d'erreurs TypeScript
+npm run typecheck
+
+# Si l'une des commandes ci-dessus échoue, le commit sera bloqué.
+echo "Pre-commit checks passed!"
