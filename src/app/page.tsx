@@ -99,7 +99,7 @@ export default function HomePage() {
                   <span>Nouveau ici ?</span>
                 </CardTitle>
                 <CardDescription>
-                  Découvrez l'essentiel pour bien commencer avec l'IA
+                  Je vous accompagne pour découvrir l'essentiel de l'IA
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -120,7 +120,7 @@ export default function HomePage() {
                   <span>L'Arsenal IA 2025</span>
                 </CardTitle>
                 <CardDescription>
-                  Comparaison des outils avec mon retour d'expérience
+                  Mes tests personnels et retours d'expérience sur les outils
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -141,7 +141,7 @@ export default function HomePage() {
                   <span>Tous les Workflows</span>
                 </CardTitle>
                 <CardDescription>
-                  Méthodes complètes pour vos cas d'usage
+                  Mes méthodes testées pour vos cas d'usage
                 </CardDescription>
               </CardHeader>
               <CardContent>

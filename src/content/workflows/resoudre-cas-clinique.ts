@@ -179,7 +179,7 @@ Chaque outil a ses forces pour l'analyse de cas cliniques :`,
   finalPrompt: [
     {
       type: 'markdown',
-      content: `## Le Prompt Final : Analyse Guidée par Étapes
+      content: `## Ma Séquence de Prompts (à Adapter selon le Cas)
 
 Voici ma séquence de prompts que j'utilise pour chaque cas. Je les enchaîne dans une même conversation pour maintenir le contexte :`,
     },
