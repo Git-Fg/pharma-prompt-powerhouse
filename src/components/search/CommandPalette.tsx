@@ -43,7 +43,10 @@ export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
 
   useEffect(() => {
     if (open) {
-      setSearchResults(`${totalItems} résultats disponibles dans la recherche`)
+      const updateSearchResults = () => {
+        setSearchResults(`${totalItems} résultats disponibles dans la recherche`)
+      }
+      updateSearchResults()
     }
   }, [open, totalItems])
 

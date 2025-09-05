@@ -14,8 +14,12 @@ export function PWAOfflineManager() {
   const [hasShownOfflineToast, setHasShownOfflineToast] = useState(false)
 
   useEffect(() => {
-    // Initial online status
-    setIsOnline(navigator.onLine)
+    // Initialize online status
+    const initializeOnlineStatus = () => {
+      setIsOnline(navigator.onLine)
+    }
+
+    initializeOnlineStatus()
 
     const handleOnline = () => {
       setIsOnline(true)
@@ -67,8 +71,10 @@ export function PWAOfflineManager() {
     window.addEventListener('offline', handleOffline)
 
     // Service Worker integration for cache-only responses
+    let serviceWorkerEventHandler: ((event: MessageEvent) => void) | null = null
+
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) => {
+      serviceWorkerEventHandler = (event) => {
         if (event.data?.type === 'CACHE_ONLY_RESPONSE') {
           // Show notification when content is served from cache only
           toast.info('Contenu en cache', {
@@ -77,19 +83,28 @@ export function PWAOfflineManager() {
             duration: 4000,
           })
         }
-      })
+      }
+
+      navigator.serviceWorker.addEventListener('message', serviceWorkerEventHandler)
     }
 
     return () => {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
+
+      if (serviceWorkerEventHandler && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.removeEventListener('message', serviceWorkerEventHandler)
+      }
     }
   }, [hasShownOfflineToast])
 
   // Visual indicator for offline status (could be used in UI)
   useEffect(() => {
     // Update document class for CSS-based offline styling
-    document.documentElement.classList.toggle('offline', !isOnline)
+    const updateOfflineClass = () => {
+      document.documentElement.classList.toggle('offline', !isOnline)
+    }
+    updateOfflineClass()
   }, [isOnline])
 
   // This component doesn't render anything visible
@@ -105,7 +120,12 @@ export function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(true)
 
   useEffect(() => {
-    setIsOnline(navigator.onLine)
+    // Initialize online status
+    const initializeStatus = () => {
+      setIsOnline(navigator.onLine)
+    }
+
+    initializeStatus()
 
     const handleOnline = () => setIsOnline(true)
     const handleOffline = () => setIsOnline(false)
