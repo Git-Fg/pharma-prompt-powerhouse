@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: WorkflowPageProps) {
-  const workflow = getWorkflowBySlug(params.slug)
+  const { slug } = await params
+  const workflow = getWorkflowBySlug(slug)
 
   if (!workflow) {
     return {
@@ -36,8 +37,9 @@ export async function generateMetadata({ params }: WorkflowPageProps) {
   }
 }
 
-export default function WorkflowPage({ params }: WorkflowPageProps) {
-  const workflow = getWorkflowBySlug(params.slug)
+export default async function WorkflowPage({ params }: WorkflowPageProps) {
+  const { slug } = await params
+  const workflow = getWorkflowBySlug(slug)
 
   if (!workflow) {
     notFound()
@@ -112,7 +114,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-sm">Le Prompt Final (à adapter)</span>
+                <span className="text-sm">Mon Point de Départ (à personnaliser)</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
@@ -190,7 +192,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               <div className="size-6 bg-purple-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-sm font-bold">5</span>
               </div>
-              <h2 className="text-2xl font-bold">Le Prompt Final (à adapter)</h2>
+              <h2 className="text-2xl font-bold">Mon Point de Départ (à personnaliser)</h2>
             </div>
             <div className="prose prose-lg">
               <ContentRenderer content={workflow.finalPrompt} />

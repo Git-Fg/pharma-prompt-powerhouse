@@ -163,7 +163,7 @@ J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations p
   finalPrompt: [
     {
       type: 'markdown',
-      content: `## Le Prompt Final (à Adapter à Votre Cas)
+      content: `## Mon Point de Départ (à Personnaliser selon Votre Cas)
 
 Voici le template que j'utilise systématiquement. Remplacez les variables entre {{}} par vos informations :`,
     },
@@ -216,6 +216,6 @@ Varie les types de raisonnement : mémorisation, compréhension, application, an
     'Définir clairement le rôle de \'professeur\' permet d\'obtenir une approche pédagogique cohérente.',
     'Tester plusieurs outils aide à trouver celui qui correspond le mieux à votre style d\'apprentissage.',
     'Les questions générées ne remplacent jamais la vérification avec vos cours et sources officielles.',
-    'La variété des formats (QCM, QROC, cas) optimise l\'ancrage mémoriel et la compréhension.',
+    'Expérimentez avec les variables du template pour adapter la méthode à votre façon d\'apprendre.',
   ],
 } satisfies Workflow
