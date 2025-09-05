@@ -27,6 +27,7 @@ export const guide = {
   ],
   conceptSlugs: [
     'tree-of-thought',
+    'broken-reference-test',
   ],
   content: [
     {
