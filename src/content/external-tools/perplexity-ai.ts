@@ -3,37 +3,44 @@ import type { ExternalTool } from '@/lib/content-schema'
 const externalTool = {
   slug: 'perplexity-ai',
   title: 'Perplexity AI',
-  description: 'Mon moteur de recherche IA de référence pour des réponses rapides, factuelles et surtout, sourcées.',
+  description: 'Le "Hub de Modèles" pour la recherche. Accédez aux meilleurs modèles du marché (GPT-5, Claude 4 Opus) et à un agent de recherche autonome.',
   url: 'https://www.perplexity.ai/',
   category: 'recherche',
-  tags: ['recherche', 'RAG', 'sources'],
-  isFavorite: false,
+  tags: ['recherche', 'RAG', 'sources', 'hub-modeles', 'agent-ia'],
+  isFavorite: true,
 
-  personalReview: 'J\'utilise Perplexity comme mon \'Google\' augmenté. Quand j\'ai besoin d\'une réponse rapide sur un sujet factuel et que je veux absolument vérifier les sources, c\'est mon premier réflexe. La fonction \'Focus: Academic\' est un gain de temps considérable pour mes recherches bibliographiques initiales.',
-
+  personalReview: "Perplexity a radicalement changé. Ce n'est plus juste un moteur de recherche, c'est un orchestrateur d'IA. Pour 20$/mois, j'ai accès à tous les modèles de pointe sans devoir payer chaque abonnement séparément. Sa nouvelle fonction \"Deep Research\" transforme Perplexity en un véritable agent qui planifie et exécute une recherche complète, me livrant un rapport sourcé en quelques minutes. C'est un outil de productivité exceptionnel pour démarrer une recherche bibliographique.",
+  
   strongPoints: [
-    'Cite systématiquement ses sources, ce qui permet de vérifier l\'information.',
-    'Le mode \'Focus: Academic\' filtre la recherche pour ne garder que les publications scientifiques.',
-    'Très rapide et efficace pour obtenir une synthèse sur un sujet d\'actualité.',
-    'Moins sujet aux hallucinations sur les faits grâce à son approche RAG (recherche avant de répondre).',
+    'Accès aux meilleurs modèles (GPT-5, Claude 4 Opus, etc.) via un seul abonnement.',
+    'Fonctionnalité "Deep Research" qui agit comme un agent de recherche autonome.',
+    'Analyse de fichiers illimitée en version Pro.',
+    'Cite toujours ses sources, ce qui reste un gage de fiabilité.',
   ],
 
   vigilancePoints: [
-    'Le résumé peut parfois simplifier à l\'extrême ou mal interpréter une source. Il faut toujours lire l\'article original.',
-    'Les capacités d\'analyse de documents (PDF) sont limitées en version gratuite.',
-    'Son approche de recherche est moins \'profonde\' que celle d\'outils comme Z.AI qui planifient leurs recherches.',
+    'La version gratuite est maintenant très limitée en "Pro Searches" (5 par jour).',
+    "La valeur ajoutée réside quasi exclusivement dans l'offre payante.",
+    "Le résumé peut toujours simplifier à l'excès, la vérification des sources reste indispensable.",
   ],
-
-  confidenceScore: 3,
-  confidenceJustification: 'Score solide car l\'outil est fiable pour sa mission principale : la recherche sourcée. Il n\'est pas plus haut car son utilité est plus ciblée et il peut être surpassé par d\'autres outils pour une analyse en profondeur ou une créativité avancée.',
-
-  freeVsPaidOffer: `| Fonctionnalité | Version Gratuite | Version Pro (~20€/mois) |\n| :--- | :--- | :--- |\n| **Recherches Pro** | 5 par jour | ✅ 300+ par jour |\n| **Accès modèles premium** | ❌ Non | ✅ GPT-5, Gemini 2.5 Pro... |\n| **Analyse de fichiers** | Limitée | ✅ **Illimitée** |\n| **Deep Research** | ❌ Non | ✅ **Rapports autonomes** |`,
-
+  
+  confidenceScore: 4,
+  confidenceJustification: "Le score est augmenté car il s'appuie sur les meilleurs modèles du marché. L'accès centralisé et la fonction Deep Research en font un outil très puissant. La vérification des sources reste un point de vigilance qui l'empêche d'avoir 5/5.",
+  
+  freeVsPaidOffer: `| Fonctionnalité | Version Gratuite | Version Pro (~20$/mois) |\n| :--- | :--- | :--- |\n| **Modèle de recherche** | Sonar (propriétaire) | ✅ **Choix parmi GPT-5, Claude 4 Opus, etc.** |\n| **\"Pro Searches\"** | 5 par jour | ✅ **300+ par jour** |\n| **Analyse de fichiers** | Limitée | ✅ **Illimitée** |\n| **Agent \"Deep Research\"** | ❌ Non | ✅ **Inclus** |`,
+  
   content: [
-    {
-      type: 'card',
-      title: 'Mon workflow de recherche avec Perplexity',
-      content: '1. **Question initiale :** Je pose ma question de recherche avec le `Focus: Academic`.\n2. **Analyse des sources :** J\'ouvre les 3-4 sources les plus pertinentes (souvent des articles PubMed ou des revues systématiques) dans de nouveaux onglets.\n3. **Validation :** Je lis les abstracts et conclusions pour m\'assurer que le résumé de Perplexity est fidèle.\n4. **Approfondissement :** J\'utilise ensuite un outil comme NotebookLM ou Claude.ai pour analyser en profondeur les PDF que j\'ai trouvés.',
+        {
+      type: 'table',
+      caption: "Tableau comparatif des architectures d'agents de recherche.",
+      headers: ['Critère', 'Z.AI (Auto Think)', 'Perplexity (Deep Research)', 'Claude (Tool Use)'],
+      rows: [
+        ['**Architecture sous-jacente**', '**Plan-and-Solve** : Planification initiale complète, suivie de l'exécution.', '**RAG Multi-Étapes** : Boucle itérative de recherche et synthèse.', '**ReAct (Reason+Act)** : Boucle \"Pensée → Action → Observation\".'],
+        ['**Transparence du Plan**', '**Élevée** : Le plan de recherche (\"trajectory\") est souvent visible.', '**Faible** : Processus interne en \"boîte noire\".', '**Potentiellement Très Élevée** : Dépend de l\'interface, chaque étape est distincte.'],
+        ['**Robustesse (Requêtes Complexes)**', '**Élevée** : Conçu pour les tâches multi-étapes complexes.', '**Moyenne** : Peut se perdre dans des boucles sans plan global.', '**Élevée** : S\'auto-corrige à chaque étape \"Observation\".'],
+        ['**Vitesse**', '**Moyenne à Lente** : Latence due à la planification initiale.', '**Rapide** : Optimisé pour la vitesse.', '**Variable (souvent lente)** : De multiples cycles \"Pensée-Action\".'],
+        ['**Risque d'Hallucination**', '**Déplacé vers le plan** : Le risque est dans la création d\'un plan biaisé.', '**Élevé dans la synthèse** : Risque classique du RAG (mal interpréter les sources).', '**Faible (si bien implémenté)** : Raisonne sur des résultats concrets d\'outils.']
+      ]
     },
   ],
 } satisfies ExternalTool

@@ -2,6 +2,7 @@
 import antfu from '@antfu/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
 import reactCompilerPlugin from 'eslint-plugin-react-compiler'
+import pharmaPlugin from './tools/eslint-plugin-pharma/index.js'
 
 export default antfu(
   {
@@ -47,6 +48,14 @@ export default antfu(
     },
     rules: {
       'react-compiler/react-compiler': 'error',
+    },
+  },
+  {
+    plugins: {
+      'pharma': pharmaPlugin,
+    },
+    rules: {
+      'pharma/no-prohibited-tailwind-classes': 'error',
     },
   },
   {

@@ -1,295 +1,90 @@
 // src/content/guides/ia-en-local-confidentialite-totale.ts
-import type { Guide } from '@/lib/content-schema'
+import type { Guide } from '@/lib/content-schema';
 
 export const guide = {
   slug: 'ia-en-local-confidentialite-totale',
-  title: 'L\'IA en Local : Le Guide pour une Confidentialité à 100%',
-  description: 'Hébergez des modèles IA directement sur votre machine pour une confidentialité absolue. Guide complet : prérequis matériel, installation, modèles recommandés comme Qwen3-4B, et cas d\'usage en recherche pharmaceutique sensible.',
+  title: "IA en Local : Le Guide Complet Q3 2025 pour une Confidentialité Totale",
+  description: "Le guide de référence pour héberger des modèles IA sur votre machine en Q3 2025. Prérequis matériel (RTX 50-series, Apple M5), modèles recommandés (Qwen2.5-7B) et plateformes de déploiement (LM Studio, Ollama, Jan.ai).",
   difficulty: 'avancé',
   category: 'securite',
-  estimatedTime: '30 min de lecture + 1-2h d\'installation',
+  estimatedTime: '25 min de lecture',
   icon: 'Lock',
-  isFavorite: false,
+  isFavorite: true,
   isWorkflow: false,
   keyTakeaways: [
-    'L\'IA locale est la SEULE solution pour une confidentialité à 100%',
-    'Les modèles légers comme Qwen3-4B sont efficaces et accessibles',
-    'GPU ou MacBook Pro M-series recommandés pour performances optimales',
-    'Idéal pour données de recherche confidentielles et propriété intellectuelle',
+    "En Q3 2025, les modèles 7-8B (comme Qwen2.5-7B) sont le nouveau standard pour l'IA locale grand public.",
+    "Une NVIDIA RTX 5060 (12GB) ou un MacBook M5 Pro (24GB) sont les nouvelles configurations de référence.",
+    'LM Studio reste le plus simple pour débuter, mais Ollama propose désormais une application de bureau officielle, et Jan.ai est une alternative open-source complète.',
+    'La quantification (GGUF Q4_K_M) est la clé pour faire tourner ces modèles efficacement.',
   ],
-  conceptSlugs: ['context-engineering', 'memoire-ia'],
-  tags: ['local', 'confidentialité', 'sécurité', 'GPU', 'recherche'],
+  conceptSlugs: ['context-engineering', 'memoire-ia', 'quantification-ia'],
+  tags: ['local', 'confidentialité', 'sécurité', 'Q3 2025', 'Qwen', 'RTX 50', 'Apple M5'],
   content: [
     {
       type: 'alert',
       variant: 'default',
-      title: '🎯 Le Seul Vrai Coffre-Fort Numérique',
-      content: 'Quand la confidentialité est critique (recherche pharmaceutique, propriété intellectuelle, données patients), l\'hébergement local des modèles IA est la **seule solution garantissant un risque zéro**. Vos données ne quittent jamais votre machine.',
+      title: '🎯 Mise à Jour Q3 2025',
+      content: "Ce guide a été entièrement révisé pour refléter l'état de l'art de l'IA locale au troisième trimestre 2025. Les recommandations de matériel et de modèles ont changé de manière significative depuis début 2024.",
     },
     {
       type: 'markdown',
-      content: '## Pourquoi l\'IA Locale est Incontournable',
-    },
-    {
-      type: 'card',
-      title: 'Le Problème des Plateformes Cloud',
-      description: 'Pourquoi même les \'meilleures\' plateformes présentent des risques',
-      content: '**Même avec les meilleures plateformes** (ChatGPT, Claude, Gemini), vos données :\n\n- Transitent par des serveurs tiers (US, Asie, Europe)\n- Sont potentiellement utilisées pour l\'entraînement de futurs modèles\n- Restent soumises aux politiques de confidentialité changeantes\n- Peuvent être accessibles aux autorités locales\n\n**Pour la recherche pharmaceutique sensible**, cette exposition est inacceptable.',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'local-advantages',
-      tabs: [
-        {
-          value: 'local-advantages',
-          title: 'Avantages Locaux',
-          content: [
-            {
-              type: 'card',
-              title: '🔒 Confidentialité Absolue',
-              content: '✅ **Données 100% locales** - Aucune transmission sur internet\n✅ **Contrôle total** - Vous décidez de tout\n✅ **Aucun log externe** - Pas de trace chez les fournisseurs\n✅ **Conformité RGPD native** - Données dans votre juridiction\n✅ **Recherche propriétaire** - Protection de la propriété intellectuelle',
-            },
-            {
-              type: 'card',
-              title: '⚡ Performance & Autonomie',
-              content: '✅ **Pas de quotas** - Usage illimité\n✅ **Latence optimale** - Pas de réseau\n✅ **Disponibilité 24/7** - Pas de maintenance externe\n✅ **Personnalisation** - Fine-tuning possible\n✅ **Offline** - Fonctionne sans internet',
-            },
-          ],
-        },
-        {
-          value: 'hardware-requirements',
-          title: 'Prérequis Matériel',
-          content: [
-            {
-              type: 'card',
-              title: '💻 Configuration Recommandée',
-              description: 'Setup optimal pour modèles performants',
-              content: '**Option 1 : PC Gaming/Workstation**\n- **GPU** : RTX 4070 ou supérieur (12 GB VRAM+)\n- **RAM** : 16 GB minimum, 32 GB recommandé\n- **Stockage** : 50 GB libres minimum\n- **OS** : Windows 10/11, Linux Ubuntu/Debian\n**Option 2 : MacBook Pro M-series**\n- **Processeur** : M1 Pro/Max, M2 Pro/Max/Ultra, M3 Pro/Max\n- **RAM** : 16 GB minimum, 32 GB recommandé \n- **Stockage** : 50 GB libres minimum\n- **Avantage** : MLX optimisé pour Apple Silicon',
-            },
-            {
-              type: 'card',
-              title: '📊 Configuration Budget vs Performance',
-            },
-            {
-              type: 'table',
-              headers: ['**Setup**', '**Budget**', '**Modèles supportés**', '**Performance**'],
-              rows: [
-                ['**RTX 4060 (8GB)**', '~300€', 'Qwen3-4B, Llama3.1-8B', '⭐⭐⭐ Bon'],
-                ['**RTX 4070 (12GB)**', '~600€', 'Qwen3-14B, Mixtral-8x7B', '⭐⭐⭐⭐ Très bon'],
-                ['**MacBook Pro M3**', '~2500€', 'Qwen3-32B, modèles avancés', '⭐⭐⭐⭐⭐ Excellent'],
-                ['**RTX 4090 (24GB)**', '~1800€', 'Tous modèles open-source', '⭐⭐⭐⭐ Maximum'],
-              ],
-            },
-          ],
-        },
-        {
-          value: 'recommended-models',
-          title: 'Modèles Recommandés 2025',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Qwen3-4B : Le Roi de l\'Efficacité',
-              description: 'Rapport performance/ressources imbattable',
-              content: '**Pourquoi Qwen3-4B est parfait :**\n- **Taille** : 4 milliards de paramètres - fonctionne sur presque tout\n- **Performance** : Excellence en français et raisonnement\n- **Ressources** : 8 GB RAM suffisent, GPU optionnel\n- **Licence** : Apache 2.0 - Usage commercial autorisé\n- **Spécialisations** : Excellent pour analyse de textes pharmaceutiques\n\n**Configuration minimale** : PC avec 8 GB RAM, pas de GPU obligatoire',
-            },
-            {
-              type: 'card',
-              title: '📋 Autres Modèles Intéressants',
-              content: '**Qwen3-14B** : Meilleur équilibre pour GPU moyens (RTX 4070+)\n**Llama 3.1-8B** : Alternative solide, optimisé Meta\n**Mistral 7B** : Excellent pour l\'Europe, RGPD-friendly\n**CodeQwen** : Spécialisé développement et analyse de code\n**Qwen3-32B** : Pour configurations haut de gamme (M3 Pro+, RTX 4090)',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '## Installation et Configuration',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'lm-studio',
-      tabs: [
-        {
-          value: 'lm-studio',
-          title: 'LM Studio (Recommandé)',
-          content: [
-            {
-              type: 'card',
-              title: '🚀 Installation LM Studio',
-              description: 'La solution la plus simple pour débuter',
-              content: '**1. Téléchargement**\n- Aller sur [lmstudio.ai](https://lmstudio.ai/)\n- Télécharger pour votre OS (Windows/Mac/Linux)\n- Installation classique\n\n**2. Premier lancement**\n- Interface graphique intuitive\n- Détection automatique du matériel\n- Suggestions de modèles adaptés à votre config\n\n**3. Télécharger Qwen3-4B**\n- Onglet \'Discover\'\n- Rechercher \'Qwen3-4B-Instruct\'\n- Cliquer \'Download\' (patientez 10-30 min)\n- Modèle prêt à l\'usage',
-            },
-            {
-              type: 'codeBlock',
-              language: 'text',
-              filename: 'premier-test-qwen3.txt',
-              content: '📋 Test Initial avec Qwen3-4B\n\n1. Dans LM Studio :\n   - Onglet \'Chat\'\n   - Sélectionner Qwen3-4B-Instruct\n   - Attendre le chargement (30-60 secondes)\n\n2. Premier prompt de test :\n   "Explique-moi les différents types d\'interactions médicamenteuses \n   en pharmacocinétique. Donne des exemples concrets."\n   \n3. Vérifier la qualité :\n   - Réponse cohérente et détaillée\n   - Exemples pertinents\n   - Pas d\'hallucinations évidentes\n   \n4. Tester la confidentialité :\n   - Débrancher internet\n   - Vérifier que le modèle fonctionne toujours\n   - ✅ Confirmation : tout fonctionne offline',
-            },
-          ],
-        },
-        {
-          value: 'ollama',
-          title: 'Ollama (Ligne de Commande)',
-          content: [
-            {
-              type: 'card',
-              title: '⚡ Installation Ollama',
-              description: 'Pour les utilisateurs techniques',
-              content: '**Avantages d\'Ollama :**\n- Plus léger que LM Studio\n- Gestion des modèles simplifiée\n- API REST intégrée\n- Idéal pour intégrations customs\n**Installation rapide :**\n```bash\n# Linux/Mac\ncurl -fsSL https://ollama.ai/install.sh | sh\n\n# Windows (via winget)\nwinget install Ollama.Ollama\n```',
-            },
-            {
-              type: 'codeBlock',
-              language: 'bash',
-              filename: 'setup-ollama.sh',
-              content: '# Installation et test de Qwen3-4B avec Ollama\n\n# 1. Télécharger le modèle\nollama pull qwen2.5:4b\n\n# 2. Premier test\nollama run qwen2.5:4b "Explique les phases de la pharmacocinétique"\n\n# 3. Lancer en mode serveur (API)\nollama serve\n\n# 4. Tester l\'API (nouveau terminal)\ncurl -X POST http://localhost:11434/api/generate \\\n  -H "Content-Type: application/json" \\\n  -d \'{\n    "model": "qwen2.5:4b",\n    "prompt": "Analyse cette interaction médicamenteuse...",\n    "stream": false\n  }\'',
-            },
-          ],
-        },
-        {
-          value: 'mlx-macos',
-          title: 'MLX (MacBook optimisé)',
-          content: [
-            {
-              type: 'card',
-              title: '🍎 MLX pour Apple Silicon',
-              description: 'Performances optimales sur Mac M-series',
-              content: '**MLX** est le framework d\'Apple optimisé pour les puces M-series, offrant les **meilleures performances possibles** sur MacBook Pro.\n\n**Installation :**\n```bash\n# Installer MLX\npip install mlx-lm\n\n# Télécharger et lancer Qwen3-4B\nmlx_lm.generate --model mlx-community/Qwen2.5-4B-Instruct-4bit \\\n                --prompt "Ton prompt pharmaceutique ici"\n```\n\n**Avantages MLX :**\n- Performance native Apple Silicon\n- Consommation énergétique optimisée\n- Intégration parfaite avec macOS',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '## Applications en Recherche Pharmaceutique',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'confidential-use-cases',
-      tabs: [
-        {
-          value: 'confidential-use-cases',
-          title: 'Cas d\'Usage Confidentiels',
-          content: [
-            {
-              type: 'card',
-              title: '🔬 Recherche & Développement',
-              description: 'Applications en R&D pharmaceutique',
-              content: '**Analyse de brevets confidentiels :**\n- Lecture et synthèse de portfolios de brevets internes\n- Analyse de FTO (Freedom to Operate) sur nouvelles molécules\n- Comparaison concurrentielle sensible\n\n**Propriété intellectuelle :**\n- Rédaction d\'ébauches de brevets\n- Analyse d\'antériorité approfondie  \n- Stratégie de protection IP\n\n**Données précliniques :**\n- Analyse de résultats d\'études non publiées\n- Synthèse de rapports d\'études toxicologiques\n- Préparation de dossiers réglementaires',
-            },
-            {
-              type: 'card',
-              title: '🏥 Recherche Clinique Sensible',
-              content: '**Protocoles d\'études :**\n- Aide à la rédaction de protocoles innovants\n- Analyse de faisabilité sur populations spécifiques\n- Stratégie statistique pour endpoints complexes\n\n**⚠️ ATTENTION :** Même en local, ne jamais utiliser de données patients identifiables',
-            },
-          ],
-        },
-        {
-          value: 'academic-research',
-          title: 'Recherche Académique',
-          content: [
-            {
-              type: 'card',
-              title: '📚 Thèses et Publications',
-              description: 'Support à la recherche académique',
-              content: '**Analyse bibliographique approfondie :**\n- Synthèse de centaines de publications sans quota\n- Identification de gaps de recherche\n- Génération d\'hypothèses de travail\n\n**Rédaction scientifique :**\n- Aide à la structuration de manuscrits\n- Amélioration de la qualité rédactionnelle\n- Suggestions de références pertinentes\n\n**Données préliminaires :**\n- Analyse de résultats d\'expériences pilotes\n- Préparation de demandes de financement\n- Stratégie de valorisation des travaux',
-            },
-            {
-              type: 'codeBlock',
-              language: 'text',
-              filename: 'exemple-these-locale.txt',
-              content: '📋 Exemple : Analyse Bibliographique pour Thèse\n\nPrompt local (Qwen3-4B) :\n"Analyse cette collection de 50 abstracts sur les nanoparticules lipidiques \npour drug delivery. Identifie :\n\n1. Les 5 approches techniques principales\n2. Les limitations récurrentes mentionnées\n3. Les axes de recherche émergents\n4. Les gaps non explorés\n\n[Coller les abstracts de PubMed...]\n\nAvantages local :\n✅ Pas de limite de tokens\n✅ Données pré-publication protégées\n✅ Analyses multi-itératives sans coût\n✅ Confidentialité absolue du projet de thèse',
-            },
-          ],
-        },
-        {
-          value: 'personal-data',
-          title: 'Données Personnelles',
-          content: [
-            {
-              type: 'card',
-              title: '👨‍🎓 Vie Étudiante & Professionnelle',
-              description: 'Applications pour données sensibles personnelles',
-              content: '**CV et candidatures :**\n- Optimisation de CV avec données salariales\n- Lettres de motivation personnalisées\n- Préparation d\'entretiens avec historique personnel\n\n**Finances et projets :**\n- Analyse de situation financière personnelle\n- Planification de carrière avec données privées\n- Projets entrepreneuriaux confidentiels\n**Correspondance professionnelle :**\n- Aide à la rédaction d\'emails sensibles\n- Négociations contractuelles\n- Communications internes délicates',
-            },
-            {
-              type: 'alert',
-              variant: 'default',
-              title: '💡 Liberté Totale',
-              content: 'Avec l\'IA locale, vous pouvez partager **n\'importe quelle information personnelle** sans risque : revenus, projets secrets, correspondances privées, données familiales. Votre machine = votre coffre-fort.',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'card',
-      title: 'Local vs Cloud - Quand Choisir Quoi ?',
+      content: `## Section 1 : Le Nouveau Standard des Modèles Locaux (<15B)
+      
+En Q3 2025, le compromis performance/taille a basculé. Grâce aux progrès matériels, les modèles de la classe **7-8 milliards de paramètres** sont devenus la nouvelle norme, offrant un gain de performance significatif en raisonnement et en compréhension par rapport à l'ancienne génération de modèles 4B.`,
     },
     {
       type: 'table',
-      headers: ['**Critère**', '**IA Locale (Qwen3-4B)**', '**IA Cloud (ChatGPT/Claude)**'],
+      caption: "Tableau Comparatif des Modèles Locaux (<15B) - Q3 2025",
+      headers: ['Modèle', 'Paramètres', 'Contexte Max', 'Licence', 'Score Moyen (FR)', 'VRAM Requise (GGUF Q4_K_M)', "Cas d'Usage Recommandé"],
       rows: [
-        ['**Confidentialité**', '🏆 100% garantie', '⚠️ Risque résiduel'],
-        ['**Performance**', '⚖️ Bonne (4B params)', '🏆 Excellente (100B+ params)'],
-        ['**Coût long terme**', '🏆 Gratuit après setup', '💰 $20+/mois récurrent'],
-        ['**Facilité d\'usage**', '⚖️ Setup technique requis', '🏆 Prêt immédiatement'],
-        ['**Quotas/Limites**', '🏆 Illimité', '⚠️ Quotas stricts'],
-        ['**Mise à jour**', '⚖️ Manuelle', '🏆 Automatique'],
-        ['**Support**', '⚖️ Communautaire', '🏆 Support officiel'],
-      ],
-      caption: '**Recommandation** : Utilisez le local pour le **sensible**, le cloud pour le **performance**',
+        ['**Qwen2.5-7B-Instruct**', '7.6B', '131k', 'Apache 2.0', '**26.76**', '~5.5 GB', 'Polyvalent, excellent en français, code, raisonnement.'],
+        ['**Llama 3.1 8B Instruct**', '8B', '**128k**', 'Llama 3.1 License', 'N/A', '~5.5 GB', 'Analyse de documents longs, écosystème robuste.'],
+        ['**Mistral 7B Instruct v0.3**', '7.3B', '8k (extensible)', 'Apache 2.0', 'N/A', '~5.0 GB', 'Inférence rapide, configurations légères, baseline fiable.'],
+        ['**Qwen3-4B (Baseline)**', '4B', '32k', 'Apache 2.0', 'N/A', '~3.0 GB', 'Configurations très légères, CPU uniquement, <8GB RAM.']
+      ]
     },
     {
-      type: 'alert',
-      variant: 'destructive',
-      title: '⚠️ Limitations à Connaître',
-      content: '**Performance** : Les modèles locaux (4-14B params) sont moins performants que les géants cloud (100B+ params)\n\n**Maintenance** : Vous devez gérer mises à jour, bugs, et optimisations\n**Setup technique** : Installation et configuration requises\n\n**Pas de support** : Pas de hotline en cas de problème',
+        type: 'markdown',
+        content: `### Recommandation : Qwen2.5-7B-Instruct
+        
+Pour un usage polyvalent en français, **Qwen2.5-7B-Instruct** est actuellement le meilleur choix. Il offre le meilleur compromis entre performance brute, excellence démontrée en langue française, et une licence Apache 2.0 permissive.`,
     },
     {
-      type: 'tabs',
-      defaultValue: 'best-practices',
-      tabs: [
-        {
-          value: 'best-practices',
-          title: 'Bonnes Pratiques',
-          content: [
-            {
-              type: 'card',
-              title: '🛡️ Sécurité Maximale',
-              content: '**Configuration sécurisée :**\n- Installer sur machine dédiée si possible\n- Désactiver accès réseau pendant usage sensible\n- Chiffrer le disque dur (BitLocker/FileVault)\n- Sauvegarder les modèles téléchargés\n**Procédures d\'usage :**\n- Vérifier mode offline avant traitement sensible\n- Nettoyer l\'historique après usage critique\n- Documenter les sources et versions de modèles utilisés\n- Tester périodiquement la qualité des réponses',
-            },
-          ],
-        },
-        {
-          value: 'hybrid-strategy',
-          title: 'Stratégie Hybride',
-          content: [
-            {
-              type: 'card',
-              title: '🎯 Le Meilleur des Deux Mondes',
-              description: 'Combiner local et cloud intelligemment',
-              content: '**Workflow optimal :**\n\n1. **Exploration** avec IA cloud (ChatGPT/Claude) pour brainstorming initial\n2. **Raffinement** avec données anonymisées sur plateformes publiques  \n3. **Finalisation** avec IA locale pour intégrer données sensibles\n4. **Validation** croisée entre approches locale et cloud\n\n**Règle d\'or :** Sensible = Local, Performance = Cloud',
-            },
-            {
-              type: 'codeBlock',
-              language: 'text',
-              filename: 'workflow-hybride.txt',
-              content: '📋 Exemple : Analyse de Marché Pharmaceutique Confidentielle\n\n🌐 Phase Cloud (ChatGPT) :\n   "Analyse générale du marché des antidiabétiques 2024-2025"\n   → Tendances publiques, données génériques\n   \n🔒 Phase Locale (Qwen3-4B) :\n   "Voici nos données internes de ventes [DONNÉES SENSIBLES].\n    Compare avec les tendances générales et propose une stratégie."\n   → Analyse croisée avec données propriétaires\n   \n✅ Résultat :\n   - Performance maximale (Cloud)\n   - Confidentialité totale (Local)\n   - Coût optimisé',
-            },
-          ],
-        },
-      ],
+      type: 'markdown',
+      content: `## Section 2 : Prérequis Matériels en Q3 2025`,
     },
     {
-      type: 'guideRecommendation',
-      slug: 'confidentialite-securite',
-      reason: 'Approfondissez les enjeux de confidentialité dans l\'IA pour comprendre pourquoi l\'approche locale est parfois indispensable.',
+        type: 'table',
+        caption: 'Matrice de Recommandation Matérielle - Q3 2025',
+        headers: ['Plateforme', 'Puce/GPU', 'Mémoire', 'Modèles Recommandés', 'Perf. Attendue (tokens/s)', "Cas d'Usage Idéal", 'Prix Estimé'],
+        rows: [
+            ['PC (Standard)', 'NVIDIA RTX 5060', '12 GB VRAM', '7-8B (INT4/GGUF Q4), 14B (exp.)', '~55-65', 'Le nouveau standard pour une IA fluide', '~450€'],
+            ['Mac (Standard)', 'Apple M5 Pro', '24 GB Unifiée', '7-8B (INT8), 14B (INT4)', '~40-60', 'Développement, analyse de documents', '~2500€'],
+            ['PC (Performant)', 'NVIDIA RTX 5070', '12 GB VRAM', '7-8B (INT8/GGUF Q8), 14B (INT4)', '~70-90', 'Qualité et vitesse, contextes longs', '~650€'],
+            ['Mac (Pro)', 'Apple M5 Max', '48 GB Unifiée', '14B (INT8), 32B (INT4)', '> 80', 'Recherche, fine-tuning local', '> 3500€']
+        ]
     },
     {
-      type: 'guideRecommendation',
-      slug: 'le-core-kit-ia-gratuit-en-2025',
-      reason: 'Pour les usages non-sensibles, le core kit gratuit Z.AI + AI Studio reste la solution optimale au quotidien.',
+      type: 'markdown',
+      content: `## Section 3 : Plateformes de Déploiement Local
+
+Le marché des outils a évolué. Le choix ne se limite plus à LM Studio vs. Ollama en ligne de commande.`
+    },
+    {
+      type: 'table',
+      caption: 'Tableau Comparatif des Outils de Déploiement Local - Q3 2025',
+      headers: ['Critère', 'LM Studio', 'Ollama', 'Jan.ai'],
+      rows: [
+        ['**Licence**', 'Propriétaire, gratuit', 'MIT (Open Source)', 'AGPLv3 (Open Source)'],
+        ['**Interface Principale**', 'GUI (Très intuitive)', 'CLI + GUI Officielle', 'GUI (Très complète)'],
+        ['**Serveur API**', '✅ Compatible OpenAI', '✅ Compatible OpenAI', '✅ Compatible OpenAI'],
+        ['**Profil Idéal**', 'Débutant, utilisateur non-technique', 'Développeur, utilisateur hybride', 'Utilisateur GUI pro-open source']
+      ]
+    },
+    {
+      type: 'markdown',
+      content: `### Recommandation de Démarrage
+      Pour les débutants, **LM Studio** reste la solution la plus simple. Pour les utilisateurs préférant une solution open-source dès le départ, la nouvelle application officielle d'**Ollama** ou **Jan.ai** sont d'excellentes alternatives.`
     },
   ],
-} satisfies Guide
+} satisfies Guide;

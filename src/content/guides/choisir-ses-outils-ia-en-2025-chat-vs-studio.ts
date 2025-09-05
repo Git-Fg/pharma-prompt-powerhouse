@@ -3,252 +3,135 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'choisir-ses-outils-ia-en-2025-chat-vs-studio',
-  title: 'Choisir ses Outils IA en 2025 : Chat vs Studio',
-  description: 'Guide complet pour choisir ses outils IA en 2025 : interfaces de chat pour l\'usage quotidien vs studios d\'expérimentation pour maîtriser le prompt engineering',
+  title: 'Choisir ses Outils IA en 2025 : Le Guide Stratégique',
+  description: "Un guide pour naviguer l'écosystème IA de 2025, des agents de recherche aux tuteurs personnels, en passant par les hubs de modèles.",
   icon: 'Workflow',
   category: 'outils',
   difficulty: 'débutant',
-  estimatedTime: '25 minutes',
+  estimatedTime: '20 minutes',
   tags: [
     'outils',
     'guide',
-    'pedagogie',
     'comparatif',
+    'strategie',
+    'agent-ia',
   ],
   isFavorite: true,
   isWorkflow: false,
   keyTakeaways: [
-    'Il existe deux catégories d\'outils IA : les **interfaces de chat** pour l\'usage quotidien et les **studios d\'expérimentation** pour maîtriser le prompt engineering.',
-    'Perplexity.ai est le roi de la recherche fiable grâce à ses sources systématiques et son mode \'Academic\'.',
-    'Google AI Studio offre l\'accès gratuit le plus généreux avec Gemini 2.5 Pro et 1 million de tokens de contexte.',
-    'Construisez un \'arsenal stratégique\' : Perplexity pour la recherche, DeepSeek pour l\'analyse de documents, Google AI Studio pour l\'expérimentation.',
+    "La distinction n'est plus seulement 'Chat vs Studio', mais se base sur des rôles spécialisés : Agent de Recherche, Hub de Modèles, Assistant d'Analyse, et Tuteur IA.",
+    "**Perplexity Pro** s'est transformé en 'Hub de Modèles', donnant accès à GPT-5 et Claude 4 Opus pour le prix d'un seul abonnement.",
+    "**Claude Pro** est devenu un 'Assistant d'Analyse' avec des capacités agentiques (Tool Use) pour les projets de recherche au long cours.",
+    "**Google AI Studio** s'impose comme le 'Tuteur IA' ultime grâce à sa fonction 'Guided Learning', tout en restant le meilleur laboratoire gratuit.",
+    "Votre 'arsenal stratégique' doit combiner un outil de recherche rapide (Perplexity gratuit), un pour l'analyse de fond (AI Studio), et potentiellement un abonnement 'Hub' (Perplexity Pro) pour maximiser la puissance.",
   ],
   conceptSlugs: [
-    'context-engineering',
-    'température-dosage',
+    'architecture-agentique',
+    'react-reason-act',
+    'systemes-multi-agents',
   ],
   content: [
     {
       type: 'markdown',
-      content: '# Choisir ses Outils IA en 2025 : Chat vs Studio\n\nEn 2025, l\'écosystème des intelligences artificielles est organisé en deux catégories distinctes : les **interfaces de chat** pour l\'usage quotidien et les **studios d\'expérimentation** pour approfondir le prompt engineering. Ce guide vous aide à choisir les bons outils selon vos besoins spécifiques d\'étudiant ou de professionnel de santé.',
+      content: "# L'Écosystème IA en 2025 : Au-delà du simple Chat\n\nEn 2025, choisir son outil IA ne se résume plus à une simple préférence entre ChatGPT et Gemini. Le marché a mûri, donnant naissance à des outils spécialisés avec des rôles bien définis. Ce guide vous aidera à y voir clair pour construire votre arsenal stratégique.",
     },
     {
       type: 'markdown',
-      content: '## Les Deux Écosystèmes d\'IA : Une Analogie',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'chat',
-      tabs: [
-        {
-          value: 'chat',
-          title: 'Interfaces de Chat',
-          content: [
-            {
-              type: 'card',
-              title: '🚗 Les Interfaces de Chat : Votre Voiture Quotidienne',
-              content: 'Les WebUIs de chat (ChatGPT, Gemini, Claude, Perplexity) sont comme des **voitures prêtes à conduire**. Vous montez, vous démarrez, et c\'est parti. Parfaites pour :\n\n- Recherche rapide d\'informations\n- Analyse de documents\n- Rédaction et brainstorming\n- Cas cliniques simples\n\nIdéal pour : Usage quotidien, débutants, rapidité d\'exécution',
-            },
-          ],
-        },
-        {
-          value: 'studio',
-          title: 'Studios d\'Expérimentation',
-          content: [
-            {
-              type: 'card',
-              title: '🔧 Les Studios d\'Expérimentation : Votre Garage de Mécanique',
-              content: 'Les environnements d\'expérimentation (Google AI Studio, OpenAI Playground, Anthropic Console) sont comme des **bancs d\'essai de moteur**. Vous regardez sous le capot, réglez les paramètres et comprenez le fonctionnement. Parfaits pour :\n\n- Comprendre la température et les paramètres\n- Tester des prompts complexes\n- Analyser des textes très longs\n- Créer des templates réutilisables\n\nIdéal pour : Apprentissage approfondi, optimisation, expérimentation',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '## Partie 1 : Interfaces de Chat - Votre Arsenal Quotidien',
-    },
-    {
-      type: 'markdown',
-      content: '### Tableau Comparatif des WebUIs de Chat (Offres Gratuites)',
+      content: '## Les Nouveaux Rôles sur le Terrain',
     },
     {
       type: 'table',
-      headers: ['Critère', 'Perplexity AI', 'Gemini (Google)', 'ChatGPT (OpenAI)', 'Claude.ai', 'DeepSeek / Qwen / Z.AI'],
+      caption: "Tableau comparatif des positionnements stratégiques des outils IA en 2025.",
+      headers: ["Outil", "Nouveau Rôle Stratégique", "Idéal Pour..."],
       rows: [
-        ['**Point Fort**', '**Recherche Fiable & Sourcée**', '**Accès à Gemini 2.5 Flash**', '**Écosystème & Popularité**', '**Grande Fenêtre Contexte**', '**Suite d\'Outils Gratuits**'],
-        ['**Analyse PDF**', 'Limitée', '**Très Bonne (10 fichiers)**', 'Limitée', 'Bonne', '**Excellente (50 fichiers)**'],
-        ['**Confidentialité**', 'Standard (US)', 'Standard (US/EU)', 'Standard (US)', 'Standard (US)', '⚠️ **Très Faible (Asie)**'],
-        ['**Idéal pour...**', 'Veille scientifique, réponses factuelles', 'Assistant polyvalent, analyse de doc', 'Tâches créatives, brainstorming', 'Analyse de longs documents, rédaction', 'Expérimentation, création (slides, code)'],
+        ['**Perplexity AI**', "**Le Hub de Modèles & Agent de Recherche**", "Accéder aux meilleurs modèles (GPT-5, Claude 4 Opus) via un seul abonnement et lancer des recherches autonomes."],
+        ['**Claude.ai**', "**L'Assistant d'Analyse et de Raisonnement**", "Les projets de recherche longs (mémoires) nécessitant l'analyse de nombreux documents et une mémoire persistante."],
+        ['**Google AI Studio**', "**Le Laboratoire & Tuteur Personnel**", "L'expérimentation gratuite et l'apprentissage guidé en transformant des cours en modules interactifs."],
+        ['**ChatGPT**', "**La Référence Polyvalente**", "Les tâches de rédaction, de brainstorming et l'accès à l'écosystème de pointe d'OpenAI (GPT-5, GPTs)."],
       ],
     },
     {
       type: 'markdown',
-      content: '### Analyse par Cas d\'Usage',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'recherche',
-      tabs: [
-        {
-          value: 'recherche',
-          title: 'Recherche Biblio',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour la Recherche Bibliographique : Perplexity AI',
-              content: 'Sa fonction première est de fournir des réponses **sourcées et à jour**. La possibilité de focaliser la recherche sur les publications académiques (`Focus: Academic`) est un avantage décisif. C\'est l\'outil le plus fiable pour minimiser le risque d\'hallucination.',
-            },
-            {
-              type: 'alert',
-              content: '**Prompt optimisé :** "Quelles sont les dernières recommandations de l\'HAS sur la prescription d\'antibiotiques pour l\'angine bactérienne chez l\'adulte ? (Focus: Academic)"',
-            },
-          ],
-        },
-        {
-          value: 'analyse',
-          title: 'Analyse de Cours',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour l\'Analyse de Documents : DeepSeek Chat',
-              content: 'Sa capacité à traiter jusqu\'à **50 documents simultanément** en version gratuite est inégalée. Vous pouvez uploader toutes vos annales, vos fiches de cours et vos articles pour une session de révision.',
-            },
-            {
-              type: 'alert',
-              content: '**Alternative fiable :** Gemini (Google) traite 10 fichiers avec une meilleure confidentialité.',
-            },
-          ],
-        },
-        {
-          value: 'clinique',
-          title: 'Cas Cliniques',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour les Cas Cliniques : Claude.ai',
-              content: 'La grande fenêtre de contexte et la robustesse logique de Claude en font l\'outil de choix pour le raisonnement clinique complexe.\n\n**Alternative gratuite :** DeepSeek avec le mode "DeepThink" pour un raisonnement approfondi.',
-            },
-          ],
-        },
-        {
-          value: 'creation',
-          title: 'Création de Contenu',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour la Création : Chat Z.AI',
-              content: 'Ses outils intégrés, en particulier **"AI Slides"**, permettent de générer une présentation complète avec recherche web intégrée.',
-            },
-            {
-              type: 'alert',
-              content: '**Prompt optimisé :** "Crée une présentation de 10 slides pour des étudiants en P2 sur le thème : \'Le rôle du pharmacien dans la gestion des maladies chroniques\'. Inclus des images libres de droit."',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '## Partie 2 : Studios d\'Expérimentation - Votre Laboratoire d\'Apprentissage',
-    },
-    {
-      type: 'markdown',
-      content: '### Tableau Comparatif des Environnements d\'Expérimentation',
-    },
-    {
-      type: 'table',
-      headers: ['Critère', 'Google AI Studio', 'OpenAI Playground', 'Anthropic Console'],
-      rows: [
-        ['**Point Fort**', '**Accès Gratuit & Généreux**', '**Accès aux derniers modèles GPT**', '**Outils d\'Évaluation de Prompts**'],
-        ['**Modèle Gratuit**', '✅ **Gemini 2.5 Pro (1M tokens)**', '❌ Non (nécessite une CB)', '❌ Non (nécessite une CB)'],
-        ['**Contexte Max**', '**1 Million de tokens**', '400 00 tokens', '200 000 tokens (1M en bêta)'],
-        ['**Expérience Non-Dev**', '**Excellente et intuitive**', 'Bonne, un peu plus technique', 'Bonne, orientée évaluation'],
-        ['**Fonctionnalité Unique**', 'Contexte via URL, Sorties Structurées', 'Accès aux variantes (nano, mini)', '**Workbench & Générateur de Prompts**'],
-        ['**Idéal pour...**', '**Apprendre sans frais, tester sur de longs textes**', 'Expérimenter avec l\'écosystème GPT', 'Rédiger et évaluer des prompts de manière rigoureuse'],
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '### Analyse Détaillée pour le Prompt Engineer en Herbe',
-    },
-    {
-      type: 'tabs',
-      defaultValue: 'studio-debutant',
-      tabs: [
-        {
-          value: 'studio-debutant',
-          title: 'Débuter (Gratuit)',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Le Meilleur Point de Départ : Google AI Studio',
-              content: '**Pourquoi ?** C\'est le seul environnement qui offre un accès **totalement gratuit et sans carte de crédit** à son modèle le plus puissant, **Gemini 2.5 Pro**, avec sa phénoménale fenêtre de contexte de **1 million de tokens**.\n\n**Cas d\'usage pour un étudiant en pharmacie :**\n1. **Tester la Température :** Générez une réponse avec température 0.1 (factuelle), puis 0.9 (créative) pour le même cas clinique\n2. **Analyser un Cours Entier :** Collez l\'intégralité d\'un cours (grâce au contexte de 1M) pour générer des questions d\'examen\n3. **Utiliser le Contexte par URL :** Donnez l\'URL d\'une recommandation ANSM pour une synthèse automatique',
-            },
-          ],
-        },
-        {
-          value: 'studio-gpt',
-          title: 'Maîtriser GPT',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour Explorer l\'Écosystème GPT : OpenAI Playground',
-              content: '**Pourquoi ?** Si votre objectif est de maîtriser l\'écosystème OpenAI (GPTs, API, etc.), le Playground est incontournable pour comparer directement le comportement des différents modèles.\n\n**Cas d\'usage pour un étudiant en pharmacie :**\n1. **Maîtriser le System Prompt :** Définir une "constitution" détaillée pour spécialiser l\'IA en pharmacie hospitalière\n2. **Comparer les Modèles :** Tester GPT-5 vs GPT-5-nano pour arbitrer entre coût et performance',
-            },
-          ],
-        },
-        {
-          value: 'studio-expert',
-          title: 'Devenir Expert',
-          content: [
-            {
-              type: 'card',
-              title: '🏆 Pour Devenir un Artisan du Prompt : Anthropic Console',
-              content: '**Pourquoi ?** La console d\'Anthropic est conçue pour ceux qui veulent aller plus loin dans la **qualité et la fiabilité** des prompts. Ses outils font d\'elle un véritable atelier d\'artisan.\n\n**Cas d\'usage pour un étudiant en pharmacie :**\n1. **Générateur de Prompts :** Créer automatiquement des prompts détaillés pour analyser une ordonnance\n2. **Workbench :** Organiser ses recherches par matière et sauvegarder ses meilleurs prompts',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'markdown',
-      content: '## Le "Combo" Idéal de l\'Étudiant en 2025\n\nIl n\'y a pas un seul "meilleur" outil, mais un **arsenal stratégique** à déployer en fonction de la situation :',
+      content: "### L'Évolution Majeure : Perplexity, le Hub de Modèles",
     },
     {
       type: 'card',
-      content: '- **Pour la Recherche Fiable** : Utilisez **Perplexity AI** comme moteur de recherche principal.\n- **Pour le Travail sur Documents** : **DeepSeek Chat** pour analyser vos cours (vigilance confidentialité).\n- **Pour la Rédaction & le Quotidien** : **Gemini** ou **ChatGPT** comme assistants polyvalents.\n- **Pour l\'Apprentissage du Prompt Engineering** : **Google AI Studio** pour comprendre les paramètres et tester des prompts complexes.',
+      title: "Perplexity n'est plus un simple moteur de recherche",
+      content: "C'est le changement le plus important de l'année. Au lieu de payer des abonnements séparés pour chaque modèle de pointe, l'abonnement Perplexity Pro (environ 20$/mois) vous donne accès à **GPT-5**, **Claude 4 Opus**, et d'autres, directement dans leur interface. \n\nSa fonction **'Deep Research'** en fait un véritable **agent de recherche** : vous lui donnez un sujet, et il planifie, exécute une recherche multi-sources, et vous rend un rapport de synthèse sourcé. C'est un gain de productivité phénoménal."
     },
     {
       type: 'markdown',
-      content: '## Votre Parcours de Formation Recommandé',
+      content: '## Mon Combo Idéal pour l'Étudiant en 2025',
     },
     {
-      type: 'card',
-      content: '1. **Démarrez avec les Interfaces de Chat** : Perplexity + Gemini pour couvrir recherche et usage quotidien.\n2. **Explorez Google AI Studio** : Gratuit et parfait pour comprendre les concepts fondamentaux.\n3. **Spécialisez-vous si Nécessaire** : OpenAI Playground ou Anthropic Console selon vos besoins spécifiques.',
+      type: 'tabs',
+      defaultValue: 'gratuit',
+      tabs: [
+        {
+          value: 'gratuit',
+          title: 'Le Combo 100% Gratuit',
+          content: [
+            {
+              type: 'card',
+              title: 'Le Duo Gagnant : Perplexity + AI Studio',
+              content: "**1. Pour la recherche rapide et sourcée :** La version gratuite de **Perplexity** reste excellente pour des questions factuelles. Vous obtenez des réponses à jour avec des liens vers les sources.\n\n**2. Pour l'analyse de fond et l'apprentissage :** **Google AI Studio** est imbattable. Utilisez-le pour analyser vos cours, générer des fiches de révision avec sa fenêtre de contexte de 1M de tokens, ou transformer un PDF en cours interactif avec 'Guided Learning'.",
+            },
+          ]
+        },
+        {
+          value: 'premium',
+          title: 'Le Combo Productivité Maximale',
+          content: [
+            {
+              type: 'card',
+              title: 'L'Abonnement Unique : Perplexity Pro',
+              content: "Si je ne devais payer qu'un seul abonnement, ce serait celui-ci. Pour environ 20$/mois, il remplace presque tous les autres :\n\n- **Accès aux meilleurs modèles** : Plus besoin de choisir entre GPT-5 et Claude 4 Opus.\n- **Agent de recherche intégré** : La fonction 'Deep Research' pour démarrer une bibliographie est révolutionnaire.\n- **Analyse de fichiers illimitée**.\n\nJe le complète avec **AI Studio** (gratuit) pour sa fonction unique de 'Guided Learning' et pour les expérimentations très spécifiques.",
+            },
+          ]
+        }
+      ]
     },
     {
       type: 'markdown',
-      content: '## Aller Plus Loin\nPour une exploration complète des outils IA gratuits et sans carte bancaire, consultez notre guide sur le core kit gratuit.',
+      content: '## Analyse Détaillée par Cas d'Usage',
+    },
+    {
+        type: 'accordion',
+        items: [
+            {
+                value: 'recherche-biblio',
+                title: 'Pour une Recherche Bibliographique Approfondie',
+                content: {
+                    type: 'card',
+                    content: "**🥇 Le Meilleur : Perplexity Pro avec 'Deep Research'**\n\nC'est la solution la plus efficace. Vous lancez une recherche sur un sujet, et l'agent travaille pour vous. Le rapport final est une base de travail solide, avec toutes les sources citées.\n\n**🥈 Alternative Gratuite : Le combo Z.AI + AI Studio**\n\nUtilisez l'agent de recherche de **Z.AI** pour obtenir un plan de recherche et des sources initiales (attention à la confidentialité). Ensuite, utilisez **AI Studio** pour analyser en profondeur les articles et les données trouvées."
+                }
+            },
+            {
+                value: 'analyse-de-fonds',
+                title: 'Pour l'Analyse d'un Corpus de Documents (Mémoire, Thèse)',
+                content: {
+                    type: 'card',
+                    content: "**🥇 Le Meilleur : Claude Pro**\n\nAvec sa fenêtre de contexte allant jusqu'à 1M de tokens et ses nouvelles capacités agentiques ('Tool Use', 'Working Notes'), Claude peut devenir un véritable partenaire de recherche, gardant en mémoire vos documents et vos objectifs sur plusieurs jours.\n\n**🥈 Alternative Gratuite : Google AI Studio**\n\nSa fenêtre de contexte de 1M de tokens est également disponible gratuitement. Il est excellent pour des sessions d'analyse ponctuelles sur un grand nombre de documents, même s'il n'a pas la mémoire à long terme d'un projet Claude."
+                }
+            },
+            {
+                value: 'tutorat',
+                title: 'Pour se Faire Expliquer un Cours Complexe',
+                content: {
+                    type: 'card',
+                    content: "**🥇 Le Meilleur : Google AI Studio avec 'Guided Learning'**\n\nC'est la fonctionnalité phare pour cet usage. Uploadez votre cours, et demandez-lui de créer un parcours d'apprentissage. Il vous guidera à travers les concepts clés avec des explications, des QCM et des exercices.\n\n**🥈 Alternative : ChatGPT-5**\n\nLe dernier modèle d'OpenAI a d'excellentes capacités pédagogiques. Vous pouvez lui demander de se comporter comme un tuteur et de vous poser des questions de manière socratique."
+                }
+            }
+        ]
+    },
+    {
+      type: 'markdown',
+      content: '## Conclusion : Pensez "Rôle" et non "Outil"\n\nL'ère du 'couteau suisse' unique est révolue. Pour être efficace en 2025, il faut penser comme un chef d'orchestre : quel instrument (ou quel rôle d'IA) est le plus adapté pour cette partie de la symphonie ? En combinant judicieusement ces outils spécialisés, vous démultiplierez votre productivité.',
     },
     {
       type: 'guideRecommendation',
       slug: 'le-core-kit-ia-gratuit-en-2025',
-      reason: 'Découvrez en détail le duo Z.AI + AI Studio qui permet d\'accéder à 95% des capacités de pointe sans frais.',
-    },
-    {
-      type: 'markdown',
-      content: '## Concepts Abordés',
-    },
-    {
-      type: 'conceptRecommendation',
-      slug: 'context-engineering',
-      reason: 'Comprendre le context engineering est crucial pour utiliser efficacement les grandes fenêtres de contexte des studios.',
-    },
-    {
-      type: 'conceptRecommendation',
-      slug: 'température-dosage',
-      reason: 'La maîtrise de la température, un paramètre clé des studios, vous permet de doser la créativité de l\'IA.',
+      reason: 'Découvrez en détail comment optimiser l'utilisation du duo Perplexity (gratuit) et AI Studio pour couvrir la majorité de vos besoins sans dépenser un centime.',
     },
   ],
 } satisfies Guide
