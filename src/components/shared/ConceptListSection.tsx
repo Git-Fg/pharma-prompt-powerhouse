@@ -1,6 +1,8 @@
-import { BookOpen } from 'lucide-react'
-import Link from 'next/link'
 import type { BaseConcept } from '@/lib/content-schema'
+import { BookOpen } from 'lucide-react'
+
+import Link from 'next/link'
+
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -10,10 +12,10 @@ interface ConceptListSectionProps {
   description?: string
 }
 
-export function ConceptListSection({ 
-  concepts, 
-  title = "Concepts fondamentaux abordés",
-  description = "Ce contenu s'appuie sur les concepts suivants. Consultez-les si vous souhaitez approfondir vos connaissances."
+export function ConceptListSection({
+  concepts,
+  title = 'Concepts fondamentaux abordés',
+  description = 'Ce contenu s\'appuie sur les concepts suivants. Consultez-les si vous souhaitez approfondir vos connaissances.',
 }: ConceptListSectionProps) {
   if (!concepts || concepts.length === 0) {
     return null

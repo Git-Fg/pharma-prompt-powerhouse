@@ -1,6 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
-import type { BaseGuide, BaseWorkflow } from '@/lib/content-schema'
+
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
@@ -87,7 +87,8 @@ export function SimilarContentSection({
                       {item.type === 'guide' ? 'Guide' : 'Workflow'}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      {Math.round(item.similarity * 100)}% de similarité
+                      {Math.round(item.similarity * 100)}
+                      % de similarité
                     </span>
                   </div>
                   <h3 className="font-semibold group-hover:text-primary transition-colors">
