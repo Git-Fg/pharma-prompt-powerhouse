@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 export default function OfflinePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
-      <div className="max-w-lg w-full space-y-6">
+      <div className="offline-container-width w-full space-y-6">
         <div className="text-center space-y-4">
           <div className="mx-auto w-20 h-20 bg-muted rounded-full flex items-center justify-center">
             <WifiOff className="h-10 w-10 text-muted-foreground" />
