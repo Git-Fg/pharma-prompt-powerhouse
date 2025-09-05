@@ -42,7 +42,7 @@ export function Skeleton({
       <div className="space-y-2">
         {Array.from({ length: lines }).map((_, index) => (
           <motion.div
-            key={`text-line-${index}`}
+            key={`text-line-${index}-${Math.random().toString(36).substr(2, 9)}`}
             className={cn(
               baseClasses,
               variantClasses[variant],
@@ -170,7 +170,7 @@ export function ListSkeleton({
     <div className={cn('space-y-4', className)}>
       {Array.from({ length: items }).map((_, index) => (
         <motion.div
-          key={`list-item-${index}`}
+          key={`list-item-${index}-${Math.random().toString(36).substr(2, 9)}`}
           className="flex gap-4 p-4 border rounded-lg bg-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -222,7 +222,7 @@ export function TableSkeleton({
         <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
           {Array.from({ length: columns }).map((_, index) => (
             <Skeleton
-              key={`header-${index}`}
+              key={`header-${index}-${Math.random().toString(36).substr(2, 9)}`}
               height="1rem"
               width="80%"
               variant="text"
@@ -234,7 +234,7 @@ export function TableSkeleton({
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <motion.div
-          key={rowIndex}
+          key={`row-${rowIndex}-${Math.random().toString(36).substr(2, 9)}`}
           className="border-b last:border-b-0 p-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -247,7 +247,7 @@ export function TableSkeleton({
           <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
             {Array.from({ length: columns }).map((_, colIndex) => (
               <Skeleton
-                key={`cell-${rowIndex}-${colIndex}`}
+                key={`cell-${rowIndex}-${colIndex}-${Math.random().toString(36).substr(2, 9)}`}
                 height="0.875rem"
                 width={colIndex === 0 ? '90%' : '70%'}
                 variant="text"
@@ -331,7 +331,7 @@ export function LoadingState({
         <div className="flex space-x-2">
           {[0, 1, 2].map(index => (
             <motion.div
-              key={index}
+              key={`dot-${index}`}
               className="w-2 h-2 bg-primary rounded-full"
               animate={{
                 scale: [1, 1.2, 1],
@@ -370,7 +370,7 @@ export function LoadingState({
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: items }).map((_, index) => (
-              <CardSkeleton key={index} showImage />
+              <CardSkeleton key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`} showImage />
             ))}
           </div>
         </div>
@@ -379,7 +379,7 @@ export function LoadingState({
       return (
         <div className={cn('grid gap-4 md:grid-cols-2 lg:grid-cols-3', className)}>
           {Array.from({ length: items }).map((_, index) => (
-            <CardSkeleton key={index} />
+            <CardSkeleton key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`} />
           ))}
         </div>
       )

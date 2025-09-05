@@ -89,7 +89,14 @@ export default function WorkflowsPage() {
     }, 0) / content.workflows.length,
   )
 
-  const stats = [\n    { value: totalWorkflows, label: 'Workflows disponibles', type: 'workflows' },\n    { value: beginnerCount, label: 'Pour débuter', type: 'guides' },\n    { value: tagCount, label: 'Cas d\'usage', type: 'concepts' },\n    { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },\n  ];\n\n  return (
+  const stats = [
+    { value: totalWorkflows, label: 'Workflows disponibles', type: 'workflows' },
+    { value: beginnerCount, label: 'Pour débuter', type: 'guides' },
+    { value: tagCount, label: "Cas d'usage", type: 'concepts' },
+    { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },
+  ];
+
+  return (
     <CollectionPageLayout
       title="Workflows Stratégiques"
       description="Mes méthodes éprouvées pour utiliser l'IA efficacement dans vos études. Chaque workflow est une étude de cas personnelle avec ma stratégie pas-à-pas."

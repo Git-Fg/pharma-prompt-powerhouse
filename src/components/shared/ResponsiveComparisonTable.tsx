@@ -140,7 +140,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                         {availability.label}
                       </Badge>
                       {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
-                        <Badge key={i} variant="outline" className="text-xs hover-scale text-pretty">
+                        <Badge key={`usecase-${useCase.replace(/\s+/g, '-').toLowerCase()}-${i}`} variant="outline" className="text-xs hover-scale text-pretty">
                           {useCase}
                         </Badge>
                       ))}
