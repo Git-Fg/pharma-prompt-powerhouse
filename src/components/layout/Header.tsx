@@ -8,9 +8,17 @@ import {
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import Button from '@/components/ui/button'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { getMainNavigationLinks } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
@@ -18,9 +26,15 @@ import { cn } from '@/lib/utils'
 export function Header() {
   const { theme, setTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   // Get navigation links from centralized source
   const mainNavigation = getMainNavigationLinks()
+
+  // Function to determine if a link is active
+  const isActive = (href: string) => {
+    return href === '/' ? pathname === href : pathname.startsWith(href)
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -38,17 +52,24 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <nav className="flex items-center space-x-6">
-              {mainNavigation.slice(1).map(item => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium transition-colors hover:text-primary"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+            <NavigationMenu>
+              <NavigationMenuList>
+                {mainNavigation.slice(1).map(item => (
+                  <NavigationMenuItem key={item.name}>
+                    <Link href={item.href} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          isActive(item.href) && 'bg-accent text-accent-foreground',
+                        )}
+                      >
+                        {item.name}
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
 
             <div className="flex items-center space-x-2">
               {/* Search */}
@@ -110,6 +131,7 @@ export function Header() {
                           onClick={() => setIsOpen(false)}
                           className={cn(
                             'flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground rounded-lg',
+                            isActive(item.href) && 'bg-accent text-accent-foreground',
                           )}
                         >
                           {item.name}
