@@ -132,7 +132,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <h2 className="text-2xl font-bold">Le Problème</h2>
             </div>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg">
               <ContentRenderer content={workflow.problem} />
             </div>
           </section>
@@ -147,7 +147,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <h2 className="text-2xl font-bold">Mon Approche Initiale (et ses limites)</h2>
             </div>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg">
               <ContentRenderer content={workflow.initialApproach} />
             </div>
           </section>
@@ -162,7 +162,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <h2 className="text-2xl font-bold">La Stratégie Optimisée</h2>
             </div>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg">
               <ContentRenderer content={workflow.optimizedStrategy} />
             </div>
           </section>
@@ -177,7 +177,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <h2 className="text-2xl font-bold">Comparaison des Outils</h2>
             </div>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg">
               <ContentRenderer content={workflow.toolComparison} />
             </div>
           </section>
@@ -192,7 +192,7 @@ export default function WorkflowPage({ params }: WorkflowPageProps) {
               </div>
               <h2 className="text-2xl font-bold">Le Prompt Final (à adapter)</h2>
             </div>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg">
               <ContentRenderer content={workflow.finalPrompt} />
             </div>
           </section>

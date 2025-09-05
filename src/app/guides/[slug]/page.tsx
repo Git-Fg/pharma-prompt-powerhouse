@@ -99,7 +99,7 @@ export default async function GuideDetailPage({
           </>
         )}
 
-        <main className="prose prose-lg dark:prose-invert max-w-none">
+        <main className="prose prose-lg dark:prose-invert">
           <ContentRenderer content={guide.content} />
         </main>
 

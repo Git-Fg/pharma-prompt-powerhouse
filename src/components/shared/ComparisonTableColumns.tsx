@@ -6,6 +6,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 import { ExternalLink, Star } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
 import { getStarRatingProps } from '@/lib/ui-utils'
 
 // Helper pour le rendu des étoiles
@@ -139,13 +140,12 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
     cell: ({ row }) => {
       const tool = row.original
       return (
-        <div className="flex gap-2">
-          <Link
-            href={`/l-arsenal-ia/${tool.slug}`}
-            className="text-primary hover:underline text-sm font-medium focus-ring hover-lift"
-          >
-            Détails
-          </Link>
+        <div className="flex gap-2 items-center">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href={`/l-arsenal-ia/${tool.slug}`}>
+              Détails
+            </Link>
+          </Button>
           <a
             href={tool.url}
             target="_blank"
