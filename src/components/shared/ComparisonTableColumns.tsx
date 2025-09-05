@@ -113,7 +113,7 @@ export const comparisonTableColumns: ColumnDef<ExternalTool>[] = [
       const useCases = getValue() as string[]
       return useCases
         ? (
-            <div className="flex flex-wrap gap-1 max-w-xs">
+            <div className="flex flex-wrap gap-1 footer-description-width">
               {useCases.slice(0, 2).map((useCase: string, i: number) => (
                 <Badge key={`usecase-${useCase.replace(/\s+/g, '-').toLowerCase()}-${i}`} variant="outline" className="text-xs hover-scale text-pretty">
                   {useCase}

@@ -13,14 +13,14 @@ export function Container({
   maxWidth = '7xl',
 }: ContainerProps) {
   const maxWidthClasses = {
-    'sm': 'max-w-sm',
-    'md': 'max-w-md',
+    'sm': 'text-content-width',
+    'md': 'text-content-width',
     'lg': 'container-constrained',
-    'xl': 'max-w-xl',
-    '2xl': 'max-w-2xl',
-    '4xl': 'max-w-4xl',
-    '6xl': 'max-w-6xl',
-    '7xl': 'max-w-7xl',
+    'xl': 'container',
+    '2xl': 'container',
+    '4xl': 'container',
+    '6xl': 'container',
+    '7xl': 'container',
     'full': 'max-w-full',
   }
 
