@@ -42,7 +42,7 @@ const concept = {
           type: 'alert',
           variant: 'destructive',
           title: 'Le Faux Sentiment de Compétence',
-          content: 'Obtenir rapidement une bonne réponse donne l'illusion de maîtriser un sujet, alors qu'en réalité, on maîtrise seulement l'art de poser une question à une machine. Le jour de l'examen ou face à un vrai patient, cette illusion peut être dangereuse.'
+          content: 'Obtenir rapidement une bonne réponse donne l\'illusion de maîtriser un sujet, alors qu\'en réalité, on maîtrise seulement l\'art de poser une question à une machine. Le jour de l\'examen ou face à un vrai patient, cette illusion peut être dangereuse.'
         }
       ]
     },

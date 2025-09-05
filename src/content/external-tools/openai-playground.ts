@@ -27,7 +27,7 @@ const externalTool = {
   confidenceScore: 4,
   confidenceJustification: 'C\'est un outil professionnel et transparent d\'OpenAI. La politique de données est claire. Le score n\'est pas de 5/5 uniquement à cause de la barrière du paiement à l\'usage qui le rend moins accessible pour une simple exploration.',
 
-  freeVsPaidOffer: `| Fonctionnalité | Offre Gratuite (Crédits initiaux) | Payant (API) |\n| :--- | :--- | :--- |\n| **Accès aux modèles** | ✅ Accès limité | ✅ **Accès complet** |\n| **Contrôle des paramètres** | ✅ Complet | ✅ **Complet** |\n| **Coût** | Crédits de bienvenue (si disponibles) | **Paiement à l'usage (tokens)** |\n| **Usage** | Expérimentation limitée | **Illimité (selon budget)** |`,
+  freeVsPaidOffer: `| Fonctionnalité | Offre Gratuite (Crédits initiaux) | Payant (API) |\n| :--- | :--- | :--- |\n| **Accès aux modèles** | ✅ Accès limité | ✅ **Accès complet** |\n| **Contrôle des paramètres** | ✅ Complet | ✅ **Complet** |\n| **Coût** | Crédits de bienvenue (si disponibles) | **Paiement à l\'usage (tokens)** |\n| **Usage** | Expérimentation limitée | **Illimité (selon budget)** |`,
 
   content: [
     {

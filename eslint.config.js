@@ -52,7 +52,7 @@ export default antfu(
   },
   {
     plugins: {
-      'pharma': pharmaPlugin,
+      pharma: pharmaPlugin,
     },
     rules: {
       'pharma/no-prohibited-tailwind-classes': 'error',
