@@ -600,6 +600,30 @@
   }
 }
 
+/* Fluid Typography - Modern CSS clamp() approach */
+@utility fluid-heading-1 {
+  font-size: clamp(2rem, 1.3714rem + 2.2857vw, 3.5rem); /* de 32px à 56px */
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+@utility fluid-heading-2 {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2.25rem); /* de 24px à 36px */
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility fluid-text-base {
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1.125rem); /* de 14px à 18px */
+  line-height: 1.6;
+}
+
+@utility fluid-section-padding {
+  padding-block: clamp(2rem, 1rem + 4vw, 4rem); /* de 32px à 64px */
+}
+
 @layer components {
   /* Layout Components */
   .page-header {
