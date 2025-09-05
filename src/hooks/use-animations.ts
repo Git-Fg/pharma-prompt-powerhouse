@@ -154,11 +154,18 @@ export function useStagger<T>(items: T[], delay = 0.1) {
   useEffect(() => {
     setVisibleItems([])
 
+    const timeouts: NodeJS.Timeout[] = []
+
     items.forEach((item, index) => {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setVisibleItems(prev => [...prev, item])
       }, index * delay * 1000)
+      timeouts.push(timeout)
     })
+
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout))
+    }
   }, [items, delay])
 
   return visibleItems
@@ -222,20 +229,26 @@ export function useTypewriter(text: string, speed = 50) {
   const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
-    setDisplayedText('')
-    setIsComplete(false)
+    const resetAndAnimate = () => {
+      setDisplayedText('')
+      setIsComplete(false)
 
-    let index = 0
-    const timer = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText(prev => prev + text[index])
-        index++
-      }
-      else {
-        setIsComplete(true)
-        clearInterval(timer)
-      }
-    }, speed)
+      let index = 0
+      const timer = setInterval(() => {
+        if (index < text.length) {
+          setDisplayedText(prev => prev + text[index])
+          index++
+        }
+        else {
+          setIsComplete(true)
+          clearInterval(timer)
+        }
+      }, speed)
+
+      return timer
+    }
+
+    const timer = resetAndAnimate()
 
     return () => clearInterval(timer)
   }, [text, speed])
@@ -275,10 +288,15 @@ export function useReducedMotion() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
+
+    const updatePreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches)
+    }
+
+    updatePreference()
 
     const handleChange = () => {
-      setPrefersReducedMotion(mediaQuery.matches)
+      updatePreference()
     }
 
     mediaQuery.addEventListener('change', handleChange)

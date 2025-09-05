@@ -2,7 +2,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { createContext, use, useCallback, useEffect, useState } from 'react'
+import { createContext, use, useCallback, useEffect, useMemo, useState } from 'react'
 
 type ConsentStatus = 'pending' | 'accepted' | 'declined'
 interface ConsentContextType {
@@ -24,10 +24,13 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
   // Charger le statut de consentement au montage
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'accepted' || stored === 'declined') {
-      setStatus(stored as ConsentStatus)
+    const loadConsentStatus = () => {
+      const stored = localStorage.getItem(STORAGE_KEY)
+      if (stored === 'accepted' || stored === 'declined') {
+        setStatus(stored as ConsentStatus)
+      }
     }
+    loadConsentStatus()
   }, [])
 
   const accept = useCallback(() => {
@@ -42,8 +45,14 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     clearStoredData()
   }, [])
 
+  const contextValue = useMemo(() => ({
+    status,
+    accept,
+    decline,
+  }), [status, accept, decline])
+
   return (
-    <ConsentContext value={{ status, accept, decline }}>
+    <ConsentContext value={contextValue}>
       {children}
     </ConsentContext>
   )

@@ -5,9 +5,10 @@ import reactCompilerPlugin from 'eslint-plugin-react-compiler'
 
 export default antfu(
   {
-    // Configuration de base
+    // Configuration de base avec Next.js
     react: true,
     typescript: true,
+    next: true,
     stylistic: {
       indent: 2,
       quotes: 'single',

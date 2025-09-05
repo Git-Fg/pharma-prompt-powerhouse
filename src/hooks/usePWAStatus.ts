@@ -21,7 +21,6 @@ export function usePWAStatus(): PWAStatus {
     // Check if installed (standalone mode)
     const checkInstalled = () => {
       return window.matchMedia('(display-mode: standalone)').matches
-
         || (window.navigator as any).standalone === true
     }
 
@@ -45,11 +44,15 @@ export function usePWAStatus(): PWAStatus {
     }
 
     // Initialize status
-    setStatus(prev => ({
-      ...prev,
-      isOnline: navigator.onLine,
-      isInstalled: checkInstalled(),
-    }))
+    const initializeStatus = () => {
+      setStatus(prev => ({
+        ...prev,
+        isOnline: navigator.onLine,
+        isInstalled: checkInstalled(),
+      }))
+    }
+
+    initializeStatus()
 
     // Add event listeners
     window.addEventListener('online', updateOnlineStatus)
@@ -58,14 +61,17 @@ export function usePWAStatus(): PWAStatus {
     window.addEventListener('appinstalled', handleAppInstalled)
 
     // Service worker update detection
+    let updateTimeout: NodeJS.Timeout | undefined
+    const handleControllerChange = () => {
+      setStatus(prev => ({ ...prev, isUpdating: true }))
+      // Reset updating status after a short delay
+      updateTimeout = setTimeout(() => {
+        setStatus(prev => ({ ...prev, isUpdating: false }))
+      }, 2000)
+    }
+
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        setStatus(prev => ({ ...prev, isUpdating: true }))
-        // Reset updating status after a short delay
-        setTimeout(() => {
-          setStatus(prev => ({ ...prev, isUpdating: false }))
-        }, 2000)
-      })
+      navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange)
     }
 
     return () => {
@@ -73,6 +79,14 @@ export function usePWAStatus(): PWAStatus {
       window.removeEventListener('offline', updateOnlineStatus)
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
       window.removeEventListener('appinstalled', handleAppInstalled)
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange)
+      }
+
+      if (updateTimeout) {
+        clearTimeout(updateTimeout)
+      }
     }
   }, [])
 
