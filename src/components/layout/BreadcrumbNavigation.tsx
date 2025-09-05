@@ -45,13 +45,15 @@ export function BreadcrumbNavigation() {
             <React.Fragment key={href}>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                {isLast ? (
-                  <BreadcrumbPage className="capitalize">{name}</BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink asChild>
-                    <Link href={href} className="capitalize">{name}</Link>
-                  </BreadcrumbLink>
-                )}
+                {isLast
+                  ? (
+                      <BreadcrumbPage className="capitalize">{name}</BreadcrumbPage>
+                    )
+                  : (
+                      <BreadcrumbLink asChild>
+                        <Link href={href} className="capitalize">{name}</Link>
+                      </BreadcrumbLink>
+                    )}
               </BreadcrumbItem>
             </React.Fragment>
           )

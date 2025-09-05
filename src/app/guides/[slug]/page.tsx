@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
-import { ArrowLeft, BookOpen, Clock, Target } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Container, Section } from '@/components/layout/Container'
+import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
-import Badge from '@/components/ui/badge'
-import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { Separator } from '@/components/ui/separator'
 import { content, getGuideBySlug } from '@/lib/content-loader'
 
@@ -50,87 +47,46 @@ export default async function GuideDetailPage({
   }
 
   return (
-    <Section>
-      <Container maxWidth="4xl">
-        <div className="mb-8">
-          <Button variant="ghost" className="mb-4" asChild>
-            <Link href="/guides">
-              <ArrowLeft className="mr-2 size-4" />
-              Retour aux guides
-            </Link>
-          </Button>
+    <ContentPageLayout item={guide}>
+      {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
+        <>
+          <KeyTakeaways points={guide.keyTakeaways} />
+          <Separator className="my-8" />
+        </>
+      )}
 
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              <CategoryBadge category={guide.category} />
-              <DifficultyBadge difficulty={guide.difficulty} />
-              {guide.isWorkflow && (
-                <Badge variant="default">
-                  <Target className="mr-1 h-3 w-3" />
-                  Workflow
-                </Badge>
-              )}
+      <ContentRenderer content={guide.content} />
+
+      <Separator className="my-12" />
+
+      {/* Related Guides - Moved after main content */}
+      {guide.relatedGuides && guide.relatedGuides.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Pour aller plus loin</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <h3 className="font-semibold flex items-center gap-2">
+                <BookOpen className="size-4" />
+                Guides similaires
+              </h3>
+              {guide.relatedGuides.map(relatedGuide => (
+                <Link
+                  href={`/guides/${relatedGuide.slug}`}
+                  key={relatedGuide.slug}
+                  className="block p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+                >
+                  <p className="font-medium">{relatedGuide.title}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-1">
+                    {relatedGuide.description}
+                  </p>
+                </Link>
+              ))}
             </div>
-
-            <h1 className="text-4xl font-bold tracking-tight">{guide.title}</h1>
-            <p className="text-xl text-muted-foreground">{guide.description}</p>
-
-            {guide.estimatedTime && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="size-4" />
-                <span>
-                  Temps de lecture estimé :
-                  {guide.estimatedTime}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <Separator className="my-8" />
-
-        {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-          <>
-            <KeyTakeaways points={guide.keyTakeaways} />
-            <Separator className="my-8" />
-          </>
-        )}
-
-        <main className="prose prose-lg dark:prose-invert">
-          <ContentRenderer content={guide.content} />
-        </main>
-
-        <Separator className="my-12" />
-
-        {/* Related Guides - Moved after main content */}
-        {guide.relatedGuides && guide.relatedGuides.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Pour aller plus loin</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <BookOpen className="size-4" />
-                  Guides similaires
-                </h3>
-                {guide.relatedGuides.map(relatedGuide => (
-                  <Link
-                    href={`/guides/${relatedGuide.slug}`}
-                    key={relatedGuide.slug}
-                    className="block p-3 border rounded-lg hover:bg-accent/50 transition-colors"
-                  >
-                    <p className="font-medium">{relatedGuide.title}</p>
-                    <p className="text-sm text-muted-foreground line-clamp-1">
-                      {relatedGuide.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </Container>
-    </Section>
+          </CardContent>
+        </Card>
+      )}
+    </ContentPageLayout>
   )
 }

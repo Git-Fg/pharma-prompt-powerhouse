@@ -15,7 +15,7 @@ export function ContentMetadata({ item }: ContentMetadataProps) {
   const hasEstimatedTime = 'estimatedTime' in item && item.estimatedTime
   // All content types have tags
   const hasTags = item.tags && item.tags.length > 0
-  
+
   const hasMetadata = hasDifficulty || hasEstimatedTime || hasTags
 
   if (!hasMetadata) {
