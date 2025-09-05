@@ -170,7 +170,7 @@ export function ListSkeleton({
     <div className={cn('space-y-4', className)}>
       {Array.from({ length: items }).map((_, index) => (
         <motion.div
-          key={index}
+          key={`list-item-${index}`}
           className="flex gap-4 p-4 border rounded-lg bg-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

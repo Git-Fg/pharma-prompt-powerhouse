@@ -33,7 +33,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-2xl">Pharma Prompt</span>
             </div>
-            <div className="container-content-width">
+            <div className="container-constrained">
               <p className="prose-slogan">
                 Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.
               </p>

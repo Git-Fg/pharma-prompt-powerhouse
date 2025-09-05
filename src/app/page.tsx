@@ -88,7 +88,7 @@ export default function HomePage() {
       {/* Quick Access Section */}
       <Section>
         <Container maxWidth="6xl">
-          <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
+          <h2 className="responsive-subheading text-center">Accès Rapides</h2>
 
           <div className="grid md:grid-cols-3 gap-6">
             {/* Pour les nouveaux visiteurs */}
@@ -200,8 +200,8 @@ export default function HomePage() {
                       ))}
                     </div>
                     <Link href={`/workflows/${workflow.slug}`}>
-                      <Button size="sm">
-                        Lire
+                      <Button size="sm" variant="outline">
+                        Découvrir
                         <ArrowRight className="w-3 h-3 ml-1" />
                       </Button>
                     </Link>

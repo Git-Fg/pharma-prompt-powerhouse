@@ -12,6 +12,7 @@ import { useContentFilter } from '@/hooks/useContentFilter'
 import { difficultyLabels } from '@/lib/constants'
 import { content } from '@/lib/content-loader'
 import { getIcon } from '@/types/icon-taxonomy'
+import { DifficultyBadge } from '@/components/ui/enhanced-badge'
 
 function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target
@@ -24,9 +25,7 @@ function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
             <Icon className="size-5 text-primary" />
           </div>
           <div className="flex gap-2">
-            <Badge variant="outline" className="text-xs">
-              {workflow.difficulty}
-            </Badge>
+            <DifficultyBadge difficulty={workflow.difficulty} size="sm" />
             {workflow.estimatedTime && (
               <Badge variant="secondary" className="text-xs">
                 <Clock className="w-3 h-3 mr-1" />
@@ -90,14 +89,7 @@ export default function WorkflowsPage() {
     }, 0) / content.workflows.length,
   )
 
-  const stats = [
-    { value: totalWorkflows, label: 'Workflows disponibles', colorClass: 'text-blue-600 dark:text-blue-400', bgClass: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200 dark:border-blue-800' },
-    { value: beginnerCount, label: 'Pour débuter', colorClass: 'text-green-600 dark:text-green-400', bgClass: 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800' },
-    { value: tagCount, label: 'Cas d\'usage', colorClass: 'text-purple-600 dark:text-purple-400', bgClass: 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/50 dark:to-purple-900/30 border-purple-200 dark:border-purple-800' },
-    { value: `${avgTime}min`, label: 'Temps moyen', colorClass: 'text-orange-600 dark:text-orange-400', bgClass: 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800' },
-  ]
-
-  return (
+  const stats = [\n    { value: totalWorkflows, label: 'Workflows disponibles', type: 'workflows' },\n    { value: beginnerCount, label: 'Pour débuter', type: 'guides' },\n    { value: tagCount, label: 'Cas d\'usage', type: 'concepts' },\n    { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },\n  ];\n\n  return (
     <CollectionPageLayout
       title="Workflows Stratégiques"
       description="Mes méthodes éprouvées pour utiliser l'IA efficacement dans vos études. Chaque workflow est une étude de cas personnelle avec ma stratégie pas-à-pas."
