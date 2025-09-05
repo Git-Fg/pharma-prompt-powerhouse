@@ -81,9 +81,10 @@ export default antfu(
       // Allow hooks naming in test files
       'react-hooks-extra/no-unnecessary-use-prefix': 'off', // Disabled for test utilities
 
-      // Custom rules for Tailwind v4 semantic utilities
-      // Since eslint-plugin-tailwindcss doesn't support v4 yet, we disable checks that would flag our semantic utilities
-      'style/max-len': 'off', // Allow longer class strings for now
+      // Tailwind v4 semantic utilities support
+      // Note: eslint-plugin-tailwindcss doesn't support Tailwind v4 yet due to peer dependency conflicts
+      // Our semantic utilities (prose-*, container-*, etc.) are implemented via @utility in globals.css
+      'style/max-len': 'off', // Allow longer class strings for semantic utilities
     },
   },
   {
