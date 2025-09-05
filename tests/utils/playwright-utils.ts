@@ -3,7 +3,8 @@
  * User-centric testing with network mocking and performance insights
  */
 
-import { test as base, expect, type Page, type Locator } from '@playwright/test'
+import type { Locator, Page } from '@playwright/test'
+import { test as base, expect } from '@playwright/test'
 
 /**
  * Extended test fixture with modern utilities
@@ -97,9 +98,9 @@ export class UserPage {
   async screenshot(name?: string) {
     const testInfo = test.info()
     const screenshotName = name || `${testInfo.title.replace(/\s+/g, '-').toLowerCase()}`
-    return this.page.screenshot({ 
+    return this.page.screenshot({
       path: `test-results/screenshots/${screenshotName}.png`,
-      fullPage: true 
+      fullPage: true,
     })
   }
 
@@ -128,7 +129,8 @@ export class UserPage {
       await locator.waitFor({ state: 'visible', timeout: 1000 })
       const box = await locator.boundingBox()
       return box !== null && box.width > 0 && box.height > 0
-    } catch {
+    }
+    catch {
       return false
     }
   }
@@ -179,22 +181,18 @@ export class NetworkMocker {
    */
   async mockExternalResources() {
     // Mock Google Fonts
-    await this.page.route('**/*fonts.googleapis.com/**', route => 
-      route.abort('blocked')
-    )
-    
+    await this.page.route('**/*fonts.googleapis.com/**', route =>
+      route.abort('blocked'))
+
     // Mock analytics
-    await this.page.route('**/*analytics*/**', route => 
-      route.abort('blocked')
-    )
-    
+    await this.page.route('**/*analytics*/**', route =>
+      route.abort('blocked'))
+
     // Mock social media embeds
-    await this.page.route('**/*facebook.com/**', route => 
-      route.abort('blocked')
-    )
-    await this.page.route('**/*twitter.com/**', route => 
-      route.abort('blocked')
-    )
+    await this.page.route('**/*facebook.com/**', route =>
+      route.abort('blocked'))
+    await this.page.route('**/*twitter.com/**', route =>
+      route.abort('blocked'))
   }
 
   /**
@@ -224,7 +222,7 @@ export class A11yTester {
   async auditPage(options?: { rules?: string[], tags?: string[] }) {
     // Inject axe-core into the page
     await this.page.addScriptTag({
-      url: 'https://unpkg.com/axe-core@4.10.0/axe.min.js'
+      url: 'https://unpkg.com/axe-core@4.10.0/axe.min.js',
     })
 
     // Run axe scan
@@ -250,7 +248,7 @@ export class A11yTester {
   async testKeyboardNavigation() {
     // Test tab navigation
     const focusableElements = await this.page.locator('[tabindex]:not([tabindex="-1"]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]').all()
-    
+
     for (let i = 0; i < focusableElements.length; i++) {
       await this.page.keyboard.press('Tab')
       const activeElement = this.page.locator(':focus')
@@ -265,17 +263,18 @@ export class A11yTester {
     // Check for proper headings hierarchy
     const headings = await this.page.locator('h1, h2, h3, h4, h5, h6').all()
     let currentLevel = 0
-    
+
     for (const heading of headings) {
       const tagName = await heading.evaluate(el => el.tagName)
-      const level = parseInt(tagName.charAt(1))
-      
+      const level = Number.parseInt(tagName.charAt(1))
+
       if (currentLevel === 0) {
         expect(level).toBe(1) // First heading should be h1
-      } else {
+      }
+      else {
         expect(level).toBeLessThanOrEqual(currentLevel + 1) // No skipping levels
       }
-      
+
       currentLevel = level
     }
 
@@ -294,9 +293,9 @@ export class A11yTester {
     // This would require a more sophisticated implementation
     // For now, we'll check that elements have sufficient opacity
     const textElements = await this.page.locator('p, span, div, h1, h2, h3, h4, h5, h6').all()
-    
+
     for (const element of textElements) {
-      const styles = await element.evaluate(el => {
+      const styles = await element.evaluate((el) => {
         const computed = getComputedStyle(el)
         return {
           color: computed.color,
@@ -304,8 +303,8 @@ export class A11yTester {
           opacity: computed.opacity,
         }
       })
-      
-      expect(parseFloat(styles.opacity)).toBeGreaterThan(0.7)
+
+      expect(Number.parseFloat(styles.opacity)).toBeGreaterThan(0.7)
     }
   }
 }
@@ -321,19 +320,20 @@ export class PerformanceMonitor {
    */
   async measurePageLoad() {
     const startTime = Date.now()
-    
+
     await this.page.goto(this.page.url())
     await this.page.waitForLoadState('networkidle')
-    
+
     const endTime = Date.now()
     const loadTime = endTime - startTime
-    
+
     // Get Web Vitals
     const metrics = await this.page.evaluate(() => {
       return new Promise((resolve) => {
         if ('web-vital' in window) {
           resolve((window as any)['web-vital'])
-        } else {
+        }
+        else {
           // Fallback metrics
           resolve({
             FCP: performance.getEntriesByType('paint').find(entry => entry.name === 'first-contentful-paint')?.startTime,
@@ -351,7 +351,7 @@ export class PerformanceMonitor {
       expectations: {
         loadTimeShouldBeLessThan: 3000,
         fcpShouldBeLessThan: 1800,
-      }
+      },
     }
   }
 
@@ -374,16 +374,16 @@ export class PerformanceMonitor {
    */
   async measureAnimationPerformance(animationSelector: string) {
     const startTime = Date.now()
-    
+
     await this.page.locator(animationSelector).hover()
     await this.page.waitForTimeout(500) // Wait for animation
-    
+
     const endTime = Date.now()
     const animationTime = endTime - startTime
-    
+
     // Animation should complete within reasonable time
     expect(animationTime).toBeLessThan(1000)
-    
+
     return animationTime
   }
 }

@@ -3,10 +3,13 @@
  * Implements the "New Test Pyramid" with focus on Server Components
  */
 
-import React, { type ReactElement } from 'react'
-import { render, type RenderOptions, type RenderResult } from '@testing-library/react'
-import { axe, type AxeResults } from 'jest-axe'
+import type { RenderOptions, RenderResult } from '@testing-library/react'
+import type { AxeResults } from 'jest-axe'
+import type { ReactElement } from 'react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { axe } from 'jest-axe'
+import React from 'react'
 
 // Extend jest-dom matchers
 import '@testing-library/jest-dom'
@@ -17,7 +20,7 @@ import '@testing-library/jest-dom'
  */
 export async function renderServerComponent<T>(
   Component: () => Promise<ReactElement> | ReactElement,
-  props?: T
+  props?: T,
 ): Promise<RenderResult> {
   // Handle both sync and async Server Components
   const element = await Component()
@@ -33,10 +36,10 @@ export async function testAccessibility(
   options?: {
     rules?: Record<string, { enabled: boolean }>
     tags?: string[]
-  }
+  },
 ): Promise<AxeResults> {
   const { container } = renderResult
-  
+
   const results = await axe(container, {
     rules: {
       // Enable specific rules for our use case
@@ -50,7 +53,7 @@ export async function testAccessibility(
 
   // Auto-fail tests if accessibility violations are found
   expect(results).toHaveNoViolations()
-  
+
   return results
 }
 
@@ -60,30 +63,30 @@ export async function testAccessibility(
  */
 export function testKeyboardNavigation(element: HTMLElement) {
   const user = userEvent.setup()
-  
+
   return {
     async tabForward() {
       await user.tab()
       return document.activeElement
     },
-    
+
     async tabBackward() {
       await user.tab({ shift: true })
       return document.activeElement
     },
-    
+
     async pressEnter() {
       await user.keyboard('{Enter}')
     },
-    
+
     async pressEscape() {
       await user.keyboard('{Escape}')
     },
-    
+
     async pressSpace() {
       await user.keyboard(' ')
     },
-    
+
     getFocusableElements() {
       return element.querySelectorAll([
         'button:not([disabled])',
@@ -94,22 +97,22 @@ export function testKeyboardNavigation(element: HTMLElement) {
         '[tabindex]:not([tabindex="-1"])',
       ].join(', '))
     },
-    
+
     hasProperTabOrder() {
       const focusable = this.getFocusableElements()
       let hasValidOrder = true
-      
+
       focusable.forEach((el, index) => {
         const tabIndex = el.getAttribute('tabindex')
-        if (tabIndex && parseInt(tabIndex) > 0) {
+        if (tabIndex && Number.parseInt(tabIndex) > 0) {
           // Positive tabindex should be avoided in most cases
           console.warn(`Element at index ${index} has positive tabindex: ${tabIndex}`)
           hasValidOrder = false
         }
       })
-      
+
       return hasValidOrder
-    }
+    },
   }
 }
 
@@ -134,7 +137,7 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
 
 export function renderWithProviders(
   ui: ReactElement,
-  options: CustomRenderOptions = {}
+  options: CustomRenderOptions = {},
 ) {
   const {
     withTheme = true,
@@ -150,9 +153,9 @@ export function renderWithProviders(
     if (withTheme) {
       const { ThemeProvider } = require('@/components/theme-provider')
       wrappedChildren = React.createElement(
-        ThemeProvider, 
+        ThemeProvider,
         { attribute: 'class', defaultTheme: 'light' },
-        wrappedChildren
+        wrappedChildren,
       )
     }
 
@@ -170,7 +173,7 @@ export function renderWithProviders(
         query: {},
         asPath: initialRoute,
       }
-      
+
       // Note: In a real implementation, you'd use next-router-mock
       // or similar testing utilities for Next.js router mocking
     }
@@ -179,7 +182,7 @@ export function renderWithProviders(
   }
 
   const renderResult = render(ui, { wrapper: Wrapper, ...renderOptions })
-  
+
   return {
     ...renderResult,
     user: userEvent.setup(),
@@ -192,21 +195,21 @@ export function renderWithProviders(
  */
 export function measureRenderPerformance<T extends (...args: any[]) => any>(
   renderFunction: T,
-  iterations = 10
+  iterations = 10,
 ) {
   const times: number[] = []
-  
+
   for (let i = 0; i < iterations; i++) {
     const start = performance.now()
     renderFunction()
     const end = performance.now()
     times.push(end - start)
   }
-  
+
   const average = times.reduce((sum, time) => sum + time, 0) / times.length
   const min = Math.min(...times)
   const max = Math.max(...times)
-  
+
   return {
     average,
     min,
@@ -215,7 +218,7 @@ export function measureRenderPerformance<T extends (...args: any[]) => any>(
     // Fail test if average render time is too slow
     expectFastRender(maxMs = 16) {
       expect(average).toBeLessThan(maxMs)
-    }
+    },
   }
 }
 
@@ -230,7 +233,7 @@ export function testAnimations(element: HTMLElement) {
         const timer = setTimeout(() => {
           reject(new Error(`Animation ${animationName} did not complete within ${timeout}ms`))
         }, timeout)
-        
+
         const handleAnimationEnd = (e: AnimationEvent) => {
           if (e.animationName === animationName) {
             clearTimeout(timer)
@@ -238,21 +241,21 @@ export function testAnimations(element: HTMLElement) {
             resolve()
           }
         }
-        
+
         element.addEventListener('animationend', handleAnimationEnd)
       })
     },
-    
+
     hasReducedMotion() {
       return window.matchMedia('(prefers-reduced-motion: reduce)').matches
     },
-    
+
     expectNoAnimationWhenReducedMotion() {
       if (this.hasReducedMotion()) {
         const computedStyle = getComputedStyle(element)
         expect(computedStyle.animationDuration).toBe('0.01ms')
       }
-    }
+    },
   }
 }
 
@@ -270,13 +273,13 @@ export const mockUtils = {
       unobserve: vi.fn(),
       disconnect: vi.fn(),
     })
-    
+
     Object.defineProperty(window, 'IntersectionObserver', {
       writable: true,
       configurable: true,
       value: mockIntersectionObserver,
     })
-    
+
     return mockIntersectionObserver
   },
 
@@ -290,13 +293,13 @@ export const mockUtils = {
       unobserve: vi.fn(),
       disconnect: vi.fn(),
     })
-    
+
     Object.defineProperty(window, 'ResizeObserver', {
       writable: true,
       configurable: true,
       value: mockResizeObserver,
     })
-    
+
     return mockResizeObserver
   },
 
@@ -308,13 +311,13 @@ export const mockUtils = {
       writeText: vi.fn().mockResolvedValue(undefined),
       readText: vi.fn().mockResolvedValue(''),
     }
-    
+
     Object.defineProperty(navigator, 'clipboard', {
       writable: true,
       configurable: true,
       value: mockClipboard,
     })
-    
+
     return mockClipboard
-  }
+  },
 }

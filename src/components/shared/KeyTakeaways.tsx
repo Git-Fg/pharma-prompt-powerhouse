@@ -1,6 +1,6 @@
 'use client'
 
-import { CheckCircle, Lightbulb, Target, TrendingUp, Zap, Info } from 'lucide-react'
+import { CheckCircle, Info, Lightbulb, Target, TrendingUp, Zap } from 'lucide-react'
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AnimatedElement } from '@/components/ui/css-animations'
@@ -53,12 +53,12 @@ const contentIcons = {
   tool: Zap,
 }
 
-export function KeyTakeaways({ 
-  points, 
+export function KeyTakeaways({
+  points,
   variant = 'default',
   contentType = 'guide',
   animated = true,
-  className 
+  className,
 }: KeyTakeawaysProps) {
   if (!points || points.length === 0) {
     return null
@@ -81,17 +81,20 @@ export function KeyTakeaways({
           'flex items-center gap-3',
           styles.title,
           variant === 'compact' ? 'text-base' : 'text-lg',
-        )}>
+        )}
+        >
           <div className={cn(
             'flex items-center justify-center rounded-lg',
             variant === 'featured' ? 'w-10 h-10 bg-primary/30' : 'w-6 h-6 bg-primary/20',
-          )}>
+          )}
+          >
             <IconComponent className={cn(
               'text-primary',
               variant === 'featured' ? 'size-5' : 'size-4',
-            )} />
+            )}
+            />
           </div>
-          
+
           {contentType === 'guide' && 'À Retenir (TL;DR)'}
           {contentType === 'concept' && 'Concepts Essentiels'}
           {contentType === 'workflow' && 'Points Clés du Workflow'}
@@ -103,8 +106,8 @@ export function KeyTakeaways({
       <CardContent className={variant === 'compact' ? 'pt-0' : undefined}>
         <ul className={styles.items}>
           {points.map((point, index) => (
-            <li 
-              key={`takeaway-${point.slice(0, 30).replace(/\s+/g, '-')}-${index}`} 
+            <li
+              key={`takeaway-${point.slice(0, 30).replace(/\s+/g, '-')}-${index}`}
               className={cn(
                 'flex items-start gap-3 group',
                 variant === 'featured' && 'p-3 rounded-lg hover:bg-background/30 transition-colors',
@@ -113,21 +116,24 @@ export function KeyTakeaways({
               <div className={cn(
                 'flex items-center justify-center rounded-full flex-shrink-0',
                 variant === 'compact' ? 'w-4 h-4 mt-1' : 'w-5 h-5 mt-1',
-                variant === 'featured' 
-                  ? 'bg-green-100 dark:bg-green-900/30 group-hover:bg-green-200 dark:group-hover:bg-green-800/40' 
+                variant === 'featured'
+                  ? 'bg-green-100 dark:bg-green-900/30 group-hover:bg-green-200 dark:group-hover:bg-green-800/40'
                   : 'bg-green-100 dark:bg-green-900/30',
-              )}>
+              )}
+              >
                 <CheckCircle className={cn(
                   'text-green-600 dark:text-green-400',
                   variant === 'compact' ? 'size-2.5' : 'size-3',
-                )} />
+                )}
+                />
               </div>
 
               <p className={cn(
                 'text-muted-foreground leading-relaxed',
                 variant === 'compact' ? 'text-sm' : 'text-base',
                 variant === 'featured' && 'text-foreground font-medium',
-              )}>
+              )}
+              >
                 {point}
               </p>
 

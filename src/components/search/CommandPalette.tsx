@@ -63,21 +63,21 @@ export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
       <div onClick={() => setOpen(true)}>
         {trigger || defaultTrigger}
       </div>
-      <CommandDialog 
-        open={open} 
+      <CommandDialog
+        open={open}
         onOpenChange={setOpen}
         title="Palette de recherche de contenu"
         description="Recherchez parmi les guides, concepts, workflows et outils disponibles"
       >
         {/* Live region for search results announcements */}
-        <div 
-          aria-live="polite" 
+        <div
+          aria-live="polite"
           aria-atomic="true"
           className="sr-only"
         >
           {searchResults}
         </div>
-        
+
         <CommandInput placeholder="Rechercher un contenu..." />
         <CommandList>
           <CommandEmpty>Aucun résultat trouvé pour votre recherche.</CommandEmpty>

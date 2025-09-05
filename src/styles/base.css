@@ -143,7 +143,7 @@
 
   /* Remove default button styling */
   button {
-    @apply border-0 bg-transparent p-0 font-inherit cursor-pointer;
+    @apply border-0 bg-transparent p-0 cursor-pointer;
   }
 
   /* Ensure images are responsive by default */
@@ -160,7 +160,7 @@
   button,
   textarea,
   select {
-    @apply font-inherit;
+    font-family: inherit;
   }
 
   /* Remove default list styling */
@@ -238,12 +238,12 @@
   }
 
   a::after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
     @apply text-sm text-gray-600;
   }
 
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
+  a[href^='#']::after,
+  a[href^='javascript:']::after {
+    content: '';
   }
 }

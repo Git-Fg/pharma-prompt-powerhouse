@@ -15,19 +15,21 @@ export function useAnimateOnView(options?: {
 
   useEffect(() => {
     const element = elementRef.current
-    if (!element) return
+    if (!element)
+      return
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view')
-            
+
             // If triggerOnce is true, stop observing after first trigger
             if (options?.triggerOnce !== false) {
               observer.unobserve(entry.target)
             }
-          } else if (options?.triggerOnce === false) {
+          }
+          else if (options?.triggerOnce === false) {
             // Re-trigger animation when element leaves view
             entry.target.classList.remove('in-view')
           }
@@ -36,7 +38,7 @@ export function useAnimateOnView(options?: {
       {
         threshold: options?.threshold ?? 0.1,
         rootMargin: options?.rootMargin ?? '0px',
-      }
+      },
     )
 
     observer.observe(element)
@@ -58,22 +60,23 @@ export function useMagneticHover(intensity: 'subtle' | 'normal' | 'strong' = 'no
 
   useEffect(() => {
     const element = elementRef.current
-    if (!element) return
+    if (!element)
+      return
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = element.getBoundingClientRect()
       const x = e.clientX - rect.left - rect.width / 2
       const y = e.clientY - rect.top - rect.height / 2
-      
+
       const multiplier = {
         subtle: 0.1,
         normal: 0.2,
         strong: 0.3,
       }[intensity]
-      
+
       const moveX = x * multiplier
       const moveY = y * multiplier
-      
+
       element.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`
     }
 
@@ -102,7 +105,8 @@ export function useStaggerAnimation(delay = 100) {
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container) return
+    if (!container)
+      return
 
     // Set the stagger delay as a CSS custom property
     container.style.setProperty('--stagger-delay', `${delay}ms`)
@@ -117,7 +121,7 @@ export function useStaggerAnimation(delay = 100) {
           }
         })
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     )
 
     observer.observe(container)
