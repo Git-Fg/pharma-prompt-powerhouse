@@ -8,12 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { content } from '@/lib/content-loader'
 
 export default function HomePage() {
-  // Get favorite workflows first, then fill with recent ones if needed
+  // Get favorite workflows first, then fill with recent ones if needed (avoiding duplicates)
   const favoriteWorkflows = content.workflows.filter(w => w.isFavorite)
-  const recentWorkflows = content.workflows.slice(0, 3)
+  const favoriteSlugs = new Set(favoriteWorkflows.map(w => w.slug))
+  const recentNonFavorites = content.workflows.filter(w => !favoriteSlugs.has(w.slug)).slice(0, 3)
   const featuredWorkflows = favoriteWorkflows.length >= 3
     ? favoriteWorkflows.slice(0, 3)
-    : [...favoriteWorkflows, ...recentWorkflows].slice(0, 3)
+    : [...favoriteWorkflows, ...recentNonFavorites].slice(0, 3)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
