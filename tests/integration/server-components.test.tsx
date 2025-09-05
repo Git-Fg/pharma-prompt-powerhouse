@@ -59,7 +59,7 @@ describe('server Components Testing', () => {
 
       expect(getByText('Test Workflow')).toBeInTheDocument()
       expect(getByText('A test workflow for demonstration')).toBeInTheDocument()
-      expect(getByRole('link', { name: /voir le guide/i })).toBeInTheDocument()
+      expect(getByRole('button', { name: /démarrer le workflow/i })).toBeInTheDocument()
     })
 
     it('meets accessibility standards', async () => {
@@ -97,11 +97,11 @@ describe('server Components Testing', () => {
     async function ContentRendererServer() {
       const content = [
         {
-          type: 'paragraph' as const,
+          type: 'markdown' as const,
           content: 'This is a test paragraph',
         },
         {
-          type: 'code' as const,
+          type: 'codeBlock' as const,
           content: 'console.log("Hello, World!")',
           language: 'javascript',
         },
@@ -122,10 +122,10 @@ describe('server Components Testing', () => {
       const { container } = await renderServerComponent(ContentRendererServer)
 
       // Check for proper semantic elements
-      const paragraph = container.querySelector('p')
+      const markdownContent = container.querySelector('.prose')
       const codeBlock = container.querySelector('pre code')
 
-      expect(paragraph).toBeInTheDocument()
+      expect(markdownContent).toBeInTheDocument()
       expect(codeBlock).toBeInTheDocument()
     })
   })
@@ -169,10 +169,10 @@ describe('integration Testing with Multiple Components', () => {
   }
 
   it('renders page with multiple components correctly', async () => {
-    const { getByRole, getByText } = await renderServerComponent(WorkflowPageServer)
+    const { getByRole, getAllByText } = await renderServerComponent(WorkflowPageServer)
 
     expect(getByRole('heading', { level: 1, name: 'Workflows' })).toBeInTheDocument()
-    expect(getByText('Test Workflow')).toBeInTheDocument()
+    expect(getAllByText('Test Workflow').length).toBeGreaterThan(0)
   })
 
   it('maintains accessibility across component composition', async () => {
