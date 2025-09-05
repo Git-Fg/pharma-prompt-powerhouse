@@ -3,16 +3,17 @@
 import { ArrowRight, BookOpen, Clock, Search, Target } from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { Input } from '@/components/ui/input'
 import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { difficultyLabels } from '@/lib/constants'
 import { content } from '@/lib/content-loader'
 import { getIcon } from '@/types/icon-taxonomy'
-import { DifficultyBadge } from '@/components/ui/enhanced-badge'
 
 function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target
@@ -89,12 +90,12 @@ export default function WorkflowsPage() {
     }, 0) / content.workflows.length,
   )
 
-  const stats = [
+  const stats: StatCardProps[] = [
     { value: totalWorkflows, label: 'Workflows disponibles', type: 'workflows' },
     { value: beginnerCount, label: 'Pour débuter', type: 'guides' },
-    { value: tagCount, label: "Cas d'usage", type: 'concepts' },
+    { value: tagCount, label: 'Cas d\'usage', type: 'concepts' },
     { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },
-  ];
+  ]
 
   return (
     <CollectionPageLayout

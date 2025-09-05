@@ -1,6 +1,7 @@
 import * as LucideIcons from 'lucide-react'
 import { ConceptListClient } from '@/components/concepts/ConceptListClient'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 
@@ -8,7 +9,7 @@ export default function ConceptsPage() {
   const totalConcepts = content.concepts.length
   const categoriesCount = new Set(content.concepts.map(c => c.category)).size
 
-  const stats = [
+  const stats: StatCardProps[] = [
     { value: totalConcepts, label: 'Concepts disponibles', type: 'concepts' },
     { value: categoriesCount, label: 'Catégories', type: 'guides' },
     { value: '100%', label: 'Contenus liés', type: 'primary' },

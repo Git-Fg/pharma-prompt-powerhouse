@@ -1,5 +1,6 @@
 import { GuideList } from '@/components/guides/GuideList'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { content } from '@/lib/content-loader'
 
 export default function GuidesPage() {
@@ -16,7 +17,7 @@ export default function GuidesPage() {
     }, 0) / guides.length,
   )
 
-  const stats = [
+  const stats: StatCardProps[] = [
     { value: totalGuides, label: 'Guides disponibles', type: 'guides' },
     { value: categoriesCount, label: 'Catégories', type: 'concepts' },
     { value: beginnerGuides, label: 'Pour débuter', type: 'workflows' },

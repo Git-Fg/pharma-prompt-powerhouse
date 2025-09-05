@@ -6,7 +6,7 @@ import { Container, Section } from './Container'
 
 type StatType = 'primary' | 'concepts' | 'guides' | 'workflows' | 'tools' | 'default'
 
-interface StatCardProps {
+export interface StatCardProps {
   value: string | number
   label: string
   type: StatType // Nouvelle prop sémantique
