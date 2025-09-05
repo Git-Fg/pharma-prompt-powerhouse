@@ -18,14 +18,14 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: '## Le Problème : Le Manque de Cas Pratiques\n\nLa théorie, c\'est bien. La pratique, c\'est mieux. L\'un des plus grands défis pour les étudiants en pharmacie est de trouver suffisamment de cas cliniques variés pour s\'entraîner. L\'IA résout ce problème en devenant un générateur de scénarios inépuisable.',
+      content: 'La théorie, c\'est bien. La pratique, c\'est mieux. L\'un des plus grands défis pour les étudiants en pharmacie est de trouver suffisamment de cas cliniques variés pour s\'entraîner. L\'IA résout ce problème en devenant un générateur de scénarios inépuisable.',
     },
   ],
 
   initialApproach: [
     {
       type: 'markdown',
-      content: '## Mon Approche Initiale (et ses Limites)\n\nAu début, j\'ai essayé de demander directement à l\'IA :\n\n> *"Fais-moi un cas clinique sur les interactions médicamenteuses."*\n\n**Résultat :** Des cas génériques, sans rapport avec mon niveau d\'étude, souvent trop simplistes ou au contraire trop complexes.',
+      content: 'Au début, j\'ai essayé de demander directement à l\'IA :\n\n> *"Fais-moi un cas clinique sur les interactions médicamenteuses."*\n\n**Résultat :** Des cas génériques, sans rapport avec mon niveau d\'étude, souvent trop simplistes ou au contraire trop complexes.',
     },
     {
       type: 'alert',

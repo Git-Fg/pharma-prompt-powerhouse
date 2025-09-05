@@ -38,7 +38,7 @@ export const workflow = {
   initialApproach: [
     {
       type: 'markdown',
-      content: '## Mon Approche Initiale (et ses Limites)\n\nAu début, j\'aurais demandé directement :\n\n> *"Analyse cette situation de pharmacovigilance et dis-moi quelle est la cause probable."*\n\n**Résultat :** Une réponse linéaire qui se concentre sur l\'hypothèse la plus évidente, sans exploration systématique des alternatives.',
+      content: 'Au début, j\'aurais demandé directement :\n\n> *"Analyse cette situation de pharmacovigilance et dis-moi quelle est la cause probable."*\n\n**Résultat :** Une réponse linéaire qui se concentre sur l\'hypothèse la plus évidente, sans exploration systématique des alternatives.',
     },
     {
       type: 'alert',

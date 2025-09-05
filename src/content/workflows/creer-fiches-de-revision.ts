@@ -15,9 +15,7 @@ export const workflow = {
   problem: [
     {
       type: 'markdown',
-      content: `## Le Problème : Mes Notes Passives Ne Suffisent Plus
-
-Quand j'ai commencé mes études de pharmacie, je pensais que relire mes notes suffirait. Erreur ! Les examens demandent une compréhension active, pas une mémorisation passive.
+      content: `Quand j'ai commencé mes études de pharmacie, je pensais que relire mes notes suffirait. Erreur ! Les examens demandent une compréhension active, pas une mémorisation passive.
 
 Le problème avec la révision traditionnelle :
 - **Illusion de connaissance :** Relire donne une fausse impression de maîtrise
@@ -30,9 +28,7 @@ Le problème avec la révision traditionnelle :
   initialApproach: [
     {
       type: 'markdown',
-      content: `## Mon Approche Initiale (et ses Limites)
-
-Au début, j'ai essayé de demander directement à ChatGPT :
+      content: `Au début, j'ai essayé de demander directement à ChatGPT :
 
 > *"Fais-moi un QCM sur les bêta-bloquants."*
 
@@ -49,9 +45,7 @@ Au début, j'ai essayé de demander directement à ChatGPT :
   optimizedStrategy: [
     {
       type: 'markdown',
-      content: `## La Stratégie Optimisée : Le Prompt "Professeur"
-
-J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.
+      content: `J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.
 Cette approche utilise le **context engineering** pour maximiser la précision.`,
     },
     {
