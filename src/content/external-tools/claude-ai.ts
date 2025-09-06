@@ -30,7 +30,7 @@ const externalTool = {
   freeVsPaidOffer: `| Fonctionnalité | Version Gratuite | Version Pro (~20€/mois) |\n| :--- | :--- | :--- |\n| **Modèle principal** | Claude 4 Sonnet | ✅ Claude 4 **Opus** |\n| **Contexte max** | 200k tokens | ✅ **~1 000 000 tokens** |\n| **Capacités Agentiques** | ❌ Non | ✅ **Tool Use & Working Notes** |\n| **Quota d\'usage** | Limité (~50 messages/8h) | ✅ **5x plus de messages** |`,
 
   content: [
-        {
+    {
       type: 'table',
       caption: "Tableau comparatif des architectures d\'agents de recherche.",
       headers: ['Critère', 'Z.AI (Auto Think)', 'Perplexity (Deep Research)', 'Claude (Tool Use)'],
@@ -40,7 +40,7 @@ const externalTool = {
         ['**Robustesse (Requêtes Complexes)**', '**Élevée** : Conçu pour les tâches multi-étapes complexes.', '**Moyenne** : Peut se perdre dans des boucles sans plan global.', '**Élevée** : S\'auto-corrige à chaque étape \"Observation\".'],
         ['**Vitesse**', '**Moyenne à Lente** : Latence due à la planification initiale.', '**Rapide** : Optimisé pour la vitesse.', '**Variable (souvent lente)** : De multiples cycles \"Pensée-Action\".'],
         ['**Risque d\'Hallucination**', '**Déplacé vers le plan** : Le risque est dans la création d\'un plan biaisé.', '**Élevé dans la synthèse** : Risque classique du RAG (mal interpréter les sources).', '**Faible (si bien implémenté)** : Raisonne sur des résultats concrets d\'outils.']
-      ]
+      ],
     },
   ],
 } satisfies ExternalTool
