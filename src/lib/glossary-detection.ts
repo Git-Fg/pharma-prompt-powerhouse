@@ -4,7 +4,7 @@
  * les termes du glossaire en liens cliquables dans le contenu markdown
  */
 
-import { glossary } from '@/content/glossary'
+import { getGlossaryTermsWithVariations } from '@/lib/glossary-utils'
 
 interface GlossaryMatch {
   term: string
@@ -21,13 +21,8 @@ export function detectGlossaryTerms(text: string): GlossaryMatch[] {
   const matches: GlossaryMatch[] = []
   const processedRanges: Set<string> = new Set()
 
-  // Créer un index des termes pour une recherche efficace
-  const glossaryTerms = Object.entries(glossary).map(([key, value]) => ({
-    key,
-    term: value.term.toLowerCase(),
-    // Inclure aussi les variations possibles (singulier/pluriel, etc.)
-    variations: generateTermVariations(value.term),
-  }))
+  // Utiliser l'utilitaire partagé pour obtenir les termes et variations
+  const glossaryTerms = getGlossaryTermsWithVariations()
 
   // Trier par longueur décroissante pour prioriser les termes plus longs
   const sortedTerms = glossaryTerms.sort((a, b) => b.term.length - a.term.length)
@@ -97,8 +92,11 @@ export function enhanceTextWithGlossary(text: string): string {
 
 /**
  * Génère les variations possibles d'un terme (pluriel, singulier, etc.)
+ * @deprecated Utiliser getGlossaryTermsWithVariations de glossary-utils.ts
  */
 function generateTermVariations(term: string): string[] {
+  // Cette fonction est maintenant dépréciée en faveur de l'utilitaire partagé
+  // Conservée temporairement pour compatibilité
   const variations: string[] = []
   const normalizedTerm = term.toLowerCase()
 

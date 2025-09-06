@@ -37,6 +37,13 @@ describe('useIsMobile Hook', () => {
   })
 
   it('should return true on mobile (width < 768)', () => {
+    // Mock innerWidth to be less than 768
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: 500,
+    })
+
     const mockMediaQueryList = {
       matches: true,
       addEventListener: vi.fn(),
@@ -52,6 +59,13 @@ describe('useIsMobile Hook', () => {
   })
 
   it('should update when window is resized', () => {
+    // Start with desktop width
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: 1024,
+    })
+
     const mockAddEventListener = vi.fn()
     const mockRemoveEventListener = vi.fn()
 
@@ -70,8 +84,7 @@ describe('useIsMobile Hook', () => {
     // Simulate the change event listener being called
     const changeCallback = mockAddEventListener.mock.calls[0]?.[1]
 
-    // Mock window.innerWidth for the update
-    const originalInnerWidth = window.innerWidth
+    // Mock window.innerWidth for the update to mobile
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
@@ -83,13 +96,6 @@ describe('useIsMobile Hook', () => {
     })
 
     expect(result.current).toBe(true)
-
-    // Restore original innerWidth
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: originalInnerWidth,
-    })
   })
 
   it('should cleanup event listener on unmount', () => {

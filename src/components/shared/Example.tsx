@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CodeBlock } from '@/components/ui/code-block'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
+import { difficultyLabels, type Difficulty } from '@/lib/constants'
 
 interface ExampleProps {
   title: string
@@ -17,7 +18,7 @@ interface ExampleProps {
   filename?: string
   outcome?: string
   tags?: string[]
-  difficulty?: 'beginner' | 'intermediate' | 'advanced'
+  difficulty?: Difficulty
   warnings?: string[]
   className?: string
   variant?: 'card' | 'inline' | 'compact'
@@ -40,15 +41,9 @@ const typeLabels = {
 }
 
 const difficultyColors = {
-  beginner: 'bg-green-100 text-green-800 border-green-200',
-  intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  advanced: 'bg-red-100 text-red-800 border-red-200',
-}
-
-const difficultyLabels = {
-  beginner: 'Débutant',
-  intermediate: 'Intermédiaire',
-  advanced: 'Avancé',
+  débutant: 'bg-green-100 text-green-800 border-green-200',
+  intermédiaire: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+  avancé: 'bg-red-100 text-red-800 border-red-200',
 }
 
 // Default values to avoid unstable array expressions

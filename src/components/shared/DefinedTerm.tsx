@@ -24,9 +24,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { glossary } from '@/content/glossary'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { content } from '@/lib/content-loader'
+import { getGlossaryDefinition } from '@/lib/glossary-utils'
 
 interface DefinedTermProps {
   term: string
@@ -137,7 +137,7 @@ export function DefinedTerm({
 }: DefinedTermProps) {
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
-  const definition = glossary[term.toLowerCase()]
+  const definition = getGlossaryDefinition(term)
 
   if (!definition) {
     // Si le terme n'est pas dans le glossaire, on renvoie le contenu tel quel
