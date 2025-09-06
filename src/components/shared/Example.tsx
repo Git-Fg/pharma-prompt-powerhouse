@@ -51,6 +51,10 @@ const difficultyLabels = {
   advanced: 'Avancé',
 }
 
+// Default values to avoid unstable array expressions
+const DEFAULT_TAGS: string[] = []
+const DEFAULT_WARNINGS: string[] = []
+
 export function Example({
   title,
   description,
@@ -59,9 +63,9 @@ export function Example({
   language,
   filename,
   outcome,
-  tags = [],
+  tags = DEFAULT_TAGS,
   difficulty,
-  warnings = [],
+  warnings = DEFAULT_WARNINGS,
   className,
   variant = 'card',
 }: ExampleProps) {
