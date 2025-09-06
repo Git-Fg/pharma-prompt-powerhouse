@@ -1,8 +1,8 @@
-import type { Guide } from '@/lib/content-schema''
+import type { Guide } from '@/lib/content-schema'
 
 const guide = {
-  slug: 'tree-of-thought-clinique','
-  title: 'Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought','
+  slug: 'tree-of-thought-clinique',
+  title: 'Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought',
   description: 'Apprenez à construire et utiliser un prompt Tree-of-Thought pour analyser un cas clinique avec plusieurs hypothèses diagnostiques.','
   icon: 'Network','
   category: 'ressources','
