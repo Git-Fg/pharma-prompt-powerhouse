@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { SectionCard } from '@/components/shared/SectionCard'
 import { AnimatedElement } from '@/components/ui/css-animations'
 import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
@@ -23,15 +23,12 @@ export function PointsBlock({ title, points, className, testId }: PointsBlockPro
   const pointsTestId = testId || generateTestId('points', 'block', title?.replace(/\s+/g, '-').toLowerCase())
 
   return (
-    <Card {...createTestIdProps(pointsTestId)} className={cn('my-6', className)}>
-      {title && (
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold text-foreground">
-            {title}
-          </CardTitle>
-        </CardHeader>
-      )}
-      <CardContent className="space-y-4">
+    <SectionCard
+      {...createTestIdProps(pointsTestId)}
+      title={title || ''}
+      className={cn('my-6', className)}
+    >
+      <div className="space-y-4">
         {points.map((point, index) => (
           <AnimatedElement
             key={`point-${index}`}
@@ -52,7 +49,7 @@ export function PointsBlock({ title, points, className, testId }: PointsBlockPro
             </div>
           </AnimatedElement>
         ))}
-      </CardContent>
-    </Card>
+      </div>
+    </SectionCard>
   )
 }
