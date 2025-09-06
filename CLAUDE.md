@@ -107,6 +107,19 @@ The project uses a custom TypeScript-based content system with:
 - **Smart Filtering**: Search, category, and difficulty filtering with centralized state management
 - **Consistent UX**: Unified empty states, loading states, and animations across all listing pages
 
+### Unified Filter System
+- **ContentFilterControls**: Single component for all filter UI across listing pages
+- **Declarative Configuration**: Props control which filters to show (category, difficulty, etc.)
+- **Consistent Behavior**: Unified reset button, responsive layout, and interaction patterns
+- **useContentFilter Integration**: Clean separation between filter logic and presentation
+
+### Unified Table System
+- **ResponsiveDataTable**: Generic component for responsive tables with TanStack Table
+- **Mobile-First Design**: Automatic switching between desktop table and mobile card views
+- **Type-Safe**: Full TypeScript generics support for any data type
+- **ContentTable**: Specialized bridge component for ContentRenderer markdown tables
+- **Single Source of Truth**: All responsive table logic centralized in one component
+
 ### UI/UX Features
 - **AutoAnimate Integration**: Smooth transitions respecting accessibility preferences
 - **TanStack Table**: For responsive comparison tables
@@ -222,6 +235,7 @@ The project uses a custom TypeScript-based content system with:
 - `keyTakeaways` - Key points summary
 - `prerequisites` - Required knowledge
 - `actionChecklist` - Interactive checklists
+- `table` - Responsive tables (automatically uses ContentTable component)
 
 ### Content Structure Guidelines
 - **Workflow Structure**: Recommended to include 6 sections: The Problem, Initial Approach (and limits), Optimized Strategy, Tool Comparison, Final Prompt (to adapt), Key Takeaways
