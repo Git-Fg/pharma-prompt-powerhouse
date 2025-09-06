@@ -66,3 +66,5 @@ Ce n\'est qu\'avec une anonymisation robuste, où même vous ne pourriez plus re
     },
   ],
 } satisfies Concept
+
+export default guide || concept || workflow

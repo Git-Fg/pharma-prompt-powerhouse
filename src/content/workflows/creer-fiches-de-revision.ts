@@ -219,3 +219,5 @@ Varie les types de raisonnement : mémorisation, compréhension, application, an
     'Expérimentez avec les variables du template pour adapter la méthode à votre façon d\'apprendre.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

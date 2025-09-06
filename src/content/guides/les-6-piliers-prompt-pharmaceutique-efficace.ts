@@ -201,9 +201,9 @@ content: [
   },
 {
   type: 'markdown',
-  content: '## Conclusion
+  content: `## Conclusion
   
-  En adoptant ces 6 piliers, vous ne vous contentez plus de poser des questions : vous **pilotez l\'IA**. Vous la guidez, vous cadrez son raisonnement, et vous lui demandez des comptes. C\'est ainsi que l\'on transforme un outil puissant en un véritable partenaire intellectuel fiable pour nos études et notre pratique future.',
+  En adoptant ces 6 piliers, vous ne vous contentez plus de poser des questions : vous **pilotez l\`IA**. Vous la guidez, vous cadrez son raisonnement, et vous lui demandez des comptes. C\'est ainsi que l\'on transforme un outil puissant en un véritable partenaire intellectuel fiable pour nos études et notre pratique future.',
   },
 {
   type: 'guideRecommendation',
@@ -212,3 +212,5 @@ content: [
   },
 ],
 } satisfies Guide
+
+export default guide || concept || workflow

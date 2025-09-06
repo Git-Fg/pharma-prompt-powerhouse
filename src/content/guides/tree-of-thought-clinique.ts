@@ -33,9 +33,9 @@ const guide = {
   content: [
     {
       type: 'markdown','
-      content: '# Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought\
+      content: `# Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought\
 \
-Ce guide est un tutoriel pratique pour appliquer le concept de Tree-of-Thought à la résolution de cas cliniques complexes. Nous n\\'allons pas redéfinir la théorie ici, mais vous montrer **comment** construire un prompt ToT efficace, étape par étape.','
+Ce guide est un tutoriel pratique pour appliquer le concept de Tree-of-Thought à la résolution de cas cliniques complexes. Nous n\\`allons pas redéfinir la théorie ici, mais vous montrer **comment** construire un prompt ToT efficace, étape par étape.','
     },
     {
       type: 'conceptRecommendation','
@@ -133,9 +133,9 @@ Après avoir exploré chaque branche, fournis une synthèse finale :\
     },
     {
       type: 'markdown','
-      content: '## Évolution 2025 : Implémentation Assistée par la Plateforme (Scaffolding Natif)\
+      content: `## Évolution 2025 : Implémentation Assistée par la Plateforme (Scaffolding Natif)\
 \
-Le ToT manuel est puissant mais peut être verbeux. Les plateformes de 2025, comme Anthropic avec Claude, commencent à proposer des outils natifs qui simplifient ce processus.','
+Le ToT manuel est puissant mais peut être verbeux. Les plateformes de 2025, comme Anthropic avec Claude, commencent à proposer des outils natifs qui simplifient ce processus.`,'
     },
     {
         type: 'card','
