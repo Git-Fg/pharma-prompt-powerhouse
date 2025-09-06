@@ -1,8 +1,8 @@
-import type { Workflow } from '@/lib/content-schema/workflow''
+import type { Workflow } from '@/lib/content-schema'
 
 const workflow = {
-  slug: 'creer-flashcards-memorables','
-  title: 'Le Générateur de Flashcards Actives','
+  slug: 'creer-flashcards-memorables',
+  title: 'Le Générateur de Flashcards Actives',
   description: 'Un workflow pour créer des flashcards qui forcent la réflexion et l'application, bien plus efficaces que de simples paires question/réponse.','
   area: 'creation-contenu','
   tags: ['flashcards', 'apprentissage', 'mémorisation', 'révision-active'],'
