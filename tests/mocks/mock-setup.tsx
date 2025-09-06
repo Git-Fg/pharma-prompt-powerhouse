@@ -199,7 +199,7 @@ export function mockIcons() {
     Target: () => <span data-testid="target-icon">🎯</span>,
     ArrowLeft: () => <span data-testid="arrow-left-icon">←</span>,
     ArrowRight: () => <span data-testid="arrow-right-icon">→</span>,
-    
+
     // Missing icons from components
     AlertCircle: () => <span data-testid="alert-circle-icon">⚠️</span>,
     AlertTriangle: () => <span data-testid="alert-triangle-icon">⚠️</span>,

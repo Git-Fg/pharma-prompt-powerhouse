@@ -45,7 +45,7 @@ vi.mock('@/lib/content-utils', () => ({
   getContentTypeFromRoute: vi.fn((routeName: string) => {
     const mapping: Record<string, string> = {
       'concepts': 'concept',
-      'guides': 'guide',  
+      'guides': 'guide',
       'workflows': 'workflow',
       'l-arsenal-ia': 'tool',
     }
