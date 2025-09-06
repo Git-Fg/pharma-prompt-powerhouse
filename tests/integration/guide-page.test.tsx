@@ -23,14 +23,38 @@ vi.mock('@/lib/content-loader', () => ({
   getConceptBySlug: vi.fn(),
   getExternalToolBySlug: vi.fn(),
   getContentItem: vi.fn(),
-  getRouteToContentTypeMapping: vi.fn(),
-  getContentTypeToRouteMapping: vi.fn(),
+  getRouteToContentTypeMapping: vi.fn(() => ({
+    'concepts': 'concept',
+    'guides': 'guide',
+    'workflows': 'workflow',
+    'l-arsenal-ia': 'tool',
+  })),
+  getContentTypeToRouteMapping: vi.fn(() => ({
+    concept: 'concepts',
+    guide: 'guides',
+    workflow: 'workflows',
+    tool: 'l-arsenal-ia',
+  })),
   content: {
     guides: [],
     workflows: [],
     concepts: [],
     externalTools: [],
   },
+}))
+
+vi.mock('@/lib/content-utils', () => ({
+  getContentTypeFromRoute: vi.fn((routeName: string) => {
+    const mapping: Record<string, string> = {
+      'concepts': 'concept',
+      'guides': 'guide',  
+      'workflows': 'workflow',
+      'l-arsenal-ia': 'tool',
+    }
+    return mapping[routeName] || null
+  }),
+  generateAllStaticParams: vi.fn(() => []),
+  generateContentMetadataDynamic: vi.fn(() => ({})),
 }))
 
 // Comprehensive lucide-react mock
