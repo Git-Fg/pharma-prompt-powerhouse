@@ -203,6 +203,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
     case 'key-points':
     case 'examples':
     case 'warning':
+    case 'definition':
       return (
         <SectionBlock
           {...createTestIdProps(testId)}
