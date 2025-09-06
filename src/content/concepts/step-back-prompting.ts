@@ -53,3 +53,5 @@ Les cas cliniques ou les questions pharmaceutiques sont rarement simples. Les d√
     },
   ],
 } satisfies Concept
+
+export default guide || concept || workflow

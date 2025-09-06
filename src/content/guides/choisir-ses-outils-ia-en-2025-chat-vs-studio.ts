@@ -32,9 +32,9 @@ conceptSlugs: [
 content: [
 {
   type: 'markdown',
-  content: "# L'Écosystème IA en 2025 : Au-delà du simple Chat
+  content: `# L'Écosystème IA en 2025 : Au-delà du simple Chat
   
-  En 2025, choisir son outil IA ne se résume plus à une simple préférence entre ChatGPT et Gemini. Le marché a mûri, donnant naissance à des outils spécialisés avec des rôles bien définis. Ce guide vous aidera à y voir clair pour construire votre arsenal stratégique.",
+  En 2025, choisir son outil IA ne se résume plus à une simple préférence entre ChatGPT et Gemini. Le marché a mûri, donnant naissance à des outils spécialisés avec des rôles bien définis. Ce guide vous aidera à y voir clair pour construire votre arsenal stratégique.`,
   },
 {
   type: 'markdown',
@@ -166,3 +166,5 @@ content: [
   },
 ],
 } satisfies Guide
+
+export default guide || concept || workflow

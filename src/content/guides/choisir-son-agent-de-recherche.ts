@@ -59,4 +59,6 @@ const guide = {
   ],
 } satisfies Guide
 
+export default guide || concept || workflow
+
 export { guide }

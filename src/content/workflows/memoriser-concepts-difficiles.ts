@@ -253,3 +253,5 @@ Température élevée recommandée (0.8-0.9) pour plus de créativité !`,
     'Les mnémoniques personnalisés battent toujours les solutions génériques trouvées sur internet.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

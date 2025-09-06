@@ -232,3 +232,5 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
     'Un bon tableau comparatif vaut tous les paragraphes du monde pour réviser efficacement.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

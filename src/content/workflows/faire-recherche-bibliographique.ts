@@ -248,3 +248,5 @@ Ne me donne pas de références spécifiques, concentre-toi sur la méthodologie
     'L\'analyse critique des méthodologies est aussi importante que la collecte d\'informations.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow
