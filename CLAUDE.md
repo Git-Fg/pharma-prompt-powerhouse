@@ -234,6 +234,44 @@ The project uses a custom TypeScript-based content system with:
 - **Advanced Debugging**: Combine visual interaction with technical analysis
 - **Test Creation Assistance**: When creating/modifying/correcting E2E tests (Playwright.js), always use Playwright MCP tools to explore the interface, understand element structure, and validate behavior before writing automated test code
 
+---
+
+### Context7 Tool (AI Agent)
+
+**What is Context7?**
+Context7 is an MCP AI Agent tool that provides up-to-date knowledge on development best practices, modern architectures, and 2025 industry standards. It serves as a technical reference to validate approaches and obtain expert recommendations.
+
+**When to Use Context7**
+- **Architecture Validation**: To confirm that implementation follows modern best practices
+- **Solution Research**: When encountering complex or unusual technical problems
+- **Code Optimization**: To get improvement and optimization suggestions
+- **Technology Choices**: To validate library, framework, or approach decisions
+- **Continuous Learning**: To stay informed about new practices and emerging standards
+- **Bug Resolution**: To understand recurring problems and their standard solutions
+- **Advanced Code Review**: To get expert perspective on code quality and maintainability
+
+**Best Practices - Context7**
+- **Use as reference**: Context7 is a technical advisor, not an executor
+- **Provide context**: Give maximum details about your problem for relevant responses
+- **Compare with existing**: Use Context7 to validate or challenge current approaches
+- **Document recommendations**: Note important suggestions for future reference
+- **Cross-reference sources**: Use Context7 alongside other documentation sources
+- **Adapt to context**: Recommendations must be adapted to project-specific constraints
+
+**Typical Workflow - Context7**
+1. **Need Identification**: Clearly define the technical problem or question
+2. **Context Preparation**: Gather relevant information (existing code, constraints, goals)
+3. **Context7 Consultation**: Ask your question with appropriate context
+4. **Recommendation Analysis**: Evaluate suggestions against your specific needs
+5. **Implementation**: Apply recommendations adapted to your context
+6. **Validation**: Verify the solution meets expectations and project constraints
+
+**Development Integration**
+- **Decision Support**: Use Context7 to validate architectural and technical choices
+- **Continuous Learning**: Consult Context7 regularly to learn new practices
+- **Complex Problem Resolution**: Combine Context7 with other tools (Playwright MCP, code analysis)
+- **Quality Assurance**: Use Context7 as reference for code reviews and optimization
+
 ### shadcn/ui
 - **Notification System**: Exclusively standardize on Sonner for toast notifications. Remove any other systems.
 - **Component Usage**: Use components as-is. Prefer simple composition over overloading.
