@@ -1,12 +1,18 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import * as LucideIcons from 'lucide-react'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import { ConceptCard } from '@/components/shared/ConceptCard'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 
 // Désactiver le rendu statique pour les pages avec des composants complexes
 export const dynamic = 'force-dynamic'
+
+// Wrapper component to avoid passing functions as props
+function ConceptCardWrapper({ item }: { item: any }) {
+  return <ConceptCard concept={item} />
+}
 
 export default function ConceptsPage() {
   const totalConcepts = content.concepts.length
@@ -27,7 +33,7 @@ export default function ConceptsPage() {
     >
       <FilterableContentGrid
         items={content.concepts}
-        renderType="concept"
+        renderComponent={ConceptCardWrapper}
         searchPlaceholder="Rechercher un concept..."
         showCategoryFilter={true}
         showDifficultyFilter={false}

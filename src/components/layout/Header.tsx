@@ -13,13 +13,6 @@ import React, { useState } from 'react'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import Button from '@/components/ui/button'
 import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
-import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -27,9 +20,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { cn } from '@/lib/utils'
 import { getMainNavigationLinks } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
-import { cn } from '@/lib/utils'
 
 export function Header() {
   const { theme, setTheme } = useTheme()
@@ -63,25 +56,24 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {mainNavigation.slice(1).map(item => (
-                  <NavigationMenuItem key={item.name}>
-                    <Link href={item.href} legacyBehavior passHref>
-                      <NavigationMenuLink
-                        {...createTestIdProps(TestIds.Navigation.Link(item.name))}
-                        className={cn(
-                          navigationMenuTriggerStyle(),
-                          isActive(item.href) && 'bg-accent text-accent-foreground',
-                        )}
-                      >
-                        {item.name}
-                      </NavigationMenuLink>
+            <nav>
+              <ul className="flex items-center space-x-6">
+                {mainNavigation.map(item => (
+                  <li key={item.name}>
+                    <Link 
+                      href={item.href} 
+                      {...createTestIdProps(TestIds.Navigation.Link(item.name))}
+                      className={cn(
+                        'text-sm font-medium transition-colors hover:text-primary',
+                        isActive(item.href) ? 'text-primary' : 'text-muted-foreground'
+                      )}
+                    >
+                      {item.name}
                     </Link>
-                  </NavigationMenuItem>
+                  </li>
                 ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+              </ul>
+            </nav>
 
             <div className="flex items-center space-x-2">
               {/* Search */}

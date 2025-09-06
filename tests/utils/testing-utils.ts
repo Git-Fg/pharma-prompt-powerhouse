@@ -32,12 +32,29 @@ export async function renderServerComponent<T>(
  * Enhanced Server Component Testing Utilities for Next.js Pages
  * Handles page components with params and async data fetching
  */
-export async function renderServerPage<T extends { params?: any, searchParams?: any }>(
+export async function renderServerPage<T>(
   PageComponent: (props: T) => Promise<ReactElement> | ReactElement,
   props: T,
 ): Promise<RenderResult> {
   // Handle async page components with params
   const element = await PageComponent(props)
+  return render(element)
+}
+
+/**
+ * Enhanced Server Component Testing Utilities for Next.js 15 Pages
+ * Handles async params in Next.js 15 with proper Promise handling
+ */
+export async function renderNextPage(
+  PageComponent: (props: { params: Promise<{ contentType: string, slug: string }> }) => Promise<ReactElement> | ReactElement,
+  props: { params: { contentType: string, slug: string } },
+): Promise<RenderResult> {
+  // Convert params to Promise for Next.js 15 compatibility
+  const nextProps = {
+    params: Promise.resolve(props.params),
+  }
+
+  const element = await PageComponent(nextProps)
   return render(element)
 }
 

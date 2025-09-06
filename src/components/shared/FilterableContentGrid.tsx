@@ -1,7 +1,7 @@
 'use client'
 
-import type { EnrichedConcept, EnrichedGuide, EnrichedWorkflow, ExternalTool } from '@/lib/content-schema'
 import { BookOpen, Search } from 'lucide-react'
+import React from 'react'
 import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -15,10 +15,6 @@ import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
-import { ConceptCard } from './ConceptCard'
-import { GuideCard } from './GuideCard'
-import { SimpleWorkflowCard } from './SimpleWorkflowCard'
-import { ToolCard } from './ToolCard'
 
 // Interface de base que les items doivent respecter pour utiliser ce composant
 export interface BaseContentItem {
@@ -30,13 +26,11 @@ export interface BaseContentItem {
   slug?: string
 }
 
-export type RenderItemType = 'workflow' | 'concept' | 'guide' | 'tool'
-
 export interface FilterableContentGridProps<TItem extends BaseContentItem> {
   /** Le tableau initial de contenu à filtrer */
   items: TItem[]
-  /** Type de rendu pour chaque item */
-  renderType: RenderItemType
+  /** Composant de rendu pour chaque item */
+  renderComponent: React.ComponentType<{ item: TItem }>
   /** Placeholder pour la barre de recherche */
   searchPlaceholder: string
   /** Afficher le filtre par catégorie */
@@ -53,7 +47,7 @@ export interface FilterableContentGridProps<TItem extends BaseContentItem> {
 
 export function FilterableContentGrid<TItem extends BaseContentItem>({
   items,
-  renderType,
+  renderComponent,
   searchPlaceholder,
   showCategoryFilter = true,
   showDifficultyFilter = false,
@@ -75,21 +69,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
     resetFilters,
   } = useContentFilter(items)
 
-  // Fonction de rendu basée sur le type
-  const renderItem = (item: TItem) => {
-    switch (renderType) {
-      case 'workflow':
-        return <SimpleWorkflowCard workflow={item as unknown as EnrichedWorkflow} />
-      case 'concept':
-        return <ConceptCard concept={item as unknown as EnrichedConcept} />
-      case 'guide':
-        return <GuideCard guide={item as unknown as EnrichedGuide} />
-      case 'tool':
-        return <ToolCard tool={item as unknown as ExternalTool} />
-      default:
-        return null
-    }
-  }
+  // Le composant de rendu est passé directement en prop
 
   // Générer les options de filtres disponibles
   const categories = showCategoryFilter
@@ -224,8 +204,8 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
       {/* Content Grid */}
       <div ref={listRef} className={gridClassName} {...createTestIdProps(TestIds.Content.Section('grid'))}>
         {filteredItems.map((item, index) => (
-          <div key={(item as BaseContentItem).slug || `item-${index}`} {...createTestIdProps(TestIds.Interactive.Card(renderType, (item as BaseContentItem).slug || `item-${index}`))}>
-            {renderItem(item)}
+          <div key={(item as BaseContentItem).slug || `item-${index}`} {...createTestIdProps(TestIds.Interactive.Card('item', (item as BaseContentItem).slug || `item-${index}`))}>
+            {React.createElement(renderComponent, { item })}
           </div>
         ))}
       </div>

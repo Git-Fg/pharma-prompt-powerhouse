@@ -7,7 +7,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
 import { createMockEnrichedWorkflow, createWorkflowWithoutConcepts } from '../mocks/content.mock'
 
-import { renderServerPage } from '../utils/testing-utils'
+import { renderNextPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -19,12 +19,19 @@ vi.mock('next/navigation', () => ({
 // Mock content loader
 vi.mock('@/lib/content-loader', () => ({
   getWorkflowBySlug: vi.fn(),
+  getContentItem: vi.fn(),
+  getRouteToContentTypeMapping: vi.fn(),
+  getContentTypeToRouteMapping: vi.fn(),
   content: {
     workflows: [],
     guides: [],
     concepts: [],
     externalTools: [],
   },
+}))
+
+vi.mock('lucide-react', () => ({
+  User: vi.fn(() => <div data-testid="user-icon" />),
 }))
 
 // Mock layout components
@@ -145,10 +152,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId, getByText, getAllByTestId } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByTestId, getByText, getAllByTestId } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Check main layout
@@ -187,10 +194,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByTestId } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       const contentRenderer = getByTestId('content-renderer')
@@ -214,10 +221,10 @@ describe('workflow Page Server Component', () => {
       }
       vi.mocked(getWorkflowBySlug).mockReturnValue(workflowWithoutConcepts)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByTestId } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { queryByTestId } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Should not render concept section when no concepts
@@ -228,10 +235,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByTestId } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Disclaimer banner should always be present for workflows
@@ -247,10 +254,10 @@ describe('workflow Page Server Component', () => {
 
       vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(WorkflowPage, {
-        params: { slug: 'non-existent-workflow' },
+      await expect(renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'non-existent-workflow' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -262,10 +269,10 @@ describe('workflow Page Server Component', () => {
 
       vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(WorkflowPage, {
-        params: { slug: '' },
+      await expect(renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: '' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -277,10 +284,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getAllByRole } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByText, getAllByRole } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Check navigation links
@@ -301,10 +308,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByTestId } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       expect(getByTestId('arrow-left-icon')).toBeInTheDocument()
@@ -317,11 +324,11 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
 
-      const renderResult = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const renderResult = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       await testAccessibility(renderResult, {
@@ -337,10 +344,10 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByRole } = await renderServerPage(WorkflowPage, {
-        params: { slug: 'test-workflow' },
+      const { getByRole } = await renderNextPage(WorkflowPage, {
+        params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Should have an h1 heading
@@ -355,11 +362,11 @@ describe('workflow Page Server Component', () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
 
-      const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
+      const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
 
       const performance = measureRenderPerformance(
-        () => renderServerPage(WorkflowPage, { params: { slug: 'test-workflow' } }),
+        () => renderNextPage(WorkflowPage, { params: { contentType: 'workflows', slug: 'test-workflow' } }),
         5,
       )
 

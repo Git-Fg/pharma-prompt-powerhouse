@@ -14,7 +14,7 @@ import {
   createToolWithoutConfidence,
 } from '../mocks/content.mock'
 
-import { renderServerPage } from '../utils/testing-utils'
+import { renderNextPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -26,12 +26,19 @@ vi.mock('next/navigation', () => ({
 // Mock content loader and utils
 vi.mock('@/lib/content-loader', () => ({
   getExternalToolBySlug: vi.fn(),
+  getContentItem: vi.fn(),
+  getRouteToContentTypeMapping: vi.fn(),
+  getContentTypeToRouteMapping: vi.fn(),
   content: {
     externalTools: [],
     guides: [],
     workflows: [],
     concepts: [],
   },
+}))
+
+vi.mock('lucide-react', () => ({
+  User: vi.fn(() => <div data-testid="user-icon" />),
 }))
 
 vi.mock('@/lib/ui-utils', () => ({
@@ -173,10 +180,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId, getAllByTestId, getByText, getAllByText } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByTestId, getAllByTestId, getByText, getAllByText } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check main layout
@@ -211,10 +218,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getByTestId, getAllByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText, getByTestId, getAllByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check personal review card
@@ -232,10 +239,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getAllByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText, getAllByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check confidence score section
@@ -255,10 +262,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getAllByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText, getAllByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check strong points
@@ -289,10 +296,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getByTestId, getAllByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText, getByTestId, getAllByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check free vs paid offer section
@@ -305,10 +312,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check TLDR section
@@ -320,10 +327,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getAllByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByText, getAllByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check use cases section
@@ -341,10 +348,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByTestId } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Check content renderer
@@ -359,10 +366,10 @@ describe('tool Page Server Component', () => {
       const minimalTool = createMinimalTool()
       vi.mocked(getExternalToolBySlug).mockReturnValue(minimalTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByTestId, queryByText } = await renderServerPage(ToolPage, {
-        params: { slug: 'minimal-tool' },
+      const { queryByTestId, queryByText } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'minimal-tool' },
       })
 
       // Should render basic structure
@@ -381,10 +388,10 @@ describe('tool Page Server Component', () => {
       const toolWithoutConfidence = createToolWithoutConfidence()
       vi.mocked(getExternalToolBySlug).mockReturnValue(toolWithoutConfidence)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByText } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { queryByText } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Should not render confidence score section
@@ -399,10 +406,10 @@ describe('tool Page Server Component', () => {
 
       vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(ToolPage, {
-        params: { slug: 'non-existent-tool' },
+      await expect(renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'non-existent-tool' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -414,10 +421,10 @@ describe('tool Page Server Component', () => {
 
       vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(ToolPage, {
-        params: { slug: '' },
+      await expect(renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: '' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -429,11 +436,11 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
 
-      const renderResult = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const renderResult = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       await testAccessibility(renderResult, {
@@ -445,10 +452,10 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByRole } = await renderServerPage(ToolPage, {
-        params: { slug: 'test-tool' },
+      const { getByRole } = await renderNextPage(ToolPage, {
+        params: { contentType: 'l-arsenal-ia', slug: 'test-tool' },
       })
 
       // Should have an h1 heading
@@ -463,11 +470,11 @@ describe('tool Page Server Component', () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
 
-      const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
+      const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
 
       const performance = measureRenderPerformance(
-        () => renderServerPage(ToolPage, { params: { slug: 'test-tool' } }),
+        () => renderNextPage(ToolPage, { params: { contentType: 'l-arsenal-ia', slug: 'test-tool' } }),
         5,
       )
 
