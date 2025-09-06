@@ -64,7 +64,7 @@ content: [
   },
 {
   type: 'markdown',
-  content: '## Mon Combo Idéal pour l'Étudiant en 2025',
+  content: '## Mon Combo Idéal pour l\'Étudiant en 2025',
   },
 {
   type: 'tabs',
@@ -77,9 +77,9 @@ content: [
     {
       type: 'card',
       title: 'Le Duo Gagnant : Perplexity + AI Studio',
-      content: "**1. Pour la recherche rapide et sourcée :** La version gratuite de **Perplexity** reste excellente pour des questions factuelles. Vous obtenez des réponses à jour avec des liens vers les sources.
-      
-      **2. Pour l\'analyse de fond et l\'apprentissage :** **Google AI Studio** est imbattable. Utilisez-le pour analyser vos cours, générer des fiches de révision avec sa fenêtre de contexte de 1M de tokens, ou transformer un PDF en cours interactif avec 'Guided Learning'.",
+      content: `**1. Pour la recherche rapide et sourcée :** La version gratuite de **Perplexity** reste excellente pour des questions factuelles. Vous obtenez des réponses à jour avec des liens vers les sources.
+
+**2. Pour l'analyse de fond et l'apprentissage :** **Google AI Studio** est imbattable. Utilisez-le pour analyser vos cours, générer des fiches de révision avec sa fenêtre de contexte de 1M de tokens, ou transformer un PDF en cours interactif avec 'Guided Learning'.`,
       },
     ]
     },
@@ -90,13 +90,13 @@ content: [
     {
       type: 'card',
       title: 'L\'Abonnement Unique : Perplexity Pro',
-      content: "Si je ne devais payer qu\'un seul abonnement, ce serait celui-ci. Pour environ 20$/mois, il remplace presque tous les autres :
-      
-      - **Accès aux meilleurs modèles** : Plus besoin de choisir entre GPT-5 et Claude 4 Opus.
-      - **Agent de recherche intégré** : La fonction 'Deep Research' pour démarrer une bibliographie est révolutionnaire.
-      - **Analyse de fichiers illimitée**.
-      
-      Je le complète avec **AI Studio** (gratuit) pour sa fonction unique de 'Guided Learning' et pour les expérimentations très spécifiques.",
+      content: `Si je ne devais payer qu'un seul abonnement, ce serait celui-ci. Pour environ 20$/mois, il remplace presque tous les autres :
+
+- **Accès aux meilleurs modèles** : Plus besoin de choisir entre GPT-5 et Claude 4 Opus.
+- **Agent de recherche intégré** : La fonction 'Deep Research' pour démarrer une bibliographie est révolutionnaire.
+- **Analyse de fichiers illimitée**.
+
+Je le complète avec **AI Studio** (gratuit) pour sa fonction unique de 'Guided Learning' et pour les expérimentations très spécifiques.`,
       },
     ]
     }
@@ -114,13 +114,13 @@ content: [
     title: 'Pour une Recherche Bibliographique Approfondie',
     content: {
       type: 'card',
-      content: "**🥇 Le Meilleur : Perplexity Pro avec 'Deep Research'**
-      
-      C\'est la solution la plus efficace. Vous lancez une recherche sur un sujet, et l\'agent travaille pour vous. Le rapport final est une base de travail solide, avec toutes les sources citées.
-      
-      **🥈 Alternative Gratuite : Le combo Z.AI + AI Studio**
-      
-      Utilisez l\'agent de recherche de **Z.AI** pour obtenir un plan de recherche et des sources initiales (attention à la confidentialité). Ensuite, utilisez **AI Studio** pour analyser en profondeur les articles et les données trouvées."
+      content: `**🥇 Le Meilleur : Perplexity Pro avec 'Deep Research'**
+
+C'est la solution la plus efficace. Vous lancez une recherche sur un sujet, et l'agent travaille pour vous. Le rapport final est une base de travail solide, avec toutes les sources citées.
+
+**🥈 Alternative Gratuite : Le combo Z.AI + AI Studio**
+
+Utilisez l'agent de recherche de **Z.AI** pour obtenir un plan de recherche et des sources initiales (attention à la confidentialité). Ensuite, utilisez **AI Studio** pour analyser en profondeur les articles et les données trouvées.`
       }
     },
   {
@@ -128,13 +128,13 @@ content: [
     title: 'Pour l\'Analyse d\'un Corpus de Documents (Mémoire, Thèse)',
     content: {
       type: 'card',
-      content: "**🥇 Le Meilleur : Claude Pro**
-      
-      Avec sa fenêtre de contexte allant jusqu'à 1M de tokens et ses nouvelles capacités agentiques ('Tool Use', 'Working Notes'), Claude peut devenir un véritable partenaire de recherche, gardant en mémoire vos documents et vos objectifs sur plusieurs jours.
-      
-      **🥈 Alternative Gratuite : Google AI Studio**
-      
-      Sa fenêtre de contexte de 1M de tokens est également disponible gratuitement. Il est excellent pour des sessions d\'analyse ponctuelles sur un grand nombre de documents, même s\'il n\'a pas la mémoire à long terme d\'un projet Claude."
+      content: `**🥇 Le Meilleur : Claude Pro**
+
+Avec sa fenêtre de contexte allant jusqu'à 1M de tokens et ses nouvelles capacités agentiques ('Tool Use', 'Working Notes'), Claude peut devenir un véritable partenaire de recherche, gardant en mémoire vos documents et vos objectifs sur plusieurs jours.
+
+**🥈 Alternative Gratuite : Google AI Studio**
+
+Sa fenêtre de contexte de 1M de tokens est également disponible gratuitement. Il est excellent pour des sessions d'analyse ponctuelles sur un grand nombre de documents, même s'il n'a pas la mémoire à long terme d'un projet Claude.`
       }
     },
   {
@@ -142,22 +142,22 @@ content: [
     title: 'Pour se Faire Expliquer un Cours Complexe',
     content: {
       type: 'card',
-      content: "**🥇 Le Meilleur : Google AI Studio avec 'Guided Learning'**
-      
-      C\'est la fonctionnalité phare pour cet usage. Uploadez votre cours, et demandez-lui de créer un parcours d\'apprentissage. Il vous guidera à travers les concepts clés avec des explications, des QCM et des exercices.
-      
-      **🥈 Alternative : ChatGPT-5**
-      
-      Le dernier modèle d\'OpenAI a d\'excellentes capacités pédagogiques. Vous pouvez lui demander de se comporter comme un tuteur et de vous poser des questions de manière socratique."
+      content: `**🥇 Le Meilleur : Google AI Studio avec 'Guided Learning'**
+
+C'est la fonctionnalité phare pour cet usage. Uploadez votre cours, et demandez-lui de créer un parcours d'apprentissage. Il vous guidera à travers les concepts clés avec des explications, des QCM et des exercices.
+
+**🥈 Alternative : ChatGPT-5**
+
+Le dernier modèle d'OpenAI a d'excellentes capacités pédagogiques. Vous pouvez lui demander de se comporter comme un tuteur et de vous poser des questions de manière socratique.`
       }
     }
   ]
   },
 {
   type: 'markdown',
-  content: '## Conclusion : Pensez "Rôle" et non "Outil"
-  
-  L'ère du 'couteau suisse' unique est révolue. Pour être efficace en 2025, il faut penser comme un chef d\'orchestre : quel instrument (ou quel rôle d\'IA) est le plus adapté pour cette partie de la symphonie ? En combinant judicieusement ces outils spécialisés, vous démultiplierez votre productivité.',
+  content: `## Conclusion : Pensez "Rôle" et non "Outil"
+
+L'ère du 'couteau suisse' unique est révolue. Pour être efficace en 2025, il faut penser comme un chef d'orchestre : quel instrument (ou quel rôle d'IA) est le plus adapté pour cette partie de la symphonie ? En combinant judicieusement ces outils spécialisés, vous démultiplierez votre productivité.`,
   },
 {
   type: 'guideRecommendation',
