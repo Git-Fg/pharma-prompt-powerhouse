@@ -49,14 +49,14 @@ Il recommence ensuite la boucle pour le médicament suivant, s'ajustant à chaqu
           variant: 'destructive',
           title: 'Le Point de Vigilance',
           content: 'Le risque principal est de se perdre dans une boucle ou d\'échouer à trouver une solution si les outils ne donnent pas les résultats attendus. L\'agent peut "tourner en rond" sans une stratégie globale.'
-        }
-      ]
+        },
+      ],
     },
     {
       type: 'conclusion',
       title: 'L\'Outil de Prédilection',
       content: 'En 2025, **Claude** est l\'exemple le plus puissant de cette architecture grâce à sa fonctionnalité de "Tool Use", qui lui permet d\'interagir de manière fiable avec des outils externes.'
-    }
+    },
   ],
 } satisfies Concept
 

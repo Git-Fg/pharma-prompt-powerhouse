@@ -24,7 +24,7 @@ const externalTool = {
     '**Risque de "Plan Halluciné" :** L\'agent peut élaborer un plan de recherche biaisé si la question initiale est mal interprétée.',
     'Peut parfois être instable ou indisponible (rançon de la gratuité).',
   ],
-  
+
   confidenceScore: 2,
   confidenceJustification: 'Le score est bas **uniquement à cause du risque majeur de confidentialité**. Sur le plan technique, cet outil mériterait 5/5. Son architecture "Plan-and-Solve" est exceptionnellement puissante, mais ne doit être utilisée qu\'avec des données non sensibles.',
 
@@ -47,7 +47,7 @@ const externalTool = {
         ['**Robustesse (Requêtes Complexes)**', '**Élevée** : Conçu pour les tâches multi-étapes complexes.', '**Moyenne** : Peut se perdre dans des boucles sans plan global.', '**Élevée** : S\'auto-corrige à chaque étape "Observation".'],
         ['**Vitesse**', '**Moyenne à Lente** : Latence due à la planification initiale.', '**Rapide** : Optimisé pour la vitesse.', '**Variable (souvent lente)** : De multiples cycles "Pensée-Action".'],
         ['**Risque d\'Hallucination**', '**Déplacé vers le plan** : Le risque est dans la création d\'un plan biaisé.', '**Élevé dans la synthèse** : Risque classique du RAG (mal interpréter les sources).', '**Faible (si bien implémenté)** : Raisonne sur des résultats concrets d\'outils.']
-      ]
+      ],
     },
   ],
 } satisfies ExternalTool
