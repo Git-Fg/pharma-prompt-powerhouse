@@ -56,6 +56,7 @@ export default antfu(
     },
     rules: {
       'pharma/no-prohibited-tailwind-classes': 'error',
+      'pharma/no-typographic-characters': 'error',
     },
   },
   {
