@@ -116,8 +116,38 @@ export default antfu(
     // Specific rules for test files
     files: ['**/*.test.ts', '**/*.test.tsx', 'tests/**/*'],
     rules: {
+      // React hooks rules for tests
       'react-hooks-extra/no-unnecessary-use-prefix': 'off',
+
+      // Console usage is common in tests
       'no-console': 'off',
+
+      // Allow any types in test mocks and utilities
+      'ts/no-explicit-any': 'off',
+
+      // Allow unused variables in test scenarios
+      'unused-imports/no-unused-vars': 'off',
+
+      // Less strict import order for test files
+      'import/first': 'off',
+      'import/order': 'off',
+
+      // Allow undescribed directive comments in test files
+      'eslint-comments/require-description': 'off',
+
+      // Disable React-specific rules that are too strict for tests
+      'react/no-array-index-key': 'off',
+      'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
+      'react-web-api/no-leaked-event-listener': 'off',
+
+      // Allow JSX props spreading in test mocks
+      'react/jsx-props-no-spreading': 'off',
+
+      // Allow empty functions in test mocks
+      '@typescript-eslint/no-empty-function': 'off',
+
+      // Less strict naming conventions for test utilities
+      '@typescript-eslint/naming-convention': 'off',
     },
   },
 )

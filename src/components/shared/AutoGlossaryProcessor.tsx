@@ -58,7 +58,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     // Reset regex index
     termPattern.lastIndex = 0
 
-    // eslint-disable-next-line no-cond-assign
+    // eslint-disable-next-line no-cond-assign -- Boucle de recherche de termes avec assignation conditionnelle
     while ((match = termPattern.exec(text)) !== null) {
       // Add text before the match
       if (match.index > lastIndex) {
