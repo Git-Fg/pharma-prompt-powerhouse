@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Star } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
@@ -8,6 +9,7 @@ import { SmartRecommendationsSection } from '@/components/shared/SmartRecommenda
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content, getExternalToolBySlug } from '@/lib/content-loader'
+import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 import { getStarRatingProps } from '@/lib/ui-utils'
 
 interface ToolPageProps {
@@ -18,6 +20,16 @@ interface ToolPageProps {
 
 export async function generateStaticParams() {
   return content.externalTools.map(tool => ({ slug: tool.slug }))
+}
+
+export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
+  const tool = getExternalToolBySlug(params.slug)
+
+  if (!tool) {
+    return generateNotFoundMetadata('tool')
+  }
+
+  return generateContentMetadata(tool)
 }
 
 export default function ToolPage({ params }: ToolPageProps) {

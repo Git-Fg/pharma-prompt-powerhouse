@@ -7,6 +7,7 @@ import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
 import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import { Separator } from '@/components/ui/separator'
 import { content, getGuideBySlug } from '@/lib/content-loader'
+import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
@@ -24,14 +25,10 @@ export async function generateMetadata({
   const guide = getGuideBySlug(params.slug)
 
   if (!guide) {
-    return {
-      title: 'Guide non trouvé',
-    }
+    return generateNotFoundMetadata('guide')
   }
-  return {
-    title: `Guide : ${guide.title} | Pharma Prompt Powerhouse`,
-    description: guide.description,
-  }
+
+  return generateContentMetadata(guide)
 }
 
 export default async function GuideDetailPage({
