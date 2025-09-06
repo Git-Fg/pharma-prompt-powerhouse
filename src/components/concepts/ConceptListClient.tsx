@@ -1,20 +1,13 @@
 'use client'
 
+import type { ContentFilterActions, ContentFilterState } from '@/components/ui/filter/ContentFilterControls'
 import type { Concept } from '@/lib/content-schema'
 import { FileText } from 'lucide-react'
 import { ConceptCard } from '@/components/shared/ConceptCard'
 import Button from '@/components/ui/button'
-import { SearchInput } from '@/components/ui/search-input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { ContentFilterControls } from '@/components/ui/filter/ContentFilterControls'
 import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
-import { categoryLabels } from '@/lib/constants'
 import { content } from '@/lib/content-loader'
 
 interface ConceptListClientProps {
@@ -24,20 +17,33 @@ interface ConceptListClientProps {
 export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
   const {
     filteredItems: filteredConcepts,
-    searchTerm,
-    selectedCategory,
-    setSearchTerm,
-    setSelectedCategory,
-    resetFilters,
+    ...filterStateAndActions
   } = useContentFilter<Concept>(initialConcepts)
 
   // AutoAnimate ref for smooth transitions
   const listRef = useAutoAnimateList()
 
-  const categories = [
-    'all',
-    ...Array.from(new Set(initialConcepts.map(c => c.category))),
-  ]
+  // Separate state and actions for ContentFilterControls
+  const filterState: ContentFilterState = {
+    searchTerm: filterStateAndActions.searchTerm,
+    selectedCategory: filterStateAndActions.selectedCategory,
+    selectedDifficulty: filterStateAndActions.selectedDifficulty,
+    selectedTags: filterStateAndActions.selectedTags,
+    showFavoritesOnly: filterStateAndActions.showFavoritesOnly,
+    availableCategories: filterStateAndActions.availableCategories,
+    availableDifficulties: filterStateAndActions.availableDifficulties,
+    availableTags: filterStateAndActions.availableTags,
+    hasActiveFilters: filterStateAndActions.hasActiveFilters,
+  }
+
+  const filterActions: ContentFilterActions = {
+    setSearchTerm: filterStateAndActions.setSearchTerm,
+    setSelectedCategory: filterStateAndActions.setSelectedCategory,
+    setSelectedDifficulty: filterStateAndActions.setSelectedDifficulty,
+    setSelectedTags: filterStateAndActions.setSelectedTags,
+    setShowFavoritesOnly: filterStateAndActions.setShowFavoritesOnly,
+    resetFilters: filterStateAndActions.resetFilters,
+  }
 
   // Calculate guide and prompt counts for each concept
   const conceptsWithStats = filteredConcepts.map((concept) => {
@@ -57,29 +63,14 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
   return (
     <>
       {/* Search and Filter Controls */}
-      <div className="flex flex-col lg:flex-row gap-4 container mx-auto mb-8">
-        <div className="flex-1">
-          <SearchInput
-            placeholder="Rechercher un concept..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full lg:w-[240px]">
-            <SelectValue placeholder="Catégorie" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map(category => (
-              <SelectItem key={category} value={category}>
-                {category === 'all'
-                  ? 'Toutes les catégories'
-                  : categoryLabels[category as keyof typeof categoryLabels] || category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <ContentFilterControls
+        state={filterState}
+        actions={filterActions}
+        searchPlaceholder="Rechercher un concept..."
+        showCategoryFilter={true}
+        showDifficultyFilter={false}
+        categoryWidth="w-full lg:w-[240px]"
+      />
 
       {/* Empty State */}
       {filteredConcepts.length === 0 && (
@@ -89,13 +80,13 @@ export function ConceptListClient({ initialConcepts }: ConceptListClientProps) {
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun concept trouvé</h3>
           <p className="prose-description mb-4">
-            {searchTerm
-              ? `Aucun concept ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
+            {filterState.searchTerm
+              ? `Aucun concept ne correspond à "${filterState.searchTerm}". Essayez avec d'autres mots-clés.`
               : 'Aucun concept ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}
           </p>
           <Button
             variant="outline"
-            onClick={resetFilters}
+            onClick={filterActions.resetFilters}
           >
             Réinitialiser les filtres
           </Button>

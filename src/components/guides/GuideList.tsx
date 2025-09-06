@@ -1,20 +1,13 @@
 'use client'
 
+import type { ContentFilterActions, ContentFilterState } from '@/components/ui/filter/ContentFilterControls'
 import type { EnrichedGuide } from '@/lib/content-schema'
 import { FileText } from 'lucide-react'
 import { GuideCard } from '@/components/shared/GuideCard'
 import Button from '@/components/ui/button'
-import { SearchInput } from '@/components/ui/search-input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { ContentFilterControls } from '@/components/ui/filter/ContentFilterControls'
 import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
-import { categoryLabels, difficultyLabels } from '@/lib/constants'
 
 interface GuideListProps {
   initialGuides: EnrichedGuide[]
@@ -23,70 +16,46 @@ interface GuideListProps {
 export function GuideList({ initialGuides }: GuideListProps) {
   const {
     filteredItems: filteredGuides,
-    searchTerm,
-    selectedCategory,
-    selectedDifficulty,
-    setSearchTerm,
-    setSelectedCategory,
-    setSelectedDifficulty,
-    resetFilters,
+    ...filterStateAndActions
   } = useContentFilter<EnrichedGuide>(initialGuides)
 
   // AutoAnimate ref for smooth transitions
   const listRef = useAutoAnimateList()
 
-  const categories = [
-    'all',
-    ...Array.from(new Set(initialGuides.map(g => g.category))),
-  ]
-  const difficulties = [
-    'all',
-    ...Array.from(new Set(initialGuides.map(g => g.difficulty))),
-  ]
+  // Separate state and actions for ContentFilterControls
+  const filterState: ContentFilterState = {
+    searchTerm: filterStateAndActions.searchTerm,
+    selectedCategory: filterStateAndActions.selectedCategory,
+    selectedDifficulty: filterStateAndActions.selectedDifficulty,
+    selectedTags: filterStateAndActions.selectedTags,
+    showFavoritesOnly: filterStateAndActions.showFavoritesOnly,
+    availableCategories: filterStateAndActions.availableCategories,
+    availableDifficulties: filterStateAndActions.availableDifficulties,
+    availableTags: filterStateAndActions.availableTags,
+    hasActiveFilters: filterStateAndActions.hasActiveFilters,
+  }
+
+  const filterActions: ContentFilterActions = {
+    setSearchTerm: filterStateAndActions.setSearchTerm,
+    setSelectedCategory: filterStateAndActions.setSelectedCategory,
+    setSelectedDifficulty: filterStateAndActions.setSelectedDifficulty,
+    setSelectedTags: filterStateAndActions.setSelectedTags,
+    setShowFavoritesOnly: filterStateAndActions.setShowFavoritesOnly,
+    resetFilters: filterStateAndActions.resetFilters,
+  }
 
   return (
     <>
       {/* Search and Filter Controls */}
-      <div className="flex flex-col lg:flex-row gap-4 container mx-auto mb-8">
-        <div className="flex-1">
-          <SearchInput
-            placeholder="Rechercher un guide..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full lg:w-[200px]">
-            <SelectValue placeholder="Catégorie" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map(category => (
-              <SelectItem key={category} value={category}>
-                {category === 'all'
-                  ? 'Toutes les catégories'
-                  : categoryLabels[category as keyof typeof categoryLabels] || category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select
-          value={selectedDifficulty}
-          onValueChange={setSelectedDifficulty}
-        >
-          <SelectTrigger className="w-full lg:w-[180px]">
-            <SelectValue placeholder="Difficulté" />
-          </SelectTrigger>
-          <SelectContent>
-            {difficulties.map(difficulty => (
-              <SelectItem key={difficulty} value={difficulty}>
-                {difficulty === 'all'
-                  ? 'Toutes les difficultés'
-                  : difficultyLabels[difficulty as keyof typeof difficultyLabels] || difficulty}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <ContentFilterControls
+        state={filterState}
+        actions={filterActions}
+        searchPlaceholder="Rechercher un guide..."
+        showCategoryFilter={true}
+        showDifficultyFilter={true}
+        categoryWidth="w-full lg:w-[200px]"
+        difficultyWidth="w-full lg:w-[180px]"
+      />
 
       {/* Empty State */}
       {filteredGuides.length === 0 && (
@@ -96,13 +65,13 @@ export function GuideList({ initialGuides }: GuideListProps) {
           </div>
           <h3 className="text-lg font-semibold mb-2">Aucun guide trouvé</h3>
           <p className="prose-description mb-4">
-            {searchTerm
-              ? `Aucun guide ne correspond à "${searchTerm}". Essayez avec d'autres mots-clés.`
+            {filterState.searchTerm
+              ? `Aucun guide ne correspond à "${filterState.searchTerm}". Essayez avec d'autres mots-clés.`
               : 'Aucun guide ne correspond aux filtres sélectionnés. Essayez de modifier vos critères.'}
           </p>
           <Button
             variant="outline"
-            onClick={resetFilters}
+            onClick={filterActions.resetFilters}
           >
             Réinitialiser les filtres
           </Button>

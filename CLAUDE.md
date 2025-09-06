@@ -307,6 +307,7 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Use animation components (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) for modern UX
 - Respect modern easing curves (`easings.spring`, `easings.bounce`) for natural animations
 - Use @antfu/eslint-config for simplified, modern ESLint configuration
+- Comit after all milestones
 
 **DO NOT:**
 - Repeat long utility class chains; prefer creating semantic utility

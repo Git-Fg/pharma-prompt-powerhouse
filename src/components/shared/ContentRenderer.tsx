@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CodeBlock } from '@/components/ui/code-block'
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { ContentTable } from '@/components/ui/data-table/ContentTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { createTestIdProps, generateContentTestId, generateTestId } from '@/lib/test-utils'
 import MultiFormatPrompt from '../prompts/MultiFormatPrompt'
@@ -236,57 +236,13 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
 
     case 'table':
       return (
-        <div className="my-6">
-          {/* Desktop Table View - Enhanced with mobile-first styling */}
-          <div className="hidden md:block overflow-x-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
-            <Table className="w-full min-w-[600px]">
-              {block.caption && <TableCaption>{block.caption}</TableCaption>}
-              <TableHeader>
-                <TableRow>
-                  {block.headers.map((header: string, index: number) => (
-                    <TableHead key={`header-${header.replace(/\s+/g, '-').toLowerCase()}-${index}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
-                      {header}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {block.rows.map((row: string[], rowIndex: number) => (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {row.map((cell: string, cellIndex: number) => (
-                      <TableCell key={`cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-z0-9]/gi, '')}`} className="px-2 py-3 text-sm md:px-4 md:py-3 md:text-base">
-                        <MarkdownRenderer content={cell} />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* Mobile Card View - Enhanced with better spacing */}
-          <div className="block md:hidden space-y-4">
-            {block.rows.map((row: string[], rowIndex: number) => (
-              <Card key={`mobile-row-${rowIndex}`} className="p-4">
-                {row.map((cell: string, cellIndex: number) => (
-                  <div key={`mobile-cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20).replace(/[^a-z0-9]/gi, '')}`} className="mb-3 last:mb-0">
-                    <div className="text-sm font-medium text-muted-foreground mb-1">
-                      {block.headers[cellIndex]}
-                    </div>
-                    <div className="text-sm leading-relaxed">
-                      <MarkdownRenderer content={cell} />
-                    </div>
-                  </div>
-                ))}
-              </Card>
-            ))}
-            {block.caption && (
-              <p className="text-sm text-muted-foreground text-center mt-2">
-                {block.caption}
-              </p>
-            )}
-          </div>
-        </div>
+        <ContentTable
+          {...createTestIdProps(testId)}
+          headers={block.headers}
+          rows={block.rows}
+          caption={block.caption}
+          className="my-6"
+        />
       )
 
     case 'multiFormatPrompt':
