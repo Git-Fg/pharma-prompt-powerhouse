@@ -85,8 +85,8 @@ Le sujet à transformer en flashcards est le suivant :
     },
     {
       type: 'conclusion','
-      title: 'Ce qu'il faut retenir : La Qualité plutôt que la Quantité','
-      content: 'Ce workflow prend un peu plus de temps que de simplement copier-coller son cours. Cependant, créer 10 flashcards actives de ce type est infiniment plus rentable sur le plan cognitif que d'en créer 50 qui ne font que gratter la surface de la connaissance. C'est un investissement qui paie le jour de l'examen, où la capacité à appliquer et à raisonner est bien plus importante que la simple mémorisation.''
+      title: 'Ce qu\'il faut retenir : La Qualité plutôt que la Quantité','
+      content: 'Ce workflow prend un peu plus de temps que de simplement copier-coller son cours. Cependant, créer 10 flashcards actives de ce type est infiniment plus rentable sur le plan cognitif que d\'en créer 50 qui ne font que gratter la surface de la connaissance. C\'est un investissement qui paie le jour de l\'examen, où la capacité à appliquer et à raisonner est bien plus importante que la simple mémorisation.'
     }
   ],
 } satisfies Workflow
