@@ -98,7 +98,7 @@ export function generateSlug(title: string): string {
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036F]/g, '') // Supprime les accents
-    .replace(/[^a-z0-9\s-]/g, '') // Garde seulement lettres, chiffres, espaces et tirets
+    .replace(/[^a-z0-9\s-]/g, ' ') // Remplace les caractères spéciaux par des espaces
     .trim()
     .replace(/\s+/g, '-') // Remplace espaces par tirets
     .replace(/-+/g, '-') // Élimine les tirets multiples

@@ -118,9 +118,9 @@ describe('useContentFilter Hook', () => {
     const { result } = renderHook(() => useContentFilter(mockItems))
 
     act(() => {
-      result.current.setSearchTerm('javascript')
+      result.current.setSearchTerm('react') // This will be found in title
       result.current.setSelectedCategory('frontend')
-      result.current.addTag('react')
+      result.current.addTag('hooks')
     })
 
     expect(result.current.filteredItems).toHaveLength(1)

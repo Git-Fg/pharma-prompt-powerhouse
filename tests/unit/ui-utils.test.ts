@@ -20,8 +20,8 @@ import {
 describe('uI Utilities', () => {
   describe('getCategoryLabel', () => {
     it('should return correct label for known categories', () => {
-      expect(getCategoryLabel('frontend')).toBe('Frontend')
-      expect(getCategoryLabel('backend')).toBe('Backend')
+      expect(getCategoryLabel('fondamentaux')).toBe('Fondamentaux 📚')
+      expect(getCategoryLabel('methodologie')).toBe('Méthodologie 🔬')
     })
 
     it('should return fallback for unknown categories', () => {
@@ -32,8 +32,8 @@ describe('uI Utilities', () => {
 
   describe('getDifficultyLabel', () => {
     it('should return correct label for known difficulties', () => {
-      expect(getDifficultyLabel('beginner')).toBe('Débutant')
-      expect(getDifficultyLabel('advanced')).toBe('Avancé')
+      expect(getDifficultyLabel('débutant')).toBe('Débutant 🌱')
+      expect(getDifficultyLabel('avancé')).toBe('Avancé 🌳')
     })
 
     it('should return fallback for unknown difficulties', () => {
@@ -44,8 +44,8 @@ describe('uI Utilities', () => {
 
   describe('getCategoryColor', () => {
     it('should return correct color for known categories', () => {
-      expect(getCategoryColor('frontend')).toBe('blue')
-      expect(getCategoryColor('backend')).toBe('green')
+      expect(getCategoryColor('fondamentaux')).toBe('blue')
+      expect(getCategoryColor('methodologie')).toBe('green')
     })
 
     it('should return fallback color for unknown categories', () => {
@@ -56,15 +56,15 @@ describe('uI Utilities', () => {
 
   describe('getConfidenceInfo', () => {
     it('should return correct info for valid scores', () => {
-      expect(getConfidenceInfo(1)).toEqual({ label: 'Très faible', color: 'red' })
-      expect(getConfidenceInfo(3)).toEqual({ label: 'Moyen', color: 'yellow' })
-      expect(getConfidenceInfo(5)).toEqual({ label: 'Très élevé', color: 'green' })
+      expect(getConfidenceInfo(1)).toEqual({ label: '⭐☆☆☆☆', description: 'Très faible confiance' })
+      expect(getConfidenceInfo(3)).toEqual({ label: '⭐⭐⭐☆☆', description: 'Confiance modérée' })
+      expect(getConfidenceInfo(5)).toEqual({ label: '⭐⭐⭐⭐⭐', description: 'Très haute confiance' })
     })
 
     it('should clamp scores to valid range', () => {
-      expect(getConfidenceInfo(0)).toEqual({ label: 'Très faible', color: 'red' })
-      expect(getConfidenceInfo(6)).toEqual({ label: 'Très élevé', color: 'green' })
-      expect(getConfidenceInfo(-10)).toEqual({ label: 'Très faible', color: 'red' })
+      expect(getConfidenceInfo(0)).toEqual({ label: '⭐☆☆☆☆', description: 'Très faible confiance' })
+      expect(getConfidenceInfo(6)).toEqual({ label: '⭐⭐⭐⭐⭐', description: 'Très haute confiance' })
+      expect(getConfidenceInfo(-10)).toEqual({ label: '⭐☆☆☆☆', description: 'Très faible confiance' })
     })
   })
 
@@ -204,8 +204,8 @@ describe('uI Utilities', () => {
 
   describe('isValidCategory', () => {
     it('should return true for valid categories', () => {
-      expect(isValidCategory('frontend')).toBe(true)
-      expect(isValidCategory('backend')).toBe(true)
+      expect(isValidCategory('fondamentaux')).toBe(true)
+      expect(isValidCategory('methodologie')).toBe(true)
     })
 
     it('should return false for invalid categories', () => {
@@ -216,8 +216,8 @@ describe('uI Utilities', () => {
 
   describe('isValidDifficulty', () => {
     it('should return true for valid difficulties', () => {
-      expect(isValidDifficulty('beginner')).toBe(true)
-      expect(isValidDifficulty('advanced')).toBe(true)
+      expect(isValidDifficulty('débutant')).toBe(true)
+      expect(isValidDifficulty('avancé')).toBe(true)
     })
 
     it('should return false for invalid difficulties', () => {

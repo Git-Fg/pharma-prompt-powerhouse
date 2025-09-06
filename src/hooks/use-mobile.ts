@@ -9,7 +9,7 @@ export function useIsMobile() {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
 
     const updateIsMobile = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      setIsMobile(mql.matches) // Use mql.matches instead of window.innerWidth
     }
 
     mql.addEventListener('change', updateIsMobile)
