@@ -90,42 +90,6 @@ export default async function ConceptDetailPage({
     <ContentPageLayout
       item={concept}
       prose={false}
-      headerContent={(
-        <header className="mb-8 space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight">
-              {concept.title}
-            </h1>
-            <p className="prose-description text-xl">
-              {concept.description}
-            </p>
-          </div>
-
-          {/* Statistiques du concept */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="text-center p-4">
-              <div className="text-2xl font-bold text-primary">
-                {relatedGuides.length + relatedWorkflows.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Ressources liées
-              </div>
-            </Card>
-            <Card className="text-center p-4">
-              <div className="text-2xl font-bold text-green-600">
-                {relatedGuides.length}
-              </div>
-              <div className="text-sm text-muted-foreground">Guides</div>
-            </Card>
-            <Card className="text-center p-4">
-              <div className="text-2xl font-bold text-blue-600">
-                {relatedWorkflows.length}
-              </div>
-              <div className="text-sm text-muted-foreground">Workflows</div>
-            </Card>
-          </div>
-        </header>
-      )}
     >
       {/* NOUVELLE SECTION : Points clés à retenir */}
       {concept.keyTakeaways && <KeyTakeaways points={concept.keyTakeaways} />}

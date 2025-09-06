@@ -12,6 +12,16 @@ vi.mock('@/components/shared/ContentMetadata', () => ({
   ContentMetadata: () => <div data-testid="content-metadata">Metadata</div>,
 }))
 
+// Mock the ContentHeader component
+vi.mock('@/components/shared/ContentHeader', () => ({
+  ContentHeader: ({ item }: { item: any }) => (
+    <div data-testid="content-header">
+      <h1>{item.title}</h1>
+      <p>{item.description}</p>
+    </div>
+  ),
+}))
+
 // Mock IntersectionObserver
 beforeAll(() => {
   Object.defineProperty(window, 'IntersectionObserver', {
@@ -60,6 +70,7 @@ describe('contentPageLayout Component', () => {
   it('should render content title and description', () => {
     render(<ContentPageLayout {...mockProps} />)
 
+    expect(screen.getByTestId('content-header')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Test Content' })).toBeInTheDocument()
     expect(screen.getByText('Test description')).toBeInTheDocument()
   })
@@ -103,16 +114,12 @@ describe('contentPageLayout Component', () => {
     expect(main).toHaveClass('max-w-none')
   })
 
-  it('should render custom header content when provided', () => {
-    const propsWithCustomHeader = {
-      ...mockProps,
-      headerContent: <div data-testid="custom-header">Custom Header</div>,
-    }
+  it('should render content header with proper props', () => {
+    render(<ContentPageLayout {...mockProps} />)
 
-    render(<ContentPageLayout {...propsWithCustomHeader} />)
-
-    expect(screen.getByTestId('custom-header')).toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: 'Test Content' })).not.toBeInTheDocument()
+    expect(screen.getByTestId('content-header')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Test Content' })).toBeInTheDocument()
+    expect(screen.getByText('Test description')).toBeInTheDocument()
   })
 
   it('should handle item without description', () => {

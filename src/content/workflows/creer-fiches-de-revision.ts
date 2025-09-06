@@ -12,23 +12,22 @@ export const workflow = {
   estimatedTime: '15 min',
   conceptSlugs: ['context-engineering', 'structuration-par-balises'],
 
-  problem: [
+  content: [
     {
-      type: 'markdown',
-      content: `Quand j\'ai commencé mes études de pharmacie, je pensais que relire mes notes suffirait. Erreur ! Les examens demandent une compréhension active, pas une mémorisation passive.
+      type: 'introduction',
+      title: 'Le Problème',
+      content: `Quand j'ai commencé mes études de pharmacie, je pensais que relire mes notes suffirait. Erreur ! Les examens demandent une compréhension active, pas une mémorisation passive.
 
 Le problème avec la révision traditionnelle :
 - **Illusion de connaissance :** Relire donne une fausse impression de maîtrise
-- **Pas d\'auto-évaluation :** Impossible de savoir si on a vraiment compris
+- **Pas d'auto-évaluation :** Impossible de savoir si on a vraiment compris
 - **Révisions monotones :** Difficile de rester concentré sur du contenu statique
 - **Manque de variété :** Toujours les mêmes exemples, aucune généralisation`,
     },
-  ],
-
-  initialApproach: [
     {
-      type: 'markdown',
-      content: `Au début, j\'ai essayé de demander directement à ChatGPT :
+      type: 'section',
+      title: 'Mon Approche Initiale',
+      content: `Au début, j'ai essayé de demander directement à ChatGPT :
 
 > *"Fais-moi un QCM sur les bêta-bloquants."*
 
@@ -38,14 +37,12 @@ Le problème avec la révision traditionnelle :
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L\'IA n\'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`,
+      content: `L'IA n'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`,
     },
-  ],
-
-  optimizedStrategy: [
     {
-      type: 'markdown',
-      content: `J\'ai développé une méthode en 3 étapes qui transforme n\'importe quel cours en matériel de révision de qualité.
+      type: 'section',
+      title: 'Ma Stratégie Optimisée',
+      content: `J'ai développé une méthode en 3 étapes qui transforme n'importe quel cours en matériel de révision de qualité.
 Cette approche utilise le **context engineering** pour maximiser la précision.`,
     },
     {
@@ -66,16 +63,16 @@ Cette approche utilise le **context engineering** pour maximiser la précision.`
       title: '📚 Étape 2 : Fournir le Contenu Intégral',
       content: `**Copiez-collez votre cours complet :**
 - Toutes les définitions importantes
-- Les mécanismes d\'action détaillés
+- Les mécanismes d'action détaillés
 - Les classifications et exemples
 - Les contre-indications et effets indésirables
 
-Plus vous donnez d\'informations, plus les questions seront précises !`,
+Plus vous donnez d'informations, plus les questions seront précises !`,
     },
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: 'L\'utilisation de balises XML permet d\'organiser le contenu de cours et d\'améliorer la génération de QCM ciblés.',
+      reason: "L'utilisation de balises XML permet d'organiser le contenu de cours et d'améliorer la génération de QCM ciblés.",
     },
     {
       type: 'card',
@@ -86,14 +83,10 @@ Plus vous donnez d\'informations, plus les questions seront précises !`,
 - Justifications détaillées obligatoires
 - Format de présentation (tableau, liste...)`,
     },
-  ],
-
-  toolComparison: [
     {
-      type: 'markdown',
-      content: `## Comparaison des Outils : Mon Retour d\'Expérience
-
-J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
+      type: 'section',
+      title: 'Comparaison des Outils',
+      content: `J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
     },
     {
       type: 'tabs',
@@ -114,7 +107,7 @@ J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations 
 - Parfois trop "scolaire" dans le ton
 - Peut manquer de créativité pour les cas complexes
 
-**Mon verdict :** Excellent point de départ. J\'utilise ChatGPT pour mes premières fiches.`,
+**Mon verdict :** Excellent point de départ. J'utilise ChatGPT pour mes premières fiches.`,
             },
           ],
         },
@@ -127,7 +120,7 @@ J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations 
               content: `**Points forts :**
 - Excellente compréhension du contexte médical
 - Questions plus nuancées et réalistes
-- Meilleur dans l\'analyse de cas complexes
+- Meilleur dans l'analyse de cas complexes
 
 **Points faibles :**
 - Interface moins intuitive que ChatGPT
@@ -145,27 +138,23 @@ J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations 
               type: 'markdown',
               content: `**Points forts :**
 - Gratuit avec quotas généreux
-- Excellent pour l\'analyse de documents PDF
+- Excellent pour l'analyse de documents PDF
 - Mode "System Prompt" idéal pour définir un rôle de professeur
 
 **Points faibles :**
 - Interface plus technique (moins "grand public")
-- Courbe d\'apprentissage plus raide
+- Courbe d'apprentissage plus raide
 
-**Mon verdict :** Parfait une fois qu\'on maîtrise l\'interface. Mon outil de prédilection pour les gros volumes.`,
+**Mon verdict :** Parfait une fois qu'on maîtrise l'interface. Mon outil de prédilection pour les gros volumes.`,
             },
           ],
         },
       ],
     },
-  ],
-
-  finalPrompt: [
     {
-      type: 'markdown',
-      content: `## Mon Point de Départ (à Personnaliser selon Votre Cas)
-
-Voici le template que j\'utilise systématiquement. Remplacez les variables entre {{}} par vos informations :`,
+      type: 'section',
+      title: 'Template Final',
+      content: `Voici le template que j'utilise systématiquement. Remplacez les variables entre {{}} par vos informations :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -183,10 +172,10 @@ FORMAT ATTENDU :
 - Réponse correcte avec justification détaillée
 - Indication du niveau de difficulté (facile/moyen/difficile)
 
-Assure-toi que les questions couvrent l\'ensemble du cours et testent la compréhension, pas seulement la mémorisation.`,
+Assure-toi que les questions couvrent l'ensemble du cours et testent la compréhension, pas seulement la mémorisation.`,
 
         aiStudio: {
-          systemPrompt: `Tu es un professeur expérimenté spécialisé en pharmacie, expert dans la création d\'outils de révision pédagogiques. Tu conçois des questions qui testent la compréhension approfondie, pas seulement la mémorisation.`,
+          systemPrompt: `Tu es un professeur expérimenté spécialisé en pharmacie, expert dans la création d'outils de révision pédagogiques. Tu conçois des questions qui testent la compréhension approfondie, pas seulement la mémorisation.`,
           userPrompt: `Crée {{NOMBRE}} {{TYPE_QUESTIONS}} de niveau {{DIFFICULTE}} pour des étudiants de {{NIVEAU}} à partir du cours suivant :
 
 {{VOTRE_COURS_INTEGRAL}}

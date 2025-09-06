@@ -12,23 +12,22 @@ export const workflow = {
   estimatedTime: '10 min',
   conceptSlugs: ['structuration-par-balises'],
 
-  problem: [
+  content: [
     {
-      type: 'markdown',
-      content: `Quand j\'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
+      type: 'introduction',
+      title: 'Le Problème : Les Comparaisons Textuelles sont Illisibles',
+      content: `Quand j'avais besoin de comparer plusieurs classes thérapeutiques (ISRS, IRSN, tricycliques...), mes notes devenaient vite illisibles. Des paragraphes de texte avec des informations mélangées.
 
 Le problème avec les comparaisons textuelles :
 - **Information noyée :** Difficile de retrouver rapidement une différence
-- **Pas de vue d\'ensemble :** Impossible de voir les patterns
+- **Pas de vue d'ensemble :** Impossible de voir les patterns
 - **Révisions inefficaces :** Pas adapté à la mémorisation rapide
-- **Erreurs d\'omission :** Certains aspects oubliés dans la comparaison`,
+- **Erreurs d'omission :** Certains aspects oubliés dans la comparaison`,
     },
-  ],
-
-  initialApproach: [
     {
-      type: 'markdown',
-      content: `Au début, j\'ai essayé de demander simplement :
+      type: 'section',
+      title: 'Mon Approche Initiale : Trop Simple',
+      content: `Au début, j'ai essayé de demander simplement :
 
 > *"Compare les ISRS et les IRSN."*
 
@@ -38,17 +37,13 @@ Le problème avec les comparaisons textuelles :
       type: 'alert',
       variant: 'destructive',
       title: 'Pourquoi ça ne marche pas',
-      content: `L\'IA génère du texte libre sans structure imposée. Le résultat n\'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
+      content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
     },
-  ],
-
-  optimizedStrategy: [
     {
-      type: 'markdown',
-      content: `Structure Imposée par l\'IA
-
-J\'ai développé une approche qui force l\'IA à créer directement un tableau structuré et visuel.
-Cette méthode s\'appuie sur la **structuration par balises** pour garantir la cohérence.`,
+      type: 'section',
+      title: 'La Stratégie Optimisée : Structure Imposée par l\'IA',
+      content: `J'ai développé une approche qui force l'IA à créer directement un tableau structuré et visuel.
+Cette méthode s'appuie sur la **structuration par balises** pour garantir la cohérence.`,
     },
     {
       type: 'conceptRecommendation',
@@ -56,17 +51,19 @@ Cette méthode s\'appuie sur la **structuration par balises** pour garantir la c
       reason: 'L\'utilisation de balises XML permet de forcer l\'IA à respecter une structure de tableau précise et cohérente.',
     },
     {
-      type: 'card',
-      title: '🏗️ Étape 1 : Définir les Éléments et Critères',
-      content: `**Spécifier clairement :**
+      type: 'points',
+      title: 'Les 3 Étapes Clés',
+      points: [
+        {
+          title: '🏗️ Étape 1 : Définir les Éléments et Critères',
+          description: `**Spécifier clairement :**
 - Les éléments à comparer (colonnes)
 - Les critères de comparaison (lignes)
 - Le format de sortie souhaité (tableau Markdown)`,
-    },
-    {
-      type: 'card',
-      title: '📋 Étape 2 : Utiliser un Prompt Structuré',
-      content: `**Template de prompt efficace :**
+        },
+        {
+          title: '📋 Étape 2 : Utiliser un Prompt Structuré',
+          description: `**Template de prompt efficace :**
 \`\`\`
 Crée un tableau comparatif des [ÉLÉMENTS] avec les critères :
 [CRITÈRES]
@@ -75,23 +72,20 @@ Format : Tableau Markdown
 Utilise des symboles (✅, ⚠️, ❌) pour une lecture rapide
 Ajoute une synthèse sous le tableau
 \`\`\``,
-    },
-    {
-      type: 'card',
-      title: '🎯 Étape 3 : Optimiser selon l\'Outil',
-      content: `**Adaptation par plateforme :**
+        },
+        {
+          title: '🎯 Étape 3 : Optimiser selon l\'Outil',
+          description: `**Adaptation par plateforme :**
 - **ChatGPT/Claude :** Prompt structuré simple
 - **Google AI Studio :** Structured Output pour format garanti
 - **Claude :** Balises XML pour structure claire`,
+        },
+      ],
     },
-  ],
-
-  toolComparison: [
     {
-      type: 'markdown',
-      content: `## Comparaison des Outils : Mon Retour d\'Expérience
-
-J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
+      type: 'section',
+      title: 'Comparaison des Outils : Mon Retour d\'Expérience',
+      content: `J'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations personnelles :`,
     },
     {
       type: 'tabs',
@@ -106,7 +100,7 @@ J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations 
               content: `**Points forts :**
 - Format Markdown natif, parfait pour les tableaux
 - Bonne compréhension des instructions de structure
-- Facilité d\'ajustement en conversationnel
+- Facilité d'ajustement en conversationnel
 
 **Points faibles :**
 - Parfois trop verbeux dans les cellules
@@ -143,27 +137,23 @@ J\'ai testé cette stratégie sur plusieurs plateformes. Voici mes observations 
               type: 'markdown',
               content: `**Points forts :**
 - Structured Output : format JSON garanti à 100%
-- Excellent pour l\'intégration dans d\'autres outils
+- Excellent pour l'intégration dans d'autres outils
 - Gratuit avec quota généreux
 
 **Points faibles :**
-- Interface moins intuitive pour l\'usage ponctuel
+- Interface moins intuitive pour l'usage ponctuel
 - Nécessite configuration initiale du schéma JSON
 
-**Mon usage :** Quand j\'ai besoin d\'une fiabilité absolue du format pour réutilisation automatisée.`,
+**Mon usage :** Quand j'ai besoin d'une fiabilité absolue du format pour réutilisation automatisée.`,
             },
           ],
         },
       ],
     },
-  ],
-
-  finalPrompt: [
     {
-      type: 'markdown',
-      content: `## Le Prompt Final : Template Universel
-
-Voici le prompt que j\'utilise maintenant, adapté selon l\'outil :`,
+      type: 'section',
+      title: 'Le Prompt Final : Template Universel',
+      content: `Voici le prompt que j'utilise maintenant, adapté selon l'outil :`,
     },
     {
       type: 'multiFormatPrompt',
@@ -190,7 +180,7 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
 1. **Identification des Classes** : Liste toutes les classes de médicaments à comparer.
 2. **Définition des Caractéristiques** : Identifie les caractéristiques pertinentes pour la comparaison.  
 3. **Structuration du Tableau** : Organise les classes en lignes et les caractéristiques en colonnes.
-4. **Remplissage des Données** : Complète chaque cellule avec l\'information pertinente.
+4. **Remplissage des Données** : Complète chaque cellule avec l'information pertinente.
 </thinking_process>
 
 <format_sortie>
@@ -199,7 +189,7 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
 - Ajoute une légende si nécessaire pour les symboles.
 </format_sortie>`,
         aiStudio: {
-          systemPrompt: `Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l\'apprentissage de classes thérapeutiques.`,
+          systemPrompt: `Tu es un expert en pharmacologie et en pédagogie pour des étudiants en pharmacie. Ta spécialité est de créer des tableaux comparatifs clairs et pédagogiques pour faciliter l'apprentissage de classes thérapeutiques.`,
           userPrompt: `Crée un tableau comparatif des {{classes_medicaments}} avec les critères :
 {{caracteristiques_comparees}}
 
@@ -221,6 +211,11 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
         'classes_medicaments : Liste des classes thérapeutiques à comparer',
         'caracteristiques_comparees : Liste des caractéristiques (efficacité, effets secondaires, etc.)',
       ],
+    },
+    {
+      type: 'key-points',
+      title: 'Ce qu\'il faut retenir',
+      content: `Ce workflow démontre l'importance de la structure dans les prompts. En forçant l'IA à utiliser un format tableau précis, on obtient des résultats beaucoup plus utiles pour la révision et la mémorisation.`,
     },
   ],
 

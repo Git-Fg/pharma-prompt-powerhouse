@@ -10,12 +10,11 @@ export const workflow = {
   tags: ['flashcards', 'apprentissage', 'mémorisation', 'révision-active'],
   isFavorite: false,
   cover: '/images/objectifs/flashcards-apres.png',
-  problem: [],
-  initialApproach: [],
-  optimizedStrategy: [],
-  toolComparison: [],
-  finalPrompt: [],
-  keyTakeaways: [],
+  keyTakeaways: [
+    'Les flashcards actives forcent la réflexion et l\'application plutôt que la simple mémorisation',
+    'Varier les formats de questions (scénario clinique, comparaison, mécanistique, etc.) améliore l\'apprentissage en profondeur',
+    'La qualité des flashcards est plus importante que la quantité pour une rétention efficace',
+  ],
 
   content: [
     {

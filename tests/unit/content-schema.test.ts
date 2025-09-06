@@ -145,11 +145,7 @@ describe('content Schema Edge Cases', () => {
         difficulty: 'débutant',
         tags: [],
         isFavorite: false,
-        problem: [{ type: 'markdown' as const, content: 'Test problem' }],
-        initialApproach: [{ type: 'markdown' as const, content: 'Test approach' }],
-        optimizedStrategy: [{ type: 'markdown' as const, content: 'Test strategy' }],
-        toolComparison: [{ type: 'markdown' as const, content: 'Test comparison' }],
-        finalPrompt: [{ type: 'markdown' as const, content: 'Test prompt' }],
+        content: [{ type: 'markdown' as const, content: 'Test content' }],
         keyTakeaways: ['At least one takeaway'],
       }
 
