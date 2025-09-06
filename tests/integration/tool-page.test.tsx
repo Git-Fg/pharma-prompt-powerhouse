@@ -1,20 +1,20 @@
 /**
  * Tool Page Server Component Tests
  * Modern testing patterns for Next.js 15 Server Components with async params
- * 
+ *
  * This file demonstrates the use of centralized mock factories while maintaining
  * the original mock structure for compatibility with vi.mock hoisting behavior.
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderServerPage } from '../utils/testing-utils'
-
 // Import mock factories directly from content.mock
-import { 
-  createMockTool, 
-  createMinimalTool, 
-  createToolWithoutConfidence 
+import {
+  createMinimalTool,
+  createMockTool,
+  createToolWithoutConfidence,
 } from '../mocks/content.mock'
+
+import { renderServerPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -60,7 +60,9 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
         <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}: {block.content?.substring(0, 50) || block.title}
+          {block.type}
+          :
+          {block.content?.substring(0, 50) || block.title}
         </div>
       ))}
     </div>
@@ -78,7 +80,9 @@ vi.mock('@/components/markdown/MarkdownRenderer', () => ({
 vi.mock('@/components/shared/DisclaimerBanner', () => ({
   DisclaimerBanner: ({ type }: any) => (
     <div data-testid="disclaimer-banner">
-      Disclaimer for {type}
+      Disclaimer for
+      {' '}
+      {type}
     </div>
   ),
 }))
@@ -86,7 +90,9 @@ vi.mock('@/components/shared/DisclaimerBanner', () => ({
 vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
   SmartRecommendationsSection: ({ item }: any) => (
     <div data-testid="smart-recommendations">
-      Recommendations for {item?.title}
+      Recommendations for
+      {' '}
+      {item?.title}
     </div>
   ),
 }))
@@ -130,7 +136,7 @@ vi.mock('lucide-react', () => ({
   ),
 }))
 
-describe('Tool Page Server Component', () => {
+describe('tool Page Server Component', () => {
   const mockTool = createMockTool({
     slug: 'test-tool',
     title: 'Test Tool',
@@ -214,8 +220,8 @@ describe('Tool Page Server Component', () => {
       expect(getByText('This is a great tool for research purposes.')).toBeInTheDocument()
 
       // Check it's in a card structure
-      const personalReviewCard = getAllByTestId('card').find(card => 
-        card.textContent?.includes('Mon Avis en Bref')
+      const personalReviewCard = getAllByTestId('card').find(card =>
+        card.textContent?.includes('Mon Avis en Bref'),
       )
       expect(personalReviewCard).toBeInTheDocument()
     })
@@ -237,7 +243,7 @@ describe('Tool Page Server Component', () => {
       // Check star rating
       const stars = getAllByTestId('star-icon')
       expect(stars.length).toBe(5)
-      
+
       // First 4 stars should be filled (rating 4/5)
       const filledStars = stars.filter(star => star.className?.includes('text-yellow-400'))
       expect(filledStars.length).toBe(4)
@@ -266,13 +272,13 @@ describe('Tool Page Server Component', () => {
       expect(getByText('Privacy concerns')).toBeInTheDocument()
 
       // Check list items have proper icons
-      const strongPointsList = getAllByTestId('card').find(card => 
-        card.textContent?.includes('Points Forts')
+      const strongPointsList = getAllByTestId('card').find(card =>
+        card.textContent?.includes('Points Forts'),
       )
       expect(strongPointsList?.querySelectorAll('.text-green-500').length).toBe(3)
 
-      const vigilancePointsList = getAllByTestId('card').find(card => 
-        card.textContent?.includes('Points de Vigilance')
+      const vigilancePointsList = getAllByTestId('card').find(card =>
+        card.textContent?.includes('Points de Vigilance'),
       )
       expect(vigilancePointsList?.querySelectorAll('.text-orange-500').length).toBe(3)
     })
@@ -320,11 +326,11 @@ describe('Tool Page Server Component', () => {
 
       // Check use cases section
       expect(getByText('Cas d\'Usage Principaux')).toBeInTheDocument()
-      
-      const useCaseBadges = getAllByTestId('badge').filter(badge => 
-        ['Literature review', 'Data analysis', 'Content generation'].some(text => 
-          badge.textContent?.includes(text)
-        )
+
+      const useCaseBadges = getAllByTestId('badge').filter(badge =>
+        ['Literature review', 'Data analysis', 'Content generation'].some(text =>
+          badge.textContent?.includes(text),
+        ),
       )
       expect(useCaseBadges.length).toBe(3)
     })
@@ -388,7 +394,7 @@ describe('Tool Page Server Component', () => {
     it('calls notFound when tool does not exist', async () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
 
       const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
@@ -403,7 +409,7 @@ describe('Tool Page Server Component', () => {
     it('handles empty slug gracefully', async () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
 
       const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default

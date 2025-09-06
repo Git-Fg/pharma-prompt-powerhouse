@@ -4,10 +4,10 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderServerPage } from '../utils/testing-utils'
-
 // Import mock factories directly from content.mock
-import { createMockGuide, createMinimalGuide, createGuideWithoutTakeaways } from '../mocks/content.mock'
+import { createGuideWithoutTakeaways, createMockGuide } from '../mocks/content.mock'
+
+import { renderServerPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -58,7 +58,9 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
         <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}: {block.content?.substring(0, 50) || block.title}
+          {block.type}
+          :
+          {block.content?.substring(0, 50) || block.title}
         </div>
       ))}
     </div>
@@ -80,7 +82,9 @@ vi.mock('@/components/shared/KeyTakeaways', () => ({
 vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
   SmartRecommendationsSection: ({ item }: any) => (
     <div data-testid="smart-recommendations">
-      Recommendations for {item?.title}
+      Recommendations for
+      {' '}
+      {item?.title}
     </div>
   ),
 }))
@@ -91,7 +95,7 @@ vi.mock('@/components/ui/separator', () => ({
   ),
 }))
 
-describe('Guide Page Server Component', () => {
+describe('guide Page Server Component', () => {
   const mockGuide = createMockGuide({
     slug: 'test-guide',
     title: 'Test Guide',
@@ -212,7 +216,7 @@ describe('Guide Page Server Component', () => {
     it('calls notFound when guide does not exist', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getGuideBySlug).mockReturnValue(undefined)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
@@ -227,7 +231,7 @@ describe('Guide Page Server Component', () => {
     it('handles malformed params gracefully', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getGuideBySlug).mockReturnValue(undefined)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default

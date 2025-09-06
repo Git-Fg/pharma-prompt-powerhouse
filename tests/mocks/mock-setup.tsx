@@ -1,19 +1,19 @@
 /**
  * Centralized Mock Setup
- * 
+ *
  * This file provides common mocking utilities for tests,
  * centralizing the setup of frequently mocked dependencies.
- * 
+ *
  * Usage:
  *   import { setupCommonMocks } from '@/tests/mocks/mock-setup'
  *   setupCommonMocks()
  */
 
 import { vi } from 'vitest'
-import { mockGuides, mockConcepts, mockWorkflows, mockTools } from './content.mock'
+import { mockConcepts, mockGuides, mockTools, mockWorkflows } from './content.mock'
 
 // Mock next/navigation
-export const mockNextNavigation = () => {
+export function mockNextNavigation() {
   vi.mock('next/navigation', () => ({
     notFound: vi.fn(() => {
       throw new Error('NOT_FOUND')
@@ -22,7 +22,7 @@ export const mockNextNavigation = () => {
 }
 
 // Mock content loader with default mock data
-export const mockContentLoader = (customContentMocks = {}) => {
+export function mockContentLoader(customContentMocks = {}) {
   vi.mock('@/lib/content-loader', () => ({
     getGuideBySlug: vi.fn(),
     getConceptBySlug: vi.fn(),
@@ -39,7 +39,7 @@ export const mockContentLoader = (customContentMocks = {}) => {
 }
 
 // Mock UI utilities
-export const mockUiUtils = () => {
+export function mockUiUtils() {
   vi.mock('@/lib/ui-utils', () => ({
     getStarRatingProps: (score: number) => ({
       stars: Array.from({ length: 5 }, (_, i) => ({
@@ -51,11 +51,11 @@ export const mockUiUtils = () => {
 }
 
 // Mock layout components
-export const mockLayoutComponents = () => {
+export function mockLayoutComponents() {
   vi.mock('@/components/layout/ContentPageLayout', () => ({
     ContentPageLayout: ({ children, item, prose }: any) => (
       <div data-testid="content-page-layout" data-prose={prose}>
-        <h1 data-testid="item-title" role="heading" aria-level="1">{item?.title}</h1>
+        <h1 data-testid="item-title" role="heading" aria-level={1}>{item?.title}</h1>
         <p data-testid="item-description">{item?.description}</p>
         <div data-testid="item-category">{item?.category}</div>
         {item?.difficulty && <div data-testid="item-difficulty">{item?.difficulty}</div>}
@@ -66,13 +66,15 @@ export const mockLayoutComponents = () => {
 }
 
 // Mock shared components
-export const mockSharedComponents = () => {
+export function mockSharedComponents() {
   vi.mock('@/components/shared/ContentRenderer', () => ({
     ContentRenderer: ({ content }: any) => (
       <div data-testid="content-renderer">
         {content?.map((block: any, index: number) => (
           <div key={index} data-testid={`content-block-${index}`}>
-            {block.type}: {block.content?.substring(0, 50) || block.title}
+            {block.type}
+            :
+            {block.content?.substring(0, 50) || block.title}
           </div>
         ))}
       </div>
@@ -106,7 +108,9 @@ export const mockSharedComponents = () => {
   vi.mock('@/components/shared/DisclaimerBanner', () => ({
     DisclaimerBanner: ({ type }: any) => (
       <div data-testid="disclaimer-banner">
-        Disclaimer for {type}
+        Disclaimer for
+        {' '}
+        {type}
       </div>
     ),
   }))
@@ -114,14 +118,16 @@ export const mockSharedComponents = () => {
   vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
     SmartRecommendationsSection: ({ item }: any) => (
       <div data-testid="smart-recommendations">
-        Recommendations for {item?.title}
+        Recommendations for
+        {' '}
+        {item?.title}
       </div>
     ),
   }))
 }
 
 // Mock UI components
-export const mockUiComponents = () => {
+export function mockUiComponents() {
   vi.mock('@/components/ui/badge', () => ({
     default: ({ children, variant, ...props }: any) => (
       <span data-testid="badge" data-variant={variant} {...props}>
@@ -142,7 +148,7 @@ export const mockUiComponents = () => {
       </div>
     ),
     CardTitle: ({ children, className, ...props }: any) => (
-      <h3 data-testid="card-title" className={className} role="heading" aria-level="3" {...props}>
+      <h3 data-testid="card-title" className={className} role="heading" aria-level={3} {...props}>
         {children}
       </h3>
     ),
@@ -169,7 +175,7 @@ export const mockUiComponents = () => {
 }
 
 // Mock markdown components
-export const mockMarkdownComponents = () => {
+export function mockMarkdownComponents() {
   vi.mock('@/components/markdown/MarkdownRenderer', () => ({
     MarkdownRenderer: ({ content }: any) => (
       <div data-testid="markdown-renderer">
@@ -180,7 +186,7 @@ export const mockMarkdownComponents = () => {
 }
 
 // Mock icons
-export const mockIcons = () => {
+export function mockIcons() {
   vi.mock('lucide-react', () => ({
     Star: ({ className, ...props }: any) => (
       <span data-testid="star-icon" className={className} {...props}>
@@ -194,7 +200,7 @@ export const mockIcons = () => {
 }
 
 // Mock next/link
-export const mockNextLink = () => {
+export function mockNextLink() {
   vi.mock('next/link', () => ({
     default: ({ href, children, ...props }: any) => (
       <a href={href} data-testid="link" {...props}>
@@ -205,14 +211,14 @@ export const mockNextLink = () => {
 }
 
 // Mock utils
-export const mockUtils = () => {
+export function mockUtils() {
   vi.mock('@/lib/utils', () => ({
     normalizeSlug: (slug: string) => slug,
   }))
 }
 
 // Complete setup function that mocks everything
-export const setupCommonMocks = (customContentMocks = {}) => {
+export function setupCommonMocks(customContentMocks = {}) {
   mockNextNavigation()
   mockContentLoader(customContentMocks)
   mockUiUtils()
@@ -226,7 +232,7 @@ export const setupCommonMocks = (customContentMocks = {}) => {
 }
 
 // Individual setup functions for more granular control
-export const setupPageTests = (customContentMocks = {}) => {
+export function setupPageTests(customContentMocks = {}) {
   mockNextNavigation()
   mockContentLoader(customContentMocks)
   mockLayoutComponents()
@@ -236,32 +242,32 @@ export const setupPageTests = (customContentMocks = {}) => {
   mockIcons()
 }
 
-export const setupComponentTests = () => {
+export function setupComponentTests() {
   mockUiComponents()
   mockIcons()
   mockUtils()
 }
 
 // Reset all mocks between tests
-export const resetAllMocks = () => {
+export function resetAllMocks() {
   vi.clearAllMocks()
   vi.resetModules()
 }
 
 // Helper functions for common test scenarios
-export const setupNotFoundTest = () => {
+export function setupNotFoundTest() {
   mockNextNavigation()
   mockContentLoader()
 }
 
-export const setupAccessibilityTest = () => {
+export function setupAccessibilityTest() {
   mockLayoutComponents()
   mockSharedComponents()
   mockUiComponents()
   mockIcons()
 }
 
-export const setupPerformanceTest = () => {
+export function setupPerformanceTest() {
   mockContentLoader()
   mockLayoutComponents()
   mockSharedComponents()

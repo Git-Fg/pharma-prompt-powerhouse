@@ -31,7 +31,17 @@ if (typeof window === 'undefined') {
 }
 /* eslint-enable ts/no-require-imports */
 
-type BaseContentItem = BaseGuide | BaseWorkflow
+// Interface pour un contenu lié avec score
+interface RelatedItem {
+  slug: string
+  title: string
+  description: string
+  type: 'guide' | 'workflow' | 'concept' | 'tool'
+  score: number
+}
+
+// Interface pour les types de base enrichis
+type BaseContentItem = BaseGuide | BaseWorkflow | BaseConcept | BaseExternalTool
 
 // Cache configuration - only available server-side
 function getCacheConfig() {
@@ -145,8 +155,6 @@ export function loadContent(): ContentData {
   // --- PASSE 1: INDEXATION (Complexité O(N)) ---
   // Crée des dictionnaires rapides pour un accès instantané par slug.
   const conceptMap = new Map<string, BaseConcept>(concepts.map(c => [c.slug, c]))
-  const guideMap = new Map<string, BaseGuide>(guides.map(g => [g.slug, g]))
-  const workflowMap = new Map<string, BaseWorkflow>(workflows.map(w => [w.slug, w]))
 
   // Préparez un objet pour stocker les relations inverses (back-relations)
   const backRelations = {
@@ -188,35 +196,14 @@ export function loadContent(): ContentData {
       return concept
     }) || []
 
-    const relatedWorkflows: EnrichedWorkflow['relatedWorkflows'] = []
-
-    // Optimisé: Trouver les workflows liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
-    if (workflow.conceptSlugs) {
-      const relatedContentSet = new Set<BaseContentItem>()
-
-      // Pour chaque concept de ce workflow, récupérer tous les contenus liés
-      workflow.conceptSlugs.forEach((conceptSlug) => {
-        const relatedContent = conceptToContentMap.get(conceptSlug) || []
-        relatedContent.forEach((item) => {
-          if (item.slug !== workflow.slug) {
-            relatedContentSet.add(item)
-          }
-        })
-      })
-
-      // Filtrer uniquement les workflows et éviter les doublons
-      relatedContentSet.forEach((item) => {
-        if (workflowMap.has(item.slug) && !relatedWorkflows.some(w => w.slug === item.slug)) {
-          const { content: _content, concepts: _concepts, relatedWorkflows: _rw, ...workflowWithoutContent } = item as EnrichedWorkflow
-          relatedWorkflows.push(workflowWithoutContent)
-        }
-      })
-    }
+    // Utiliser le nouveau système unifié de recommandation
+    const allContent: BaseContentItem[] = [...guides, ...workflows, ...concepts, ...externalTools]
+    const relatedItems = findRelatedItems(workflow, allContent, 3)
 
     return {
       ...workflow,
       concepts: conceptsForWorkflow,
-      relatedWorkflows: relatedWorkflows.slice(0, 3),
+      relatedItems,
     }
   })
 
@@ -234,39 +221,28 @@ export function loadContent(): ContentData {
       return concept
     }) || []
 
-    const relatedGuides: EnrichedGuide['relatedGuides'] = []
-
-    // Optimisé: Trouver les guides liés en utilisant l'index des concepts (O(N) au lieu de O(N²))
-    if (guide.conceptSlugs) {
-      const relatedContentSet = new Set<BaseContentItem>()
-
-      // Pour chaque concept de ce guide, récupérer tous les contenus liés
-      guide.conceptSlugs.forEach((conceptSlug) => {
-        const relatedContent = conceptToContentMap.get(conceptSlug) || []
-        relatedContent.forEach((item) => {
-          if (item.slug !== guide.slug) {
-            relatedContentSet.add(item)
-          }
-        })
-      })
-
-      // Filtrer uniquement les guides et éviter les doublons
-      relatedContentSet.forEach((item) => {
-        if (guideMap.has(item.slug) && !relatedGuides.some(g => g.slug === item.slug)) {
-          const { content: _content, concepts: _concepts, relatedGuides: _rg, ...guideWithoutContent } = item as EnrichedGuide
-          relatedGuides.push(guideWithoutContent)
-        }
-      })
-    }
+    // Utiliser le nouveau système unifié de recommandation
+    const allContent: BaseContentItem[] = [...guides, ...workflows, ...concepts, ...externalTools]
+    const relatedItems = findRelatedItems(guide, allContent, 3)
 
     return {
       ...guide,
       concepts: conceptsForGuide,
-      relatedGuides: relatedGuides.slice(0, 3),
+      relatedItems,
     }
   })
 
-  const enrichedConcepts: EnrichedConcept[] = concepts
+  // Enrichir les concepts
+  const enrichedConcepts: EnrichedConcept[] = concepts.map((concept) => {
+    // Utiliser le nouveau système unifié de recommandation
+    const allContent: BaseContentItem[] = [...guides, ...workflows, ...concepts, ...externalTools]
+    const relatedItems = findRelatedItems(concept, allContent, 4) // 4 pour les concepts pour montrer plus de diversité
+
+    return {
+      ...concept,
+      relatedItems,
+    }
+  })
 
   const finalContentObject = {
     guides: enrichedGuides,
@@ -303,6 +279,90 @@ export function loadContent(): ContentData {
   }
 
   return finalContentObject
+}
+
+// --- FONCTION UNIFIÉE DE CALCUL DE SIMILARITÉ ---
+
+/**
+ * Calcule le score de similarité entre deux contenus
+ * Combine les tags (40%) et les concepts partagés (60%)
+ */
+function calculateSimilarity(itemA: BaseContentItem, itemB: BaseContentItem): number {
+  let score = 0
+
+  // Similarité basée sur les tags (40% du poids)
+  const tagSimilarity = calculateTagSimilarity(itemA.tags || [], itemB.tags || [])
+  score += tagSimilarity * 0.4
+
+  // Similarité basée sur les concepts partagés (60% du poids)
+  const conceptSimilarity = calculateConceptSimilarity(itemA.conceptSlugs || [], itemB.conceptSlugs || [])
+  score += conceptSimilarity * 0.6
+
+  return score
+}
+
+/**
+ * Calcule la similarité Jaccard entre deux listes de tags
+ */
+function calculateTagSimilarity(tags1: string[], tags2: string[]): number {
+  if (!tags1.length || !tags2.length)
+    return 0
+
+  const intersection = tags1.filter(tag => tags2.includes(tag))
+  const union = [...new Set([...tags1, ...tags2])]
+
+  return intersection.length / union.length
+}
+
+/**
+ * Calcule la similarité Jaccard entre deux listes de concepts
+ */
+function calculateConceptSimilarity(concepts1: string[], concepts2: string[]): number {
+  if (!concepts1.length || !concepts2.length)
+    return 0
+
+  const intersection = concepts1.filter(concept => concepts2.includes(concept))
+  const union = [...new Set([...concepts1, ...concepts2])]
+
+  return intersection.length / union.length
+}
+
+/**
+ * Trouve les contenus les plus similaires pour un item donné
+ */
+function findRelatedItems(
+  currentItem: BaseContentItem,
+  allItems: BaseContentItem[],
+  maxItems: number = 3,
+): RelatedItem[] {
+  const scoredItems = allItems
+    .filter(item => item.slug !== currentItem.slug)
+    .map(item => ({
+      slug: item.slug,
+      title: item.title,
+      description: item.description,
+      type: getContentType(item),
+      score: calculateSimilarity(currentItem, item),
+    }))
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maxItems)
+
+  return scoredItems
+}
+
+/**
+ * Détermine le type d'un contenu
+ */
+function getContentType(item: BaseContentItem): 'guide' | 'workflow' | 'concept' | 'tool' {
+  if ('url' in item)
+    return 'tool'
+  if ('keyTakeaways' in item && 'category' in item && !('estimatedTime' in item))
+    return 'concept'
+  if ('estimatedTime' in item) {
+    return 'isWorkflow' in item && item.isWorkflow ? 'workflow' : 'guide'
+  }
+  return 'guide' // fallback
 }
 
 export const content = loadContent()

@@ -240,16 +240,37 @@ export type BaseWorkflow = z.infer<typeof workflowSchema>
 export type BaseExternalTool = z.infer<typeof externalToolSchema>
 
 // Types enrichis résultant du content-loader - explicites pour la sécurité de type
-export type EnrichedConcept = BaseConcept // Les concepts ne sont pas enrichis actuellement
 
 export type EnrichedGuide = BaseGuide & {
   concepts: BaseConcept[]
-  relatedGuides: Omit<BaseGuide, 'content' | 'conceptSlugs'>[]
+  relatedItems: Array<{
+    slug: string
+    title: string
+    description: string
+    type: 'guide' | 'workflow' | 'concept' | 'tool'
+    score: number
+  }>
 }
 
 export type EnrichedWorkflow = BaseWorkflow & {
   concepts: BaseConcept[]
-  relatedWorkflows: Omit<BaseWorkflow, 'content' | 'conceptSlugs'>[]
+  relatedItems: Array<{
+    slug: string
+    title: string
+    description: string
+    type: 'guide' | 'workflow' | 'concept' | 'tool'
+    score: number
+  }>
+}
+
+export type EnrichedConcept = BaseConcept & {
+  relatedItems: Array<{
+    slug: string
+    title: string
+    description: string
+    type: 'guide' | 'workflow' | 'concept' | 'tool'
+    score: number
+  }>
 }
 
 // Aliases pour compatibilité descendante - seront dépréciés progressivement
