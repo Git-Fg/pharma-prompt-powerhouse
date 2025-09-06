@@ -32,6 +32,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Architecture
 
+### Architectural Principles
+- **Declarative Architecture**: Components declare what they need, not how to implement it
+- **Single Source of Truth**: Each functionality has one canonical implementation
+- **Type-First Development**: TypeScript types drive component design and validation
+- **Zero Duplication**: Shared functionality extracted into reusable, type-safe components
+- **Progressive Enhancement**: Core functionality works everywhere, enhancements where supported
+
 ### Modern Stack (2025)
 - **Next.js 15** with App Router and React 19
 - **TypeScript** with strict mode and Zod validation
@@ -55,9 +62,10 @@ The project uses a custom TypeScript-based content system with:
 
 ### Component Architecture
 - **shadcn/ui** components with tailwind-variants for styling
-- **Smart Recommendation System**: Context-aware content suggestions
+- **Unified Architecture**: Single components for multiple use cases (FilterableContentGrid, SmartRecommendationsSection, ContentHeader)
 - **Mobile-First Design**: Bottom navigation and responsive layouts
 - **Modern Animations**: AutoAnimate + Framer Motion hybrid system
+- **Type Safety**: 100% TypeScript coverage with generic constraints and strict mode
 
 ### Key Systems
 
@@ -67,10 +75,17 @@ The project uses a custom TypeScript-based content system with:
 - **Back-Relations**: Automatic reverse relationship mapping
 - **Integrity Validation**: Build fails on broken content references
 
-#### Recommendation Engine
-- **ConceptRecommendation**: Suggests related concepts with justifications
-- **ToolRecommendation**: Context-aware tool suggestions
-- **GuideRecommendation**: Smart guide linking based on content
+#### Unified Recommendation System
+- **SmartRecommendationsSection**: Single intelligent recommendation component for all content types
+- **Combined Scoring Algorithm**: Tag similarity (40%) + concept similarity (60%) for relevant suggestions
+- **Multi-type Recommendations**: Supports guides, workflows, concepts, and external tools
+- **Context-aware**: Automatically adapts recommendations based on current content type
+
+#### Unified Listing System
+- **FilterableContentGrid**: Generic component for all content listing pages
+- **TypeScript Generics**: Full type safety with flexible content type constraints
+- **Smart Filtering**: Search, category, and difficulty filtering with centralized state management
+- **Consistent UX**: Unified empty states, loading states, and animations across all listing pages
 
 #### UI/UX Features
 - **AutoAnimate Integration**: Smooth transitions respecting accessibility preferences
