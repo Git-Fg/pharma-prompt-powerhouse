@@ -61,7 +61,7 @@ export function KeyTakeaways({
   points,
   variant = 'default',
   contentType = 'guide',
-  animated = true,
+  animated = false,
   className,
 }: KeyTakeawaysProps) {
   if (!points || points.length === 0) {
