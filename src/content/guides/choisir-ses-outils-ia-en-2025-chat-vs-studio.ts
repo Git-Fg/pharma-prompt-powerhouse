@@ -57,10 +57,10 @@ content: [
   },
 {
   type: 'card',
-  title: "Perplexity n\'est plus un simple moteur de recherche",
-  content: "C\'est le changement le plus important de l\'année. Au lieu de payer des abonnements séparés pour chaque modèle de pointe, l\'abonnement Perplexity Pro (environ 20$/mois) vous donne accès à **GPT-5**, **Claude 4 Opus**, et d\'autres, directement dans leur interface.
+  title: "Perplexity n'est plus un simple moteur de recherche",
+  content: `C'est le changement le plus important de l'année. Au lieu de payer des abonnements séparés pour chaque modèle de pointe, l'abonnement Perplexity Pro (environ 20$/mois) vous donne accès à **GPT-5**, **Claude 4 Opus**, et d'autres, directement dans leur interface.
   
-  Sa fonction **'Deep Research'** en fait un véritable **agent de recherche** : vous lui donnez un sujet, et il planifie, exécute une recherche multi-sources, et vous rend un rapport de synthèse sourcé. C\'est un gain de productivité phénoménal."
+  Sa fonction **'Deep Research'** en fait un véritable **agent de recherche** : vous lui donnez un sujet, et il planifie, exécute une recherche multi-sources, et vous rend un rapport de synthèse sourcé. C'est un gain de productivité phénoménal.`,
   },
 {
   type: 'markdown',
