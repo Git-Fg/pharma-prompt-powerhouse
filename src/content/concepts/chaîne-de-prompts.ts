@@ -80,7 +80,7 @@ export const concept = {
     },
     {
       type: 'guideRecommendation',
-      slug: 'workflow-generer-cas-cliniques',
+      slug: 'tree-of-thought-clinique',
       reason: 'Découvrez un exemple concret d\'application de chaîne de prompts pour créer des cas cliniques de révision de haute qualité.',
     },
     {
