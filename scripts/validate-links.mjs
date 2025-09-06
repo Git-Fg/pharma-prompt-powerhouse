@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { glob } from 'glob'
 import markdownLinkCheck from 'markdown-link-check'
 
-/* eslint-disable no-console */
+/* eslint-disable no-console -- Script de validation, besoin de console.log */
 console.log('🔍 Checking for broken links in content files...')
 
 // Configuration pour markdown-link-check
@@ -127,4 +127,4 @@ if (hasErrors) {
 else {
   console.log('\n✅ All external links are live.')
 }
-/* eslint-enable no-console */
+/* eslint-enable no-console -- Fin du script de validation */

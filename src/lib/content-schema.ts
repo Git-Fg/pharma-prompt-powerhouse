@@ -124,7 +124,7 @@ const accordionBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   type: z.literal('accordion'),
   items: z.array(z.object({
     title: z.string(),
-    // eslint-disable-next-line ts/no-use-before-define
+    // eslint-disable-next-line ts/no-use-before-define -- Référence circulaire nécessaire pour les schémas récursifs
     content: z.array(contentBlockSchema),
   })),
 }))
@@ -143,7 +143,7 @@ const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   tabs: z.array(z.object({
     value: z.string(),
     title: z.string(),
-    // eslint-disable-next-line ts/no-use-before-define
+    // eslint-disable-next-line ts/no-use-before-define -- Référence circulaire nécessaire pour les schémas récursifs
     content: z.array(contentBlockSchema),
   })),
 }))

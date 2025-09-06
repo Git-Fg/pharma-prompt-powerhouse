@@ -2,7 +2,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-/* eslint-disable no-console */
+/* eslint-disable no-console -- Script de génération, besoin de console.log */
 console.log('📝 Generating valid slugs list for ESLint validation...')
 
 // Check if we have cached content first
@@ -90,4 +90,4 @@ if (duplicates.length > 0) {
 else {
   console.log('✅ No duplicate slugs found.')
 }
-/* eslint-enable no-console */
+/* eslint-enable no-console -- Fin du script de génération */

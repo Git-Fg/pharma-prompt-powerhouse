@@ -14,7 +14,7 @@ import { allWorkflows } from '@/content/workflows'
 import { normalizeSlug } from './utils'
 
 // Imports conditionnels pour Node.js uniquement (build time)
-/* eslint-disable ts/no-require-imports */
+/* eslint-disable ts/no-require-imports -- Import conditionnel de modules Node.js côté serveur uniquement */
 // eslint-disable-next-line ts/no-explicit-any -- Modules Node.js conditionnels importés uniquement côté serveur, typés correctement lors de l'importation réel
 let createHash: any, readFileSync: any, writeFileSync: any, existsSync: any, mkdirSync: any, path: any
 
@@ -30,7 +30,7 @@ if (typeof window === 'undefined') {
   existsSync = fs.existsSync
   mkdirSync = fs.mkdirSync
 }
-/* eslint-enable ts/no-require-imports */
+/* eslint-enable ts/no-require-imports -- Fin de la section d'import conditionnel */
 
 // Interface pour un contenu lié avec score
 interface RelatedItem {
@@ -132,7 +132,7 @@ export function loadContent(): ContentData {
 
     // Vérifier si le cache est valide
     if (cachedManifest.global?.hash === globalHash && existsSync(config.CONTENT_CACHE_PATH)) {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- Log de debugging pour le chargement de contenu
       console.log('✅ Content cache hit! Loading content from cache.')
       try {
         const cachedContent = JSON.parse(readFileSync(config.CONTENT_CACHE_PATH, 'utf-8')) as ContentData
@@ -143,7 +143,7 @@ export function loadContent(): ContentData {
       }
     }
 
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console -- Log de debugging pour le chargement de contenu
     console.log('🔥 Content cache miss or outdated. Rebuilding content...')
   }
 
@@ -271,7 +271,7 @@ export function loadContent(): ContentData {
         },
       }
       writeFileSync(config.MANIFEST_PATH, JSON.stringify(newManifest, null, 2))
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- Log de debugging pour le chargement de contenu
       console.log('✅ Content cache updated successfully.')
     }
     catch {
