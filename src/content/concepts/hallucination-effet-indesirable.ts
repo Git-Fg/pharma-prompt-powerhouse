@@ -6,7 +6,7 @@ export const concept = {
   description: 'Comprendre et prévenir les hallucinations de l\'IA comme des effets indésirables prévisibles',
   icon: 'AlertTriangle',
   category: 'fondamentaux',
-  difficulty: 'débutant',
+  difficulty: 'intermédiaire',
   tags: [
     'exemple-code',
     'guide',
@@ -22,8 +22,23 @@ export const concept = {
   conceptSlugs: [],
   content: [
     {
-      type: 'markdown',
-      content: '# Hallucination : Effet Indésirable\n\n## Qu\'est-ce qu\'une hallucination ?\n\nUne **hallucination** est une erreur factuelle plausible générée par l\'IA. Contrairement à une simple erreur, l\'hallucination est crédible et peut tromper même des experts. C\'est l\'équivalent d\'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante.\n\n## Pourquoi les hallucinations surviennent-elles ?',
+      type: 'section',
+      title: 'Qu\'est-ce qu\'une hallucination ?',
+      content: 'Une hallucination est une erreur factuelle plausible générée par l\'IA.',
+      variant: 'introduction',
+    },
+    {
+      type: 'definedTerm',
+      term: 'hallucination',
+      children: 'Contrairement à une simple erreur, l\'hallucination est crédible et peut tromper même des experts. C\'est l\'équivalent d\'un effet indésirable médicamenteux : prévisible, géré, mais nécessitant une vigilance constante.',
+      variant: 'inline',
+      showIcon: true,
+    },
+    {
+      type: 'section',
+      title: 'Pourquoi les hallucinations surviennent-elles ?',
+      content: 'Comprendre les mécanismes d\'action des hallucinations permet de mieux les prévenir et les traiter.',
+      variant: 'section',
     },
     {
       type: 'alert',
@@ -83,6 +98,16 @@ export const concept = {
               content: 'Un réglage bas (ex: 0.2) favorise la factualité. Un réglage haut (ex: 0.9) favorise la créativité mais augmente le risque.\n\n**❌ Température : 0.9 (risque élevé)**\n```\n"Inventez une nouvelle molécule pour traiter l\'hypertension"\n```\n\n**✅ Température : 0.2 (risque faible)**\n```\n"Listez les molécules antihypertensives disponibles en 2025"\n```',
             },
             {
+              type: 'citation',
+              source: 'OpenAI',
+              title: 'GPT-4 Technical Report',
+              citationType: 'study',
+              author: 'OpenAI Team',
+              year: '2023',
+              url: 'https://arxiv.org/abs/2303.08774',
+              variant: 'compact',
+            },
+            {
               type: 'card',
               title: '2. Contexte Clair et Délimité',
               content: 'Fournir un contexte précis et des limites claires aide l\'IA à rester dans les faits.\n\n**❌ Prompt vague**\n```\n"Analyse cette ordonnance"\n```\n\n**✅ Prompt précis**\n```\n"Analyse cette ordonnance en te basant UNIQUEMENT sur les informations fournies.\nSi une information n\'est pas dans le texte, indique \'Non précisé\'."\n```',
@@ -117,30 +142,45 @@ export const concept = {
       content: '## Applications en pharmacie\n\n### Cas 1 : Analyse d\'interaction médicamenteuse',
     },
     {
-      type: 'codeBlock',
-      language: 'text',
-      filename: 'interaction-medicamenteuse.txt',
+      type: 'example',
+      title: 'Analyse d\'interaction médicamenteuse',
+      description: 'Comparaison entre un prompt risqué et un prompt sécurisé pour l\'analyse d\'interactions',
       content: '❌ Prompt risqué\n"Dis-moi tout sur l\'interaction warfarine-amiodarone"\n\n✅ Prompt sécurisé\n"Basé sur les référentiels fournis, liste les interactions\ndocumentées entre warfarine et amiodarone. Indique le niveau\nde preuve pour chaque interaction."',
+      exampleType: 'prompt',
+      difficulty: 'intermédiaire',
+      tags: ['sécurité', 'interaction', 'pharmacie'],
+      outcome: 'Le prompt sécurisé limite le contexte aux référentiels fournis et demande explicitement le niveau de preuve, réduisant ainsi le risque d\'hallucination.',
+      variant: 'card',
     },
     {
       type: 'markdown',
       content: '### Cas 2 : Calcul de dose',
     },
     {
-      type: 'codeBlock',
-      language: 'text',
-      filename: 'calcul-dose.txt',
+      type: 'example',
+      title: 'Calcul de dose',
+      description: 'Comparaison entre un prompt risqué et un prompt sécurisé pour le calcul de doses',
       content: '❌ Prompt risqué\n"Calcule la dose de digoxine pour ce patient"\n\n✅ Prompt sécurisé\n"Utilise la formule de Cockcroft-Gault fournie pour calculer\nla clairance de créatinine, puis applique les recommandations\nde dosage de la HAS pour la digoxine."',
+      exampleType: 'prompt',
+      difficulty: 'intermédiaire',
+      tags: ['pharmacie', 'calcul', 'sécurité'],
+      outcome: 'Le prompt sécurisé spécifie la méthode de calcul à utiliser et se réfère aux recommandations officielles, garantissant des résultats précis et traçables.',
+      variant: 'card',
     },
     {
       type: 'markdown',
       content: '### Cas 3 : Recherche bibliographique',
     },
     {
-      type: 'codeBlock',
-      language: 'text',
-      filename: 'recherche-biblio.txt',
+      type: 'example',
+      title: 'Recherche bibliographique',
+      description: 'Comparaison entre un prompt risqué et un prompt sécurisé pour la recherche bibliographique',
       content: '❌ Prompt risqué\n"Trouve les dernières études sur les nouveaux anticoagulants"\n\n✅ Prompt sécurisé\n"Recherche dans PubMed les études publiées entre 2020 et 2025\nsur les anticoagulants oraux directs. Limite aux essais\ncliniques randomisés."',
+      exampleType: 'prompt',
+      difficulty: 'intermédiaire',
+      tags: ['recherche', 'bibliographie', 'pharmacie'],
+      outcome: 'Le prompt sécurisé définit des critères de recherche précis (source, période, type d\'étude) pour obtenir des résultats fiables et reproductibles.',
+      variant: 'card',
     },
     {
       type: 'markdown',
@@ -164,4 +204,4 @@ export const concept = {
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

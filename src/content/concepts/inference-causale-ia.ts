@@ -1,13 +1,18 @@
 import type { Concept } from '@/lib/content-schema'
 
-const concept = {
+export const concept = {
   slug: 'inference-causale-ia',
   title: 'L\'Inférence Causale et l\'IA',
   description: 'La limite fondamentale des IA actuelles : pourquoi trouver une corrélation n\'est pas prouver une causalité.',
-  area: 'concepts',
+  category: 'concepts',
+  difficulty: 'intermédiaire',
   tags: ['ia', 'limitation', 'fiabilité', 'pharmacovigilance'],
   isFavorite: false,
-  cover: '/images/objectifs/recherche-biblio-avant.png',
+  keyTakeaways: [
+    'Les IA excellent pour trouver des corrélations mais ne peuvent pas prouver des liens de causalité.',
+    'En pharmacovigilance, cette limite est critique : l\'IA peut aider à explorer des hypothèses mais pas à établir l\'imputabilité.',
+    'Utilisez l\'IA pour organiser l\'information et appliquer des cadres méthodologiques, mais gardez le jugement humain pour la causalité.',
+  ],
 
   content: [
     {
@@ -23,23 +28,7 @@ const concept = {
     {
       type: 'section',
       title: 'Pourquoi est-ce Critique en Pharmacovigilance ?',
-      content: [
-        {
-          type: 'markdown',
-          content: 'Dans l\'analyse d\'un effet indésirable, la question n\'est pas de savoir si l\'effet est *associé* au médicament, mais s\'il est *causé* par lui. C\'est ce qu\'on appelle l\'imputabilité.',
-        },
-        {
-          type: 'card',
-          title: 'Le Risque de Fausse Imputation',
-          content: 'Une IA peut trouver dans la littérature 50 cas où le médicament A a été donné à des patients qui ont développé l\'effet B. Mais elle ne peut pas savoir si ces patients n\'avaient pas tous une autre maladie (facteur de confusion) qui est la vraie cause de l\'effet B.',
-        },
-        {
-          type: 'alert',
-          variant: 'destructive',
-          title: 'Ne Jamais Conclure à la Causalité sur la Base d\'une IA Seule',
-          content: 'La sortie d\'une IA peut être une excellente base pour **explorer des hypothèses**, mais ne doit jamais être utilisée comme une preuve de causalité. Le jugement humain et l\'application de cadres méthodologiques rigoureux (comme les critères de Bradford Hill ou l\'échelle de Naranjo) restent indispensables.',
-        },
-      ],
+      content: 'Dans l\'analyse d\'un effet indésirable, la question n\'est pas de savoir si l\'effet est *associé* au médicament, mais s\'il est *causé* par lui. C\'est ce qu\'on appelle l\'imputabilité.\n\n**Le Risque de Fausse Imputation**\nUne IA peut trouver dans la littérature 50 cas où le médicament A a été donné à des patients qui ont développé l\'effet B. Mais elle ne peut pas savoir si ces patients n\'avaient pas tous une autre maladie (facteur de confusion) qui est la vraie cause de l\'effet B.\n\n⚠️ **Ne Jamais Conclure à la Causalité sur la Base d\'une IA Seule**\nLa sortie d\'une IA peut être une excellente base pour **explorer des hypothèses**, mais ne doit jamais être utilisée comme une preuve de causalité. Le jugement humain et l\'application de cadres méthodologiques rigoureux (comme les critères de Bradford Hill ou l\'échelle de Naranjo) restent indispensables.',
     },
     {
       type: 'conclusion',

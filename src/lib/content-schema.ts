@@ -33,6 +33,8 @@ const multiFormatPromptBlockSchema = z.object({
 const keyTakeawaysBlockSchema = z.object({
   type: z.literal('keyTakeaways'),
   points: z.array(z.string()),
+  variant: z.enum(['default', 'highlighted', 'compact', 'featured']).optional(),
+  contentType: z.enum(['guide', 'concept', 'workflow', 'tool']).optional(),
 })
 
 const prerequisitesBlockSchema = z.object({
@@ -58,6 +60,62 @@ const actionChecklistBlockSchema = z.object({
   })),
   variant: z.enum(['default', 'card', 'alert']).optional(),
   allowChecking: z.boolean().optional(),
+})
+
+const pointsBlockSchema = z.object({
+  type: z.literal('points'),
+  title: z.string().optional(),
+  points: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+  })),
+})
+
+const definedTermBlockSchema = z.object({
+  type: z.literal('definedTerm'),
+  term: z.string(),
+  children: z.string(),
+  variant: z.enum(['inline', 'button']).optional(),
+  showIcon: z.boolean().optional(),
+})
+
+const citationBlockSchema = z.object({
+  type: z.literal('citation'),
+  source: z.string(),
+  title: z.string().optional(),
+  url: z.string().url().optional(),
+  citationType: z.enum(['article', 'book', 'website', 'study', 'guideline', 'other']).optional(),
+  author: z.string().optional(),
+  year: z.string().optional(),
+  doi: z.string().optional(),
+  journal: z.string().optional(),
+  volume: z.string().optional(),
+  issue: z.string().optional(),
+  pages: z.string().optional(),
+  abstract: z.string().optional(),
+  variant: z.enum(['inline', 'card', 'compact']).optional(),
+})
+
+const exampleBlockSchema = z.object({
+  type: z.literal('example'),
+  title: z.string(),
+  description: z.string().optional(),
+  content: z.string(),
+  exampleType: z.enum(['prompt', 'code', 'workflow', 'scenario', 'other']).optional(),
+  language: z.string().optional(),
+  filename: z.string().optional(),
+  outcome: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+  warnings: z.array(z.string()).optional(),
+  variant: z.enum(['card', 'inline', 'compact']).optional(),
+})
+
+const sectionBlockSchema = z.object({
+  type: z.enum(['introduction', 'analogy', 'section', 'conclusion', 'key-points', 'examples', 'warning']),
+  title: z.string(),
+  content: z.string(),
+  variant: z.enum(['default', 'highlighted', 'subtle']).optional(),
 })
 
 // Recursive schemas need to be declared with z.lazy for circular references
@@ -101,6 +159,11 @@ export const contentBlockSchema = z.union([
   keyTakeawaysBlockSchema,
   prerequisitesBlockSchema,
   actionChecklistBlockSchema,
+  pointsBlockSchema,
+  definedTermBlockSchema,
+  citationBlockSchema,
+  exampleBlockSchema,
+  sectionBlockSchema,
   accordionBlockSchema,
   tableBlockSchema,
 ])
@@ -142,6 +205,7 @@ export const guideSchema = baseContentSchema.extend({
 export const workflowSchema = baseContentSchema.extend({
   category: z.string(),
   difficulty: z.string(),
+  cover: z.string().optional(),
   estimatedTime: z.string().optional(),
   problem: z.array(contentBlockSchema),
   initialApproach: z.array(contentBlockSchema),

@@ -1,13 +1,18 @@
 import type { Concept } from '@/lib/content-schema'
 
-const concept = {
+export const concept = {
   slug: 'hallucination-strategique',
   title: 'L\'Hallucination Stratégique',
   description: 'Un risque subtil des agents planificateurs : quand le plan lui-même est basé sur une mauvaise prémisse.',
-  area: 'concepts',
+  category: 'concepts',
+  difficulty: 'intermédiaire',
   tags: ['ia', 'agent', 'plan-and-solve', 'biais', 'fiabilité'],
   isFavorite: false,
-  cover: '/images/objectifs/recherche-biblio-apres.png',
+  keyTakeaways: [
+    'L\'hallucination stratégique est un risque propre aux agents "Plan-and-Solve" où le plan lui-même est basé sur une mauvaise prémisse.',
+    'Contrairement à l\'hallucination factuelle, chaque étape du plan peut être correcte mais la stratégie globale est erronée.',
+    'La mitigation implique de valider le plan avant exécution, d\'être précis dans l\'objectif, et d\'itérer par étapes.',
+  ],
 
   content: [
     {
@@ -23,27 +28,7 @@ const concept = {
     {
       type: 'section',
       title: 'Comment la Détecter et la Mitiger ?',
-      content: [
-        {
-          type: 'markdown',
-          content: 'Le risque est élevé car le plan peut paraître très logique et bien structuré. Voici comment s\'en prémunir :',
-        },
-        {
-          type: 'card',
-          title: '1. Validez Toujours le Plan',
-          content: 'Les meilleurs agents "Plan-and-Solve" (comme Z.AI) vous montrent leur plan avant de l\'exécuter. Ne l\'ignorez jamais. Lisez-le attentivement. Est-ce que les étapes correspondent bien à ce que vous voulez faire ?',
-        },
-        {
-          type: 'card',
-          title: '2. Soyez Extrêmement Précis dans votre Objectif Initial',
-          content: 'Plus votre demande est ambiguë, plus le risque d\'interprétation erronée est grand. Fournissez un contexte clair, définissez les termes importants et précisez le format de sortie attendu.',
-        },
-        {
-          type: 'card',
-          title: '3. Itérez en Plusieurs Fois',
-          content: 'Pour une tâche très complexe, ne demandez pas tout d\'un coup. Commencez par une demande plus simple, validez le plan et les premiers résultats, puis demandez à l\'agent de continuer ou de raffiner sa stratégie.',
-        },
-      ],
+      content: 'Le risque est élevé car le plan peut paraître très logique et bien structuré. Voici comment s\'en prémunir :\n\n**1. Validez Toujours le Plan**\nLes meilleurs agents "Plan-and-Solve" (comme Z.AI) vous montrent leur plan avant de l\'exécuter. Ne l\'ignorez jamais. Lisez-le attentivement. Est-ce que les étapes correspondent bien à ce que vous voulez faire ?\n\n**2. Soyez Extrêmement Précis dans votre Objectif Initial**\nPlus votre demande est ambiguë, plus le risque d\'interprétation erronée est grand. Fournissez un contexte clair, définissez les termes importants et précisez le format de sortie attendu.\n\n**3. Itérez en Plusieurs Fois**\nPour une tâche très complexe, ne demandez pas tout d\'un coup. Commencez par une demande plus simple, validez le plan et les premiers résultats, puis demandez à l\'agent de continuer ou de raffiner sa stratégie.',
     },
     {
       type: 'conclusion',

@@ -13,8 +13,12 @@ test.describe('Application E2E Tests', () => {
     // Check workflows section exists (replaces objectifs)
     await expect(page.getByRole('heading', { name: /Workflows/ })).toBeVisible()
 
-    // Check navigation is working
-    await expect(page.getByRole('link', { name: /Arsenal IA/ })).toBeVisible()
+    // Check navigation is working using test IDs
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
+
+    const arsenalLink = page.locator('[data-testid="nav-link-l-arsenal-ia"]')
+    await expect(arsenalLink).toBeVisible()
   })
 
   test('concepts page navigation and content', async ({ page }) => {
@@ -23,10 +27,16 @@ test.describe('Application E2E Tests', () => {
     // Check concepts page loads - correct title is "Hub de Concepts"
     await expect(page.getByRole('heading', { name: 'Hub de Concepts' })).toBeVisible()
 
-    // Check concepts are displayed
-    await expect(page.getByRole('link', { name: /Context Engineering/ })).toBeVisible()
+    // Check concepts are displayed using test ID for navigation
+    const conceptsLink = page.locator('[data-testid="nav-link-concepts"]')
+    await expect(conceptsLink).toBeVisible()
 
-    // Test concept navigation
+    // Check page header using test ID
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
+
+    // Test concept navigation - keep existing link navigation as it's content-specific
+    await expect(page.getByRole('link', { name: /Context Engineering/ })).toBeVisible()
     await page.getByRole('link', { name: /Context Engineering/ }).click()
     await expect(page).toHaveURL(/\/concepts\/context-engineering/)
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Context Engineering')
@@ -37,6 +47,13 @@ test.describe('Application E2E Tests', () => {
 
     // Check guides page loads
     await expect(page.getByRole('heading', { name: 'Mes Fiches & Méthodes' })).toBeVisible()
+
+    // Check navigation using test IDs
+    const guidesLink = page.locator('[data-testid="nav-link-guides"]')
+    await expect(guidesLink).toBeVisible()
+
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
 
     // Check search functionality exists
     await expect(page.getByPlaceholder(/Rechercher/)).toBeVisible()
@@ -51,6 +68,13 @@ test.describe('Application E2E Tests', () => {
     // Check workflows page loads - updated to match actual title
     await expect(page.getByRole('heading', { name: /Workflows Stratégiques/ })).toBeVisible()
 
+    // Check navigation using test IDs
+    const workflowsLink = page.locator('[data-testid="nav-link-workflows-stratégiques"]')
+    await expect(workflowsLink).toBeVisible()
+
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
+
     // Check workflow cards are visible
     await expect(page.locator('a[href*="/workflows/"]').first()).toBeVisible()
   })
@@ -60,6 +84,13 @@ test.describe('Application E2E Tests', () => {
 
     // Check page loads - correct title is "L'Arsenal IA 2025"
     await expect(page.getByRole('heading', { name: 'L\'Arsenal IA 2025' })).toBeVisible()
+
+    // Check navigation using test IDs
+    const arsenalLink = page.locator('[data-testid="nav-link-l-arsenal-ia"]')
+    await expect(arsenalLink).toBeVisible()
+
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
 
     // Check comparative table exists
     await expect(page.getByRole('heading', { name: /Tableau Comparatif/ })).toBeVisible()
@@ -73,6 +104,10 @@ test.describe('Application E2E Tests', () => {
 
     // Check page loads
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+
+    // Check navigation using test IDs
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
   })
 
   test('no console errors on main pages', async ({ page }) => {

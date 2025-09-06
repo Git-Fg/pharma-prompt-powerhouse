@@ -5,7 +5,7 @@ import { guide as gestionMemoireIa } from './gestion-memoire-ia'
 import { guide as iaEnLocalConfidentialite } from './ia-en-local-confidentialite-totale'
 import { guide as iaStagiaireBrillantNaif } from './ia-stagiaire-brillant-naif'
 import { guide as leCoreKitIaGratuit } from './le-core-kit-ia-gratuit-en-2025'
-import { guide as les5PiliersPrompt } from './les-5-piliers-dun-prompt-pharmaceutique-efficace'
+import { guide as les6PiliersPrompt } from './les-6-piliers-prompt-pharmaceutique-efficace'
 import { guide as obtenirDonneesFiables } from './obtenir-donnees-fiables'
 import { guide as optimisationPromptsMethodeIterative } from './optimisation-de-prompts-la-methode-iterative'
 import { guide as optimiserQuotasTemps } from './optimiser-ses-quotas-et-son-temps-avec-lia'
@@ -21,7 +21,7 @@ export const allGuides = [
   iaEnLocalConfidentialite,
   iaStagiaireBrillantNaif,
   leCoreKitIaGratuit,
-  les5PiliersPrompt,
+  les6PiliersPrompt,
   obtenirDonneesFiables,
   optimisationPromptsMethodeIterative,
   optimiserQuotasTemps,

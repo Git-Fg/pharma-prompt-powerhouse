@@ -20,20 +20,23 @@ export const concept = {
   conceptSlugs: [],
   content: [
     {
-      type: 'alert',
-      variant: 'default',
-      title: '🧬 Analogie Biologique',
-      content: 'Un **token** est à l\'IA ce qu\'un **acide aminé** est à une protéine : un bloc fondamental indivisible que le système manipule.',
+      type: 'section',
+      title: 'Définition : Qu\'est-ce qu\'un Token ?',
+      content: 'Un token est l\'unité fondamentale que les modèles de langage utilisent pour traiter le texte.',
+      variant: 'introduction',
     },
     {
-      type: 'markdown',
-      content: '## Définition : Qu\'est-ce qu\'un Token ?',
+      type: 'definedTerm',
+      term: 'token',
+      children: 'Un token est à l\'IA ce qu\'un acide aminé est à une protéine : un bloc fondamental indivisible que le système manipule.',
+      variant: 'button',
+      showIcon: true,
     },
     {
       type: 'card',
       title: 'Unité de Base du Texte',
       description: 'L\'équivalent numérique d\'un acide aminé',
-      content: 'Dans le domaine des modèles de langage (LLMs), un **token** est l\'unité de base du texte. C\'est l\'équivalent d\'un acide aminé pour une protéine : un bloc fondamental que le modèle manipule.',
+      content: 'Dans le domaine des modèles de langage (LLMs), un token est l\'unité de base du texte. C\'est l\'équivalent d\'un acide aminé pour une protéine : un bloc fondamental que le modèle manipule.',
     },
     {
       type: 'tabs',
@@ -70,7 +73,14 @@ export const concept = {
               type: 'card',
               title: 'La "Mémoire à Court Terme" de l\'IA',
               description: 'Quantité maximale de tokens gérés simultanément',
-              content: 'Chaque modèle d\'IA possède une **fenêtre de contexte** (ou *context window*), qui est la quantité maximale de tokens qu\'il peut prendre en compte à un instant T.',
+              content: 'Chaque modèle d\'IA possède une fenêtre de contexte, qui est la quantité maximale de tokens qu\'il peut prendre en compte à un instant T.',
+            },
+            {
+              type: 'definedTerm',
+              term: 'context-window',
+              children: 'La fenêtre de contexte (ou context window) est la \'mémoire de travail\' du modèle. Elle inclut votre prompt (tokens envoyés) et la réponse de l\'IA (tokens générés). Si la conversation dépasse cette limite, l\'IA \'oublie\' les informations les plus anciennes.',
+              variant: 'inline',
+              showIcon: true,
             },
             {
               type: 'alert',
@@ -187,4 +197,4 @@ export const concept = {
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

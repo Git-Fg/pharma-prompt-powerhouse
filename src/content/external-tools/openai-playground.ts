@@ -31,6 +31,23 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'Comparaison des Offres : Crédits vs API',
+      content: 'OpenAI Playground propose des crédits initiaux pour l\'expérimentation, puis fonctionne sur un modèle de paiement à l\'usage via l\'API.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Offres OpenAI Playground',
+      headers: ['Fonctionnalité', 'Offre Gratuite (Crédits initiaux)', 'Payant (API)'],
+      rows: [
+        ['**Accès aux modèles**', '✅ Accès limité', '✅ **Accès complet**'],
+        ['**Contrôle des paramètres**', '✅ Complet', '✅ **Complet**'],
+        ['**Coût**', 'Crédits de bienvenue (si disponibles)', '**Paiement à l\'usage (tokens)**'],
+        ['**Usage**', 'Expérimentation limitée', '**Illimité (selon budget)**'],
+      ],
+    },
+    {
       type: 'alert',
       variant: 'default',
       title: '🎓 Mon conseil pour les étudiants',

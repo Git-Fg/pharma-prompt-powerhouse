@@ -28,6 +28,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { getMainNavigationLinks } from '@/lib/navigation'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -44,12 +45,15 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      {...createTestIdProps(TestIds.Layout.Header)}
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    >
       <div className="container mx-auto px-4 h-16">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2" {...createTestIdProps(TestIds.Navigation.Logo)}>
               <div className="size-8 bg-primary rounded-lg flex items-center justify-center">
                 <Brain className="size-5 text-primary-foreground" />
               </div>
@@ -65,6 +69,7 @@ export function Header() {
                   <NavigationMenuItem key={item.name}>
                     <Link href={item.href} legacyBehavior passHref>
                       <NavigationMenuLink
+                        {...createTestIdProps(TestIds.Navigation.Link(item.name))}
                         className={cn(
                           navigationMenuTriggerStyle(),
                           isActive(item.href) && 'bg-accent text-accent-foreground',
@@ -84,6 +89,7 @@ export function Header() {
 
               {/* Theme Toggle */}
               <Button
+                {...createTestIdProps(TestIds.Navigation.ThemeToggle)}
                 variant="ghost"
                 size="icon"
                 onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -97,6 +103,7 @@ export function Header() {
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-2">
             <Button
+              {...createTestIdProps(TestIds.Navigation.ThemeToggle)}
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -127,6 +134,7 @@ export function Header() {
                       href="/"
                       className="flex items-center space-x-3"
                       onClick={() => setIsOpen(false)}
+                      {...createTestIdProps(TestIds.Navigation.Logo)}
                     >
                       <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                         <Brain className="size-6 text-primary-foreground" />
@@ -148,6 +156,7 @@ export function Header() {
                             'flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground rounded-lg',
                             isActive(item.href) && 'bg-accent text-accent-foreground',
                           )}
+                          {...createTestIdProps(TestIds.Navigation.MobileItem(item.name))}
                         >
                           {item.name}
                         </Link>

@@ -31,6 +31,24 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'Comparaison des Offres : Gratuit vs Plus',
+      content: 'ChatGPT propose une version gratuite avec GPT-4o-mini et une version payante (~20$/mois) avec GPT-5 et des fonctionnalités avancées.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Comparaison détaillée des fonctionnalités entre version gratuite et version Plus',
+      headers: ['Fonctionnalité', 'Version Gratuite', 'Version Payante (Plus ~20$/mois)'],
+      rows: [
+        ['**Modèle principal**', 'GPT-4o-mini', '✅ **GPT-5**'],
+        ['**Contexte max**', '128k tokens', '✅ **256k tokens**'],
+        ['**Recherche Web**', '✅ Intégrée', '✅ Intégrée'],
+        ['**Analyse de PDF**', 'Limitée', '✅ **Avancée**'],
+        ['**GPTs personnalisés**', '❌ Non', '✅ **Accès illimité**'],
+      ],
+    },
+    {
       type: 'card',
       title: 'Quand est-ce que j\'utilise ChatGPT ?',
       content: 'J\'utilise ChatGPT principalement pour :\n- **Obtenir des réponses rapides** sur des sujets généraux.\n- **Brainstormer** des idées pour un exposé ou un mémoire.\n- **Rédiger** des ébauches de textes, des emails ou des résumés.\n- **Traduire** des articles ou des documents de manière rapide.\n- **Dialoguer** avec l\'IA pour affiner un prompt étape par étape (optimisation itérative).',

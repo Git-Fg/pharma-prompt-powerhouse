@@ -220,4 +220,4 @@ Varie les types de raisonnement : mémorisation, compréhension, application, an
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow

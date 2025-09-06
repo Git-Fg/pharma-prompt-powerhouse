@@ -31,15 +31,38 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'Comparaison des Offres : Crédits vs API',
+      content: 'Anthropic Console propose des crédits initiaux pour l\'expérimentation, puis fonctionne sur un modèle de paiement à l\'usage via l\'API.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Offres Anthropic Console',
+      headers: ['Fonctionnalité', 'Offre Gratuite (Crédits initiaux)', 'Payant (API)'],
+      rows: [
+        ['**Accès aux modèles**', '✅ Tous les modèles', '✅ Tous les modèles'],
+        ['**Contrôle des paramètres**', '✅ Complet', '✅ Complet'],
+        ['**Coût**', 'Crédits gratuits de départ', 'Paiement à l\'usage (tokens)'],
+        ['**Sauvegarde**', '✅ Workbench pour projets', '✅ Workbench pour projets'],
+      ],
+    },
+    {
       type: 'card',
       title: '🧪 Qu\'est-ce que l\'Anthropic Console ?',
       description: 'Le laboratoire des modèles Claude',
       content: 'L\'Anthropic Console est l\'équivalent du \'Playground\' d\'OpenAI ou du \'Studio\' de Google. C\'est une interface web conçue pour me permettre, même sans être développeur, d\'expérimenter, d\'évaluer et d\'optimiser des prompts en contrôlant finement le comportement des modèles Claude. C\'est l\'outil que j\'utilise pour aller plus loin que l\'interface de chat de `claude.ai`.',
     },
     {
-      type: 'card',
-      title: 'Claude.ai vs Anthropic Console : Mon Usage',
-      content: '| **Aspect** | **Claude.ai** (Chat) | **Anthropic Console** (Studio) |\n| :--- | :--- | :--- |\n| **Mon Objectif** | Obtenir des réponses, rédiger | **Tester, comprendre, optimiser** |\n| **Mon Contrôle** | Limité (style de conversation) | **Total** (température, system prompt...) |\n| **Idéal pour...** | Tâches quotidiennes | Apprentissage du prompt engineering |\n| **Coût pour moi** | Gratuit/Pro | **Crédits gratuits** puis payant |',
+      type: 'table',
+      caption: 'Claude.ai vs Anthropic Console : Mon Usage',
+      headers: ['Aspect', 'Claude.ai (Chat)', 'Anthropic Console (Studio)'],
+      rows: [
+        ['**Mon Objectif**', 'Obtenir des réponses, rédiger', '**Tester, comprendre, optimiser**'],
+        ['**Mon Contrôle**', 'Limité (style de conversation)', '**Total** (température, system prompt...)'],
+        ['**Idéal pour...**', 'Tâches quotidiennes', 'Apprentissage du prompt engineering'],
+        ['**Coût pour moi**', 'Gratuit/Pro', '**Crédits gratuits** puis payant'],
+      ],
     },
     {
       type: 'alert',

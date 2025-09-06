@@ -19,15 +19,15 @@ vi.mock('@/lib/navigation', () => ({
   getNavigationLinksBySection: (section: string) => {
     if (section === 'main') {
       return [
-        { name: 'Accueil', href: '/' },
-        { name: 'Par où commencer', href: '/par-ou-commencer' },
-        { name: 'Workflows Stratégiques', href: '/workflows' },
-        { name: 'L\'Arsenal IA', href: '/l-arsenal-ia' },
-        { name: 'Concepts', href: '/concepts' },
+        { name: 'Accueil', href: '/', icon: null },
+        { name: 'Par où commencer', href: '/par-ou-commencer', icon: null },
+        { name: 'Workflows Stratégiques', href: '/workflows', icon: null },
+        { name: 'L\'Arsenal IA', href: '/l-arsenal-ia', icon: null },
+        { name: 'Concepts', href: '/concepts', icon: null },
       ]
     }
     if (section === 'legal') {
-      return [{ name: 'Confidentialité', href: '/guides/confidentialite-securite' }]
+      return [{ name: 'Confidentialité', href: '/guides/confidentialite-securite', icon: null }]
     }
     return []
   },
@@ -89,13 +89,21 @@ describe('footer Component', () => {
     })
 
     it('renders all main navigation links', () => {
-      const nav = within(mobileFooter).getAllByRole('navigation', { name: /navigation/i })[0]
-      expect(within(nav).getByRole('link', { name: 'Accueil' })).toBeInTheDocument()
+      const navs = within(mobileFooter).getAllByRole('navigation', { name: /navigation/i })
+      expect(navs.length).toBeGreaterThan(0)
+      const nav = navs[0]
+      if (nav) {
+        expect(within(nav).getByRole('link', { name: 'Accueil' })).toBeInTheDocument()
+      }
     })
 
     it('renders the "Voir tous" link for workflows', () => {
-      const workflows = within(mobileFooter).getAllByRole('navigation', { name: /workflows/i })[0]
-      expect(within(workflows).getByRole('link', { name: /Voir tous/ })).toBeInTheDocument()
+      const workflowsNavs = within(mobileFooter).getAllByRole('navigation', { name: /workflows/i })
+      expect(workflowsNavs.length).toBeGreaterThan(0)
+      const workflows = workflowsNavs[0]
+      if (workflows) {
+        expect(within(workflows).getByRole('link', { name: /Voir tous/ })).toBeInTheDocument()
+      }
     })
   })
 

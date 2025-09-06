@@ -1,12 +1,12 @@
 'use client'
-import { Info, Lightbulb } from 'lucide-react'
+import { AlertCircle, Info, Lightbulb } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { content } from '@/lib/content-loader'
+import { getConceptBySlug } from '@/lib/content-loader'
 
 interface ConceptRecommendationProps {
   conceptSlug: string
@@ -18,8 +18,14 @@ function RecommendationContent({ concept, reason }: { concept: any, reason: stri
     <div className="flex flex-col gap-4">
       <div>
         <h4 className="text-sm font-semibold">{concept.title}</h4>
-        <p className="text-sm text-muted-foreground">{concept.description}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed">{concept.description}</p>
       </div>
+
+      {concept.difficulty && (
+        <Badge variant="outline" className="text-xs w-fit">
+          {concept.difficulty}
+        </Badge>
+      )}
 
       {concept.tags && concept.tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
@@ -38,13 +44,28 @@ function RecommendationContent({ concept, reason }: { concept: any, reason: stri
       )}
 
       {concept.keyTakeaways && concept.keyTakeaways.length > 0 && (
-        <div>
-          <p className="text-xs font-medium mb-1">TLDR :</p>
-          <p className="text-xs text-muted-foreground">
-            {concept.keyTakeaways[0]}
-            {' '}
-            {concept.keyTakeaways.length > 1 && `+ ${concept.keyTakeaways.length - 1} points clés`}
+        <div className="bg-muted/30 rounded-lg p-3">
+          <p className="text-xs font-medium mb-2 flex items-center gap-1">
+            <Lightbulb className="size-3" />
+            Points clés
           </p>
+          <ul className="text-xs text-muted-foreground space-y-1">
+            {concept.keyTakeaways.slice(0, 2).map((takeaway: string, index: number) => (
+              <li key={index} className="flex items-start gap-2">
+                <span className="text-muted-foreground mt-1">•</span>
+                <span>{takeaway}</span>
+              </li>
+            ))}
+            {concept.keyTakeaways.length > 2 && (
+              <li className="text-xs text-muted-foreground italic">
+                +
+                {' '}
+                {concept.keyTakeaways.length - 2}
+                {' '}
+                autres points...
+              </li>
+            )}
+          </ul>
         </div>
       )}
 
@@ -53,9 +74,9 @@ function RecommendationContent({ concept, reason }: { concept: any, reason: stri
         <span className="text-xs text-muted-foreground italic">{reason}</span>
       </div>
 
-      <Button variant="outline" size="sm" asChild>
+      <Button variant="outline" size="sm" asChild className="w-full">
         <Link href={`/concepts/${concept.slug}`}>
-          En savoir plus
+          Explorer le concept
         </Link>
       </Button>
     </div>
@@ -64,14 +85,14 @@ function RecommendationContent({ concept, reason }: { concept: any, reason: stri
 
 export function ConceptRecommendation({ conceptSlug, reason }: ConceptRecommendationProps) {
   const isMobile = useIsMobile()
-  const concept = content.concepts.find(c => c.slug === conceptSlug)
+  const concept = getConceptBySlug(conceptSlug)
 
   if (!concept) {
     return (
-      <Badge variant="destructive">
-        Concept introuvable:
-        {conceptSlug}
-      </Badge>
+      <span className="inline-flex items-center gap-2 text-sm text-destructive bg-destructive/10 px-2 py-1 rounded-md">
+        <AlertCircle className="size-3" />
+        Concept non trouvé
+      </span>
     )
   }
 

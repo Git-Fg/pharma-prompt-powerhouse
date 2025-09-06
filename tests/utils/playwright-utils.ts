@@ -89,6 +89,73 @@ export class UserPage {
   }
 
   /**
+   * Find and wait for element by test ID
+   */
+  async findByTestId(testId: string, options?: { timeout?: number }) {
+    const element = this.getByTestId(testId)
+    await this.waitForElement(element, options)
+    return element
+  }
+
+  /**
+   * Click element by test ID
+   */
+  async clickByTestId(testId: string) {
+    const element = await this.findByTestId(testId)
+    await element.click()
+  }
+
+  /**
+   * Fill input by test ID
+   */
+  async fillByTestId(testId: string, text: string) {
+    const element = await this.findByTestId(testId)
+    await this.typeRealistic(element, text)
+  }
+
+  /**
+   * Check checkbox by test ID
+   */
+  async checkByTestId(testId: string, checked = true) {
+    const element = await this.findByTestId(testId)
+    if (checked) {
+      await element.check()
+    }
+    else {
+      await element.uncheck()
+    }
+  }
+
+  /**
+   * Get text content by test ID
+   */
+  async getTextByTestId(testId: string): Promise<string> {
+    const element = await this.findByTestId(testId)
+    return await element.textContent() || ''
+  }
+
+  /**
+   * Check if element by test ID is visible
+   */
+  async isVisibleByTestId(testId: string): Promise<boolean> {
+    try {
+      const element = this.getByTestId(testId)
+      return await this.isVisibleToUser(element)
+    }
+    catch {
+      return false
+    }
+  }
+
+  /**
+   * Wait for element by test ID to be hidden
+   */
+  async waitForHiddenByTestId(testId: string, options?: { timeout?: number }) {
+    const element = this.getByTestId(testId)
+    await element.waitFor({ state: 'hidden', timeout: options?.timeout })
+  }
+
+  /**
    * Navigate and wait for the page to be ready
    */
   async goto(url: string, options?: { waitForLoadState?: 'load' | 'domcontentloaded' | 'networkidle' }) {

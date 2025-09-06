@@ -1,13 +1,20 @@
-import type { Workflow } from '@/lib/content-schema/workflow'
+import type { Workflow } from '@/lib/content-schema'
 
-const workflow = {
+export const workflow = {
   slug: 'analyse-pharmacovigilance',
   title: 'Le Comité d\'Experts IA pour l\'Analyse de Pharmacovigilance',
   description: 'Un workflow avancé utilisant un système multi-agents pour analyser un signal de pharmacovigilance sous plusieurs angles et éviter les conclusions hâtives.',
-  area: 'recherche-et-veille',
+  category: 'recherche-et-veille',
+  difficulty: 'avancé',
   tags: ['pharmacovigilance', 'multi-agent', 'imputabilité', 'biais', 'causalité'],
   isFavorite: false,
   cover: '/images/objectifs/recherche-biblio-apres.png',
+  problem: [],
+  initialApproach: [],
+  optimizedStrategy: [],
+  toolComparison: [],
+  finalPrompt: [],
+  keyTakeaways: [],
 
   content: [
     {
@@ -18,27 +25,12 @@ const workflow = {
     {
       type: 'section',
       title: 'La Stratégie Optimisée : Simuler un Comité d\'Experts',
-      content: [
-        {
-          type: 'markdown',
-          content: 'Plutôt que de poser une question directe, nous allons utiliser une approche de **système multi-agents**. Nous demandons à l\'IA de simuler un comité d\'experts où chaque "agent" a une expertise spécifique et analyse le problème sous un angle différent. L\'objectif est de structurer le raisonnement de l\'IA, de réduire les biais et de rendre son processus de "pensée" plus transparent.',
-        },
-        {
-          type: 'alert',
-          variant: 'default',
-          title: 'La Puissance de la Perspective Forcée',
-          content: 'En obligeant l\'IA à endosser des rôles contradictoires (par exemple, un qui cherche à prouver le lien, un autre qui cherche à l\'infirmer), on la force à une analyse plus nuancée et exhaustive. La conclusion n\'est plus une simple affirmation, mais une synthèse pondérée des arguments de chaque expert.',
-        },
-      ],
+      content: 'Plutôt que de poser une question directe, nous allons utiliser une approche de **système multi-agents**. Nous demandons à l\'IA de simuler un comité d\'experts où chaque "agent" a une expertise spécifique et analyse le problème sous un angle différent. L\'objectif est de structurer le raisonnement de l\'IA, de réduire les biais et de rendre son processus de "pensée" plus transparent.\n\nℹ️ **La Puissance de la Perspective Forcée**\nEn obligeant l\'IA à endosser des rôles contradictoires (par exemple, un qui cherche à prouver le lien, un autre qui cherche à l\'infirmer), on la force à une analyse plus nuancée et exhaustive. La conclusion n\'est plus une simple affirmation, mais une synthèse pondérée des arguments de chaque expert.',
     },
     {
-      type: 'section',
-      title: 'Le Prompt Final (à adapter)',
-      content: [
-        {
-          type: 'code-block',
-          language: 'markdown',
-          code: `
+      type: 'codeBlock',
+      language: 'markdown',
+      content: `
 # CONTEXTE
 Je suis un étudiant en pharmacie analysant un signal potentiel de pharmacovigilance. Mon objectif n\'est pas d\'obtenir une réponse définitive, mais de structurer une analyse complète et nuancée en utilisant les critères d\'imputabilité comme guide. Je suis conscient de la différence fondamentale entre corrélation et causalité.
 
@@ -70,8 +62,6 @@ Voici les informations dont je dispose :
 - **Description du cas typique :** {{description_cas}}
 </signal>
 `,
-        },
-      ],
     },
     {
       type: 'conclusion',

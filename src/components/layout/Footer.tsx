@@ -4,6 +4,7 @@ import { ArrowRight, Brain } from 'lucide-react'
 import Link from 'next/link'
 import { content } from '@/lib/content-loader'
 import { getNavigationLinksBySection } from '@/lib/navigation'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 
 export function Footer() {
   // La logique de récupération des données reste la même
@@ -20,14 +21,20 @@ export function Footer() {
     .slice(0, 3)
 
   return (
-    <footer className="bg-muted/50 border-t">
+    <footer
+      {...createTestIdProps(TestIds.Layout.Footer)}
+      className="bg-muted/50 border-t"
+    >
       <div className="container mx-auto px-4 py-12 md:py-16">
 
         {/* ====================================================================== */}
         {/* == 1. LAYOUT DESKTOP (GRAND ÉCRAN) - Inchangé mais caché par défaut == */}
         {/* `hidden lg:grid` : Ce bloc n'apparaîtra que sur les écrans larges.   */}
         {/* ====================================================================== */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-12">
+        <div
+          {...createTestIdProps('desktop-footer')}
+          className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-12"
+        >
           {/* Brand Section */}
           <div className="lg:col-span-5 space-y-4">
             <Link href="/" className="inline-flex items-center space-x-3 mb-4">
@@ -42,35 +49,35 @@ export function Footer() {
           {/* Links Wrapper */}
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
             {/* Navigation Section */}
-            <div>
+            <nav aria-label="Navigation principale">
               <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Navigation</h3>
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
                   <li key={link.name}>
                     <Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2">
-                      <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                      {link.icon && <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />}
                       <span>{link.name}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
             {/* Legal & Workflows */}
             <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div>
+              <nav aria-label="Sécurité & Légal">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Sécurité & Légal</h3>
                 <ul className="space-y-3">
                   {legalLinks.map(link => (
                     <li key={link.name}>
                       <Link href={link.href} className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2">
-                        <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />
+                        {link.icon && <link.icon className="size-4 hidden sm:block group-hover:text-primary transition-colors" />}
                         <span>{link.name}</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div>
+              </nav>
+              <nav aria-label="Workflows">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Workflows</h3>
                 <div className="space-y-3">
                   {recentWorkflows.map(workflow => (
@@ -81,7 +88,7 @@ export function Footer() {
                     <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
-              </div>
+              </nav>
             </div>
           </div>
         </div>
@@ -90,19 +97,22 @@ export function Footer() {
         {/* == 2. LAYOUT MOBILE & TABLETTE - Minimaliste et visible par défaut  == */}
         {/* `lg:hidden` : Ce bloc disparaîtra sur les écrans larges.             == */}
         {/* ====================================================================== */}
-        <div className="lg:hidden">
+        <div
+          {...createTestIdProps('mobile-footer')}
+          className="lg:hidden"
+        >
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
             {/* Colonne 1: Navigation */}
-            <div>
+            <nav aria-label="Navigation principale">
               <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Navigation</h3>
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
                   <li key={link.name}><Link href={link.href} className="text-muted-foreground hover:text-foreground">{link.name}</Link></li>
                 ))}
               </ul>
-            </div>
+            </nav>
             {/* Colonne 2: Workflows */}
-            <div>
+            <nav aria-label="Workflows">
               <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Workflows</h3>
               <ul className="space-y-3">
                 {recentWorkflows.map(workflow => (
@@ -110,16 +120,16 @@ export function Footer() {
                 ))}
                 <li><Link href="/workflows" className="text-primary font-medium">Voir tous →</Link></li>
               </ul>
-            </div>
+            </nav>
             {/* Colonne 3: Légal (apparaît sur sm et +) */}
-            <div className="col-span-2 sm:col-span-1">
+            <nav aria-label="Sécurité & Légal" className="col-span-2 sm:col-span-1">
               <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Sécurité & Légal</h3>
               <ul className="space-y-3">
                 {legalLinks.map(link => (
                   <li key={link.name}><Link href={link.href} className="text-muted-foreground hover:text-foreground">{link.name}</Link></li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </div>
 
           {/* Brand & Description centrés en bas pour mobile */}

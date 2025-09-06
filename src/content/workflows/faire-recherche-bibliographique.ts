@@ -65,6 +65,28 @@ Cette approche s\'appuie sur la **structuration par balises** pour organiser l\'
 - Définir des critères d\'inclusion/exclusion`,
     },
     {
+      type: 'example',
+      title: 'Exemple de stratégie de recherche avec PICO',
+      description: 'Application concrète de la méthode PICO pour une recherche sur les anticoagulants',
+      content: 'Sujet : "Impact des anticoagulants oraux directs chez le sujet âgé"\n\nApplication PICO :\n- P (Patient) : Patients >75 ans, fibrillation auriculaire\n- I (Intervention) : Anticoagulants oraux directs (apixaban, rivaroxaban)\n- C (Comparaison) : Antivitamines K (warfarine)\n- O (Outcome) : Événements hémorragiques majeurs, mortalité\n\nMots-clés identifiés :\n- "elderly patients", "aged >75", "older adults"\n- "direct oral anticoagulants", "DOACs", "apixaban", "rivaroxaban"\n- "vitamin K antagonists", "warfarin"\n- "major bleeding", "mortality", "safety"',
+      exampleType: 'workflow',
+      difficulty: 'intermédiaire',
+      tags: ['PICO', 'recherche', 'bibliographie'],
+      outcome: 'La structuration PICO permet de générer une équation de recherche précise et de réduire le bruit documentaire.',
+      variant: 'card',
+    },
+    {
+      type: 'citation',
+      source: 'Higgins et al.',
+      title: 'Cochrane Handbook for Systematic Reviews of Interventions',
+      citationType: 'guideline',
+      author: 'Julian PT Higgins, James Thomas, Jacqueline Chandler et al.',
+      year: '2022',
+      journal: 'Cochrane',
+      url: 'https://training.cochrane.org/handbook',
+      variant: 'compact',
+    },
+    {
       type: 'card',
       title: '📊 Étape 2 : Analyse et Synthèse des Articles Trouvés',
       content: `**Une fois mes articles récupérés :**
@@ -249,4 +271,4 @@ Ne me donne pas de références spécifiques, concentre-toi sur la méthodologie
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow

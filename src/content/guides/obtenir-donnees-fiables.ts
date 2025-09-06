@@ -35,11 +35,47 @@ export const guide = {
     },
     {
       type: 'markdown',
-      content: '## Étape 1 : Formuler une Question de Recherche Efficace (Méthode PICO)\n\nUne question précise est la clé. Le framework PICO est parfait pour cela :\n- **P**atient/Problème\n- **I**ntervention\n- **C**omparaison\n- **O**utcome (Résultat)\n\n**Exemple :**\n*Au lieu de :* `"infos sur les nouveaux traitements du diabète"`\n*Préférez :* `"Chez les patients DT2 (P), quel est l\'impact des inhibiteurs de SGLT2 (I) vs placebo (C) sur les événements cardiovasculaires majeurs (O) ?"`',
+      content: '## Étape 1 : Formuler une Question de Recherche Efficace (Méthode PICO)\n\nUne question précise est la clé. Le framework PICO est parfait pour cela :\n- **P**atient/Problème\n- **I**ntervention\n- **C**omparaison\n- **O**utcome (Résultat)',
+    },
+    {
+      type: 'example',
+      title: 'Transformation PICO d\'une question vague',
+      description: 'Comment transformer une question générique en question structurée PICO',
+      content: 'Question vague :\n"infos sur les nouveaux traitements du diabète"\n\nQuestion PICO structurée :\n"Chez les patients DT2 (P), quel est l\'impact des inhibiteurs de SGLT2 (I) vs placebo (C) sur les événements cardiovasculaires majeurs (O) ?"\n\nRésultats obtenus :\n- Réponse plus précise et ciblée\n- Sources plus pertinentes\n- Analyse comparative plus facile\n- Réduction du risque d\'hallucination',
+      exampleType: 'prompt',
+      difficulty: 'intermédiaire',
+      tags: ['PICO', 'recherche', 'pharmacie'],
+      outcome: 'La méthode PICO permet d\'obtenir des réponses plus précises et des sources plus pertinentes.',
+      variant: 'card',
+    },
+    {
+      type: 'citation',
+      source: 'Richardson et al.',
+      title: 'The well-built clinical question: a key to evidence-based decisions',
+      citationType: 'article',
+      author: 'WS Richardson, MC Wilson, JG Nishikawa, RW Hayward',
+      year: '1995',
+      journal: 'ACP Journal Club',
+      volume: '123',
+      issue: '3',
+      pages: 'A12-13',
+      doi: '10.7326/ACPJC-1995-123-3-A12',
+      variant: 'compact',
     },
     {
       type: 'markdown',
       content: '## Étape 2 : Choisir le Bon Type d\'Outil\n\nPour la recherche, privilégiez les outils basés sur le **RAG (Retrieval-Augmented Generation)**. Ils cherchent l\'information sur le web *avant* de générer une réponse, et citent leurs sources.',
+    },
+    {
+      type: 'citation',
+      source: 'Lewis et al.',
+      title: 'Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks',
+      citationType: 'study',
+      author: 'Patrick Lewis, Ethan Perez, Aleksandara Piktus et al.',
+      year: '2021',
+      url: 'https://arxiv.org/abs/2005.11401',
+      journal: 'Advances in Neural Information Processing Systems',
+      variant: 'compact',
     },
     {
       type: 'toolRecommendation',
@@ -56,10 +92,21 @@ export const guide = {
       content: '## Étape 3 : L\'Analyse Critique des Sources (Votre Vraie Valeur Ajoutée)\n\nC\'est l\'étape la plus importante et non-délégable.\n\n1.  **Cliquez sur les Sources :** Ne lisez JAMAIS une synthèse sans ouvrir les liens [1], [2]...\n2.  **Évaluez la Qualité de la Source :** Est-ce une méta-analyse du NEJM, un essai randomisé, ou un article de blog ?\n3.  **Lisez l\'Abstract et les Conclusions :** Vérifiez si la synthèse de l\'IA correspond à la conclusion des auteurs.\n4.  **Cherchez les Biais :** L\'IA a-t-elle omis une limitation importante mentionnée dans l\'article source ?',
     },
     {
+      type: 'example',
+      title: 'Workflow d\'analyse critique d\'une source',
+      description: 'Processus systématique pour évaluer la qualité des informations fournies par l\'IA',
+      content: 'Étape 1 : Question IA\n"Quels sont les bénéfices des SGLT2 chez le patient diabétique ?"\n\nÉtape 2 : Vérification des sources\n- Source 1 : NEJM 2022 (méta-analyse) ✓\n- Source 2 : Lancet 2021 (essai randomisé) ✓\n- Source 3 : Article de blog 2023 ✗\n\nÉtape 3 : Croisement des informations\n- NEJM : réduction de 14% mortalité cardiovasculaire\n- Lancet : réduction de 12% mortalité cardiovasculaire\n- IA : réduction de 15% (légère surestimation)\n\nÉtape 4 : Conclusion ajustée\n"Réduction de 12-14% selon les méta-analyses récentes"',
+      exampleType: 'workflow',
+      difficulty: 'avancé',
+      tags: ['analyse-critique', 'recherche', 'pharmacie'],
+      outcome: 'L\'analyse critique permet de détecter les légères distorsions de l\'IA et d\'obtenir une information précise.',
+      variant: 'card',
+    },
+    {
       type: 'markdown',
       content: '## Conclusion : Un Workflow en Boucle\nVotre travail de recherche devient une boucle vertueuse :\n\n`Question PICO -> IA (Recherche) -> Analyse Critique des Sources -> Affinement de la Question -> IA (Recherche plus ciblée) ...`\n\nEn maîtrisant ce processus, vous utilisez l\'IA pour ce qu\'elle fait de mieux (scanner et synthétiser des volumes massifs de données) tout en gardant ce que vous faites de mieux : l\'analyse critique et le jugement expert.',
     },
   ],
 } satisfies Guide
 
-export default guide || concept || workflow
+export default guide

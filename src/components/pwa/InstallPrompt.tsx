@@ -19,7 +19,6 @@ export function InstallPrompt() {
     // Check if already installed and update state accordingly
     const checkAndSetInstalled = () => {
       if (window.matchMedia('(display-mode: standalone)').matches) {
-        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
         setIsInstalled(true)
       }
     }

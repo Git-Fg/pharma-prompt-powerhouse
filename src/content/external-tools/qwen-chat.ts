@@ -31,6 +31,22 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'L\'Offre 100% Gratuite',
+      content: 'Qwen Chat propose une offre complètement gratuite sans option payante, avec un accès complet à toute la gamme de modèles Qwen 3.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Fonctionnalités de Qwen Chat (100% gratuit)',
+      headers: ['Fonctionnalité', 'Offre Gratuite', 'Payant'],
+      rows: [
+        ['**Accès aux modèles**', '✅ Toute la gamme Qwen 3', 'N/A'],
+        ['**Outils créatifs**', '✅ Inclus (Deep Research, Image Edit...)', 'N/A'],
+        ['**Usage**', '✅ Illimité (actuellement)', 'N/A'],
+      ],
+    },
+    {
       type: 'alert',
       variant: 'destructive',
       title: '⚠️ Usage Recommandé : Données Publiques Uniquement',

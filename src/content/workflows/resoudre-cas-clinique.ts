@@ -250,4 +250,4 @@ Ne propose pas encore de diagnostic, concentre-toi sur la structuration des donn
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow
