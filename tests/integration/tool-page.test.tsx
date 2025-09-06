@@ -1,10 +1,20 @@
 /**
  * Tool Page Server Component Tests
  * Modern testing patterns for Next.js 15 Server Components with async params
+ * 
+ * This file demonstrates the use of centralized mock factories while maintaining
+ * the original mock structure for compatibility with vi.mock hoisting behavior.
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderServerPage } from '../utils/testing-utils'
+
+// Import mock factories directly from content.mock
+import { 
+  createMockTool, 
+  createMinimalTool, 
+  createToolWithoutConfidence 
+} from '../mocks/content.mock'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -121,7 +131,7 @@ vi.mock('lucide-react', () => ({
 }))
 
 describe('Tool Page Server Component', () => {
-  const mockTool = {
+  const mockTool = createMockTool({
     slug: 'test-tool',
     title: 'Test Tool',
     description: 'A test AI tool for demonstration',
@@ -144,7 +154,7 @@ describe('Tool Page Server Component', () => {
         content: '# Test Tool Overview\n\nThis is a comprehensive overview of the test tool.',
       },
     ],
-  }
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -338,21 +348,7 @@ describe('Tool Page Server Component', () => {
   describe('with minimal tool data', () => {
     it('handles tool with minimal fields', async () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      const minimalTool = {
-        slug: 'minimal-tool',
-        title: 'Minimal Tool',
-        description: 'A minimal tool',
-        url: 'https://minimal.example.com',
-        category: 'basic',
-        tags: ['minimal'],
-        isFavorite: false,
-        strongPoints: [] as string[],
-        vigilancePoints: [] as string[],
-        confidenceScore: 3,
-        confidenceJustification: 'Basic confidence',
-        freeVsPaidOffer: '',
-        content: [],
-      }
+      const minimalTool = createMinimalTool()
       vi.mocked(getExternalToolBySlug).mockReturnValue(minimalTool)
 
       const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default
@@ -374,11 +370,7 @@ describe('Tool Page Server Component', () => {
 
     it('handles tool without confidence score', async () => {
       const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      const toolWithoutConfidence = {
-        ...mockTool,
-        confidenceScore: undefined,
-        confidenceJustification: undefined,
-      }
+      const toolWithoutConfidence = createToolWithoutConfidence()
       vi.mocked(getExternalToolBySlug).mockReturnValue(toolWithoutConfidence)
 
       const ToolPage = (await import('@/app/l-arsenal-ia/[slug]/page')).default

@@ -6,6 +6,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderServerPage } from '../utils/testing-utils'
 
+// Import mock factories directly from content.mock
+import { createMockConcept, createMinimalConcept, createConceptWithoutTakeaways } from '../mocks/content.mock'
+
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
   notFound: vi.fn(() => {
@@ -101,7 +104,7 @@ vi.mock('lucide-react', () => ({
 }))
 
 describe('Concept Page Server Component', () => {
-  const mockConcept = {
+  const mockConcept = createMockConcept({
     slug: 'test-concept',
     title: 'Test Concept',
     description: 'A test concept for demonstration',
@@ -130,7 +133,7 @@ describe('Concept Page Server Component', () => {
         language: 'javascript',
       },
     ],
-  }
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -206,7 +209,7 @@ describe('Concept Page Server Component', () => {
 
     it('handles concept without key takeaways', async () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
-      const conceptWithoutTakeaways = { ...mockConcept, keyTakeaways: undefined }
+      const conceptWithoutTakeaways = createConceptWithoutTakeaways()
       vi.mocked(getConceptBySlug).mockReturnValue(conceptWithoutTakeaways)
 
       const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default

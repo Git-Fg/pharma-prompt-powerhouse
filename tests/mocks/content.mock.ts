@@ -171,11 +171,15 @@ export const createMinimalTool = (): ExternalTool => createMockTool({
   url: 'https://minimal.example.com',
   category: 'basic',
   tags: ['minimal'],
+  personalReview: undefined,
   strongPoints: [],
   vigilancePoints: [],
   confidenceScore: 3,
   confidenceJustification: 'Basic confidence',
   freeVsPaidOffer: '',
+  tldr: undefined,
+  use_cases: [],
+  capabilities: [],
   content: [],
 })
 
