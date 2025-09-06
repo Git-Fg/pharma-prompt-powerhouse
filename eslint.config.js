@@ -9,7 +9,10 @@ export default antfu(
     // Configuration de base avec Next.js
     react: true,
     typescript: true,
-    next: true,
+    next: {
+      enabled: true,
+      rootDir: '.',
+    },
     stylistic: {
       indent: 2,
       quotes: 'single',

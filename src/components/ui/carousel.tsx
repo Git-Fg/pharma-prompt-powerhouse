@@ -63,7 +63,9 @@ function Carousel({
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api)
       return
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour la synchronisation de l'état du carousel
     setCanScrollPrev(api.canScrollPrev())
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour la synchronisation de l'état du carousel
     setCanScrollNext(api.canScrollNext())
   }, [])
 

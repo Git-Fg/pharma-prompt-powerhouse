@@ -4,6 +4,9 @@ import { ResponsiveComparisonTable } from '@/components/shared/ResponsiveCompari
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
 
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
+
 export default function ExternalToolsPage() {
   const tools = content.externalTools
 

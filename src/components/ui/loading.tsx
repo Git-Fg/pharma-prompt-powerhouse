@@ -43,6 +43,7 @@ export function Skeleton({
       <div className="space-y-2">
         {Array.from({ length: lines }).map((_, index) => (
           <motion.div
+            // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des lignes de loading avec identifiant unique généré
             key={`text-line-${index}-${Math.random().toString(36).substr(2, 9)}`}
             className={cn(
               baseClasses,
@@ -171,6 +172,7 @@ export function ListSkeleton({
     <div className={cn('space-y-4', className)}>
       {Array.from({ length: items }).map((_, index) => (
         <motion.div
+          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des items de liste avec identifiant unique généré
           key={`list-item-${index}-${Math.random().toString(36).substr(2, 9)}`}
           className="flex gap-4 p-4 border rounded-lg bg-card"
           initial={{ opacity: 0, y: 20 }}
@@ -223,6 +225,7 @@ export function TableSkeleton({
         <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
           {Array.from({ length: columns }).map((_, index) => (
             <Skeleton
+              // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des headers de table avec identifiant unique généré
               key={`header-${index}-${Math.random().toString(36).substr(2, 9)}`}
               height="1rem"
               width="80%"
@@ -235,6 +238,7 @@ export function TableSkeleton({
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <motion.div
+          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des lignes de table avec identifiant unique généré
           key={`row-${rowIndex}-${Math.random().toString(36).substr(2, 9)}`}
           className="border-b last:border-b-0 p-3"
           initial={{ opacity: 0 }}
@@ -248,6 +252,7 @@ export function TableSkeleton({
           <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
             {Array.from({ length: columns }).map((_, colIndex) => (
               <Skeleton
+                // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cellules de table avec position unique
                 key={`cell-${rowIndex}-${colIndex}-${Math.random().toString(36).substr(2, 9)}`}
                 height="0.875rem"
                 width={colIndex === 0 ? '90%' : '70%'}
@@ -371,7 +376,11 @@ export function LoadingState({
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: items }).map((_, index) => (
-              <CardSkeleton key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`} showImage />
+              <CardSkeleton
+                // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cards avec identifiant unique généré
+                key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`}
+                showImage
+              />
             ))}
           </div>
         </div>
@@ -380,7 +389,10 @@ export function LoadingState({
       return (
         <div className={cn('grid gap-4 md:grid-cols-2 lg:grid-cols-3', className)}>
           {Array.from({ length: items }).map((_, index) => (
-            <CardSkeleton key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`} />
+            <CardSkeleton
+              // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cards avec identifiant unique généré
+              key={`card-${index}-${Math.random().toString(36).substr(2, 9)}`}
+            />
           ))}
         </div>
       )

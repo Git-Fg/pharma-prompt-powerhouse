@@ -37,6 +37,11 @@ const nextConfig: NextConfig = {
   // Optimisations de performance
   poweredByHeader: false,
 
+  // Configuration Turbopack pour éviter les warnings
+  turbopack: {
+    root: __dirname,
+  },
+
   // Optimisations pour Vercel
   // swcMinify: true, // Supprimé car activé par défaut dans Next.js 15
 

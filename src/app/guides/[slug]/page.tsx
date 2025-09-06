@@ -9,6 +9,9 @@ import { Separator } from '@/components/ui/separator'
 import { content, getGuideBySlug } from '@/lib/content-loader'
 import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
+
 // Génération des paramètres statiques pour le build
 export async function generateStaticParams() {
   return content.guides.map(guide => ({

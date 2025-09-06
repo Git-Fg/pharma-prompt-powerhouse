@@ -15,7 +15,7 @@ import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
 
 // Interface de base que les items doivent respecter pour utiliser ce composant
-interface BaseContentItem {
+export interface BaseContentItem {
   title: string
   description: string
   category: string

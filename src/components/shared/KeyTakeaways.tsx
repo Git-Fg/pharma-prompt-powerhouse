@@ -116,6 +116,7 @@ export function KeyTakeaways({
         <ul className={styles.items}>
           {points.map((point, index) => (
             <li
+              // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des points clés avec contenu unique
               key={`takeaway-${point.slice(0, 30).replace(/\s+/g, '-')}-${index}`}
               className={cn(
                 'flex items-start gap-3 group',

@@ -23,6 +23,7 @@ export function PWALifecycle() {
             }
           }
 
+          // eslint-disable-next-line react-web-api/no-leaked-event-listener -- Cleanup géré par la fonction de retour
           newWorker.addEventListener('statechange', handleStateChange)
 
           // Store the cleanup function for this specific worker
@@ -46,6 +47,7 @@ export function PWALifecycle() {
         }
 
         // Listen for service worker updates
+        // eslint-disable-next-line react-web-api/no-leaked-event-listener -- Cleanup géré dans la fonction de retour du useEffect
         reg.addEventListener('updatefound', handleUpdateFound)
 
         // Store cleanup function

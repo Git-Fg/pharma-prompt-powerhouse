@@ -458,3 +458,4 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Pass function components directly to client components from server components without wrapping
 
 In case of doubt, refer to official documentation for React 19, Next.js 15, Zod, Vitest, @antfu/eslint-config, and shadcn/ui.
+- N'utilise jamais "echo" ou de commande bash pour ajouter des espaces à la fin de documents ou erreurs similaires pouvant être auto fixées par npm run lint:fix

@@ -3,9 +3,12 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
-import { SimpleWorkflowCard } from '@/components/shared/SimpleWorkflowCard'
+import { SimpleWorkflowRenderItem } from '@/components/shared/SimpleWorkflowRenderItem'
 import Button from '@/components/ui/button'
 import { content } from '@/lib/content-loader'
+
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
 
 export default function WorkflowsPage() {
   // Calculate statistics
@@ -35,7 +38,7 @@ export default function WorkflowsPage() {
     >
       <FilterableContentGrid
         items={content.workflows}
-        renderItem={workflow => <SimpleWorkflowCard workflow={workflow} />}
+        renderItem={workflow => <SimpleWorkflowRenderItem item={workflow} />}
         searchPlaceholder="Rechercher un workflow..."
         showCategoryFilter={false}
         showDifficultyFilter={true}

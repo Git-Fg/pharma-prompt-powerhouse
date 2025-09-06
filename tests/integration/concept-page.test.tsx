@@ -52,6 +52,7 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
         <div key={index} data-testid={`content-block-${index}`}>
           {block.type}
           :
+          {' '}
           {block.content?.substring(0, 50) || block.title}
         </div>
       ))}

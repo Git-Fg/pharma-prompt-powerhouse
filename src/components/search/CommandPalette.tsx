@@ -44,6 +44,7 @@ export function CommandPalette({ trigger }: CommandPaletteProps = {}) {
   useEffect(() => {
     if (open) {
       const updateSearchResults = () => {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour la mise à jour du texte d'accessibilité
         setSearchResults(`${totalItems} résultats disponibles dans la recherche`)
       }
       updateSearchResults()
