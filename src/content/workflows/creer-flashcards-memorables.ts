@@ -13,7 +13,7 @@ const workflow = {
     {
       type: 'introduction','
       title: 'Le Problème : Les Flashcards Passives ne Suffisent Pas','
-      content: 'Le format classique de flashcard (Terme au recto, Définition au verso) est utile, mais limité. Il teste principalement la reconnaissance et la mémorisation brute. Pour un apprentissage en profondeur, il faut des flashcards qui nous obligent à **réfléchir, appliquer et connecter** les connaissances, pas seulement à les réciter. C'est le principe de la révision active.''
+      content: 'Le format classique de flashcard (Terme au recto, Définition au verso) est utile, mais limité. Il teste principalement la reconnaissance et la mémorisation brute. Pour un apprentissage en profondeur, il faut des flashcards qui nous obligent à **réfléchir, appliquer et connecter** les connaissances, pas seulement à les réciter. C'est le principe de la révision active.'
     },
     {
       type: 'section','
@@ -21,18 +21,18 @@ const workflow = {
       content: [
         {
           type: 'markdown','
-          content: 'L'idée est de demander à l'IA de se comporter comme un ingénieur pédagogique et de transformer une notion brute en une série de mini-exercices sous forme de flashcards. On va lui fournir une typologie de questions pour qu'elle puisse varier les angles d'attaque.''
+          content: 'L'idée est de demander à l'IA de se comporter comme un ingénieur pédagogique et de transformer une notion brute en une série de mini-exercices sous forme de flashcards. On va lui fournir une typologie de questions pour qu'elle puisse varier les angles d'attaque.'
         },
         {
           type: 'card-list','
           items: [
             {
               title: 'Flashcard de Scénario Clinique','
-              content: '**Objectif :** Appliquer une connaissance dans un contexte. **Exemple :** "Un patient sous amiodarone se plaint de toux sèche. Quelle est votre première hypothèse et quel examen simple demandez-vous ?"''"
+              content: '**Objectif :** Appliquer une connaissance dans un contexte. **Exemple :** "Un patient sous amiodarone se plaint de toux sèche. Quelle est votre première hypothèse et quel examen simple demandez-vous ?"'"
             },
             {
               title: 'Flashcard de Comparaison','
-              content: '**Objectif :** Distinguer des concepts proches. **Exemple :** "Quelles sont les 3 différences clés entre la maladie de Crohn et la rectocolite hémorragique en termes de localisation et de type d'inflammation ?"''"
+              content: '**Objectif :** Distinguer des concepts proches. **Exemple :** "Quelles sont les 3 différences clés entre la maladie de Crohn et la rectocolite hémorragique en termes de localisation et de type d'inflammation ?"'"
             },
             {
               title: 'Flashcard "Pourquoi" ou "Comment" (Mécanistique)','"
@@ -40,7 +40,7 @@ const workflow = {
             },
             {
               title: 'Flashcard "Avocat du Diable"','"
-              content: '**Objectif :** Challenger une idée reçue. **Exemple :** "Pourquoi l'association Bêta-bloquant + Vérapamil est-elle généralement contre-indiquée, alors que les deux sont des anti-hypertenseurs ?"''"
+              content: '**Objectif :** Challenger une idée reçue. **Exemple :** "Pourquoi l'association Bêta-bloquant + Vérapamil est-elle généralement contre-indiquée, alors que les deux sont des anti-hypertenseurs ?"'"
             }
           ]
         }

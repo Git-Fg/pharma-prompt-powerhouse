@@ -101,7 +101,7 @@ content: [
   type: 'alert',
   variant: 'destructive',
   title: 'Pièges à Éviter : 3 Erreurs Courantes (Même avec un Bon Framework)',
-  content: ''
+  content: '
   },
 {
   type: 'accordion',
