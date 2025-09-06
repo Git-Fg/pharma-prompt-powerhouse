@@ -210,6 +210,108 @@
 - **Configuration :** Utiliser la configuration standard pour Next.js avec les alias et le mode `globals`.
 - **Scripts de Test :** Configurer les scripts : `"test": "vitest"`, `"test:watch": "vitest"`.
 - **Bonnes Pratiques :** Tester le comportement, pas l'implémentation. Utiliser `@testing-library/react`.
+
+### Tests E2E : Deux Approches Complémentaires
+
+**IMPORTANT : Deux types de "Playwright" dans ce projet**
+
+1. **Playwright.js (Librairie JavaScript)** : Pour les tests E2e automatisés écrits en code
+   - Scripts dans `tests/e2e/`
+   - Exécuté avec `npm run test:e2e`
+   - Tests automatisés pour CI/CD
+
+2. **Playwright MCP (Outils AI Agent)** : Pour l'interaction manuelle via AI Agent
+   - Outils avec préfixe `mcp__playwright__`
+   - Utilisation interactive pendant le développement
+   - Débogage visuel et validation en temps réel
+
+---
+
+**Outils MCP Playwright (AI Agent)**
+- **Navigation :** `mcp__playwright__browser_navigate`, `mcp__playwright__browser_navigate_back`, `mcp__playwright__browser_tabs`
+- **Interaction :** `mcp__playwright__browser_click`, `mcp__playwright__browser_type`, `mcp__playwright__browser_fill_form`, `mcp__playwright__browser_select_option`
+- **Capture :** `mcp__playwright__browser_snapshot`, `mcp__playwright__browser_take_screenshot`, `mcp__playwright__browser_console_messages`
+- **Contrôle :** `mcp__playwright__browser_wait_for`, `mcp__playwright__browser_resize`, `mcp__playwright__browser_press_key`
+- **Avancé :** `mcp__playwright__browser_drag`, `mcp__playwright__browser_evaluate`, `mcp__playwright__browser_handle_dialog`
+
+**Quand Utiliser les Outils Playwright MCP (AI Agent)**
+- **Débogage visuel interactif :** Quand vous avez besoin de voir l'interface réelle pour diagnostiquer un problème
+- **Validation en temps réel :** Pendant le développement avec hot reload pour tester immédiatement les changements
+- **Tests exploratoires :** Pour explorer et comprendre le comportement de l'application
+- **Documentation visuelle :** Prendre des screenshots pour documenter l'interface utilisateur
+- **Validation de responsive :** Tester rapidement différentes tailles d'écran
+- **Tests d'accessibilité manuels :** Analyser la structure sémantique via les snapshots
+- **Débogage de problèmes complexes :** Combinaison de console logs et interaction visuelle
+
+**Meilleures Pratiques - Playwright MCP (AI Agent)**
+- **Toujours commencer par un snapshot :** Utilisez `browser_snapshot` pour comprendre la structure avant d'interagir
+- **Utiliser les références du snapshot :** Préférez les refs du snapshot aux sélecteurs CSS manuels
+- **Attendre le chargement :** Utilisez `browser_wait_for` pour que les éléments soient prêts
+- **Documenter avec des screenshots :** Utilisez `browser_take_screenshot` pour le débogage
+- **Vérifier les erreurs :** Utilisez `browser_console_messages` pour détecter les problèmes JavaScript
+- **Toujours fermer le navigateur :** Utilisez `browser_close` pour éviter les fuites de ressources
+- **Sessions isolées :** Chaque session doit commencer et se terminer proprement
+
+**Workflow Typique - Playwright MCP (AI Agent)**
+1. **Initialisation :** `browser_navigate` vers l'URL de développement
+2. **Analyse :** `browser_snapshot` pour comprendre la structure actuelle
+3. **Interaction :** Actions utilisateur via les outils MCP
+4. **Validation :** Nouveau snapshot pour vérifier les changements
+5. **Débogage :** Screenshots et logs console si nécessaire
+6. **Nettoyage :** `browser_close`
+
+**Workflow pour la Création de Tests E2E (Playwright.js)**
+1. **Exploration avec MCP :** Utilisez les outils MCP pour naviguer et explorer l'interface à tester
+2. **Analyse de structure :** `browser_snapshot` pour comprendre les sélecteurs et la hiérarchie des éléments
+3. **Simulation du flux :** Exécutez manuellement le scénario de test avec les outils MCP
+4. **Documentation :** Prenez des screenshots des étapes clés et notez les sélecteurs importants
+5. **Validation du comportement :** Vérifiez que le flux fonctionne comme attendu
+6. **Écriture du test :** Utilisez les informations collectées pour écrire le test Playwright.js automatisé
+7. **Vérification croisée :** Exécutez le test automatisé et comparez avec le comportement observé avec MCP
+
+**Intégration avec le Développement**
+- **Hot Reload :** Utilisez les outils MCP pendant le dev pour valider les changements en temps réel
+- **Complémentarité avec les tests automatisés :** Les outils MCP sont pour le développement interactif, Playwright.js pour les tests automatisés
+- **Débogage avancé :** Combine interaction visuelle et analyse technique
+- **Aide à la création de tests :** Lors de la création/modification/correction de tests E2E (Playwright.js), utilisez toujours les outils Playwright MCP pour explorer l'interface, comprendre la structure des éléments, et valider le comportement avant d'écrire le code de test automatisé
+
+---
+
+### Outils Context7 (AI Agent)
+
+**Qu'est-ce que Context7 ?**
+Context7 est un outil MCP d'IA Agent qui fournit des connaissances à jour sur les meilleures pratiques de développement, les architectures modernes, et les standards de l'industrie en 2025. Il sert de référence technique pour valider les approches et obtenir des recommandations expertes.
+
+**Quand Utiliser Context7**
+- **Validation d'architecture :** Pour confirmer que l'implémentation suit les meilleures pratiques modernes
+- **Recherche de solutions :** Lorsque vous rencontrez un problème technique complexe ou inhabituel
+- **Optimisation de code :** Pour obtenir des suggestions d'amélioration et d'optimisation
+- **Choix technologiques :** Pour valider les décisions de librairies, frameworks ou approches
+- **Apprentissage continu :** Pour se tenir informé des nouvelles pratiques et standards émergents
+- **Résolution de bugs :** Pour comprendre les problèmes récurrents et leurs solutions standard
+- **Code review avancée :** Pour obtenir une perspective experte sur la qualité et la maintenabilité du code
+
+**Meilleures Pratiques - Context7**
+- **Utiliser comme référence :** Context7 est un conseiller technique, pas un exécutant
+- **Fournir du contexte :** Donnez le maximum de détails sur votre problème pour obtenir des réponses pertinentes
+- **Comparer avec l'existant :** Utilisez Context7 pour valider ou challenger les approches actuelles
+- **Documenter les recommandations :** Notez les suggestions importantes pour référence future
+- **Croiser les sources :** Utilisez Context7 en complément d'autres sources de documentation
+- **Adapter au contexte :** Les recommandations doivent être adaptées aux contraintes spécifiques du projet
+
+**Workflow Typique - Context7**
+1. **Identification du besoin :** Définissez clairement le problème ou la question technique
+2. **Préparation du contexte :** Rassemblez les informations pertinentes (code existant, contraintes, objectifs)
+3. **Consultation de Context7 :** Posez votre question avec le contexte approprié
+4. **Analyse des recommandations :** Évaluez les suggestions par rapport à vos besoins spécifiques
+5. **Implémentation :** Appliquez les recommandations adaptées à votre contexte
+6. **Validation :** Vérifiez que la solution répond aux attentes et aux contraintes du projet
+
+**Intégration avec le Développement**
+- **Aide à la décision :** Utilisez Context7 pour valider les choix architecturaux et techniques
+- **Formation continue :** Consultez Context7 régulièrement pour apprendre les nouvelles pratiques
+- **Résolution de problèmes complexes :** Combinez Context7 avec les autres outils (Playwright MCP, analyse de code)
+- **Quality assurance :** Utilisez Context7 comme référence pour les code reviews et l'optimisation
 </testing_rules>
 
 <typescript_rules>
@@ -234,6 +336,17 @@ DO utiliser @antfu/eslint-config pour une configuration ESLint simplifiée et mo
 DO justifier toute utilisation du type `any` avec des commentaires de désactivation ESLint descriptifs expliquant pourquoi c'est incontournable.
 DO utiliser des règles ESLint spécifiques aux tests pour maintenir la qualité du code tout en permettant de la flexibilité dans les tests.
 DO envelopper les composants Lucide React dans des éléments div lorsqu'ils sont utilisés dans des composants serveur pour éviter les problèmes de sérialisation.
+DO utiliser les outils Playwright MCP (AI Agent) pour le débogage visuel et la validation en temps réel pendant le développement.
+DO utiliser Playwright.js (librairie) pour les tests E2E automatisés dans CI/CD.
+DO toujours utiliser les outils Playwright MCP pour aider à la création, modification et correction des tests E2E Playwright.js (explorer l'interface, comprendre la structure des éléments, valider le comportement avant d'écrire le code de test).
+DO utiliser Context7 pour valider les choix architecturaux et obtenir des recommandations sur les meilleures pratiques de développement modernes.
+DO consulter Context7 lorsque vous rencontrez des problèmes techniques complexes ou des décisions de conception importantes.
+DO fournir un contexte détaillé à Context7 pour obtenir des réponses pertinentes et adaptées au projet.
+DO utiliser Context7 comme référence pour l'apprentissage continu et le maintien des connaissances à jour.
+DO commencer par un snapshot avec les outils MCP pour comprendre la structure de la page avant d'interagir.
+DO prendre des screenshots avec les outils MCP pour documenter l'état et le débogage visuel.
+DO vérifier les messages console avec les outils MCP pour détecter les erreurs JavaScript pendant le développement.
+DO fermer le navigateur après chaque session MCP pour éviter les fuites de ressources.
 DO NOT répéter de longues chaînes de classes utilitaires ; préférer la création d'un utilitaire sémantique.
 DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
@@ -325,11 +438,16 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation.
 Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'implémentation en privilégiant l'édition manuelle, étape par étape des différents fichiers.
 
-A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type et tests d'intégration/units ainsi que de playwright tool te permettant de naviguer et vérifier les logs, prendre des screenshot, et globalement analyser le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi de playwright mcp tool et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace.
+A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type et tests d'intégration/units, ainsi que des tests E2E automatisés avec Playwright.js (npm run test:e2e). Utilise les outils Playwright MCP (AI Agent) pour naviguer, vérifier les logs, prendre des screenshots, et analyser visuellement le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi des outils Playwright MCP et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace.
 
 Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus.
 
-Aide toi de tes outils de façon extensive, par exemple, n'hésite jamais à utiliser les outils github pour vérifier les comit, surveiller les commentaires ... , context7 pour confirmer l'implémentation optimale selon les normes en 2025 de modernité/simplicité ou si tu rencontres un problème, playwright tool pour vérifier que tout fonctionne correctement voir effectuer des recherches complémentaires ...
+Aide toi de tes outils de façon extensive, par exemple :
+- **Outils GitHub :** Vérifier les commits, surveiller les commentaires, gérer les PRs
+- **Context7 :** Confirmer l'implémentation optimale selon les normes 2025 de modernité/simplicité, valider les choix architecturaux, résoudre des problèmes complexes, obtenir des recommandations d'experts
+- **Playwright MCP :** Vérifier visuellement que tout fonctionne correctement, déboguer en temps réel, aider à la création de tests E2E
+- **Recherche complémentaire :** Effectuer des recherches approfondies lorsque nécessaire
+Combine ces outils de manière intelligente pour une approche de développement complète et robuste.
 
 Attention, tu es un AI Agent, même si les règles disent de privilégier la simplicité/efficacité à la complexité, veille à TOUJOURS effectuer l'ENSEMBLE des modifications pertinentes pour la tâche, ne t'arrête jamais à une modification de content, et commence toujours par effectuer une analyse détaillée et complète du projet ainsi que de la tâches, scindée en plusieurs étapes qui utiliseront plusieurs comits. De plus, cherche de façon proactive les erreurs/incohérences restantes, pour les corriger en temps réel ou, si le processus est vraiment trop complexe, les expliquer dans ton message final.
 
@@ -339,5 +457,5 @@ Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours
 
 Contrainte absolue : Tu DOIS structurer tes approches en plusieurs phases, avec plusieurs comit, mis à jour continuellement. N'hésite pas à ajouter des commentaires sur des commits pour préciser les incohérences/erreurs introduites, ou diverses informations complémentairs : tu as beaucoup d'outils github, utilise les de façon extensive et optimale. N'hésite JAMAIS à répondre à un commentaire, ajouter un commentaire ou editer un commentaire.
 
-Lorsque tu effectues des tests e2e, vérifie toujours que tu as bien installé/configuré le Playwright browser.
+Lorsque tu effectues des tests E2E avec Playwright.js, vérifie toujours que tu as bien installé/configuré le Playwright browser. Pour les outils MCP, le navigateur est géré automatiquement.
 </copilot_contrainte>
