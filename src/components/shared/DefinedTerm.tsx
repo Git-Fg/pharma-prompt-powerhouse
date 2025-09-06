@@ -4,28 +4,14 @@ import { useState } from 'react'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 import { glossary } from '@/content/glossary'
-import { useIsMobile } from '@/hooks/use-mobile'
 import { content } from '@/lib/content-loader'
 
 interface DefinedTermProps {
@@ -44,10 +30,9 @@ interface DefinitionContentProps {
     context?: string
     examples?: string[]
   }
-  isMobile?: boolean
 }
 
-function DefinitionContent({ definition, isMobile }: DefinitionContentProps) {
+function DefinitionContent({ definition }: DefinitionContentProps) {
   const relatedConcepts = definition.relatedConcepts
     ? definition.relatedConcepts
         .map(slug => content.concepts.find(c => c.slug === slug))
@@ -116,15 +101,6 @@ function DefinitionContent({ definition, isMobile }: DefinitionContentProps) {
         </div>
       )}
 
-      {isMobile && (
-        <div className="pt-4 border-t">
-          <Button asChild size="sm" className="w-full">
-            <Link href={`/glossary#${definition.term.toLowerCase()}`}>
-              Voir dans le glossaire
-            </Link>
-          </Button>
-        </div>
-      )}
     </div>
   )
 }
@@ -136,7 +112,6 @@ export function DefinedTerm({
   showIcon = true,
 }: DefinedTermProps) {
   const [open, setOpen] = useState(false)
-  const isMobile = useIsMobile()
   const definition = glossary[term.toLowerCase()]
 
   if (!definition) {
@@ -157,93 +132,69 @@ export function DefinedTerm({
   const content = (
     <DefinitionContent
       definition={definition}
-      isMobile={isMobile}
     />
   )
 
   if (variant === 'button') {
-    if (isMobile) {
-      return (
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-auto p-1 font-normal">
-              {children}
-              {showIcon && <HelpCircle className="size-3 ml-1" />}
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="bottom" className="h-[80vh] rounded-t-lg">
-            <SheetHeader>
-              <SheetTitle className="text-lg flex items-center gap-2">
-                <HelpCircle className="size-5" />
-                {definition.term}
-              </SheetTitle>
-              <SheetDescription className="text-sm">
-                Définition du glossaire
-              </SheetDescription>
-            </SheetHeader>
-            <div className="flex-1 overflow-y-auto py-4">
-              {content}
-            </div>
-          </SheetContent>
-        </Sheet>
-      )
-    }
-
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>
           <Button variant="ghost" size="sm" className="h-auto p-1 font-normal">
             {children}
             {showIcon && <HelpCircle className="size-3 ml-1" />}
           </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:text-content-width">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+        </DrawerTrigger>
+        <DrawerContent className="h-[80vh] rounded-t-lg">
+          <DrawerHeader>
+            <DrawerTitle className="text-lg flex items-center gap-2">
               <HelpCircle className="size-5" />
               {definition.term}
-            </DialogTitle>
-            <DialogDescription asChild>
-              {content}
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    )
-  }
-
-  if (isMobile) {
-    return (
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          {trigger}
-        </SheetTrigger>
-        <SheetContent side="bottom" className="h-[80vh] rounded-t-lg">
-          <SheetHeader>
-            <SheetTitle className="text-lg flex items-center gap-2">
-              <HelpCircle className="size-5" />
-              {definition.term}
-            </SheetTitle>
-            <SheetDescription className="text-sm">
+            </DrawerTitle>
+            <DrawerDescription className="text-sm">
               Définition du glossaire
-            </SheetDescription>
-          </SheetHeader>
-          <div className="flex-1 overflow-y-auto py-4">
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="flex-1 overflow-y-auto py-4 px-4">
             {content}
+            <div className="pt-4 border-t mt-4">
+              <Button asChild size="sm" className="w-full">
+                <Link href={`/glossary#${definition.term.toLowerCase()}`}>
+                  Voir dans le glossaire
+                </Link>
+              </Button>
+            </div>
           </div>
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     )
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         {trigger}
-      </PopoverTrigger>
-      <PopoverContent className="w-96 max-h-[80vh] overflow-y-auto" side="top" align="start">
-        {content}
-      </PopoverContent>
-    </Popover>
+      </DrawerTrigger>
+      <DrawerContent className="h-[80vh] rounded-t-lg">
+        <DrawerHeader>
+          <DrawerTitle className="text-lg flex items-center gap-2">
+            <HelpCircle className="size-5" />
+            {definition.term}
+          </DrawerTitle>
+          <DrawerDescription className="text-sm">
+            Définition du glossaire
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="flex-1 overflow-y-auto py-4 px-4">
+          {content}
+          <div className="pt-4 border-t mt-4">
+            <Button asChild size="sm" className="w-full">
+              <Link href={`/glossary#${definition.term.toLowerCase()}`}>
+                Voir dans le glossaire
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
   )
 }
