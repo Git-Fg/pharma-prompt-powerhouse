@@ -96,27 +96,27 @@ describe('content Loader Integration', () => {
       }
     })
 
-    it('should enrich guides with related guides', () => {
+    it('should enrich guides with related items', () => {
       const guidesWithConcepts = loadedContent.guides.filter(guide =>
         guide.conceptSlugs && guide.conceptSlugs.length > 0,
       )
 
       if (guidesWithConcepts.length > 0) {
         const enrichedGuide = guidesWithConcepts[0] as EnrichedGuide
-        expect(enrichedGuide.relatedGuides).toBeDefined()
-        expect(Array.isArray(enrichedGuide.relatedGuides)).toBe(true)
+        expect(enrichedGuide.relatedItems).toBeDefined()
+        expect(Array.isArray(enrichedGuide.relatedItems)).toBe(true)
       }
     })
 
-    it('should enrich workflows with related workflows', () => {
+    it('should enrich workflows with related items', () => {
       const workflowsWithConcepts = loadedContent.workflows.filter(workflow =>
         workflow.conceptSlugs && workflow.conceptSlugs.length > 0,
       )
 
       if (workflowsWithConcepts.length > 0) {
         const enrichedWorkflow = workflowsWithConcepts[0]!
-        expect(enrichedWorkflow.relatedWorkflows).toBeDefined()
-        expect(Array.isArray(enrichedWorkflow.relatedWorkflows)).toBe(true)
+        expect(enrichedWorkflow.relatedItems).toBeDefined()
+        expect(Array.isArray(enrichedWorkflow.relatedItems)).toBe(true)
       }
     })
 
@@ -128,10 +128,10 @@ describe('content Loader Integration', () => {
       guidesWithConcepts.forEach((guide) => {
         const enrichedGuide = guide as EnrichedGuide
 
-        // Check related guides don't include self
-        if (enrichedGuide.relatedGuides) {
-          expect(enrichedGuide.relatedGuides.some(relatedGuide =>
-            relatedGuide.slug === guide.slug,
+        // Check related items don't include self
+        if (enrichedGuide.relatedItems) {
+          expect(enrichedGuide.relatedItems.some(relatedItem =>
+            relatedItem.slug === guide.slug,
           )).toBe(false)
         }
       })
@@ -297,7 +297,7 @@ describe('content Loader Integration', () => {
                   case 'workflow':
                     found = !!getWorkflowBySlug(item.slug)
                     break
-                  case 'external':
+                  case 'external-tool':
                     found = !!getExternalToolBySlug(item.slug)
                     break
                 }

@@ -19,7 +19,7 @@ const mockWorkflow = {
   isWorkflow: true as const,
   content: [],
   concepts: [],
-  relatedGuides: [],
+  relatedItems: [],
   steps: [
     {
       id: 'step-1',

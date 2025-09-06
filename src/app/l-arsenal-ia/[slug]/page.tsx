@@ -74,10 +74,11 @@ export default function ToolPage({ params }: ToolPageProps) {
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-1">
                     {getStarRatingProps(tool.confidenceScore).stars.map(star => (
-                      <Star
-                        key={star.index}
-                        className={`size-4 ${star.className}`}
-                      />
+                      <div key={star.index}>
+                        <Star
+                          className={`size-4 ${star.className}`}
+                        />
+                      </div>
                     ))}
                     <span className="ml-2 text-sm text-muted-foreground">
                       {tool.confidenceScore}

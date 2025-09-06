@@ -5,7 +5,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
-import { createGuideWithoutTakeaways, createMockGuide } from '../mocks/content.mock'
+import { createGuideWithoutTakeaways, createMockEnrichedGuide } from '../mocks/content.mock'
 
 import { renderServerPage } from '../utils/testing-utils'
 
@@ -57,7 +57,7 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
   ContentRenderer: ({ content }: any) => (
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
-        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
+
         <div key={index} data-testid={`content-block-${index}`}>
           {block.type}
           :
@@ -72,7 +72,7 @@ vi.mock('@/components/shared/KeyTakeaways', () => ({
   KeyTakeaways: ({ points }: any) => (
     <div data-testid="key-takeaways">
       {points?.map((point: string, index: number) => (
-        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
+
         <div key={index} data-testid={`takeaway-${index}`}>
           {point}
         </div>
@@ -98,7 +98,7 @@ vi.mock('@/components/ui/separator', () => ({
 }))
 
 describe('guide Page Server Component', () => {
-  const mockGuide = createMockGuide({
+  const mockGuide = createMockEnrichedGuide({
     slug: 'test-guide',
     title: 'Test Guide',
     description: 'A test guide for demonstration',
@@ -123,6 +123,12 @@ describe('guide Page Server Component', () => {
         slug: 'test-concept',
         title: 'Test Concept',
         description: 'A test concept',
+        category: 'methodology',
+        difficulty: 'intermediate',
+        tags: ['test', 'concept'],
+        isFavorite: false,
+        keyTakeaways: ['Test concept takeaway'],
+        content: [],
       },
     ],
   })
@@ -185,7 +191,7 @@ describe('guide Page Server Component', () => {
 
     it('handles guide without concepts', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
-      const guideWithoutConcepts = createMockGuide({ ...mockGuide, concepts: [] })
+      const guideWithoutConcepts = createMockEnrichedGuide({ ...mockGuide, concepts: [] })
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutConcepts)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
@@ -200,7 +206,12 @@ describe('guide Page Server Component', () => {
 
     it('handles guide without key takeaways', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
-      const guideWithoutTakeaways = createGuideWithoutTakeaways()
+      const baseGuide = createGuideWithoutTakeaways()
+      const guideWithoutTakeaways = {
+        ...baseGuide,
+        concepts: [],
+        relatedItems: [],
+      }
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutTakeaways)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default

@@ -54,7 +54,7 @@ export default async function GuideDetailPage({
 
       {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
         <>
-          <KeyTakeaways points={guide.keyTakeaways} />
+          <KeyTakeaways points={guide.keyTakeaways} animated={false} />
           <Separator className="my-8" />
         </>
       )}

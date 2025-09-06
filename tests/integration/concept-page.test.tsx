@@ -5,7 +5,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
-import { createConceptWithoutTakeaways, createMockConcept } from '../mocks/content.mock'
+import { createConceptWithoutTakeaways, createMockEnrichedConcept } from '../mocks/content.mock'
 
 import { renderServerPage } from '../utils/testing-utils'
 
@@ -48,7 +48,7 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
   ContentRenderer: ({ content }: any) => (
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
-        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
+
         <div key={index} data-testid={`content-block-${index}`}>
           {block.type}
           :
@@ -63,7 +63,7 @@ vi.mock('@/components/shared/KeyTakeaways', () => ({
   KeyTakeaways: ({ points }: any) => (
     <div data-testid="key-takeaways">
       {points?.map((point: string, index: number) => (
-        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
+
         <div key={index} data-testid={`takeaway-${index}`}>
           {point}
         </div>
@@ -110,7 +110,7 @@ vi.mock('lucide-react', () => ({
 }))
 
 describe('concept Page Server Component', () => {
-  const mockConcept = createMockConcept({
+  const mockConcept = createMockEnrichedConcept({
     slug: 'test-concept',
     title: 'Test Concept',
     description: 'A test concept for demonstration',
@@ -215,7 +215,11 @@ describe('concept Page Server Component', () => {
 
     it('handles concept without key takeaways', async () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
-      const conceptWithoutTakeaways = createConceptWithoutTakeaways()
+      const baseConcept = createConceptWithoutTakeaways()
+      const conceptWithoutTakeaways = {
+        ...baseConcept,
+        relatedItems: [],
+      }
       vi.mocked(getConceptBySlug).mockReturnValue(conceptWithoutTakeaways)
 
       const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
