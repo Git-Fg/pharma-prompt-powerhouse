@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
+import { contentCardVariants } from '@/components/ui/variants'
 
 interface PrerequisiteItem {
   type: 'concept' | 'guide' | 'workflow' | 'external'
@@ -61,7 +62,7 @@ export function Prerequisites({
 
   if (variant === 'compact') {
     return (
-      <div className="mb-6 p-4 border-l-4 border-blue-500 bg-blue-50/50 dark:bg-blue-950/20">
+      <div className={`${contentCardVariants({ variant: 'concept', size: 'compact', interactive: false })} mb-6 p-4 bg-blue-50/50 dark:bg-blue-950/20`}>
         <h3 className="font-semibold text-sm mb-3 flex items-center gap-2">
           <BookOpen className="size-4" />
           {title}

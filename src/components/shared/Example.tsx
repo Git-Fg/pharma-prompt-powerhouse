@@ -1,6 +1,7 @@
 'use client'
 
 import { AlertTriangle, BookOpen, Code, Lightbulb, PlayCircle } from 'lucide-react'
+import { useMemo } from 'react'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -59,13 +60,17 @@ export function Example({
   language,
   filename,
   outcome,
-  tags = [],
+  tags,
   difficulty,
-  warnings = [],
+  warnings,
   className,
   variant = 'card',
 }: ExampleProps) {
   const IconComponent = typeIcons[type]
+  const defaultTags = useMemo(() => [], [])
+  const defaultWarnings = useMemo(() => [], [])
+  const resolvedTags = tags ?? defaultTags
+  const resolvedWarnings = warnings ?? defaultWarnings
 
   if (variant === 'compact') {
     return (
@@ -135,9 +140,9 @@ export function Example({
         {description && (
           <p className="text-sm text-muted-foreground">{description}</p>
         )}
-        {tags.length > 0 && (
+        {resolvedTags.length > 0 && (
           <div className="flex flex-wrap gap-1">
-            {tags.map(tag => (
+            {resolvedTags.map(tag => (
               <Badge key={tag} variant="secondary" className="text-xs">
                 {tag}
               </Badge>
@@ -146,14 +151,14 @@ export function Example({
         )}
       </CardHeader>
       <CardContent className="pt-0">
-        {warnings.length > 0 && (
+        {resolvedWarnings.length > 0 && (
           <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
             <div className="flex items-start gap-2">
               <AlertTriangle className="size-4 text-amber-600 mt-0.5 flex-shrink-0" />
               <div className="text-sm">
                 <p className="font-medium text-amber-800 mb-1">Points de vigilance</p>
                 <ul className="text-amber-700 space-y-1">
-                  {warnings.map((warning, index) => (
+                  {resolvedWarnings.map((warning, index) => (
                     <li key={index} className="text-sm">
                       •
                       {warning}

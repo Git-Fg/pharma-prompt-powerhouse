@@ -39,9 +39,12 @@
 **Stratégie de Documentation**
 - **`README.md` (Racine) :** La porte d'entrée du projet. Présentation générale, objectifs, instructions d'installation.
 - **`AGENTS.md` (ce fichier) :** Les règles fondamentales et la base de connaissances du projet. La constitution pour le développement et la création de contenu.
+- **`CLAUDE.md` :** Instructions spécifiques pour Claude Code avec les commandes de développement et l'architecture du projet.
 - **`src/app/globals.css` :** Le design system centralisé avec Tailwind v4. Tous les tokens de design, utilitaires et composants de base.
+- **`src/components/ui/variants.ts` :** Variants centralisées avec tailwind-variants pour tous les composants UI.
 - **`docs/` :** Documentation technique spécialisée et guides de résolution de problèmes.
   - **`tailwind-v4-text-width-bug.md` :** Guide complet sur le bug "un mot par ligne" et ses solutions.
+  - **`CENTRALIZED_ARCHITECTURE.md` :** Documentation sur l'architecture centralisée et les design patterns.
 </project_documentation_rules>
 
 ---
