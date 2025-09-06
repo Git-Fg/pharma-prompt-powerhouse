@@ -1,24 +1,32 @@
 import type { AnyContent } from '@/types'
-import { content } from '@/lib/content-loader'
 import { ExternalLink } from 'lucide-react'
-import { Card } from '@/components/ui/card'
 import Button from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { content } from '@/lib/content-loader'
 
 interface ContentHeaderProps {
   item: AnyContent
 }
 
+// Guards de type pour une détection fiable
+function isExternalTool(item: AnyContent): item is import('@/lib/content-schema').ExternalTool {
+  return 'url' in item && typeof item.url === 'string'
+}
+
+function isConcept(item: AnyContent): item is import('@/lib/content-schema').Concept {
+  return 'category' in item && 'keyTakeaways' in item && Array.isArray(item.keyTakeaways)
+}
+
 export function ContentHeader({ item }: ContentHeaderProps) {
-  // Vérifier si c'est un external tool (qui a une URL)
-  if ('url' in item) {
-    const tool = item
+  // Cas 1: External tools (ont une URL)
+  if (isExternalTool(item)) {
     return (
       <header className="text-center space-y-4 mb-8">
-        <h1 className="text-4xl font-bold">{tool.title}</h1>
-        <p className="prose-description text-lg">{tool.description}</p>
+        <h1 className="text-4xl font-bold">{item.title}</h1>
+        <p className="prose-description text-lg">{item.description}</p>
         <div className="flex justify-center">
           <Button asChild size="lg">
-            <a href={tool.url} target="_blank" rel="noopener noreferrer">
+            <a href={item.url} target="_blank" rel="noopener noreferrer">
               Visiter l'outil
               <ExternalLink className="ml-2 size-4" />
             </a>
@@ -28,21 +36,20 @@ export function ContentHeader({ item }: ContentHeaderProps) {
     )
   }
 
-  // Vérifier si c'est un concept (qui n'a pas de category ou qui a une category spécifique)
-  if ('category' in item && item.category === undefined) {
-    const concept = item as any
+  // Cas 2: Concepts (ont keyTakeaways et pas de estimatedTime)
+  if (isConcept(item)) {
     const relatedGuides = content.guides.filter(
-      g => g.conceptSlugs?.includes(concept.slug),
+      g => g.conceptSlugs?.includes(item.slug),
     )
     const relatedWorkflows = content.workflows.filter(
-      w => w.conceptSlugs?.includes(concept.slug),
+      w => w.conceptSlugs?.includes(item.slug),
     )
 
     return (
       <header className="mb-8 space-y-6">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">{concept.title}</h1>
-          <p className="prose-description text-xl">{concept.description}</p>
+          <h1 className="text-4xl font-bold tracking-tight">{item.title}</h1>
+          <p className="prose-description text-xl">{item.description}</p>
         </div>
 
         {/* Statistiques du concept */}
@@ -72,7 +79,7 @@ export function ContentHeader({ item }: ContentHeaderProps) {
     )
   }
 
-  // En-tête par défaut pour guides et workflows
+  // Cas 3: En-tête par défaut pour guides et workflows
   return (
     <header className="mb-8 space-y-4">
       <h1 className="text-4xl font-bold tracking-tight">{item.title}</h1>

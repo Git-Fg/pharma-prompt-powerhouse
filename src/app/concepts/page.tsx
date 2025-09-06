@@ -1,7 +1,8 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import * as LucideIcons from 'lucide-react'
-import { ConceptListClient } from '@/components/concepts/ConceptListClient'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import { ConceptCard } from '@/components/shared/ConceptCard'
+import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 
@@ -22,7 +23,13 @@ export default function ConceptsPage() {
       description="Chaque concept est un dossier complet reliant la théorie, la pratique et les outils. Choisissez un concept pour commencer."
       stats={stats}
     >
-      <ConceptListClient initialConcepts={content.concepts} />
+      <FilterableContentGrid
+        items={content.concepts}
+        renderItem={concept => <ConceptCard concept={concept} />}
+        searchPlaceholder="Rechercher un concept..."
+        showCategoryFilter={true}
+        showDifficultyFilter={false}
+      />
 
       <Separator className="my-12" />
 

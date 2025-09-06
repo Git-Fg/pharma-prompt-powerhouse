@@ -1,84 +1,13 @@
-'use client'
-
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
-import { ArrowRight, BookOpen, Clock, Search, Target } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import Badge from '@/components/ui/badge'
+import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
+import { SimpleWorkflowCard } from '@/components/shared/SimpleWorkflowCard'
 import Button from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DifficultyBadge } from '@/components/ui/enhanced-badge'
-import { Input } from '@/components/ui/input'
-import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
-import { useContentFilter } from '@/hooks/useContentFilter'
-import { difficultyLabels } from '@/lib/constants'
 import { content } from '@/lib/content-loader'
-import { getIcon } from '@/types/icon-taxonomy'
-
-function WorkflowCard({ workflow }: { workflow: typeof content.workflows[0] }) {
-  const Icon = workflow.icon ? getIcon(workflow.icon) : Target
-
-  return (
-    <Card className="flex flex-col h-full hover:shadow-lg transition-all duration-200 group">
-      <CardHeader className="flex-grow">
-        <div className="flex items-center justify-between mb-3">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Icon className="size-5 text-primary" />
-          </div>
-          <div className="flex gap-2">
-            <DifficultyBadge difficulty={workflow.difficulty} size="sm" />
-            {workflow.estimatedTime && (
-              <Badge variant="secondary" className="text-xs">
-                <Clock className="w-3 h-3 mr-1" />
-                {workflow.estimatedTime}
-              </Badge>
-            )}
-          </div>
-        </div>
-
-        <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-          {workflow.title}
-        </CardTitle>
-
-        <CardDescription className="line-clamp-3 text-sm leading-relaxed">
-          {workflow.description}
-        </CardDescription>
-
-        <div className="flex flex-wrap gap-1 pt-3">
-          {workflow.tags.slice(0, 3).map((tag: string) => (
-            <Badge key={tag} variant="outline" className="text-xs">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      </CardHeader>
-
-      <CardContent className="pt-0">
-        <Link href={`/workflows/${workflow.slug}`}>
-          <Button className="w-full group/btn">
-            <span>Découvrir la méthode</span>
-            <ArrowRight className="size-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
-      </CardContent>
-    </Card>
-  )
-}
 
 export default function WorkflowsPage() {
-  const listRef = useAutoAnimateList()
-
-  // Use centralized content filtering
-  const {
-    filteredItems: filteredWorkflows,
-    searchTerm,
-    setSearchTerm,
-    selectedDifficulty,
-    setSelectedDifficulty,
-    availableDifficulties,
-    resetFilters,
-  } = useContentFilter(content.workflows)
-
   // Calculate statistics
   const totalWorkflows = content.workflows.length
   const beginnerCount = content.workflows.filter(w => w.difficulty === 'débutant').length
@@ -104,58 +33,14 @@ export default function WorkflowsPage() {
       stats={stats}
       contentMaxWidth="6xl"
     >
-      {/* Search and Filters */}
-      <div className="mb-8 space-y-4">
-        <div className="relative text-content-width mx-auto">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
-          <Input
-            placeholder="Rechercher un workflow..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-
-        <div className="flex justify-center gap-2 flex-wrap">
-          <Button
-            variant={selectedDifficulty === 'all' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setSelectedDifficulty('all')}
-          >
-            Tous
-          </Button>
-          {availableDifficulties.map(difficulty => (
-            <Button
-              key={difficulty}
-              variant={selectedDifficulty === difficulty ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedDifficulty(difficulty)}
-            >
-              {difficultyLabels[difficulty as keyof typeof difficultyLabels] || difficulty}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      {/* Workflows Grid */}
-      <div ref={listRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {filteredWorkflows.map(workflow => (
-          <WorkflowCard key={workflow.slug} workflow={workflow} />
-        ))}
-      </div>
-
-      {filteredWorkflows.length === 0 && (
-        <div className="text-center py-12">
-          <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-semibold mb-2">Aucun workflow trouvé</h3>
-          <p className="text-muted-foreground mb-4">
-            Essayez de modifier votre recherche ou vos filtres.
-          </p>
-          <Button variant="outline" onClick={resetFilters}>
-            Réinitialiser les filtres
-          </Button>
-        </div>
-      )}
+      <FilterableContentGrid
+        items={content.workflows}
+        renderItem={workflow => <SimpleWorkflowCard workflow={workflow} />}
+        searchPlaceholder="Rechercher un workflow..."
+        showCategoryFilter={false}
+        showDifficultyFilter={true}
+        gridClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      />
 
       {/* Bottom CTA */}
       <div className="mt-16 text-center bg-muted p-6 md:p-8 rounded-lg">

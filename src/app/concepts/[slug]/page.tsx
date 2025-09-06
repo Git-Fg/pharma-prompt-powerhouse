@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
-import {
-  BookOpen,
-  Lightbulb,
-  Target,
-} from 'lucide-react'
+import { Target } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
-import { RelatedContentSection } from '@/components/shared/RelatedContentSection'
+import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { content, getConceptBySlug } from '@/lib/content-loader'
 import { normalizeSlug } from '@/lib/utils'
 
@@ -78,14 +73,6 @@ export default async function ConceptDetailPage({
     notFound()
   }
 
-  // Trouver les contenus liés à ce concept
-  const relatedGuides = content.guides.filter(
-    g => g.conceptSlugs?.includes(params.slug),
-  )
-  const relatedWorkflows = content.workflows.filter(
-    w => w.conceptSlugs?.includes(params.slug),
-  )
-
   return (
     <ContentPageLayout
       item={concept}
@@ -109,25 +96,8 @@ export default async function ConceptDetailPage({
         </CardContent>
       </Card>
 
-      <Separator className="my-8" />
-
-      <div className="space-y-12">
-        {/* Guides liés */}
-        <RelatedContentSection
-          title="Guides liés à ce concept"
-          icon={BookOpen}
-          items={relatedGuides}
-          type="guides"
-        />
-
-        {/* Workflows pratiques */}
-        <RelatedContentSection
-          title="Appliquer : Les Workflows Pratiques"
-          icon={Lightbulb}
-          items={relatedWorkflows}
-          type="workflows"
-        />
-      </div>
+      {/* Recommandations intelligentes */}
+      <SmartRecommendationsSection item={concept} />
     </ContentPageLayout>
   )
 }

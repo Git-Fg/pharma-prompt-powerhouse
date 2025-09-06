@@ -72,7 +72,7 @@ Plus vous donnez d'informations, plus les questions seront précises !`,
     {
       type: 'conceptRecommendation',
       slug: 'structuration-par-balises',
-      reason: "L'utilisation de balises XML permet d'organiser le contenu de cours et d'améliorer la génération de QCM ciblés.",
+      reason: 'L\'utilisation de balises XML permet d\'organiser le contenu de cours et d\'améliorer la génération de QCM ciblés.',
     },
     {
       type: 'card',
