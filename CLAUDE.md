@@ -170,6 +170,70 @@ The project uses a custom TypeScript-based content system with:
 - **Test Scripts**: Configure scripts: `"test": "vitest"`, `"test:watch": "vitest"`.
 - **Best Practices**: Test behavior, not implementation. Use `@testing-library/react`.
 
+### E2E Testing: Two Complementary Approaches
+
+**IMPORTANT: Two Types of "Playwright" in This Project**
+
+1. **Playwright.js (JavaScript Library)**: For automated E2E tests written in code
+   - Scripts in `tests/e2e/`
+   - Executed with `npm run test:e2e`
+   - Automated tests for CI/CD pipelines
+
+2. **Playwright MCP (AI Agent Tools)**: For manual interaction via AI Agent
+   - Tools with `mcp__playwright__` prefix
+   - Interactive use during development
+   - Visual debugging and real-time validation
+
+---
+
+**Playwright MCP Tools (AI Agent)**
+- **Navigation**: `mcp__playwright__browser_navigate`, `mcp__playwright__browser_navigate_back`, `mcp__playwright__browser_tabs`
+- **Interaction**: `mcp__playwright__browser_click`, `mcp__playwright__browser_type`, `mcp__playwright__browser_fill_form`, `mcp__playwright__browser_select_option`
+- **Capture**: `mcp__playwright__browser_snapshot`, `mcp__playwright__browser_take_screenshot`, `mcp__playwright__browser_console_messages`
+- **Control**: `mcp__playwright__browser_wait_for`, `mcp__playwright__browser_resize`, `mcp__playwright__browser_press_key`
+- **Advanced**: `mcp__playwright__browser_drag`, `mcp__playwright__browser_evaluate`, `mcp__playwright__browser_handle_dialog`
+
+**When to Use Playwright MCP Tools (AI Agent)**
+- **Interactive Visual Debugging**: When you need to see the actual interface to diagnose issues
+- **Real-time Validation**: During development with hot reload to test changes immediately
+- **Exploratory Testing**: To explore and understand application behavior
+- **Visual Documentation**: Take screenshots to document the user interface
+- **Responsive Validation**: Quickly test different screen sizes
+- **Manual Accessibility Testing**: Analyze semantic structure via snapshots
+- **Complex Issue Debugging**: Combine console logs with visual interaction
+
+**Best Practices - Playwright MCP (AI Agent)**
+- **Always start with a snapshot**: Use `browser_snapshot` to understand structure before interacting
+- **Use snapshot references**: Prefer refs from snapshots over manual CSS selectors
+- **Wait for loading**: Use `browser_wait_for` to ensure elements are ready
+- **Document with screenshots**: Use `browser_take_screenshot` for debugging
+- **Check for errors**: Use `browser_console_messages` to detect JavaScript issues
+- **Always close browser**: Use `browser_close` to prevent resource leaks
+- **Isolated sessions**: Each session should start and end cleanly
+
+**Typical Workflow - Playwright MCP (AI Agent)**
+1. **Initialize**: `browser_navigate` to development URL
+2. **Analyze**: `browser_snapshot` to understand current structure
+3. **Interact**: User actions via MCP tools
+4. **Validate**: New snapshot to verify changes
+5. **Debug**: Screenshots and console logs if needed
+6. **Cleanup**: `browser_close`
+
+**E2E Test Creation Workflow (Playwright.js)**
+1. **MCP Exploration**: Use MCP tools to navigate and explore the interface to be tested
+2. **Structure Analysis**: `browser_snapshot` to understand selectors and element hierarchy
+3. **Flow Simulation**: Manually execute the test scenario using MCP tools
+4. **Documentation**: Take screenshots of key steps and note important selectors
+5. **Behavior Validation**: Verify the flow works as expected
+6. **Test Writing**: Use collected information to write automated Playwright.js test
+7. **Cross-verification**: Run automated test and compare with MCP-observed behavior
+
+**Development Integration**
+- **Hot Reload**: Use MCP tools during development to validate changes in real-time
+- **Complementarity with automated tests**: MCP tools are for interactive development, Playwright.js for automated tests
+- **Advanced Debugging**: Combine visual interaction with technical analysis
+- **Test Creation Assistance**: When creating/modifying/correcting E2E tests (Playwright.js), always use Playwright MCP tools to explore the interface, understand element structure, and validate behavior before writing automated test code
+
 ### shadcn/ui
 - **Notification System**: Exclusively standardize on Sonner for toast notifications. Remove any other systems.
 - **Component Usage**: Use components as-is. Prefer simple composition over overloading.
@@ -329,6 +393,13 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Justify all `any` type usage with descriptive ESLint disable comments explaining why it's unavoidable
 - Use test-specific ESLint rules to maintain code quality while allowing flexibility in tests
 - Wrap Lucide React components in div elements when used in server components to prevent serialization issues
+- Use Playwright MCP (AI Agent) tools for interactive visual debugging and real-time validation during development
+- Use Playwright.js (library) for automated E2E tests in CI/CD pipelines
+- Always use Playwright MCP tools to assist with creating, modifying, and correcting Playwright.js E2E tests (explore interface, understand element structure, validate behavior before writing test code)
+- Start with a snapshot using MCP tools to understand page structure before interacting
+- Take screenshots with MCP tools to document states and visual debugging
+- Check console messages with MCP tools to detect JavaScript errors during development
+- Close the browser after each MCP session to prevent resource leaks
 - Commit after all milestones
 
 **DO NOT:**
