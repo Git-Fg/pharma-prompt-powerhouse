@@ -20,9 +20,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { cn } from '@/lib/utils'
 import { getMainNavigationLinks } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const { theme, setTheme } = useTheme()
@@ -60,12 +60,12 @@ export function Header() {
               <ul className="flex items-center space-x-6">
                 {mainNavigation.map(item => (
                   <li key={item.name}>
-                    <Link 
-                      href={item.href} 
+                    <Link
+                      href={item.href}
                       {...createTestIdProps(TestIds.Navigation.Link(item.name))}
                       className={cn(
                         'text-sm font-medium transition-colors hover:text-primary',
-                        isActive(item.href) ? 'text-primary' : 'text-muted-foreground'
+                        isActive(item.href) ? 'text-primary' : 'text-muted-foreground',
                       )}
                     >
                       {item.name}
