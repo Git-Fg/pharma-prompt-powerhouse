@@ -9,12 +9,6 @@ export const workflow = {
   tags: ['pharmacovigilance', 'multi-agent', 'imputabilité', 'biais', 'causalité'],
   isFavorite: false,
   cover: '/images/objectifs/recherche-biblio-apres.png',
-  problem: [],
-  initialApproach: [],
-  optimizedStrategy: [],
-  toolComparison: [],
-  finalPrompt: [],
-  keyTakeaways: [],
 
   content: [
     {
@@ -68,6 +62,13 @@ Voici les informations dont je dispose :
       title: 'Ce qu\'il faut retenir : L\'IA comme Outil de Structuration',
       content: 'Ce workflow illustre un usage avancé et sécurisé de l\'IA pour un problème critique. Nous ne lui demandons pas la réponse, nous l\'utilisons pour appliquer un cadre d\'analyse rigoureux. En décomposant le problème en sous-questions et en forçant l\'IA à adopter des perspectives multiples, nous nous approprions son processus de raisonnement et nous gardons la main sur l\'interprétation finale. C\'est un exemple parfait de l\'IA comme levier pour l\'esprit critique, et non comme substitut.',
     },
+  ],
+
+  keyTakeaways: [
+    'Ce workflow illustre un usage avancé et sécurisé de l\'IA pour un problème critique.',
+    'Nous ne lui demandons pas la réponse, nous l\'utilisons pour appliquer un cadre d\'analyse rigoureux.',
+    'En décomposant le problème en sous-questions et en forçant l\'IA à adopter des perspectives multiples, nous nous approprions son processus de raisonnement.',
+    'C\'est un exemple parfait de l\'IA comme levier pour l\'esprit critique, et non comme substitut.',
   ],
 } satisfies Workflow
 

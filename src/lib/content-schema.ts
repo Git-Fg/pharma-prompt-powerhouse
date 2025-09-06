@@ -207,13 +207,8 @@ export const workflowSchema = baseContentSchema.extend({
   difficulty: z.string(),
   cover: z.string().optional(),
   estimatedTime: z.string().optional(),
-  problem: z.array(contentBlockSchema),
-  initialApproach: z.array(contentBlockSchema),
-  optimizedStrategy: z.array(contentBlockSchema),
-  toolComparison: z.array(contentBlockSchema),
-  finalPrompt: z.array(contentBlockSchema),
   keyTakeaways: z.array(z.string()).min(1),
-  content: z.array(contentBlockSchema).optional(), // For additional content sections
+  content: z.array(contentBlockSchema),
 })
 
 // Enhanced external tool schema for L'Arsenal IA
@@ -254,7 +249,7 @@ export type EnrichedGuide = BaseGuide & {
 
 export type EnrichedWorkflow = BaseWorkflow & {
   concepts: BaseConcept[]
-  relatedWorkflows: Omit<BaseWorkflow, 'problem' | 'initialApproach' | 'optimizedStrategy' | 'toolComparison' | 'finalPrompt' | 'content' | 'conceptSlugs'>[]
+  relatedWorkflows: Omit<BaseWorkflow, 'content' | 'conceptSlugs'>[]
 }
 
 // Aliases pour compatibilité descendante - seront dépréciés progressivement

@@ -9,11 +9,6 @@ export const workflow = {
   tags: ['cas-clinique', 'socratique', 'raisonnement', 'biais'],
   isFavorite: true,
   cover: '/images/objectifs/cas-clinique-apres.png',
-  problem: [],
-  initialApproach: [],
-  optimizedStrategy: [],
-  toolComparison: [],
-  finalPrompt: [],
   keyTakeaways: [
     'Le tuteur socratique transforme l\'IA de solutionneur en guide, forçant l\'étudiant à développer son propre raisonnement clinique.',
     'Cette méthode prévient le biais d\'automatisation et le désapprentissage cognitif en maintenant l\'étudiant actif dans son apprentissage.',

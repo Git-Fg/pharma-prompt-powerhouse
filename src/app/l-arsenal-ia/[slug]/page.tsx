@@ -31,20 +31,6 @@ export default function ToolPage({ params }: ToolPageProps) {
     <ContentPageLayout
       item={tool}
       prose={false}
-      headerContent={(
-        <header className="text-center space-y-4 mb-8">
-          <h1 className="text-4xl font-bold">{tool.title}</h1>
-          <p className="prose-description text-lg">{tool.description}</p>
-          <div className="flex justify-center">
-            <Button asChild size="lg">
-              <a href={tool.url} target="_blank" rel="noopener noreferrer">
-                Visiter l'outil
-                <ExternalLink className="ml-2 size-4" />
-              </a>
-            </Button>
-          </div>
-        </header>
-      )}
     >
       <article className="space-y-8">
 

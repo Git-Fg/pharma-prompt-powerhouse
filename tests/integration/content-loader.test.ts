@@ -54,8 +54,8 @@ describe('content Loader Integration', () => {
         expect(workflow.slug).toBeDefined()
         expect(workflow.title).toBeDefined()
         expect(workflow.description).toBeDefined()
-        expect(workflow.problem).toBeDefined()
-        expect(workflow.finalPrompt).toBeDefined()
+        expect(workflow.content).toBeDefined()
+        expect(workflow.keyTakeaways).toBeDefined()
       }
     })
   })
