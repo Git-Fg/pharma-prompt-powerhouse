@@ -1,11 +1,18 @@
-import type { Concept } from '@/lib/content-schema';
+import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'quantification-ia',
-  title: "La Quantification : La Clé de l\'IA Locale",
-  description: "Comprendre comment la quantification (GGUF, INT8, INT4) réduit la taille des modèles pour les faire tourner sur du matériel grand public.",
+  title: 'La Quantification : La Clé de l\'IA Locale',
+  description: 'Comprendre comment la quantification (GGUF, INT8, INT4) réduit la taille des modèles pour les faire tourner sur du matériel grand public.',
   category: 'concepts-cles',
+  difficulty: 'intermédiaire',
   tags: ['quantification', 'gguf', 'int4', 'local', 'optimisation'],
+  isFavorite: false,
+  keyTakeaways: [
+    'La quantification réduit la précision numérique des poids du modèle pour le rendre plus léger et rapide.',
+    'Les modèles quantifiés (GGUF Q4_K_M) sont jusqu\'à 4 fois plus petits et permettent l\'IA locale sur matériel grand public.',
+    'C\'est la technologie clé qui rend l\'IA locale accessible à tous avec une qualité quasi-identique.',
+  ],
   content: [
     {
       type: 'markdown',

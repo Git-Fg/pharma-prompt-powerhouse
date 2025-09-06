@@ -7,7 +7,7 @@ export const concept = {
   description: 'Optimisez la fenêtre de contexte de l\'IA pour maximiser la pertinence et la précision des réponses en pharmacie.',
   icon: 'Target',
   category: 'fondamentaux',
-  difficulty: 'débutant',
+  difficulty: 'intermédiaire',
   tags: [
     'context-engineering',
     'guide',
@@ -167,4 +167,4 @@ export const concept = {
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

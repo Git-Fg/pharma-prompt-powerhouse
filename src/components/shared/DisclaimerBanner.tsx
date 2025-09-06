@@ -71,7 +71,7 @@ export function DisclaimerBanner({ type = 'all', compact = false }: DisclaimerBa
             <AlertDescription className="text-orange-700 dark:text-orange-300 mt-2">
               <MarkdownRenderer
                 content={disclaimer.content}
-                className="prose prose-sm dark:prose-invert prose-orange max-w-none"
+                className="prose prose-sm dark:prose-invert prose-orange text-content-width"
               />
             </AlertDescription>
           </Alert>

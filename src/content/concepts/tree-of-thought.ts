@@ -24,22 +24,74 @@ export const concept = {
   conceptSlugs: [],
   content: [
     {
-      type: 'markdown',
-      content: 'Le **Tree-of-Thought (ToT)** est une technique avancée qui guide l\'IA à explorer plusieurs chemins de raisonnement simultanément. Plutôt que de suivre une seule ligne de pensée, elle évalue différentes hypothèses, ce qui est crucial pour le diagnostic différentiel ou l\'analyse d\'interactions complexes en pharmacie.',
+      type: 'section',
+      title: 'Introduction au Tree-of-Thought',
+      content: 'Le Tree-of-Thought (ToT) est une technique avancée qui guide l\'IA à explorer plusieurs chemins de raisonnement simultanément. Plutôt que de suivre une seule ligne de pensée, elle évalue différentes hypothèses, ce qui est crucial pour le diagnostic différentiel ou l\'analyse d\'interactions complexes en pharmacie.',
+      variant: 'introduction',
     },
     {
-      type: 'markdown',
-      content: '## Pourquoi utiliser le Tree-of-Thought ?\n\nCette approche est particulièrement utile quand vous devez :\n\n- Analyser plusieurs hypothèses diagnostiques\n- Évaluer différentes stratégies thérapeutiques\n- Résoudre des cas cliniques complexes avec plusieurs variables\n- Optimiser des protocoles de soins',
+      type: 'section',
+      title: 'Pourquoi utiliser le Tree-of-Thought ?',
+      content: 'Cette approche est particulièrement utile quand vous devez analyser plusieurs hypothèses en parallèle.',
+      variant: 'key-points',
     },
     {
-      type: 'markdown',
-      content: '## Comment ça fonctionne ?\nLe ToT fonctionne comme un arbre de décision où chaque "nœud" représente une étape de raisonnement. L\'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies.',
+      type: 'points',
+      title: 'Cas d\'Usage du Tree-of-Thought',
+      points: [
+        {
+          title: 'Analyse d\'hypothèses diagnostiques',
+          description: 'Explorer plusieurs causes possibles pour un même symptôme ou effet indésirable',
+        },
+        {
+          title: 'Évaluation de stratégies thérapeutiques',
+          description: 'Comparer différentes approches de traitement pour trouver la plus efficace',
+        },
+        {
+          title: 'Résolution de cas complexes',
+          description: 'Gérer les situations cliniques avec de multiples variables et incertitudes',
+        },
+        {
+          title: 'Optimisation de protocoles',
+          description: 'Tester différentes combinaisons et ajustements pour optimiser les soins',
+        },
+      ],
     },
     {
-      type: 'markdown',
-      content: '## Applications en pharmacie\n\n- **Diagnostic différentiel** : Explorer plusieurs causes possibles d\'un effet indésirable\n- **Optimisation posologique** : Tester différentes stratégies d\'ajustement de dose\n- **Gestion des interactions** : Analyser plusieurs scénarios d\'interaction médicamenteuse\n- **Planification thérapeutique** : Évaluer différentes approches de traitement',
+      type: 'section',
+      title: 'Comment ça fonctionne ?',
+      content: 'Le ToT fonctionne comme un arbre de décision où chaque \'nœud\' représente une étape de raisonnement. L\'IA explore plusieurs branches simultanément, évalue la qualité de chaque approche, puis choisit la meilleure ou combine plusieurs stratégies.',
+      variant: 'section',
+    },
+    {
+      type: 'section',
+      title: 'Applications en pharmacie',
+      content: 'Applications concrètes du Tree-of-Thought dans la pratique pharmaceutique',
+      variant: 'examples',
+    },
+    {
+      type: 'points',
+      title: 'Applications Pharmaceutiques',
+      points: [
+        {
+          title: 'Diagnostic différentiel',
+          description: 'Explorer plusieurs causes possibles d\'un effet indésirable pour identifier la plus probable',
+        },
+        {
+          title: 'Optimisation posologique',
+          description: 'Tester différentes stratégies d\'ajustement de dose en fonction des paramètres du patient',
+        },
+        {
+          title: 'Gestion des interactions',
+          description: 'Analyser plusieurs scénarios d\'interaction médicamenteuse pour prévenir les risques',
+        },
+        {
+          title: 'Planification thérapeutique',
+          description: 'Évaluer différentes approches de traitement pour personnaliser la prise en charge',
+        },
+      ],
     },
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

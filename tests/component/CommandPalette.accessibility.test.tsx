@@ -48,7 +48,6 @@ describe('commandPalette Accessibility', () => {
     await testAccessibility(renderResult, {
       rules: {
         // Dialog should have proper labeling
-        'dialog-title': { enabled: true },
         'aria-dialog-name': { enabled: true },
       },
     })

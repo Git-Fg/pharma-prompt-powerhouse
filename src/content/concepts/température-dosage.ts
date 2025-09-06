@@ -25,6 +25,17 @@ export const concept = {
       content: 'Dans les réglages d\'un modèle de langage, la **température** est un paramètre (généralement entre 0 et 1, parfois jusqu\'à 2) qui contrôle le degré d\'aléa et de "créativité" dans les réponses de l\'IA.\n\nCe n\'est pas une mesure de la "chaleur" de la réponse, mais plutôt une métaphore pour son degré de prévisibilité.\n\n**C\'est l\'équivalent d\'un dosage en pharmacie** : un mauvais dosage peut rendre la réponse inefficace ou toxique (hors-sujet).',
     },
     {
+      type: 'citation',
+      source: 'OpenAI',
+      title: 'GPT-3 Technical Report',
+      citationType: 'study',
+      author: 'OpenAI Team',
+      year: '2020',
+      url: 'https://arxiv.org/abs/2005.14165',
+      abstract: 'Introduction of the temperature parameter in language models for controlling output diversity and creativity.',
+      variant: 'compact',
+    },
+    {
       type: 'tabs',
       defaultValue: 'basse-temperature',
       tabs: [
@@ -86,6 +97,17 @@ export const concept = {
       content: 'Commencez par tester vos prompts à différentes températures dans **Google AI Studio** (gratuit). Observez comment la même question génère des réponses de plus en plus créatives quand vous augmentez la température de 0.1 à 0.9.',
     },
     {
+      type: 'example',
+      title: 'Impact de la température sur une tâche de rédaction',
+      description: 'Même prompt, différentes températures, résultats radicalement différents',
+      content: 'Prompt : "Rédige une introduction sur l\'importance de l\'observance thérapeutique"\n\nTempérature 0.1 :\n"L\'observance thérapeutique est un élément fondamental du succès du traitement médicamenteux. Elle permet d\'assurer l\'efficacité optimale des médicaments prescrits et de réduire les risques d\'échec thérapeutique."\n\nTempérature 0.9 :\n"L\'observance thérapeutique, ce petit geste quotidien qui transforme une simple prescription en véritable alliance thérapeutique ! C\'est l\'art de transformer l\'intention médicale en réalité concrète, où chaque comprimé devient une promesse de santé tenue, un pas vers le bien-être que le patient s\'engage à honorer avec constance et confiance."',
+      exampleType: 'prompt',
+      difficulty: 'intermédiaire',
+      tags: ['température', 'créativité', 'rédaction'],
+      outcome: 'La température basse donne une réponse factuelle et structurée, tandis que la température haute produit une réponse métaphorique et engageante.',
+      variant: 'card',
+    },
+    {
       type: 'toolRecommendation',
       slug: 'google-ai-studio',
       reason: 'Google AI Studio est la meilleure plateforme gratuite pour expérimenter avec le paramètre de température et comprendre son impact sur les réponses de Gemini.',
@@ -93,4 +115,4 @@ export const concept = {
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

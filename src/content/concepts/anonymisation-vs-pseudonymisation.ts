@@ -7,6 +7,7 @@ export const concept = {
   icon: 'Scale',
   category: 'concepts-fondamentaux',
   difficulty: 'intermédiaire',
+  isFavorite: false,
   tags: ['rgpd', 'confidentialite', 'donnees', 'juridique'],
   keyTakeaways: [
     'L\'anonymisation rend l\'identification d\'une personne \"raisonnablement impossible\", sortant les données du champ d\'application du RGPD.',
@@ -67,4 +68,4 @@ Ce n\'est qu\'avec une anonymisation robuste, où même vous ne pourriez plus re
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

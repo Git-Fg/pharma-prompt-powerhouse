@@ -29,40 +29,39 @@ module.exports = {
 
         // Check for typographic apostrophes
         const typographicApostrophes = /'/g
-        let match
-        while ((match = typographicApostrophes.exec(text)) !== null) {
+        for (const apostropheMatch of text.matchAll(typographicApostrophes)) {
           context.report({
             node,
-            loc: sourceCode.getLocFromIndex(match.index),
-            message: `Typographic apostrophe "${match[0]}" found. Use regular apostrophe "'" instead to prevent TypeScript syntax errors.`,
+            loc: sourceCode.getLocFromIndex(apostropheMatch.index),
+            message: `Typographic apostrophe "${apostropheMatch[0]}" found. Use regular apostrophe "'" instead to prevent TypeScript syntax errors.`,
             fix(fixer) {
-              return fixer.replaceTextRange([match.index, match.index + match[0].length], '\'')
+              return fixer.replaceTextRange([apostropheMatch.index, apostropheMatch.index + apostropheMatch[0].length], '\'')
             },
           })
         }
 
         // Check for typographic quotes
         const typographicQuotes = /"/g
-        while ((match = typographicQuotes.exec(text)) !== null) {
+        for (const quoteMatch of text.matchAll(typographicQuotes)) {
           context.report({
             node,
-            loc: sourceCode.getLocFromIndex(match.index),
-            message: `Typographic quote "${match[0]}" found. Use regular quotes '"' instead to prevent TypeScript syntax errors.`,
+            loc: sourceCode.getLocFromIndex(quoteMatch.index),
+            message: `Typographic quote "${quoteMatch[0]}" found. Use regular quotes '"' instead to prevent TypeScript syntax errors.`,
             fix(fixer) {
-              return fixer.replaceTextRange([match.index, match.index + match[0].length], '"')
+              return fixer.replaceTextRange([quoteMatch.index, quoteMatch.index + quoteMatch[0].length], '"')
             },
           })
         }
 
         // Check for malformed string endings (comma inside quotes followed by comma)
         const malformedStrings = /\.',',/g
-        while ((match = malformedStrings.exec(text)) !== null) {
+        for (const malformedMatch of text.matchAll(malformedStrings)) {
           context.report({
             node,
-            loc: sourceCode.getLocFromIndex(match.index),
-            message: `Malformed string ending "${match[0]}" found. Should be ".'," instead.`,
+            loc: sourceCode.getLocFromIndex(malformedMatch.index),
+            message: `Malformed string ending "${malformedMatch[0]}" found. Should be ".'," instead.`,
             fix(fixer) {
-              return fixer.replaceTextRange([match.index, match.index + match[0].length], '.\',')
+              return fixer.replaceTextRange([malformedMatch.index, malformedMatch.index + malformedMatch[0].length], '.\',')
             },
           })
         }

@@ -32,10 +32,27 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'L\'Offre 100% Gratuite',
+      content: 'Z.AI propose une offre complètement gratuite sans option payante, avec un accès complet au modèle GLM-4.5 et à toutes les fonctionnalités.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Fonctionnalités de Z.AI (100% gratuit)',
+      headers: ['Fonctionnalité', 'Offre Gratuite', 'Payant'],
+      rows: [
+        ['**Accès au modèle GLM-4.5**', '✅ Complet', 'N/A'],
+        ['**Recherche web avancée**', '✅ Illimitée', 'N/A'],
+        ['**Création de présentations**', '✅ Illimitée', 'N/A'],
+        ['**Développement web**', '✅ Inclus', 'N/A'],
+      ],
+    },
+    {
       type: 'card',
       title: 'Comprendre l\'Architecture "Plan-and-Solve"',
       description: 'Z.AI vs. les autres : une différence fondamentale',
-      content: 'Contrairement à un simple moteur de recherche, Z.AI agit comme un chercheur qui rédige un protocole complet **avant** de commencer son expérience. Cette phase de planification lui permet de gérer des tâches très complexes de manière cohérente, là où d\'autres outils peuvent se perdre en cours de route.'
+      content: 'Contrairement à un simple moteur de recherche, Z.AI agit comme un chercheur qui rédige un protocole complet **avant** de commencer son expérience. Cette phase de planification lui permet de gérer des tâches très complexes de manière cohérente, là où d\'autres outils peuvent se perdre en cours de route.',
     },
     {
       type: 'table',
@@ -46,7 +63,7 @@ const externalTool = {
         ['**Transparence du Plan**', '**Élevée** : Le plan de recherche ("trajectory") est souvent visible.', '**Faible** : Processus interne en "boîte noire".', '**Potentiellement Très Élevée** : Dépend de l\'interface, chaque étape est distincte.'],
         ['**Robustesse (Requêtes Complexes)**', '**Élevée** : Conçu pour les tâches multi-étapes complexes.', '**Moyenne** : Peut se perdre dans des boucles sans plan global.', '**Élevée** : S\'auto-corrige à chaque étape "Observation".'],
         ['**Vitesse**', '**Moyenne à Lente** : Latence due à la planification initiale.', '**Rapide** : Optimisé pour la vitesse.', '**Variable (souvent lente)** : De multiples cycles "Pensée-Action".'],
-        ['**Risque d\'Hallucination**', '**Déplacé vers le plan** : Le risque est dans la création d\'un plan biaisé.', '**Élevé dans la synthèse** : Risque classique du RAG (mal interpréter les sources).', '**Faible (si bien implémenté)** : Raisonne sur des résultats concrets d\'outils.']
+        ['**Risque d\'Hallucination**', '**Déplacé vers le plan** : Le risque est dans la création d\'un plan biaisé.', '**Élevé dans la synthèse** : Risque classique du RAG (mal interpréter les sources).', '**Faible (si bien implémenté)** : Raisonne sur des résultats concrets d\'outils.'],
       ],
     },
   ],

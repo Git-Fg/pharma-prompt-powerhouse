@@ -30,6 +30,23 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'L\'Offre 100% Gratuite',
+      content: 'Google AI Studio propose une offre complètement gratuite pour les utilisateurs, avec un accès au puissant modèle Gemini 2.5 Pro.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Fonctionnalités de Google AI Studio (gratuit)',
+      headers: ['Fonctionnalité', 'Offre Gratuite', 'Payant'],
+      rows: [
+        ['**Modèle principal**', '✅ **Gemini 2.5 Pro**', 'N/A (API payante pour développeurs)'],
+        ['**Contexte max**', '✅ **1 Million de tokens**', 'N/A'],
+        ['**Quota d\'usage**', 'Très généreux (60 req/min)', 'N/A'],
+        ['**Multimodal**', '✅ Complet (Image, Vidéo, Audio)', 'N/A'],
+      ],
+    },
+    {
       type: 'card',
       title: '🚀 Nouvelle Capacité : Le Tuteur Personnel',
       description: 'La fonctionnalité "Guided Learning"',

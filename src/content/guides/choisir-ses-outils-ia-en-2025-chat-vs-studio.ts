@@ -3,7 +3,7 @@ import type { Guide } from '@/lib/content-schema'
 export const guide = {
   slug: 'choisir-ses-outils-ia-en-2025-chat-vs-studio',
   title: 'Choisir ses Outils IA en 2025 : Le Guide Stratégique',
-  description: "Un guide pour naviguer l'écosystème IA de 2025, des agents de recherche aux tuteurs personnels, en passant par les hubs de modèles.",
+  description: 'Un guide pour naviguer l\'écosystème IA de 2025, des agents de recherche aux tuteurs personnels, en passant par les hubs de modèles.',
   icon: 'Workflow',
   category: 'outils',
   difficulty: 'débutant',
@@ -18,11 +18,11 @@ export const guide = {
   isFavorite: true,
   isWorkflow: false,
   keyTakeaways: [
-    "La distinction n\'est plus seulement 'Chat vs Studio', mais se base sur des rôles spécialisés : Agent de Recherche, Hub de Modèles, Assistant d\'Analyse, et Tuteur IA.",
-    "**Perplexity Pro** s\'est transformé en 'Hub de Modèles', donnant accès à GPT-5 et Claude 4 Opus pour le prix d\'un seul abonnement.",
-    "**Claude Pro** est devenu un 'Assistant d\'Analyse' avec des capacités agentiques (Tool Use) pour les projets de recherche au long cours.",
-    "**Google AI Studio** s\'impose comme le 'Tuteur IA' ultime grâce à sa fonction 'Guided Learning', tout en restant le meilleur laboratoire gratuit.",
-    "Votre 'arsenal stratégique' doit combiner un outil de recherche rapide (Perplexity gratuit), un pour l\'analyse de fond (AI Studio), et potentiellement un abonnement 'Hub' (Perplexity Pro) pour maximiser la puissance.",
+    'La distinction n\'est plus seulement \'Chat vs Studio\', mais se base sur des rôles spécialisés : Agent de Recherche, Hub de Modèles, Assistant d\'Analyse, et Tuteur IA.',
+    '**Perplexity Pro** s\'est transformé en \'Hub de Modèles\', donnant accès à GPT-5 et Claude 4 Opus pour le prix d\'un seul abonnement.',
+    '**Claude Pro** est devenu un \'Assistant d\'Analyse\' avec des capacités agentiques (Tool Use) pour les projets de recherche au long cours.',
+    '**Google AI Studio** s\'impose comme le \'Tuteur IA\' ultime grâce à sa fonction \'Guided Learning\', tout en restant le meilleur laboratoire gratuit.',
+    'Votre \'arsenal stratégique\' doit combiner un outil de recherche rapide (Perplexity gratuit), un pour l\'analyse de fond (AI Studio), et potentiellement un abonnement \'Hub\' (Perplexity Pro) pour maximiser la puissance.',
   ],
   conceptSlugs: [
     'architecture-agentique',
@@ -42,22 +42,22 @@ export const guide = {
     },
     {
       type: 'table',
-      caption: "Tableau comparatif des positionnements stratégiques des outils IA en 2025.",
-      headers: ["Outil", "Nouveau Rôle Stratégique", "Idéal Pour..."],
+      caption: 'Tableau comparatif des positionnements stratégiques des outils IA en 2025.',
+      headers: ['Outil', 'Nouveau Rôle Stratégique', 'Idéal Pour...'],
       rows: [
-        ['**Perplexity AI**', "**Le Hub de Modèles & Agent de Recherche**", "Accéder aux meilleurs modèles (GPT-5, Claude 4 Opus) via un seul abonnement et lancer des recherches autonomes."],
-        ['**Claude.ai**', "**L\'Assistant d\'Analyse et de Raisonnement**", "Les projets de recherche longs (mémoires) nécessitant l\'analyse de nombreux documents et une mémoire persistante."],
-        ['**Google AI Studio**', "**Le Laboratoire & Tuteur Personnel**", "L\'expérimentation gratuite et l\'apprentissage guidé en transformant des cours en modules interactifs."],
-        ['**ChatGPT**', "**La Référence Polyvalente**", "Les tâches de rédaction, de brainstorming et l\'accès à l'écosystème de pointe d\'OpenAI (GPT-5, GPTs)."],
+        ['**Perplexity AI**', '**Le Hub de Modèles & Agent de Recherche**', 'Accéder aux meilleurs modèles (GPT-5, Claude 4 Opus) via un seul abonnement et lancer des recherches autonomes.'],
+        ['**Claude.ai**', '**L\'Assistant d\'Analyse et de Raisonnement**', 'Les projets de recherche longs (mémoires) nécessitant l\'analyse de nombreux documents et une mémoire persistante.'],
+        ['**Google AI Studio**', '**Le Laboratoire & Tuteur Personnel**', 'L\'expérimentation gratuite et l\'apprentissage guidé en transformant des cours en modules interactifs.'],
+        ['**ChatGPT**', '**La Référence Polyvalente**', 'Les tâches de rédaction, de brainstorming et l\'accès à l\'écosystème de pointe d\'OpenAI (GPT-5, GPTs).'],
       ],
     },
     {
       type: 'markdown',
-      content: "### L'Évolution Majeure : Perplexity, le Hub de Modèles",
+      content: '### L\'Évolution Majeure : Perplexity, le Hub de Modèles',
     },
     {
       type: 'card',
-      title: "Perplexity n'est plus un simple moteur de recherche",
+      title: 'Perplexity n\'est plus un simple moteur de recherche',
       content: `C'est le changement le plus important de l'année. Au lieu de payer des abonnements séparés pour chaque modèle de pointe, l'abonnement Perplexity Pro (environ 20$/mois) vous donne accès à **GPT-5**, **Claude 4 Opus**, et d'autres, directement dans leur interface.
   
   Sa fonction **'Deep Research'** en fait un véritable **agent de recherche** : vous lui donnez un sujet, et il planifie, exécute une recherche multi-sources, et vous rend un rapport de synthèse sourcé. C'est un gain de productivité phénoménal.`,
@@ -167,4 +167,4 @@ L'ère du 'couteau suisse' unique est révolue. Pour être efficace en 2025, il 
   ],
 } satisfies Guide
 
-export default guide || concept || workflow
+export default guide

@@ -112,4 +112,4 @@ export const workflow = {
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow

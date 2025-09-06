@@ -13,14 +13,39 @@ test.describe('Core Site Navigation', () => {
     // Check main title is present - use the actual title
     await expect(page).toHaveTitle(/Pharma Prompt Powerhouse/i)
 
-    // Check main navigation elements - updated for new structure
-    const navElements = ['Par où commencer ?', 'Workflows Stratégiques', 'L\'Arsenal IA', 'Concepts']
-    for (const navItem of navElements) {
-      // Use more flexible text matching with getByRole
-      await expect(page.getByRole('link', { name: new RegExp(navItem, 'i') }).first()).toBeVisible({ timeout: 10000 })
-    }
+    // Check main navigation elements using test IDs
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
+
+    const logo = page.locator('[data-testid="nav-logo"]')
+    await expect(logo).toBeVisible()
+
+    const themeToggle = page.locator('[data-testid="nav-theme-toggle"]')
+    await expect(themeToggle).toBeVisible()
+
+    // Check navigation links using test IDs
+    const workflowsLink = page.locator('[data-testid="nav-link-workflows-stratégiques"]')
+    await expect(workflowsLink).toBeVisible()
+
+    const mobileNav = page.locator('[data-testid="layout-mobile-nav"]')
+    await expect(mobileNav).toBeVisible()
 
     await page.screenshot({ path: 'test-results/homepage.png', fullPage: true })
+  })
+
+  test('navigation using test IDs', async ({ page }) => {
+    await page.goto('/')
+
+    // Test navigation click using test ID
+    const workflowsLink = page.locator('[data-testid="nav-link-workflows-stratégiques"]')
+    await workflowsLink.click()
+
+    // Verify navigation worked
+    await expect(page).toHaveURL('/workflows')
+
+    // Verify page loaded using header test ID
+    const header = page.locator('[data-testid="layout-header"]')
+    await expect(header).toBeVisible()
   })
 
   test('concepts page navigation works', async ({ page }) => {

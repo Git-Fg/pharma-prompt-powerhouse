@@ -1,11 +1,18 @@
 import type { Concept } from '@/lib/content-schema'
 
-const concept = {
+export const concept = {
   slug: 'step-back-prompting',
   title: 'Step-Back Prompting',
-  description: "Une méthode de raisonnement qui force l'IA à s'abstraire des détails pour identifier les principes fondamentaux avant de résoudre un problème spécifique.",
-  area: 'Concepts Avancés',
-  isNew: true,
+  description: 'Une méthode de raisonnement qui force l\'IA à s\'abstraire des détails pour identifier les principes fondamentaux avant de résoudre un problème spécifique.',
+  category: 'Concepts Avancés',
+  difficulty: 'avancé',
+  tags: ['raisonnement', 'abstraction', 'principes-fondamentaux'],
+  isFavorite: false,
+  keyTakeaways: [
+    'Step-Back Prompting force l\'IA à s\'abstraire des détails pour identifier les principes fondamentaux avant de résoudre un problème.',
+    'Cette méthode réduit les erreurs de précipitation et améliore le raisonnement en ancrant la réponse dans des concepts de base.',
+    'Idéale pour les cas complexes comme le diagnostic différentiel et l\'analyse d\'interactions médicamenteuses.',
+  ],
   content: [
     {
       type: 'markdown',
@@ -54,4 +61,4 @@ Les cas cliniques ou les questions pharmaceutiques sont rarement simples. Les d�
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

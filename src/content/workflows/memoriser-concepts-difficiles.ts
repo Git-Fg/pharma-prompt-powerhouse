@@ -254,4 +254,4 @@ Température élevée recommandée (0.8-0.9) pour plus de créativité !`,
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow

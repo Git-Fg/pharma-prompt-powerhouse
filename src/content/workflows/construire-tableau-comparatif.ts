@@ -233,4 +233,4 @@ Présente le tableau en markdown avec un en-tête clair. Utilise des symboles (�
   ],
 } satisfies Workflow
 
-export default guide || concept || workflow
+export default workflow

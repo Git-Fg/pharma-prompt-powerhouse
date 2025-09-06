@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
+import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 
 interface ActionItem {
   id: string
@@ -21,6 +22,7 @@ interface ActionChecklistProps {
   items: ActionItem[]
   variant?: 'default' | 'card' | 'alert'
   allowChecking?: boolean
+  testId?: string
 }
 
 interface ChecklistContentProps {
@@ -31,6 +33,7 @@ interface ChecklistContentProps {
   toggleItem: (itemId: string) => void
   getPriorityColor: (priority?: string) => string
   getPriorityBadge: (priority?: string) => React.ReactNode
+  testId?: string
 }
 
 function ChecklistContent({
@@ -41,6 +44,7 @@ function ChecklistContent({
   toggleItem,
   getPriorityColor,
   getPriorityBadge,
+  testId,
 }: ChecklistContentProps) {
   return (
     <div className="space-y-4">
@@ -54,6 +58,7 @@ function ChecklistContent({
           return (
             <div
               key={item.id}
+              {...createTestIdProps(testId ? `${testId}-item-${item.id}` : `checklist-item-${item.id}`)}
               className={`flex items-start gap-3 p-3 rounded-lg border transition-all ${
                 isChecked
                   ? 'bg-green-50/50 border-green-200 dark:bg-green-950/20 dark:border-green-800'
@@ -64,6 +69,7 @@ function ChecklistContent({
               {allowChecking
                 ? (
                     <Checkbox
+                      {...createTestIdProps(testId ? `${testId}-checkbox-${item.id}` : `checklist-checkbox-${item.id}`)}
                       checked={isChecked}
                       onCheckedChange={() => toggleItem(item.id)}
                       className="mt-0.5"
@@ -132,6 +138,7 @@ export function ActionChecklist({
   items,
   variant = 'default',
   allowChecking = true,
+  testId,
 }: ActionChecklistProps) {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(() => new Set())
 
@@ -195,11 +202,14 @@ export function ActionChecklist({
     toggleItem,
     getPriorityColor,
     getPriorityBadge,
+    testId,
   }
+
+  const checklistTestId = testId || generateTestId('checklist', 'main', title?.replace(/\s+/g, '-').toLowerCase())
 
   if (variant === 'alert') {
     return (
-      <Alert className="mb-8">
+      <Alert {...createTestIdProps(checklistTestId)} className="mb-8">
         <CheckCircle2 className="size-4" />
         <AlertTitle>{title}</AlertTitle>
         <AlertDescription>
@@ -213,7 +223,7 @@ export function ActionChecklist({
 
   if (variant === 'card') {
     return (
-      <Card className="mb-8">
+      <Card {...createTestIdProps(checklistTestId)} className="mb-8">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CheckCircle2 className="size-5" />
@@ -228,7 +238,7 @@ export function ActionChecklist({
   }
 
   return (
-    <div className="mb-8 p-6 border rounded-lg bg-background">
+    <div {...createTestIdProps(checklistTestId)} className="mb-8 p-6 border rounded-lg bg-background">
       <h3 className="font-semibold mb-4 flex items-center gap-2">
         <CheckCircle2 className="size-5" />
         {title}

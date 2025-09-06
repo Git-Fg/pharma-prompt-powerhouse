@@ -33,6 +33,23 @@ const externalTool = {
 
   content: [
     {
+      type: 'section',
+      title: 'L\'Offre 100% Gratuite',
+      content: 'NotebookLM propose une offre complètement gratuite sans option payante, avec des fonctionnalités généreuses pour la recherche documentaire.',
+      variant: 'key-points',
+    },
+    {
+      type: 'table',
+      caption: 'Fonctionnalités de NotebookLM (100% gratuit)',
+      headers: ['Fonctionnalité', 'Offre Gratuite', 'Payant'],
+      rows: [
+        ['**Nombre de Notebooks**', '✅ Illimité', 'N/A'],
+        ['**Nombre de sources**', '✅ 50 par notebook', 'N/A'],
+        ['**Taille des sources**', 'Généreuse', 'N/A'],
+        ['**Audio Overview**', '✅ Inclus', 'N/A'],
+      ],
+    },
+    {
       type: 'card',
       title: 'Mon Workflow de Révision avec NotebookLM',
       content: '1. **Création :** Je crée un notebook par Unité d\'Enseignement (UE).\n2. **Alimentation :** Tout au long du semestre, j\'ajoute les PDFs des cours, les TD et mes fiches de révision.\n3. **Interrogation :** Avant un examen, je lui pose des questions transversales : *\'Compare les mécanismes d\'action des diurétiques selon mes différentes sources\'*.\n4. **Synthèse Audio :** Je génère l\' \'Audio Overview\' pour réviser passivement pendant mes trajets.',

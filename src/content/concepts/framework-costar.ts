@@ -4,9 +4,15 @@ export const concept = {
   slug: 'framework-costar',
   title: 'Framework CO-STAR',
   description: 'Une introduction au framework de prompting CO-STAR (Context, Objective, Style, Tone, Audience, Response), une méthode complète pour des instructions détaillées.',
-  area: 'Prompting',
+  category: 'Prompting',
+  difficulty: 'intermédiaire',
   tags: ['méthodologie', 'prompting', 'framework'],
-  isExternal: false,
+  isFavorite: false,
+  keyTakeaways: [
+    'CO-STAR est un framework complet pour structurer les prompts en 6 composantes essentielles.',
+    'Les 6 éléments : Context, Objective, Style, Tone, Audience, Response.',
+    'Cette méthode est complémentaire à notre approche des 6 Piliers adaptée à la pharmacie.',
+  ],
   content: [
     {
       type: 'markdown',
@@ -59,4 +65,4 @@ CO-STAR est un des nombreux frameworks de prompting. D\'autres existent, comme *
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

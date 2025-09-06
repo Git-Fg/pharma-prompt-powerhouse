@@ -1,23 +1,37 @@
 import type { Guide } from '@/lib/content-schema'
 
-const guide = {
+export const guide = {
   slug: 'choisir-son-agent-de-recherche',
   title: 'Choisir son Agent de Recherche : Z.AI vs Perplexity vs Claude',
   description: 'Un guide stratégique pour choisir le bon outil de recherche IA en fonction de la complexité de votre tâche, basé sur leurs architectures sous-jacentes.',
-  area: 'guides',
+  category: 'guides',
+  difficulty: 'intermédiaire',
   tags: ['ia', 'agent', 'recherche', 'z-ai', 'perplexity', 'claude'],
   isFavorite: true,
-  cover: '/images/objectifs/recherche-biblio-apres.png',
+  isWorkflow: false,
+  keyTakeaways: [
+    'Les agents de recherche IA utilisent 3 architectures principales : Plan-and-Solve (Z.AI), RAG Multi-Étapes (Perplexity), et ReAct (Claude).',
+    'Z.AI est idéal pour les recherches complexes et exploratoires grâce à sa planification structurée.',
+    'Perplexity excelle dans la recherche factuelle rapide et la veille scientifique ciblée.',
+    'Claude est le plus fiable pour les interactions contrôlées avec des documents spécifiques.',
+    'Chaque outil a des risques spécifiques : hallucination stratégique (Z.AI), synthèse erronée (Perplexity), et dépendance de la qualité des documents (Claude).',
+  ],
 
   content: [
     {
-      type: 'introduction',
-      title: 'Tous les "chercheurs IA" ne sont pas identiques',
+      type: 'markdown',
+      content: '## Tous les "chercheurs IA" ne sont pas identiques',
+    },
+    {
+      type: 'markdown',
       content: 'Vous avez une recherche bibliographique à faire. Quel outil choisir ? La réponse dépend de la nature de votre tâche. Comprendre comment ces outils "réfléchissent" est la clé pour faire le bon choix. On peut classer les principaux agents de recherche en trois grandes familles, chacune avec ses forces et ses faiblesses.',
     },
     {
-      type: 'section',
-      title: 'Les 3 Paradigmes de la Recherche IA',
+      type: 'markdown',
+      content: '## Les 3 Paradigmes de la Recherche IA',
+    },
+    {
+      type: 'markdown',
       content: 'Pour faire simple, chaque agent de recherche a une \'personnalité\' différente, dictée par son architecture :\n- **Le Stratège (Plan-and-Solve) :** Il planifie tout à l\'avance. C\'est l\'approche de Z.AI.\n- **Le Sprinteur Itératif (RAG Multi-Étapes) :** Il cherche, synthétise, et recommence en boucle. C\'est l\'approche de Perplexity.\n- **L\'Exécutant Prudent (ReAct) :** Il réfléchit, agit, observe, et ajuste. C\'est l\'approche de Claude quand il utilise des outils.',
     },
     {
@@ -59,6 +73,4 @@ const guide = {
   ],
 } satisfies Guide
 
-export default guide || concept || workflow
-
-export { guide }
+export default guide

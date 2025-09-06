@@ -6,7 +6,7 @@ export const concept = {
   description: 'Découpez vos tâches complexes en une série de prompts logiques, comme un protocole de soin',
   icon: 'GitBranch',
   category: 'methodologie',
-  difficulty: 'débutant',
+  difficulty: 'intermédiaire',
   tags: [
     'exemple-code',
     'guide',
@@ -91,4 +91,4 @@ export const concept = {
   ],
 } satisfies Concept
 
-export default guide || concept || workflow
+export default concept

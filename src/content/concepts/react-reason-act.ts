@@ -1,19 +1,24 @@
 import type { Concept } from '@/lib/content-schema'
 
-const concept = {
+export const concept = {
   slug: 'react-reason-act',
   title: 'ReAct (Reason+Act)',
   description: 'La boucle de raisonnement courte : comment une IA réfléchit, agit, et observe pour accomplir des tâches étape par étape.',
-  area: 'concepts',
+  category: 'concepts',
+  difficulty: 'intermédiaire',
   tags: ['ia', 'agent', 'architecture', 'react', 'claude'],
   isFavorite: false,
-  cover: '/images/objectifs/recherche-biblio-apres.png',
+  keyTakeaways: [
+    'ReAct (Reason+Act) fonctionne en boucles courtes : réfléchir → agir → observer → répéter.',
+    'Cette architecture est idéale pour les tâches nécessitant des outils externes et une adaptation rapide.',
+    'Claude est l\'exemple le plus puissant de cette approche avec sa fonctionnalité "Tool Use".',
+  ],
 
   content: [
     {
       type: 'introduction',
       title: 'Penser, Agir, Observer, Répéter',
-      content: 'L\'architecture "ReAct" (pour Reason + Act) est un modèle d\'action pour les agents IA qui imite la façon dont les humains accomplissent des tâches. Au lieu de tout planifier à l\'avance, l\'agent progresse par une série de petites boucles de raisonnement et d\'action.'
+      content: 'L\'architecture "ReAct" (pour Reason + Act) est un modèle d\'action pour les agents IA qui imite la façon dont les humains accomplissent des tâches. Au lieu de tout planifier à l\'avance, l\'agent progresse par une série de petites boucles de raisonnement et d\'action.',
     },
     {
       type: 'analogy',
@@ -29,33 +34,12 @@ Il recommence ensuite la boucle pour le médicament suivant, s'ajustant à chaqu
     {
       type: 'section',
       title: 'Quand utiliser cette architecture ?',
-      content: [
-        {
-          type: 'markdown',
-          content: 'Cette approche est idéale pour :'
-        },
-        {
-          type: 'card',
-          title: 'Les Tâches Nécessitant des Outils Externes',
-          content: 'Chaque fois que l\'IA doit interagir avec une source d\'information externe (une API, une base de données, un moteur de recherche), la boucle ReAct lui permet de s\'assurer que le résultat de l\'outil est correct avant de continuer.'
-        },
-        {
-          type: 'card',
-          title: 'Les Problèmes où le Contexte Évolue Rapidement',
-          content: 'Si la situation peut changer après chaque action, une planification rigide est inefficace. ReAct permet une grande flexibilité et une capacité d\'adaptation.'
-        },
-        {
-          type: 'alert',
-          variant: 'destructive',
-          title: 'Le Point de Vigilance',
-          content: 'Le risque principal est de se perdre dans une boucle ou d\'échouer à trouver une solution si les outils ne donnent pas les résultats attendus. L\'agent peut "tourner en rond" sans une stratégie globale.'
-        },
-      ],
+      content: 'Cette approche est idéale pour :\n\n**Les Tâches Nécessitant des Outils Externes**\nChaque fois que l\'IA doit interagir avec une source d\'information externe (une API, une base de données, un moteur de recherche), la boucle ReAct lui permet de s\'assurer que le résultat de l\'outil est correct avant de continuer.\n\n**Les Problèmes où le Contexte Évolue Rapidement**\nSi la situation peut changer après chaque action, une planification rigide est inefficace. ReAct permet une grande flexibilité et une capacité d\'adaptation.\n\n⚠️ **Le Point de Vigilance**\nLe risque principal est de se perdre dans une boucle ou d\'échouer à trouver une solution si les outils ne donnent pas les résultats attendus. L\'agent peut "tourner en rond" sans une stratégie globale.',
     },
     {
       type: 'conclusion',
       title: 'L\'Outil de Prédilection',
-      content: 'En 2025, **Claude** est l\'exemple le plus puissant de cette architecture grâce à sa fonctionnalité de "Tool Use", qui lui permet d\'interagir de manière fiable avec des outils externes.'
+      content: 'En 2025, **Claude** est l\'exemple le plus puissant de cette architecture grâce à sa fonctionnalité de "Tool Use", qui lui permet d\'interagir de manière fiable avec des outils externes.',
     },
   ],
 } satisfies Concept
