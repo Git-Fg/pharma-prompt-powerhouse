@@ -1,5 +1,6 @@
 'use client'
 
+import type { EnrichedConcept, EnrichedGuide, EnrichedWorkflow, ExternalTool } from '@/lib/content-schema'
 import { BookOpen, Search } from 'lucide-react'
 import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,6 +14,11 @@ import {
 import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
+import { ConceptCard } from './ConceptCard'
+import { GuideCard } from './GuideCard'
+import { SimpleWorkflowCard } from './SimpleWorkflowCard'
+import { ToolCard } from './ToolCard'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 
 // Interface de base que les items doivent respecter pour utiliser ce composant
 export interface BaseContentItem {
@@ -24,11 +30,13 @@ export interface BaseContentItem {
   slug?: string
 }
 
+export type RenderItemType = 'workflow' | 'concept' | 'guide' | 'tool'
+
 export interface FilterableContentGridProps<TItem extends BaseContentItem> {
   /** Le tableau initial de contenu à filtrer */
   items: TItem[]
-  /** Fonction de rendu pour chaque item */
-  renderItem: (item: TItem) => React.ReactNode
+  /** Type de rendu pour chaque item */
+  renderType: RenderItemType
   /** Placeholder pour la barre de recherche */
   searchPlaceholder: string
   /** Afficher le filtre par catégorie */
@@ -45,7 +53,7 @@ export interface FilterableContentGridProps<TItem extends BaseContentItem> {
 
 export function FilterableContentGrid<TItem extends BaseContentItem>({
   items,
-  renderItem,
+  renderType,
   searchPlaceholder,
   showCategoryFilter = true,
   showDifficultyFilter = false,
@@ -67,6 +75,22 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
     resetFilters,
   } = useContentFilter(items)
 
+  // Fonction de rendu basée sur le type
+  const renderItem = (item: TItem) => {
+    switch (renderType) {
+      case 'workflow':
+        return <SimpleWorkflowCard workflow={item as unknown as EnrichedWorkflow} />
+      case 'concept':
+        return <ConceptCard concept={item as unknown as EnrichedConcept} />
+      case 'guide':
+        return <GuideCard guide={item as unknown as EnrichedGuide} />
+      case 'tool':
+        return <ToolCard tool={item as unknown as ExternalTool} />
+      default:
+        return null
+    }
+  }
+
   // Générer les options de filtres disponibles
   const categories = showCategoryFilter
     ? ['all', ...Array.from(new Set(items.map(item => item.category).filter((cat): cat is string => Boolean(cat))))]
@@ -79,10 +103,10 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
   // État vide
   if (filteredItems.length === 0) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6" {...createTestIdProps(TestIds.Content.Section('empty-state'))}>
         {/* Search and Filters */}
         <div className="space-y-4">
-          <div className="relative dialog-content-width mx-auto">
+          <div className="relative dialog-content-width mx-auto" {...createTestIdProps(TestIds.Form.Input('search'))}>
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
             <Input
               placeholder={searchPlaceholder}
@@ -93,7 +117,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
           </div>
 
           {(showCategoryFilter && categories.length > 1) && (
-            <div className="flex justify-center gap-2 flex-wrap">
+            <div className="flex justify-center gap-2 flex-wrap" {...createTestIdProps(TestIds.Form.Select('category'))}>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="Catégorie" />
@@ -140,7 +164,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
           <p className="text-muted-foreground mb-4">
             {emptyMessage}
           </p>
-          <Button variant="outline" onClick={resetFilters}>
+          <Button variant="outline" onClick={resetFilters} {...createTestIdProps(TestIds.Interactive.Button('reset-filters'))}>
             Réinitialiser les filtres
           </Button>
         </div>
@@ -152,7 +176,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
     <div className="space-y-6">
       {/* Search and Filters */}
       <div className="space-y-4">
-        <div className="relative dialog-content-width mx-auto">
+        <div className="relative dialog-content-width mx-auto" {...createTestIdProps(TestIds.Form.Input('search'))}>
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
           <Input
             placeholder={searchPlaceholder}
@@ -162,9 +186,9 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
           />
         </div>
 
-        <div className="flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-4 flex-wrap" {...createTestIdProps(TestIds.Content.Section('filters'))}>
           {(showCategoryFilter && categories.length > 1) && (
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <Select value={selectedCategory} onValueChange={setSelectedCategory} {...createTestIdProps(TestIds.Form.Select('category'))}>
               <SelectTrigger className="w-48">
                 <SelectValue placeholder="Catégorie" />
               </SelectTrigger>
@@ -180,7 +204,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
           )}
 
           {(showDifficultyFilter && difficulties.length > 1) && (
-            <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+            <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty} {...createTestIdProps(TestIds.Form.Select('difficulty'))}>
               <SelectTrigger className="w-48">
                 <SelectValue placeholder="Difficulté" />
               </SelectTrigger>
@@ -198,10 +222,9 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
       </div>
 
       {/* Content Grid */}
-      <div ref={listRef} className={gridClassName}>
+      <div ref={listRef} className={gridClassName} {...createTestIdProps(TestIds.Content.Section('grid'))}>
         {filteredItems.map((item, index) => (
-          // eslint-disable-next-line ts/no-explicit-any -- Accès dynamique aux propriétés communes de différents types de contenu
-          <div key={(item as any).slug || `item-${index}`}>
+          <div key={(item as BaseContentItem).slug || `item-${index}`} {...createTestIdProps(TestIds.Interactive.Card(renderType, (item as BaseContentItem).slug || `item-${index}`))}>
             {renderItem(item)}
           </div>
         ))}

@@ -1,7 +1,6 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
-import { GuideRenderItem } from '@/components/shared/GuideRenderItem'
 import { content } from '@/lib/content-loader'
 
 // Désactiver le rendu statique pour les pages avec des composants complexes
@@ -36,7 +35,7 @@ export default function GuidesPage() {
     >
       <FilterableContentGrid
         items={guides}
-        renderItem={guide => <GuideRenderItem item={guide} />}
+        renderType="guide"
         searchPlaceholder="Rechercher un guide..."
         showCategoryFilter={true}
         showDifficultyFilter={true}

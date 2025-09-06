@@ -482,11 +482,28 @@
 }
 
 @utility prose-description {
-  @apply text-base/relaxed text-muted-foreground max-w-2xl mx-auto text-pretty;
+  max-width: 42rem; /* 672px - Direct value to bypass Tailwind v4 max-w-2xl bug for header descriptions */
+  margin-left: auto;
+  margin-right: auto;
+  @apply text-base/relaxed text-muted-foreground text-pretty;
 }
 
 @utility prose-intro {
   @apply text-muted-foreground leading-relaxed responsive-text text-pretty max-w-none;
+}
+
+@utility prose-content-width {
+  max-width: 65rem; /* 1040px - Direct value to bypass Tailwind v4 max-w-7xl bug for main content areas */
+  margin-left: auto;
+  margin-right: auto;
+  @apply text-muted-foreground leading-relaxed text-pretty;
+}
+
+@utility prose-section-width {
+  max-width: 56rem; /* 896px - Direct value to bypass Tailwind v4 max-w-6xl bug for section content */
+  margin-left: auto;
+  margin-right: auto;
+  @apply text-muted-foreground leading-relaxed text-pretty;
 }
 
 @utility prose-personal-note {
