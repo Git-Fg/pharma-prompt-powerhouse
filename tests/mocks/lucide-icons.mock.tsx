@@ -1,6 +1,6 @@
 /**
  * Comprehensive Lucide React Icons Mock
- * 
+ *
  * This mock provides all the icons used across components
  * to prevent "No X export is defined" errors in tests.
  */
