@@ -5,6 +5,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { contentCardVariants } from '@/components/ui/variants'
 
 export const metadata = {
   title: 'Par où commencer ? - Guide pour débuter avec l\'IA',
@@ -35,7 +36,7 @@ export default function ParOuCommencerPage() {
         <Container maxWidth="4xl">
           <div className="space-y-8">
             {/* Étape 1 */}
-            <Card className="border-l-4 border-l-blue-500">
+            <Card className={contentCardVariants({ variant: 'concept' })}>
               <CardHeader>
                 <div className="flex items-center space-x-2">
                   <div className="size-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -87,7 +88,7 @@ export default function ParOuCommencerPage() {
             </Card>
 
             {/* Étape 2 */}
-            <Card className="border-l-4 border-l-green-500">
+            <Card className={contentCardVariants({ variant: 'guide' })}>
               <CardHeader>
                 <div className="flex items-center space-x-2">
                   <div className="size-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -119,7 +120,7 @@ export default function ParOuCommencerPage() {
             </Card>
 
             {/* Étape 3 */}
-            <Card className="border-l-4 border-l-red-500">
+            <Card className={contentCardVariants({ variant: 'security' })}>
               <CardHeader>
                 <div className="flex items-center space-x-2">
                   <div className="size-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -181,7 +182,7 @@ export default function ParOuCommencerPage() {
             </Card>
 
             {/* Étape suivante */}
-            <Card className="border-l-4 border-l-purple-500">
+            <Card className={contentCardVariants({ variant: 'advanced' })}>
               <CardHeader>
                 <div className="flex items-center space-x-2">
                   <div className="size-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">

@@ -104,8 +104,8 @@ export const guide = {
     },
     {
       type: 'guideRecommendation',
-      slug: 'les-5-piliers-dun-prompt-pharmaceutique-efficace',
-      reason: 'Avant d\'utiliser la méthode XML, maîtrisez d\'abord les 5 piliers fondamentaux pour construire des prompts efficaces.',
+      slug: 'les-6-piliers-prompt-pharmaceutique-efficace',
+      reason: 'Avant d\'utiliser la méthode XML, maîtrisez d\'abord les 6 piliers fondamentaux pour construire des prompts efficaces.',
     },
     {
       type: 'conceptRecommendation',

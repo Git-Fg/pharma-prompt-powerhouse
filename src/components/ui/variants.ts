@@ -16,6 +16,8 @@ export const contentCardVariants = tv({
       guide: 'border-l-4 border-l-green-500 hover:shadow-lg hover:border-l-green-600',
       workflow: 'border-l-4 border-l-purple-500 hover:shadow-lg hover:border-l-purple-600',
       tool: 'border-l-4 border-l-orange-500 hover:shadow-lg hover:border-l-orange-600',
+      security: 'border-l-4 border-l-red-500 hover:shadow-lg hover:border-l-red-600',
+      advanced: 'border-l-4 border-l-purple-500 hover:shadow-lg hover:border-l-purple-600',
       default: 'hover:shadow-md',
     },
     size: {
