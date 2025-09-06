@@ -434,6 +434,10 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Use Playwright MCP (AI Agent) tools for interactive visual debugging and real-time validation during development
 - Use Playwright.js (library) for automated E2E tests in CI/CD pipelines
 - Always use Playwright MCP tools to assist with creating, modifying, and correcting Playwright.js E2E tests (explore interface, understand element structure, validate behavior before writing test code)
+- Use Context7 to validate architectural choices and get recommendations on modern development best practices
+- Consult Context7 when encountering complex technical problems or important design decisions
+- Provide detailed context to Context7 to get relevant and project-appropriate responses
+- Use Context7 as reference for continuous learning and keeping knowledge up-to-date
 - Start with a snapshot using MCP tools to understand page structure before interacting
 - Take screenshots with MCP tools to document states and visual debugging
 - Check console messages with MCP tools to detect JavaScript errors during development
