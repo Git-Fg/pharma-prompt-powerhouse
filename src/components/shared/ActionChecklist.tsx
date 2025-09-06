@@ -4,8 +4,8 @@ import { Check, CheckCircle2, Circle } from 'lucide-react'
 
 import { useState } from 'react'
 
+import { SectionCard } from '@/components/shared/SectionCard'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 
@@ -26,7 +26,6 @@ interface ActionChecklistProps {
 }
 
 interface ChecklistContentProps {
-  description?: string
   items: ActionItem[]
   checkedItems: Set<string>
   allowChecking: boolean
@@ -37,7 +36,6 @@ interface ChecklistContentProps {
 }
 
 function ChecklistContent({
-  description,
   items,
   checkedItems,
   allowChecking,
@@ -48,9 +46,6 @@ function ChecklistContent({
 }: ChecklistContentProps) {
   return (
     <div className="space-y-4">
-      {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
-      )}
       <div className="space-y-3">
         {items.map((item) => {
           const isChecked = checkedItems.has(item.id)
@@ -195,7 +190,6 @@ export function ActionChecklist({
   }
 
   const checklistProps = {
-    description,
     items,
     checkedItems,
     allowChecking,
@@ -223,17 +217,15 @@ export function ActionChecklist({
 
   if (variant === 'card') {
     return (
-      <Card {...createTestIdProps(checklistTestId)} className="mb-8">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <CheckCircle2 className="size-5" />
-            {title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChecklistContent {...checklistProps} />
-        </CardContent>
-      </Card>
+      <SectionCard
+        {...createTestIdProps(checklistTestId)}
+        title={title}
+        description={description}
+        icon={CheckCircle2}
+        className="mb-8"
+      >
+        <ChecklistContent {...checklistProps} />
+      </SectionCard>
     )
   }
 

@@ -1,8 +1,9 @@
 import type { AnyContent } from '@/types'
 import { ArrowRight, BookOpen, Lightbulb, Sparkles, Target } from 'lucide-react'
 import Link from 'next/link'
+import { SectionCard } from '@/components/shared/SectionCard'
 import Badge from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
 
 interface SmartRecommendationsSectionProps {
@@ -224,119 +225,91 @@ export function SmartRecommendationsSection({
     <div className="space-y-8">
       {/* Section "Contenu Similaire" - basée sur les tags et concepts partagés */}
       {similarRecommendations.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Sparkles className="size-5" />
-              Contenu similaire
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Découvrez d'autres contenus qui partagent des thématiques communes
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              {similarRecommendations.map(({ item, score, type }) => (
-                <RecommendationCard
-                  key={`similar-${item.slug}`}
-                  item={item}
-                  type={type}
-                  score={score}
-                  showScore={true}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <SectionCard
+          title="Contenu similaire"
+          description="Découvrez d'autres contenus qui partagent des thématiques communes"
+          icon={Sparkles}
+        >
+          <div className="grid gap-4">
+            {similarRecommendations.map(({ item, score, type }) => (
+              <RecommendationCard
+                key={`similar-${item.slug}`}
+                item={item}
+                type={type}
+                score={score}
+                showScore={true}
+              />
+            ))}
+          </div>
+        </SectionCard>
       )}
 
       {/* Section "Pour aller plus loin" - relations explicites */}
       {relatedRecommendations.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Target className="size-5" />
-              Pour aller plus loin
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Continuez votre exploration avec ces contenus recommandés
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              {relatedRecommendations.map(({ item, type }) => (
-                <RecommendationCard
-                  key={`related-${item.slug}`}
-                  item={item}
-                  type={type}
-                  score={1.0}
-                  showScore={false}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <SectionCard
+          title="Pour aller plus loin"
+          description="Continuez votre exploration avec ces contenus recommandés"
+          icon={Target}
+        >
+          <div className="grid gap-4">
+            {relatedRecommendations.map(({ item, type }) => (
+              <RecommendationCard
+                key={`related-${item.slug}`}
+                item={item}
+                type={type}
+                score={1.0}
+                showScore={false}
+              />
+            ))}
+          </div>
+        </SectionCard>
       )}
 
       {/* Section "Guides liés" - pour les concepts */}
       {conceptRecommendations.filter(r => r.type === 'guide').length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="size-5" />
-              Guides liés à ce concept
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Approfondissez ce concept avec ces guides pratiques
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              {conceptRecommendations
-                .filter(r => r.type === 'guide')
-                .map(({ item }) => (
-                  <RecommendationCard
-                    key={`concept-guide-${item.slug}`}
-                    item={item}
-                    type="guide"
-                    score={0.8}
-                    showScore={false}
-                  />
-                ))}
-            </div>
-          </CardContent>
-        </Card>
+        <SectionCard
+          title="Guides liés à ce concept"
+          description="Approfondissez ce concept avec ces guides pratiques"
+          icon={BookOpen}
+        >
+          <div className="grid gap-4">
+            {conceptRecommendations
+              .filter(r => r.type === 'guide')
+              .map(({ item }) => (
+                <RecommendationCard
+                  key={`concept-guide-${item.slug}`}
+                  item={item}
+                  type="guide"
+                  score={0.8}
+                  showScore={false}
+                />
+              ))}
+          </div>
+        </SectionCard>
       )}
 
       {/* Section "Workflows pratiques" - pour les concepts */}
       {conceptRecommendations.filter(r => r.type === 'workflow').length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Lightbulb className="size-5" />
-              Appliquer : Les Workflows Pratiques
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Mettez en pratique ce concept avec ces workflows interactifs
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-4">
-              {conceptRecommendations
-                .filter(r => r.type === 'workflow')
-                .map(({ item }) => (
-                  <RecommendationCard
-                    key={`concept-workflow-${item.slug}`}
-                    item={item}
-                    type="workflow"
-                    score={0.8}
-                    showScore={false}
-                    compact={true}
-                  />
-                ))}
-            </div>
-          </CardContent>
-        </Card>
+        <SectionCard
+          title="Appliquer : Les Workflows Pratiques"
+          description="Mettez en pratique ce concept avec ces workflows interactifs"
+          icon={Lightbulb}
+        >
+          <div className="grid md:grid-cols-2 gap-4">
+            {conceptRecommendations
+              .filter(r => r.type === 'workflow')
+              .map(({ item }) => (
+                <RecommendationCard
+                  key={`concept-workflow-${item.slug}`}
+                  item={item}
+                  type="workflow"
+                  score={0.8}
+                  showScore={false}
+                  compact={true}
+                />
+              ))}
+          </div>
+        </SectionCard>
       )}
     </div>
   )
