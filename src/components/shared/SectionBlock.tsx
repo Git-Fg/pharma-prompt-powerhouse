@@ -9,7 +9,7 @@ import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 
 interface SectionBlockProps {
-  type: 'introduction' | 'analogy' | 'section' | 'conclusion' | 'key-points' | 'examples' | 'warning'
+  type: 'introduction' | 'analogy' | 'section' | 'conclusion' | 'key-points' | 'examples' | 'warning' | 'definition'
   title: string
   content: string
   className?: string
@@ -51,6 +51,13 @@ const typeStyles: Record<string, TypeStyle> = {
     icon: '📋',
     badge: 'Section',
     badgeVariant: 'outline' as const,
+  },
+  'definition': {
+    container: 'bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-950/20 dark:to-gray-950/20 border-slate-200 dark:border-slate-800',
+    title: 'text-slate-700 dark:text-slate-300',
+    icon: '📖',
+    badge: 'Définition',
+    badgeVariant: 'secondary' as const,
   },
   'conclusion': {
     container: 'bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 border-orange-200 dark:border-orange-800',
@@ -96,11 +103,35 @@ const variantStyles: Record<'default' | 'highlighted' | 'subtle', VariantStyle> 
 
 export function SectionBlock({ type, title, content, className, variant = 'default', testId }: SectionBlockProps) {
   const styles = typeStyles[type]
-  const variantStyle = variantStyles[variant]
+  const variantStyle = variantStyles[variant] || variantStyles.default
   const sectionTestId = testId || generateTestId('section', type, title.replace(/\s+/g, '-').toLowerCase())
 
   if (!styles) {
-    return null
+    console.warn(`Unknown section type: "${type}". Using default fallback.`)
+    // Return a fallback section with basic styling
+    return (
+      <AnimatedElement variant="slideUp" className="w-full">
+        <Card
+          {...createTestIdProps(sectionTestId)}
+          className={cn(
+            'my-6 transition-all duration-300 hover:shadow-md',
+            'bg-muted/30 border-muted-foreground/20',
+            className,
+          )}
+        >
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base leading-tight">
+              {title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="text-sm leading-relaxed text-foreground/90">
+              {content}
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedElement>
+    )
   }
 
   return (

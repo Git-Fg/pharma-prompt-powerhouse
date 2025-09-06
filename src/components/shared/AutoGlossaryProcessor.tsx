@@ -19,8 +19,13 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
   const [isClient, setIsClient] = React.useState(false)
 
   React.useEffect(() => {
-    setIsClient(true)
+    // Add a small delay to ensure DOM is fully hydrated
+    const timer = setTimeout(() => setIsClient(true), 100)
+    return () => clearTimeout(timer)
   }, [])
+
+  // For tests or when explicitly needed, enable processing immediately
+  const shouldProcess = isClient || (typeof process !== 'undefined' && process.env.NODE_ENV === 'test')
 
   // Get all glossary terms sorted by length (longest first) to avoid partial matches
   const glossaryTerms = React.useMemo(() => {
@@ -145,7 +150,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
   }, [processTextNode])
 
   // Return unprocessed children during SSR
-  if (!isClient) {
+  if (!shouldProcess) {
     return <>{children}</>
   }
 
