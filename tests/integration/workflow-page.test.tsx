@@ -6,6 +6,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderServerPage } from '../utils/testing-utils'
 
+// Import mock factories directly from content.mock
+import { createMockWorkflow, createWorkflowWithoutConcepts } from '../mocks/content.mock'
+
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
   notFound: vi.fn(() => {
@@ -103,7 +106,7 @@ vi.mock('lucide-react', () => ({
 }))
 
 describe('Workflow Page Server Component', () => {
-  const mockWorkflow = {
+  const mockWorkflow = createMockWorkflow({
     slug: 'test-workflow',
     title: 'Test Workflow',
     description: 'A test workflow for demonstration',
@@ -130,7 +133,7 @@ describe('Workflow Page Server Component', () => {
         description: 'A concept related to workflows',
       },
     ],
-  }
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -202,7 +205,7 @@ describe('Workflow Page Server Component', () => {
 
     it('handles workflow without concepts', async () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      const workflowWithoutConcepts = { ...mockWorkflow, concepts: [] }
+      const workflowWithoutConcepts = createWorkflowWithoutConcepts()
       vi.mocked(getWorkflowBySlug).mockReturnValue(workflowWithoutConcepts)
 
       const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default

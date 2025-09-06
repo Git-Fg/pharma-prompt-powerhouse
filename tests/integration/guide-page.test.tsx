@@ -4,7 +4,10 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderServerPage, mockNextNavigation } from '../utils/testing-utils'
+import { renderServerPage } from '../utils/testing-utils'
+
+// Import mock factories directly from content.mock
+import { createMockGuide, createMinimalGuide, createGuideWithoutTakeaways } from '../mocks/content.mock'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -89,7 +92,7 @@ vi.mock('@/components/ui/separator', () => ({
 }))
 
 describe('Guide Page Server Component', () => {
-  const mockGuide = {
+  const mockGuide = createMockGuide({
     slug: 'test-guide',
     title: 'Test Guide',
     description: 'A test guide for demonstration',
@@ -116,7 +119,7 @@ describe('Guide Page Server Component', () => {
         description: 'A test concept',
       },
     ],
-  }
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -176,7 +179,7 @@ describe('Guide Page Server Component', () => {
 
     it('handles guide without concepts', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
-      const guideWithoutConcepts = { ...mockGuide, concepts: [] }
+      const guideWithoutConcepts = createMockGuide({ ...mockGuide, concepts: [] })
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutConcepts)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
@@ -191,7 +194,7 @@ describe('Guide Page Server Component', () => {
 
     it('handles guide without key takeaways', async () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
-      const guideWithoutTakeaways = { ...mockGuide, keyTakeaways: undefined }
+      const guideWithoutTakeaways = createGuideWithoutTakeaways()
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutTakeaways)
 
       const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
