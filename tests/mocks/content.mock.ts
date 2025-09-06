@@ -9,11 +9,14 @@
  */
 
 import type {
-  Concept,
+  BaseConcept,
+  BaseExternalTool,
+  BaseGuide,
+  BaseWorkflow,
   ContentBlock,
-  ExternalTool,
-  Guide,
-  Workflow,
+  EnrichedConcept,
+  EnrichedGuide,
+  EnrichedWorkflow,
 } from '@/lib/content-schema'
 
 // Base content block factories
@@ -49,7 +52,7 @@ export function createMockCardBlock(title: string, content: string): ContentBloc
 }
 
 // Guide mock factory
-export function createMockGuide(overrides: Partial<Guide> = {}): Guide {
+export function createMockGuide(overrides: Partial<BaseGuide> = {}): BaseGuide {
   return {
     slug: 'test-guide',
     title: 'Test Guide',
@@ -70,7 +73,7 @@ export function createMockGuide(overrides: Partial<Guide> = {}): Guide {
 }
 
 // Concept mock factory
-export function createMockConcept(overrides: Partial<Concept> = {}): Concept {
+export function createMockConcept(overrides: Partial<BaseConcept> = {}): BaseConcept {
   return {
     slug: 'test-concept',
     title: 'Test Concept',
@@ -94,7 +97,7 @@ export function createMockConcept(overrides: Partial<Concept> = {}): Concept {
 }
 
 // Workflow mock factory
-export function createMockWorkflow(overrides: Partial<Workflow> = {}): Workflow {
+export function createMockWorkflow(overrides: Partial<BaseWorkflow> = {}): BaseWorkflow {
   return {
     slug: 'test-workflow',
     title: 'Test Workflow',
@@ -114,7 +117,7 @@ export function createMockWorkflow(overrides: Partial<Workflow> = {}): Workflow 
 }
 
 // External Tool mock factory
-export function createMockTool(overrides: Partial<ExternalTool> = {}): ExternalTool {
+export function createMockTool(overrides: Partial<BaseExternalTool> = {}): BaseExternalTool {
   return {
     slug: 'test-tool',
     title: 'Test Tool',
@@ -140,7 +143,7 @@ export function createMockTool(overrides: Partial<ExternalTool> = {}): ExternalT
 }
 
 // Specialized mock factories for specific test cases
-export function createMinimalGuide(): Guide {
+export function createMinimalGuide(): BaseGuide {
   return createMockGuide({
     slug: 'minimal-guide',
     title: 'Minimal Guide',
@@ -153,13 +156,13 @@ export function createMinimalGuide(): Guide {
   })
 }
 
-export function createGuideWithoutTakeaways(): Guide {
+export function createGuideWithoutTakeaways(): BaseGuide {
   return createMockGuide({
     keyTakeaways: undefined,
   })
 }
 
-export function createMinimalConcept(): Concept {
+export function createMinimalConcept(): BaseConcept {
   return createMockConcept({
     slug: 'minimal-concept',
     title: 'Minimal Concept',
@@ -171,13 +174,13 @@ export function createMinimalConcept(): Concept {
   })
 }
 
-export function createConceptWithoutTakeaways(): Concept {
+export function createConceptWithoutTakeaways(): BaseConcept {
   return createMockConcept({
     keyTakeaways: undefined,
   })
 }
 
-export function createMinimalTool(): ExternalTool {
+export function createMinimalTool(): BaseExternalTool {
   return createMockTool({
     slug: 'minimal-tool',
     title: 'Minimal Tool',
@@ -198,17 +201,111 @@ export function createMinimalTool(): ExternalTool {
   })
 }
 
-export function createToolWithoutConfidence(): ExternalTool {
+export function createToolWithoutConfidence(): BaseExternalTool {
   return createMockTool({
     confidenceScore: undefined,
     confidenceJustification: undefined,
   })
 }
 
-export function createWorkflowWithoutConcepts(): Workflow {
+export function createWorkflowWithoutConcepts(): BaseWorkflow {
   return createMockWorkflow({
     conceptSlugs: [],
   })
+}
+
+// Enriched mock factories for testing content-loader functionality
+export function createMockEnrichedGuide(overrides: Partial<EnrichedGuide> = {}): EnrichedGuide {
+  const baseGuide = createMockGuide()
+  return {
+    ...baseGuide,
+    concepts: [],
+    relatedItems: [
+      {
+        slug: 'related-concept',
+        title: 'Related Concept',
+        description: 'A related concept for testing',
+        type: 'concept',
+        score: 0.8,
+      },
+      {
+        slug: 'related-workflow',
+        title: 'Related Workflow',
+        description: 'A related workflow for testing',
+        type: 'workflow',
+        score: 0.6,
+      },
+    ],
+    ...overrides,
+  }
+}
+
+export function createMockEnrichedWorkflow(overrides: Partial<EnrichedWorkflow> = {}): EnrichedWorkflow {
+  const baseWorkflow = createMockWorkflow()
+  return {
+    ...baseWorkflow,
+    concepts: [
+      {
+        slug: 'workflow-concept',
+        title: 'Workflow Concept',
+        description: 'A concept related to this workflow',
+        category: 'methodology',
+        difficulty: 'intermediate',
+        tags: ['workflow', 'concept'],
+        isFavorite: false,
+        keyTakeaways: ['Important concept', 'Key workflow principle'],
+        content: [],
+      },
+    ],
+    relatedItems: [
+      {
+        slug: 'related-guide',
+        title: 'Related Guide',
+        description: 'A related guide for testing',
+        type: 'guide',
+        score: 0.7,
+      },
+      {
+        slug: 'related-tool',
+        title: 'Related Tool',
+        description: 'A related tool for testing',
+        type: 'tool',
+        score: 0.5,
+      },
+    ],
+    ...overrides,
+  }
+}
+
+export function createMockEnrichedConcept(overrides: Partial<EnrichedConcept> = {}): EnrichedConcept {
+  const baseConcept = createMockConcept()
+  return {
+    ...baseConcept,
+    relatedItems: [
+      {
+        slug: 'related-guide',
+        title: 'Related Guide',
+        description: 'A related guide for testing',
+        type: 'guide',
+        score: 0.9,
+      },
+      {
+        slug: 'related-workflow',
+        title: 'Related Workflow',
+        description: 'A related workflow for testing',
+        type: 'workflow',
+        score: 0.7,
+      },
+      {
+        slug: 'another-concept',
+        title: 'Another Concept',
+        description: 'Another related concept for testing',
+        type: 'concept',
+        score: 0.6,
+      },
+    ],
+    ...overrides,
+  }
 }
 
 // Collections of mocks for comprehensive testing

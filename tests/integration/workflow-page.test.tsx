@@ -5,7 +5,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
-import { createMockWorkflow, createWorkflowWithoutConcepts } from '../mocks/content.mock'
+import { createMockEnrichedWorkflow, createWorkflowWithoutConcepts } from '../mocks/content.mock'
 
 import { renderServerPage } from '../utils/testing-utils'
 
@@ -54,7 +54,7 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
   ContentRenderer: ({ content }: any) => (
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
-        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
+
         <div key={index} data-testid={`content-block-${index}`}>
           {block.type}
           :
@@ -113,7 +113,7 @@ vi.mock('lucide-react', () => ({
 }))
 
 describe('workflow Page Server Component', () => {
-  const mockWorkflow = createMockWorkflow({
+  const mockWorkflow = createMockEnrichedWorkflow({
     slug: 'test-workflow',
     title: 'Test Workflow',
     description: 'A test workflow for demonstration',
@@ -133,13 +133,6 @@ describe('workflow Page Server Component', () => {
       },
     ],
     keyTakeaways: ['Step 1', 'Step 2', 'Step 3'],
-    concepts: [
-      {
-        slug: 'workflow-concept',
-        title: 'Workflow Concept',
-        description: 'A concept related to workflows',
-      },
-    ],
   })
 
   beforeEach(() => {
@@ -212,7 +205,12 @@ describe('workflow Page Server Component', () => {
 
     it('handles workflow without concepts', async () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      const workflowWithoutConcepts = createWorkflowWithoutConcepts()
+      const baseWorkflow = createWorkflowWithoutConcepts()
+      const workflowWithoutConcepts = {
+        ...baseWorkflow,
+        concepts: [],
+        relatedItems: [],
+      }
       vi.mocked(getWorkflowBySlug).mockReturnValue(workflowWithoutConcepts)
 
       const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default

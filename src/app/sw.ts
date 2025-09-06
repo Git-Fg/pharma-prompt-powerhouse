@@ -1,5 +1,4 @@
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
-import { defaultCache } from '@serwist/next/worker'
 import { CacheFirst, ExpirationPlugin, Serwist, StaleWhileRevalidate } from 'serwist'
 
 // This declares the value of `injectionPoint` to TypeScript.
@@ -21,9 +20,6 @@ const serwist = new Serwist({
   navigationPreload: true,
   disableDevLogs: true,
   runtimeCaching: [
-    // Extend default cache with our custom caching strategies
-    ...defaultCache,
-
     // Google Fonts - Cache First Strategy
     {
       matcher: /^https:\/\/fonts\.googleapis\.com\/.*/i,
