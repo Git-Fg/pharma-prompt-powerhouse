@@ -1,4 +1,4 @@
-import type { EnrichedGuide } from '@/lib/content-schema'
+import type { ContentBlock, EnrichedGuide } from '@/lib/content-schema'
 import { beforeAll, describe, expect, it } from 'vitest'
 import {
   content,
@@ -219,6 +219,163 @@ describe('content Loader Integration', () => {
       // Should complete 10 content loads in under 100ms on reasonable hardware
       // This verifies that the O(N²) → O(N) optimization is working
       expect(duration).toBeLessThan(100)
+    })
+  })
+
+  describe('content block integrity validation', () => {
+    // Helper function to recursively traverse content blocks and validate references
+    function validateContentBlockIntegrity(
+      blocks: ContentBlock[] | undefined,
+      parentContext: { type: string, slug: string },
+      errors: string[] = [],
+    ): string[] {
+      if (!blocks) {
+        return errors
+      }
+
+      // Ensure blocks is an array before iterating
+      if (!Array.isArray(blocks)) {
+        errors.push(`Erreur d'intégrité : Le ${parentContext.type} '${parentContext.slug}' a un contenu non-tableau`)
+        return errors
+      }
+
+      for (const block of blocks) {
+        switch (block.type) {
+          case 'toolRecommendation': {
+            const tool = getExternalToolBySlug(block.slug)
+            if (!tool) {
+              errors.push(`Erreur d'intégrité : Le ${parentContext.type} '${parentContext.slug}' référence un outil inexistant '${block.slug}'`)
+            }
+            break
+          }
+
+          case 'guideRecommendation': {
+            const guide = getGuideBySlug(block.slug)
+            if (!guide) {
+              errors.push(`Erreur d'intégrité : Le ${parentContext.type} '${parentContext.slug}' référence un guide inexistant '${block.slug}'`)
+            }
+            break
+          }
+
+          case 'conceptRecommendation': {
+            const concept = getConceptBySlug(block.slug)
+            if (!concept) {
+              errors.push(`Erreur d'intégrité : Le ${parentContext.type} '${parentContext.slug}' référence un concept inexistant '${block.slug}'`)
+            }
+            break
+          }
+
+          case 'prerequisites':
+            block.items.forEach((item: any) => {
+              if (item.slug) {
+                let found = false
+                switch (item.type) {
+                  case 'concept':
+                    found = !!getConceptBySlug(item.slug)
+                    break
+                  case 'guide':
+                    found = !!getGuideBySlug(item.slug)
+                    break
+                  case 'workflow':
+                    found = !!getWorkflowBySlug(item.slug)
+                    break
+                  case 'external':
+                    found = !!getExternalToolBySlug(item.slug)
+                    break
+                }
+                if (!found) {
+                  errors.push(`Erreur d'intégrité : Le ${parentContext.type} '${parentContext.slug}' référence un prérequis ${item.type} inexistant '${item.slug}'`)
+                }
+              }
+            })
+            break
+
+          case 'tabs':
+            block.tabs.forEach((tab: any) => {
+              validateContentBlockIntegrity(tab.content, parentContext, errors)
+            })
+            break
+
+          case 'accordion':
+            block.items.forEach((item: any) => {
+              validateContentBlockIntegrity(item.content, parentContext, errors)
+            })
+            break
+        }
+      }
+      return errors
+    }
+
+    it('should validate all content block references in guides', () => {
+      const allErrors: string[] = []
+
+      loadedContent.guides.forEach((guide) => {
+        const errors = validateContentBlockIntegrity(guide.content, { type: 'guide', slug: guide.slug })
+        allErrors.push(...errors)
+      })
+
+      expect(allErrors).toHaveLength(0)
+      if (allErrors.length > 0) {
+        console.error(`\n${allErrors.join('\n')}`)
+      }
+    })
+
+    it('should validate all content block references in workflows', () => {
+      const allErrors: string[] = []
+
+      loadedContent.workflows.forEach((workflow) => {
+        const errors = validateContentBlockIntegrity(workflow.content, { type: 'workflow', slug: workflow.slug })
+        allErrors.push(...errors)
+      })
+
+      expect(allErrors).toHaveLength(0)
+      if (allErrors.length > 0) {
+        console.error(`\n${allErrors.join('\n')}`)
+      }
+    })
+
+    it('should validate all content block references in concepts', () => {
+      const allErrors: string[] = []
+
+      loadedContent.concepts.forEach((concept) => {
+        const errors = validateContentBlockIntegrity(concept.content, { type: 'concept', slug: concept.slug })
+        allErrors.push(...errors)
+      })
+
+      expect(allErrors).toHaveLength(0)
+      if (allErrors.length > 0) {
+        console.error(`\n${allErrors.join('\n')}`)
+      }
+    })
+
+    it('should validate all content block references in external tools', () => {
+      const allErrors: string[] = []
+
+      loadedContent.externalTools.forEach((tool) => {
+        const errors = validateContentBlockIntegrity(tool.content, { type: 'outil', slug: tool.slug })
+        allErrors.push(...errors)
+      })
+
+      expect(allErrors).toHaveLength(0)
+      if (allErrors.length > 0) {
+        console.error(`\n${allErrors.join('\n')}`)
+      }
+    })
+
+    it('should detect broken references with test data', () => {
+      // Create a test content block with broken references
+      const brokenBlocks: ContentBlock[] = [
+        { type: 'toolRecommendation', slug: 'non-existent-tool', reason: 'Test' },
+        { type: 'guideRecommendation', slug: 'non-existent-guide', reason: 'Test' },
+        { type: 'conceptRecommendation', slug: 'non-existent-concept', reason: 'Test' },
+      ]
+
+      const errors = validateContentBlockIntegrity(brokenBlocks, { type: 'test', slug: 'test-content' })
+
+      expect(errors).toHaveLength(3)
+      expect(errors[0]).toContain('référence un outil inexistant')
+      expect(errors[1]).toContain('référence un guide inexistant')
+      expect(errors[2]).toContain('référence un concept inexistant')
     })
   })
 })

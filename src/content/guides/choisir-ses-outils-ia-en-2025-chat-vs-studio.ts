@@ -112,44 +112,50 @@ Je le complète avec **AI Studio** (gratuit) pour sa fonction unique de 'Guided 
         {
           value: 'recherche-biblio',
           title: 'Pour une Recherche Bibliographique Approfondie',
-          content: {
-            type: 'card',
-            content: `**🥇 Le Meilleur : Perplexity Pro avec 'Deep Research'**
+          content: [
+            {
+              type: 'card',
+              content: `**🥇 Le Meilleur : Perplexity Pro avec 'Deep Research'**
 
 C'est la solution la plus efficace. Vous lancez une recherche sur un sujet, et l'agent travaille pour vous. Le rapport final est une base de travail solide, avec toutes les sources citées.
 
 **🥈 Alternative Gratuite : Le combo Z.AI + AI Studio**
 
 Utilisez l'agent de recherche de **Z.AI** pour obtenir un plan de recherche et des sources initiales (attention à la confidentialité). Ensuite, utilisez **AI Studio** pour analyser en profondeur les articles et les données trouvées.`,
-          },
+            },
+          ],
         },
         {
           value: 'analyse-de-fonds',
           title: 'Pour l\'Analyse d\'un Corpus de Documents (Mémoire, Thèse)',
-          content: {
-            type: 'card',
-            content: `**🥇 Le Meilleur : Claude Pro**
+          content: [
+            {
+              type: 'card',
+              content: `**🥇 Le Meilleur : Claude Pro**
 
 Avec sa fenêtre de contexte allant jusqu'à 1M de tokens et ses nouvelles capacités agentiques ('Tool Use', 'Working Notes'), Claude peut devenir un véritable partenaire de recherche, gardant en mémoire vos documents et vos objectifs sur plusieurs jours.
 
 **🥈 Alternative Gratuite : Google AI Studio**
 
 Sa fenêtre de contexte de 1M de tokens est également disponible gratuitement. Il est excellent pour des sessions d'analyse ponctuelles sur un grand nombre de documents, même s'il n'a pas la mémoire à long terme d'un projet Claude.`,
-          },
+            },
+          ],
         },
         {
           value: 'tutorat',
           title: 'Pour se Faire Expliquer un Cours Complexe',
-          content: {
-            type: 'card',
-            content: `**🥇 Le Meilleur : Google AI Studio avec 'Guided Learning'**
+          content: [
+            {
+              type: 'card',
+              content: `**🥇 Le Meilleur : Google AI Studio avec 'Guided Learning'**
 
 C'est la fonctionnalité phare pour cet usage. Uploadez votre cours, et demandez-lui de créer un parcours d'apprentissage. Il vous guidera à travers les concepts clés avec des explications, des QCM et des exercices.
 
 **🥈 Alternative : ChatGPT-5**
 
 Le dernier modèle d'OpenAI a d'excellentes capacités pédagogiques. Vous pouvez lui demander de se comporter comme un tuteur et de vous poser des questions de manière socratique.`,
-          },
+            },
+          ],
         },
       ],
     },
