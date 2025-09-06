@@ -100,7 +100,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     return parts.length > 0 ? parts : [text]
   }, [termPattern])
 
-  const processNode = React.useCallback((node: React.ReactNode): React.ReactNode => {
+  const processNode = React.useCallback((node: React.ReactNode, nodeIndex = 0): React.ReactNode => {
     if (typeof node === 'string') {
       return processTextNode(node)
     }
@@ -125,15 +125,20 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
       // Use alternatives to React.Children.map for better performance
       const childrenProcessed = Array.isArray(props.children)
-        ? props.children.map(processNode)
+        ? props.children.map((child, idx) => processNode(child, idx))
         : props.children
-          ? processNode(props.children)
+          ? processNode(props.children, 0)
           : undefined
 
-      return React.cloneElement(node, {
-        ...(node.props as object),
-        children: childrenProcessed,
-      } as any)
+      // Instead of cloneElement, create a new element with the same type and props
+      return React.createElement(
+        node.type as any,
+        {
+          ...(node.props as object),
+          key: node.key || `processed-${nodeIndex}`,
+          children: childrenProcessed,
+        },
+      )
     }
 
     return node
@@ -146,9 +151,9 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
   // Process all children using modern React patterns
   const processedChildren = Array.isArray(children)
-    ? children.map(processNode)
+    ? children.map((child, idx) => processNode(child, idx))
     : children
-      ? processNode(children)
+      ? processNode(children, 0)
       : undefined
 
   return <>{processedChildren}</>

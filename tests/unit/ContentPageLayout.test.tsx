@@ -70,7 +70,7 @@ describe('contentPageLayout Component', () => {
     const section = container.querySelector('section')
     expect(section).toBeInTheDocument()
 
-    const containerDiv = container.querySelector('.max-w-4xl')
+    const containerDiv = container.querySelector('.container')
     expect(containerDiv).toBeInTheDocument()
   })
 

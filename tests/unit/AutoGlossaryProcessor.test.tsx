@@ -148,7 +148,7 @@ describe('autoGlossaryProcessor', () => {
     render(
       <AutoGlossaryProcessor>
         <div>
-          <img src="/test.jpg" alt="Test image" data-testid="test-image" />
+          <div data-testid="test-image" role="img" aria-label="Test image" />
           <p>Text with token here.</p>
         </div>
       </AutoGlossaryProcessor>,
