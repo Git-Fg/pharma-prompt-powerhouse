@@ -19,7 +19,7 @@ interface MarkdownRendererProps {
  * Utilise les styles prose centralisés définis dans globals.css.
  * Intègre la détection automatique des termes du glossaire.
  */
-export function MarkdownRenderer({ content, className, enableAutoGlossary = true }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, className, enableAutoGlossary = false }: MarkdownRendererProps) {
   const markdownContent = (
     <div className={cn('prose', className)}>
       <ReactMarkdown
