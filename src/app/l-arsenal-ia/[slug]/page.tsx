@@ -1,11 +1,11 @@
-import { ExternalLink, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
+import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import Badge from '@/components/ui/badge'
-import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content, getExternalToolBySlug } from '@/lib/content-loader'
 import { getStarRatingProps } from '@/lib/ui-utils'
@@ -175,6 +175,11 @@ export default function ToolPage({ params }: ToolPageProps) {
         {/* Disclaimer Banner */}
         <div className="mt-8">
           <DisclaimerBanner type="arsenal" />
+        </div>
+
+        {/* Recommandations intelligentes */}
+        <div className="mt-8">
+          <SmartRecommendationsSection item={tool} />
         </div>
       </article>
     </ContentPageLayout>

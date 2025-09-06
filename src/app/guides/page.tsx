@@ -1,6 +1,7 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
-import { GuideList } from '@/components/guides/GuideList'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
+import { GuideCard } from '@/components/shared/GuideCard'
 import { content } from '@/lib/content-loader'
 
 export default function GuidesPage() {
@@ -30,7 +31,13 @@ export default function GuidesPage() {
       description="Voici les fiches de synthèse que j'ai créées au fil de mes révisions. Elles représentent ma méthodologie de structuration de l'information."
       stats={stats}
     >
-      <GuideList initialGuides={guides} />
+      <FilterableContentGrid
+        items={guides}
+        renderItem={guide => <GuideCard guide={guide} />}
+        searchPlaceholder="Rechercher un guide..."
+        showCategoryFilter={true}
+        showDifficultyFilter={true}
+      />
     </CollectionPageLayout>
   )
 }

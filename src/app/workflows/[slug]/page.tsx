@@ -1,13 +1,12 @@
-import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
 import { ConceptListSection } from '@/components/shared/ConceptListSection'
 import { ContentRenderer } from '@/components/shared/ContentRenderer'
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
-import { SimilarContentSection } from '@/components/shared/SimilarContentSection'
+import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import Button from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { content, getWorkflowBySlug } from '@/lib/content-loader'
 
@@ -63,39 +62,10 @@ export default async function WorkflowPage({ params }: WorkflowPageProps) {
         <DisclaimerBanner type="workflow" />
       </div>
 
-      {/* Similar content based on tags */}
-      {workflow.tags && workflow.tags.length > 0 && (
-        <div className="mt-16">
-          <SimilarContentSection
-            currentSlug={workflow.slug}
-            currentTags={workflow.tags}
-            contentType="workflow"
-          />
-        </div>
-      )}
-
-      {/* Related Workflows */}
-      {workflow.relatedWorkflows.length > 0 && (
-        <section className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">Workflows Connexes</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {workflow.relatedWorkflows.map(relatedWorkflow => (
-              <Card key={relatedWorkflow.slug} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">{relatedWorkflow.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{relatedWorkflow.description}</p>
-                  <Link href={`/workflows/${relatedWorkflow.slug}`}>
-                    <Button variant="outline" size="sm">
-                      Découvrir
-                      <ArrowRight className="w-3 h-3 ml-1" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* Recommandations intelligentes */}
+      <div className="mt-16">
+        <SmartRecommendationsSection item={workflow} />
+      </div>
 
       {/* Navigation */}
       <div className="mt-16 flex justify-between">

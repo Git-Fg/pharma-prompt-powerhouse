@@ -1,7 +1,7 @@
 import type { AnyContent } from '@/types'
 import { Container, Section } from '@/components/layout/Container'
-import { ContentMetadata } from '@/components/shared/ContentMetadata'
 import { ContentHeader } from '@/components/shared/ContentHeader'
+import { ContentMetadata } from '@/components/shared/ContentMetadata'
 import { cn } from '@/lib/utils'
 import { BreadcrumbNavigation } from './BreadcrumbNavigation'
 
