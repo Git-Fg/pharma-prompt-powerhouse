@@ -12,8 +12,16 @@ interface AutoGlossaryProcessorProps {
 /**
  * Component that automatically detects and wraps glossary terms in text content.
  * This processor scans text nodes and replaces glossary terms with DefinedTerm components.
+ * Only runs on the client side to avoid SSR issues.
  */
 export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) {
+  // Only process on client side to avoid SSR issues
+  const [isClient, setIsClient] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   // Get all glossary terms sorted by length (longest first) to avoid partial matches
   const glossaryTerms = React.useMemo(() => {
     return Object.keys(glossary).sort((a, b) => b.length - a.length)
@@ -100,9 +108,10 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     if (React.isValidElement(node)) {
       // Don't process if it's already a DefinedTerm to avoid double wrapping
       // Check for DefinedTerm by component name or props
-      if (node.type === DefinedTerm || 
-          (typeof node.type === 'function' && node.type.name === 'DefinedTerm') ||
-          (node.props && 'term' in node.props && 'children' in node.props)) {
+      if (node.type === DefinedTerm
+        || (typeof node.type === 'function' && node.type.name === 'DefinedTerm')
+        || (node.props && typeof node.props === 'object' && node.props !== null
+          && 'term' in node.props && 'children' in node.props)) {
         return node
       }
 
@@ -115,7 +124,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       const props = node.props as { children?: React.ReactNode }
 
       // Use alternatives to React.Children.map for better performance
-      const children = Array.isArray(props.children)
+      const childrenProcessed = Array.isArray(props.children)
         ? props.children.map(processNode)
         : props.children
           ? processNode(props.children)
@@ -123,12 +132,17 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
       return React.cloneElement(node, {
         ...(node.props as object),
-        children,
+        children: childrenProcessed,
       } as any)
     }
 
     return node
   }, [processTextNode])
+
+  // Return unprocessed children during SSR
+  if (!isClient) {
+    return <>{children}</>
+  }
 
   // Process all children using modern React patterns
   const processedChildren = Array.isArray(children)
