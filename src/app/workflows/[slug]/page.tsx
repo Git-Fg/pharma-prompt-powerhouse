@@ -9,6 +9,7 @@ import { SmartRecommendationsSection } from '@/components/shared/SmartRecommenda
 import Button from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { content, getWorkflowBySlug } from '@/lib/content-loader'
+import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 
 interface WorkflowPageProps {
   params: {
@@ -25,15 +26,10 @@ export async function generateMetadata({ params }: WorkflowPageProps) {
   const workflow = getWorkflowBySlug(slug)
 
   if (!workflow) {
-    return {
-      title: 'Workflow non trouvé',
-    }
+    return generateNotFoundMetadata('workflow')
   }
 
-  return {
-    title: `${workflow.title} - Workflow Stratégique`,
-    description: workflow.description,
-  }
+  return generateContentMetadata(workflow)
 }
 
 export default async function WorkflowPage({ params }: WorkflowPageProps) {

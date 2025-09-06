@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next'
 import type { Thing, WithContext } from 'schema-dts'
+import type { AnyContent } from '@/types'
 
 type JsonLd = Thing
 
@@ -370,3 +371,131 @@ export function generateHowToSchema(config: {
     },
   }
 }
+
+// =============================================================================
+// FONCTIONS SIMPLIFIÉES POUR LES PAGES DE DÉTAIL
+// =============================================================================
+
+/**
+ * Détecte le type de contenu pour les métadonnées SEO
+ */
+function getContentType(item: AnyContent): 'concept' | 'guide' | 'workflow' | 'tool' {
+  if ('url' in item && typeof item.url === 'string') {
+    return 'tool'
+  }
+  if ('keyTakeaways' in item && Array.isArray(item.keyTakeaways) && 'category' in item && !('estimatedTime' in item)) {
+    return 'concept'
+  }
+  if ('estimatedTime' in item) {
+    return 'isWorkflow' in item && item.isWorkflow ? 'workflow' : 'guide'
+  }
+  return 'guide' // fallback
+}
+
+/**
+ * Génère le préfixe de titre selon le type de contenu
+ */
+function getTitlePrefix(type: 'concept' | 'guide' | 'workflow' | 'tool'): string {
+  switch (type) {
+    case 'concept':
+      return 'Concept'
+    case 'guide':
+      return 'Guide'
+    case 'workflow':
+      return 'Workflow Stratégique'
+    case 'tool':
+      return 'Outil'
+  }
+}
+
+/**
+ * Génère les mots-clés de base selon le type de contenu
+ */
+function getBaseKeywords(type: 'concept' | 'guide' | 'workflow' | 'tool'): string[] {
+  const baseKeywords = [
+    'pharmacie',
+    'prompt engineering',
+    'intelligence artificielle',
+    'formation',
+    'étudiants',
+    'santé',
+  ]
+
+  switch (type) {
+    case 'concept':
+      return [...baseKeywords, 'concept', 'théorie', 'fondamentaux']
+    case 'guide':
+      return [...baseKeywords, 'guide', 'pratique', 'méthodologie', 'tutorial']
+    case 'workflow':
+      return [...baseKeywords, 'workflow', 'processus', 'appliqué', 'stratégie']
+    case 'tool':
+      return [...baseKeywords, 'outil', 'logiciel', 'application', 'évaluation']
+  }
+}
+
+/**
+ * Fonction centralisée pour générer les métadonnées SEO pour tout type de contenu
+ *
+ * Cette fonction simplifiée est conçue pour les pages de détail ([slug]/page.tsx)
+ * et utilise le système avancé de métadonnées en coulisses.
+ *
+ * @param item - Le contenu (concept, guide, workflow, ou outil)
+ * @param options - Options de configuration optionnelles
+ * @param options.includeKeywords - Inclure les mots-clés (défaut: true)
+ * @returns Objet Metadata complet pour Next.js
+ */
+export function generateContentMetadata(
+  item: AnyContent,
+  options: {
+    /** Inclure les mots-clés (défaut: true) */
+    includeKeywords?: boolean
+  } = {},
+): Metadata {
+  const {
+    includeKeywords = true,
+  } = options
+
+  const type = getContentType(item)
+  const baseKeywords = getBaseKeywords(type)
+
+  // Construction des mots-clés
+  const keywords = includeKeywords
+    ? [
+        ...baseKeywords,
+        item.title,
+        ...(item.tags || []),
+        ...(item.category ? [item.category] : []),
+        ...(('difficulty' in item && item.difficulty) ? [item.difficulty] : []),
+      ].filter(Boolean)
+    : []
+
+  // Utiliser le système avancé existant avec une configuration simplifiée
+  return generateMetadata({
+    title: item.title,
+    description: item.description || '',
+    keywords,
+    category: item.category,
+    contentType: type,
+    difficulty: ('difficulty' in item && item.difficulty) ? item.difficulty as 'beginner' | 'intermediate' | 'advanced' : undefined,
+    language: 'fr-FR',
+  })
+}
+
+/**
+ * Génère des métadonnées pour les pages "non trouvé"
+ */
+export function generateNotFoundMetadata(
+  type: 'concept' | 'guide' | 'workflow' | 'tool' = 'guide',
+): Metadata {
+  const typeLabel = getTitlePrefix(type)
+  return {
+    title: `${typeLabel} non trouvé - Pharma Prompt Powerhouse`,
+    description: `Le ${typeLabel.toLowerCase()} que vous recherchez n'existe pas.`,
+  }
+}
+
+/**
+ * Types utilitaires pour TypeScript
+ */
+export type SEOContentType = ReturnType<typeof getContentType>
+export type SEOOptions = Parameters<typeof generateContentMetadata>[1]

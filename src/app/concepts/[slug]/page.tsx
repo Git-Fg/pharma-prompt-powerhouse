@@ -7,6 +7,7 @@ import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
 import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content, getConceptBySlug } from '@/lib/content-loader'
+import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 import { normalizeSlug } from '@/lib/utils'
 
 // Génération des pages statiques au build
@@ -25,41 +26,10 @@ export async function generateMetadata({
   const concept = getConceptBySlug(params.slug)
 
   if (!concept) {
-    return {
-      title: 'Concept non trouvé - Pharma Prompt Powerhouse',
-      description: 'Le concept que vous recherchez n\'existe pas.',
-    }
+    return generateNotFoundMetadata('concept')
   }
-  return {
-    title: `${concept.title} - Concepts | Pharma Prompt Powerhouse`,
-    description: concept.description,
-    keywords: [
-      'pharmacie',
-      'prompt engineering',
-      'intelligence artificielle',
-      'formation',
-      concept.title,
-      ...(concept.tags || []),
-    ],
-    openGraph: {
-      title: concept.title,
-      description: concept.description,
-      type: 'article',
-      images: [
-        {
-          url: '/icon-512x512.png',
-          width: 512,
-          height: 512,
-          alt: concept.title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: concept.title,
-      description: concept.description,
-    },
-  }
+
+  return generateContentMetadata(concept)
 }
 
 export default async function ConceptDetailPage({
