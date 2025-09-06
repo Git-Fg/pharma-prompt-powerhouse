@@ -71,6 +71,7 @@ export function mockSharedComponents() {
     ContentRenderer: ({ content }: any) => (
       <div data-testid="content-renderer">
         {content?.map((block: any, index: number) => (
+          // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
           <div key={index} data-testid={`content-block-${index}`}>
             {block.type}
             :
@@ -85,6 +86,7 @@ export function mockSharedComponents() {
     KeyTakeaways: ({ points }: any) => (
       <div data-testid="key-takeaways">
         {points?.map((point: string, index: number) => (
+          // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
           <div key={index} data-testid={`takeaway-${index}`}>
             {point}
           </div>

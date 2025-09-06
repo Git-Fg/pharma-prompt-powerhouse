@@ -31,6 +31,7 @@ export function PointsBlock({ title, points, className, testId }: PointsBlockPro
       <div className="space-y-4">
         {points.map((point, index) => (
           <AnimatedElement
+            // eslint-disable-next-line react/no-array-index-key -- Liste de points statique, pas de réordonnancement possible
             key={`point-${index}`}
             variant="slideUp"
             delay={index * 100}

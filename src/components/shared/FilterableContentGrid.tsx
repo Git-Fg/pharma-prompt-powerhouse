@@ -200,6 +200,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
       {/* Content Grid */}
       <div ref={listRef} className={gridClassName}>
         {filteredItems.map((item, index) => (
+          // eslint-disable-next-line ts/no-explicit-any -- Accès dynamique aux propriétés communes de différents types de contenu
           <div key={(item as any).slug || `item-${index}`}>
             {renderItem(item)}
           </div>

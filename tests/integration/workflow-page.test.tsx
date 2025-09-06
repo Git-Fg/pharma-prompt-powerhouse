@@ -54,6 +54,7 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
   ContentRenderer: ({ content }: any) => (
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
+        // eslint-disable-next-line react/no-array-index-key -- Test mock, pas de réordonnancement possible
         <div key={index} data-testid={`content-block-${index}`}>
           {block.type}
           :

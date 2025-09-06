@@ -159,6 +159,7 @@ export function Example({
                 <p className="font-medium text-amber-800 mb-1">Points de vigilance</p>
                 <ul className="text-amber-700 space-y-1">
                   {resolvedWarnings.map((warning, index) => (
+                    // eslint-disable-next-line react/no-array-index-key -- Liste statique de warnings, pas de réordonnancement possible
                     <li key={index} className="text-sm">
                       •
                       {warning}

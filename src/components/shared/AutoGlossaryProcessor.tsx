@@ -137,6 +137,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
       // Instead of cloneElement, create a new element with the same type and props
       return React.createElement(
+        // eslint-disable-next-line ts/no-explicit-any -- Type casting nécessaire pour le traitement de nœuds markdown complexes
         node.type as any,
         {
           ...(node.props as object),

@@ -216,6 +216,7 @@ export function generateStructuredData(config: SEOConfig & {
   })
 
   // 3. Article/Guide Schema (Content-specific)
+  // eslint-disable-next-line ts/no-explicit-any -- Schéma SEO dynamique, structure variable selon le type de contenu
   const articleSchema: any = {
     '@context': 'https://schema.org',
     '@type': contentType === 'guide'
