@@ -187,6 +187,9 @@
 - **Configuration Moderne :** **Standardiser exclusivement sur @antfu/eslint-config** pour une configuration simplifiée et optimale.
 - **Gestion Automatique des Plugins :** @antfu/eslint-config gère automatiquement tous les plugins ESLint nécessaires (React, TypeScript, Next.js).
 - **Support Tailwind v4 :** Le plugin officiel `eslint-plugin-tailwindcss` n'est pas encore pleinement compatible avec la configuration sans-fichier de v4. Il est recommandé de le désactiver ou de configurer sa règle `no-custom-classname` avec une liste `allow` pour les utilitaires sémantiques personnalisés (ex: `prose-*`, `container-*`).
+- **Contrôle des Types `any` TypeScript :** Contrôle strict de l'utilisation du type `any` avec la règle `ts/no-explicit-any: 'error'`. Toute utilisation de `any` doit être justifiée avec des commentaires de désactivation ESLint descriptifs.
+- **Exigences de Commentaires ESLint :** `eslint-comments/require-description: 'error'` exige des commentaires descriptifs pour toutes les directives de désactivation/activation.
+- **Règles Spécifiques aux Tests :** Règles ESLint assouplies pour les fichiers de test (`**/*.test.ts?(x)`, `tests/**/*`) tout en maintenant des règles strictes pour le code source.
 - **Philosophie :** Configuration déclarative avec des règles opiniâtres mais sensées, évitant la complexité manuelle.
 - **Structure :** `eslint.config.js` utilise l'API de configuration ESLint v9+ avec des overrides spécifiques par type de fichier.
 - **Intégrations :**
@@ -195,7 +198,7 @@
   - **TypeScript** : Validation stricte avec règles modernes
 - **Personnalisations Projet :**
   - Règles spécifiques pour les composants shadcn/ui (`src/components/ui/**`)
-  - Configuration allégée pour les tests (`**/*.test.ts?(x)`)
+  - Configuration allégée pour les tests avec désactivation des règles strictes (`ts/no-explicit-any: 'off'`, etc.)
   - Exclusions intelligentes pour les fichiers de documentation et exemples
 - **Style :** 2 espaces, guillemets simples, pas de point-virgule (style moderne 2025)
 - **Performance :** Règles optimisées pour le React 19 Compiler et les bonnes pratiques modernes
@@ -228,6 +231,9 @@ DO appliquer systématiquement l'approche mobile-first avec les breakpoints stan
 DO utiliser les composants d'animation (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) pour une UX moderne.
 DO respecter les courbes d'accélération modernes (`easings.spring`, `easings.bounce`) pour des animations naturelles.
 DO utiliser @antfu/eslint-config pour une configuration ESLint simplifiée et moderne.
+DO justifier toute utilisation du type `any` avec des commentaires de désactivation ESLint descriptifs expliquant pourquoi c'est incontournable.
+DO utiliser des règles ESLint spécifiques aux tests pour maintenir la qualité du code tout en permettant de la flexibilité dans les tests.
+DO envelopper les composants Lucide React dans des éléments div lorsqu'ils sont utilisés dans des composants serveur pour éviter les problèmes de sérialisation.
 DO NOT répéter de longues chaînes de classes utilitaires ; préférer la création d'un utilitaire sémantique.
 DO NOT utiliser la voix "nous".
 DO NOT utiliser de serveur personnalisé.
@@ -237,6 +243,8 @@ DO NOT inclure d'appels à l'action commerciaux, de newsletters, ou de liens ver
 DO NOT prétendre détenir une vérité absolue ; présenter les conclusions comme des observations personnelles et encourager l'expérimentation.
 DO NOT effectuer de logique de liaison de données au runtime dans les composants ; c'est le rôle du `content-loader`.
 DO NOT créer de types manuels redondants pour le contenu.
+DO NOT utiliser des types `any` sans justification et documentation appropriées.
+DO NOT passer des composants fonction directement des composants serveur aux composants client sans les envelopper.
 En cas de doute, se référer à la documentation officielle de React 19, Next.js 15, Zod, Vitest, @antfu/eslint-config et shadcn/ui.
 </instructions>
 

@@ -71,6 +71,7 @@ The project uses a custom TypeScript-based content system with:
 - **Smart Interconnections**: Content items are automatically linked through concept relationships
 - **Performance Optimization**: O(1) content loading with Maps and caching system
 - **Type-Safe Content**: 100% type safety with enriched content types
+- **Enhanced Content Types**: All content types now include `relatedItems` and `concepts` properties for automatic cross-referencing and intelligent recommendations
 
 ### Content Types
 1. **Concepts** (`src/content/concepts/`) - 8 fundamental AI concepts
@@ -124,7 +125,8 @@ The project uses a custom TypeScript-based content system with:
 - **AutoAnimate Integration**: Smooth transitions respecting accessibility preferences
 - **TanStack Table**: For responsive comparison tables
 - **Modern Typography**: text-pretty, text-balance, and orphans/widows control
-- **PWA Support**: Service worker with Serwist integration
+- **PWA Support**: Service worker with Serwist integration and Turbopack compatibility setup
+- **Server Component Optimization**: Fixed serialization issues for React 19 server components
 
 ---
 
@@ -155,6 +157,9 @@ The project uses a custom TypeScript-based content system with:
 - **Modern Configuration**: Exclusively standardize on @antfu/eslint-config for simplified, optimal configuration.
 - **Plugin Management**: @antfu/eslint-config automatically manages all necessary ESLint plugins (React, TypeScript, Next.js).
 - **Tailwind v4 Support**: Official `eslint-plugin-tailwindcss` not yet fully compatible with v4's fileless configuration. Recommend disabling or configuring `no-custom-classname` rule with `allow` list for custom semantic utilities (ex: `prose-*`, `container-*`).
+- **TypeScript `any` Type Control**: Strict control over `any` type usage with `ts/no-explicit-any: 'error'` rule. All `any` usage must be justified with descriptive ESLint disable comments.
+- **ESLint Comment Requirements**: `eslint-comments/require-description: 'error'` enforces descriptive comments for all disable/enable directives.
+- **Test-Specific Rules**: Relaxed ESLint rules for test files (`**/*.test.ts?(x)`, `tests/**/*`) while maintaining strict rules for source code.
 - **Philosophy**: Declarative configuration with opinionated but sensible rules, avoiding manual complexity.
 - **Style**: 2 spaces, single quotes, no semicolons (modern 2025 style)
 - **Performance**: Rules optimized for React 19 Compiler and modern best practices
@@ -321,7 +326,10 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Use animation components (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) for modern UX
 - Respect modern easing curves (`easings.spring`, `easings.bounce`) for natural animations
 - Use @antfu/eslint-config for simplified, modern ESLint configuration
-- Comit after all milestones
+- Justify all `any` type usage with descriptive ESLint disable comments explaining why it's unavoidable
+- Use test-specific ESLint rules to maintain code quality while allowing flexibility in tests
+- Wrap Lucide React components in div elements when used in server components to prevent serialization issues
+- Commit after all milestones
 
 **DO NOT:**
 - Repeat long utility class chains; prefer creating semantic utility
@@ -333,5 +341,7 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Claim absolute truth; present conclusions as personal observations and encourage experimentation
 - Perform data binding logic at runtime in components; that's content-loader's role
 - Create redundant manual types for content
+- Use `any` types without proper justification and documentation
+- Pass function components directly to client components from server components without wrapping
 
 In case of doubt, refer to official documentation for React 19, Next.js 15, Zod, Vitest, @antfu/eslint-config, and shadcn/ui.
