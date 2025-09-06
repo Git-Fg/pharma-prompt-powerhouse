@@ -70,26 +70,14 @@ describe('useIsMobile Hook', () => {
     // Simulate the change event listener being called
     const changeCallback = mockAddEventListener.mock.calls[0]?.[1]
 
-    // Mock window.innerWidth for the update
-    const originalInnerWidth = window.innerWidth
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 500,
-    })
+    // Change matches property to simulate mobile viewport
+    mockMediaQueryList.matches = true
 
     act(() => {
       changeCallback?.()
     })
 
     expect(result.current).toBe(true)
-
-    // Restore original innerWidth
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: originalInnerWidth,
-    })
   })
 
   it('should cleanup event listener on unmount', () => {
