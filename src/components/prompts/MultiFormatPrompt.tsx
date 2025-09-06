@@ -7,6 +7,7 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { contentCardVariants } from '@/components/ui/variants'
 
 interface MultiFormatPromptProps {
   alternativeVersions?: {
@@ -217,14 +218,14 @@ export default function MultiFormatPrompt({
 
                 <div>
                   <h4 className="text-sm font-medium mb-2">System Prompt :</h4>
-                  <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm border-l-4 border-blue-500">
+                  <pre className={`${contentCardVariants({ variant: 'concept', size: 'compact', interactive: false })} whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm`}>
                     {alternativeVersions.aiStudio.systemPrompt}
                   </pre>
                 </div>
 
                 <div>
                   <h4 className="text-sm font-medium mb-2">User Prompt :</h4>
-                  <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm border-l-4 border-green-500">
+                  <pre className={`${contentCardVariants({ variant: 'guide', size: 'compact', interactive: false })} whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm`}>
                     {alternativeVersions.aiStudio.userPrompt}
                   </pre>
                 </div>

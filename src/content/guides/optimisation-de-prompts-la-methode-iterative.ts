@@ -126,7 +126,7 @@ export const guide = {
     },
     {
       type: 'guideRecommendation',
-      slug: 'les-5-piliers-dun-prompt-pharmaceutique-efficace',
+      slug: 'les-6-piliers-prompt-pharmaceutique-efficace',
       reason: 'Avant d\'optimiser, assurez-vous de maîtriser les fondamentaux : un prompt bien structuré nécessite moins d\'itérations pour atteindre l\'excellence.',
     },
   ],
