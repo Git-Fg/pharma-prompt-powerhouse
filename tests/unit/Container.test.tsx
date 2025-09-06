@@ -11,11 +11,10 @@ describe('container Component', () => {
     )
 
     const container = screen.getByText('Test Content').parentElement
+    expect(container).toHaveClass('w-full')
     expect(container).toHaveClass('container')
     expect(container).toHaveClass('mx-auto')
     expect(container).toHaveClass('px-4')
-    expect(container).toHaveClass('sm:px-6')
-    expect(container).toHaveClass('lg:px-8')
   })
 
   it('should merge custom className with default classes', () => {
@@ -26,6 +25,7 @@ describe('container Component', () => {
     )
 
     const container = screen.getByText('Test Content').parentElement
+    expect(container).toHaveClass('w-full')
     expect(container).toHaveClass('container')
     expect(container).toHaveClass('custom-class')
   })

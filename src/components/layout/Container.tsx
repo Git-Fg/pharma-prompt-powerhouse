@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
-interface ContainerProps {
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
   className?: string
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl' | '7xl' | 'full'
@@ -11,6 +11,7 @@ export function Container({
   children,
   className = '',
   maxWidth = '7xl',
+  ...rest
 }: ContainerProps) {
   const maxWidthClasses = {
     'sm': 'text-content-width',
@@ -25,11 +26,13 @@ export function Container({
   }
 
   return (
-    <div className={cn(
-      'w-full container mx-auto px-4',
-      maxWidthClasses[maxWidth],
-      className,
-    )}
+    <div
+      className={cn(
+        'w-full container mx-auto px-4',
+        maxWidthClasses[maxWidth],
+        className,
+      )}
+      {...rest}
     >
       {children}
     </div>
