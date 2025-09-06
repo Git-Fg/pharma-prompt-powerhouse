@@ -11,6 +11,7 @@ import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
 import { cn, normalizeSlug } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 
 interface ConceptCardProps {
   concept: Concept
@@ -18,10 +19,12 @@ interface ConceptCardProps {
 
 export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
   return (
-    <Card className={cn(
-      contentCardVariants({ variant: 'concept', size: 'default' }),
-      'h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group',
-    )}
+    <Card 
+      className={cn(
+        contentCardVariants({ variant: 'concept', size: 'default' }),
+        'h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group',
+      )}
+      {...createTestIdProps(TestIds.Interactive.Card('concept', concept.slug))}
     >
       <CardHeader className="flex-grow">
         <div className="flex items-start justify-between mb-3">
@@ -63,7 +66,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
               </Badge>
             ))}
           </div>
-          <Link href={`/concepts/${normalizeSlug(concept.slug)}`} className="block">
+          <Link href={`/concepts/${normalizeSlug(concept.slug)}`} className="block" {...createTestIdProps(TestIds.Interactive.Button('discover-concept'))}>
             <Button className="w-full" size="sm">
               Découvrir le concept
             </Button>

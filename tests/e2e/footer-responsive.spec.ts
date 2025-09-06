@@ -9,17 +9,34 @@ test.describe('Footer Responsive Design', () => {
     // Set desktop viewport
     await page.setViewportSize({ width: 1400, height: 800 })
 
-    // Wait for footer to be visible
-    const footer = page.locator('footer')
+    // Wait for footer to be visible using data test ID
+    const footer = page.locator('[data-testid="layout-footer"]')
     await expect(footer).toBeVisible()
+
+    // Check desktop footer is visible
+    const desktopFooter = page.locator('[data-testid="desktop-footer"]')
+    await expect(desktopFooter).toBeVisible()
+
+    // Check mobile footer is hidden
+    const mobileFooter = page.locator('[data-testid="mobile-footer"]')
+    await expect(mobileFooter).toBeHidden()
 
     // Check grid layout
     const grid = footer.locator('.grid').first()
     await expect(grid).toHaveClass(/md:grid-cols-12/)
 
-    // Verify 3 sections are present
-    const sections = footer.locator('h3')
-    await expect(sections).toHaveCount(3) // Navigation, Sécurité & Légal, Workflows
+    // Verify brand section is present
+    const brandSection = page.locator('[data-testid="footer-brand-section"]')
+    await expect(brandSection).toBeVisible()
+
+    // Verify navigation sections are present
+    const navSection = page.locator('[data-testid="footer-navigation-section"]')
+    const legalSection = page.locator('[data-testid="footer-legal-section"]')
+    const workflowsSection = page.locator('[data-testid="footer-workflows-section"]')
+
+    await expect(navSection).toBeVisible()
+    await expect(legalSection).toBeVisible()
+    await expect(workflowsSection).toBeVisible()
 
     // Check grid template columns (should be 12 equal columns at xl breakpoint)
     const gridStyles = await grid.evaluate((el) => {
@@ -104,34 +121,47 @@ test.describe('Footer Responsive Design', () => {
   })
 
   test('all footer sections have proper content', async ({ page }) => {
-    const footer = page.locator('footer')
+    const footer = page.locator('[data-testid="layout-footer"]')
 
-    // Brand section - use more specific selector
-    await expect(footer.locator('.font-bold.text-2xl:has-text("Pharma Prompt")')).toBeVisible()
-    await expect(footer.locator('text=Mon carnet de notes personnel')).toBeVisible()
+    // Brand section - use data test ID
+    const brandSection = page.locator('[data-testid="footer-brand-section"]')
+    await expect(brandSection).toBeVisible()
+    await expect(brandSection.locator('[data-testid="nav-logo"]')).toBeVisible()
+    
+    const brandDescription = page.locator('[data-testid="footer-brand-description"]')
+    await expect(brandDescription).toBeVisible()
+    await expect(brandDescription).toContainText('Mon carnet de notes personnel')
 
     // Navigation section
-    await expect(footer.locator('h3:has-text("Navigation")')).toBeVisible()
-    await expect(footer.locator('a[href="/"]')).toContainText('Accueil')
-    await expect(footer.locator('a[href="/par-ou-commencer"]')).toContainText('Par où commencer')
-    await expect(footer.locator('a[href="/workflows"]').first()).toContainText('Workflows Stratégiques')
-    await expect(footer.locator('a[href="/l-arsenal-ia"]')).toContainText('L\'Arsenal IA')
-    await expect(footer.locator('a[href="/concepts"]')).toContainText('Concepts')
+    const navSection = page.locator('[data-testid="footer-navigation-section"]')
+    await expect(navSection).toBeVisible()
+    await expect(navSection.locator('h3')).toContainText('Navigation')
+    
+    // Test navigation links with data test IDs
+    await expect(footer.locator('[data-testid="nav-link-Accueil"]')).toBeVisible()
+    await expect(footer.locator('[data-testid="nav-link-Par où commencer"]')).toBeVisible()
+    await expect(footer.locator('[data-testid="nav-link-Workflows Stratégiques"]').nth(1)).toBeVisible() // Footer link
+    await expect(footer.locator('[data-testid="nav-link-L\'Arsenal IA 2025"]')).toBeVisible()
+    await expect(footer.locator('[data-testid="nav-link-Hub de Concepts"]').nth(1)).toBeVisible() // Footer link
 
     // Legal section
-    await expect(footer.locator('h3:has-text("Sécurité & Légal")')).toBeVisible()
-    await expect(footer.locator('a[href="/guides/confidentialite-securite"]')).toContainText('Confidentialité')
+    const legalSection = page.locator('[data-testid="footer-legal-section"]')
+    await expect(legalSection).toBeVisible()
+    await expect(legalSection.locator('h3')).toContainText('Sécurité & Légal')
+    await expect(legalSection.locator('[data-testid="nav-link-Confidentialité"]')).toBeVisible()
 
     // Workflows section
-    await expect(footer.locator('h3:has-text("Workflows")')).toBeVisible()
-    await expect(footer.locator('a[href="/workflows"]:has-text("Voir tous")')).toBeVisible()
+    const workflowsSection = page.locator('[data-testid="footer-workflows-section"]')
+    await expect(workflowsSection).toBeVisible()
+    await expect(workflowsSection.locator('h3')).toContainText('Workflows')
+    await expect(workflowsSection.locator('[data-testid="nav-link-Voir tous les workflows"]')).toBeVisible()
   })
 
   test('footer workflows section displays recent workflows', async ({ page }) => {
-    const workflowsSection = page.locator('footer').locator('h3:has-text("Workflows")').locator('..')
+    const workflowsSection = page.locator('[data-testid="footer-workflows-section"]')
 
     // Should have workflow links (at least 1, max 3)
-    const workflowLinks = workflowsSection.locator('a[href^="/workflows/"]:not(:has-text("Voir tous"))')
+    const workflowLinks = workflowsSection.locator('a[href^="/workflows/"]:not([data-testid*="Voir tous"])')
     const linkCount = await workflowLinks.count()
     expect(linkCount).toBeGreaterThan(0)
     expect(linkCount).toBeLessThanOrEqual(3)
@@ -143,34 +173,43 @@ test.describe('Footer Responsive Design', () => {
 
       const href = await link.getAttribute('href')
       expect(href).toMatch(/^\/workflows\/[a-z0-9-]+$/)
+
+      // Check that workflow links have data test IDs
+      const testId = await link.getAttribute('data-testid')
+      expect(testId).toMatch(/^nav-link-/)
     }
   })
 
   test('footer semantic utilities are applied correctly', async ({ page }) => {
     // Check that prose-slogan class is applied to brand description
-    const brandDescription = page.locator('footer').locator('.prose-slogan')
+    const brandDescription = page.locator('[data-testid="footer-brand-description"]')
     await expect(brandDescription).toBeVisible()
     await expect(brandDescription).toContainText('Mon carnet de notes personnel')
+    await expect(brandDescription).toHaveClass(/prose-slogan/)
 
-    // Check that max-w-xs is applied to brand text container
-    const maxWidthContainer = page.locator('footer').locator('.max-w-xs')
-    await expect(maxWidthContainer).toBeVisible()
+    // Check that semantic utility width classes are applied to brand text container
+    const desktopWidthContainer = page.locator('[data-testid="footer-brand-section"]').locator('.dialog-content-width')
+    const mobileWidthContainer = page.locator('[data-testid="mobile-footer-description"]')
 
-    // Note: Skipping max-width value test due to Tailwind v4 bug with max-w-* classes
-    // The visual layout works correctly as confirmed by screenshots
+    // Check that either desktop or mobile width class is present (depending on viewport)
+    const hasDesktopWidth = await desktopWidthContainer.count() > 0
+    const hasMobileWidth = await mobileWidthContainer.count() > 0
+
+    expect(hasDesktopWidth || hasMobileWidth).toBe(true)
   })
 
   test('footer copyright shows current year', async ({ page }) => {
     const currentYear = new Date().getFullYear()
-    const copyright = page.locator('footer').locator(`text=© ${currentYear} Pharma Prompt Powerhouse`)
+    const copyright = page.locator('[data-testid="footer-copyright"]')
     await expect(copyright).toBeVisible()
+    await expect(copyright).toContainText(`© ${currentYear} Pharma Prompt Powerhouse`)
   })
 
   test('footer links are keyboard accessible', async ({ page }) => {
-    const footer = page.locator('footer')
+    const footer = page.locator('[data-testid="layout-footer"]')
 
     // Tab through footer links and ensure they're focusable
-    const links = footer.locator('a')
+    const links = footer.locator('a[data-testid^="nav-link-"]')
     const linkCount = await links.count()
 
     // Focus first link
@@ -180,6 +219,8 @@ test.describe('Footer Responsive Design', () => {
     // Tab through a few links to ensure keyboard navigation works
     for (let i = 0; i < Math.min(3, linkCount - 1); i++) {
       await page.keyboard.press('Tab')
+      const focusedElement = page.locator(':focus')
+      await expect(focusedElement).toHaveAttribute('data-testid', /^nav-link-/)
     }
   })
 

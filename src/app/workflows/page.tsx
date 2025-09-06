@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
-import { SimpleWorkflowRenderItem } from '@/components/shared/SimpleWorkflowRenderItem'
 import Button from '@/components/ui/button'
 import { content } from '@/lib/content-loader'
 
@@ -38,7 +37,7 @@ export default function WorkflowsPage() {
     >
       <FilterableContentGrid
         items={content.workflows}
-        renderItem={workflow => <SimpleWorkflowRenderItem item={workflow} />}
+        renderType="workflow"
         searchPlaceholder="Rechercher un workflow..."
         showCategoryFilter={false}
         showDifficultyFilter={true}

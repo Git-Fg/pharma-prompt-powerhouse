@@ -1,7 +1,6 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import * as LucideIcons from 'lucide-react'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import { ConceptRenderItem } from '@/components/shared/ConceptRenderItem'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
@@ -28,7 +27,7 @@ export default function ConceptsPage() {
     >
       <FilterableContentGrid
         items={content.concepts}
-        renderItem={concept => <ConceptRenderItem item={concept} />}
+        renderType="concept"
         searchPlaceholder="Rechercher un concept..."
         showCategoryFilter={true}
         showDifficultyFilter={false}
