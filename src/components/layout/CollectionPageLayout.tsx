@@ -60,7 +60,11 @@ export function CollectionPageLayout({
                   {stats.map((stat, index) => {
                     const styles = statStyles[stat.type] || statStyles.default
                     return (
-                      <AnimatedItem key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}-${index}`} delay={index * 0.1}>
+                      <AnimatedItem
+                        // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cartes statistiques avec labels uniques
+                        key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}-${index}`}
+                        delay={index * 0.1}
+                      >
                         <div className={cn('stat-card hover-glow hover-scale cursor-pointer', styles.bg)}>
                           <div className={cn('stat-number animate-bounce-subtle', styles.color)}>
                             {stat.value}

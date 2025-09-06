@@ -169,7 +169,7 @@ export function mockUiComponents() {
 
   vi.mock('@/components/ui/button', () => ({
     default: ({ children, ...props }: any) => (
-      <button data-testid="button" {...props}>
+      <button data-testid="button" type="button" {...props}>
         {children}
       </button>
     ),

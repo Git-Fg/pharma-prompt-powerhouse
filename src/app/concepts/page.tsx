@@ -1,10 +1,13 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
 import * as LucideIcons from 'lucide-react'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import { ConceptCard } from '@/components/shared/ConceptCard'
+import { ConceptRenderItem } from '@/components/shared/ConceptRenderItem'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
+
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
 
 export default function ConceptsPage() {
   const totalConcepts = content.concepts.length
@@ -25,7 +28,7 @@ export default function ConceptsPage() {
     >
       <FilterableContentGrid
         items={content.concepts}
-        renderItem={concept => <ConceptCard concept={concept} />}
+        renderItem={concept => <ConceptRenderItem item={concept} />}
         searchPlaceholder="Rechercher un concept..."
         showCategoryFilter={true}
         showDifficultyFilter={false}

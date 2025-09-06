@@ -80,7 +80,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
         <Card {...createTestIdProps(testId)} className="my-6">
           <CardContent className="p-4">
             <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value}>
-              <TabsList className={`grid w-full grid-cols-${block.tabs.length}`}>
+              <TabsList className="grid w-full gap-1" style={{ gridTemplateColumns: `repeat(${block.tabs.length}, 1fr)` }}>
                 {block.tabs.map((tab: { value: string, title: string, content: ContentBlock[] }) => (
                   <TabsTrigger
                     key={tab.value}
@@ -220,6 +220,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
           {block.items.map((item: { title: string, content: ContentBlock[] }, index: number) => (
             <AccordionItem
               value={`item-${index}`}
+              // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des accordéons avec titres uniques
               key={`accordion-${item.title.replace(/\s+/g, '-').toLowerCase()}-${index}`}
               {...createTestIdProps(generateTestId('accordion', 'item', index))}
             >

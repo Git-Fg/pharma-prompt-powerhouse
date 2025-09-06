@@ -11,6 +11,9 @@ import { Separator } from '@/components/ui/separator'
 import { content, getWorkflowBySlug } from '@/lib/content-loader'
 import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
 
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
+
 interface WorkflowPageProps {
   params: {
     slug: string

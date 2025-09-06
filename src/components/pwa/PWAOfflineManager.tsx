@@ -16,6 +16,7 @@ export function PWAOfflineManager() {
   useEffect(() => {
     // Initialize online status
     const initializeOnlineStatus = () => {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour l'initialisation de l'état de connexion
       setIsOnline(navigator.onLine)
     }
 
@@ -122,6 +123,7 @@ export function useOnlineStatus() {
   useEffect(() => {
     // Initialize online status
     const initializeStatus = () => {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour l'initialisation de l'état de connexion
       setIsOnline(navigator.onLine)
     }
 

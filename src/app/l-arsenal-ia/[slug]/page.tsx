@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Star } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
@@ -8,9 +7,12 @@ import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
 import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { StarRating } from '@/components/ui/star-rating'
 import { content, getExternalToolBySlug } from '@/lib/content-loader'
 import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
-import { getStarRatingProps } from '@/lib/ui-utils'
+
+// Désactiver le rendu statique pour les pages avec des composants complexes
+export const dynamic = 'force-dynamic'
 
 interface ToolPageProps {
   params: {
@@ -73,13 +75,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-1">
-                    {getStarRatingProps(tool.confidenceScore).stars.map(star => (
-                      <div key={star.index}>
-                        <Star
-                          className={`size-4 ${star.className}`}
-                        />
-                      </div>
-                    ))}
+                    <StarRating confidenceScore={tool.confidenceScore} />
                     <span className="ml-2 text-sm text-muted-foreground">
                       {tool.confidenceScore}
                       /5
@@ -101,6 +97,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                 <CardContent>
                   <ul className="space-y-2">
                     {tool.strongPoints?.map((point: string, index: number) => (
+                      // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des listes courtes et non réordonnées
                       <li key={`strong-${point.slice(0, 20).replace(/\s+/g, '-')}-${index}`} className="flex items-start gap-2">
                         <span className="text-green-500 mt-1">✓</span>
                         <span>{point}</span>
@@ -120,6 +117,7 @@ export default function ToolPage({ params }: ToolPageProps) {
                 <CardContent>
                   <ul className="space-y-2">
                     {tool.vigilancePoints?.map((point: string, index: number) => (
+                      // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des listes courtes et non réordonnées
                       <li key={`vigilance-${point.slice(0, 20).replace(/\s+/g, '-')}-${index}`} className="flex items-start gap-2">
                         <span className="text-orange-500 mt-1">⚠</span>
                         <span>{point}</span>
@@ -169,6 +167,7 @@ export default function ToolPage({ params }: ToolPageProps) {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {tool.use_cases?.map((useCase: string, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des badges avec texte unique
                   <Badge key={`usecase-${useCase.replace(/\s+/g, '-').toLowerCase()}-${index}`} variant="secondary">
                     {useCase}
                   </Badge>

@@ -38,9 +38,16 @@ export function ContentTable({ headers, rows, caption, className = '' }: Content
 
   // Mobile card renderer
   const renderMobileCard = (rowData: ContentTableData, index: number) => (
-    <Card key={`mobile-row-${index}`} className="p-4">
+    <Card
+      key={`mobile-row-${index}`}
+      className="p-4"
+    >
       {rowData.cells.map((cell, cellIndex) => (
-        <div key={`mobile-cell-${index}-${cellIndex}`} className="mb-3 last:mb-0">
+        <div
+          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cellules avec position unique
+          key={`mobile-cell-${index}-${cellIndex}`}
+          className="mb-3 last:mb-0"
+        >
           <div className="text-sm font-medium text-muted-foreground mb-1">
             {headers[cellIndex]}
           </div>

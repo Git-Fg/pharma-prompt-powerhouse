@@ -1,5 +1,5 @@
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
-import { CacheFirst, ExpirationPlugin, Serwist, StaleWhileRevalidate } from 'serwist'
+import { CacheFirst, ExpirationPlugin, NetworkFirst, Serwist, StaleWhileRevalidate } from 'serwist'
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -74,20 +74,38 @@ const serwist = new Serwist({
       }),
     },
 
-    // Navigation Requests - Stale While Revalidate for instant loading
+    // API Routes - Network First with fallback for reliability
     {
-      matcher: ({ request }) => request.mode === 'navigate',
-      handler: new StaleWhileRevalidate({
-        cacheName: 'pages',
+      matcher: /\/api\/.*$/i,
+      handler: new NetworkFirst({
+        cacheName: 'api-cache',
         plugins: [
           new ExpirationPlugin({
-            maxEntries: 50,
-            maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+            maxEntries: 20,
+            maxAgeSeconds: 5 * 60, // 5 minutes
+          }),
+        ],
+      }),
+    },
+
+    // Critical Navigation - Network First for fresh content
+    {
+      matcher: ({ request, url }) => {
+        return (
+          request.mode === 'navigate'
+          && !url.pathname.startsWith('/api/')
+        )
+      },
+      handler: new NetworkFirst({
+        cacheName: 'critical-pages',
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 25,
+            maxAgeSeconds: 24 * 60 * 60, // 24 hours
           }),
           {
             // Modern offline experience - return cached content with notification
             handlerDidError: async () => {
-              // Instead of redirecting to /offline, let the app handle it gracefully
               return new Response(
                 JSON.stringify({
                   offline: true,
@@ -104,6 +122,27 @@ const serwist = new Serwist({
       }),
     },
   ],
+})
+
+// Performance monitoring using service worker events
+self.addEventListener('install', (event) => {
+  // eslint-disable-next-line no-console -- Debug logs acceptables pour le monitoring du service worker
+  console.debug('Service worker installé:', event)
+})
+
+self.addEventListener('activate', (event) => {
+  // eslint-disable-next-line no-console -- Debug logs acceptables pour le monitoring du service worker
+  console.debug('Service worker activé:', event)
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
+})
+
+self.addEventListener('error', (event) => {
+  console.error('Service worker error:', event)
 })
 
 serwist.addEventListeners()

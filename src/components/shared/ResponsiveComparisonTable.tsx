@@ -70,6 +70,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
                 {availability.label}
               </Badge>
               {tool.use_cases?.slice(0, 2).map((useCase: string, i: number) => (
+                // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des badges avec texte unique et prévisible
                 <Badge key={`usecase-${useCase.replace(/\s+/g, '-').toLowerCase()}-${i}`} variant="outline" className="text-xs hover-scale text-pretty">
                   {useCase}
                 </Badge>

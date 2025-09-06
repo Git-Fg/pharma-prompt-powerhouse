@@ -43,6 +43,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     const loadConsentStatus = () => {
       const stored = localStorage.getItem(STORAGE_KEY)
       if (stored === 'accepted' || stored === 'declined') {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour l'initialisation de l'état de consentement
         setStatus(stored as ConsentStatus)
       }
     }
