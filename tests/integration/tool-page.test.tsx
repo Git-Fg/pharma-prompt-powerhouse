@@ -25,7 +25,6 @@ vi.mock('next/navigation', () => ({
 
 // Mock content loader and utils
 vi.mock('@/lib/content-loader', () => ({
-  getExternalToolBySlug: vi.fn(),
   getContentItem: vi.fn(),
   getRouteToContentTypeMapping: vi.fn(() => ({
     'concepts': 'concept',
@@ -254,8 +253,8 @@ describe('tool Page Server Component', () => {
 
   describe('with valid tool', () => {
     it('renders tool page with all components', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -292,8 +291,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders personal review section', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -313,8 +312,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders confidence score with stars', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -336,8 +335,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders strong points and vigilance points', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -370,8 +369,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders free vs paid offer comparison', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -386,8 +385,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders TLDR section', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -401,8 +400,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders use cases', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -422,8 +421,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('renders main content', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -439,9 +438,9 @@ describe('tool Page Server Component', () => {
 
   describe('with minimal tool data', () => {
     it('handles tool with minimal fields', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const minimalTool = createMinimalTool()
-      vi.mocked(getExternalToolBySlug).mockReturnValue(minimalTool)
+      vi.mocked(getContentItem).mockReturnValue(minimalTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -461,9 +460,9 @@ describe('tool Page Server Component', () => {
     })
 
     it('handles tool without confidence score', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const toolWithoutConfidence = createToolWithoutConfidence()
-      vi.mocked(getExternalToolBySlug).mockReturnValue(toolWithoutConfidence)
+      vi.mocked(getContentItem).mockReturnValue(toolWithoutConfidence)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -478,10 +477,10 @@ describe('tool Page Server Component', () => {
 
   describe('with invalid tool', () => {
     it('calls notFound when tool does not exist', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -493,10 +492,10 @@ describe('tool Page Server Component', () => {
     })
 
     it('handles empty slug gracefully', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getExternalToolBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -510,8 +509,8 @@ describe('tool Page Server Component', () => {
 
   describe('accessibility testing', () => {
     it('meets accessibility standards', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
@@ -526,8 +525,8 @@ describe('tool Page Server Component', () => {
     })
 
     it('has proper heading structure', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -544,8 +543,8 @@ describe('tool Page Server Component', () => {
 
   describe('performance testing', () => {
     it('renders within performance budget', async () => {
-      const { getExternalToolBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getExternalToolBySlug).mockReturnValue(mockTool)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockTool)
 
       const ToolPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
