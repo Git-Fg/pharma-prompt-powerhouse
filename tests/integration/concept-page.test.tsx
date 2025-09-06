@@ -7,7 +7,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
 import { createConceptWithoutTakeaways, createMockEnrichedConcept } from '../mocks/content.mock'
 
-import { renderServerPage } from '../utils/testing-utils'
+import { renderNextPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -19,6 +19,9 @@ vi.mock('next/navigation', () => ({
 // Mock content loader and utils
 vi.mock('@/lib/content-loader', () => ({
   getConceptBySlug: vi.fn(),
+  getContentItem: vi.fn(),
+  getRouteToContentTypeMapping: vi.fn(),
+  getContentTypeToRouteMapping: vi.fn(),
   content: {
     concepts: [],
     guides: [],
@@ -29,6 +32,10 @@ vi.mock('@/lib/content-loader', () => ({
 
 vi.mock('@/lib/utils', () => ({
   normalizeSlug: (slug: string) => slug,
+}))
+
+vi.mock('lucide-react', () => ({
+  User: vi.fn(() => <div data-testid="user-icon" />),
 }))
 
 // Mock layout components
@@ -151,10 +158,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId, getByText } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getByTestId, getByText } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Check main layout
@@ -194,10 +201,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getByTestId } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       const contentRenderer = getByTestId('content-renderer')
@@ -223,10 +230,10 @@ describe('concept Page Server Component', () => {
       }
       vi.mocked(getConceptBySlug).mockReturnValue(conceptWithoutTakeaways)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByTestId } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { queryByTestId } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Should not render key takeaways section when none exist
@@ -237,10 +244,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getByTestId } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Card structure should always be present for concepts
@@ -259,10 +266,10 @@ describe('concept Page Server Component', () => {
 
       vi.mocked(getConceptBySlug).mockReturnValue(undefined)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(ConceptDetailPage, {
-        params: { slug: 'non-existent-concept' },
+      await expect(renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'non-existent-concept' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -274,10 +281,10 @@ describe('concept Page Server Component', () => {
 
       vi.mocked(getConceptBySlug).mockReturnValue(undefined)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(ConceptDetailPage, {
-        params: { slug: '' },
+      await expect(renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: '' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -289,10 +296,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getByTestId } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       const card = getByTestId('card')
@@ -317,10 +324,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getByTestId } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Check card has margin bottom class
@@ -334,11 +341,11 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
 
-      const renderResult = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const renderResult = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Test basic accessibility without heading order for mock components
@@ -351,10 +358,10 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getAllByRole } = await renderServerPage(ConceptDetailPage, {
-        params: { slug: 'test-concept' },
+      const { getAllByRole } = await renderNextPage(ConceptDetailPage, {
+        params: { contentType: 'concepts', slug: 'test-concept' },
       })
 
       // Should have proper heading hierarchy
@@ -378,11 +385,11 @@ describe('concept Page Server Component', () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
 
-      const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
+      const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
 
       const performance = measureRenderPerformance(
-        () => renderServerPage(ConceptDetailPage, { params: { slug: 'test-concept' } }),
+        () => renderNextPage(ConceptDetailPage, { params: { contentType: 'concepts', slug: 'test-concept' } }),
         5,
       )
 

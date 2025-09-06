@@ -7,7 +7,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 // Import mock factories directly from content.mock
 import { createGuideWithoutTakeaways, createMockEnrichedGuide } from '../mocks/content.mock'
 
-import { renderServerPage } from '../utils/testing-utils'
+import { renderNextPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -22,12 +22,19 @@ vi.mock('@/lib/content-loader', () => ({
   getWorkflowBySlug: vi.fn(),
   getConceptBySlug: vi.fn(),
   getExternalToolBySlug: vi.fn(),
+  getContentItem: vi.fn(),
+  getRouteToContentTypeMapping: vi.fn(),
+  getContentTypeToRouteMapping: vi.fn(),
   content: {
     guides: [],
     workflows: [],
     concepts: [],
     externalTools: [],
   },
+}))
+
+vi.mock('lucide-react', () => ({
+  User: vi.fn(() => <div data-testid="user-icon" />),
 }))
 
 // Mock layout components
@@ -144,10 +151,10 @@ describe('guide Page Server Component', () => {
       vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
 
       // Import the actual page component
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId, getAllByTestId, getByText } = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const { getByTestId, getAllByTestId, getByText } = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       // Check main layout
@@ -173,10 +180,10 @@ describe('guide Page Server Component', () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByTestId } = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const { getByTestId } = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       const contentRenderer = getByTestId('content-renderer')
@@ -195,10 +202,10 @@ describe('guide Page Server Component', () => {
       const guideWithoutConcepts = createMockEnrichedGuide({ ...mockGuide, concepts: [] })
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutConcepts)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByTestId } = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const { queryByTestId } = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       // Should not render concept section when no concepts
@@ -215,10 +222,10 @@ describe('guide Page Server Component', () => {
       }
       vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutTakeaways)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { queryByTestId } = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const { queryByTestId } = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       // Should not render key takeaways section when none exist
@@ -233,10 +240,10 @@ describe('guide Page Server Component', () => {
 
       vi.mocked(getGuideBySlug).mockReturnValue(undefined)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(GuideDetailPage, {
-        params: { slug: 'non-existent-guide' },
+      await expect(renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'non-existent-guide' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -248,10 +255,10 @@ describe('guide Page Server Component', () => {
 
       vi.mocked(getGuideBySlug).mockReturnValue(undefined)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      await expect(renderServerPage(GuideDetailPage, {
-        params: { slug: '' },
+      await expect(renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: '' },
       })).rejects.toThrow('NOT_FOUND')
 
       expect(notFound).toHaveBeenCalled()
@@ -263,11 +270,11 @@ describe('guide Page Server Component', () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
 
-      const renderResult = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const renderResult = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       await testAccessibility(renderResult, {
@@ -281,10 +288,10 @@ describe('guide Page Server Component', () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByRole } = await renderServerPage(GuideDetailPage, {
-        params: { slug: 'test-guide' },
+      const { getByRole } = await renderNextPage(GuideDetailPage, {
+        params: { contentType: 'guides', slug: 'test-guide' },
       })
 
       // Should have an h1 heading
@@ -299,11 +306,11 @@ describe('guide Page Server Component', () => {
       const { getGuideBySlug } = await import('@/lib/content-loader')
       vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
 
-      const GuideDetailPage = (await import('@/app/guides/[slug]/page')).default
+      const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
 
       const performance = measureRenderPerformance(
-        () => renderServerPage(GuideDetailPage, { params: { slug: 'test-guide' } }),
+        () => renderNextPage(GuideDetailPage, { params: { contentType: 'guides', slug: 'test-guide' } }),
         5,
       )
 
