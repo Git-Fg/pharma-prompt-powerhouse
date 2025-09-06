@@ -7,6 +7,7 @@ import type {
   EnrichedGuide,
   EnrichedWorkflow,
 } from './content-schema'
+import type { AnyContent } from '@/types'
 import { allConcepts } from '@/content/concepts'
 import { allExternalTools } from '@/content/external-tools'
 import { allGuides } from '@/content/guides'
@@ -383,4 +384,57 @@ export function getConceptBySlug(slug: string): EnrichedConcept | undefined {
 
 export function getExternalToolBySlug(slug: string): BaseExternalTool | undefined {
   return content.externalTools.find((t: BaseExternalTool) => t.slug === slug)
+}
+
+/**
+ * Fonction unifiée pour récupérer n'importe quel type de contenu par son type et son slug
+ * @param contentType Type de contenu ('concept' | 'guide' | 'workflow' | 'tool')
+ * @param slug Slug du contenu
+ * @returns L'objet contenu ou undefined si non trouvé
+ */
+export function getContentItem(contentType: string, slug: string): AnyContent | undefined {
+  switch (contentType) {
+    case 'concept':
+      return getConceptBySlug(slug)
+    case 'guide':
+      return getGuideBySlug(slug)
+    case 'workflow':
+      return getWorkflowBySlug(slug)
+    case 'tool':
+      return getExternalToolBySlug(slug)
+    default:
+      console.warn(`Unknown content type: ${contentType}`)
+      return undefined
+  }
+}
+
+/**
+ * Fonction utilitaire pour valider qu'un type de contenu est supporté
+ */
+export function isValidContentType(contentType: string): contentType is 'concept' | 'guide' | 'workflow' | 'tool' {
+  return ['concept', 'guide', 'workflow', 'tool'].includes(contentType)
+}
+
+/**
+ * Fonction utilitaire pour obtenir le mapping entre les noms de routes et les types de contenu
+ */
+export function getRouteToContentTypeMapping(): Record<string, 'concept' | 'guide' | 'workflow' | 'tool'> {
+  return {
+    'concepts': 'concept',
+    'guides': 'guide',
+    'workflows': 'workflow',
+    'l-arsenal-ia': 'tool',
+  }
+}
+
+/**
+ * Fonction inverse : obtenir le nom de la route à partir du type de contenu
+ */
+export function getContentTypeToRouteMapping(): Record<'concept' | 'guide' | 'workflow' | 'tool', string> {
+  return {
+    concept: 'concepts',
+    guide: 'guides',
+    workflow: 'workflows',
+    tool: 'l-arsenal-ia',
+  }
 }
