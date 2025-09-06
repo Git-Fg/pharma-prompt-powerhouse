@@ -18,7 +18,6 @@ vi.mock('next/navigation', () => ({
 
 // Mock content loader and utils
 vi.mock('@/lib/content-loader', () => ({
-  getConceptBySlug: vi.fn(),
   getContentItem: vi.fn(),
   getRouteToContentTypeMapping: vi.fn(() => ({
     'concepts': 'concept',
@@ -237,8 +236,8 @@ describe('concept Page Server Component', () => {
 
   describe('with valid concept', () => {
     it('renders concept page with all components', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -280,8 +279,8 @@ describe('concept Page Server Component', () => {
     })
 
     it('renders concept content correctly', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -304,13 +303,13 @@ describe('concept Page Server Component', () => {
     })
 
     it('handles concept without key takeaways', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const baseConcept = createConceptWithoutTakeaways()
       const conceptWithoutTakeaways = {
         ...baseConcept,
         relatedItems: [],
       }
-      vi.mocked(getConceptBySlug).mockReturnValue(conceptWithoutTakeaways)
+      vi.mocked(getContentItem).mockReturnValue(conceptWithoutTakeaways)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -323,8 +322,8 @@ describe('concept Page Server Component', () => {
     })
 
     it('always renders concept card structure', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -343,10 +342,10 @@ describe('concept Page Server Component', () => {
 
   describe('with invalid concept', () => {
     it('calls notFound when concept does not exist', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getConceptBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -358,10 +357,10 @@ describe('concept Page Server Component', () => {
     })
 
     it('handles malformed slug gracefully', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getConceptBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -375,8 +374,8 @@ describe('concept Page Server Component', () => {
 
   describe('content structure', () => {
     it('has proper concept card layout', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -403,8 +402,8 @@ describe('concept Page Server Component', () => {
     })
 
     it('applies proper CSS classes', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -420,8 +419,8 @@ describe('concept Page Server Component', () => {
 
   describe('accessibility testing', () => {
     it('meets basic accessibility standards', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
@@ -437,8 +436,8 @@ describe('concept Page Server Component', () => {
     })
 
     it('has proper heading structure', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -464,8 +463,8 @@ describe('concept Page Server Component', () => {
 
   describe('performance testing', () => {
     it('renders within performance budget', async () => {
-      const { getConceptBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getConceptBySlug).mockReturnValue(mockConcept)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockConcept)
 
       const ConceptDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
