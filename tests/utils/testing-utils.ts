@@ -32,7 +32,7 @@ export async function renderServerComponent<T>(
  * Enhanced Server Component Testing Utilities for Next.js Pages
  * Handles page components with params and async data fetching
  */
-export async function renderServerPage<T extends { params?: any; searchParams?: any }>(
+export async function renderServerPage<T extends { params?: any, searchParams?: any }>(
   PageComponent: (props: T) => Promise<ReactElement> | ReactElement,
   props: T,
 ): Promise<RenderResult> {
@@ -47,7 +47,7 @@ export async function renderServerPage<T extends { params?: any; searchParams?: 
 export function mockNextNavigation() {
   const mockNotFound = vi.fn()
   const mockRedirect = vi.fn()
-  
+
   return {
     notFound: mockNotFound,
     redirect: mockRedirect,

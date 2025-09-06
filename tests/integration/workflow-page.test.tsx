@@ -4,10 +4,10 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderServerPage } from '../utils/testing-utils'
-
 // Import mock factories directly from content.mock
 import { createMockWorkflow, createWorkflowWithoutConcepts } from '../mocks/content.mock'
+
+import { renderServerPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -55,7 +55,9 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
         <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}: {block.content?.substring(0, 50) || block.title}
+          {block.type}
+          :
+          {block.content?.substring(0, 50) || block.title}
         </div>
       ))}
     </div>
@@ -65,7 +67,9 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
 vi.mock('@/components/shared/DisclaimerBanner', () => ({
   DisclaimerBanner: ({ type }: any) => (
     <div data-testid="disclaimer-banner">
-      Disclaimer for {type}
+      Disclaimer for
+      {' '}
+      {type}
     </div>
   ),
 }))
@@ -73,7 +77,9 @@ vi.mock('@/components/shared/DisclaimerBanner', () => ({
 vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
   SmartRecommendationsSection: ({ item }: any) => (
     <div data-testid="smart-recommendations">
-      Recommendations for {item?.title}
+      Recommendations for
+      {' '}
+      {item?.title}
     </div>
   ),
 }))
@@ -105,7 +111,7 @@ vi.mock('lucide-react', () => ({
   ArrowRight: () => <span data-testid="arrow-right-icon">→</span>,
 }))
 
-describe('Workflow Page Server Component', () => {
+describe('workflow Page Server Component', () => {
   const mockWorkflow = createMockWorkflow({
     slug: 'test-workflow',
     title: 'Test Workflow',
@@ -238,7 +244,7 @@ describe('Workflow Page Server Component', () => {
     it('calls notFound when workflow does not exist', async () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
 
       const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
@@ -253,7 +259,7 @@ describe('Workflow Page Server Component', () => {
     it('handles empty slug gracefully', async () => {
       const { getWorkflowBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
 
       const WorkflowPage = (await import('@/app/workflows/[slug]/page')).default
@@ -280,13 +286,13 @@ describe('Workflow Page Server Component', () => {
       // Check navigation links
       const links = getAllByRole('link')
       expect(links.length).toBe(2)
-      
+
       const backLink = links.find(link => link.getAttribute('href') === '/workflows')
       const guideLink = links.find(link => link.getAttribute('href') === '/par-ou-commencer')
-      
+
       expect(backLink).toBeInTheDocument()
       expect(guideLink).toBeInTheDocument()
-      
+
       expect(backLink).toHaveTextContent('Tous les workflows')
       expect(guideLink).toHaveTextContent('Guide débutant')
     })

@@ -4,10 +4,10 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderServerPage } from '../utils/testing-utils'
-
 // Import mock factories directly from content.mock
-import { createMockConcept, createMinimalConcept, createConceptWithoutTakeaways } from '../mocks/content.mock'
+import { createConceptWithoutTakeaways, createMockConcept } from '../mocks/content.mock'
+
+import { renderServerPage } from '../utils/testing-utils'
 
 // Mock the notFound function from next/navigation
 vi.mock('next/navigation', () => ({
@@ -35,7 +35,7 @@ vi.mock('@/lib/utils', () => ({
 vi.mock('@/components/layout/ContentPageLayout', () => ({
   ContentPageLayout: ({ children, item, prose }: any) => (
     <div data-testid="content-page-layout" data-prose={prose}>
-      <h1 data-testid="item-title" role="heading" aria-level="1">{item?.title}</h1>
+      <h1 data-testid="item-title" role="heading" aria-level={1}>{item?.title}</h1>
       <p data-testid="item-description">{item?.description}</p>
       <div data-testid="item-category">{item?.category}</div>
       <div data-testid="item-difficulty">{item?.difficulty}</div>
@@ -49,7 +49,9 @@ vi.mock('@/components/shared/ContentRenderer', () => ({
     <div data-testid="content-renderer">
       {content?.map((block: any, index: number) => (
         <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}: {block.content?.substring(0, 50) || block.title}
+          {block.type}
+          :
+          {block.content?.substring(0, 50) || block.title}
         </div>
       ))}
     </div>
@@ -71,7 +73,9 @@ vi.mock('@/components/shared/KeyTakeaways', () => ({
 vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
   SmartRecommendationsSection: ({ item }: any) => (
     <div data-testid="smart-recommendations">
-      Recommendations for {item?.title}
+      Recommendations for
+      {' '}
+      {item?.title}
     </div>
   ),
 }))
@@ -88,7 +92,7 @@ vi.mock('@/components/ui/card', () => ({
     </div>
   ),
   CardTitle: ({ children, ...props }: any) => (
-    <h3 data-testid="card-title" role="heading" aria-level="3" {...props}>
+    <h3 data-testid="card-title" role="heading" aria-level={3} {...props}>
       {children}
     </h3>
   ),
@@ -103,7 +107,7 @@ vi.mock('lucide-react', () => ({
   Target: () => <span data-testid="target-icon">🎯</span>,
 }))
 
-describe('Concept Page Server Component', () => {
+describe('concept Page Server Component', () => {
   const mockConcept = createMockConcept({
     slug: 'test-concept',
     title: 'Test Concept',
@@ -245,7 +249,7 @@ describe('Concept Page Server Component', () => {
     it('calls notFound when concept does not exist', async () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getConceptBySlug).mockReturnValue(undefined)
 
       const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
@@ -260,7 +264,7 @@ describe('Concept Page Server Component', () => {
     it('handles malformed slug gracefully', async () => {
       const { getConceptBySlug } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
-      
+
       vi.mocked(getConceptBySlug).mockReturnValue(undefined)
 
       const ConceptDetailPage = (await import('@/app/concepts/[slug]/page')).default
