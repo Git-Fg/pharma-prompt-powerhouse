@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## **Project Philosophy**
 
 **Pharma Prompt Powerhouse: A Student's Practical Guide to AI**
-- **Core Mission**: A practical AI guide, created by a student for students. 
+- **Core Mission**: A practical AI guide, created by a student for students.
 - **Author's Posture**: I'm a student, just like you. This site is my exploration journal. I share my methods, discoveries, doubts, and even failures to save you time.
 - **Intellectual Humility**: I don't claim absolute truth. Recommendations and analyses are based on personal experience. I systematically encourage testing for yourself.
 - **No Marketing**: This is a purely informative and educational resource. There's nothing to sell, no newsletter, no community building (Discord, forums, etc.).
