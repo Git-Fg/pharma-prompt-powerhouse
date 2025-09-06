@@ -36,6 +36,7 @@ export function ContentMetadata({ item }: ContentMetadataProps) {
           {hasEstimatedTime && (
             <div className="flex items-center gap-2">
               <Clock className="size-4" />
+              {/* eslint-disable-next-line ts/no-explicit-any -- Accès dynamique aux propriétés de différents types de contenu */}
               <span>{(item as any).estimatedTime}</span>
             </div>
           )}

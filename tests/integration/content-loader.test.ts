@@ -1,5 +1,23 @@
 import type { ContentBlock, EnrichedGuide } from '@/lib/content-schema'
 import { beforeAll, describe, expect, it } from 'vitest'
+
+// Types pour les données de test
+interface PrerequisiteItem {
+  slug?: string
+  type: 'concept' | 'guide' | 'workflow' | 'external-tool'
+  title?: string
+}
+
+interface TabItem {
+  value: string
+  title: string
+  content: ContentBlock[]
+}
+
+interface AccordionItem {
+  title: string
+  content: ContentBlock[]
+}
 import {
   content,
   getConceptBySlug,
@@ -266,7 +284,7 @@ describe('content Loader Integration', () => {
           }
 
           case 'prerequisites':
-            block.items.forEach((item: any) => {
+            block.items.forEach((item: PrerequisiteItem) => {
               if (item.slug) {
                 let found = false
                 switch (item.type) {
@@ -291,13 +309,13 @@ describe('content Loader Integration', () => {
             break
 
           case 'tabs':
-            block.tabs.forEach((tab: any) => {
+            block.tabs.forEach((tab: TabItem) => {
               validateContentBlockIntegrity(tab.content, parentContext, errors)
             })
             break
 
           case 'accordion':
-            block.items.forEach((item: any) => {
+            block.items.forEach((item: AccordionItem) => {
               validateContentBlockIntegrity(item.content, parentContext, errors)
             })
             break

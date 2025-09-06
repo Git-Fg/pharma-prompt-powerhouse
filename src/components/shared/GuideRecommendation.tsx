@@ -14,7 +14,12 @@ interface GuideRecommendationProps {
   reason: string
 }
 
-function GuideRecommendationContent({ guide, reason, includeTitle = true }: { guide: any, reason: string, includeTitle?: boolean }) {
+function GuideRecommendationContent({ guide, reason, includeTitle = true }: {
+  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
+  guide: any
+  reason: string
+  includeTitle?: boolean
+}) {
   return (
     <div className="flex flex-col gap-4">
       {includeTitle && (

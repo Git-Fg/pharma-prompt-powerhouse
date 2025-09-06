@@ -14,6 +14,7 @@ interface SkeletonProps {
   animate?: boolean
   style?: React.CSSProperties
   dataSidebar?: string
+  // eslint-disable-next-line ts/no-explicit-any -- Permet les attributs data HTML arbitraires pour les tests et le style
   [key: string]: any // Allow any data attributes
 }
 

@@ -70,17 +70,14 @@ export default antfu(
       'antfu/no-top-level-await': 'off',
       'node/prefer-global/process': 'off',
 
-      // Disable array index key warnings for this project
-      // In this pharma content app, many lists are stable and semantically keyed
-      'react/no-array-index-key': 'off', // Disabled - over-engineering for this use case
+      // React array index key control - warn to encourage better practices
+      'react/no-array-index-key': 'warn', // Changed to warn - use index keys only with justification
 
-      // Disable direct setState warnings for this project
-      // These hooks are carefully designed and cleaned up properly
-      'react-hooks-extra/no-direct-set-state-in-use-effect': 'off', // Disabled - intentional patterns
+      // React hooks useEffect setState control - warn to prevent side effects
+      'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn', // Changed to warn - justify exceptions
 
-      // Disable event listener warnings for PWA components
-      // Service workers and PWA lifecycle events are meant to be persistent
-      'react-web-api/no-leaked-event-listener': 'off', // Disabled - over-engineering for PWA use case
+      // React event listener cleanup control - warn to prevent memory leaks
+      'react-web-api/no-leaked-event-listener': 'warn', // Changed to warn - justify PWA lifecycle exceptions
 
       // Allow dangerouslySetInnerHTML in chart components (controlled use)
       'react-dom/no-dangerously-set-innerhtml': 'warn', // Changed from error to warn
@@ -98,6 +95,12 @@ export default antfu(
       // Note: eslint-plugin-tailwindcss doesn't support Tailwind v4 yet due to peer dependency conflicts
       // Our semantic utilities (prose-*, container-*, etc.) are implemented via @utility in globals.css
       'style/max-len': 'off', // Allow longer class strings for semantic utilities
+
+      // TypeScript any type control - prohibit by default, require justification
+      'ts/no-explicit-any': 'error',
+
+      // Require description for eslint-disable-next-line comments to force justification
+      'eslint-comments/require-description': 'error',
     },
   },
   {

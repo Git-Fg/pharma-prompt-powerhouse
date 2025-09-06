@@ -13,7 +13,11 @@ interface ConceptRecommendationProps {
   reason: string
 }
 
-function RecommendationContent({ concept, reason }: { concept: any, reason: string }) {
+function RecommendationContent({ concept, reason }: {
+  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
+  concept: any
+  reason: string
+}) {
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -51,6 +55,7 @@ function RecommendationContent({ concept, reason }: { concept: any, reason: stri
           </p>
           <ul className="text-xs text-muted-foreground space-y-1">
             {concept.keyTakeaways.slice(0, 2).map((takeaway: string, index: number) => (
+              // eslint-disable-next-line react/no-array-index-key -- Liste statique de points clés, pas de réordonnancement possible
               <li key={index} className="flex items-start gap-2">
                 <span className="text-muted-foreground mt-1">•</span>
                 <span>{takeaway}</span>

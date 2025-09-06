@@ -15,6 +15,7 @@ import { normalizeSlug } from './utils'
 
 // Imports conditionnels pour Node.js uniquement (build time)
 /* eslint-disable ts/no-require-imports */
+// eslint-disable-next-line ts/no-explicit-any -- Modules Node.js conditionnels importés uniquement côté serveur, typés correctement lors de l'importation réel
 let createHash: any, readFileSync: any, writeFileSync: any, existsSync: any, mkdirSync: any, path: any
 
 if (typeof window === 'undefined') {

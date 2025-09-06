@@ -11,6 +11,7 @@ interface ToolRecommendationProps {
 }
 
 interface QuickLinkProps {
+  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
   tool: any
   reason: string
 }

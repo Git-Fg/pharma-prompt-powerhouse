@@ -72,6 +72,7 @@ function DefinitionContent({ definition }: DefinitionContentProps) {
           </p>
           <ul className="text-sm text-muted-foreground space-y-1">
             {definition.examples.map((example, index) => (
+              // eslint-disable-next-line react/no-array-index-key -- Liste statique d'exemples, pas de réordonnancement possible
               <li key={index} className="flex items-start gap-2">
                 <span className="text-muted-foreground">•</span>
                 <span>{example}</span>

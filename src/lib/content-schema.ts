@@ -119,6 +119,7 @@ const sectionBlockSchema = z.object({
 })
 
 // Recursive schemas need to be declared with z.lazy for circular references
+// eslint-disable-next-line ts/no-explicit-any -- Schéma récursif Zod, limitation TypeScript pour les références circulaires
 const accordionBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   type: z.literal('accordion'),
   items: z.array(z.object({
@@ -135,6 +136,7 @@ const tableBlockSchema = z.object({
   rows: z.array(z.array(z.string())),
 })
 
+// eslint-disable-next-line ts/no-explicit-any -- Schéma récursif Zod, limitation TypeScript pour les références circulaires
 const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   type: z.literal('tabs'),
   defaultValue: z.string().optional(),
