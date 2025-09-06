@@ -1,13 +1,14 @@
 'use client'
 
+import type { Difficulty } from '@/lib/constants'
 import { AlertTriangle, BookOpen, Code, Lightbulb, PlayCircle } from 'lucide-react'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CodeBlock } from '@/components/ui/code-block'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { difficultyLabels } from '@/lib/constants'
 import { cn } from '@/lib/utils'
-import { difficultyLabels, type Difficulty } from '@/lib/constants'
 
 interface ExampleProps {
   title: string

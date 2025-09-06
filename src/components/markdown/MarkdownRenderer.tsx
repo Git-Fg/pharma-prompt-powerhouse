@@ -2,10 +2,10 @@
 'use client'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { CodeBlock } from '@/components/ui/code-block'
-import { cn } from '@/lib/utils'
-import { parseTextWithGlossaryTerms } from '@/lib/glossary-detection'
 import { DefinedTerm } from '@/components/shared/DefinedTerm'
+import { CodeBlock } from '@/components/ui/code-block'
+import { parseTextWithGlossaryTerms } from '@/lib/glossary-detection'
+import { cn } from '@/lib/utils'
 
 interface MarkdownRendererProps {
   content: string
@@ -18,13 +18,13 @@ interface MarkdownRendererProps {
  */
 function TextWithGlossary({ children }: { children: string }) {
   const parsedContent = parseTextWithGlossaryTerms(children)
-  
+
   return (
     <>
       {parsedContent.map((segment, index) => {
         if (segment.type === 'glossary' && segment.glossaryKey) {
           return (
-            <DefinedTerm 
+            <DefinedTerm
               key={`glossary-${segment.glossaryKey}-${index}`}
               term={segment.glossaryKey}
               variant="inline"
@@ -46,10 +46,10 @@ function TextWithGlossary({ children }: { children: string }) {
  * Utilise les styles prose centralisés définis dans globals.css.
  * Inclut maintenant la détection automatique des termes du glossaire.
  */
-export function MarkdownRenderer({ 
-  content, 
-  className, 
-  enableGlossaryDetection = true 
+export function MarkdownRenderer({
+  content,
+  className,
+  enableGlossaryDetection = true,
 }: MarkdownRendererProps) {
   return (
     <div className={cn('prose', className)}>
@@ -61,10 +61,9 @@ export function MarkdownRenderer({
           h3: ({ ...props }) => <h3 {...props} />, // Uses centralized .prose h3 styles
           p: ({ children, ...props }) => (
             <p {...props}>
-              {enableGlossaryDetection && typeof children === 'string' 
+              {enableGlossaryDetection && typeof children === 'string'
                 ? <TextWithGlossary>{children}</TextWithGlossary>
-                : children
-              }
+                : children}
             </p>
           ),
           // Appliquer aussi la détection aux éléments de liste
@@ -72,8 +71,7 @@ export function MarkdownRenderer({
             <li className="mb-2" {...props}>
               {enableGlossaryDetection && typeof children === 'string'
                 ? <TextWithGlossary>{children}</TextWithGlossary>
-                : children
-              }
+                : children}
             </li>
           ),
           // Et aux liens/texte dans les tableaux
@@ -81,8 +79,7 @@ export function MarkdownRenderer({
             <td {...props}>
               {enableGlossaryDetection && typeof children === 'string'
                 ? <TextWithGlossary>{children}</TextWithGlossary>
-                : children
-              }
+                : children}
             </td>
           ),
           ul: ({ ...props }) => <ul className="list-disc pl-6 my-4" {...props} />,

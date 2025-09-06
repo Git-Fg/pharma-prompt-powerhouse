@@ -61,10 +61,10 @@ function generateTermVariations(term: string): string[] {
   if (normalizedTerm.endsWith('s') && normalizedTerm.length > 3) {
     variations.push(normalizedTerm.slice(0, -1))
   }
-  
+
   // Singulier -> Pluriel
   if (!normalizedTerm.endsWith('s')) {
-    variations.push(normalizedTerm + 's')
+    variations.push(`${normalizedTerm}s`)
   }
 
   // Variations avec tirets/espaces
