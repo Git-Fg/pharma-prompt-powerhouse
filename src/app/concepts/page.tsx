@@ -1,4 +1,5 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
+import type { EnrichedConcept } from '@/lib/content-schema'
 import * as LucideIcons from 'lucide-react'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { ConceptCard } from '@/components/shared/ConceptCard'
@@ -10,7 +11,7 @@ import { content } from '@/lib/content-loader'
 export const dynamic = 'force-dynamic'
 
 // Wrapper component to avoid passing functions as props
-function ConceptCardWrapper({ item }: { item: any }) {
+function ConceptCardWrapper({ item }: { item: EnrichedConcept }) {
   return <ConceptCard concept={item} />
 }
 
