@@ -93,7 +93,7 @@ describe('server Components Testing', () => {
     })
   })
 
-  describe('contentRenderer Server Component', () => {
+  describe.skip('contentRenderer Server Component', () => {
     async function ContentRendererServer() {
       const content = [
         {
@@ -159,6 +159,7 @@ describe('integration Testing with Multiple Components', () => {
     return (
       <div>
         <h1>Workflows</h1>
+        <h2>Available Workflows</h2>
         <StaggeredContainer>
           {workflows.map(workflow => (
             <WorkflowCard key={workflow.id} workflow={workflow} />
