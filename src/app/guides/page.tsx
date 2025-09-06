@@ -1,4 +1,5 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
+import type { EnrichedGuide } from '@/lib/content-schema'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { GuideCard } from '@/components/shared/GuideCard'
@@ -8,7 +9,7 @@ import { content } from '@/lib/content-loader'
 export const dynamic = 'force-dynamic'
 
 // Wrapper component to avoid passing functions as props
-function GuideCardWrapper({ item }: { item: any }) {
+function GuideCardWrapper({ item }: { item: EnrichedGuide }) {
   return <GuideCard guide={item} />
 }
 

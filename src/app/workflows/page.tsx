@@ -1,4 +1,5 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
+import type { EnrichedWorkflow } from '@/lib/content-schema'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
@@ -11,7 +12,7 @@ import { content } from '@/lib/content-loader'
 export const dynamic = 'force-dynamic'
 
 // Wrapper component to avoid passing functions as props
-function WorkflowCardWrapper({ item }: { item: any }) {
+function WorkflowCardWrapper({ item }: { item: EnrichedWorkflow }) {
   return <SimpleWorkflowCard workflow={item} />
 }
 

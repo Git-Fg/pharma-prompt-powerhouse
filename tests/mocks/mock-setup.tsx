@@ -190,6 +190,7 @@ export function mockMarkdownComponents() {
 // Mock icons
 export function mockIcons() {
   vi.mock('lucide-react', () => ({
+    // Existing icons
     Star: ({ className, ...props }: any) => (
       <span data-testid="star-icon" className={className} {...props}>
         ⭐
@@ -198,6 +199,53 @@ export function mockIcons() {
     Target: () => <span data-testid="target-icon">🎯</span>,
     ArrowLeft: () => <span data-testid="arrow-left-icon">←</span>,
     ArrowRight: () => <span data-testid="arrow-right-icon">→</span>,
+    
+    // Missing icons from components
+    AlertCircle: () => <span data-testid="alert-circle-icon">⚠️</span>,
+    AlertTriangle: () => <span data-testid="alert-triangle-icon">⚠️</span>,
+    BookOpen: () => <span data-testid="book-open-icon">📖</span>,
+    Brain: () => <span data-testid="brain-icon">🧠</span>,
+    Check: () => <span data-testid="check-icon">✓</span>,
+    CheckCircle: () => <span data-testid="check-circle-icon">✅</span>,
+    CheckCircle2: () => <span data-testid="check-circle2-icon">✅</span>,
+    CheckIcon: () => <span data-testid="check-icon">✓</span>,
+    ChevronDownIcon: () => <span data-testid="chevron-down-icon">▼</span>,
+    ChevronRight: () => <span data-testid="chevron-right-icon">▶</span>,
+    ChevronRightIcon: () => <span data-testid="chevron-right-icon">▶</span>,
+    ChevronUpIcon: () => <span data-testid="chevron-up-icon">▲</span>,
+    Circle: () => <span data-testid="circle-icon">○</span>,
+    CircleIcon: () => <span data-testid="circle-icon">○</span>,
+    Clock: () => <span data-testid="clock-icon">🕒</span>,
+    Code: () => <span data-testid="code-icon">💻</span>,
+    Cookie: () => <span data-testid="cookie-icon">🍪</span>,
+    Copy: () => <span data-testid="copy-icon">📋</span>,
+    Download: () => <span data-testid="download-icon">⬇️</span>,
+    ExternalLink: () => <span data-testid="external-link-icon">🔗</span>,
+    FileCode: () => <span data-testid="file-code-icon">📄</span>,
+    FileText: () => <span data-testid="file-text-icon">📄</span>,
+    Globe: () => <span data-testid="globe-icon">🌍</span>,
+    HelpCircle: () => <span data-testid="help-circle-icon">❓</span>,
+    Info: () => <span data-testid="info-icon">ℹ️</span>,
+    Lightbulb: () => <span data-testid="lightbulb-icon">💡</span>,
+    LucideIcon: () => <span data-testid="lucide-icon">⭐</span>,
+    MoreHorizontal: () => <span data-testid="more-horizontal-icon">⋯</span>,
+    PanelLeftIcon: () => <span data-testid="panel-left-icon">⬅️</span>,
+    PlayCircle: () => <span data-testid="play-circle-icon">▶️</span>,
+    Quote: () => <span data-testid="quote-icon">💬</span>,
+    Search: () => <span data-testid="search-icon">🔍</span>,
+    SearchIcon: () => <span data-testid="search-icon">🔍</span>,
+    Settings: () => <span data-testid="settings-icon">⚙️</span>,
+    Shield: () => <span data-testid="shield-icon">🛡️</span>,
+    Sparkles: () => <span data-testid="sparkles-icon">✨</span>,
+    Tag: () => <span data-testid="tag-icon">🏷️</span>,
+    TrendingUp: () => <span data-testid="trending-up-icon">📈</span>,
+    User: () => <span data-testid="user-icon">👤</span>,
+    Users: () => <span data-testid="users-icon">👥</span>,
+    Wifi: () => <span data-testid="wifi-icon">📶</span>,
+    WifiOff: () => <span data-testid="wifi-off-icon">📶</span>,
+    X: () => <span data-testid="x-icon">✕</span>,
+    XIcon: () => <span data-testid="x-icon">✕</span>,
+    Zap: () => <span data-testid="zap-icon">⚡</span>,
   }))
 }
 
