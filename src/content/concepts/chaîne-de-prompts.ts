@@ -90,3 +90,5 @@ export const concept = {
     },
   ],
 } satisfies Concept
+
+export default guide || concept || workflow

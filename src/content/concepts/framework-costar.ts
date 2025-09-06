@@ -58,3 +58,5 @@ CO-STAR est un des nombreux frameworks de prompting. D\'autres existent, comme *
     },
   ],
 } satisfies Concept
+
+export default guide || concept || workflow

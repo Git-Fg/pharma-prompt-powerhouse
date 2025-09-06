@@ -249,3 +249,5 @@ Ne propose pas encore de diagnostic, concentre-toi sur la structuration des donn
     'L\'IA est un excellent partenaire pédagogique, mais les décisions cliniques doivent toujours être validées par un professionnel.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

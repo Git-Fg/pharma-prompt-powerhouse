@@ -111,3 +111,5 @@ export const workflow = {
     'Utilisez le ToT pour générer un plan d\'action clair, en priorisant les vérifications et les mesures à prendre.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

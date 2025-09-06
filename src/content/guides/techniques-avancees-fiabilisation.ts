@@ -128,3 +128,5 @@ Un patient sous warfarine commence un traitement par amiodarone. Faut-il ajuster
     },
   ],
 } satisfies Guide
+
+export { guide }

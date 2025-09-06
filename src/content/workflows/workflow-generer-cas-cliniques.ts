@@ -105,3 +105,5 @@ export const workflow = {
     'Enrichissez vos cas en intégrant des \'pièges\' subtils et des questions à complexité progressive pour un apprentissage actif.',
   ],
 } satisfies Workflow
+
+export default guide || concept || workflow

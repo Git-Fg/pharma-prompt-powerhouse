@@ -83,7 +83,7 @@ content: [
   type: 'codeBlock',
   language: 'text',
   filename: 'prompt-anonymisation.txt',
-  content: '''RÔLE: Tu es un expert en protection des données de santé (RGPD).
+  content: `RÔLE: Tu es un expert en protection des données de santé (RGPD).
   
   TÂCHE: Analyse le texte clinique ci-dessous. Identifie et remplace TOUTES les informations personnelles identifiables (directes et indirectes) par des placeholders génériques.
   
@@ -97,7 +97,7 @@ content: [
   FORMAT DE SORTIE: Produis le texte anonymisé. Si tu as un doute sur une information, encadre-la avec des balises <AMBIGUITE>...</AMBIGUITE> pour ma relecture.
   
   CONTEXTE:
-  [Coller le texte clinique ici]'''
+  [Coller le texte clinique ici]`
   },
 {
   type: 'markdown',
@@ -122,3 +122,5 @@ content: [
   }
 ]
 } satisfies Guide
+
+export default guide || concept || workflow

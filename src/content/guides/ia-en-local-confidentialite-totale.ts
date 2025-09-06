@@ -88,3 +88,5 @@ Le marché des outils a évolué. Le choix ne se limite plus à LM Studio vs. Ol
     },
   ],
 } satisfies Guide
+
+export default guide || concept || workflow
