@@ -1,22 +1,26 @@
 // src/components/markdown/MarkdownRenderer.tsx
 'use client'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { AutoGlossaryProcessor } from '@/components/shared/AutoGlossaryProcessor'
 import { CodeBlock } from '@/components/ui/code-block'
 import { cn } from '@/lib/utils'
 
 interface MarkdownRendererProps {
   content: string
   className?: string
+  enableAutoGlossary?: boolean
 }
 
 /**
  * Renderer sécurisé pour le contenu Markdown utilisant react-markdown.
  * Remplace l'ancien système dangerouslySetInnerHTML par un rendu React sécurisé.
  * Utilise les styles prose centralisés définis dans globals.css.
+ * Intègre la détection automatique des termes du glossaire.
  */
-export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
-  return (
+export function MarkdownRenderer({ content, className, enableAutoGlossary = true }: MarkdownRendererProps) {
+  const markdownContent = (
     <div className={cn('prose', className)}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
@@ -56,4 +60,11 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
       </ReactMarkdown>
     </div>
   )
+
+  // Wrap with AutoGlossaryProcessor if enabled
+  return enableAutoGlossary
+    ? (
+        <AutoGlossaryProcessor>{markdownContent}</AutoGlossaryProcessor>
+      )
+    : markdownContent
 }
