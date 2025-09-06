@@ -285,10 +285,11 @@ Context7 is an MCP AI Agent tool that provides up-to-date knowledge on developme
 - **Single File**: `src/app/globals.css` centralizes entire design system.
 - **@theme inline**: All design tokens (spacing, colors, typography, breakpoints, shadows, z-index) defined centrally.
 
-> ⚠️ **Critical Tailwind v4 Bug - "One Word Per Line" Display**: As of current state (Q3 2024), Tailwind v4 contains a major bug where `max-w-*` classes (ex: `max-w-xs`, `max-w-md`, `max-w-lg`) incorrectly use spacing variables (`--spacing-*`) instead of container variables (`--container-*`). **Symptom**: Text displays one word per line on mobile, making content unreadable. **Implemented Solutions:**
-> 1. Explicit redefinition of `--container-*` variables in `@theme`
-> 2. Creation of custom semantic utilities (`footer-description-width`, `text-content-width`) with direct values
-> 3. Complete documentation in `/docs/tailwind-v4-text-width-bug.md`
+> ⚠️ **Critical Tailwind v4 Bug - "One Word Per Line" Display**: As of current state (Q3 2024), Tailwind v4 contains a major bug where `max-w-*` classes (ex: `max-w-xs`, `max-w-md`, `max-w-lg`) incorrectly use spacing variables (`--spacing-*`) instead of container variables (`--container-*`). **Symptom**: Text displays one word per line on mobile, making content unreadable. **Working Solution:**
+> 1. **Use semantic utilities with direct values**: Create utilities like `prose-description` (max-width: 42rem), `prose-content-width` (max-width: 65rem), `prose-section-width` (max-width: 56rem), `container-constrained` (max-width: 32rem) with direct CSS values instead of relying on broken Tailwind classes
+> 2. **Avoid official workaround**: The official Tailwind v4 workaround (adding container variables to @theme inline) has been tested and doesn't resolve the issue consistently
+> 3. **ESLint protection**: Custom ESLint rules prevent both use of problematic max-width classes and attempts to apply the official workaround
+> 4. Complete documentation in `/docs/tailwind-v4-text-width-bug.md`
 
 - **@utility (Semantic Utilities)**: In addition to base utilities (`container`, etc.), create semantic utilities for recurring styles (ex: `prose-slogan`, `prose-description`). This improves readability and maintainability by giving business meaning to styles, instead of repeating long class chains.
 - **@layer components**: Reusable base components (buttons, cards, layouts) without duplication.
@@ -389,7 +390,8 @@ Context7 is an MCP AI Agent tool that provides up-to-date knowledge on developme
 ## **Custom ESLint Rules**
 
 The project includes custom ESLint rules in `tools/eslint-plugin-pharma/`:
-- `pharma/no-prohibited-tailwind-classes` - Prevents use of deprecated Tailwind classes
+- `pharma/no-prohibited-tailwind-classes` - Prevents use of Tailwind max-width classes affected by v4 bug
+- `pharma/no-tailwind-v4-workaround` - Prevents modification of @theme inline with official workaround that doesn't work
 - `pharma/no-typographic-characters` - Prevents direct use of typographic characters in content
 
 ---

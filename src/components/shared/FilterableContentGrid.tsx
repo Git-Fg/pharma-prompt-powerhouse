@@ -14,11 +14,11 @@ import {
 import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { ConceptCard } from './ConceptCard'
 import { GuideCard } from './GuideCard'
 import { SimpleWorkflowCard } from './SimpleWorkflowCard'
 import { ToolCard } from './ToolCard'
-import { createTestIdProps, TestIds } from '@/lib/test-utils'
 
 // Interface de base que les items doivent respecter pour utiliser ce composant
 export interface BaseContentItem {

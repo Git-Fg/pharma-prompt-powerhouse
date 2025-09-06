@@ -83,7 +83,7 @@ export function ContentHeader({ item }: ContentHeaderProps) {
   return (
     <header className="mb-8 space-y-4">
       <h1 className="text-4xl font-bold tracking-tight">{item.title}</h1>
-      <p className="text-xl text-muted-foreground">{item.description}</p>
+      <p className="prose-description text-xl">{item.description}</p>
     </header>
   )
 }

@@ -127,7 +127,7 @@ test.describe('Footer Responsive Design', () => {
     const brandSection = page.locator('[data-testid="footer-brand-section"]')
     await expect(brandSection).toBeVisible()
     await expect(brandSection.locator('[data-testid="nav-logo"]')).toBeVisible()
-    
+
     const brandDescription = page.locator('[data-testid="footer-brand-description"]')
     await expect(brandDescription).toBeVisible()
     await expect(brandDescription).toContainText('Mon carnet de notes personnel')
@@ -136,7 +136,7 @@ test.describe('Footer Responsive Design', () => {
     const navSection = page.locator('[data-testid="footer-navigation-section"]')
     await expect(navSection).toBeVisible()
     await expect(navSection.locator('h3')).toContainText('Navigation')
-    
+
     // Test navigation links with data test IDs
     await expect(footer.locator('[data-testid="nav-link-Accueil"]')).toBeVisible()
     await expect(footer.locator('[data-testid="nav-link-Par où commencer"]')).toBeVisible()
