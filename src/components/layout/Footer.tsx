@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { content } from '@/lib/content-loader'
 import { getNavigationLinksBySection } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
-import { cn } from '@/lib/utils'
 
 export function Footer() {
   // La logique de récupération des données reste la même
@@ -55,8 +54,8 @@ export function Footer() {
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href} 
+                    <Link
+                      href={link.href}
                       className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"
                       {...createTestIdProps(TestIds.Navigation.Link(link.name))}
                     >
@@ -74,8 +73,8 @@ export function Footer() {
                 <ul className="space-y-3">
                   {legalLinks.map(link => (
                     <li key={link.name}>
-                      <Link 
-                        href={link.href} 
+                      <Link
+                        href={link.href}
                         className="group text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center space-x-2"
                         {...createTestIdProps(TestIds.Navigation.Link(link.name))}
                       >
@@ -90,17 +89,17 @@ export function Footer() {
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Workflows</h3>
                 <div className="space-y-3">
                   {recentWorkflows.map(workflow => (
-                    <Link 
-                      key={workflow.slug} 
-                      href={`/workflows/${workflow.slug}`} 
+                    <Link
+                      key={workflow.slug}
+                      href={`/workflows/${workflow.slug}`}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors group line-clamp-2 block"
                       {...createTestIdProps(TestIds.Navigation.Link(workflow.title))}
                     >
                       <span>{workflow.title}</span>
                     </Link>
                   ))}
-                  <Link 
-                    href="/workflows" 
+                  <Link
+                    href="/workflows"
                     className="text-sm text-primary hover:text-primary/80 font-medium transition-colors group inline-flex items-center space-x-1 pt-2"
                     {...createTestIdProps(TestIds.Navigation.Link('Voir tous les workflows'))}
                   >

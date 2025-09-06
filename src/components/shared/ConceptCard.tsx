@@ -9,9 +9,9 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
+import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn, normalizeSlug } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
-import { createTestIdProps, TestIds } from '@/lib/test-utils'
 
 interface ConceptCardProps {
   concept: Concept
@@ -19,7 +19,7 @@ interface ConceptCardProps {
 
 export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
   return (
-    <Card 
+    <Card
       className={cn(
         contentCardVariants({ variant: 'concept', size: 'default' }),
         'h-full flex-col hover:shadow-lg hover:border-primary/50 transition-all duration-200 group',

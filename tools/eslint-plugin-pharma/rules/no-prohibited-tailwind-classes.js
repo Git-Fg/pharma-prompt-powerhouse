@@ -12,7 +12,7 @@ module.exports = {
       recommended: true,
     },
     messages: {
-      forbiddenClass: 'Utilisation interdite de la classe Tailwind \"{{className}}\" à cause du bug Tailwind v4. Utilisez plutôt les utilitaires sémantiques : footer-description-width (320px), text-content-width (448px), dialog-content-width (768px), prose-description (672px), prose-content-width (1040px), prose-section-width (896px), offline-container-width, container-lg-width, ou container-content-width.',
+      forbiddenClass: 'Utilisation interdite de la classe Tailwind \"{{className}}\" à cause du bug Tailwind v4. Utilisez plutôt les utilitaires sémantiques avec valeurs directes : prose-description (672px), prose-content-width (1040px), prose-section-width (896px), container-constrained (512px), ou définissez vos propres utilitaires avec max-width: [valeur] direct dans le CSS.',
     },
     schema: [], // Aucune option
   },
