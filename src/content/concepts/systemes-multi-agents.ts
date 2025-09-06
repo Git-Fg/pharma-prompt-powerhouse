@@ -42,14 +42,14 @@ const concept = {
           type: 'card',
           title: 'Transparence du Raisonnement',
           content: 'La structure même du prompt rend le processus de pensée de l\'IA beaucoup plus transparent. On peut voir clairement l\'avis de chaque "expert" avant la synthèse finale, ce qui permet de mieux évaluer la validité de la conclusion.'
-        }
-      ]
+        },
+      ],
     },
     {
       type: 'conclusion',
       title: 'Une Technique Avancée à votre Portée',
       content: 'Même sans outils de développement complexes, vous pouvez implémenter un système multi-agents simple directement dans un prompt en définissant clairement les rôles que vous voulez que l\'IA adopte. C\'est la base de notre nouveau workflow sur l\'analyse de signaux de pharmacovigilance.'
-    }
+    },
   ],
 } satisfies Concept
 

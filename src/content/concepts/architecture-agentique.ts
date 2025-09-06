@@ -21,7 +21,7 @@ const concept = {
       content: `Une architecture agentique se compose généralement de trois modules :
 1.  **Perception :** L\'agent analyse la demande initiale et l\'environnement (par exemple, les outils disponibles, les données fournies).
 2.  **Cognition :** Le "cerveau" de l\'agent. C\'est ici qu\'il planifie, raisonne, et décide de la prochaine action.
-3.  **Action :** L\'agent exécute la décision prise, par exemple en utilisant un outil (comme une recherche web), en posant une question à l\'utilisateur, ou en générant du contenu.`
+3.  **Action :** L\'agent exécute la décision prise, par exemple en utilisant un outil (comme une recherche web), en posant une question à l\'utilisateur, ou en générant du contenu.`,
     },
     {
       type: 'section',
@@ -29,7 +29,7 @@ const concept = {
       content: [
         {
           type: 'markdown',
-          content: `En 2025, on peut simplifier les architectures d\'agents de recherche en trois grands modèles :`
+          content: `En 2025, on peut simplifier les architectures d\'agents de recherche en trois grands modèles :`,
         },
         {
           type: 'card',
@@ -45,14 +45,14 @@ const concept = {
           type: 'card',
           title: '3. RAG Multi-Étapes',
           content: 'L\'agent enchaîne des cycles de recherche d\'information (Retrieval-Augmented Generation) et de synthèse de manière itérative. C\'est une forme de ReAct spécialisée dans la recherche. C\'est l\'approche de **Perplexity**.'
-        }
-      ]
+        },
+      ],
     },
     {
       type: 'conclusion',
       title: 'Pourquoi c\'est important pour vous ?',
       content: 'Comprendre l\'architecture sous-jacente d\'un outil vous permet de choisir le bon "spécialiste" pour votre besoin. Utiliser un agent "Plan-and-Solve" pour une question simple est inefficace, tandis qu\'utiliser un agent simple pour une revue de littérature complexe mènera à un résultat médiocre. C\'est la clé pour obtenir des résultats de haute qualité.'
-    }
+    },
   ],
 } satisfies Concept
 

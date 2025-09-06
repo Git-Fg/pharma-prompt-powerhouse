@@ -43,14 +43,14 @@ const concept = {
           variant: 'destructive',
           title: 'Le Faux Sentiment de Compétence',
           content: 'Obtenir rapidement une bonne réponse donne l\'illusion de maîtriser un sujet, alors qu\'en réalité, on maîtrise seulement l\'art de poser une question à une machine. Le jour de l\'examen ou face à un vrai patient, cette illusion peut être dangereuse.'
-        }
-      ]
+        },
+      ],
     },
     {
       type: 'conclusion',
       title: 'La Solution : Devenir le Pilote, pas le Passager',
       content: 'La meilleure défense contre ce biais est de changer de posture. N\'utilisez pas l\'IA comme un oracle qui vous donne la réponse, mais comme un partenaire de dialogue. C\'est vous qui devez garder le contrôle du raisonnement. Les méthodes comme le dialogue socratique sont conçues spécifiquement pour cela.'
-    }
+    },
   ],
 } satisfies Concept
 
