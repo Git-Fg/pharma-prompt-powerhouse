@@ -18,10 +18,6 @@ vi.mock('next/navigation', () => ({
 
 // Mock content loader
 vi.mock('@/lib/content-loader', () => ({
-  getGuideBySlug: vi.fn(),
-  getWorkflowBySlug: vi.fn(),
-  getConceptBySlug: vi.fn(),
-  getExternalToolBySlug: vi.fn(),
   getContentItem: vi.fn(),
   getRouteToContentTypeMapping: vi.fn(() => ({
     'concepts': 'concept',
@@ -233,8 +229,8 @@ describe('guide Page Server Component', () => {
 
   describe('with valid guide', () => {
     it('renders guide page with all components', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockGuide)
 
       // Import the actual page component
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
@@ -263,8 +259,8 @@ describe('guide Page Server Component', () => {
     })
 
     it('renders content blocks correctly', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockGuide)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -284,9 +280,9 @@ describe('guide Page Server Component', () => {
     })
 
     it('handles guide without concepts', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const guideWithoutConcepts = createMockEnrichedGuide({ ...mockGuide, concepts: [] })
-      vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutConcepts)
+      vi.mocked(getContentItem).mockReturnValue(guideWithoutConcepts)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -299,14 +295,14 @@ describe('guide Page Server Component', () => {
     })
 
     it('handles guide without key takeaways', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const baseGuide = createGuideWithoutTakeaways()
       const guideWithoutTakeaways = {
         ...baseGuide,
         concepts: [],
         relatedItems: [],
       }
-      vi.mocked(getGuideBySlug).mockReturnValue(guideWithoutTakeaways)
+      vi.mocked(getContentItem).mockReturnValue(guideWithoutTakeaways)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -321,10 +317,10 @@ describe('guide Page Server Component', () => {
 
   describe('with invalid guide', () => {
     it('calls notFound when guide does not exist', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getGuideBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -336,10 +332,10 @@ describe('guide Page Server Component', () => {
     })
 
     it('handles malformed params gracefully', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getGuideBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -353,8 +349,8 @@ describe('guide Page Server Component', () => {
 
   describe('accessibility testing', () => {
     it('meets accessibility standards', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockGuide)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
@@ -371,8 +367,8 @@ describe('guide Page Server Component', () => {
     })
 
     it('has proper heading structure', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockGuide)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -389,8 +385,8 @@ describe('guide Page Server Component', () => {
 
   describe('performance testing', () => {
     it('renders within performance budget', async () => {
-      const { getGuideBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getGuideBySlug).mockReturnValue(mockGuide)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockGuide)
 
       const GuideDetailPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')

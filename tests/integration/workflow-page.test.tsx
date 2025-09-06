@@ -18,7 +18,6 @@ vi.mock('next/navigation', () => ({
 
 // Mock content loader
 vi.mock('@/lib/content-loader', () => ({
-  getWorkflowBySlug: vi.fn(),
   getContentItem: vi.fn(),
   getRouteToContentTypeMapping: vi.fn(() => ({
     'concepts': 'concept',
@@ -230,8 +229,8 @@ describe('workflow Page Server Component', () => {
 
   describe('with valid workflow', () => {
     it('renders workflow page with all components', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -272,8 +271,8 @@ describe('workflow Page Server Component', () => {
     })
 
     it('renders workflow content correctly', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -293,14 +292,14 @@ describe('workflow Page Server Component', () => {
     })
 
     it('handles workflow without concepts', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const baseWorkflow = createWorkflowWithoutConcepts()
       const workflowWithoutConcepts = {
         ...baseWorkflow,
         concepts: [],
         relatedItems: [],
       }
-      vi.mocked(getWorkflowBySlug).mockReturnValue(workflowWithoutConcepts)
+      vi.mocked(getContentItem).mockReturnValue(workflowWithoutConcepts)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -313,8 +312,8 @@ describe('workflow Page Server Component', () => {
     })
 
     it('always renders disclaimer banner', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -330,10 +329,10 @@ describe('workflow Page Server Component', () => {
 
   describe('with invalid workflow', () => {
     it('calls notFound when workflow does not exist', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -345,10 +344,10 @@ describe('workflow Page Server Component', () => {
     })
 
     it('handles empty slug gracefully', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
+      const { getContentItem } = await import('@/lib/content-loader')
       const { notFound } = await import('next/navigation')
 
-      vi.mocked(getWorkflowBySlug).mockReturnValue(undefined)
+      vi.mocked(getContentItem).mockReturnValue(undefined)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -362,8 +361,8 @@ describe('workflow Page Server Component', () => {
 
   describe('navigation functionality', () => {
     it('has correct navigation structure', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -386,8 +385,8 @@ describe('workflow Page Server Component', () => {
     })
 
     it('includes proper icons in navigation', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -402,8 +401,8 @@ describe('workflow Page Server Component', () => {
 
   describe('accessibility testing', () => {
     it('meets accessibility standards', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { testAccessibility } = await import('../utils/testing-utils')
@@ -422,8 +421,8 @@ describe('workflow Page Server Component', () => {
     })
 
     it('has proper heading structure', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
@@ -440,8 +439,8 @@ describe('workflow Page Server Component', () => {
 
   describe('performance testing', () => {
     it('renders within performance budget', async () => {
-      const { getWorkflowBySlug } = await import('@/lib/content-loader')
-      vi.mocked(getWorkflowBySlug).mockReturnValue(mockWorkflow)
+      const { getContentItem } = await import('@/lib/content-loader')
+      vi.mocked(getContentItem).mockReturnValue(mockWorkflow)
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
       const { measureRenderPerformance } = await import('../utils/testing-utils')
