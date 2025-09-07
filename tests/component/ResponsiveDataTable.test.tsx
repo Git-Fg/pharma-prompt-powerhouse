@@ -1,8 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import type { ColumnDef } from '@tanstack/react-table'
+import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { ResponsiveDataTable } from '@/components/ui/data-table/ResponsiveDataTable'
-import type { ColumnDef } from '@tanstack/react-table'
-import { useMobile } from '@/hooks/use-mobile'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 interface TestData {
   id: number
@@ -39,24 +39,34 @@ const mockColumns: ColumnDef<TestData>[] = [
 
 // Mock the mobile hook
 vi.mock('@/hooks/use-mobile', () => ({
-  useMobile: vi.fn(() => false),
+  useIsMobile: vi.fn(() => false),
 }))
 
-describe('ResponsiveDataTable', () => {
+function mockRenderMobileCard(item: TestData, index: number) {
+  return (
+    <div key={index} data-testid={`mobile-card-${index}`}>
+      <h3>{item.name}</h3>
+      <p>{item.category}</p>
+      <p>{item.status}</p>
+    </div>
+  )
+}
+
+describe('responsiveDataTable', () => {
   it('renders table in desktop mode', () => {
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={mockColumns}
-        ariaLabel="Test data table"
-      />
+        renderMobileCard={mockRenderMobileCard}
+      />,
     )
 
     expect(screen.getByRole('table')).toBeInTheDocument()
     expect(screen.getByText('Name')).toBeInTheDocument()
     expect(screen.getByText('Category')).toBeInTheDocument()
     expect(screen.getByText('Status')).toBeInTheDocument()
-    
+
     // Check data rows
     expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByText('Item 2')).toBeInTheDocument()
@@ -65,19 +75,19 @@ describe('ResponsiveDataTable', () => {
 
   it('switches to mobile card view on mobile devices', () => {
     // Mock mobile device
-    vi.mocked(useMobile).mockReturnValue(true)
+    vi.mocked(useIsMobile).mockReturnValue(true)
 
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={mockColumns}
-        ariaLabel="Test data table"
-      />
+        renderMobileCard={mockRenderMobileCard}
+      />,
     )
 
     // Should show mobile cards instead of table
     expect(screen.queryByRole('table')).not.toBeInTheDocument()
-    
+
     // Should still show data but in card format
     expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByText('Category A')).toBeInTheDocument()
@@ -85,28 +95,28 @@ describe('ResponsiveDataTable', () => {
 
   it('handles empty data gracefully', () => {
     render(
-      <ResponsiveDataTable 
-        data={[]} 
+      <ResponsiveDataTable
+        data={[]}
         columns={mockColumns}
         ariaLabel="Empty data table"
-      />
+      />,
     )
 
     expect(screen.getByRole('table')).toBeInTheDocument()
     expect(screen.getByText('Name')).toBeInTheDocument()
-    
+
     // Should not show any data rows
     expect(screen.queryByText('Item 1')).not.toBeInTheDocument()
   })
 
   it('applies custom className when provided', () => {
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={mockColumns}
-        ariaLabel="Test data table"
+        renderMobileCard={mockRenderMobileCard}
         className="custom-table-class"
-      />
+      />,
     )
 
     const tableContainer = screen.getByRole('table').closest('div')
@@ -115,28 +125,28 @@ describe('ResponsiveDataTable', () => {
 
   it('renders custom cell content correctly', () => {
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={mockColumns}
-        ariaLabel="Test data table"
-      />
+        renderMobileCard={mockRenderMobileCard}
+      />,
     )
 
     // Check that custom cell rendering works (status column)
     const activeItems = screen.getAllByText('active')
     const inactiveItems = screen.getAllByText('inactive')
-    
+
     expect(activeItems).toHaveLength(2)
     expect(inactiveItems).toHaveLength(1)
   })
 
   it('provides proper accessibility attributes', () => {
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={mockColumns}
         ariaLabel="Accessible data table"
-      />
+      />,
     )
 
     const table = screen.getByRole('table')
@@ -163,11 +173,11 @@ describe('ResponsiveDataTable', () => {
     ]
 
     render(
-      <ResponsiveDataTable 
-        data={mockData} 
+      <ResponsiveDataTable
+        data={mockData}
         columns={sortableColumns}
         ariaLabel="Sortable data table"
-      />
+      />,
     )
 
     // Should render sortable headers
@@ -184,11 +194,11 @@ describe('ResponsiveDataTable', () => {
     }))
 
     render(
-      <ResponsiveDataTable 
-        data={largeDataset} 
+      <ResponsiveDataTable
+        data={largeDataset}
         columns={mockColumns}
         ariaLabel="Large dataset table"
-      />
+      />,
     )
 
     expect(screen.getByRole('table')).toBeInTheDocument()

@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ConsentBanner } from '@/components/consent/ConsentBanner'
 
 // Mock the consent hook
@@ -16,7 +16,7 @@ vi.mock('lucide-react', () => ({
   X: () => <div data-testid="close-icon">X</div>,
 }))
 
-describe('ConsentBanner', () => {
+describe('consentBanner', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseConsent.mockReturnValue({
@@ -160,7 +160,7 @@ describe('ConsentBanner', () => {
 
     // Accept button should be primary (more prominent)
     expect(acceptButton).toHaveClass('bg-primary', 'text-primary-foreground')
-    
+
     // Refuse button should be secondary (less prominent)
     expect(refuseButton).toHaveClass('border-input', 'bg-background')
   })

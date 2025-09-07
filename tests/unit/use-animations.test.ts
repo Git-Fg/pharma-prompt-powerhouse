@@ -1,6 +1,13 @@
-import { renderHook, act } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
-import { useAnimations } from '@/hooks/use-animations'
+import { act, renderHook } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import {
+  useCounterAnimation,
+  useInView,
+  useLoadingState,
+  useReducedMotion,
+  useScrollProgress,
+  useTypewriter,
+} from '@/hooks/use-animations'
 
 // Mock requestAnimationFrame and cancelAnimationFrame
 const mockRAF = vi.fn()
@@ -48,10 +55,10 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
-describe('useAnimations', () => {
+describe('animation Hooks', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    mockRAF.mockImplementation(cb => {
+    mockRAF.mockImplementation((cb) => {
       setTimeout(cb, 16) // Simulate 60fps
       return 1
     })
@@ -61,213 +68,161 @@ describe('useAnimations', () => {
     vi.resetAllMocks()
   })
 
-  it('initializes with default values', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    expect(result.current.isAnimationsEnabled).toBe(true)
-    expect(result.current.isVisible).toBe(false)
-    expect(result.current.animationText).toBe('')
-    expect(result.current.scrollProgress).toBe(0)
-  })
-
-  it('disables animations when user prefers reduced motion', () => {
-    // Mock reduced motion preference
-    window.matchMedia = vi.fn().mockImplementation(query => ({
-      matches: query === '(prefers-reduced-motion: reduce)',
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }))
-
-    const { result } = renderHook(() => useAnimations())
-
-    expect(result.current.isAnimationsEnabled).toBe(false)
-  })
-
-  it('enables animations when user prefers motion', () => {
-    // Mock motion preference
-    window.matchMedia = vi.fn().mockImplementation(query => ({
-      matches: query !== '(prefers-reduced-motion: reduce)',
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }))
-
-    const { result } = renderHook(() => useAnimations())
-
-    expect(result.current.isAnimationsEnabled).toBe(true)
-  })
-
-  it('updates scroll progress correctly', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    // Mock scroll position
-    Object.defineProperty(window, 'scrollY', { value: 500, writable: true })
-    Object.defineProperty(document.documentElement, 'scrollHeight', { value: 2000, writable: true })
-    Object.defineProperty(window, 'innerHeight', { value: 1000, writable: true })
-
-    // Trigger scroll event
-    act(() => {
-      window.dispatchEvent(new Event('scroll'))
+  describe('useReducedMotion', () => {
+    it('returns false when motion is not reduced', () => {
+      const { result } = renderHook(() => useReducedMotion())
+      expect(result.current).toBe(false)
     })
 
-    // Should calculate progress as scrollY / (scrollHeight - innerHeight)
-    // 500 / (2000 - 1000) = 0.5
-    expect(result.current.scrollProgress).toBe(0.5)
-  })
+    it('returns true when user prefers reduced motion', () => {
+      window.matchMedia = vi.fn().mockImplementation(query => ({
+        matches: query === '(prefers-reduced-motion: reduce)',
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      }))
 
-  it('handles edge cases in scroll progress calculation', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    // Mock edge case where scrollHeight <= innerHeight
-    Object.defineProperty(window, 'scrollY', { value: 0, writable: true })
-    Object.defineProperty(document.documentElement, 'scrollHeight', { value: 800, writable: true })
-    Object.defineProperty(window, 'innerHeight', { value: 1000, writable: true })
-
-    act(() => {
-      window.dispatchEvent(new Event('scroll'))
+      const { result } = renderHook(() => useReducedMotion())
+      expect(result.current).toBe(true)
     })
-
-    expect(result.current.scrollProgress).toBe(0)
   })
 
-  it('provides createInViewAnimation function', () => {
-    const { result } = renderHook(() => useAnimations())
+  describe('useLoadingState', () => {
+    it('starts with loading true and transitions to false', async () => {
+      const { result } = renderHook(() => useLoadingState(100))
 
-    expect(typeof result.current.createInViewAnimation).toBe('function')
-  })
+      expect(result.current.isLoading).toBe(true)
 
-  it('creates intersection observer for in-view animations', () => {
-    const { result } = renderHook(() => useAnimations())
-    const mockElement = document.createElement('div')
-
-    act(() => {
-      result.current.createInViewAnimation(mockElement, 'slide-in')
-    })
-
-    expect(mockIntersectionObserver).toHaveBeenCalled()
-    expect(mockObserve).toHaveBeenCalledWith(mockElement)
-  })
-
-  it('provides createTypewriterAnimation function', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    expect(typeof result.current.createTypewriterAnimation).toBe('function')
-  })
-
-  it('animates text with typewriter effect', async () => {
-    const { result } = renderHook(() => useAnimations())
-
-    act(() => {
-      result.current.createTypewriterAnimation('Hello World', 50)
-    })
-
-    // Should start typing animation
-    expect(result.current.animationText).toBe('')
-
-    // Wait for first character
-    await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 60))
-    })
-
-    // Should have started typing
-    expect(mockRAF).toHaveBeenCalled()
-  })
-
-  it('provides createScrollAnimation function', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    expect(typeof result.current.createScrollAnimation).toBe('function')
-  })
-
-  it('creates scroll-based animations', () => {
-    const { result } = renderHook(() => useAnimations())
-    const mockElement = document.createElement('div')
-
-    act(() => {
-      result.current.createScrollAnimation(mockElement, 'fade-in-up')
-    })
-
-    // Should set up scroll listener
-    expect(mockRAF).toHaveBeenCalled()
-  })
-
-  it('provides cleanup for animations', () => {
-    const { result, unmount } = renderHook(() => useAnimations())
-
-    const mockElement = document.createElement('div')
-    
-    act(() => {
-      result.current.createInViewAnimation(mockElement, 'slide-in')
-    })
-
-    unmount()
-
-    expect(mockDisconnect).toHaveBeenCalled()
-  })
-
-  it('respects animation preferences in createInViewAnimation', () => {
-    // Mock reduced motion
-    window.matchMedia = vi.fn().mockImplementation(query => ({
-      matches: query === '(prefers-reduced-motion: reduce)',
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }))
-
-    const { result } = renderHook(() => useAnimations())
-    const mockElement = document.createElement('div')
-
-    act(() => {
-      result.current.createInViewAnimation(mockElement, 'slide-in')
-    })
-
-    // Should not create intersection observer when animations are disabled
-    expect(result.current.isAnimationsEnabled).toBe(false)
-  })
-
-  it('handles typewriter animation cancellation', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    act(() => {
-      result.current.createTypewriterAnimation('Hello World', 50)
-    })
-
-    // Start another animation to cancel the first
-    act(() => {
-      result.current.createTypewriterAnimation('New Text', 50)
-    })
-
-    expect(mockCAF).toHaveBeenCalled()
-  })
-
-  it('updates visibility state correctly', () => {
-    const { result } = renderHook(() => useAnimations())
-
-    // Initially not visible
-    expect(result.current.isVisible).toBe(false)
-
-    // Mock intersection observer callback
-    const mockCallback = mockIntersectionObserver.mock.calls[0]?.[0]
-    
-    if (mockCallback) {
-      act(() => {
-        mockCallback([{ isIntersecting: true }])
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 150))
       })
 
-      expect(result.current.isVisible).toBe(true)
-    }
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    it('provides start and stop loading methods', () => {
+      const { result } = renderHook(() => useLoadingState(100))
+
+      expect(typeof result.current.startLoading).toBe('function')
+      expect(typeof result.current.stopLoading).toBe('function')
+
+      act(() => {
+        result.current.stopLoading()
+      })
+
+      expect(result.current.isLoading).toBe(false)
+
+      act(() => {
+        result.current.startLoading()
+      })
+
+      expect(result.current.isLoading).toBe(true)
+    })
+  })
+
+  describe('useCounterAnimation', () => {
+    it('provides counter animation functionality', () => {
+      const { result } = renderHook(() => useCounterAnimation(100, 1000, 0))
+
+      expect(result.current.count).toBe(0)
+      expect(result.current.isAnimating).toBe(false)
+      expect(typeof result.current.animate).toBe('function')
+    })
+
+    it('animates counter when animate is called', () => {
+      const { result } = renderHook(() => useCounterAnimation(100, 50, 0))
+
+      act(() => {
+        result.current.animate()
+      })
+
+      expect(result.current.isAnimating).toBe(true)
+    })
+  })
+
+  describe('useTypewriter', () => {
+    it('types text character by character', async () => {
+      const { result } = renderHook(() => useTypewriter('Hello', 10))
+
+      expect(result.current.displayedText).toBe('')
+      expect(result.current.isComplete).toBe(false)
+
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 60))
+      })
+
+      expect(result.current.displayedText.length).toBeGreaterThan(0)
+    })
+
+    it('marks as complete when typing is done', async () => {
+      const { result } = renderHook(() => useTypewriter('Hi', 10))
+
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 50))
+      })
+
+      expect(result.current.isComplete).toBe(true)
+      expect(result.current.displayedText).toBe('Hi')
+    })
+  })
+
+  describe('useScrollProgress', () => {
+    it('tracks scroll progress', () => {
+      const { result } = renderHook(() => useScrollProgress())
+      expect(result.current).toBe(0)
+    })
+
+    it('updates on scroll events', () => {
+      Object.defineProperty(document.documentElement, 'scrollHeight', {
+        writable: true,
+        value: 2000,
+      })
+      Object.defineProperty(window, 'innerHeight', {
+        writable: true,
+        value: 800,
+      })
+      Object.defineProperty(window, 'scrollY', {
+        writable: true,
+        value: 600,
+      })
+
+      const { result } = renderHook(() => useScrollProgress())
+
+      act(() => {
+        window.dispatchEvent(new Event('scroll'))
+      })
+
+      expect(result.current).toBe(0.5) // 600 / (2000 - 800) = 0.5
+    })
+  })
+
+  describe('useInView', () => {
+    it('provides ref and visibility state', () => {
+      const { result } = renderHook(() => useInView())
+
+      expect(result.current.ref).toBeDefined()
+      expect(result.current.isInView).toBe(false)
+    })
+
+    it('observes element when ref is set', () => {
+      const { result } = renderHook(() => useInView())
+
+      const mockElement = document.createElement('div')
+
+      act(() => {
+        if (result.current.ref.current !== mockElement) {
+          Object.defineProperty(result.current.ref, 'current', {
+            writable: true,
+            value: mockElement,
+          })
+        }
+      })
+
+      expect(mockIntersectionObserver).toHaveBeenCalled()
+    })
   })
 })
