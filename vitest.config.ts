@@ -25,8 +25,6 @@ export default defineConfig({
       ],
       // Ensure DOM testing library works in browser mode
       isolate: true,
-      // Setup files for browser mode
-      setupFiles: './tests/setup.ts',
     },
 
     coverage: {
