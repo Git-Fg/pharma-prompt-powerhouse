@@ -1,16 +1,15 @@
 import type { LucideIcon } from 'lucide-react'
 // src/lib/navigation.ts
-import { Home } from 'lucide-react'
-import { getIcon } from './icon-loader'
+import { BookOpen, Brain, ExternalLink, Home, Shield, Target } from 'lucide-react'
 
 // Type-safe icon mapping for navigation
 const navigationIcons: Record<string, LucideIcon> = {
   Home,
-  Target: getIcon('Target') as LucideIcon,
-  BookOpen: getIcon('BookOpen') as LucideIcon,
-  ExternalLink: getIcon('ExternalLink') as LucideIcon,
-  Brain: getIcon('Brain') as LucideIcon,
-  Shield: getIcon('Shield') as LucideIcon,
+  Target,
+  BookOpen,
+  ExternalLink,
+  Brain,
+  Shield,
 }
 
 // =================================================================
@@ -152,7 +151,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Accueil',
     href: '/',
-    icon: navigationIcons.Home,
+    icon: navigationIcons.Home!,
     section: 'main',
     description: 'Page d\'accueil du site',
     showInMobileNav: true,
@@ -160,7 +159,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Par où commencer ?',
     href: '/par-ou-commencer',
-    icon: navigationIcons.Target,
+    icon: navigationIcons.Target!,
     section: 'main',
     description: 'Guide de démarrage pour débuter avec l\'IA',
     showInMobileNav: true,
@@ -168,7 +167,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Workflows Stratégiques',
     href: '/workflows',
-    icon: navigationIcons.BookOpen,
+    icon: navigationIcons.BookOpen!,
     section: 'main',
     description: 'Méthodes complètes pour vos cas d\'usage',
     showInMobileNav: true,
@@ -176,7 +175,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'L\'Arsenal IA',
     href: '/l-arsenal-ia',
-    icon: navigationIcons.ExternalLink,
+    icon: navigationIcons.ExternalLink!,
     section: 'main',
     description: 'Comparaison d\'outils avec mon retour d\'expérience',
     showInMobileNav: true,
@@ -184,14 +183,14 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Concepts',
     href: '/concepts',
-    icon: navigationIcons.Brain,
+    icon: navigationIcons.Brain!,
     section: 'main',
     description: 'Définitions claires pour comprendre l\'IA',
   },
   {
     name: 'Confidentialité',
     href: '/guides/confidentialite-securite',
-    icon: navigationIcons.Shield,
+    icon: navigationIcons.Shield!,
     section: 'legal',
     description: 'Guide de sécurité et confidentialité',
   },
