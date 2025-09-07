@@ -16,6 +16,9 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.55.0-noble
+      options: --ipc=host
 
     steps:
       - name: Checkout code
@@ -29,9 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Playwright browsers for Vitest Browser Mode
-        run: npx playwright install --with-deps chromium
 
       - name: Run validation (lint, typecheck, test)
         run: npm run validate
