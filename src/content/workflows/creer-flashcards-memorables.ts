@@ -30,13 +30,13 @@ export const workflow = {
           image: '/images/objectifs/fiche-revision-avant.png',
           title: 'Flashcard Passive Traditionnelle',
           description: 'Simple paire terme/définition qui teste seulement la reconnaissance.',
-          alt: 'Flashcard traditionnelle recto verso avec terme et définition simple'
+          alt: 'Flashcard traditionnelle recto verso avec terme et définition simple',
         },
         {
           image: '/images/objectifs/flashcards-apres.png',
-          title: 'Flashcard Active Moderne', 
+          title: 'Flashcard Active Moderne',
           description: 'Flashcard avec scénario clinique qui force l\'application et la réflexion.',
-          alt: 'Flashcard interactive avec cas clinique et questions d\'application'
+          alt: 'Flashcard interactive avec cas clinique et questions d\'application',
         },
       ],
     },

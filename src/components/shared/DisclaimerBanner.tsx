@@ -39,8 +39,8 @@ export function DisclaimerBanner({ type = 'all', compact = false }: DisclaimerBa
 
   if (compact) {
     return (
-      <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20 dark:border-orange-800/50">
-        <CardContent className="p-4">
+      <Card padding="sm" className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20 dark:border-orange-800/50">
+        <CardContent>
           <div className="flex items-start gap-3">
             <AlertTriangle className="size-5 text-orange-600 flex-shrink-0 mt-0.5" />
             <div className="space-y-2">

@@ -1,10 +1,9 @@
 import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
-import type { EnrichedConcept, EnrichedGuide, EnrichedWorkflow } from '@/lib/content-schema'
 import { ArrowRight } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
-import { FilterableContentClient } from '@/components/layout/FilterableContentClient'
+import { FilterableContentList } from '@/components/shared/FilterableContentList'
 import Button from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
@@ -15,19 +14,7 @@ export interface CollectionPageProps {
   type: CollectionType
   title: string
   description: string
-  contentMaxWidth?: string
   children?: React.ReactNode
-}
-
-export interface FilterableContentClientProps {
-  items: (EnrichedConcept | EnrichedGuide | EnrichedWorkflow)[]
-  type: CollectionType
-  searchPlaceholder: string
-  showCategoryFilter: boolean
-  showDifficultyFilter: boolean
-  gridClassName?: string
-  emptyMessage?: string
-  emptyTitle?: string
 }
 
 export function getCollectionStats(type: CollectionType): StatCardProps[] {
@@ -123,7 +110,7 @@ export function getCollectionConfig(type: CollectionType) {
   }
 }
 
-export function CollectionPage({ type, title, description, contentMaxWidth, children }: CollectionPageProps) {
+export function CollectionPage({ type, title, description, children }: CollectionPageProps) {
   const stats = getCollectionStats(type)
   const items = getCollectionItems(type)
   const config = getCollectionConfig(type)
@@ -133,9 +120,8 @@ export function CollectionPage({ type, title, description, contentMaxWidth, chil
       title={title}
       description={description}
       stats={stats}
-      contentMaxWidth={contentMaxWidth as 'sm' | 'lg' | 'xl' | 'md' | '2xl' | '4xl' | '6xl' | '7xl' | 'full' | undefined}
     >
-      <FilterableContentClient
+      <FilterableContentList
         items={items}
         type={type}
         searchPlaceholder={config.searchPlaceholder}

@@ -39,13 +39,13 @@ export const workflow = {
           image: '/images/objectifs/cas-clinique-avant.png',
           title: 'Approche Traditionnelle : Solution Directe',
           description: 'L\'IA donne la solution complète, l\'étudiant passe en mode passif et développe un faux sentiment de compétence.',
-          alt: 'IA donnant directement une solution complète à un cas clinique'
+          alt: 'IA donnant directement une solution complète à un cas clinique',
         },
         {
           image: '/images/objectifs/cas-clinique-apres.png',
-          title: 'Approche Socratique : Dialogue Guidé', 
+          title: 'Approche Socratique : Dialogue Guidé',
           description: 'L\'IA pose des questions ciblées, l\'étudiant développe son raisonnement clinique de manière active.',
-          alt: 'IA agissant comme tuteur socratique avec des questions progressives'
+          alt: 'IA agissant comme tuteur socratique avec des questions progressives',
         },
       ],
     },

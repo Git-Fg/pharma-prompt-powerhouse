@@ -28,20 +28,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint:fix` - Run ESLint and auto-fix issues
 - `npm run typecheck` - Run TypeScript type checking
 
-### Testing
-- `npm run test` - Run all tests with Vitest
+### Testing (Vitest Browser Mode)
+- `npm run test` - Run all tests in Browser Mode (144 tests)
 - `npm run test:coverage` - Run tests with coverage report
-- `npm run test:unit` - Run unit tests only
-- `npm run test:integration` - Run integration tests only
-- `npm run test:component` - Run component tests only
-- `npm run test:e2e` - Run Playwright E2E tests
+- `npm run test:unit` - Run unit tests only (`tests/unit/`)
+- `npm run test:integration` - Run integration tests only (`tests/integration/`)
+- `npm run test:component` - Run component tests only (`tests/component/`)
+- `npm run test:browser` - Run tests in Browser Mode (alias for `npm run test`)
+- `npm run test:ui` - Run tests with Vitest UI interface
 
 ### Content Management
 - `npm run content:prepare` - Generate valid slugs for content
 - `npm run content:validate-links` - Validate content links
 
 ### Validation
-- `npm run validate` - Run all validation (lint + typecheck + test)
+- `npm run validate` - Run all validation with auto-fix (lint:fix + typecheck + test:browser)
 
 ### Maintenance
 - `npm run cleanreinstall` - Clean reinstall dependencies
@@ -61,7 +62,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Next.js 15** with App Router and React 19
 - **TypeScript** with strict mode and Zod validation
 - **Tailwind CSS v4** with @theme inline and recipes
-- **Vitest** for testing (5-10x faster than Jest)
+- **Vitest Browser Mode** for unified testing with Playwright provider (3s execution, 144 tests)
 - **@antfu/eslint-config** with custom pharma rules
 
 ### Content Architecture
@@ -164,20 +165,20 @@ The project uses a custom TypeScript-based content system with:
 - **Style**: 2 spaces, single quotes, no semicolons (modern 2025 style)
 - **Performance**: Rules optimized for React 19 Compiler and modern best practices
 
-### Testing (Vitest)
-- **Test Framework**: Exclusively standardize on Vitest. Completely remove Jest.
-- **Configuration**: Use standard configuration for Next.js with aliases and `globals` mode.
-- **Test Scripts**: Configure scripts: `"test": "vitest"`, `"test:watch": "vitest"`.
-- **Best Practices**: Test behavior, not implementation. Use `@testing-library/react`.
+### Testing (Vitest Browser Mode)
 
-### E2E Testing
+**Unified Testing Architecture**
+- **Test Framework**: Exclusively standardize on Vitest Browser Mode. Completely removed Jest and Playwright E2E.
+- **Configuration**: Modern Browser Mode configuration with Playwright provider and Chromium instances.
+- **Test Scripts**: Configure scripts: `"test": "vitest"`, `"test:browser"` for browser-specific testing.
+- **Best Practices**: Test behavior, not implementation. Use `@testing-library/react` with browser environment.
 
-**Playwright.js (JavaScript Library)**
-- For automated E2E tests written in code
-- Scripts in `tests/e2e/`
-- Executed with `npm run test:e2e`
-- Automated tests for CI/CD pipelines
-- Critical user flow validation
+**Browser Mode Implementation**
+- **Provider**: Playwright with Chromium for realistic browser testing
+- **Headless Mode**: Automated CI/CD testing with `headless: true`
+- **Performance**: ~3 second execution time with 144 tests passing
+- **Environment**: Full browser globals access (window, document, etc.)
+- **Coverage**: Comprehensive testing across unit, component, and integration levels
 
 ---
 
@@ -214,7 +215,7 @@ Context7 is an MCP AI Agent tool that provides up-to-date knowledge on developme
 **Development Integration**
 - **Decision Support**: Use Context7 to validate architectural and technical choices
 - **Continuous Learning**: Consult Context7 regularly to learn new practices
-- **Complex Problem Resolution**: Combine Context7 with other tools (Playwright MCP, code analysis)
+- **Complex Problem Resolution**: Combine Context7 with other tools (code analysis)
 - **Quality Assurance**: Use Context7 as reference for code reviews and optimization
 
 ### shadcn/ui
@@ -343,10 +344,21 @@ The project includes custom ESLint rules in `tools/eslint-plugin-pharma/`:
 
 ## **Testing Philosophy**
 
-- **Unit Tests**: For utility functions and hooks
-- **Component Tests**: For UI components
-- **Integration Tests**: For content loading and validation
-- **E2E Tests**: For critical user flows
+**Vitest Browser Mode Testing Strategy**
+- **Unit Tests**: For utility functions and hooks in `tests/unit/`
+- **Component Tests**: For UI components in `tests/component/`
+- **Integration Tests**: For content loading and validation in `tests/integration/`
+- **Browser Environment**: All tests run in realistic browser environment with Playwright provider
+- **Performance Focus**: Fast execution (~3s) with comprehensive coverage (144 tests)
+- **No E2E Testing**: Removed Playwright E2E tests in favor of unified Browser Mode approach
+
+**Testing Configuration Details**
+- **Browser Mode**: Enabled with `browser.enabled: true` and Playwright provider
+- **Headless Execution**: Automated CI/CD with `headless: true`
+- **Chromium Instances**: Single browser instance for consistent testing
+- **TypeScript References**: Browser mode matchers and provider types in `tests/setup.ts`
+- **Mocking Strategy**: Modern `{ spy: true }` mocking and proper React hooks mocking
+- **Auto-Fix Validation**: `npm run validate` includes automatic linting fixes
 
 ---
 
@@ -378,7 +390,7 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Justify all `any` type usage with descriptive ESLint disable comments explaining why it's unavoidable
 - Use test-specific ESLint rules to maintain code quality while allowing flexibility in tests
 - Wrap Lucide React components in div elements when used in server components to prevent serialization issues
-- Use Playwright.js (library) for automated E2E tests in CI/CD pipelines
+- Use Vitest Browser Mode for automated browser tests in CI/CD pipelines
 - Use Context7 to validate architectural choices and get recommendations on modern development best practices
 - Consult Context7 when encountering complex technical problems or important design decisions
 - Provide detailed context to Context7 to get relevant and project-appropriate responses

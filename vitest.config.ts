@@ -5,11 +5,26 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'jsdom', // Fallback for pure unit tests
     setupFiles: './tests/setup.ts',
     include: ['tests/**/*.{test,spec}.{ts,tsx}'],
-    exclude: ['tests/e2e/**'],
     reporters: 'default',
+
+    // ✅ Modern Browser Mode Configuration (2025)
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      headless: true,
+      instances: [
+        {
+          browser: 'chromium',
+          launch: {
+            headless: true,
+          },
+        },
+      ],
+    },
+
     coverage: {
       reporter: ['text', 'json', 'html'],
       exclude: [

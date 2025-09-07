@@ -28,7 +28,6 @@ export default function ExternalToolsPage() {
       title="L'Arsenal IA 2025"
       description="Mon guide personnel des outils IA pour les étudiants en pharmacie"
       stats={stats}
-      contentMaxWidth="7xl"
     >
       {/* Comparative Table */}
       <Card>
