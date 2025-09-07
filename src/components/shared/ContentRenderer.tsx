@@ -29,12 +29,17 @@ function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`)
 }
 
-function BlockSwitch({ block, index, currentItem }: { block: ContentBlock, index: number, currentItem?: AnyEnrichedContent }) {
+function BlockSwitch({ block, index, currentItem, enableAutoGlossary = true }: { 
+  block: ContentBlock, 
+  index: number, 
+  currentItem?: AnyEnrichedContent,
+  enableAutoGlossary?: boolean 
+}) {
   const testId = generateContentTestId(block, index)
 
   switch (block.type) {
     case 'markdown':
-      return <MarkdownRenderer content={block.content} />
+      return <MarkdownRenderer content={block.content} enableAutoGlossary={enableAutoGlossary} />
     case 'alert':
       return (
         <Alert
@@ -44,7 +49,7 @@ function BlockSwitch({ block, index, currentItem }: { block: ContentBlock, index
         >
           {typeof block.title === 'string' && <AlertTitle>{block.title}</AlertTitle>}
           <AlertDescription>
-            <MarkdownRenderer content={block.content} />
+            <MarkdownRenderer content={block.content} enableAutoGlossary={enableAutoGlossary} />
           </AlertDescription>
         </Alert>
       )
@@ -73,7 +78,7 @@ function BlockSwitch({ block, index, currentItem }: { block: ContentBlock, index
             {block.description && <CardDescription>{block.description}</CardDescription>}
           </CardHeader>
           <CardContent>
-            <MarkdownRenderer content={block.content} />
+            <MarkdownRenderer content={block.content} enableAutoGlossary={enableAutoGlossary} />
           </CardContent>
         </Card>
       )
@@ -307,7 +312,15 @@ function BlockSwitch({ block, index, currentItem }: { block: ContentBlock, index
 
 // Suppression du code dupliqué et conservation du switch exhaustif
 
-export function ContentRenderer({ content, currentItem }: { content: ContentBlock[], currentItem?: AnyEnrichedContent }) {
+export function ContentRenderer({ 
+  content, 
+  currentItem, 
+  enableAutoGlossary = true 
+}: { 
+  content: ContentBlock[], 
+  currentItem?: AnyEnrichedContent,
+  enableAutoGlossary?: boolean 
+}) {
   if (!content || content.length === 0)
     return null
 
@@ -318,7 +331,7 @@ export function ContentRenderer({ content, currentItem }: { content: ContentBloc
         const blockKey = 'id' in block && typeof block.id === 'string'
           ? block.id
           : `${block.type}-${index}`
-        return <BlockSwitch key={`content-${blockKey}`} block={block} index={index} currentItem={currentItem} />
+        return <BlockSwitch key={`content-${blockKey}`} block={block} index={index} currentItem={currentItem} enableAutoGlossary={enableAutoGlossary} />
       })}
     </>
   )
