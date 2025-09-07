@@ -45,10 +45,15 @@ interface RelatedItem {
 // Interface pour les types de base enrichis
 type BaseContentItem = BaseGuide | BaseWorkflow | BaseConcept | BaseExternalTool
 
-// Cache configuration - only available server-side
+// Cache configuration - only available server-side and in development
 function getCacheConfig() {
   if (typeof window !== 'undefined')
     return null
+
+  // Désactiver le cache en production et dans les environnements serverless
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return null
+  }
 
   return {
     CACHE_DIR: path?.join(process.cwd(), '.content-cache'),
@@ -83,17 +88,30 @@ interface CacheManifest {
 }
 
 /**
- * S'assure que le répertoire de cache existe
+ * S'assure que le répertoire de cache existe (développement uniquement)
+ * En production/serverless, le cache est désactivé car le système de fichiers est en lecture seule
  */
 function ensureCacheDir(): boolean {
   const config = getCacheConfig()
   if (!config || !mkdirSync || !existsSync)
     return false
 
-  if (!existsSync(config.CACHE_DIR)) {
-    mkdirSync(config.CACHE_DIR, { recursive: true })
+  // Désactiver le cache en production et dans les environnements serverless
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return false
   }
-  return true
+
+  try {
+    if (!existsSync(config.CACHE_DIR)) {
+      mkdirSync(config.CACHE_DIR, { recursive: true })
+    }
+    return true
+  }
+  catch (error) {
+    // En cas d'erreur de création du cache, continuer sans cache
+    console.warn('⚠️ Could not create cache directory, continuing without cache:', error)
+    return false
+  }
 }
 
 interface ContentData {
@@ -106,10 +124,10 @@ interface ContentData {
 export function loadContent(): ContentData {
   const config = getCacheConfig()
 
-  // S'assurer que le répertoire de cache existe (server-side only)
+  // S'assurer que le répertoire de cache existe (développement uniquement)
   const cacheEnabled = ensureCacheDir()
 
-  // --- LOGIQUE DE CACHE INCRÉMENTAL (Server-side only) ---
+  // --- LOGIQUE DE CACHE INCRÉMENTAL (Développement uniquement) ---
   if (cacheEnabled && config && readFileSync && existsSync && writeFileSync) {
     let cachedManifest: CacheManifest = {}
     try {
@@ -146,6 +164,10 @@ export function loadContent(): ContentData {
 
     // eslint-disable-next-line no-console -- Log de debugging pour le chargement de contenu
     console.log('🔥 Content cache miss or outdated. Rebuilding content...')
+  }
+  else if (process.env.NODE_ENV === 'production') {
+    // eslint-disable-next-line no-console -- Log informatif pour la production
+    console.log('🚀 Production mode: Loading content without cache.')
   }
 
   // --- LOGIQUE EXISTANTE OPTIMISÉE (O(N)) ---
@@ -253,7 +275,7 @@ export function loadContent(): ContentData {
     externalTools,
   }
 
-  // --- ÉCRITURE DU NOUVEAU CACHE (Server-side only) ---
+  // --- ÉCRITURE DU NOUVEAU CACHE (Développement uniquement) ---
   if (cacheEnabled && config && writeFileSync) {
     try {
       const allContentString = JSON.stringify({
@@ -275,8 +297,8 @@ export function loadContent(): ContentData {
       // eslint-disable-next-line no-console -- Log de debugging pour le chargement de contenu
       console.log('✅ Content cache updated successfully.')
     }
-    catch {
-      console.warn('⚠️ Could not write to cache, continuing without cache.')
+    catch (error) {
+      console.warn('⚠️ Could not write to cache, continuing without cache:', error)
     }
   }
 
