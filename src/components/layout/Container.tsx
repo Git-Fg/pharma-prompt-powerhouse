@@ -4,32 +4,26 @@ import { cn } from '@/lib/utils'
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
   className?: string
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl' | '7xl' | 'full'
+  variant?: 'collection' | 'detail' | 'full'
 }
 
 export function Container({
   children,
   className = '',
-  maxWidth = '7xl',
+  variant = 'detail',
   ...rest
 }: ContainerProps) {
-  const maxWidthClasses = {
-    'sm': 'text-content-width',
-    'md': 'text-content-width',
-    'lg': 'container-constrained',
-    'xl': 'container',
-    '2xl': 'container',
-    '4xl': 'container',
-    '6xl': 'container',
-    '7xl': 'container',
-    'full': 'max-w-full',
+  const variantClasses = {
+    collection: 'container-layout-collection',
+    detail: 'container-layout-detail',
+    full: 'max-w-full px-0',
   }
 
   return (
     <div
       className={cn(
-        'w-full container mx-auto px-4',
-        maxWidthClasses[maxWidth],
+        'w-full',
+        variantClasses[variant],
         className,
       )}
       {...rest}
@@ -39,7 +33,14 @@ export function Container({
   )
 }
 
-// Composant pour les sections avec marges standardisées
+/**
+ * Composant pour les sections avec marges standardisées
+ *
+ * Convention de rythme vertical :
+ * - `size="lg"` : Uniquement pour la toute première section "héro" d'une page
+ * - `size="md"` (défaut) : Pour toutes les sections de contenu principales qui se suivent
+ * - `size="sm"` : Pour les sections auxiliaires ou de conclusion
+ */
 interface SectionProps {
   children: ReactNode
   className?: string

@@ -185,15 +185,15 @@ npm run test:ui
 npm run lint
 npm run typecheck
 
-# Tests E2E (Playwright)
-npm run test:e2e
+# Tests en mode navigateur (Vitest Browser Mode)
+npm run test:browser
 ```
 
 ## 🔧 Outils de Développement
 
 ### **Modern Development Stack**
 - **Package Manager**: npm (default) / pnpm (local development)
-- **Testing**: Vitest avec jsdom (5-10x plus rapide que Jest)
+- **Testing**: Vitest avec Browser Mode (unifié, 5-10x plus rapide que Jest)
 - **Type Checking**: TypeScript strict avec validation Zod
 - **Linting**: @antfu/eslint-config avec règles React 19 et Next.js 15
 - **Content Validation**: Build-time validation avec schémas Zod

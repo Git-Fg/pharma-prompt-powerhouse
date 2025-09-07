@@ -17,7 +17,6 @@ interface CollectionPageLayoutProps {
   description: string
   stats?: StatCardProps[] // Tableau de props pour les cartes de statistiques
   headerClassName?: string
-  contentMaxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl' | '7xl' | 'full'
   children: React.ReactNode
 }
 
@@ -26,7 +25,6 @@ export function CollectionPageLayout({
   description,
   stats,
   headerClassName,
-  contentMaxWidth = '7xl',
   children,
 }: CollectionPageLayoutProps) {
   // Mapping des styles selon le type de statistique
@@ -45,7 +43,7 @@ export function CollectionPageLayout({
       <StaggeredItem>
         <div className={cn('border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60', headerClassName)}>
           <Section size="md">
-            <Container maxWidth="4xl">
+            <Container variant="detail">
               <div className="page-header">
                 <h1 className="page-title text-balance animate-fade-in">
                   {title}
@@ -86,7 +84,7 @@ export function CollectionPageLayout({
       {/* Contenu principal avec marges standardisées et animations */}
       <StaggeredItem>
         <Section>
-          <Container maxWidth={contentMaxWidth}>
+          <Container variant="collection">
             <ScrollAnimated variant="slideUp" className="animate-fade-in">
               {children}
             </ScrollAnimated>

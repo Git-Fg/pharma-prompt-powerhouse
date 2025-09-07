@@ -1,26 +1,116 @@
-import * as React from 'react'
+'use client'
 
+import { cva } from 'class-variance-authority'
+
+import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+interface CardContextValue {
+  padding: 'sm' | 'md' | 'lg'
+}
+
+const CardContext = React.createContext<CardContextValue | undefined>(undefined)
+
+function useCardContext() {
+  const context = React.use(CardContext)
+  if (!context) {
+    throw new Error('Card components must be used within a Card component')
+  }
+  return context
+}
+
+const cardVariants = cva(
+  'bg-card text-card-foreground rounded-lg border shadow-sm transition-all duration-200 ease-spring hover-lift',
+  {
+    variants: {
+      padding: {
+        sm: 'p-4',
+        md: 'p-6',
+        lg: 'p-8 md:p-10',
+      },
+    },
+    defaultVariants: {
+      padding: 'md',
+    },
+  },
+)
+
+const cardHeaderVariants = cva(
+  'flex flex-col space-y-1.5 @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+  {
+    variants: {
+      padding: {
+        sm: 'p-4',
+        md: 'p-6',
+        lg: 'p-8 md:p-10',
+      },
+    },
+    defaultVariants: {
+      padding: 'md',
+    },
+  },
+)
+
+const cardContentVariants = cva(
+  '',
+  {
+    variants: {
+      padding: {
+        sm: 'p-4 pt-0',
+        md: 'p-6 pt-0',
+        lg: 'p-8 md:p-10 pt-0',
+      },
+    },
+    defaultVariants: {
+      padding: 'md',
+    },
+  },
+)
+
+const cardFooterVariants = cva(
+  'flex items-center [.border-t]:pt-6',
+  {
+    variants: {
+      padding: {
+        sm: 'p-4 pt-4',
+        md: 'p-6 pt-4',
+        lg: 'p-8 md:p-10 pt-6',
+      },
+    },
+    defaultVariants: {
+      padding: 'md',
+    },
+  },
+)
+
+interface CardProps extends React.ComponentProps<'div'> {
+  padding?: 'sm' | 'md' | 'lg'
+}
+
+function Card({ className, padding = 'md', children, ...props }: CardProps) {
   return (
-    <div
-      data-slot="card"
-      className={cn(
-        'bg-card text-card-foreground rounded-lg border shadow-sm transition-all duration-200 ease-spring hover-lift',
-        className,
-      )}
-      {...props}
-    />
+    <CardContext.Provider value={{ padding }}>
+      <div
+        data-slot="card"
+        className={cn(
+          cardVariants({ padding }),
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    </CardContext.Provider>
   )
 }
 
 function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
+  const { padding } = useCardContext()
   return (
     <div
       data-slot="card-header"
       className={cn(
-        'flex flex-col space-y-1.5 p-6 @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        cardHeaderVariants({ padding }),
         className,
       )}
       {...props}
@@ -62,20 +152,22 @@ function CardAction({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
+  const { padding } = useCardContext()
   return (
     <div
       data-slot="card-content"
-      className={cn('p-6 pt-0', className)}
+      className={cn(cardContentVariants({ padding }), className)}
       {...props}
     />
   )
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
+  const { padding } = useCardContext()
   return (
     <div
       data-slot="card-footer"
-      className={cn('flex items-center p-6 pt-4 [.border-t]:pt-6', className)}
+      className={cn(cardFooterVariants({ padding }), className)}
       {...props}
     />
   )

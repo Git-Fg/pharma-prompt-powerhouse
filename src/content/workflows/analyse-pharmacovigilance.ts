@@ -24,13 +24,13 @@ export const workflow = {
           image: '/images/objectifs/recherche-biblio-avant.png',
           title: 'Approche Risquée : Question Directe',
           description: 'Demander directement à l\'IA si un médicament cause un effet, sans cadre méthodologique.',
-          alt: 'Question directe à l\'IA sur la causalité sans structure d\'analyse'
+          alt: 'Question directe à l\'IA sur la causalité sans structure d\'analyse',
         },
         {
           image: '/images/objectifs/recherche-biblio-apres.png',
-          title: 'Approche Sécurisée : Comité d\'Experts', 
+          title: 'Approche Sécurisée : Comité d\'Experts',
           description: 'Système multi-agents avec perspectives contradictoires pour une analyse nuancée.',
-          alt: 'Système multi-agents simulant un comité d\'experts en pharmacovigilance'
+          alt: 'Système multi-agents simulant un comité d\'experts en pharmacovigilance',
         },
       ],
     },

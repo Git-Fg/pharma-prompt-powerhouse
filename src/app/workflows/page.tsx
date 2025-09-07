@@ -6,7 +6,6 @@ export default function WorkflowsPage() {
       type="workflows"
       title="Workflows Stratégiques"
       description="Mes méthodes éprouvées pour utiliser l'IA efficacement dans vos études. Chaque workflow est une étude de cas personnelle avec ma stratégie pas-à-pas."
-      contentMaxWidth="6xl"
     />
   )
 }

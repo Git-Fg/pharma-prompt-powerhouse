@@ -205,29 +205,30 @@
 </eslint_rules>
 
 <testing_rules>
-**Tests (Vitest)**
-- **Framework de Test :** **Standardiser exclusivement sur Vitest**. Supprimer complètement Jest.
-- **Configuration :** Utiliser la configuration standard pour Next.js avec les alias et le mode `globals`.
-- **Scripts de Test :** Configurer les scripts : `"test": "vitest"`, `"test:watch": "vitest"`.
-- **Bonnes Pratiques :** Tester le comportement, pas l'implémentation. Utiliser `@testing-library/react`.
+**Tests (Vitest Browser Mode)**
+- **Framework de Test Unifié :** **Standardiser exclusivement sur Vitest Browser Mode**. Supprimer complètement Jest et Playwright E2E.
+- **Configuration Moderne :** Utiliser la configuration Browser Mode avec Playwright provider et instances Chromium.
+- **Scripts de Test :** Configurer les scripts : `"test": "vitest"`, `"test:browser"` pour le mode navigateur.
+- **Bonnes Pratiques :** Tester le comportement, pas l'implémentation. Utiliser `@testing-library/react` avec environnement navigateur.
+- **Performance :** Exécution en ~3 secondes avec 144 tests passants dans un environnement navigateur réaliste.
 
-### Tests E2E : Deux Approches Complémentaires
+### Architecture de Test Unifiée
 
-**IMPORTANT : Deux types de "Playwright" dans ce projet**
+**IMPORTANT : Migration vers Vitest Browser Mode**
+- **Suppression de Playwright E2E :** Les tests E2E Playwright.js ont été supprimés au profit de Vitest Browser Mode
+- **Tests Unifiés :** Tous les tests (unit, component, integration) s'exécutent maintenant dans le même environnement navigateur
+- **Provider Playwright :** Utilisé comme provider pour Vitest Browser Mode, plus comme framework E2E séparé
+- **Performance Optimisée :** Exécution beaucoup plus rapide (~3s vs temps E2E précédents) avec meilleure couverture
 
-1. **Playwright.js (Librairie JavaScript)** : Pour les tests E2e automatisés écrits en code
-   - Scripts dans `tests/e2e/`
-   - Exécuté avec `npm run test:e2e`
-   - Tests automatisés pour CI/CD
-
-2. **Playwright MCP (Outils AI Agent)** : Pour l'interaction manuelle via AI Agent
-   - Outils avec préfixe `mcp__playwright__`
-   - Utilisation interactive pendant le développement
-   - Débogage visuel et validation en temps réel
+**Structure des Tests**
+- **Unit Tests (`tests/unit/`)** : Pour les utilitaires, hooks et logique métier
+- **Component Tests (`tests/component/`)** : Pour les composants React dans environnement navigateur
+- **Integration Tests (`tests/integration/`)** : Pour les flux d'intégration simplifiés
+- **Environnement Commun :** Tous les tests s'exécutent dans Chromium avec headless mode pour CI/CD
 
 ---
 
-**Outils MCP Playwright (AI Agent)**
+**Outils MCP Playwright (AI Agent) - Pour Développement Interactif**
 - **Navigation :** `mcp__playwright__browser_navigate`, `mcp__playwright__browser_navigate_back`, `mcp__playwright__browser_tabs`
 - **Interaction :** `mcp__playwright__browser_click`, `mcp__playwright__browser_type`, `mcp__playwright__browser_fill_form`, `mcp__playwright__browser_select_option`
 - **Capture :** `mcp__playwright__browser_snapshot`, `mcp__playwright__browser_take_screenshot`, `mcp__playwright__browser_console_messages`
@@ -242,6 +243,7 @@
 - **Validation de responsive :** Tester rapidement différentes tailles d'écran
 - **Tests d'accessibilité manuels :** Analyser la structure sémantique via les snapshots
 - **Débogage de problèmes complexes :** Combinaison de console logs et interaction visuelle
+- **Complément Vitest Browser Mode :** Les outils MCP sont parfaits pour le débogage visuel pendant que Vitest gère les tests automatisés
 
 **Meilleures Pratiques - Playwright MCP (AI Agent)**
 - **Toujours commencer par un snapshot :** Utilisez `browser_snapshot` pour comprendre la structure avant d'interagir
@@ -260,20 +262,11 @@
 5. **Débogage :** Screenshots et logs console si nécessaire
 6. **Nettoyage :** `browser_close`
 
-**Workflow pour la Création de Tests E2E (Playwright.js)**
-1. **Exploration avec MCP :** Utilisez les outils MCP pour naviguer et explorer l'interface à tester
-2. **Analyse de structure :** `browser_snapshot` pour comprendre les sélecteurs et la hiérarchie des éléments
-3. **Simulation du flux :** Exécutez manuellement le scénario de test avec les outils MCP
-4. **Documentation :** Prenez des screenshots des étapes clés et notez les sélecteurs importants
-5. **Validation du comportement :** Vérifiez que le flux fonctionne comme attendu
-6. **Écriture du test :** Utilisez les informations collectées pour écrire le test Playwright.js automatisé
-7. **Vérification croisée :** Exécutez le test automatisé et comparez avec le comportement observé avec MCP
-
 **Intégration avec le Développement**
 - **Hot Reload :** Utilisez les outils MCP pendant le dev pour valider les changements en temps réel
-- **Complémentarité avec les tests automatisés :** Les outils MCP sont pour le développement interactif, Playwright.js pour les tests automatisés
+- **Complémentarité avec Vitest :** Les outils MCP sont pour le développement interactif, Vitest Browser Mode pour les tests automatisés
 - **Débogage avancé :** Combine interaction visuelle et analyse technique
-- **Aide à la création de tests :** Lors de la création/modification/correction de tests E2E (Playwright.js), utilisez toujours les outils Playwright MCP pour explorer l'interface, comprendre la structure des éléments, et valider le comportement avant d'écrire le code de test automatisé
+- **Aide au développement :** Utilisez les outils MCP pour explorer l'interface, comprendre la structure des éléments, et valider le comportement pendant le développement
 
 ---
 
@@ -337,8 +330,8 @@ DO justifier toute utilisation du type `any` avec des commentaires de désactiva
 DO utiliser des règles ESLint spécifiques aux tests pour maintenir la qualité du code tout en permettant de la flexibilité dans les tests.
 DO envelopper les composants Lucide React dans des éléments div lorsqu'ils sont utilisés dans des composants serveur pour éviter les problèmes de sérialisation.
 DO utiliser les outils Playwright MCP (AI Agent) pour le débogage visuel et la validation en temps réel pendant le développement.
-DO utiliser Playwright.js (librairie) pour les tests E2E automatisés dans CI/CD.
-DO toujours utiliser les outils Playwright MCP pour aider à la création, modification et correction des tests E2E Playwright.js (explorer l'interface, comprendre la structure des éléments, valider le comportement avant d'écrire le code de test).
+DO utiliser Vitest Browser Mode pour tous les tests automatisés (unit, component, integration) dans CI/CD.
+DO toujours utiliser les outils Playwright MCP pour le débogage visuel et l'exploration de l'interface pendant le développement, en complément de Vitest Browser Mode.
 DO utiliser Context7 pour valider les choix architecturaux et obtenir des recommandations sur les meilleures pratiques de développement modernes.
 DO consulter Context7 lorsque vous rencontrez des problèmes techniques complexes ou des décisions de conception importantes.
 DO fournir un contexte détaillé à Context7 pour obtenir des réponses pertinentes et adaptées au projet.
@@ -438,14 +431,14 @@ En cas de doute, se référer à la documentation officielle de React 19, Next.j
 Lors d'implémentation de refactorisation, modifications ou autre processus complexe, veille à TOUJOURS finaliser l'implémentation.
 Par exemple, si des fichiers contents sont à modifier, effectuer TOUJOURS l'implémentation en privilégiant l'édition manuelle, étape par étape des différents fichiers.
 
-A la fin du processus, effectue toujours une passe de vérification, suppression de code mort, test de lint, type et tests d'intégration/units, ainsi que des tests E2E automatisés avec Playwright.js (npm run test:e2e). Utilise les outils Playwright MCP (AI Agent) pour naviguer, vérifier les logs, prendre des screenshots, et analyser visuellement le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi des outils Playwright MCP et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace.
+A la fin du processus, effectue toujours une passe de vérification avec `npm run validate` qui exécute automatiquement le linting avec auto-fix, la vérification des types et tous les tests automatisés. Utilise les outils Playwright MCP (AI Agent) pour naviguer, vérifier les logs, prendre des screenshots, et analyser visuellement le contenu du projet, afin de toujours vérifier que l'ensemble des modifications ont été correctement et entièrement implémentées. Aide toi des outils Playwright MCP et des capacités de hot reload pour corriger en temps réel les problèmes de façon efficace.
 
 Fais en sorte de créer des comit de façon pertinente et structurée lors de ton processus.
 
 Aide toi de tes outils de façon extensive, par exemple :
 - **Outils GitHub :** Vérifier les commits, surveiller les commentaires, gérer les PRs
 - **Context7 :** Confirmer l'implémentation optimale selon les normes 2025 de modernité/simplicité, valider les choix architecturaux, résoudre des problèmes complexes, obtenir des recommandations d'experts
-- **Playwright MCP :** Vérifier visuellement que tout fonctionne correctement, déboguer en temps réel, aider à la création de tests E2E
+- **Playwright MCP :** Vérifier visuellement que tout fonctionne correctement, déboguer en temps réel, explorer l'interface pendant le développement
 - **Recherche complémentaire :** Effectuer des recherches approfondies lorsque nécessaire
 Combine ces outils de manière intelligente pour une approche de développement complète et robuste.
 
@@ -457,5 +450,5 @@ Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours
 
 Contrainte absolue : Tu DOIS structurer tes approches en plusieurs phases, avec plusieurs comit, mis à jour continuellement. N'hésite pas à ajouter des commentaires sur des commits pour préciser les incohérences/erreurs introduites, ou diverses informations complémentairs : tu as beaucoup d'outils github, utilise les de façon extensive et optimale. N'hésite JAMAIS à répondre à un commentaire, ajouter un commentaire ou editer un commentaire.
 
-Lorsque tu effectues des tests E2E avec Playwright.js, vérifie toujours que tu as bien installé/configuré le Playwright browser. Pour les outils MCP, le navigateur est géré automatiquement.
+Lorsque tu effectues des tests avec Vitest Browser Mode, le navigateur est géré automatiquement via la configuration Playwright provider. Les outils MCP fonctionnent indépendamment pour le débogage visuel.
 </copilot_contrainte>

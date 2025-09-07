@@ -1,8 +1,10 @@
+/// <reference types="@vitest/browser/matchers" />
+/// <reference types="@vitest/browser/providers/playwright" />
+
 import React from 'react'
 import { vi } from 'vitest'
-// Test setup file for Vitest
-// Global test configuration
-import '@testing-library/jest-dom'
+// Test setup file for Vitest Browser Mode
+// Global test configuration for modern browser testing
 
 // Mock ResizeObserver for components that use it (like cmdk)
 globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({

@@ -23,9 +23,9 @@ export default function HomePage() {
 
       {/* 1. HERO SECTION CORRIGÉE : Contenue dans une Card pour un impact visuel fort */}
       <Section size="lg">
-        <Container maxWidth="4xl">
+        <Container variant="detail">
           <StaggeredItem>
-            <Card className="p-6 md:p-10 text-center shadow-lg bg-card/80 backdrop-blur-sm">
+            <Card padding="lg" className="text-center shadow-lg bg-card/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="responsive-heading text-balance">
                   Bienvenue sur Pharma Prompt Powerhouse
@@ -48,11 +48,11 @@ export default function HomePage() {
       </Section>
 
       {/* 2. DISCLAIMERS SECTION : Unifiée avec des Cards pour la cohérence */}
-      <Section>
-        <Container maxWidth="6xl">
+      <Section size="md">
+        <Container variant="collection">
           <StaggeredItem>
             <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-              <Card className="p-4 flex items-start gap-3">
+              <Card padding="sm" className="flex items-start gap-3">
                 <Zap className="size-5 text-primary flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Performance</h3>
@@ -62,7 +62,7 @@ export default function HomePage() {
                 </div>
               </Card>
 
-              <Card className="p-4 flex items-start gap-3">
+              <Card padding="sm" className="flex items-start gap-3">
                 <AlertTriangle className="size-5 text-amber-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Fiabilité</h3>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 </div>
               </Card>
 
-              <Card className="p-4 flex items-start gap-3">
+              <Card padding="sm" className="flex items-start gap-3">
                 <Shield className="size-5 text-red-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Confidentialité</h3>
@@ -87,8 +87,8 @@ export default function HomePage() {
       </Section>
 
       {/* 3. QUICK ACCESS SECTION : Titre plus visible */}
-      <Section>
-        <Container maxWidth="6xl">
+      <Section size="md">
+        <Container variant="collection">
           <StaggeredItem>
             <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -151,8 +151,8 @@ export default function HomePage() {
       <Separator className="my-8 container mx-auto" />
 
       {/* 4. FEATURED WORKFLOWS : Titre plus engageant et structure de carte améliorée */}
-      <Section>
-        <Container maxWidth="6xl">
+      <Section size="md">
+        <Container variant="collection">
           <StaggeredItem>
             <div className="flex items-center justify-between mb-8">
               <h2 className="responsive-subheading">Workflows à la Une</h2>
@@ -202,10 +202,10 @@ export default function HomePage() {
       </Section>
 
       {/* 5. PERSONAL NOTE : Design unifié */}
-      <Section>
-        <Container maxWidth="4xl">
+      <Section size="sm">
+        <Container variant="detail">
           <StaggeredItem>
-            <Card className="bg-muted/50 border-dashed text-center p-6 md:p-8">
+            <Card padding="lg" className="bg-muted/50 border-dashed text-center">
               <Brain className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
               <p className="prose-personal-note container mx-auto">

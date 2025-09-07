@@ -17,7 +17,7 @@ export default function ParOuCommencerPage() {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
       <Section size="lg">
-        <Container maxWidth="4xl">
+        <Container variant="detail">
           <div className="flex flex-col items-center space-y-4">
             <Badge variant="outline" className="mb-4">
               Guide pour débutants
@@ -32,8 +32,8 @@ export default function ParOuCommencerPage() {
       </Section>
 
       {/* Étapes du parcours */}
-      <Section>
-        <Container maxWidth="4xl">
+      <Section size="md">
+        <Container variant="detail">
           <div className="space-y-8">
             {/* Étape 1 */}
             <Card className={contentCardVariants({ variant: 'concept' })}>
@@ -239,8 +239,8 @@ export default function ParOuCommencerPage() {
       </Section>
 
       {/* Call to action */}
-      <Section>
-        <Container maxWidth="4xl">
+      <Section size="sm">
+        <Container variant="detail">
           <div className="text-center">
             <div className="bg-muted p-6 rounded-lg">
               <h3 className="text-lg font-semibold mb-2">Prêt à commencer ?</h3>

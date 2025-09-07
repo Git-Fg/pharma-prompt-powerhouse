@@ -78,8 +78,8 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
       )
     case 'tabs':
       return (
-        <Card {...createTestIdProps(testId)} className="my-6">
-          <CardContent className="p-4">
+        <Card padding="sm" {...createTestIdProps(testId)} className="my-6">
+          <CardContent>
             <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value}>
               <TabsList className="grid w-full gap-1" style={{ gridTemplateColumns: `repeat(${block.tabs.length}, 1fr)` }}>
                 {block.tabs.map((tab: { value: string, title: string, content: ContentBlock[] }) => (

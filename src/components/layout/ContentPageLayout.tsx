@@ -14,7 +14,7 @@ interface ContentPageLayoutProps {
 export function ContentPageLayout({ item, children, prose = true }: ContentPageLayoutProps) {
   return (
     <Section>
-      <Container maxWidth="4xl">
+      <Container variant="detail">
         <BreadcrumbNavigation />
 
         <ContentHeader item={item} />
