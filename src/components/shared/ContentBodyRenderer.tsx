@@ -65,7 +65,7 @@ function ConceptBody({ item }: { item: AnyEnrichedContent }) {
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert">
-            <ContentRenderer content={item.content} currentItem={item} />
+            <ContentRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
           </div>
         </CardContent>
       </Card>
@@ -104,7 +104,7 @@ function GuideBody({ item }: { item: AnyEnrichedContent }) {
       )}
 
       {/* Contenu principal */}
-      <ContentRenderer content={guide.content} currentItem={item} />
+      <ContentRenderer content={guide.content} currentItem={item} enableAutoGlossary={false} />
 
       <Separator className="my-12" />
 
@@ -135,7 +135,7 @@ function WorkflowBody({ item }: { item: AnyEnrichedContent }) {
       )}
 
       {/* Contenu du workflow */}
-      <ContentRenderer content={workflow.content} currentItem={item} />
+      <ContentRenderer content={workflow.content} currentItem={item} enableAutoGlossary={false} />
 
       {/* Disclaimer Banner */}
       <div className="mt-16">
