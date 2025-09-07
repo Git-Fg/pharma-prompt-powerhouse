@@ -25,19 +25,29 @@ Le problème avec les comparaisons textuelles :
 - **Erreurs d'omission :** Certains aspects oubliés dans la comparaison`,
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale : Trop Simple',
-      content: `Au début, j'ai essayé de demander simplement :
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale : Trop Simple',
+              content: `Au début, j'ai essayé de demander simplement :
 
 > *"Compare les ISRS et les IRSN."*
 
 **Résultat :** Deux paragraphes de texte décrivant similitudes et différences, sans structure claire.`,
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Pourquoi ça ne marche pas',
-      content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Pourquoi ça ne marche pas',
+              content: `L'IA génère du texte libre sans structure imposée. Le résultat n'est ni visuel ni facilement mémorisable. Il faut reformater manuellement.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

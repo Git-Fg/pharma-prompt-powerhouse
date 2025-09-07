@@ -9,10 +9,8 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { MagneticHover } from '@/components/ui/css-animations'
 import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
-import {
-  formatEstimatedTime,
-  getContentUrl,
-} from '@/lib/ui-utils'
+import { getContentUrl } from '@/lib/navigation'
+import { formatEstimatedTime } from '@/lib/ui-utils'
 import { cn } from '@/lib/utils'
 
 interface WorkflowCardProps {

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { getContentTypeFromUrl, getContentUrl } from '@/lib/navigation'
 import {
   filterAndSortByRelevance,
   formatEstimatedTime,
@@ -7,8 +8,6 @@ import {
   getCategoryColor,
   getCategoryLabel,
   getConfidenceInfo,
-  getContentTypeFromUrl,
-  getContentUrl,
   getDifficultyLabel,
   getStarRatingProps,
   isValidCategory,

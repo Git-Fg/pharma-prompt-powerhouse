@@ -25,19 +25,29 @@ Les difficultés classiques :
 - **Oubli rapide :** Ce qui est mémorisé mécaniquement s'efface vite`,
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale : Trop Générique',
-      content: `Au début, j'ai essayé de demander simplement :
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale : Trop Générique',
+              content: `Au début, j'ai essayé de demander simplement :
 
 > *"Donne-moi un moyen de retenir les effets des bêta-bloquants."*
 
 **Résultat :** Une liste d'acronymes génériques et peu mémorables, sans personnalisation ni créativité.`,
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Pourquoi ça ne marche pas',
-      content: `L'IA propose des solutions "bateau" sans créativité. Les mnémoniques générés sont souvent artificiels et peu mémorables car ils ne s'adaptent pas à votre style d'apprentissage.`,
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Pourquoi ça ne marche pas',
+              content: `L'IA propose des solutions "bateau" sans créativité. Les mnémoniques générés sont souvent artificiels et peu mémorables car ils ne s'adaptent pas à votre style d'apprentissage.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

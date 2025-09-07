@@ -9,7 +9,7 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
-import { getContentUrl } from '@/lib/ui-utils'
+import { getContentUrl } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
 

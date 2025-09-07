@@ -47,20 +47,68 @@ export const guide = {
       ],
     },
     {
-      type: 'points',
-      title: 'Scénarios Concrets : Quel Outil pour Quelle Tâche ?',
-      points: [
+      type: 'tabs',
+      defaultValue: 'z-ai',
+      tabs: [
         {
-          title: 'Quand utiliser Z.AI (Plan-and-Solve) ?',
-          description: '**Scénario :** Vous devez faire une revue de littérature pour votre thèse sur un sujet que vous connaissez peu. **Pourquoi Z.AI ?** Son approche planifiée va structurer la recherche, explorer les sous-thèmes de manière logique et vous fournir une synthèse cohérente et globale.',
+          value: 'z-ai',
+          title: 'Z.AI',
+          content: [
+            {
+              type: 'card',
+              title: 'Le Stratège (Plan-and-Solve)',
+              content: `**Scénario idéal :** Vous devez faire une revue de littérature pour votre thèse sur un sujet que vous connaissez peu.
+
+**Pourquoi Z.AI ?**
+- **Approche planifiée** qui structure la recherche de manière logique
+- **Exploration systématique** des sous-thèmes
+- **Synthèse cohérente et globale** des informations trouvées
+- **Idéal** pour les recherches exploratoires complexes
+
+**Architecture :** Plan-and-Solve (Auto Think)
+**Risque principal :** Hallucination stratégique (vérifiez toujours son plan)`,
+            },
+          ],
         },
         {
-          title: 'Quand utiliser Perplexity (RAG Multi-Étapes) ?',
-          description: '**Scénario :** Vous entendez parler d\'un nouveau médicament et vous voulez rapidement savoir ce que sont les dernières études publiées. **Pourquoi Perplexity ?** Sa vitesse et son focus sur les sources récentes sont imbattables pour la veille factuelle et rapide.',
+          value: 'perplexity',
+          title: 'Perplexity',
+          content: [
+            {
+              type: 'card',
+              title: 'Le Sprinteur Itératif (RAG Multi-Étapes)',
+              content: `**Scénario idéal :** Vous entendez parler d\'un nouveau médicament et vous voulez rapidement savoir ce que sont les dernières études publiées.
+
+**Pourquoi Perplexity ?**
+- **Vitesse exceptionnelle** pour la recherche factuelle
+- **Focus sur les sources récentes** et pertinentes
+- **Veille scientifique ciblée** très efficace
+- **Synthèse rapide** d\'informations actualisées
+
+**Architecture :** RAG Multi-Étapes (Deep Research)
+**Risque principal :** Context drift (peut oublier le début de la question)`,
+            },
+          ],
         },
         {
-          title: 'Quand utiliser Claude (ReAct) ?',
-          description: '**Scénario :** Vous avez déjà sélectionné 5 études cliniques en PDF et vous voulez en extraire précisément le protocole, la population et les résultats pour les comparer. **Pourquoi Claude ?** Sa méthode ReAct est la plus fiable pour interagir avec des documents fournis, car il vérifie chaque étape d\'extraction.',
+          value: 'claude',
+          title: 'Claude',
+          content: [
+            {
+              type: 'card',
+              title: 'L\'Exécutant Prudent (ReAct)',
+              content: `**Scénario idéal :** Vous avez déjà sélectionné 5 études cliniques en PDF et vous voulez en extraire précisément le protocole, la population et les résultats pour les comparer.
+
+**Pourquoi Claude ?**
+- **Fiabilité maximale** pour interagir avec des documents fournis
+- **Vérification systématique** de chaque étape d\'extraction
+- **Contrôle précis** sur le processus d\'analyse
+- **Robustesse** dans les tâches documentaires
+
+**Architecture :** ReAct (Reason+Act avec Tool Use)
+**Risque principal :** Dépend entièrement de la qualité des documents fournis`,
+            },
+          ],
         },
       ],
     },

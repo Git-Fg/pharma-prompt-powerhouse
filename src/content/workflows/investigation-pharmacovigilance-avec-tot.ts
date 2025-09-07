@@ -35,15 +35,25 @@ export const workflow = {
       reason: 'Ce guide est une application directe et pratique du concept de Tree-of-Thought à un cas réel de pharmacie.',
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale',
-      content: 'Au début, j\'aurais demandé directement :\n\n> *"Analyse cette situation de pharmacovigilance et dis-moi quelle est la cause probable."*\n\n**Résultat :** Une réponse linéaire qui se concentre sur l\'hypothèse la plus évidente, sans exploration systématique des alternatives.',
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Pourquoi ça ne marche pas',
-      content: 'L\'IA, comme un humain, peut avoir des biais de confirmation. Elle va privilégier la première hypothèse plausible sans explorer méthodiquement les autres pistes.',
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale',
+              content: 'Au début, j\'aurais demandé directement :\n\n> *"Analyse cette situation de pharmacovigilance et dis-moi quelle est la cause probable."*\n\n**Résultat :** Une réponse linéaire qui se concentre sur l\'hypothèse la plus évidente, sans exploration systématique des alternatives.',
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Pourquoi ça ne marche pas',
+              content: 'L\'IA, comme un humain, peut avoir des biais de confirmation. Elle va privilégier la première hypothèse plausible sans explorer méthodiquement les autres pistes.',
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

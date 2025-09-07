@@ -19,15 +19,25 @@ export const workflow = {
       content: 'Quand j\'ai commencé à rédiger mon mémoire, j\'étais perdu dans la masse d\'informations disponibles. PubMed me donnait des centaines de résultats, mais je ne savais pas par où commencer ni comment évaluer la pertinence des articles.\n\n**Mes difficultés :**\n- Identifier les mots-clés pertinents\n- Trier les sources fiables des moins crédibles\n- Synthétiser des informations complexes et parfois contradictoires\n- Organiser ma bibliographie de façon logique',
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale : La Demande Directe',
-      content: 'Je demandais directement :\n\n> *"Trouve-moi des articles sur [mon sujet]"*\n\n**Résultat :** L\'IA me citait des références qu\'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.',
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Le risque des références inventées',
-      content: 'L\'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n\'existent pas. JAMAIS de recherche bibliographique sans vérification !',
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale : La Demande Directe',
+              content: 'Je demandais directement :\n\n> *"Trouve-moi des articles sur [mon sujet]"*\n\n**Résultat :** L\'IA me citait des références qu\'elle ne pouvait pas vérifier, avec parfois des erreurs de citation ou des articles inexistants.',
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Le risque des références inventées',
+              content: 'L\'IA peut "halluciner" des références bibliographiques qui semblent crédibles mais n\'existent pas. JAMAIS de recherche bibliographique sans vérification !',
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

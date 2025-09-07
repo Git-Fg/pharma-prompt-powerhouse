@@ -22,15 +22,25 @@ export const workflow = {
       content: 'La théorie, c\'est bien. La pratique, c\'est mieux. L\'un des plus grands défis pour les étudiants en pharmacie est de trouver suffisamment de cas cliniques variés pour s\'entraîner. L\'IA résout ce problème en devenant un générateur de scénarios inépuisable.',
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale : La Demande Générique',
-      content: 'Au début, j\'ai essayé de demander directement à l\'IA :\n\n> *"Fais-moi un cas clinique sur les interactions médicamenteuses."*\n\n**Résultat :** Des cas génériques, sans rapport avec mon niveau d\'étude, souvent trop simplistes ou au contraire trop complexes.',
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Pourquoi ça ne marche pas',
-      content: 'L\'IA n\'a aucun contexte sur votre niveau, vos objectifs pédagogiques spécifiques, ni sur les types de problèmes que vous devez maîtriser pour vos examens.',
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale : La Demande Générique',
+              content: 'Au début, j\'ai essayé de demander directement à l\'IA :\n\n> *"Fais-moi un cas clinique sur les interactions médicamenteuses."*\n\n**Résultat :** Des cas génériques, sans rapport avec mon niveau d\'étude, souvent trop simplistes ou au contraire trop complexes.',
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Pourquoi ça ne marche pas',
+              content: 'L\'IA n\'a aucun contexte sur votre niveau, vos objectifs pédagogiques spécifiques, ni sur les types de problèmes que vous devez maîtriser pour vos examens.',
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',
