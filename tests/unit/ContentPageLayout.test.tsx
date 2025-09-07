@@ -81,7 +81,7 @@ describe('contentPageLayout Component', () => {
     const section = container.querySelector('section')
     expect(section).toBeInTheDocument()
 
-    const containerDiv = container.querySelector('.container-layout-detail')
+    const containerDiv = container.querySelector('.container-layout-collection')
     expect(containerDiv).toBeInTheDocument()
   })
 

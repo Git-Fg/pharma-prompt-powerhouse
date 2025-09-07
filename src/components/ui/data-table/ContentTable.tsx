@@ -40,15 +40,15 @@ export function ContentTable({ headers, rows, caption, className = '' }: Content
   const renderMobileCard = (rowData: ContentTableData, index: number) => (
     <Card
       key={`mobile-row-${index}`}
-      className="p-4"
+      className="p-3 border-l-4 border-l-primary/20"
     >
       {rowData.cells.map((cell, cellIndex) => (
         <div
           // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cellules avec position unique
           key={`mobile-cell-${index}-${cellIndex}`}
-          className="mb-3 last:mb-0"
+          className="mb-2 last:mb-0"
         >
-          <div className="text-sm font-medium text-muted-foreground mb-1">
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
             {headers[cellIndex]}
           </div>
           <div className="text-sm leading-relaxed">
@@ -67,8 +67,8 @@ export function ContentTable({ headers, rows, caption, className = '' }: Content
         renderMobileCard={renderMobileCard}
         tableCaption={caption || undefined}
         showMobileHeader={true}
-        desktopClassName="overflow-x-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent"
-        mobileClassName="space-y-4"
+        desktopClassName="overflow-x-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent rounded-lg border"
+        mobileClassName="space-y-3"
       />
     </div>
   )
