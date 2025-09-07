@@ -77,3 +77,6 @@ public/sw*
 @ Gemini CLI
 .gemini
 gha-creds-*.json
+
+# Playwright MCP
+.playwright-mcp
