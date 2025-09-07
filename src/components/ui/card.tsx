@@ -12,7 +12,7 @@ interface CardContextValue {
 const CardContext = React.createContext<CardContextValue | undefined>(undefined)
 
 function useCardContext() {
-  const context = React.use(CardContext)
+  const context = React.useContext(CardContext)
   if (!context) {
     throw new Error('Card components must be used within a Card component')
   }
@@ -88,8 +88,9 @@ interface CardProps extends React.ComponentProps<'div'> {
 }
 
 function Card({ className, padding = 'md', children, ...props }: CardProps) {
+  const contextValue = React.useMemo(() => ({ padding }), [padding])
   return (
-    <CardContext.Provider value={{ padding }}>
+    <CardContext.Provider value={contextValue}>
       <div
         data-slot="card"
         className={cn(
