@@ -10,11 +10,33 @@ export const dynamic = 'force-dynamic'
 export default function ExternalToolsPage() {
   const tools = content.externalTools
 
-  // Calculate statistics
-  const totalTools = tools.length
-  const favoriteCount = tools.filter(t => t.isFavorite).length
-  const reviewedCount = tools.filter(t => t.personalReview).length
-  const freeCount = tools.filter(t => !t.freeVsPaidOffer || t.freeVsPaidOffer.includes('Gratuit')).length
+  // Calculate statistics with error handling
+  let totalTools = 0
+  let favoriteCount = 0
+  let reviewedCount = 0
+  let freeCount = 0
+
+  try {
+    totalTools = tools.length
+    favoriteCount = tools.filter(t => t.isFavorite).length
+    reviewedCount = tools.filter(t => t.personalReview).length
+    freeCount = tools.filter((t) => {
+      // Safe check for freeVsPaidOffer
+      if (!t.freeVsPaidOffer)
+        return true
+      if (typeof t.freeVsPaidOffer !== 'string')
+        return false
+      return t.freeVsPaidOffer.includes('Gratuit')
+    }).length
+  }
+  catch (error) {
+    console.error('Error calculating tool statistics:', error)
+    // Fallback values
+    totalTools = tools?.length || 0
+    favoriteCount = 0
+    reviewedCount = 0
+    freeCount = 0
+  }
 
   const stats: StatCardProps[] = [
     { value: totalTools, label: 'Outils testés', type: 'tools' },
