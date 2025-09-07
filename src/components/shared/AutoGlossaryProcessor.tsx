@@ -125,15 +125,24 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
         return node
       }
 
-      // Process children recursively
+      // Process children recursively - handle different types of children properly
       const props = node.props as { children?: React.ReactNode }
 
-      // Use alternatives to React.Children.map for better performance
-      const childrenProcessed = Array.isArray(props.children)
-        ? props.children.map((child, idx) => processNode(child, idx))
-        : props.children
-          ? processNode(props.children, 0)
-          : undefined
+      // Handle children more robustly
+      let childrenProcessed: React.ReactNode = undefined
+      
+      if (props.children !== undefined) {
+        if (Array.isArray(props.children)) {
+          childrenProcessed = props.children.map((child, idx) => processNode(child, idx))
+        } else if (React.isValidElement(props.children)) {
+          childrenProcessed = processNode(props.children, 0)
+        } else if (typeof props.children === 'string') {
+          childrenProcessed = processTextNode(props.children)
+        } else {
+          // For other types (numbers, booleans, etc.), leave as-is
+          childrenProcessed = props.children
+        }
+      }
 
       // Instead of cloneElement, create a new element with the same type and props
       return React.createElement(
@@ -150,17 +159,23 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     return node
   }, [processTextNode])
 
-  // Return unprocessed children during SSR
-  if (!shouldProcess) {
-    return <>{children}</>
-  }
-
-  // Process all children using modern React patterns
-  const processedChildren = Array.isArray(children)
-    ? children.map((child, idx) => processNode(child, idx))
-    : children
-      ? processNode(children, 0)
-      : undefined
+  // Process all children using modern React patterns with better type safety
+  const processedChildren = React.useMemo(() => {
+    if (!shouldProcess) return children
+    
+    if (!children) return undefined
+    
+    if (Array.isArray(children)) {
+      return children.map((child, idx) => processNode(child, idx))
+    } else if (React.isValidElement(children)) {
+      return processNode(children, 0)
+    } else if (typeof children === 'string') {
+      return processTextNode(children)
+    } else {
+      // For other types (numbers, booleans, etc.), return as-is
+      return children
+    }
+  }, [children, processNode, processTextNode, shouldProcess])
 
   return <>{processedChildren}</>
 }
