@@ -129,16 +129,19 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       const props = node.props as { children?: React.ReactNode }
 
       // Handle children more robustly
-      let childrenProcessed: React.ReactNode = undefined
-      
+      let childrenProcessed: React.ReactNode
+
       if (props.children !== undefined) {
         if (Array.isArray(props.children)) {
           childrenProcessed = props.children.map((child, idx) => processNode(child, idx))
-        } else if (React.isValidElement(props.children)) {
+        }
+        else if (React.isValidElement(props.children)) {
           childrenProcessed = processNode(props.children, 0)
-        } else if (typeof props.children === 'string') {
+        }
+        else if (typeof props.children === 'string') {
           childrenProcessed = processTextNode(props.children)
-        } else {
+        }
+        else {
           // For other types (numbers, booleans, etc.), leave as-is
           childrenProcessed = props.children
         }
@@ -161,17 +164,22 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
   // Process all children using modern React patterns with better type safety
   const processedChildren = React.useMemo(() => {
-    if (!shouldProcess) return children
-    
-    if (!children) return undefined
-    
+    if (!shouldProcess)
+      return children
+
+    if (!children)
+      return undefined
+
     if (Array.isArray(children)) {
       return children.map((child, idx) => processNode(child, idx))
-    } else if (React.isValidElement(children)) {
+    }
+    else if (React.isValidElement(children)) {
       return processNode(children, 0)
-    } else if (typeof children === 'string') {
+    }
+    else if (typeof children === 'string') {
       return processTextNode(children)
-    } else {
+    }
+    else {
       // For other types (numbers, booleans, etc.), return as-is
       return children
     }

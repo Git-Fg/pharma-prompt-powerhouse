@@ -42,20 +42,23 @@ export function MarkdownRenderer({ content, className, enableAutoGlossary = true
               [key: string]: unknown
             }
             const match = /language-(\w+)/.exec(className || '')
-            
+
             // More robust children handling for react-markdown
             let codeContent = ''
             if (typeof children === 'string') {
               codeContent = children
-            } else if (Array.isArray(children)) {
+            }
+            else if (Array.isArray(children)) {
               codeContent = children.join('')
-            } else if (children && typeof children === 'object') {
-              // Handle React elements and other object types
-              codeContent = React.Children.toArray(children).join('')
-            } else {
+            }
+            else if (children && typeof children === 'object') {
+              // Handle React elements and other object types safely
+              codeContent = String(children)
+            }
+            else {
               codeContent = String(children || '')
             }
-            
+
             return !inline && match
               ? (
                   <CodeBlock language={match[1]}>{codeContent.replace(/\n$/, '')}</CodeBlock>
