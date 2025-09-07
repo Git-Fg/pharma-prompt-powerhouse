@@ -35,12 +35,12 @@ export function MarkdownRenderer({ content, className, enableAutoGlossary = true
           a: ({ ...props }) => <a {...props} />, // Uses centralized .prose a styles
           code(props) {
             // Handle the complex props from react-markdown for code elements
+            // Type-safe props handling for react-markdown code elements
             const { inline, className, children, ...rest } = props as {
               inline?: boolean
               className?: string
               children?: React.ReactNode
-              [key: string]: unknown
-            }
+            } & Record<string, string | boolean | number | undefined>
             const match = /language-(\w+)/.exec(className || '')
 
             // More robust children handling for react-markdown
