@@ -29,11 +29,11 @@ function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`)
 }
 
-function BlockSwitch({ block, index, currentItem, enableAutoGlossary = true }: { 
-  block: ContentBlock, 
-  index: number, 
-  currentItem?: AnyEnrichedContent,
-  enableAutoGlossary?: boolean 
+function BlockSwitch({ block, index, currentItem, enableAutoGlossary = true }: {
+  block: ContentBlock
+  index: number
+  currentItem?: AnyEnrichedContent
+  enableAutoGlossary?: boolean
 }) {
   const testId = generateContentTestId(block, index)
 
@@ -312,14 +312,14 @@ function BlockSwitch({ block, index, currentItem, enableAutoGlossary = true }: {
 
 // Suppression du code dupliqué et conservation du switch exhaustif
 
-export function ContentRenderer({ 
-  content, 
-  currentItem, 
-  enableAutoGlossary = true 
-}: { 
-  content: ContentBlock[], 
-  currentItem?: AnyEnrichedContent,
-  enableAutoGlossary?: boolean 
+export function ContentRenderer({
+  content,
+  currentItem,
+  enableAutoGlossary = true,
+}: {
+  content: ContentBlock[]
+  currentItem?: AnyEnrichedContent
+  enableAutoGlossary?: boolean
 }) {
   if (!content || content.length === 0)
     return null
