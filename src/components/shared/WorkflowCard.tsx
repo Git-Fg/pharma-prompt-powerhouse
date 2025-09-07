@@ -1,6 +1,6 @@
 'use client'
 
-import type { EnrichedGuide } from '@/lib/content-schema'
+import type { EnrichedWorkflow } from '@/lib/content-schema'
 import { ArrowRight, BookOpen, Clock, Star, Target, Users, Zap } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -14,7 +14,7 @@ import { formatEstimatedTime } from '@/lib/ui-utils'
 import { cn } from '@/lib/utils'
 
 interface WorkflowCardProps {
-  workflow: EnrichedGuide & { isWorkflow: true }
+  workflow: EnrichedWorkflow
   /**
    * Enhanced display mode with three-zone layout
    * - glimpse: Quick visual scan (icon, title, category)
@@ -38,8 +38,8 @@ export const WorkflowCard: React.FC<WorkflowCardProps> = ({
   showStats = false,
   variant = 'default',
 }) => {
-  const estimatedTime = formatEstimatedTime(workflow.estimatedTime, 'guide')
-  const workflowUrl = getContentUrl('guide', workflow.slug)
+  const estimatedTime = formatEstimatedTime(workflow.estimatedTime, 'workflow')
+  const workflowUrl = getContentUrl('workflow', workflow.slug)
 
   // Mock statistics for demonstration
   const mockStats = {
