@@ -1,6 +1,40 @@
 import type { NextConfig } from 'next'
 import withSerwistInit from '@serwist/next'
 
+// Déterminer si nous sommes dans un environnement de développement ou de prévisualisation Vercel
+const isDevEnvironment = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview'
+
+// Sources fiables pour Vercel (uniquement en dev/preview)
+const vercelSources = [
+  'https://vercel.live', // Vercel Toolbar
+  'https://vercel.com',
+  'https://assets.vercel.com',
+  'https://vercel-insights.com',
+]
+
+// Construction de la CSP
+const cspDirectives = [
+  `default-src 'self'`,
+  // On retire 'unsafe-eval' qui n'est plus nécessaire et dangereux.
+  // On ajoute les sources Vercel uniquement en environnement de développement/preview.
+  `script-src 'self' 'unsafe-inline' ${isDevEnvironment ? vercelSources.join(' ') : ''}`,
+  `style-src 'self' 'unsafe-inline'`,
+  // On ajoute les sources Vercel pour les images (avatars de la toolbar, etc.)
+  `img-src 'self' data: https: blob: ${isDevEnvironment ? '*.vercel.com *.vercel-insights.com' : ''}`,
+  `font-src 'self' data: ${isDevEnvironment ? 'assets.vercel.com' : ''}`,
+  // On ajoute les sources Vercel pour les connexions (analytics, etc.)
+  `connect-src 'self' https://api.github.com ${isDevEnvironment ? vercelSources.join(' ') : ''}`,
+  `media-src 'self'`,
+  `worker-src 'self' blob:`,
+  `child-src 'self'`,
+  `object-src 'none'`,
+  `base-uri 'self'`,
+  `form-action 'self'`,
+  `frame-ancestors 'none'`,
+  `block-all-mixed-content`,
+  `upgrade-insecure-requests`,
+].join('; ')
+
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
@@ -42,9 +76,6 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
 
-  // Optimisations pour Vercel
-  // swcMinify: true, // Supprimé car activé par défaut dans Next.js 15
-
   // Headers de sécurité
   async headers() {
     return [
@@ -65,23 +96,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: [
-              'default-src \'self\'',
-              'script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'',
-              'style-src \'self\' \'unsafe-inline\'',
-              'img-src \'self\' data: https: blob:',
-              'font-src \'self\' data:',
-              'connect-src \'self\' https://api.github.com',
-              'media-src \'self\'',
-              'worker-src \'self\' blob:',
-              'child-src \'self\'',
-              'object-src \'none\'',
-              'base-uri \'self\'',
-              'form-action \'self\'',
-              'frame-ancestors \'none\'',
-              'block-all-mixed-content',
-              'upgrade-insecure-requests',
-            ].join('; '),
+            value: cspDirectives, // Utilisation de notre CSP dynamique
           },
           {
             key: 'Referrer-Policy',
