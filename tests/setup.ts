@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { vi } from 'vitest'
+
 // Test setup file for Vitest Browser Mode
 // Global test configuration for modern browser testing
 
