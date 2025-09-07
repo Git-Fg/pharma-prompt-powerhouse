@@ -117,7 +117,8 @@ function GuideBody({ item }: { item: AnyEnrichedContent }) {
 // Composant spécifique pour les Workflows
 function WorkflowBody({ item }: { item: AnyEnrichedContent }) {
   // Guard pour s'assurer que c'est bien un workflow enrichi
-  if (!('isWorkflow' in item) || !item.isWorkflow || !('concepts' in item)) {
+  // Les workflows ont une propriété 'cover' et 'keyTakeaways' obligatoire
+  if (!('keyTakeaways' in item) || !Array.isArray(item.keyTakeaways) || !('concepts' in item)) {
     return null
   }
 
@@ -307,7 +308,7 @@ function ToolBody({ item }: { item: AnyEnrichedContent }) {
       {/* Main Content */}
       {item.content && item.content.length > 0 && (
         <div className="prose dark:prose-invert">
-          <ContentRenderer content={item.content} currentItem={item} />
+          <ContentRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
         </div>
       )}
 

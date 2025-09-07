@@ -105,7 +105,13 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
   const processNode = React.useCallback((node: React.ReactNode, nodeIndex = 0): React.ReactNode => {
     if (typeof node === 'string') {
-      return processTextNode(node)
+      const processed = processTextNode(node)
+      // Toujours retourner les éléments individuellement, pas en tant que tableau
+      if (processed.length === 1) {
+        return processed[0]
+      }
+      // Si plusieurs éléments, les retourner dans un Fragment sans key
+      return processed
     }
 
     if (React.isValidElement(node)) {
@@ -137,7 +143,8 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
           childrenProcessed = processNode(props.children, 0)
         }
         else if (typeof props.children === 'string') {
-          childrenProcessed = processTextNode(props.children)
+          const processed = processTextNode(props.children)
+          childrenProcessed = processed.length === 1 ? processed[0] : processed
         }
         else {
           // For other types (numbers, booleans, etc.), leave as-is
@@ -175,7 +182,8 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       return processNode(children, 0)
     }
     else if (typeof children === 'string') {
-      return processTextNode(children)
+      const processed = processTextNode(children)
+      return processed.length === 1 ? processed[0] : processed
     }
     else {
       // For other types (numbers, booleans, etc.), return as-is
