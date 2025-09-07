@@ -1,27 +1,6 @@
 import type { NextConfig } from 'next'
 import withSerwistInit from '@serwist/next'
 
-// Construction de la CSP adaptée selon l'environnement
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-const cspDirectives = [
-  `default-src 'self'`,
-  // Scripts: plus permissif en développement pour permettre Turbopack et HMR
-  `script-src 'self'${isDevelopment ? ' \'unsafe-eval\' \'unsafe-inline\'' : ''}`,
-  `style-src 'self' 'unsafe-inline'`,
-  `img-src 'self' data: https: blob:`,
-  `font-src 'self' data:`,
-  `connect-src 'self' https://api.github.com *.vercel-insights.com${isDevelopment ? ' ws://localhost:* wss://localhost:*' : ''}`,
-  `media-src 'self'`,
-  `worker-src 'self' blob:`,
-  `child-src 'self'`,
-  `object-src 'none'`,
-  `base-uri 'self'`,
-  `form-action 'self'`,
-  `frame-ancestors 'none'`,
-  ...(isDevelopment ? [] : ['block-all-mixed-content', 'upgrade-insecure-requests']),
-].join('; ')
-
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
@@ -49,7 +28,6 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
     // Optimisations pour Vercel
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
 
   // Compression
@@ -80,10 +58,6 @@ const nextConfig: NextConfig = {
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: cspDirectives, // Utilisation de notre CSP dynamique
           },
           {
             key: 'Referrer-Policy',
