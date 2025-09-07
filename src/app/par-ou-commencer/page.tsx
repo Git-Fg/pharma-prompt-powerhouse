@@ -33,7 +33,7 @@ export default function ParOuCommencerPage() {
 
       {/* Étapes du parcours */}
       <Section size="md">
-        <Container variant="detail">
+        <Container variant="collection">
           <ol className="space-y-8 [counter-reset:step-counter]">
             {/* Étape 1 */}
             <li className="[counter-increment:step-counter] relative">
@@ -248,7 +248,7 @@ export default function ParOuCommencerPage() {
 
       {/* Call to action */}
       <Section size="sm">
-        <Container variant="detail">
+        <Container variant="collection">
           <div className="text-center">
             <div className="bg-muted p-6 rounded-lg">
               <h3 className="text-lg font-semibold mb-2">Prêt à commencer ?</h3>
