@@ -1,8 +1,6 @@
-/// <reference types="@vitest/browser/matchers" />
-/// <reference types="@vitest/browser/providers/playwright" />
-
 import React from 'react'
 import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 // Test setup file for Vitest Browser Mode
 // Global test configuration for modern browser testing
