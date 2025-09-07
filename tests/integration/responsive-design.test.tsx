@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock Next.js components and hooks
 vi.mock('next/navigation', () => ({
@@ -42,19 +42,31 @@ vi.mock('@/lib/content-loader', () => ({
 // Mock lucide-react icons
 vi.mock('lucide-react', () => {
   const icons = [
-    'Home', 'BookOpen', 'Brain', 'Wrench', 'Search', 'ArrowRight', 'Shield',
-    'Target', 'Zap', 'Star', 'ExternalLink', 'AlertTriangle', 'Check', 'X'
+    'Home',
+    'BookOpen',
+    'Brain',
+    'Wrench',
+    'Search',
+    'ArrowRight',
+    'Shield',
+    'Target',
+    'Zap',
+    'Star',
+    'ExternalLink',
+    'AlertTriangle',
+    'Check',
+    'X',
   ]
-  
+
   const mockIcons: Record<string, React.ComponentType> = {}
-  icons.forEach(icon => {
+  icons.forEach((icon) => {
     mockIcons[icon] = () => <div data-testid={`icon-${icon.toLowerCase()}`}>{icon}</div>
   })
-  
+
   return mockIcons
 })
 
-describe('Application Integration Tests', () => {
+describe('application Integration Tests', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
@@ -140,14 +152,14 @@ describe('Application Integration Tests', () => {
     let clickCount = 0
     const InteractiveComponent = () => (
       <div>
-        <button 
+        <button
           onClick={() => clickCount++}
           className="bg-primary text-primary-foreground px-4 py-2 rounded"
         >
           Interactive Button
         </button>
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Search..."
           className="border border-input px-3 py-2 rounded"
           aria-label="Search input"
@@ -203,13 +215,15 @@ describe('Application Integration Tests', () => {
   it('handles error states gracefully', () => {
     const ErrorComponent = ({ hasError }: { hasError: boolean }) => (
       <div>
-        {hasError ? (
-          <div role="alert" className="text-red-600">
-            An error occurred. Please try again.
-          </div>
-        ) : (
-          <div>Normal content</div>
-        )}
+        {hasError
+          ? (
+              <div role="alert" className="text-red-600">
+                An error occurred. Please try again.
+              </div>
+            )
+          : (
+              <div>Normal content</div>
+            )}
       </div>
     )
 
@@ -224,17 +238,19 @@ describe('Application Integration Tests', () => {
   it('supports loading states consistently', () => {
     const LoadingComponent = ({ isLoading }: { isLoading: boolean }) => (
       <div>
-        {isLoading ? (
-          <div aria-label="Loading" className="animate-pulse">
-            <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
-            <div className="h-4 bg-muted rounded w-1/2"></div>
-          </div>
-        ) : (
-          <div>
-            <h2>Content Title</h2>
-            <p>Content loaded successfully</p>
-          </div>
-        )}
+        {isLoading
+          ? (
+              <div aria-label="Loading" className="animate-pulse">
+                <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
+                <div className="h-4 bg-muted rounded w-1/2"></div>
+              </div>
+            )
+          : (
+              <div>
+                <h2>Content Title</h2>
+                <p>Content loaded successfully</p>
+              </div>
+            )}
       </div>
     )
 

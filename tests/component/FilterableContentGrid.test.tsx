@@ -1,6 +1,6 @@
 import type { Guide } from '@/lib/content-schema'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { FilterableContentGrid } from '@/components/shared/FilterableContentGrid'
 import { useContentFilter } from '@/hooks/useContentFilter'
 
@@ -15,7 +15,7 @@ vi.mock('@/hooks/useAutoAnimate', () => ({
 }))
 
 // Mock content components
-vi.mock('@/components/shared/ContentFilterControls', () => ({
+vi.mock('@/components/ui/filter/ContentFilterControls', () => ({
   ContentFilterControls: ({ onReset }: { onReset: () => void }) => (
     <div data-testid="filter-controls">
       <button onClick={onReset} data-testid="reset-filters">Reset</button>
@@ -25,8 +25,8 @@ vi.mock('@/components/shared/ContentFilterControls', () => ({
 
 vi.mock('@/components/shared/GuideCard', () => ({
   GuideCard: ({ guide }: { guide: Guide }) => (
-    <div data-testid={`guide-card-${guide.slug}`}>
-      <h3>{guide.title}</h3>
+    <div data-testid={`guide-card-${item.slug}`}>
+      <h3>{item.title}</h3>
       <p>{guide.description}</p>
     </div>
   ),
@@ -40,9 +40,10 @@ const mockItems: Guide[] = [
     category: 'general',
     difficulty: 'beginner',
     estimatedTime: '10 min',
-    lastUpdated: '2024-01-01',
     tags: ['test', 'guide'],
-    contentBlocks: [],
+    isFavorite: false,
+    isWorkflow: false,
+    content: [],
     conceptSlugs: [],
     relatedItems: [],
     concepts: [],
@@ -54,27 +55,40 @@ const mockItems: Guide[] = [
     category: 'advanced',
     difficulty: 'intermediate',
     estimatedTime: '20 min',
-    lastUpdated: '2024-01-02',
     tags: ['advanced', 'test'],
-    contentBlocks: [],
+    isFavorite: false,
+    isWorkflow: false,
+    content: [],
     conceptSlugs: [],
     relatedItems: [],
     concepts: [],
   },
 ]
 
-describe('FilterableContentGrid', () => {
+describe('filterableContentGrid', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     vi.mocked(useContentFilter).mockReturnValue({
+      filteredItems: mockItems,
       searchTerm: '',
       selectedCategory: 'all',
       selectedDifficulty: 'all',
+      selectedTags: [],
+      showFavoritesOnly: false,
       setSearchTerm: vi.fn(),
       setSelectedCategory: vi.fn(),
       setSelectedDifficulty: vi.fn(),
+      setSelectedTags: vi.fn(),
+      setShowFavoritesOnly: vi.fn(),
+      addTag: vi.fn(),
+      removeTag: vi.fn(),
+      toggleTag: vi.fn(),
+      availableCategories: ['general'],
+      availableDifficulties: ['beginner'],
+      availableTags: [],
       resetFilters: vi.fn(),
-      filteredItems: mockItems,
+      hasActiveFilters: false,
+      stats: { total: 2, filtered: 2, favorites: 0, categories: 1, difficulties: 1, tags: 0 },
     })
   })
 
@@ -82,10 +96,11 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={mockItems}
-        renderItem={(guide) => <div key={guide.slug} data-testid={`guide-card-${guide.slug}`}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
-      />
+        renderComponent={({ item }) => <div key={item.slug} data-testid={`guide-card-${item.slug}`}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyTitle="No guides found"
+        emptyMessage="Try adjusting your filters"
+      />,
     )
 
     expect(screen.getByTestId('guide-card-guide-1')).toBeInTheDocument()
@@ -98,12 +113,12 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={mockItems}
-        renderItem={(guide) => <div key={guide.slug}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
+        renderComponent={({ item }) => <div key={item.slug}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyMessage="Try adjusting your filters"
         showCategoryFilter
         showDifficultyFilter
-      />
+      />,
     )
 
     expect(screen.getByTestId('filter-controls')).toBeInTheDocument()
@@ -125,10 +140,10 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={[]}
-        renderItem={(guide) => <div key={guide.slug}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
-      />
+        renderComponent={({ item }) => <div key={item.slug}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyMessage="Try adjusting your filters"
+      />,
     )
 
     expect(screen.getByText('No guides found')).toBeInTheDocument()
@@ -151,11 +166,11 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={mockItems}
-        renderItem={(guide) => <div key={guide.slug}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
+        renderComponent={({ item }) => <div key={item.slug}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyMessage="Try adjusting your filters"
         showCategoryFilter
-      />
+      />,
     )
 
     const resetButton = screen.getByTestId('reset-filters')
@@ -168,10 +183,10 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={mockItems}
-        renderItem={(guide) => <div key={guide.slug} data-testid={`guide-card-${guide.slug}`}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
-      />
+        renderComponent={({ item }) => <div key={item.slug} data-testid={`guide-card-${item.slug}`}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyMessage="Try adjusting your filters"
+      />,
     )
 
     // Check that the grid container has proper classes
@@ -195,10 +210,10 @@ describe('FilterableContentGrid', () => {
     render(
       <FilterableContentGrid
         items={mockItems}
-        renderItem={(guide) => <div key={guide.slug}>{guide.title}</div>}
-        emptyStateTitle="No guides found"
-        emptyStateDescription="Try adjusting your filters"
-      />
+        renderComponent={({ item }) => <div key={item.slug}>{item.title}</div>}
+        searchPlaceholder="Search guides"
+        emptyMessage="Try adjusting your filters"
+      />,
     )
 
     // The component should render without errors and show filter controls

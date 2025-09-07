@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 
@@ -18,7 +18,7 @@ vi.mock('@/components/ui/code-block', () => ({
   ),
 }))
 
-describe('MarkdownRenderer', () => {
+describe('markdownRenderer', () => {
   it('renders basic markdown content', () => {
     const content = `
 # Test Heading
@@ -35,7 +35,7 @@ This is a **bold** text and *italic* text.
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Test Heading')
     expect(screen.getByText('bold')).toBeInTheDocument()
     expect(screen.getByText('italic')).toBeInTheDocument()
-    
+
     // Check list items
     expect(screen.getByText('Item 1')).toBeInTheDocument()
     expect(screen.getByText('Item 2')).toBeInTheDocument()
@@ -119,10 +119,10 @@ interface User {
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Section Title')
     expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('Subsection')
     expect(screen.getByRole('link')).toHaveAttribute('href', 'https://example.com')
-    
+
     const codeBlock = screen.getByTestId('code-block')
     expect(codeBlock).toHaveAttribute('data-language', 'typescript')
-    
+
     expect(screen.getByText('Ordered item 1')).toBeInTheDocument()
     expect(screen.getByText('Nested unordered item')).toBeInTheDocument()
   })
@@ -147,7 +147,7 @@ def hello():
 
     const container = screen.getByTestId('auto-glossary')
     expect(container).toBeInTheDocument()
-    
+
     // Check that it contains only the prose wrapper div
     const proseContainer = container.querySelector('.prose')
     expect(proseContainer).toBeInTheDocument()

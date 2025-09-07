@@ -1,8 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { usePathname } from 'next/navigation'
 import { describe, expect, it, vi } from 'vitest'
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
-import { useMobile } from '@/hooks/use-mobile'
-import { useRouter, usePathname } from 'next/navigation'
 
 // Mock Next.js navigation
 const mockPush = vi.fn()
@@ -16,7 +15,7 @@ vi.mock('next/navigation', () => ({
 
 // Mock mobile hook
 vi.mock('@/hooks/use-mobile', () => ({
-  useMobile: vi.fn(() => true),
+  useIsMobile: vi.fn(() => true),
 }))
 
 // Mock lucide-react icons
@@ -28,7 +27,7 @@ vi.mock('lucide-react', () => ({
   Wrench: () => <div data-testid="wrench-icon">Wrench</div>,
 }))
 
-describe('MobileBottomNav', () => {
+describe('mobileBottomNav', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
@@ -92,7 +91,7 @@ describe('MobileBottomNav', () => {
     render(<MobileBottomNav />)
 
     fireEvent.click(screen.getByText('Recherche'))
-    
+
     // Should trigger command palette open event
     expect(mockOpen).toHaveBeenCalled()
   })
@@ -107,7 +106,7 @@ describe('MobileBottomNav', () => {
     const buttons = screen.getAllByRole('button')
     expect(buttons).toHaveLength(5)
 
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       expect(button).toHaveAttribute('aria-label')
     })
   })
@@ -143,7 +142,7 @@ describe('MobileBottomNav', () => {
 
     homeButton = screen.getByText('Accueil').closest('button')
     const conceptsButton = screen.getByText('Concepts').closest('button')
-    
+
     expect(homeButton).not.toHaveClass('text-primary')
     expect(conceptsButton).toHaveClass('text-primary')
   })
