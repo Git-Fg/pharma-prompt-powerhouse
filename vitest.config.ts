@@ -3,6 +3,15 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      '@testing-library/react',
+      '@testing-library/jest-dom',
+      'sonner',
+    ],
+  },
   test: {
     globals: true,
     environment: 'jsdom', // Fallback for pure unit tests
@@ -18,9 +27,6 @@ export default defineConfig({
       instances: [
         {
           browser: 'chromium',
-          launch: {
-            headless: true,
-          },
         },
       ],
       // Ensure DOM testing library works in browser mode

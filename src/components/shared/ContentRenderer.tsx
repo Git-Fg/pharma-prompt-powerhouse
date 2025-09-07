@@ -254,7 +254,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
             <Carousel className="w-full" opts={{ loop: true }}>
               <CarouselContent>
                 {block.items.map((item: { image: string, title?: string, description?: string, alt?: string }, idx: number) => (
-                  <CarouselItem key={`${item.image}-${idx}`}>
+                  <CarouselItem key={`${item.image}-${item.title || idx}`}>
                     <div className="relative aspect-video overflow-hidden rounded-lg">
                       {/* eslint-disable-next-line next/no-img-element -- Usage de img standard pour les images dynamiques dans le carousel */}
                       <img

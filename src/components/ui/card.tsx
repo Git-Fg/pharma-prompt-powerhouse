@@ -12,7 +12,7 @@ interface CardContextValue {
 const CardContext = React.createContext<CardContextValue | undefined>(undefined)
 
 function useCardContext() {
-  const context = React.useContext(CardContext)
+  const context = React.use(CardContext)
   if (!context) {
     throw new Error('Card components must be used within a Card component')
   }
