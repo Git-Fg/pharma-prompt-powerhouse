@@ -148,6 +148,17 @@ const tabsBlockSchema: z.ZodType<any> = z.lazy(() => z.object({
   })),
 }))
 
+const carouselBlockSchema = z.object({
+  type: z.literal('carousel'),
+  items: z.array(z.object({
+    image: z.string(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    alt: z.string().optional(),
+  })),
+  caption: z.string().optional(),
+})
+
 export const contentBlockSchema = z.union([
   markdownBlockSchema,
   alertBlockSchema,
@@ -168,6 +179,7 @@ export const contentBlockSchema = z.union([
   sectionBlockSchema,
   accordionBlockSchema,
   tableBlockSchema,
+  carouselBlockSchema,
 ])
 
 // Type TypeScript inféré pour un bloc de contenu

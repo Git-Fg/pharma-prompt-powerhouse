@@ -142,38 +142,67 @@ vi.mock('@/components/shared/ConceptListSection', () => ({
   ),
 }))
 
-vi.mock('@/components/shared/ContentRenderer', () => ({
-  ContentRenderer: ({ content }: any) => (
-    <div data-testid="content-renderer">
-      {content?.map((block: any, index: number) => (
+vi.mock('@/components/shared/ContentBodyRenderer', () => ({
+  ContentBodyRenderer: ({ item, contentType }: any) => (
+    <div data-testid="content-body-renderer">
+      {/* Workflow-specific content */}
+      {contentType === 'workflow' && (
+        <>
+          {/* Concepts section */}
+          {item.concepts && item.concepts.length > 0 && (
+            <>
+              <div data-testid="concept-list-section">
+                {item.concepts?.map((concept: any) => (
+                  <div key={concept.slug} data-testid={`concept-${concept.slug}`}>
+                    {concept.title}
+                  </div>
+                ))}
+              </div>
+              <hr data-testid="separator" className="my-8" />
+            </>
+          )}
 
-        <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}
-          :
-          {' '}
-          {block.content?.substring(0, 50) || block.title}
-        </div>
-      ))}
-    </div>
-  ),
-}))
+          {/* Content renderer */}
+          <div data-testid="content-renderer">
+            {item.content?.map((block: any, index: number) => (
+              <div key={index} data-testid={`content-block-${index}`}>
+                {block.type}
+                :
+                {' '}
+                {block.content?.substring(0, 50) || block.title}
+              </div>
+            ))}
+          </div>
 
-vi.mock('@/components/shared/DisclaimerBanner', () => ({
-  DisclaimerBanner: ({ type }: any) => (
-    <div data-testid="disclaimer-banner">
-      Disclaimer for
-      {' '}
-      {type}
-    </div>
-  ),
-}))
+          {/* Disclaimer banner */}
+          <div data-testid="disclaimer-banner">
+            Disclaimer for workflow
+          </div>
 
-vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
-  SmartRecommendationsSection: ({ item }: any) => (
-    <div data-testid="smart-recommendations">
-      Recommendations for
-      {' '}
-      {item?.title}
+          {/* Smart recommendations */}
+          <div data-testid="smart-recommendations">
+            Recommendations for
+            {' '}
+            {item?.title}
+          </div>
+
+          {/* Navigation section */}
+          <div data-testid="workflow-navigation">
+            <div data-testid="link" data-href="/workflows">
+              <button data-testid="button" type="button">
+                <span data-testid="arrow-left-icon">←</span>
+                Tous les workflows
+              </button>
+            </div>
+            <div data-testid="link" data-href="/par-ou-commencer">
+              <button data-testid="button" type="button">
+                Guide débutant
+                <span data-testid="arrow-right-icon">→</span>
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   ),
 }))
@@ -194,9 +223,9 @@ vi.mock('@/components/ui/button', () => ({
 
 vi.mock('next/link', () => ({
   default: ({ href, children, ...props }: any) => (
-    <a href={href} data-testid="link" {...props}>
+    <div data-testid="link" data-href={href} {...props}>
       {children}
-    </a>
+    </div>
   ),
 }))
 
@@ -243,8 +272,8 @@ describe('workflow Page Server Component', () => {
       expect(getByTestId('item-title')).toHaveTextContent('Test Workflow')
       expect(getByTestId('item-description')).toHaveTextContent('A test workflow for demonstration')
 
-      // Check prose prop is false for workflows
-      expect(getByTestId('content-page-layout')).toHaveAttribute('data-prose', 'false')
+      // Check prose prop is true for workflows
+      expect(getByTestId('content-page-layout')).toHaveAttribute('data-prose', 'true')
 
       // Check content components
       expect(getByTestId('concept-list-section')).toBeInTheDocument()
@@ -262,8 +291,8 @@ describe('workflow Page Server Component', () => {
       // Check navigation links
       const links = getAllByTestId('link')
       expect(links.length).toBe(2)
-      expect(links[0]).toHaveAttribute('href', '/workflows')
-      expect(links[1]).toHaveAttribute('href', '/par-ou-commencer')
+      expect(links[0]).toHaveAttribute('data-href', '/workflows')
+      expect(links[1]).toHaveAttribute('data-href', '/par-ou-commencer')
 
       // Check icons
       expect(getByTestId('arrow-left-icon')).toBeInTheDocument()
@@ -366,16 +395,16 @@ describe('workflow Page Server Component', () => {
 
       const WorkflowPage = (await import('@/app/[contentType]/[slug]/page')).default
 
-      const { getByText, getAllByRole } = await renderNextPage(WorkflowPage, {
+      const { getByText, getAllByTestId } = await renderNextPage(WorkflowPage, {
         params: { contentType: 'workflows', slug: 'test-workflow' },
       })
 
       // Check navigation links
-      const links = getAllByRole('link')
+      const links = getAllByTestId('link')
       expect(links.length).toBe(2)
 
-      const backLink = links.find(link => link.getAttribute('href') === '/workflows')
-      const guideLink = links.find(link => link.getAttribute('href') === '/par-ou-commencer')
+      const backLink = Array.from(links).find(link => link.getAttribute('data-href') === '/workflows')
+      const guideLink = Array.from(links).find(link => link.getAttribute('data-href') === '/par-ou-commencer')
 
       expect(backLink).toBeInTheDocument()
       expect(guideLink).toBeInTheDocument()

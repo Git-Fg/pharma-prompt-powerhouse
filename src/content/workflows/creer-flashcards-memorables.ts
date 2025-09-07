@@ -23,6 +23,24 @@ export const workflow = {
       content: 'Le format classique de flashcard (Terme au recto, Définition au verso) est utile, mais limité. Il teste principalement la reconnaissance et la mémorisation brute. Pour un apprentissage en profondeur, il faut des flashcards qui nous obligent à **réfléchir, appliquer et connecter** les connaissances, pas seulement à les réciter. C\'est le principe de la révision active.',
     },
     {
+      type: 'carousel',
+      caption: 'L\'évolution des flashcards : de la mémorisation passive à l\'apprentissage actif',
+      items: [
+        {
+          image: '/images/objectifs/fiche-revision-avant.png',
+          title: 'Flashcard Passive Traditionnelle',
+          description: 'Simple paire terme/définition qui teste seulement la reconnaissance.',
+          alt: 'Flashcard traditionnelle recto verso avec terme et définition simple'
+        },
+        {
+          image: '/images/objectifs/flashcards-apres.png',
+          title: 'Flashcard Active Moderne', 
+          description: 'Flashcard avec scénario clinique qui force l\'application et la réflexion.',
+          alt: 'Flashcard interactive avec cas clinique et questions d\'application'
+        },
+      ],
+    },
+    {
       type: 'section',
       title: 'La Stratégie Optimisée : Diversifier les Formats de Questions',
       content: 'L\'idée est de demander à l\'IA de se comporter comme un ingénieur pédagogique et de transformer une notion brute en une série de mini-exercices sous forme de flashcards. On va lui fournir une typologie de questions pour qu\'elle puisse varier les angles d\'attaque.',

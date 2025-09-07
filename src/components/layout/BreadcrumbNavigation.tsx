@@ -11,20 +11,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-
-// Simple mapping pour des noms plus jolis
-const pathSegmentNames: Record<string, string> = {
-  'concepts': 'Concepts',
-  'guides': 'Guides',
-  'workflows': 'Workflows',
-  'l-arsenal-ia': 'L\'Arsenal IA',
-}
+import { formatBreadcrumbSegments } from '@/lib/navigation'
 
 export function BreadcrumbNavigation() {
   const pathname = usePathname()
-  const segments = pathname.split('/').filter(Boolean)
+  const breadcrumbSegments = formatBreadcrumbSegments(pathname)
 
-  if (segments.length === 0) {
+  if (breadcrumbSegments.length === 0) {
     return null
   }
 
@@ -36,28 +29,22 @@ export function BreadcrumbNavigation() {
             <Link href="/">Accueil</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        {segments.map((segment, index) => {
-          const href = `/${segments.slice(0, index + 1).join('/')}`
-          const isLast = index === segments.length - 1
-          const name = pathSegmentNames[segment] || segment.replace(/-/g, ' ')
-
-          return (
-            <React.Fragment key={href}>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                {isLast
-                  ? (
-                      <BreadcrumbPage className="capitalize">{name}</BreadcrumbPage>
-                    )
-                  : (
-                      <BreadcrumbLink asChild>
-                        <Link href={href} className="capitalize">{name}</Link>
-                      </BreadcrumbLink>
-                    )}
-              </BreadcrumbItem>
-            </React.Fragment>
-          )
-        })}
+        {breadcrumbSegments.map(segment => (
+          <React.Fragment key={segment.href}>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              {segment.isLast
+                ? (
+                    <BreadcrumbPage className="capitalize">{segment.name}</BreadcrumbPage>
+                  )
+                : (
+                    <BreadcrumbLink asChild>
+                      <Link href={segment.href} className="capitalize">{segment.name}</Link>
+                    </BreadcrumbLink>
+                  )}
+            </BreadcrumbItem>
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   )

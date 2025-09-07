@@ -6,6 +6,7 @@ import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { CodeBlock } from '@/components/ui/code-block'
 import { ContentTable } from '@/components/ui/data-table/ContentTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -244,6 +245,47 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
           caption={block.caption}
           className="my-6"
         />
+      )
+
+    case 'carousel':
+      return (
+        <Card {...createTestIdProps(testId)} className="my-6">
+          <CardContent className="p-0">
+            <Carousel className="w-full" opts={{ loop: true }}>
+              <CarouselContent>
+                {block.items.map((item: { image: string, title?: string, description?: string, alt?: string }, idx: number) => (
+                  <CarouselItem key={`${item.image}-${idx}`}>
+                    <div className="relative aspect-video overflow-hidden rounded-lg">
+                      {/* eslint-disable-next-line next/no-img-element -- Usage de img standard pour les images dynamiques dans le carousel */}
+                      <img
+                        src={item.image}
+                        alt={item.alt || item.title || `Image ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      {(item.title || item.description) && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
+                          {item.title && (
+                            <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+                          )}
+                          {item.description && (
+                            <p className="text-sm opacity-90">{item.description}</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
+            {block.caption && (
+              <div className="p-4 text-center text-sm text-muted-foreground">
+                {block.caption}
+              </div>
+            )}
+          </CardContent>
+        </Card>
       )
 
     case 'multiFormatPrompt':

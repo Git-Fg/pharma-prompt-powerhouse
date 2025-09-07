@@ -25,19 +25,47 @@ Le problème avec la révision traditionnelle :
 - **Manque de variété :** Toujours les mêmes exemples, aucune généralisation`,
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale',
-      content: `Au début, j'ai essayé de demander directement à ChatGPT :
+      type: 'carousel',
+      caption: 'La transformation d\'une fiche de révision passive en fiche active avec QCM intégré',
+      items: [
+        {
+          image: '/images/objectifs/fiche-revision-avant.png',
+          title: 'Avant : Fiche Passive',
+          description: 'Une simple liste de notes à relire, sans interaction ni auto-évaluation.',
+          alt: 'Fiche de révision traditionnelle avec texte dense et monotone',
+        },
+        {
+          image: '/images/objectifs/fiche-revision-apres.png',
+          title: 'Après : Fiche Active',
+          description: 'Une fiche interactive avec QCM, cas cliniques et exercices d\'application.',
+          alt: 'Fiche de révision moderne avec QCM et éléments interactifs',
+        },
+      ],
+    },
+    {
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale',
+              content: `Au début, j'ai essayé de demander directement à ChatGPT :
 
 > *"Fais-moi un QCM sur les bêta-bloquants."*
 
 **Résultat :** Des questions trop génériques, sans rapport avec mon cours spécifique, souvent avec des erreurs factuelles.`,
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Pourquoi ça ne marche pas',
-      content: `L'IA n'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`,
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Pourquoi ça ne marche pas',
+              content: `L'IA n'a aucun contexte sur votre cours, votre niveau, vos objectifs pédagogiques. Elle improvise avec ses connaissances générales, qui peuvent être inexactes ou inadaptées.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

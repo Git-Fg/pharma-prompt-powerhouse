@@ -220,31 +220,5 @@ export function isValidConfidenceScore(score: number): boolean {
 // UTILITAIRES D'URL ET NAVIGATION
 // =================================================================
 
-/**
- * Génère l'URL complète d'un élément de contenu
- */
-export function getContentUrl(type: 'workflow' | 'guide' | 'concept' | 'tool', slug: string): string {
-  const basePaths = {
-    workflow: '/workflows',
-    guide: '/guides',
-    concept: '/concepts',
-    tool: '/l-arsenal-ia',
-  }
-
-  return `${basePaths[type]}/${slug}`
-}
-
-/**
- * Extrait le type de contenu depuis une URL
- */
-export function getContentTypeFromUrl(url: string): 'workflow' | 'guide' | 'concept' | 'tool' | null {
-  if (url.startsWith('/workflows/'))
-    return 'workflow'
-  if (url.startsWith('/guides/'))
-    return 'guide'
-  if (url.startsWith('/concepts/'))
-    return 'concept'
-  if (url.startsWith('/l-arsenal-ia/'))
-    return 'tool'
-  return null
-}
+// Les fonctions de navigation ont été déplacées vers src/lib/navigation.ts
+// pour centraliser toutes les utilitaires de navigation

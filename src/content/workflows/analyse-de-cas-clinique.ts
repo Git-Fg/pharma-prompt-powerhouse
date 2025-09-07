@@ -32,6 +32,24 @@ export const workflow = {
       content: 'Face à un cas clinique, notre premier réflexe est souvent de demander la solution à une IA. C\'est rapide, c\'est facile, et c\'est pédagogiquement inutile. On obtient une réponse parfaite que l\'on croit avoir comprise, mais on n\'a exercé aucune des compétences de raisonnement clinique qui nous seront demandées en examen ou en stage. C\'est le meilleur moyen de tomber dans le piège du **biais d\'automatisation** et du **désapprentissage cognitif**.',
     },
     {
+      type: 'carousel',
+      caption: 'La transformation de l\'IA : de solutionneur à tuteur socratique',
+      items: [
+        {
+          image: '/images/objectifs/cas-clinique-avant.png',
+          title: 'Approche Traditionnelle : Solution Directe',
+          description: 'L\'IA donne la solution complète, l\'étudiant passe en mode passif et développe un faux sentiment de compétence.',
+          alt: 'IA donnant directement une solution complète à un cas clinique'
+        },
+        {
+          image: '/images/objectifs/cas-clinique-apres.png',
+          title: 'Approche Socratique : Dialogue Guidé', 
+          description: 'L\'IA pose des questions ciblées, l\'étudiant développe son raisonnement clinique de manière active.',
+          alt: 'IA agissant comme tuteur socratique avec des questions progressives'
+        },
+      ],
+    },
+    {
       type: 'section',
       title: 'La Stratégie Optimisée : Forcer le Dialogue Socratique',
       content: 'La solution est de changer radicalement de posture : ne plus demander à l\'IA de résoudre le cas, mais de nous aider **nous** à le résoudre. On va lui assigner le rôle d\'un tuteur socratique. Son seul but est de nous poser les bonnes questions pour nous faire avancer.\n\nℹ️ **La Philosophie du Tuteur Cognitif**\nL\'IA devient un partenaire qui nous challenge. Le but n\'est plus d\'avoir la bonne réponse, mais de construire le bon raisonnement. Chaque question de l\'IA est une opportunité d\'articuler notre pensée, d\'identifier nos lacunes et de solidifier nos connaissances.',
@@ -110,27 +128,75 @@ Commençons. Quelle est la toute première question que je devrais me poser ?`,
       allowChecking: true,
     },
     {
-      type: 'section',
-      title: 'Comparaison des Outils pour ce Workflow',
-      content: [
+      type: 'tabs',
+      defaultValue: 'claude',
+      tabs: [
         {
-          type: 'markdown',
-          content: 'J\'ai testé ce prompt sur plusieurs modèles. Voici mes conclusions pour cette tâche précise.',
+          value: 'claude',
+          title: 'Claude',
+          content: [
+            {
+              type: 'card',
+              title: 'Mon Choix N°1',
+              content: `Claude est exceptionnel pour suivre des instructions de persona complexes et maintenir un rôle sur la durée.
+
+**Points forts :**
+- Respecte parfaitement la consigne de ne pas donner la réponse
+- Pose des questions très pertinentes et ciblées
+- Style naturellement pédagogique et collaboratif
+- Maintient la cohérence du dialogue sur la durée
+
+**Points faibles :**
+- Quota plus restrictif en version gratuite
+- Interface moins intuitive pour les débutants
+
+**Verdict :** Le meilleur choix pour un tuteur socratique efficace.`,
+            },
+          ],
         },
         {
-          type: 'points',
-          points: [
+          value: 'gemini',
+          title: 'Gemini',
+          content: [
             {
-              title: 'Claude (Opus ou Sonnet)',
-              description: '**Mon choix N°1.** Claude est exceptionnel pour suivre des instructions de persona complexes et maintenir un rôle sur la durée. Il respecte parfaitement la consigne de ne pas donner la réponse et pose des questions très pertinentes. Son style est naturellement plus pédagogique.',
+              type: 'card',
+              title: 'Très Bon Challenger',
+              content: `Gemini est également très performant pour ce workflow, avec quelques particularités.
+
+**Points forts :**
+- Excellente capacité de raisonnement sur données complexes
+- Gratuit avec quotas généreux
+- Réponses rapides et bien structurées
+
+**Points faibles :**
+- Tendance à donner des indices trop évidents
+- Nécessite parfois d'être recadré pour rester strict
+- Moins naturel dans le maintien du persona
+
+**Verdict :** Une excellente alternative, surtout avec AI Studio.`,
             },
+          ],
+        },
+        {
+          value: 'chatgpt',
+          title: 'ChatGPT',
+          content: [
             {
-              title: 'Gemini (Advanced ou AI Studio)',
-              description: '**Très bon challenger.** Gemini est également très performant. Il a parfois tendance à vouloir donner des "indices" un peu trop évidents, mais une simple instruction pour être plus strict suffit à le recadrer. Sa capacité à raisonner sur des données complexes est un atout.',
-            },
-            {
-              title: 'ChatGPT-4o',
-              description: '**Fait le travail, mais moins \"naturel\".** ChatGPT a tendance à avoir un ton un peu plus professoral et moins collaboratif. Il suit les instructions, mais l\'interaction semble moins fluide, plus mécanique. Il reste une option tout à fait viable.',
+              type: 'card',
+              title: 'Fait le Travail',
+              content: `ChatGPT-4o est capable de suivre les instructions, mais avec une approche plus mécanique.
+
+**Points forts :**
+- Interface intuitive et accessible
+- Bonne compréhension des instructions complexes
+- Mémoire conversationnelle efficace
+
+**Points faibles :**
+- Ton plus professoral et moins collaboratif
+- Interaction parfois mécanique et moins fluide
+- Moins naturel dans le rôle de tuteur
+
+**Verdict :** Viable mais moins optimal que Claude ou Gemini.`,
             },
           ],
         },

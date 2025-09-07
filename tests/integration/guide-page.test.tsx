@@ -142,41 +142,57 @@ vi.mock('@/components/shared/ConceptListSection', () => ({
   ),
 }))
 
-vi.mock('@/components/shared/ContentRenderer', () => ({
-  ContentRenderer: ({ content }: any) => (
-    <div data-testid="content-renderer">
-      {content?.map((block: any, index: number) => (
+vi.mock('@/components/shared/ContentBodyRenderer', () => ({
+  ContentBodyRenderer: ({ item, contentType }: any) => (
+    <div data-testid="content-body-renderer">
+      {/* Concepts section */}
+      {item.concepts && item.concepts.length > 0 && (
+        <>
+          <div data-testid="concept-list-section">
+            {item.concepts?.map((concept: any) => (
+              <div key={concept.slug} data-testid={`concept-${concept.slug}`}>
+                {concept.title}
+              </div>
+            ))}
+          </div>
+          <hr data-testid="separator" className="my-8" />
+        </>
+      )}
 
-        <div key={index} data-testid={`content-block-${index}`}>
-          {block.type}
-          :
-          {' '}
-          {block.content?.substring(0, 50) || block.title}
-        </div>
-      ))}
-    </div>
-  ),
-}))
+      {/* Key takeaways section */}
+      {item.keyTakeaways && item.keyTakeaways.length > 0 && (
+        <>
+          <div data-testid="key-takeaways">
+            {item.keyTakeaways?.map((point: string, index: number) => (
+              <div key={index} data-testid={`takeaway-${index}`}>
+                {point}
+              </div>
+            ))}
+          </div>
+          <hr data-testid="separator" className="my-8" />
+        </>
+      )}
 
-vi.mock('@/components/shared/KeyTakeaways', () => ({
-  KeyTakeaways: ({ points }: any) => (
-    <div data-testid="key-takeaways">
-      {points?.map((point: string, index: number) => (
+      {/* Content renderer */}
+      <div data-testid="content-renderer">
+        {item.content?.map((block: any, index: number) => (
+          <div key={index} data-testid={`content-block-${index}`}>
+            {block.type}
+            :
+            {' '}
+            {block.content?.substring(0, 50) || block.title}
+          </div>
+        ))}
+      </div>
 
-        <div key={index} data-testid={`takeaway-${index}`}>
-          {point}
-        </div>
-      ))}
-    </div>
-  ),
-}))
+      <hr data-testid="separator" className="my-12" />
 
-vi.mock('@/components/shared/SmartRecommendationsSection', () => ({
-  SmartRecommendationsSection: ({ item }: any) => (
-    <div data-testid="smart-recommendations">
-      Recommendations for
-      {' '}
-      {item?.title}
+      {/* Smart recommendations */}
+      <div data-testid="smart-recommendations">
+        Recommendations for
+        {' '}
+        {item?.title}
+      </div>
     </div>
   ),
 }))

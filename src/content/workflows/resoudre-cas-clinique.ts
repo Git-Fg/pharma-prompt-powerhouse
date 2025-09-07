@@ -27,19 +27,29 @@ export const workflow = {
 Résultat : des réponses partielles et peu convaincantes aux examens.`,
     },
     {
-      type: 'section',
-      title: 'Mon Approche Initiale',
-      content: `Je posais directement le cas à l'IA en demandant :
+      type: 'accordion',
+      items: [
+        {
+          title: 'Mon Approche Initiale (et ses limites)',
+          content: [
+            {
+              type: 'section',
+              title: 'Mon Approche Initiale',
+              content: `Je posais directement le cas à l'IA en demandant :
 
 > *"Analyse ce cas clinique et donne-moi la réponse."*
 
 **Problème :** L'IA me donnait une analyse complète d'un coup, sans m'aider à développer mon propre raisonnement clinique.`,
-    },
-    {
-      type: 'alert',
-      variant: 'destructive',
-      title: 'Le piège de la solution immédiate',
-      content: `Obtenir directement la réponse ne m'apprenait pas à raisonner. J'étais dépendant de l'IA sans développer mon expertise clinique personnelle.`,
+            },
+            {
+              type: 'alert',
+              variant: 'destructive',
+              title: 'Le piège de la solution immédiate',
+              content: `Obtenir directement la réponse ne m'apprenait pas à raisonner. J'étais dépendant de l'IA sans développer mon expertise clinique personnelle.`,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'section',

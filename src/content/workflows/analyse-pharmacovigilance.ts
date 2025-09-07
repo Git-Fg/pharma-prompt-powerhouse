@@ -17,6 +17,24 @@ export const workflow = {
       content: 'Analyser un signal de pharmacovigilance est l\'une des tâches les plus complexes. Le principal danger est de conclure à un lien de causalité à partir d\'une simple corrélation statistique. Les IA excellent pour trouver des associations dans de grands volumes de données, mais elles sont structurellement incapables de prouver une causalité. Demander à une IA "Est-ce que ce médicament cause cet effet ?" est une erreur méthodologique fondamentale qui peut conduire à de mauvaises conclusions.',
     },
     {
+      type: 'carousel',
+      caption: 'L\'évolution de l\'analyse : de la question simple au comité d\'experts multi-agents',
+      items: [
+        {
+          image: '/images/objectifs/recherche-biblio-avant.png',
+          title: 'Approche Risquée : Question Directe',
+          description: 'Demander directement à l\'IA si un médicament cause un effet, sans cadre méthodologique.',
+          alt: 'Question directe à l\'IA sur la causalité sans structure d\'analyse'
+        },
+        {
+          image: '/images/objectifs/recherche-biblio-apres.png',
+          title: 'Approche Sécurisée : Comité d\'Experts', 
+          description: 'Système multi-agents avec perspectives contradictoires pour une analyse nuancée.',
+          alt: 'Système multi-agents simulant un comité d\'experts en pharmacovigilance'
+        },
+      ],
+    },
+    {
       type: 'section',
       title: 'La Stratégie Optimisée : Simuler un Comité d\'Experts',
       content: 'Plutôt que de poser une question directe, nous allons utiliser une approche de **système multi-agents**. Nous demandons à l\'IA de simuler un comité d\'experts où chaque "agent" a une expertise spécifique et analyse le problème sous un angle différent. L\'objectif est de structurer le raisonnement de l\'IA, de réduire les biais et de rendre son processus de "pensée" plus transparent.\n\nℹ️ **La Puissance de la Perspective Forcée**\nEn obligeant l\'IA à endosser des rôles contradictoires (par exemple, un qui cherche à prouver le lien, un autre qui cherche à l\'infirmer), on la force à une analyse plus nuancée et exhaustive. La conclusion n\'est plus une simple affirmation, mais une synthèse pondérée des arguments de chaque expert.',
