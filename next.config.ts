@@ -1,14 +1,17 @@
 import type { NextConfig } from 'next'
 import withSerwistInit from '@serwist/next'
 
-// Construction de la CSP simplifiée et sécurisée
+// Construction de la CSP adaptée selon l'environnement
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 const cspDirectives = [
   `default-src 'self'`,
-  `script-src 'self'`, // Retrait de 'unsafe-inline' pour renforcer la sécurité
+  // Scripts: plus permissif en développement pour permettre Turbopack et HMR
+  `script-src 'self'${isDevelopment ? " 'unsafe-eval' 'unsafe-inline'" : ''}`,
   `style-src 'self' 'unsafe-inline'`,
   `img-src 'self' data: https: blob:`,
   `font-src 'self' data:`,
-  `connect-src 'self' https://api.github.com *.vercel-insights.com`,
+  `connect-src 'self' https://api.github.com *.vercel-insights.com${isDevelopment ? ' ws://localhost:* wss://localhost:*' : ''}`,
   `media-src 'self'`,
   `worker-src 'self' blob:`,
   `child-src 'self'`,
@@ -16,8 +19,7 @@ const cspDirectives = [
   `base-uri 'self'`,
   `form-action 'self'`,
   `frame-ancestors 'none'`,
-  `block-all-mixed-content`,
-  `upgrade-insecure-requests`,
+  ...(isDevelopment ? [] : ['block-all-mixed-content', 'upgrade-insecure-requests']),
 ].join('; ')
 
 const nextConfig: NextConfig = {
