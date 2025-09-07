@@ -28,9 +28,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
   const shouldProcess = isClient || (typeof process !== 'undefined' && process.env.NODE_ENV === 'test')
 
   // Get all glossary terms sorted by length (longest first) to avoid partial matches
-  const glossaryTerms = React.useMemo(() => {
-    return Object.keys(glossary).sort((a, b) => b.length - a.length)
-  }, [])
+  const glossaryTerms = Object.keys(glossary).sort((a, b) => b.length - a.length)
 
   // Create a regex pattern that matches any glossary term (case insensitive)
   const termPattern = React.useMemo(() => {
@@ -183,7 +181,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       // For other types (numbers, booleans, etc.), return as-is
       return children
     }
-  }, [children, processNode, processTextNode, shouldProcess])
+  }, [children, shouldProcess, processNode, processTextNode])
 
   return <>{processedChildren}</>
 }

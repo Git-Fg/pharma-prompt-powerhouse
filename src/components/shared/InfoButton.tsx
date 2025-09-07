@@ -3,30 +3,25 @@
 import type { Concept, ExternalTool } from '@/lib/content-schema'
 import { ExternalLink, Globe, Info, Lightbulb } from 'lucide-react'
 import React from 'react'
+import { Container } from '@/components/layout/Container'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 
 interface InfoButtonProps {
-  variant: 'concept' | 'tool'
-  item: Concept | ExternalTool
+  content: Concept | ExternalTool
   size?: 'sm' | 'md' | 'lg'
   className?: string
 }
 
-export const InfoButton: React.FC<InfoButtonProps> = ({
-  variant,
-  item,
-  size = 'sm',
-  className,
-}) => {
-  const [open, setOpen] = React.useState(false)
+export function InfoButton({ content, size = 'md', className }: InfoButtonProps) {
+  const [isOpen, setIsOpen] = React.useState(false)
 
   const iconSize = {
-    sm: 'size-3',
-    md: 'size-4',
-    lg: 'size-5',
+    sm: 'h-4 w-4',
+    md: 'h-5 w-5',
+    lg: 'h-6 w-6',
   }[size]
 
   const buttonSize = {
@@ -36,7 +31,7 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
   }[size]
 
   const renderConceptContent = (concept: Concept) => (
-    <div className="space-y-3 text-content-width">
+    <Container variant="detail" className="space-y-3 px-0">
       <div className="flex items-start gap-3">
         <div className="bg-primary/10 p-2 rounded-lg flex-shrink-0">
           <Lightbulb className="size-4 text-primary" />
@@ -53,12 +48,14 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
         {concept.description}
       </p>
 
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <span>
-          Difficulté:
-          {concept.difficulty}
-        </span>
-      </div>
+      {'difficulty' in concept && (
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span>
+            Difficulté:
+            {concept.difficulty}
+          </span>
+        </div>
+      )}
 
       {concept.tags.length > 0 && (
         <div className="flex flex-wrap gap-1">
@@ -77,11 +74,11 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
           )}
         </div>
       )}
-    </div>
+    </Container>
   )
 
   const renderToolContent = (tool: ExternalTool) => (
-    <div className="space-y-3 text-content-width">
+    <Container variant="detail" className="space-y-3 px-0">
       <div className="flex items-start gap-3">
         <div className="bg-primary/10 p-2 rounded-lg flex-shrink-0">
           <Globe className="size-4 text-primary" />
@@ -105,69 +102,47 @@ export const InfoButton: React.FC<InfoButtonProps> = ({
         {tool.description}
       </p>
 
-      {tool.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {tool.tags.slice(0, 3).map(tag => (
-            <Badge key={tag} variant="outline" className="text-xs">
-              {tag}
-            </Badge>
-          ))}
-          {tool.tags.length > 3 && (
-            <span className="text-xs text-muted-foreground">
-              +
-              {tool.tags.length - 3}
-              {' '}
-              autres
-            </span>
-          )}
-        </div>
-      )}
-
-      <div className="flex gap-2 pt-2 border-t">
-        <a
-          href={tool.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
+      {tool.url && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full"
+          asChild
         >
-          <ExternalLink className="size-3" />
-          Visiter l'outil
-        </a>
-      </div>
-    </div>
+          <a
+            href={tool.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2"
+          >
+            <ExternalLink className="size-3" />
+            Visiter le site
+          </a>
+        </Button>
+      )}
+    </Container>
   )
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
+          size="sm"
           className={cn(
+            'text-muted-foreground hover:text-foreground hover:bg-muted',
+            iconSize,
             buttonSize,
-            'rounded-full hover:bg-primary/10 hover:text-primary transition-all duration-200',
-            'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-            'group relative',
+            'p-0',
             className,
           )}
-          aria-label={`Plus d'informations sur ${item.title}`}
         >
-          <Info className={cn(iconSize, 'transition-transform group-hover:scale-110')} />
-
-          {/* Subtle indicator for interactive element */}
-          <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-primary/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          <Info className={iconSize} />
+          <span className="sr-only">Plus d'informations</span>
         </Button>
       </PopoverTrigger>
-
-      <PopoverContent
-        className="w-auto p-4 animate-in fade-in-0 zoom-in-95 duration-200"
-        side="top"
-        align="center"
-        sideOffset={8}
-      >
-        {variant === 'concept'
-          ? renderConceptContent(item as Concept)
-          : renderToolContent(item as ExternalTool)}
+      <PopoverContent className="w-80" side="bottom" align="start">
+        {'url' in content ? renderToolContent(content) : renderConceptContent(content)}
       </PopoverContent>
     </Popover>
   )

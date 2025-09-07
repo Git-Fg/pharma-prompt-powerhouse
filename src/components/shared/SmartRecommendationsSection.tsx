@@ -196,7 +196,7 @@ function RecommendationCard({ item, type, score, showScore, compact = false }: R
   if (compact) {
     return (
       <Link href={url} className="block">
-        <Card padding="sm" className="hover:bg-accent/50 transition-colors">
+        <Card className="hover:bg-accent/50 transition-colors">
           <CardContent>
             <h3 className="font-semibold mb-2">{item.title}</h3>
             <p className="text-sm text-muted-foreground line-clamp-2">{item.description}</p>

@@ -1,7 +1,6 @@
 'use client'
 
 import type { ExternalTool } from '@/lib/content-schema'
-import { ExternalLink, Globe } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import Badge from '@/components/ui/badge'
@@ -9,6 +8,7 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
+import { getIcon } from '@/lib/icon-loader'
 import { getContentUrl } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
@@ -31,7 +31,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4 flex-1">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <Globe className="size-6 text-primary" />
+              {getIcon('Globe')({ className: 'size-6 text-primary' })}
             </div>
             <div className="flex-1 min-w-0">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
@@ -44,8 +44,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             </div>
           </div>
           <InfoButton
-            variant="tool"
-            item={tool}
+            content={tool}
             size="md"
             className="ml-2 flex-shrink-0"
           />
@@ -67,7 +66,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full" size="sm">
                 Visiter l'outil
-                <ExternalLink className="ml-1 size-4" />
+                {getIcon('ExternalLink')({ className: 'ml-1 size-4' })}
               </Button>
             </a>
             <Link href={toolUrl} className="flex-1">

@@ -1,6 +1,17 @@
 import type { LucideIcon } from 'lucide-react'
 // src/lib/navigation.ts
-import { BookOpen, Brain, ExternalLink, Home, Shield, Target } from 'lucide-react'
+import { Home } from 'lucide-react'
+import { getIcon } from './icon-loader'
+
+// Type-safe icon mapping for navigation
+const navigationIcons: Record<string, LucideIcon> = {
+  Home,
+  Target: getIcon('Target') as LucideIcon,
+  BookOpen: getIcon('BookOpen') as LucideIcon,
+  ExternalLink: getIcon('ExternalLink') as LucideIcon,
+  Brain: getIcon('Brain') as LucideIcon,
+  Shield: getIcon('Shield') as LucideIcon,
+}
 
 // =================================================================
 // UTILITAIRES DE CHEMIN D'ACCÈS ET FIL D'ARIANE
@@ -134,48 +145,53 @@ export interface NavItem {
   icon: LucideIcon
   description?: string // Optionnel, pour plus de contexte
   section: 'main' | 'legal' | 'ressources' // Pour organiser le footer
+  showInMobileNav?: boolean // Optionnel, pour afficher dans la navigation mobile
 }
 
 export const navigationLinks: NavItem[] = [
   {
     name: 'Accueil',
     href: '/',
-    icon: Home,
+    icon: navigationIcons.Home,
     section: 'main',
     description: 'Page d\'accueil du site',
+    showInMobileNav: true,
   },
   {
     name: 'Par où commencer ?',
     href: '/par-ou-commencer',
-    icon: Target,
+    icon: navigationIcons.Target,
     section: 'main',
     description: 'Guide de démarrage pour débuter avec l\'IA',
+    showInMobileNav: true,
   },
   {
     name: 'Workflows Stratégiques',
     href: '/workflows',
-    icon: BookOpen,
+    icon: navigationIcons.BookOpen,
     section: 'main',
     description: 'Méthodes complètes pour vos cas d\'usage',
+    showInMobileNav: true,
   },
   {
     name: 'L\'Arsenal IA',
     href: '/l-arsenal-ia',
-    icon: ExternalLink,
+    icon: navigationIcons.ExternalLink,
     section: 'main',
     description: 'Comparaison d\'outils avec mon retour d\'expérience',
+    showInMobileNav: true,
   },
   {
     name: 'Concepts',
     href: '/concepts',
-    icon: Brain,
+    icon: navigationIcons.Brain,
     section: 'main',
     description: 'Définitions claires pour comprendre l\'IA',
   },
   {
     name: 'Confidentialité',
     href: '/guides/confidentialite-securite',
-    icon: Shield,
+    icon: navigationIcons.Shield,
     section: 'legal',
     description: 'Guide de sécurité et confidentialité',
   },
@@ -185,3 +201,6 @@ export const navigationLinks: NavItem[] = [
 export const getMainNavigationLinks = () => navigationLinks.filter(link => link.section === 'main')
 export const getLegalNavigationLinks = () => navigationLinks.filter(link => link.section === 'legal')
 export const getNavigationLinksBySection = (section: NavItem['section']) => navigationLinks.filter(link => link.section === section)
+
+// Fonction utilitaire pour obtenir les liens de navigation mobile
+export const getMobileNavigationLinks = () => navigationLinks.filter(link => link.showInMobileNav)

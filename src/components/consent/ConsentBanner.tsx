@@ -22,7 +22,7 @@ export function ConsentBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/95 backdrop-blur-md border-t animate-slide-up">
       <div className="container mx-auto container">
-        <Card padding="md" className="shadow-lg">
+        <Card className="shadow-lg">
           <CardContent>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 

@@ -1,16 +1,13 @@
 'use client'
 
 import type { LucideIcon } from 'lucide-react'
-import {
-  BookOpen,
-  Search,
-} from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import { useAutoAnimateLayout } from '@/hooks/useAutoAnimate'
-import { getMainNavigationLinks } from '@/lib/navigation'
+import { getIcon } from '@/lib/icon-loader'
+import { getMobileNavigationLinks } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 
@@ -24,50 +21,32 @@ interface MobileNavItem {
 
 // Create mobile-specific nav items based on centralized navigation
 function createMobileNavItems(): MobileNavItem[] {
-  const mainNavLinks = getMainNavigationLinks()
+  const mobileNavLinks = getMobileNavigationLinks()
 
-  // Find specific nav items
-  const homeLink = mainNavLinks.find(link => link.href === '/')
-  const workflowsLink = mainNavLinks.find(link => link.href === '/workflows')
-  const arsenalLink = mainNavLinks.find(link => link.href === '/l-arsenal-ia')
-
+  // Create mobile items from centralized navigation
   const baseItems: (MobileNavItem | null)[] = [
-    homeLink
-      ? {
-          name: homeLink.name,
-          href: homeLink.href,
-          icon: homeLink.icon,
-          isActive: (pathname: string) => pathname === '/',
-        }
-      : null,
-    workflowsLink
-      ? {
-          name: 'Workflows', // Shorter name for mobile
-          href: workflowsLink.href,
-          icon: workflowsLink.icon,
-          isActive: (pathname: string) => pathname.startsWith('/workflows'),
-        }
-      : null,
+    ...mobileNavLinks.map(link => ({
+      name: link.name === 'Workflows Stratégiques'
+        ? 'Workflows'
+        : link.name === 'L\'Arsenal IA'
+          ? 'Arsenal IA'
+          : link.name === 'Par où commencer ?'
+            ? 'Commencer'
+            : link.name,
+      href: link.href,
+      icon: link.icon,
+      isActive: (pathname: string) => {
+        if (link.href === '/')
+          return pathname === '/'
+        return pathname.startsWith(link.href)
+      },
+    })),
     {
       name: 'Recherche',
       href: '#',
-      icon: Search,
+      icon: getIcon('Search'),
       isActive: () => false,
       isSearch: true,
-    },
-    arsenalLink
-      ? {
-          name: 'Arsenal IA', // Shorter name for mobile
-          href: arsenalLink.href,
-          icon: arsenalLink.icon,
-          isActive: (pathname: string) => pathname.startsWith('/l-arsenal-ia'),
-        }
-      : null,
-    {
-      name: 'Guides',
-      href: '/guides',
-      icon: BookOpen,
-      isActive: (pathname: string) => pathname.startsWith('/guides') || pathname.startsWith('/concepts'),
     },
   ]
 

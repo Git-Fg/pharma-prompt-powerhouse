@@ -514,14 +514,6 @@
   @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-@utility container-constrained {
-  max-width: 32rem; /* 512px - Correction bug max-w-lg de Tailwind v4 */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 @utility container {
   width: 100%;
   margin-inline: auto;
@@ -564,22 +556,12 @@
   max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug */
 }
 
-@utility dialog-content-width {
-  max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for dialogs */
-}
-
 @utility offline-container-width {
   max-width: 32rem; /* 512px - Direct value to bypass Tailwind v4 max-w-lg bug for offline page */
 }
 
 @utility footer-description-width {
   max-width: 20rem; /* 320px - Direct value to bypass Tailwind v4 max-w-xs bug for footer */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@utility text-content-width {
-  max-width: 28rem; /* 448px - Direct value to bypass Tailwind v4 max-w-md bug for text content */
   margin-left: auto;
   margin-right: auto;
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { AlertTriangle, Shield, TrendingUp } from 'lucide-react'
+import { Container } from '@/components/layout/Container'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent } from '@/components/ui/card'
@@ -39,7 +40,7 @@ export function DisclaimerBanner({ type = 'all', compact = false }: DisclaimerBa
 
   if (compact) {
     return (
-      <Card padding="sm" className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20 dark:border-orange-800/50">
+      <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20 dark:border-orange-800/50">
         <CardContent>
           <div className="flex items-start gap-3">
             <AlertTriangle className="size-5 text-orange-600 flex-shrink-0 mt-0.5" />
@@ -69,10 +70,12 @@ export function DisclaimerBanner({ type = 'all', compact = false }: DisclaimerBa
               {disclaimer.title}
             </AlertTitle>
             <AlertDescription className="text-orange-700 dark:text-orange-300 mt-2">
-              <MarkdownRenderer
-                content={disclaimer.content}
-                className="prose prose-sm dark:prose-invert prose-orange text-content-width"
-              />
+              <Container variant="detail" className="px-0">
+                <MarkdownRenderer
+                  content={disclaimer.content}
+                  className="prose prose-sm dark:prose-invert prose-orange"
+                />
+              </Container>
             </AlertDescription>
           </Alert>
         )

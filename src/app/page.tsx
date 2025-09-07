@@ -25,7 +25,7 @@ export default function HomePage() {
       <Section size="lg">
         <Container variant="detail">
           <StaggeredItem>
-            <Card padding="lg" className="text-center shadow-lg bg-card/80 backdrop-blur-sm">
+            <Card className="text-center shadow-lg bg-card/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="responsive-heading text-balance">
                   Bienvenue sur Pharma Prompt Powerhouse
@@ -52,7 +52,7 @@ export default function HomePage() {
         <Container variant="collection">
           <StaggeredItem>
             <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-              <Card padding="sm" className="flex items-start gap-3">
+              <Card className="flex items-start gap-3">
                 <Zap className="size-5 text-primary flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Performance</h3>
@@ -62,7 +62,7 @@ export default function HomePage() {
                 </div>
               </Card>
 
-              <Card padding="sm" className="flex items-start gap-3">
+              <Card className="flex items-start gap-3">
                 <AlertTriangle className="size-5 text-amber-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Fiabilité</h3>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 </div>
               </Card>
 
-              <Card padding="sm" className="flex items-start gap-3">
+              <Card className="flex items-start gap-3">
                 <Shield className="size-5 text-red-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Confidentialité</h3>
@@ -205,7 +205,7 @@ export default function HomePage() {
       <Section size="sm">
         <Container variant="detail">
           <StaggeredItem>
-            <Card padding="lg" className="bg-muted/50 border-dashed text-center">
+            <Card className="bg-muted/50 border-dashed text-center">
               <Brain className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
               <p className="prose-personal-note container mx-auto">

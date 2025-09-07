@@ -60,15 +60,6 @@ function Carousel({
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api)
-      return
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour la synchronisation de l'état du carousel
-    setCanScrollPrev(api.canScrollPrev())
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- Direct set acceptable pour la synchronisation de l'état du carousel
-    setCanScrollNext(api.canScrollNext())
-  }, [])
-
   const scrollPrev = React.useCallback(() => {
     api?.scrollPrev()
   }, [api])
@@ -77,19 +68,16 @@ function Carousel({
     api?.scrollNext()
   }, [api])
 
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault()
-        scrollPrev()
-      }
-      else if (event.key === 'ArrowRight') {
-        event.preventDefault()
-        scrollNext()
-      }
-    },
-    [scrollPrev, scrollNext],
-  )
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      scrollPrev()
+    }
+    else if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      scrollNext()
+    }
+  }
 
   React.useEffect(() => {
     if (!api || !setApi)
@@ -100,14 +88,22 @@ function Carousel({
   React.useEffect(() => {
     if (!api)
       return
-    onSelect(api)
-    api.on('reInit', onSelect)
-    api.on('select', onSelect)
+
+    const updateScrollState = () => {
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- État de défilement mis à jour directement pour des raisons de performance
+      setCanScrollPrev(api.canScrollPrev())
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- État de défilement mis à jour directement pour des raisons de performance
+      setCanScrollNext(api.canScrollNext())
+    }
+
+    updateScrollState()
+    api.on('reInit', updateScrollState)
+    api.on('select', updateScrollState)
 
     return () => {
-      api?.off('select', onSelect)
+      api?.off('select', updateScrollState)
     }
-  }, [api, onSelect])
+  }, [api])
 
   const contextValue = React.useMemo(() => ({
     carouselRef,

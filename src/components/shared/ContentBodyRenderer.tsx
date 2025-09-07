@@ -1,7 +1,7 @@
 'use client'
 
 import type { EnrichedGuide, EnrichedWorkflow } from '@/lib/content-schema'
-import type { AnyContent } from '@/types'
+import type { AnyEnrichedContent } from '@/types'
 import { ArrowLeft, ArrowRight, Target } from 'lucide-react'
 import Link from 'next/link'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
@@ -17,7 +17,7 @@ import { Separator } from '@/components/ui/separator'
 import { StarRating } from '@/components/ui/star-rating'
 
 interface ContentBodyRendererProps {
-  item: AnyContent
+  item: AnyEnrichedContent
   contentType: 'concept' | 'guide' | 'workflow' | 'tool'
 }
 
@@ -44,9 +44,9 @@ export function ContentBodyRenderer({ item, contentType }: ContentBodyRendererPr
 }
 
 // Composant spécifique pour les Concepts
-function ConceptBody({ item }: { item: AnyContent }) {
-  // Guard pour s'assurer que c'est bien un concept
-  if (!('keyTakeaways' in item) || !('category' in item)) {
+function ConceptBody({ item }: { item: AnyEnrichedContent }) {
+  // Guard pour s'assurer que c'est bien un concept enrichi
+  if (!('keyTakeaways' in item) || !('category' in item) || !('relatedItems' in item)) {
     return null
   }
 
@@ -65,7 +65,7 @@ function ConceptBody({ item }: { item: AnyContent }) {
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert">
-            <ContentRenderer content={item.content} />
+            <ContentRenderer content={item.content} currentItem={item} />
           </div>
         </CardContent>
       </Card>
@@ -77,14 +77,13 @@ function ConceptBody({ item }: { item: AnyContent }) {
 }
 
 // Composant spécifique pour les Guides
-function GuideBody({ item }: { item: AnyContent }) {
-  // Guard pour s'assurer que c'est bien un guide
-  if (!('estimatedTime' in item)) {
+function GuideBody({ item }: { item: AnyEnrichedContent }) {
+  // Guard pour s'assurer que c'est bien un guide enrichi
+  if (!('estimatedTime' in item) || !('concepts' in item)) {
     return null
   }
 
-  // eslint-disable-next-line ts/no-explicit-any -- Cast nécessaire car AnyContent contient les types de base mais nous avons besoin des types enrichis
-  const guide = item as any as EnrichedGuide
+  const guide = item as EnrichedGuide
 
   return (
     <>
@@ -105,7 +104,7 @@ function GuideBody({ item }: { item: AnyContent }) {
       )}
 
       {/* Contenu principal */}
-      <ContentRenderer content={guide.content} />
+      <ContentRenderer content={guide.content} currentItem={item} />
 
       <Separator className="my-12" />
 
@@ -116,14 +115,13 @@ function GuideBody({ item }: { item: AnyContent }) {
 }
 
 // Composant spécifique pour les Workflows
-function WorkflowBody({ item }: { item: AnyContent }) {
-  // Guard pour s'assurer que c'est bien un workflow
-  if (!('isWorkflow' in item) || !item.isWorkflow) {
+function WorkflowBody({ item }: { item: AnyEnrichedContent }) {
+  // Guard pour s'assurer que c'est bien un workflow enrichi
+  if (!('isWorkflow' in item) || !item.isWorkflow || !('concepts' in item)) {
     return null
   }
 
-  // eslint-disable-next-line ts/no-explicit-any -- Cast nécessaire car AnyContent contient les types de base mais nous avons besoin des types enrichis
-  const workflow = item as any as EnrichedWorkflow
+  const workflow = item as EnrichedWorkflow
 
   return (
     <>
@@ -136,7 +134,7 @@ function WorkflowBody({ item }: { item: AnyContent }) {
       )}
 
       {/* Contenu du workflow */}
-      <ContentRenderer content={workflow.content} />
+      <ContentRenderer content={workflow.content} currentItem={item} />
 
       {/* Disclaimer Banner */}
       <div className="mt-16">
@@ -168,7 +166,7 @@ function WorkflowBody({ item }: { item: AnyContent }) {
 }
 
 // Composant spécifique pour les Tools
-function ToolBody({ item }: { item: AnyContent }) {
+function ToolBody({ item }: { item: AnyEnrichedContent }) {
   // Guard pour s'assurer que c'est bien un tool
   if (!('url' in item)) {
     return null
@@ -309,7 +307,7 @@ function ToolBody({ item }: { item: AnyContent }) {
       {/* Main Content */}
       {item.content && item.content.length > 0 && (
         <div className="prose dark:prose-invert">
-          <ContentRenderer content={item.content} />
+          <ContentRenderer content={item.content} currentItem={item} />
         </div>
       )}
 

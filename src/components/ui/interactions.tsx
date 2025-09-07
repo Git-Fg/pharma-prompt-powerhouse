@@ -424,8 +424,7 @@ export function AnimatedToast({
       className={cn(
         'fixed top-6 right-6 z-toast',
         'px-4 py-3 rounded-lg shadow-lg',
-        'flex items-center gap-3',
-        'text-content-width',
+        'flex items-center gap-3 container-layout-detail',
         colors[type],
       )}
       initial={{ opacity: 0, x: 100, scale: 0.95 }}
