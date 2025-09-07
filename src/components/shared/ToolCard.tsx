@@ -8,9 +8,9 @@ import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
-import { getIcon } from '@/lib/icon-loader'
 import { getContentUrl } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
+import { getIcon } from '@/types/icon-taxonomy'
 import { InfoButton } from './InfoButton'
 
 interface ToolCardProps {
@@ -20,6 +20,10 @@ interface ToolCardProps {
 export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   // Utilisation des utilitaires centralisés
   const toolUrl = getContentUrl('tool', tool.slug)
+
+  // Créer les composants d'icônes
+  const GlobeIcon = getIcon('Globe')
+  const ExternalLinkIcon = getIcon('ExternalLink')
 
   return (
     <Card className={cn(
@@ -31,7 +35,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4 flex-1">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              {getIcon('Globe')({ className: 'size-6 text-primary' })}
+              <GlobeIcon className="size-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
@@ -66,7 +70,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
             <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full" size="sm">
                 Visiter l'outil
-                {getIcon('ExternalLink')({ className: 'ml-1 size-4' })}
+                <ExternalLinkIcon className="ml-1 size-4" />
               </Button>
             </a>
             <Link href={toolUrl} className="flex-1">
