@@ -1,27 +1,27 @@
 # 🏗️ Architecture Centralisée - Guide du Développeur
 
-Ce document explique l'architecture centralisée mise en place pour garantir la maintenabilité du projet **Pharma Prompt Powerhouse**.
+Ce document explique l'architecture centralisée du projet **Pharma Prompt Powerhouse** pour garantir la maintenabilité et la cohérence du code.
 
 ## 📋 Vue d'ensemble
 
-L'architecture suit le principe **DRY (Don't Repeat Yourself)** et centralise toutes les constantes, configurations et logiques partagées dans des fichiers dédiés.
+L'architecture suit le principe **DRY (Don't Repeat Yourself)** et centralise constantes, configurations et logiques partagées dans des fichiers dédiés.
 
 ## 🎯 Fichiers Centraux
 
-### 1. `/src/lib/constants.ts` - Source de Vérité Unique
+### 1. `/src/lib/constants.ts` - Constantes de Contenu
 
-**Responsabilité** : Centralise toutes les constantes de contenu (labels, catégories, difficultés, etc.)
+**Responsabilité** : Centralise toutes les constantes métier (catégories, difficultés, types de contenu)
 
 ```typescript
 // ✅ FAIRE - Utiliser les constantes centralisées
-import { getCategoryLabel, getDifficultyLabel } from '@/lib/ui-utils'
+import { contentCategories, difficultyLevels } from '@/lib/constants'
 
-const categoryDisplay = getCategoryLabel(guide.category)
-const difficultyDisplay = getDifficultyLabel(guide.difficulty)
+const categoryInfo = contentCategories[guide.category]
+const difficultyInfo = difficultyLevels[guide.difficulty]
 ```
 
 ```typescript
-// ❌ ÉVITER - Hardcoder les labels
+// ❌ ÉVITER - Hardcoder les valeurs
 const categoryDisplay = guide.category === 'fondamentaux' ? 'Fondamentaux 📚' : guide.category
 ```
 
@@ -41,21 +41,27 @@ const baseUrl = env.baseUrl // Adapté automatiquement selon l'environnement
 const baseUrl = 'https://pharma-prompt-powerhouse.vercel.app'
 ```
 
-### 3. `/src/hooks/useContentFilter.ts` - Logique de Filtrage
+### 3. `/src/hooks/useContentFilter.ts` - Logique de Filtrage Unifiée
 
 **Responsabilité** : Centralise toute la logique de filtrage pour les collections de contenu
 
 ```typescript
 // ✅ FAIRE - Utiliser le hook centralisé
-const { filteredItems, searchTerm, setSearchTerm, resetFilters } = useContentFilter(guides)
+const { 
+  filteredItems, 
+  searchTerm, 
+  setSearchTerm, 
+  selectedCategory, 
+  setSelectedCategory,
+  resetFilters 
+} = useContentFilter(items)
 ```
 
 ```typescript
 // ❌ ÉVITER - Dupliquer la logique de filtrage
 const [searchTerm, setSearchTerm] = useState('')
-const filteredItems = guides.filter(guide =>
-  guide.title.toLowerCase().includes(searchTerm.toLowerCase())
-)
+const [selectedCategory, setSelectedCategory] = useState('all')
+const filteredItems = items.filter(item => /* ... */)
 ```
 
 ### 4. `/src/components/ui/variants.ts` - Styles Centralisés
@@ -77,6 +83,24 @@ import { contentCardVariants } from '@/components/ui/variants';
 ### 5. `/src/lib/ui-utils.ts` - Utilitaires d'Interface
 
 **Responsabilité** : Fonctions utilitaires pour l'affichage et la manipulation des données
+
+### 6. `/src/content/glossary.ts` - Glossaire Centralisé
+
+**Responsabilité** : Définitions centralisées pour la détection automatique de termes
+
+```typescript
+// ✅ FAIRE - Ajouter des termes au glossaire
+export const glossary = {
+  'nouveau-terme': {
+    term: 'Nouveau Terme',
+    definition: 'Description claire et concise',
+    category: 'technique'
+  }
+}
+
+// ✅ FAIRE - Utiliser la détection automatique
+<MarkdownRenderer content={content} enableAutoGlossary={true} />
+```
 
 ## 🔧 Bonnes Pratiques
 
