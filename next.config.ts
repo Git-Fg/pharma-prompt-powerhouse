@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 const cspDirectives = [
   `default-src 'self'`,
   // Scripts: plus permissif en développement pour permettre Turbopack et HMR
-  `script-src 'self'${isDevelopment ? " 'unsafe-eval' 'unsafe-inline'" : ''}`,
+  `script-src 'self'${isDevelopment ? ' \'unsafe-eval\' \'unsafe-inline\'' : ''}`,
   `style-src 'self' 'unsafe-inline'`,
   `img-src 'self' data: https: blob:`,
   `font-src 'self' data:`,
