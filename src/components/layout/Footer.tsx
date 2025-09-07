@@ -25,7 +25,7 @@ export function Footer() {
       {...createTestIdProps(TestIds.Layout.Footer)}
       className="bg-muted/50 border-t"
     >
-      <div className="container mx-auto px-4 py-12 md:py-16">
+      <div className="container mx-auto px-4 py-8 md:py-12">
 
         {/* ====================================================================== */}
         {/* == 1. LAYOUT DESKTOP (GRAND ÉCRAN) - Inchangé mais caché par défaut == */}
@@ -37,11 +37,11 @@ export function Footer() {
         >
           {/* Brand Section */}
           <div className="lg:col-span-5 space-y-4" {...createTestIdProps('footer-brand-section')}>
-            <Link href="/" className="inline-flex items-center space-x-3 mb-4" {...createTestIdProps(TestIds.Navigation.Logo)}>
-              <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
-                <Brain className="size-7 text-primary-foreground" />
+            <Link href="/" className="inline-flex items-center space-x-2 mb-3" {...createTestIdProps(TestIds.Navigation.Logo)}>
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+                <Brain className="size-6 text-primary-foreground" />
               </div>
-              <span className="font-bold text-2xl">Pharma Prompt</span>
+              <span className="font-bold text-xl">Pharma Prompt</span>
             </Link>
             <p className="prose-slogan mx-0" {...createTestIdProps('footer-brand-description')}>Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
@@ -152,12 +152,12 @@ export function Footer() {
           </div>
 
           {/* Brand & Description centrés en bas pour mobile */}
-          <div className="text-center mt-12 pt-8 border-t" {...createTestIdProps('mobile-footer-brand')}>
-            <Link href="/" className="inline-flex items-center space-x-3 mb-4" {...createTestIdProps(TestIds.Navigation.Logo)}>
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-md">
-                <Brain className="size-6 text-primary-foreground" />
+          <div className="text-center mt-8 pt-6 border-t" {...createTestIdProps('mobile-footer-brand')}>
+            <Link href="/" className="inline-flex items-center space-x-2 mb-3" {...createTestIdProps(TestIds.Navigation.Logo)}>
+              <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-md">
+                <Brain className="size-5 text-primary-foreground" />
               </div>
-              <span className="font-bold text-xl">Pharma Prompt</span>
+              <span className="font-bold text-lg">Pharma Prompt</span>
             </Link>
             <p className="prose-slogan text-xs mx-auto" {...createTestIdProps('mobile-footer-description')}>Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
@@ -166,7 +166,7 @@ export function Footer() {
         {/* ====================================================================== */}
         {/* == 3. COPYRIGHT - Commun aux deux layouts pour éviter la duplication == */}
         {/* ====================================================================== */}
-        <div className="border-t mt-12 pt-8 text-center" {...createTestIdProps('footer-copyright')}>
+        <div className="border-t mt-8 pt-6 text-center" {...createTestIdProps('footer-copyright')}>
           <p className="text-sm text-muted-foreground">
             ©
             {new Date().getFullYear()}

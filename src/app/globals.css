@@ -573,13 +573,34 @@
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  @media (min-width: var(--breakpoint-sm)) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: var(--breakpoint-lg)) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
+
 @utility container-layout-detail {
-  max-width: 48rem; /* 768px - Optimal width for reading content */
+  max-width: 65rem; /* 1040px - Wider than before for better content reading, matching home page sections */
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  @media (min-width: var(--breakpoint-sm)) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: var(--breakpoint-lg)) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 @utility section-spacing {
