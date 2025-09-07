@@ -6,15 +6,15 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import { useAutoAnimateLayout } from '@/hooks/useAutoAnimate'
-import { getIcon } from '@/lib/icon-loader'
 import { getMobileNavigationLinks } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
+import { getIcon } from '@/types/icon-taxonomy'
 
 interface MobileNavItem {
   name: string
   href: string
-  icon: LucideIcon
+  icon: LucideIcon | React.ComponentType<{ className?: string }>
   isActive: (pathname: string) => boolean
   isSearch?: boolean
 }
