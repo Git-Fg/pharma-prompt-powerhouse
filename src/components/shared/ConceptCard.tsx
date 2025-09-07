@@ -37,8 +37,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
             </CardTitle>
           </div>
           <InfoButton
-            variant="concept"
-            item={concept}
+            content={concept}
             size="md"
             className="ml-2 flex-shrink-0"
           />

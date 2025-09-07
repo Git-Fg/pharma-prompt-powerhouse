@@ -2,6 +2,7 @@
 'use client'
 
 import type { ContentBlock } from '@/lib/content-schema'
+import type { AnyEnrichedContent } from '@/types'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -28,7 +29,7 @@ function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`)
 }
 
-function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
+function BlockSwitch({ block, index, currentItem }: { block: ContentBlock, index: number, currentItem?: AnyEnrichedContent }) {
   const testId = generateContentTestId(block, index)
 
   switch (block.type) {
@@ -48,7 +49,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
         </Alert>
       )
     case 'toolRecommendation':
-      return <ToolRecommendation {...createTestIdProps(testId)} tags={[]} currentSlug={String(block.slug || '')} />
+      return <ToolRecommendation {...createTestIdProps(testId)} tags={currentItem?.tags || []} currentSlug={String(block.slug || '')} />
     case 'guideRecommendation':
       return <GuideRecommendation {...createTestIdProps(testId)} guideSlug={String(block.slug || '')} reason={String(block.reason || '')} />
     case 'conceptRecommendation':
@@ -78,7 +79,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
       )
     case 'tabs':
       return (
-        <Card padding="sm" {...createTestIdProps(testId)} className="my-6">
+        <Card {...createTestIdProps(testId)} className="my-6">
           <CardContent>
             <Tabs defaultValue={block.defaultValue || block.tabs[0]?.value}>
               <TabsList className="grid w-full gap-1" style={{ gridTemplateColumns: `repeat(${block.tabs.length}, 1fr)` }}>
@@ -104,7 +105,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
                     const blockKey = 'id' in subBlock && typeof subBlock.id === 'string'
                       ? subBlock.id
                       : `${subBlock.type}-${idx}`
-                    return <BlockSwitch key={`${tab.value}-${blockKey}`} block={subBlock} index={idx} />
+                    return <BlockSwitch key={`${tab.value}-${blockKey}`} block={subBlock} index={idx} currentItem={currentItem} />
                   })}
                 </TabsContent>
               ))}
@@ -229,7 +230,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
                 {item.title}
               </AccordionTrigger>
               <AccordionContent {...createTestIdProps(generateTestId('accordion', 'content', index))}>
-                <ContentRenderer content={item.content} />
+                <ContentRenderer content={item.content} currentItem={currentItem} />
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -306,7 +307,7 @@ function BlockSwitch({ block, index }: { block: ContentBlock, index: number }) {
 
 // Suppression du code dupliqué et conservation du switch exhaustif
 
-export function ContentRenderer({ content }: { content: ContentBlock[] }) {
+export function ContentRenderer({ content, currentItem }: { content: ContentBlock[], currentItem?: AnyEnrichedContent }) {
   if (!content || content.length === 0)
     return null
 
@@ -317,7 +318,7 @@ export function ContentRenderer({ content }: { content: ContentBlock[] }) {
         const blockKey = 'id' in block && typeof block.id === 'string'
           ? block.id
           : `${block.type}-${index}`
-        return <BlockSwitch key={`content-${blockKey}`} block={block} index={index} />
+        return <BlockSwitch key={`content-${blockKey}`} block={block} index={index} currentItem={currentItem} />
       })}
     </>
   )

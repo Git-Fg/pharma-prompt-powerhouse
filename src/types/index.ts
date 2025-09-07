@@ -14,9 +14,16 @@ export type {
   Workflow,
 } from '@/lib/content-schema'
 
-// Type global pour représenter n'importe quel élément de nos collections.
+// Type global pour représenter n'importe quel élément de nos collections (types de base).
 export type AnyContent
   = | import('@/lib/content-schema').Concept
     | import('@/lib/content-schema').Guide
     | import('@/lib/content-schema').Workflow
+    | import('@/lib/content-schema').ExternalTool
+
+// Type global pour représenter n'importe quel élément enrichi de nos collections.
+export type AnyEnrichedContent
+  = | import('@/lib/content-schema').EnrichedConcept
+    | import('@/lib/content-schema').EnrichedGuide
+    | import('@/lib/content-schema').EnrichedWorkflow
     | import('@/lib/content-schema').ExternalTool

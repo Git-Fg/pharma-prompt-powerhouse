@@ -84,17 +84,19 @@ const cardFooterVariants = cva(
 )
 
 interface CardProps extends React.ComponentProps<'div'> {
-  padding?: 'sm' | 'md' | 'lg'
+  // La prop padding est supprimée pour forcer l'utilisation des sous-composants
+  // CardHeader, CardContent, et CardFooter qui ont déjà un padding standardisé
 }
 
-function Card({ className, padding = 'md', children, ...props }: CardProps) {
-  const contextValue = React.useMemo(() => ({ padding }), [padding])
+function Card({ className, children, ...props }: CardProps) {
+  // Padding par défaut pour les cartes sans sous-composants
+  const contextValue = React.useMemo(() => ({ padding: 'md' as const }), [])
   return (
     <CardContext.Provider value={contextValue}>
       <div
         data-slot="card"
         className={cn(
-          cardVariants({ padding }),
+          cardVariants({ padding: 'md' }),
           className,
         )}
         {...props}

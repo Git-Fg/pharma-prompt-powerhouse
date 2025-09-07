@@ -2,6 +2,7 @@
 
 import { Download, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Container } from '@/components/layout/Container'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -93,35 +94,37 @@ export function InstallPrompt() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 md:left-auto md:right-4 md:text-content-width">
-      <Card className="shadow-lg border-2 border-primary/20">
-        <CardHeader className="pb-2">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Installer l'app</CardTitle>
+    <div className="fixed bottom-4 left-4 right-4 z-50 md:left-auto md:right-4">
+      <Container variant="detail" className="px-0">
+        <Card className="shadow-lg border-2 border-primary/20">
+          <CardHeader className="pb-2">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">Installer l'app</CardTitle>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleDismiss}
+                className="h-6 w-6 p-0"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            <CardDescription>
+              Accédez plus rapidement à vos workflows et travaillez hors ligne
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
             <Button
-              variant="ghost"
+              onClick={handleInstallClick}
+              className="w-full"
               size="sm"
-              onClick={handleDismiss}
-              className="h-6 w-6 p-0"
             >
-              <X className="h-4 w-4" />
+              <Download className="h-4 w-4 mr-2" />
+              Installer
             </Button>
-          </div>
-          <CardDescription>
-            Accédez plus rapidement à vos workflows et travaillez hors ligne
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <Button
-            onClick={handleInstallClick}
-            className="w-full"
-            size="sm"
-          >
-            <Download className="h-4 w-4 mr-2" />
-            Installer
-          </Button>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </Container>
     </div>
   )
 }

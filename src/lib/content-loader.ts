@@ -7,7 +7,7 @@ import type {
   EnrichedGuide,
   EnrichedWorkflow,
 } from './content-schema'
-import type { AnyContent } from '@/types'
+import type { AnyEnrichedContent } from '@/types'
 import { allConcepts } from '@/content/concepts'
 import { allExternalTools } from '@/content/external-tools'
 import { allGuides } from '@/content/guides'
@@ -414,7 +414,7 @@ export function getExternalToolBySlug(slug: string): BaseExternalTool | undefine
  * @param slug Slug du contenu
  * @returns L'objet contenu ou undefined si non trouvé
  */
-export function getContentItem(contentType: string, slug: string): AnyContent | undefined {
+export function getContentItem(contentType: string, slug: string): AnyEnrichedContent | undefined {
   switch (contentType) {
     case 'concept':
       return getConceptBySlug(slug)

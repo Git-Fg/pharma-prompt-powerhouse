@@ -1,7 +1,7 @@
 // =================================================================
 // HOOK DE FILTRAGE UNIVERSEL POUR LE CONTENU
 // =================================================================
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 // Interface de base que tous les contenus doivent respecter
 interface BaseContent {
@@ -120,29 +120,29 @@ export function useContentFilter<T extends BaseContent>(
   ])
 
   // Fonctions d'action
-  const resetFilters = useCallback(() => {
+  const resetFilters = () => {
     setSearchTerm('')
     setSelectedCategory('all')
     setSelectedDifficulty('all')
     setSelectedTags([])
     setShowFavoritesOnly(false)
-  }, [])
+  }
 
-  const addTag = useCallback((tag: string) => {
+  const addTag = (tag: string) => {
     setSelectedTags(prev => prev.includes(tag) ? prev : [...prev, tag])
-  }, [])
+  }
 
-  const removeTag = useCallback((tag: string) => {
+  const removeTag = (tag: string) => {
     setSelectedTags(prev => prev.filter(t => t !== tag))
-  }, [])
+  }
 
-  const toggleTag = useCallback((tag: string) => {
+  const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
       prev.includes(tag)
         ? prev.filter(t => t !== tag)
         : [...prev, tag],
     )
-  }, [])
+  }
 
   // Statistiques utiles
   const stats = useMemo(() => ({

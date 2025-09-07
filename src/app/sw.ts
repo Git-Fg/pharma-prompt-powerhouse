@@ -104,18 +104,47 @@ const serwist = new Serwist({
             maxAgeSeconds: 24 * 60 * 60, // 24 hours
           }),
           {
-            // Modern offline experience - return cached content with notification
-            handlerDidError: async () => {
-              return new Response(
-                JSON.stringify({
-                  offline: true,
-                  message: 'Contenu disponible hors ligne',
-                }),
-                {
-                  headers: { 'Content-Type': 'application/json' },
-                  status: 200,
-                },
-              )
+            // Modern offline experience - serve cached content or fallback to offline page
+            handlerDidError: async ({ request }) => {
+              try {
+                // Try to serve from cache first
+                const cache = await caches.open('critical-pages')
+                const cachedResponse = await cache.match(request)
+
+                if (cachedResponse) {
+                  // Notify client that we're serving cached content
+                  const clients = await self.clients.matchAll()
+                  clients.forEach((client) => {
+                    client.postMessage({
+                      type: 'CACHE_ONLY_RESPONSE',
+                      url: request.url,
+                    })
+                  })
+                  return cachedResponse
+                }
+
+                // Fallback to home page if specific page not cached
+                const homeResponse = await cache.match('/')
+                if (homeResponse) {
+                  return homeResponse
+                }
+
+                // Last resort - return minimal offline response
+                return new Response(
+                  JSON.stringify({
+                    offline: true,
+                    message: 'Contenu disponible hors ligne',
+                  }),
+                  {
+                    headers: { 'Content-Type': 'application/json' },
+                    status: 200,
+                  },
+                )
+              }
+              catch (error) {
+                console.error('Cache fallback error:', error)
+                return new Response('Service temporairement indisponible', { status: 503 })
+              }
             },
           },
         ],

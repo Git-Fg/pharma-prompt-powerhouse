@@ -2,6 +2,7 @@
 
 import { BookOpen, Search } from 'lucide-react'
 import React from 'react'
+import { Container } from '@/components/layout/Container'
 import Button from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -86,7 +87,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
       <div className="space-y-6" {...createTestIdProps(TestIds.Content.Section('empty-state'))}>
         {/* Search and Filters */}
         <div className="space-y-4">
-          <div className="relative dialog-content-width mx-auto" {...createTestIdProps(TestIds.Form.Input('search'))}>
+          <Container variant="detail" className="relative px-0" {...createTestIdProps(TestIds.Form.Input('search'))}>
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
             <Input
               placeholder={searchPlaceholder}
@@ -94,7 +95,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
               onChange={e => setSearchTerm(e.target.value)}
               className="pl-10"
             />
-          </div>
+          </Container>
 
           {(showCategoryFilter && categories.length > 1) && (
             <div className="flex justify-center gap-2 flex-wrap" {...createTestIdProps(TestIds.Form.Select('category'))}>
@@ -156,7 +157,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
     <div className="space-y-6">
       {/* Search and Filters */}
       <div className="space-y-4">
-        <div className="relative dialog-content-width mx-auto" {...createTestIdProps(TestIds.Form.Input('search'))}>
+        <Container variant="detail" className="relative px-0" {...createTestIdProps(TestIds.Form.Input('search'))}>
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
           <Input
             placeholder={searchPlaceholder}
@@ -164,7 +165,7 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
             onChange={e => setSearchTerm(e.target.value)}
             className="pl-10"
           />
-        </div>
+        </Container>
 
         <div className="flex justify-center gap-4 flex-wrap" {...createTestIdProps(TestIds.Content.Section('filters'))}>
           {(showCategoryFilter && categories.length > 1) && (

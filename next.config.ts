@@ -1,29 +1,14 @@
 import type { NextConfig } from 'next'
 import withSerwistInit from '@serwist/next'
 
-// Déterminer si nous sommes dans un environnement de développement ou de prévisualisation Vercel
-const isDevEnvironment = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview'
-
-// Sources fiables pour Vercel (uniquement en dev/preview)
-const vercelSources = [
-  'https://vercel.live', // Vercel Toolbar
-  'https://vercel.com',
-  'https://assets.vercel.com',
-  'https://vercel-insights.com',
-]
-
-// Construction de la CSP
+// Construction de la CSP simplifiée et sécurisée
 const cspDirectives = [
   `default-src 'self'`,
-  // On retire 'unsafe-eval' qui n'est plus nécessaire et dangereux.
-  // On ajoute les sources Vercel uniquement en environnement de développement/preview.
-  `script-src 'self' 'unsafe-inline' ${isDevEnvironment ? vercelSources.join(' ') : ''}`,
+  `script-src 'self'`, // Retrait de 'unsafe-inline' pour renforcer la sécurité
   `style-src 'self' 'unsafe-inline'`,
-  // On ajoute les sources Vercel pour les images (avatars de la toolbar, etc.)
-  `img-src 'self' data: https: blob: ${isDevEnvironment ? '*.vercel.com *.vercel-insights.com' : ''}`,
-  `font-src 'self' data: ${isDevEnvironment ? 'assets.vercel.com' : ''}`,
-  // On ajoute les sources Vercel pour les connexions (analytics, etc.)
-  `connect-src 'self' https://api.github.com ${isDevEnvironment ? vercelSources.join(' ') : ''}`,
+  `img-src 'self' data: https: blob:`,
+  `font-src 'self' data:`,
+  `connect-src 'self' https://api.github.com *.vercel-insights.com`,
   `media-src 'self'`,
   `worker-src 'self' blob:`,
   `child-src 'self'`,

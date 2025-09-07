@@ -23,7 +23,7 @@ export function ContentMetadata({ item }: ContentMetadataProps) {
   }
 
   return (
-    <Card padding="sm" className="my-8 bg-muted/50">
+    <Card className="my-8 bg-muted/50">
       <CardContent>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
           {hasDifficulty && (

@@ -8,7 +8,7 @@ import Button from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 
-export type CollectionType = 'concepts' | 'guides' | 'workflows'
+export type CollectionType = 'concepts' | 'guides' | 'workflows' | 'tools'
 
 export interface CollectionPageProps {
   type: CollectionType
@@ -70,6 +70,28 @@ export function getCollectionStats(type: CollectionType): StatCardProps[] {
         { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },
       ]
     }
+
+    case 'tools': {
+      const tools = content.externalTools
+      const totalTools = tools.length
+      const favoriteCount = tools.filter(t => t.isFavorite).length
+      const reviewedCount = tools.filter(t => t.personalReview).length
+      const freeCount = tools.filter((t) => {
+        // Safe check for freeVsPaidOffer
+        if (!t.freeVsPaidOffer)
+          return true
+        if (typeof t.freeVsPaidOffer !== 'string')
+          return false
+        return t.freeVsPaidOffer.includes('Gratuit')
+      }).length
+
+      return [
+        { value: totalTools, label: 'Outils testés', type: 'tools' },
+        { value: favoriteCount, label: 'Favoris', type: 'primary' },
+        { value: reviewedCount, label: 'Avis détaillés', type: 'workflows' },
+        { value: freeCount, label: 'Accès gratuit', type: 'guides' },
+      ]
+    }
   }
 }
 
@@ -81,6 +103,9 @@ export function getCollectionItems(type: CollectionType) {
       return content.guides
     case 'workflows':
       return content.workflows
+    case 'tools':
+      // Return empty array for tools since they don't use FilterableContentList
+      return []
   }
 }
 
@@ -107,6 +132,13 @@ export function getCollectionConfig(type: CollectionType) {
         showDifficultyFilter: true,
         gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
       }
+    case 'tools':
+      return {
+        searchPlaceholder: 'Rechercher un outil...',
+        showCategoryFilter: true,
+        showDifficultyFilter: false,
+        gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+      }
   }
 }
 
@@ -121,14 +153,18 @@ export function CollectionPage({ type, title, description, children }: Collectio
       description={description}
       stats={stats}
     >
-      <FilterableContentList
-        items={items}
-        type={type}
-        searchPlaceholder={config.searchPlaceholder}
-        showCategoryFilter={config.showCategoryFilter}
-        showDifficultyFilter={config.showDifficultyFilter}
-        gridClassName={config.gridClassName}
-      />
+      {type !== 'tools'
+        ? (
+            <FilterableContentList
+              items={items}
+              type={type}
+              searchPlaceholder={config.searchPlaceholder}
+              showCategoryFilter={config.showCategoryFilter}
+              showDifficultyFilter={config.showDifficultyFilter}
+              gridClassName={config.gridClassName}
+            />
+          )
+        : null}
 
       {type === 'concepts' && (
         <>
