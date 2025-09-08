@@ -1,15 +1,16 @@
 /**
  * Modern Test Utilities 2025
- * 
+ *
  * Utilitaires de test modernes utilisant les meilleures pratiques :
  * - @testing-library/react pour le rendu
  * - @testing-library/user-event pour les interactions
  * - Glass Box Principle
  */
 
-import { render, screen, type RenderOptions } from '@testing-library/react'
+import type { RenderOptions } from '@testing-library/react'
+import type { ReactElement } from 'react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { type ReactElement } from 'react'
 import { vi } from 'vitest'
 
 /**
@@ -25,21 +26,21 @@ export interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
  */
 export function renderWithUserEvent(
   ui: ReactElement,
-  options: CustomRenderOptions = {}
+  options: CustomRenderOptions = {},
 ) {
   const { userEventOptions, ...renderOptions } = options
-  
+
   // Configuration user-event optimisée pour browser mode
   const user = userEvent.setup({
     delay: null, // Tests plus rapides
-    ...userEventOptions
+    ...userEventOptions,
   })
-  
+
   const renderResult = render(ui, renderOptions)
-  
+
   return {
     user,
-    ...renderResult
+    ...renderResult,
   }
 }
 
@@ -58,9 +59,9 @@ export const TestDataFactory = {
     isWorkflow: false,
     content: [],
     conceptSlugs: ['test-concept'],
-    ...overrides
+    ...overrides,
   }),
-  
+
   concept: (overrides = {}) => ({
     slug: 'test-concept',
     title: 'Concept de Test',
@@ -71,9 +72,9 @@ export const TestDataFactory = {
     isFavorite: false,
     keyTakeaways: ['Point clé 1', 'Point clé 2'],
     content: [],
-    ...overrides
+    ...overrides,
   }),
-  
+
   workflow: (overrides = {}) => ({
     slug: 'test-workflow',
     title: 'Workflow de Test',
@@ -85,9 +86,9 @@ export const TestDataFactory = {
     isWorkflow: true,
     content: [],
     conceptSlugs: ['test-concept'],
-    ...overrides
+    ...overrides,
   }),
-  
+
   externalTool: (overrides = {}) => ({
     slug: 'test-tool',
     title: 'Outil Externe',
@@ -98,8 +99,8 @@ export const TestDataFactory = {
     isFavorite: false,
     url: 'https://example.com',
     content: [],
-    ...overrides
-  })
+    ...overrides,
+  }),
 }
 
 /**
@@ -113,12 +114,15 @@ export const AccessibilityTestUtils = {
     expect(button).toBeInTheDocument()
     expect(button).toBeVisible()
     expect(button).toBeEnabled()
-    expect(button).toHaveAttribute('type')
+    // Un bouton peut ne pas avoir type (implicitement "submit" dans un form, "button" sinon)
+    if (button.tagName.toLowerCase() === 'button') {
+      expect(button).toHaveAttribute('type')
+    }
     // Un bouton doit avoir un nom accessible (soit textContent, soit aria-label)
     const hasAccessibleName = button.textContent?.trim() || button.getAttribute('aria-label')
     expect(hasAccessibleName).toBeTruthy()
   },
-  
+
   /**
    * Vérifie qu'un lien est accessible
    */
@@ -132,14 +136,14 @@ export const AccessibilityTestUtils = {
     const hasAccessibleName = link.textContent?.trim() || link.getAttribute('aria-label')
     expect(hasAccessibleName).toBeTruthy()
   },
-  
+
   /**
    * Vérifie qu'un élément interactif a le bon focus
    */
   expectProperFocus(element: HTMLElement) {
     expect(element).toHaveFocus()
     expect(element).toBeVisible()
-  }
+  },
 }
 
 /**
@@ -154,7 +158,7 @@ export const UserInteractionUtils = {
     expect(element).toBeEnabled()
     await user.click(element)
   },
-  
+
   /**
    * Tape du texte dans un champ avec validation
    */
@@ -164,13 +168,13 @@ export const UserInteractionUtils = {
     await user.type(field, text)
     expect(field).toHaveValue(text)
   },
-  
+
   /**
    * Navigation au clavier
    */
   async navigateWithKeyboard(user: ReturnType<typeof userEvent.setup>, key: string) {
     await user.keyboard(key)
-  }
+  },
 }
 
 /**
@@ -186,7 +190,7 @@ export const TestAssertions = {
     expect(element).toBeVisible()
     return element
   },
-  
+
   /**
    * Vérifie qu'un élément avec test-id existe (peut être caché)
    */
@@ -195,14 +199,14 @@ export const TestAssertions = {
     expect(element).toBeInTheDocument()
     return element
   },
-  
+
   /**
    * Vérifie qu'un élément avec test-id n'existe pas
    */
   expectTestIdNotExists(testId: string) {
     expect(screen.queryByTestId(testId)).not.toBeInTheDocument()
   },
-  
+
   /**
    * Vérifie qu'un texte est présent et visible
    */
@@ -212,18 +216,18 @@ export const TestAssertions = {
     expect(element).toBeVisible()
     return element
   },
-  
+
   /**
    * Gère les éléments dupliqués (desktop/mobile)
    */
   expectDuplicatedElements(testId: string, expectedCount: number = 2) {
     const elements = screen.getAllByTestId(testId)
     expect(elements).toHaveLength(expectedCount)
-    elements.forEach(element => {
+    elements.forEach((element) => {
       expect(element).toBeInTheDocument()
     })
     return elements
-  }
+  },
 }
 
 /**
@@ -236,20 +240,20 @@ export const MockFactories = {
     back: vi.fn(),
     forward: vi.fn(),
     refresh: vi.fn(),
-    prefetch: vi.fn()
+    prefetch: vi.fn(),
   }),
-  
+
   theme: (overrides = {}) => ({
     theme: 'light',
     setTheme: vi.fn(),
     systemTheme: 'light',
     themes: ['light', 'dark'],
     resolvedTheme: 'light',
-    ...overrides
+    ...overrides,
   }),
-  
-  searchParams: (params: Record<string, string> = {}) => 
-    new URLSearchParams(params)
+
+  searchParams: (params: Record<string, string> = {}) =>
+    new URLSearchParams(params),
 }
 
 /**
@@ -265,5 +269,5 @@ export function clearAllMocks() {
 export {
   render,
   screen,
-  userEvent
+  userEvent,
 }

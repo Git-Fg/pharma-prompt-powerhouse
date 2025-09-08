@@ -232,7 +232,7 @@ Your team of agents is equipped with powerful tools to enhance their analysis an
 
 **What to Mock (Dépendances Externes):**
 - `next/navigation` - APIs de navigation du framework
-- `next/link` - Composants de routage du framework  
+- `next/link` - Composants de routage du framework
 - `@/lib/content-loader` - Chargement des données et logique métier
 - `next-themes` - Gestion des thèmes
 - Browser APIs - `ResizeObserver`, `scrollIntoView`
