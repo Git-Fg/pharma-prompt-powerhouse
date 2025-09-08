@@ -1,9 +1,9 @@
-import React from 'react'
 import { useTheme } from 'next-themes'
+import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Header } from '@/components/layout/Header'
-import { createMockTheme } from '@/tests/utils/mocks'
-import { fireEvent, render, screen } from '@/tests/utils/test-utils'
+import { createMockTheme } from '../utils/mocks'
+import { fireEvent, render, screen } from '../utils/test-utils'
 
 // Mock next-themes (not mocked globally)
 vi.mock('next-themes', () => ({

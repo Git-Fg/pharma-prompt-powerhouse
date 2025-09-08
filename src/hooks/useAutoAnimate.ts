@@ -69,12 +69,25 @@ export function useAutoAnimateGrid(options?: {
 export function useAutoAnimateWithConfig(options?: {
   duration?: number
   easing?: string
+  disrespectUserMotionPreference?: boolean
 }) {
   const prefersReducedMotion = useReducedMotion()
-  const [enabledRef] = useAutoAnimate({
-    duration: options?.duration || 250,
-    easing: options?.easing || 'ease-in-out',
-  })
 
-  return prefersReducedMotion ? null : enabledRef
+  // Use the options as provided, with defaults for required properties
+  const config = options
+    ? {
+        ...options,
+        duration: options.duration ?? 250,
+        easing: options.easing ?? 'ease-in-out',
+      }
+    : {
+        duration: 250,
+        easing: 'ease-in-out',
+      }
+
+  const [enabledRef] = useAutoAnimate(config)
+
+  // Return null if user prefers reduced motion and we should respect that preference
+  const shouldDisableAnimation = prefersReducedMotion && !options?.disrespectUserMotionPreference
+  return shouldDisableAnimation ? null : enabledRef
 }

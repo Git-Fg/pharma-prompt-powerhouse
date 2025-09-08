@@ -28,7 +28,7 @@ export function ContentHeader({ item }: ContentHeaderProps) {
           <Button asChild size="lg">
             <a href={item.url} target="_blank" rel="noopener noreferrer">
               Visiter l'outil
-              <ExternalLink className="ml-2 size-4" />
+              <ExternalLink className="ml-2 size-4" data-testid="external-link-icon" />
             </a>
           </Button>
         </div>
