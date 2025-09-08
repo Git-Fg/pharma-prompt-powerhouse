@@ -1,0 +1,146 @@
+/**
+ * Test refactorisé pour BreadcrumbNavigation - Version moderne 2025
+ * 
+ * Applique le Glass Box Principle :
+ * - Mock UNIQUEMENT les dépendances externes (navigation, data)
+ * - Les composants UI internes restent réels pour tester l'intégration
+ */
+
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { renderWithUserEvent, TestAssertions, clearAllMocks } from '../utils/modern-test-utils'
+import { BreadcrumbNavigation } from '@/components/layout/BreadcrumbNavigation'
+
+// Mock UNIQUEMENT les dépendances externes selon Glass Box Principle
+const mockUsePathname = vi.fn()
+const mockFormatBreadcrumbSegments = vi.fn()
+
+vi.mock('next/navigation', () => ({
+  usePathname: () => mockUsePathname()
+}))
+
+vi.mock('@/lib/navigation', () => ({
+  formatBreadcrumbSegments: () => mockFormatBreadcrumbSegments()
+}))
+
+describe('BreadcrumbNavigation - Modern Testing', () => {
+  beforeEach(() => {
+    clearAllMocks()
+    
+    // Configuration par défaut
+    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockFormatBreadcrumbSegments.mockReturnValue([
+      { name: 'Accueil', href: '/', isCurrent: false },
+      { name: 'Concepts', href: '/concepts', isCurrent: false },
+      { name: 'chain of thought', href: '/concepts/chain-of-thought', isCurrent: true },
+    ])
+  })
+
+  it('should render breadcrumb navigation with real UI components', () => {
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Test avec les composants réels - pas de mocks d'UI
+    const navigation = document.querySelector('nav')
+    expect(navigation).toBeInTheDocument()
+    expect(navigation).toHaveClass('mb-8')
+    
+    // Vérifier les breadcrumbs avec sélecteurs robustes
+    const breadcrumbItems = document.querySelectorAll('[role="listitem"]')
+    expect(breadcrumbItems).toHaveLength(3)
+    
+    // Vérifier le contenu avec des assertions modernes
+    TestAssertions.expectTextVisible('Accueil')
+    TestAssertions.expectTextVisible('Concepts')
+    TestAssertions.expectTextVisible('chain of thought')
+  })
+
+  it('should render proper links for non-current items', () => {
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Les liens doivent être accessibles et bien formés
+    const homeLink = document.querySelector('a[href="/"]')
+    expect(homeLink).toBeInTheDocument()
+    expect(homeLink).toHaveTextContent('Accueil')
+    
+    const conceptsLink = document.querySelector('a[href="/concepts"]')
+    expect(conceptsLink).toBeInTheDocument()
+    expect(conceptsLink).toHaveTextContent('Concepts')
+    
+    // L'élément actuel ne doit pas être un lien
+    const currentElement = document.querySelector('[aria-current]')
+    expect(currentElement).not.toHaveAttribute('href')
+    expect(currentElement).toHaveTextContent('chain of thought')
+  })
+
+  it('should handle single level path correctly', () => {
+    mockUsePathname.mockReturnValue('/concepts')
+    mockFormatBreadcrumbSegments.mockReturnValue([
+      { name: 'Accueil', href: '/', isCurrent: false },
+      { name: 'Concepts', href: '/concepts', isCurrent: true },
+    ])
+    
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    const breadcrumbItems = document.querySelectorAll('[role="listitem"]')
+    expect(breadcrumbItems).toHaveLength(2)
+    
+    // Vérifier la structure des séparateurs
+    const separators = document.querySelectorAll('[data-slot="breadcrumb-separator"]')
+    expect(separators).toHaveLength(1) // n-1 séparateurs pour n éléments
+  })
+
+  it('should handle root path by returning null', () => {
+    mockUsePathname.mockReturnValue('/')
+    mockFormatBreadcrumbSegments.mockReturnValue([])
+    
+    const { container } = renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Pour le chemin racine, le composant retourne null
+    expect(container.firstChild).toBeNull()
+  })
+
+  it('should apply proper styling with real CSS classes', () => {
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Vérifier que les classes CSS réelles sont appliquées
+    const currentPage = document.querySelector('[aria-current]')
+    expect(currentPage).toHaveClass('capitalize')
+    
+    const links = document.querySelectorAll('a')
+    links.forEach(link => {
+      expect(link).toHaveClass('capitalize')
+    })
+  })
+
+  it('should handle complex path segments with hyphens', () => {
+    mockUsePathname.mockReturnValue('/guides/techniques-avancees-fiabilisation')
+    mockFormatBreadcrumbSegments.mockReturnValue([
+      { name: 'Accueil', href: '/', isCurrent: false },
+      { name: 'Guides', href: '/guides', isCurrent: false },
+      { name: 'techniques avancees fiabilisation', href: '/guides/techniques-avancees-fiabilisation', isCurrent: true },
+    ])
+    
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Test des transformations de slug complexes
+    TestAssertions.expectTextVisible('techniques avancees fiabilisation')
+    
+    const breadcrumbItems = document.querySelectorAll('[role="listitem"]')
+    expect(breadcrumbItems).toHaveLength(3)
+  })
+
+  it('should be accessible with proper ARIA attributes', () => {
+    renderWithUserEvent(<BreadcrumbNavigation />)
+    
+    // Vérifier l'accessibilité de la navigation
+    const nav = document.querySelector('nav')
+    expect(nav).toHaveAttribute('role', 'navigation')
+    
+    // Vérifier les éléments de liste
+    const list = document.querySelector('ol')
+    expect(list).toBeInTheDocument()
+    
+    // Vérifier l'élément actuel
+    const currentItem = document.querySelector('[aria-current]')
+    expect(currentItem).toHaveAttribute('aria-current', 'page')
+  })
+})
