@@ -66,7 +66,7 @@ vi.mock('next/navigation', async () => {
 
 // Mock global pour next/link
 vi.mock('next/link', () => ({
-  default: ({ children, href, ...props }: any) => {
+  default: ({ children, href, ...props }: { children: React.ReactNode, href: string, [key: string]: unknown }) => {
     return React.createElement('a', { href, ...props }, children)
   },
 }))
@@ -77,5 +77,5 @@ vi.mock('next-themes', () => ({
     theme: 'light',
     setTheme: vi.fn(),
   })),
-  ThemeProvider: ({ children }: any) => children,
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => children,
 }))

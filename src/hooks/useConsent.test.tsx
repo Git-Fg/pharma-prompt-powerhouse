@@ -1,5 +1,5 @@
-import { act, render, renderHook, screen } from '@/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { act, render, renderHook, screen } from '@/test-utils'
 import { ConsentProvider, useConsent } from './useConsent'
 
 // Mock localStorage
@@ -62,7 +62,7 @@ describe('useConsent', () => {
   describe('consent actions', () => {
     it('should accept consent and update localStorage', () => {
       const { result } = renderHook(() => useConsent(), { wrapper: TestWrapper })
-      
+
       act(() => {
         result.current.accept()
       })
@@ -73,7 +73,7 @@ describe('useConsent', () => {
 
     it('should decline consent and update localStorage', () => {
       const { result } = renderHook(() => useConsent(), { wrapper: TestWrapper })
-      
+
       act(() => {
         result.current.decline()
       })
@@ -125,7 +125,7 @@ describe('useConsent', () => {
       })
 
       const { result } = renderHook(() => useConsent(), { wrapper: TestWrapper })
-      
+
       act(() => {
         result.current.accept()
       })

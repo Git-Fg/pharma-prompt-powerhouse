@@ -1,6 +1,6 @@
 import type { ContentBlock } from '@/lib/content-schema'
-import { render, screen } from '@/test-utils'
 import { describe, expect, it, vi } from 'vitest'
+import { render, screen } from '@/test-utils'
 import { ContentRenderer } from './ContentRenderer'
 
 // Mock child components to focus on ContentRenderer logic
@@ -19,7 +19,9 @@ vi.mock('@/components/shared/ToolRecommendation', () => ({
 vi.mock('@/components/shared/GuideRecommendation', () => ({
   GuideRecommendation: ({ guideSlug, reason }: { guideSlug: string, reason: string }) => (
     <div data-testid="guide-recommendation">
-      {guideSlug}: {reason}
+      {guideSlug}
+      :
+      {reason}
     </div>
   ),
 }))
@@ -27,7 +29,9 @@ vi.mock('@/components/shared/GuideRecommendation', () => ({
 vi.mock('@/components/shared/ConceptRecommendation', () => ({
   ConceptRecommendation: ({ conceptSlug, reason }: { conceptSlug: string, reason: string }) => (
     <div data-testid="concept-recommendation">
-      {conceptSlug}: {reason}
+      {conceptSlug}
+      :
+      {reason}
     </div>
   ),
 }))
@@ -40,7 +44,7 @@ vi.mock('@/components/ui/code-block', () => ({
   ),
 }))
 
-describe('ContentRenderer', () => {
+describe('contentRenderer', () => {
   it('should render markdown content blocks', () => {
     const contentBlocks: ContentBlock[] = [
       {
@@ -115,7 +119,7 @@ describe('ContentRenderer', () => {
     render(<ContentRenderer content={contentBlocks} />)
 
     expect(screen.getByTestId('guide-recommendation')).toHaveTextContent(
-      'test-guide: Helpful for understanding concepts'
+      'test-guide: Helpful for understanding concepts',
     )
   })
 
@@ -131,7 +135,7 @@ describe('ContentRenderer', () => {
     render(<ContentRenderer content={contentBlocks} />)
 
     expect(screen.getByTestId('concept-recommendation')).toHaveTextContent(
-      'test-concept: Essential background knowledge'
+      'test-concept: Essential background knowledge',
     )
   })
 
@@ -214,10 +218,10 @@ describe('ContentRenderer', () => {
     // Check that all elements are rendered
     const textBlocks = screen.getAllByTestId('markdown-content')
     expect(textBlocks).toHaveLength(3)
-    
+
     const codeBlock = screen.getByTestId('code-block')
     expect(codeBlock).toBeInTheDocument()
-    
+
     const guideRec = screen.getByTestId('guide-recommendation')
     expect(guideRec).toBeInTheDocument()
   })

@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 
 // Re-export des utilitaires de testing-library pour simplifier les imports
-export { fireEvent, render, renderHook, screen, waitFor, within, act } from '@testing-library/react'
+export { act, fireEvent, render, renderHook, screen, waitFor, within } from '@testing-library/react'
 export { userEvent }
 export { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 

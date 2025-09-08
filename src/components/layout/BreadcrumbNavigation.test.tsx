@@ -1,5 +1,5 @@
-import { render, screen } from '@/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { render, screen } from '@/test-utils'
 import { BreadcrumbNavigation } from './BreadcrumbNavigation'
 
 // Mock the Next.js navigation module
@@ -16,7 +16,7 @@ vi.mock('@/lib/navigation', () => ({
   formatBreadcrumbSegments: () => mockFormatBreadcrumbSegments(),
 }))
 
-describe('BreadcrumbNavigation Component', () => {
+describe('breadcrumbNavigation Component', () => {
   beforeEach(() => {
     vi.clearAllMocks()
 
@@ -37,7 +37,7 @@ describe('BreadcrumbNavigation Component', () => {
     expect(screen.getAllByText('Accueil')).toHaveLength(2)
     expect(screen.getByText('Concepts')).toBeInTheDocument()
     expect(screen.getByText('chain of thought')).toBeInTheDocument()
-  }))
+  })
 
   it('should render links for all but the last breadcrumb', () => {
     mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
@@ -137,7 +137,7 @@ describe('BreadcrumbNavigation Component', () => {
 
       const homeLink = screen.getByText('Accueil').closest('a')
       const conceptsLink = screen.getByText('Concepts').closest('a')
-      
+
       expect(homeLink).toHaveAttribute('href', '/')
       expect(conceptsLink).toHaveAttribute('href', '/concepts')
     })

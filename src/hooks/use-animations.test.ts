@@ -1,5 +1,5 @@
-import { act, renderHook } from '@/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { act, renderHook } from '@/test-utils'
 import {
   useCounterAnimation,
   useInView,
@@ -55,7 +55,7 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
-describe('Animation Hooks', () => {
+describe('animation Hooks', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockRAF.mockImplementation((callback) => {
@@ -216,7 +216,7 @@ describe('Animation Hooks', () => {
     it('should restart animation when text changes', () => {
       const { result, rerender } = renderHook(
         ({ text }) => useTypewriter(text, 50),
-        { initialProps: { text: 'First' } }
+        { initialProps: { text: 'First' } },
       )
 
       expect(result.current.displayText).toBe('')

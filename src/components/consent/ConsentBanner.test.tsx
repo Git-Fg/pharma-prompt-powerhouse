@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from '@/test-utils'
 import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { fireEvent, render, screen } from '@/test-utils'
 import { ConsentBanner } from './ConsentBanner'
 
 // Mock the consent hook
@@ -12,7 +12,7 @@ vi.mock('@/hooks/useConsent', () => ({
   useConsent: () => mockUseConsent(),
 }))
 
-describe('ConsentBanner', () => {
+describe('consentBanner', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseConsent.mockReturnValue({
@@ -78,7 +78,7 @@ describe('ConsentBanner', () => {
 
     const acceptButton = screen.getByRole('button', { name: 'Activer le confort' })
     const declineButton = screen.getByRole('button', { name: 'Naviguer sans sauvegarde' })
-    
+
     expect(acceptButton).toBeInTheDocument()
     expect(declineButton).toBeInTheDocument()
   })
@@ -88,7 +88,7 @@ describe('ConsentBanner', () => {
 
     // Check for key privacy messaging
     expect(screen.getByText(/Confort et Confidentialité/)).toBeInTheDocument()
-    
+
     // Should have informative text about what consent means
     const banner = screen.getByRole('banner')
     expect(banner).toBeInTheDocument()
@@ -106,7 +106,7 @@ describe('ConsentBanner', () => {
       render(<ConsentBanner />)
 
       const acceptButton = screen.getByText('Activer le confort')
-      
+
       // Rapid clicks
       fireEvent.click(acceptButton)
       fireEvent.click(acceptButton)
@@ -120,7 +120,7 @@ describe('ConsentBanner', () => {
       render(<ConsentBanner />)
 
       const declineButton = screen.getByText('Naviguer sans sauvegarde')
-      
+
       // Rapid clicks
       fireEvent.click(declineButton)
       fireEvent.click(declineButton)

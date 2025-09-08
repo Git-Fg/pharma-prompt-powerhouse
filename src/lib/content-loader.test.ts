@@ -53,7 +53,7 @@ vi.mock('@/content/external-tools', () => ({
   allExternalTools: [],
 }))
 
-describe('Content Loader', () => {
+describe('content Loader', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
