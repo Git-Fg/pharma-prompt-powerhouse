@@ -1,8 +1,9 @@
+import React from 'react'
 import { useTheme } from 'next-themes'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Header } from '@/components/layout/Header'
 import { createMockTheme } from '@/tests/utils/mocks'
-import { fireEvent, screen } from '@/tests/utils/test-utils'
+import { fireEvent, render, screen } from '@/tests/utils/test-utils'
 
 // Mock next-themes (not mocked globally)
 vi.mock('next-themes', () => ({
@@ -11,7 +12,7 @@ vi.mock('next-themes', () => ({
 
 // Mock CommandPalette
 vi.mock('@/components/search/CommandPalette', () => ({
-  CommandPalette: () => <div data-testid="command-palette">Command Palette</div>,
+  CommandPalette: () => React.createElement('div', { 'data-testid': 'command-palette' }, 'Command Palette'),
 }))
 
 // Mock navigation

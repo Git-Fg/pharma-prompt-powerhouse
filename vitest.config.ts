@@ -12,8 +12,12 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',
-      name: 'chromium',
-      headless: true,
+      instances: [
+        {
+          browser: 'chromium',
+          headless: true,
+        },
+      ],
       // Optimisations pour CI/CD
       screenshotFailures: false,
       viewport: { width: 1280, height: 720 },
@@ -53,7 +57,7 @@ export default defineConfig({
       },
     },
     maxConcurrency: 1, // Sequential pour browser mode
-    timeout: 10000, // Plus de temps pour browser mode
+    testTimeout: 10000, // Plus de temps pour browser mode
     hookTimeout: 20000,
 
     // Options spécifiques pour éviter les erreurs de dépendances
@@ -72,6 +76,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@/tests': path.resolve(__dirname, './tests'),
     },
   },
   // Optimisation pour Vite en mode test

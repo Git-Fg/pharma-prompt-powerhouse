@@ -12,10 +12,13 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/content/*": ["./src/content/*"]
+      "@/content/*": ["./src/content/*"],
+      "@/tests/*": ["./tests/*"]
     },
     "resolveJsonModule": true,
     "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
       // "@serwist/next/typings"
     ],
     "allowJs": true,

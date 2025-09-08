@@ -8,7 +8,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { BreadcrumbNavigation } from '@/components/layout/BreadcrumbNavigation'
-import { clearAllMocks, renderWithUserEvent, TestAssertions } from '../utils/modern-test-utils'
+import { clearAllMocks, renderWithUserEvent, TestAssertions } from '@/tests/utils/modern-test-utils'
 
 // Mock UNIQUEMENT les dépendances externes selon Glass Box Principle
 const mockUsePathname = vi.fn()
@@ -71,7 +71,7 @@ describe('breadcrumbNavigation - Modern Testing', () => {
     const currentElement = document.querySelector('[aria-current="page"]')
     expect(currentElement).toBeInTheDocument()
     expect(currentElement).toHaveTextContent('chain of thought')
-    expect(currentElement.tagName.toLowerCase()).toBe('span')
+    expect(currentElement!.tagName.toLowerCase()).toBe('span')
   })
 
   it('should handle single level path correctly', () => {
@@ -143,7 +143,7 @@ describe('breadcrumbNavigation - Modern Testing', () => {
     // Vérifier les éléments de liste
     const list = document.querySelector('[data-slot="breadcrumb-list"]')
     expect(list).toBeInTheDocument()
-    expect(list.tagName.toLowerCase()).toBe('ol')
+    expect(list!.tagName.toLowerCase()).toBe('ol')
 
     // Vérifier l'élément actuel
     const currentItem = document.querySelector('[aria-current="page"]')
