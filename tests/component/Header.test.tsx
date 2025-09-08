@@ -10,6 +10,24 @@ vi.mock('next-themes', () => ({
   useTheme: vi.fn(),
 }))
 
+// Mock next/navigation
+vi.mock('next/navigation', () => ({
+  usePathname: vi.fn(() => '/'),
+  useRouter: vi.fn(() => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+    back: vi.fn(),
+    forward: vi.fn(),
+  })),
+}))
+
+// Mock next/link
+vi.mock('next/link', () => ({
+  __esModule: true,
+  default: ({ children, href, ...props }: any) =>
+    React.createElement('a', { href, ...props }, children),
+}))
+
 // Mock CommandPalette
 vi.mock('@/components/search/CommandPalette', () => ({
   CommandPalette: () => React.createElement('div', { 'data-testid': 'command-palette' }, 'Command Palette'),
