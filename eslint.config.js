@@ -9,6 +9,7 @@ export default antfu(
     // Configuration de base avec Next.js
     react: true,
     typescript: true,
+    test: true, // Enable Vitest test integration
     next: {
       enabled: true,
       rootDir: '.',
