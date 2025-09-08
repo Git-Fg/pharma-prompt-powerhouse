@@ -185,12 +185,14 @@ export function StaggeredPage({
 export function StaggeredItem({
   children,
   className = '',
+  delay,
   ...props
-}: { children: ReactNode, className?: string } & HTMLMotionProps<'div'>) {
+}: { children: ReactNode, className?: string, delay?: number } & HTMLMotionProps<'div'>) {
   return (
     <motion.div
       className={className}
       variants={staggeredItemVariants}
+      transition={{ delay }}
       {...props}
     >
       {children}

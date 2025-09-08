@@ -44,7 +44,7 @@ export function ContentTable({ headers, rows, caption, className = '' }: Content
     >
       {rowData.cells.map((cell, cellIndex) => (
         <div
-          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cellules avec position unique
+
           key={`mobile-cell-${index}-${cellIndex}`}
           className="mb-2 last:mb-0"
         >

@@ -90,7 +90,7 @@ describe('useAutoAnimate hooks', () => {
       expect(result.current).not.toBe(null)
       expect(mockAutoAnimate).toHaveBeenCalledWith({
         duration: 200,
-        easing: 'ease-in-out',
+        easing: 'ease-out',
       })
     })
 
@@ -107,7 +107,7 @@ describe('useAutoAnimate hooks', () => {
 
       expect(mockAutoAnimate).toHaveBeenCalledWith({
         duration: 300,
-        easing: 'ease-in-out',
+        easing: 'ease-out',
       })
     })
 
@@ -137,7 +137,7 @@ describe('useAutoAnimate hooks', () => {
 
       expect(mockAutoAnimate).toHaveBeenCalledWith({
         duration: 200,
-        easing: 'ease-in-out',
+        easing: 'ease-out',
       })
     })
   })
@@ -166,12 +166,12 @@ describe('useAutoAnimate hooks', () => {
     it('accepts custom grid options', () => {
       renderHook(() => useAutoAnimateGrid({
         duration: 350,
-        easing: 'ease-in-out',
+        easing: 'ease-out',
       }))
 
       expect(mockAutoAnimate).toHaveBeenCalledWith({
         duration: 350,
-        easing: 'ease-in-out',
+        easing: 'ease-out',
       })
     })
   })
@@ -224,7 +224,10 @@ describe('useAutoAnimate hooks', () => {
       const { result } = renderHook(() => useAutoAnimateWithConfig({}))
 
       expect(result.current).not.toBe(null)
-      expect(mockAutoAnimate).toHaveBeenCalledWith({})
+      expect(mockAutoAnimate).toHaveBeenCalledWith({
+        duration: 250,
+        easing: 'ease-in-out',
+      })
     })
   })
 

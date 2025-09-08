@@ -1,6 +1,8 @@
-import { AlertTriangle, ArrowRight, BookOpen, Brain, ExternalLink, Shield, Star, Target, Zap } from 'lucide-react'
+import { ArrowRight, BookOpen, ExternalLink, Star, Target } from 'lucide-react'
 import Link from 'next/link'
 import { Container, Section } from '@/components/layout/Container'
+import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
+import { SectionBlock } from '@/components/shared/SectionBlock'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -47,41 +49,11 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 2. DISCLAIMERS SECTION : Unifiée avec des Cards pour la cohérence */}
+      {/* 2. DISCLAIMERS SECTION : Unifiée avec le composant DisclaimerBanner */}
       <Section size="md">
         <Container variant="collection">
           <StaggeredItem>
-            <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-              <Card className="flex items-start gap-3">
-                <Zap className="size-5 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-1">Performance</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Le paysage de l'IA évolue constamment. Expérimentez pour trouver votre solution optimale.
-                  </p>
-                </div>
-              </Card>
-
-              <Card className="flex items-start gap-3">
-                <AlertTriangle className="size-5 text-amber-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-1">Fiabilité</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Une IA peut "halluciner". Vérifiez toujours avec des sources fiables.
-                  </p>
-                </div>
-              </Card>
-
-              <Card className="flex items-start gap-3">
-                <Shield className="size-5 text-red-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-1">Confidentialité</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt.
-                  </p>
-                </div>
-              </Card>
-            </div>
+            <DisclaimerBanner variant="grid" />
           </StaggeredItem>
         </Container>
       </Section>
@@ -109,7 +81,7 @@ export default function HomePage() {
                   </Button>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-2 border-primary/50 shadow-primary/10">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <ExternalLink className="size-5" />
@@ -118,7 +90,7 @@ export default function HomePage() {
                   <CardDescription>Mes tests personnels et retours d'expérience sur les outils</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button className="w-full" asChild>
                     <Link href="/l-arsenal-ia">
                       Voir les outils
                       <ArrowRight className="size-4 ml-2" />
@@ -205,14 +177,12 @@ export default function HomePage() {
       <Section size="sm">
         <Container variant="detail">
           <StaggeredItem>
-            <Card className="bg-muted/50 border-dashed text-center">
-              <Brain className="w-12 h-12 mx-auto mb-4 text-primary" />
-              <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
-              <p className="prose-personal-note container mx-auto">
-                Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle et mes recherches.
-                <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
-              </p>
-            </Card>
+            <SectionBlock
+              type="key-points"
+              title="Mon Approche"
+              content="Je ne prétends pas détenir de vérité absolue. Les recommandations et analyses sont basées sur mon expérience personnelle et mes recherches. Je vous encourage systématiquement à tester par vous-même."
+              variant="highlighted"
+            />
           </StaggeredItem>
         </Container>
       </Section>

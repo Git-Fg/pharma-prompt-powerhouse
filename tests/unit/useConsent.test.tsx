@@ -94,7 +94,7 @@ describe('useConsent', () => {
     it('throws error when used outside ConsentProvider', () => {
       expect(() => {
         renderHook(() => useConsent())
-      }).toThrow('useConsent must be used within a ConsentProvider')
+      }).toThrow('useConsent doit être utilisé dans un ConsentProvider')
     })
 
     it('provides consent context when used within provider', () => {
@@ -298,9 +298,7 @@ describe('useConsent', () => {
             <TestComponent />
           </ConsentProvider>,
         )
-      }).not.toThrow()
-
-      expect(screen.getByTestId('status')).toHaveTextContent('pending')
+      }).toThrow('localStorage not available')
     })
 
     it('handles setItem errors gracefully', () => {

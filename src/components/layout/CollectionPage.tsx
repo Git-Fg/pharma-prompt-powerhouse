@@ -1,10 +1,12 @@
-import type { StatCardProps } from '@/components/layout/CollectionPageLayout'
+import type { StatCardProps } from '@/components/layout/PageHeader'
 import { ArrowRight } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import Link from 'next/link'
 import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
 import { FilterableContentList } from '@/components/shared/FilterableContentList'
+import { ResponsiveComparisonTable } from '@/components/shared/ResponsiveComparisonTable'
 import Button from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { content } from '@/lib/content-loader'
 
@@ -14,6 +16,7 @@ export interface CollectionPageProps {
   type: CollectionType
   title: string
   description: string
+  displayMode?: 'grid' | 'table'
   children?: React.ReactNode
 }
 
@@ -142,7 +145,7 @@ export function getCollectionConfig(type: CollectionType) {
   }
 }
 
-export function CollectionPage({ type, title, description, children }: CollectionPageProps) {
+export function CollectionPage({ type, title, description, displayMode = 'grid', children }: CollectionPageProps) {
   const stats = getCollectionStats(type)
   const items = getCollectionItems(type)
   const config = getCollectionConfig(type)
@@ -153,18 +156,27 @@ export function CollectionPage({ type, title, description, children }: Collectio
       description={description}
       stats={stats}
     >
-      {type !== 'tools'
-        ? (
-            <FilterableContentList
-              items={items}
-              type={type}
-              searchPlaceholder={config.searchPlaceholder}
-              showCategoryFilter={config.showCategoryFilter}
-              showDifficultyFilter={config.showDifficultyFilter}
-              gridClassName={config.gridClassName}
-            />
-          )
-        : null}
+      {displayMode === 'grid' && type !== 'tools' && (
+        <FilterableContentList
+          items={items}
+          type={type}
+          searchPlaceholder={config.searchPlaceholder}
+          showCategoryFilter={config.showCategoryFilter}
+          showDifficultyFilter={config.showDifficultyFilter}
+          gridClassName={config.gridClassName}
+        />
+      )}
+
+      {displayMode === 'table' && type === 'tools' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Tableau Comparatif</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveComparisonTable tools={content.externalTools} />
+          </CardContent>
+        </Card>
+      )}
 
       {type === 'concepts' && (
         <>

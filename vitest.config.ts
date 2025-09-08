@@ -10,6 +10,9 @@ export default defineConfig({
       '@testing-library/react',
       '@testing-library/jest-dom',
       'sonner',
+      'next/navigation',
+      'next/link',
+      'lucide-react',
     ],
   },
   test: {
@@ -19,7 +22,19 @@ export default defineConfig({
     include: ['tests/**/*.{test,spec}.{ts,tsx}'],
     reporters: 'default',
 
-    // ✅ Modern Browser Mode Configuration (2025)
+    // Performance optimizations
+    pool: 'forks', // Use process pool for better isolation
+    poolOptions: {
+      forks: {
+        singleFork: true, // Use single fork for faster startup
+      },
+    },
+    maxConcurrency: 4, // Run more tests in parallel
+    isolate: false, // Disable isolation for speed (use carefully)
+    testTimeout: 10000, // 10 seconds default timeout
+    hookTimeout: 10000, // 10 seconds hook timeout
+
+    // ✅ Optimized Browser Mode Configuration (2025)
     browser: {
       enabled: true,
       provider: 'playwright',
@@ -27,10 +42,23 @@ export default defineConfig({
       instances: [
         {
           browser: 'chromium',
+          launchOptions: {
+            // Performance optimizations for browser
+            args: [
+              '--no-sandbox',
+              '--disable-setuid-sandbox',
+              '--disable-dev-shm-usage',
+              '--disable-accelerated-2d-canvas',
+              '--no-first-run',
+              '--no-zygote',
+              '--disable-gpu',
+            ],
+          },
         },
       ],
-      // Ensure DOM testing library works in browser mode
-      isolate: true,
+      // Faster browser settings
+      isolate: false, // Reuse browser instances between tests
+      screenshotFailures: false, // Disable screenshots for speed
     },
 
     coverage: {

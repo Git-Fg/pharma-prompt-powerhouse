@@ -16,7 +16,7 @@ export function StarRating({ confidenceScore, className = '' }: StarRatingProps)
     <div className={`flex items-center gap-1 ${className}`}>
       {Array.from({ length: fullStars }).map((_, i) => (
         <Star
-          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des étoiles pleines avec position fixe
+
           key={`full-${i}`}
           className="size-4 text-yellow-400 fill-current"
         />
@@ -26,7 +26,7 @@ export function StarRating({ confidenceScore, className = '' }: StarRatingProps)
       )}
       {Array.from({ length: emptyStars }).map((_, i) => (
         <Star
-          // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des étoiles vides avec position fixe
+
           key={`empty-${i}`}
           className="size-4 text-gray-300"
         />

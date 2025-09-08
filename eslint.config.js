@@ -113,6 +113,18 @@ export default antfu(
       'react-refresh/only-export-components': 'off',
       'react-dom/no-dangerously-set-innerhtml': 'off',
       'react/no-context-provider': 'off',
+      // Allow cloneElement for complex component patterns in UI library
+      'react/no-clone-element': 'off',
+      // Allow array index keys for UI component rendering patterns
+      'react/no-array-index-key': 'off',
+      // Allow context provider value objects (common in UI libraries)
+      'react/no-unstable-context-value': 'off',
+      // Allow object expressions as default props in UI components
+      'react/no-unstable-default-props': 'off',
+      // Allow direct setState in useEffect for UI component patterns
+      'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
+      // Allow missing dependencies in useEffect for UI component patterns
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
   {

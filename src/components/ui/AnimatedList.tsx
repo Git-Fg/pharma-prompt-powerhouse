@@ -53,7 +53,7 @@ export function AnimatedList({
       {/* eslint-disable-next-line react/no-children-map -- Children.map is necessary for stable key generation with animation variants */}
       {React.Children.map(children, (child, index) => (
         <motion.div
-          // eslint-disable-next-line react/no-array-index-key -- Index is used as fallback when child.key is not available
+
           key={`stagger-item-${index}-${(child as React.ReactElement)?.key || index}`}
           variants={customItemVariants}
           custom={index}

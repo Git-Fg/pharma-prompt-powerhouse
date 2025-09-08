@@ -90,9 +90,8 @@ function Carousel({
       return
 
     const updateScrollState = () => {
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- État de défilement mis à jour directement pour des raisons de performance
       setCanScrollPrev(api.canScrollPrev())
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- État de défilement mis à jour directement pour des raisons de performance
+
       setCanScrollNext(api.canScrollNext())
     }
 

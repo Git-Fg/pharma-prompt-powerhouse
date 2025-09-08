@@ -17,18 +17,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ---
 
-## **Agent-Driven Workflow Philosophy**
+## **Agent-Driven Workflow Philosophy (Version 2.0)**
 
-This project is supported by a team of three specialized AI agents. Your role as an orchestrator is to delegate tasks based on the **phase of development**. Encourage agents to **think deeply and sequentially** when planning and to **structure their plan using the native todo list tool**. Trust them to execute their tasks autonomously and report their results.
+This project is supported by a team of three specialized AI agents. Your role as an orchestrator is to delegate tasks based on the **nature of the task**, moving from a linear "phase-based" model to a dynamic "expertise-based" workflow. Encourage agents to **think deeply and sequentially** when planning and to **structure their plan using the native todo list tool**.
 
--   **Phase 1: Creation (Starting from Scratch) -> `project-architect`**
-    When a request involves creating a new file from scratch (content or UI component), delegate to the **Project Architect**. It will analyze the project's existing patterns and schemas to build a correctly structured, intelligent boilerplate file.
+### **The Team of Experts**
 
--   **Phase 2: Improvement & Refinement -> `code-strategist`**
-    When a request is about improving an existing file (for SEO, UX, or code structure), delegate to the **Code Strategist**. It will analyze, report, and then autonomously implement its own recommendations unless the initial request was for a report only.
+-   **`project-architect` (The Structural Engineer):**
+    Handles the **foundation and structure** of the code. Its domain is the "how" and "what" gets built. It creates new files and performs major structural refactoring on existing ones.
 
--   **Phase 3: Final Validation & QA -> `qa-guardian`**
-    Before finalizing major changes, delegate a final, holistic audit to the **QA Guardian**. It will perform both static code analysis and dynamic testing on the live application to ensure quality, consistency, and the absence of regressions.
+-   **`code-strategist` (The Content & Experience Optimizer):**
+    Handles the **quality, impact, and presentation of content** *within* an existing structure. Its domain is the "why" and "for whom". It improves SEO, readability, and suggests using existing components to better present information.
+
+-   **`qa-guardian` (The Final Validator & Triage Lead):**
+    Performs the final, holistic audit of the running application. It doesn't just find bugs; it **triages them** and recommends which expert (Architect or Strategist) is best suited to fix them, thus initiating a new work cycle if needed.
+
+### **The Collaborative Workflow in Action (Example)**
+
+1.  **User Request:** "Refactor the `par-ou-commencer` page to use a new `StepCard` component for better structure."
+2.  **Orchestrator -> `project-architect`:** The task is structural. The architect creates the `StepCard.tsx` component and refactors `par-ou-commencer/page.tsx` to use it.
+3.  **User Request:** "The refactoring is done. Please run a full QA audit."
+4.  **Orchestrator -> `qa-guardian`:** The QA agent starts the dev server and tests the page.
+5.  **QA Report:** The QA Guardian reports two issues:
+    *   A critical layout bug on mobile where the `StepCard` overflows.
+    *   A minor SEO issue: the page title is not optimal.
+    *   **Triage Recommendation:** It recommends delegating the layout bug to the **`project-architect`** and the SEO issue to the **`code-strategist`**.
+6.  **Orchestrator -> Delegation:** You can now delegate the two bug fixes to the appropriate agents, creating an intelligent and iterative feedback loop.
 
 ---
 
@@ -41,173 +55,6 @@ This project is supported by a team of three specialized AI agents. Your role as
 - **`npm run validate`**: Run all validation with auto-fix (lint:fix + typecheck + test).
 
 ---
-
-## **Architecture & Stack**
-
-- **Stack**: Next.js 15, React 19, TypeScript, Zod, Tailwind CSS v4, Vitest Browser Mode.
-- **Content Architecture**: Zod-validated, type-safe, with smart interconnections and O(1) loading.
-- **Component Architecture**: Based on shadcn/ui, with a unified, mobile-first, and type-safe approach.
-
----
-
-## **Specialized Agent Capabilities (MCPs)**
-
-Your team of agents is equipped with powerful tools to enhance their analysis and execution.
-
--   **`context7` (Documentation Access):**
-    Provides agents with up-to-date documentation and code examples for any library version. Agents use this to ensure their generated code is modern, correct, and follows the latest best practices, reducing guesswork.
-
--   **`shadcn` (UI Component Registry Access):**
-    Allows the `project-architect` to discover, analyze, and install UI components from the shadcn/ui registry. This accelerates UI development by intelligently reusing existing, high-quality primitives.
-
--   **`playwright` (Browser Automation):**
-    Provides the `qa-guardian` with the ability to navigate, interact with, and inspect the live web application. It can check for console errors, perform accessibility scans, and validate UI interactions without relying on static analysis alone.
-
----
-
-## **Technical Rules**
-
-- **Next.js & React**: Exclusively use App Router, React 19 features (`useActionState`, `use()`), and **never use a custom server**.
-- **TypeScript**: All content types are inferred from Zod schemas in `lib/content-schema.ts`. `strict` mode is enabled.
-- **ESLint**: Exclusively use @antfu/eslint-config. All `eslint-disable` directives must be justified with a comment.
-- **Testing**: Exclusively use Vitest Browser Mode with Playwright provider.
-
----
-
-## **Testing Architecture & Best Practices**
-
-### **Global Test Setup Contract**
-
-**File**: `tests/setup.ts` provides comprehensive mocks for framework-level dependencies:
-
-**Globally Mocked Modules (DO NOT re-mock in individual test files):**
-- `next/navigation` - Complete API with `useRouter`, `useSearchParams`, `usePathname`, `redirect`, `notFound`
-- `next/link` - Proper React component implementation using `React.createElement()`
-- `sonner` - Toast notifications and Toaster component
-- Browser APIs - `ResizeObserver`, `scrollIntoView`
-
-**Individual Test File Responsibilities:**
-- Only mock modules NOT handled globally (e.g., `next-themes`, business logic)
-- Never re-mock globally available modules
-- Document which dependencies come from global setup
-
-### **Mock Implementation Standards**
-
-**✅ Correct Pattern (Global Setup):**
-\`\`\`typescript
-// In tests/setup.ts
-vi.mock('next/link', () => ({
-  __esModule: true,
-  default: ({ children, href, ...props }: any) => {
-    return React.createElement('a', { href, ...props }, children)
-  },
-}))
-\`\`\`
-
-**✅ Correct Pattern (Individual Test):**
-\`\`\`typescript
-// In individual test files - only mock non-global dependencies
-vi.mock('next-themes', () => ({
-  useTheme: vi.fn(),
-}))
-
-// Note: Document global dependencies
-// Note: usePathname is mocked globally in tests/setup.ts
-\`\`\`
-
-**❌ Anti-Patterns to Avoid:**
-\`\`\`typescript
-// NEVER re-mock globally available modules
-vi.mock('next/navigation', () => ({ ... })) // Already in setup.ts
-vi.mock('next/link', () => ({ ... }))        // Already in setup.ts
-
-// NEVER use JSX syntax in mocks (causes "Element type is invalid" errors)
-vi.mock('next/link', () => ({
-  default: ({ children, href, ...props }) => (
-    <a href={href} {...props}>{children}</a>  // ❌ Wrong: JSX in mock context
-  ),
-}))
-\`\`\`
-
-### **Test Configuration Anti-Patterns**
-
-**The Problem:** Duplicate mocks between global setup and individual test files cause:
-- "Element type is invalid" errors due to conflicting mock implementations
-- Inconsistent behavior across tests
-- Unnecessary code duplication
-- Mock resolution conflicts
-
-**The Solution:** Clear separation of concerns:
-- **Global Setup**: Framework-level mocks (Next.js, browser APIs, third-party libraries)
-- **Individual Tests**: Component-specific mocks (business logic, component dependencies)
-
-### **Component Testing Requirements**
-
-**Button Elements:**
-- All button mocks must include `type="button"` to prevent form submission issues
-- Example: \`<button type="button" {...props}>{children}</button>\`
-
-**React Element Creation:**
-- Use `React.createElement()` for component mocks, not JSX syntax
-- Ensures proper React element construction in mock contexts
-
-**Test IDs:**
-- Use consistent test ID patterns from `src/lib/test-utils.ts`
-- Follow pattern: `{component-type}-{component-name}-{optional-identifier}`
-- Use `getAllByTestId()` when elements appear multiple times (desktop/mobile)
-
-### **Test File Structure**
-
-\`\`\`typescript
-// 1. Import dependencies
-import { render, screen } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-// 2. Import component to test
-import { MyComponent } from '@/components/MyComponent'
-
-// 3. Mock non-global dependencies ONLY
-vi.mock('some-local-dependency', () => ({
-  someFunction: vi.fn(),
-}))
-
-// 4. Note global dependencies
-// Note: useRouter is mocked globally in tests/setup.ts
-
-describe('MyComponent', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
-  it('should render correctly', () => {
-    render(<MyComponent />)
-    expect(screen.getByTestId('my-component')).toBeInTheDocument()
-  })
-})
-\`\`\`
-
-### **Common Test Pitfalls**
-
-1. **Duplicate Navigation Links**: Components often render in both desktop and mobile versions
-   - Use `getAllByTestId()` instead of `getByTestId()`
-   - Expect multiple elements: `expect(screen.getAllByText('Workflows')).toHaveLength(2)`
-
-2. **Theme Toggle Duplication**: Theme toggles appear in both desktop and mobile navigation
-   - Test both instances: `expect(screen.getAllByTestId('nav-theme-toggle')).toHaveLength(2)`
-
-3. **Async Processing Delays**: Remove artificial delays in tests
-   - Use `vi.useFakeTimers()` and `vi.advanceTimersByTime()` if needed
-   - Prefer immediate processing for test reliability
-
----
-
-## **CSS & Content Guidelines**
-
-- **CSS**: The entire design system is centralized in `app/globals.css`. Prefer creating semantic utilities (`@utility`) over repeating class chains. A critical Tailwind v4 `max-w-*` bug is handled with custom utilities.
-- **Content**: The target audience is health students. Developer jargon is forbidden. The voice is personal ("I"). Disclaimers are handled centrally by the `DisclaimerBanner` component.
-
----
-
 ## **Critical Best Practices**
 
 **DO:**

@@ -19,6 +19,7 @@
     "test:integration": "vitest run tests/integration/",
     "test:component": "vitest run tests/component/",
     "test:browser": "vitest --browser",
+    "test:browser:run": "vitest --browser --run",
     "content:prepare": "node scripts/generate-valid-slugs.mjs",
     "content:validate-links": "node scripts/validate-links.mjs"
   },

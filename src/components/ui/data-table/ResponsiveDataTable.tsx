@@ -106,7 +106,7 @@ export function ResponsiveDataTable<TData extends RowData>({
         <div className="space-y-4">
           {data.map((item, index) => (
             <div
-              // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cartes mobiles avec données uniques
+
               key={`mobile-row-${index}`}
             >
               {renderMobileCard(item, index)}

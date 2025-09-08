@@ -84,6 +84,8 @@ export const TestIds = {
     Header: 'layout-header',
     Footer: 'layout-footer',
     MobileNav: 'layout-mobile-nav',
+    Container: (type: string, identifier?: string) => generateTestId('layout', 'container', `${type}${identifier ? `-${identifier}` : ''}`),
+    Grid: (type: string, identifier?: string) => generateTestId('layout', 'grid', `${type}${identifier ? `-${identifier}` : ''}`),
   },
 
   // Navigation

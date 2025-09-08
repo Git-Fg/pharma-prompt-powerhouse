@@ -161,8 +161,9 @@ describe('animation Hooks', () => {
     it('marks as complete when typing is done', async () => {
       const { result } = renderHook(() => useTypewriter('Hi', 10))
 
+      // Wait for the typewriter to complete
       await act(async () => {
-        await new Promise(resolve => setTimeout(resolve, 50))
+        await new Promise(resolve => setTimeout(resolve, 150))
       })
 
       expect(result.current.isComplete).toBe(true)

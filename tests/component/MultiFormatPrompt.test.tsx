@@ -1,6 +1,10 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import MultiFormatPrompt from '@/components/prompts/MultiFormatPrompt'
+import { setTestTimeout, testConfigs } from '../test-timeouts'
+
+// Set appropriate timeout for clipboard tests
+setTestTimeout(testConfigs.clipboard)
 
 // Mock UI components
 vi.mock('@/components/ui/alert', () => ({
