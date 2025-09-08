@@ -1,5 +1,5 @@
-import { act, renderHook } from '@/test-utils'
 import { describe, expect, it } from 'vitest'
+import { act, renderHook } from '@/test-utils'
 import { useContentFilter } from './useContentFilter'
 
 // Mock data for testing
@@ -55,7 +55,7 @@ describe('useContentFilter Hook', () => {
     })
 
     expect(result.current.filteredItems).toHaveLength(1)
-    expect(result.current.filteredItems[0].title).toBe('React Hooks')
+    expect(result.current.filteredItems[0]?.title).toBe('React Hooks')
     expect(result.current.stats.filtered).toBe(1)
   })
 

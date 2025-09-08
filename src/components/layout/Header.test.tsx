@@ -1,8 +1,7 @@
-import { fireEvent, screen } from '@/test-utils'
 import { useTheme } from 'next-themes'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createMockTheme, fireEvent, screen } from '@/test-utils'
 import { Header } from './Header'
-import { createMockTheme } from '@/test-utils'
 
 // Mock next-themes
 vi.mock('next-themes', () => ({
@@ -24,14 +23,14 @@ vi.mock('@/lib/navigation', () => ({
   ]),
 }))
 
-describe('Header', () => {
+describe('header', () => {
   const mockSetTheme = vi.fn()
   const mockUseTheme = vi.mocked(useTheme)
 
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseTheme.mockReturnValue(createMockTheme({
-      setTheme: mockSetTheme
+      setTheme: mockSetTheme,
     }))
   })
 
@@ -100,13 +99,13 @@ describe('Header', () => {
       render(<Header />)
 
       const mobileTrigger = screen.getByTestId('mobile-nav-trigger')
-      
+
       // Check if mobile nav content exists (it should be hidden initially)
       const mobileNavContent = screen.getByTestId('mobile-nav-content')
-      
+
       // Click to open
       fireEvent.click(mobileTrigger)
-      
+
       // The test validates interaction exists - exact behavior depends on implementation
       expect(mobileTrigger).toBeInTheDocument()
     })

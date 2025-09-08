@@ -1,5 +1,5 @@
-import { render, screen, within } from '@/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { render, screen, within } from '@/test-utils'
 import { Footer } from './Footer'
 
 // Mock the content loader to provide consistent test data
@@ -33,7 +33,7 @@ vi.mock('@/lib/navigation', () => ({
   },
 }))
 
-describe('Footer Component', () => {
+describe('footer Component', () => {
   let desktopFooter: HTMLElement
   let mobileFooter: HTMLElement
 
@@ -45,10 +45,10 @@ describe('Footer Component', () => {
     mobileFooter = within(footer).getByTestId('mobile-footer')
   })
 
-  describe('Desktop Footer', () => {
+  describe('desktop Footer', () => {
     it('renders the desktop footer section correctly', () => {
       expect(desktopFooter).toBeInTheDocument()
-      
+
       // Check main navigation links
       expect(within(desktopFooter).getByText('Accueil')).toBeInTheDocument()
       expect(within(desktopFooter).getByText('Par où commencer')).toBeInTheDocument()
@@ -73,10 +73,10 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Mobile Footer', () => {
+  describe('mobile Footer', () => {
     it('renders the mobile footer section correctly', () => {
       expect(mobileFooter).toBeInTheDocument()
-      
+
       // Check that main navigation links are present in mobile version
       expect(within(mobileFooter).getByText('Accueil')).toBeInTheDocument()
       expect(within(mobileFooter).getByText('Par où commencer')).toBeInTheDocument()
@@ -88,11 +88,11 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Navigation Links', () => {
+  describe('navigation Links', () => {
     it('contains working navigation links', () => {
       const homeLink = screen.getAllByRole('link', { name: 'Accueil' })[0]
       expect(homeLink).toHaveAttribute('href', '/')
-      
+
       const workflowsLink = screen.getAllByRole('link', { name: 'Workflows Stratégiques' })[0]
       expect(workflowsLink).toHaveAttribute('href', '/workflows')
     })
@@ -103,7 +103,7 @@ describe('Footer Component', () => {
     })
   })
 
-  describe('Accessibility', () => {
+  describe('accessibility', () => {
     it('has proper contentinfo role', () => {
       expect(screen.getByRole('contentinfo')).toBeInTheDocument()
     })
