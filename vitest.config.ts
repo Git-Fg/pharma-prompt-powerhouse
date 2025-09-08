@@ -2,38 +2,40 @@ import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
+// Configuration moderne avec Vitest pour co-localisation (2025)
 export default defineConfig({
   plugins: [react()],
   test: {
-    // Configuration moderne pour Browser Mode uniquement (2025)
-    globals: true, // Globales pour describe/it/expect disponibles partout
+    // Détection automatique des tests co-localisés
+    include: [
+      'src/**/*.{test,spec}.{ts,tsx}', // Tests co-localisés
+    ],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/tmp/**',
+      '**/.next/**',
+    ],
 
-    // Browser Mode avec Playwright - Plus de jsdom nécessaire
-    browser: {
-      enabled: true,
-      provider: 'playwright',
-      instances: [
-        {
-          browser: 'chromium',
-          headless: true,
-        },
-      ],
-      // Optimisations pour CI/CD
-      screenshotFailures: false,
-      viewport: { width: 1280, height: 720 },
-    },
+    // Configuration globale simplifiée
+    globals: true,
+    environment: 'happy-dom', // Plus léger que jsdom pour les tests unitaires
 
-    // Coverage avec V8 (le plus rapide en 2025)
+    // Setup global
+    setupFiles: ['./src/test-setup.ts'],
+
+    // Coverage moderne avec V8
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
       reportsDirectory: './coverage',
+      include: ['src/**/*.{ts,tsx}'],
       exclude: [
-        'node_modules/',
-        'tests/',
+        'src/**/*.{test,spec}.{ts,tsx}',
+        'src/test-setup.ts',
+        'src/**/*.stories.{ts,tsx}',
         '**/*.config.*',
         '**/coverage/**',
-        'src/lib/test-utils.ts', // Utilitaires de test exclus
       ],
       thresholds: {
         lines: 80,
@@ -43,44 +45,38 @@ export default defineConfig({
       },
     },
 
-    // Configuration des fichiers de test
-    setupFiles: ['./tests/setup.ts'],
-    include: ['tests/**/*.{test,spec}.{ts,tsx}'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/tmp/**'],
+    // Optimisations de performance
+    isolate: false,
+    pool: 'threads',
+    maxConcurrency: 4,
+    testTimeout: 10000,
 
-    // Optimisations de performance pour Browser Mode
-    isolate: false, // Plus rapide avec browser mode
-    pool: 'forks', // Meilleur pour browser mode
-    poolOptions: {
-      forks: {
-        singleFork: true, // Un seul processus pour tous les tests
-      },
-    },
-    maxConcurrency: 1, // Sequential pour browser mode
-    testTimeout: 10000, // Plus de temps pour browser mode
-    hookTimeout: 20000,
-
-    // Options spécifiques pour éviter les erreurs de dépendances
+    // Configuration des dépendances
     deps: {
       optimizer: {
         web: {
-          include: ['sonner', '@testing-library/react', '@testing-library/user-event'],
+          include: [
+            'sonner',
+            '@testing-library/react',
+            '@testing-library/user-event',
+          ],
         },
       },
     },
-
-    // Configuration pour éviter les problèmes de mock hoisting
-    unstubEnvs: true,
-    unstubGlobals: true,
   },
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@/tests': path.resolve(__dirname, './tests'),
     },
   },
-  // Optimisation pour Vite en mode test
+
   optimizeDeps: {
-    include: ['sonner', '@testing-library/react', '@testing-library/user-event', 'vitest-axe'],
+    include: [
+      'sonner',
+      '@testing-library/react',
+      '@testing-library/user-event',
+      'vitest-axe',
+    ],
   },
 })
