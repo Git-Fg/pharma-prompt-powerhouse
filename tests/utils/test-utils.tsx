@@ -1,16 +1,16 @@
-import { render, RenderOptions } from '@testing-library/react'
-import { ReactElement } from 'react'
+import type { RenderOptions } from '@testing-library/react'
+import type { ReactElement } from 'react'
+import { render } from '@testing-library/react'
 
 // Wrapper personnalisé pour les tests avec providers si nécessaire
-const AllTheProviders = ({ children }: { children: ReactElement }) => {
+function AllTheProviders({ children }: { children: ReactElement }) {
   return children
 }
 
 // Custom render function with providers
-const customRender = (
-  ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
-) => render(ui, { wrapper: AllTheProviders, ...options })
+function customRender(ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) {
+  return render(ui, { wrapper: AllTheProviders, ...options })
+}
 
 // Réexporter tout de @testing-library/react
 export * from '@testing-library/react'

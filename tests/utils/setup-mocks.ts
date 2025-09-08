@@ -1,11 +1,12 @@
 /**
  * Setup de mocks modernes pour les tests
- * 
+ *
  * Suit le Glass Box Principle :
  * - Mock UNIQUEMENT les dépendances externes
  * - Les composants internes restent réels pour tester l'intégration
  */
 
+import React from 'react'
 import { vi } from 'vitest'
 
 /**
@@ -19,12 +20,12 @@ export function mockNextNavigation() {
       back: vi.fn(),
       forward: vi.fn(),
       refresh: vi.fn(),
-      prefetch: vi.fn()
+      prefetch: vi.fn(),
     })),
     useSearchParams: vi.fn(() => new URLSearchParams()),
     usePathname: vi.fn(() => '/'),
     redirect: vi.fn(),
-    notFound: vi.fn()
+    notFound: vi.fn(),
   }))
 }
 
@@ -34,10 +35,8 @@ export function mockNextNavigation() {
 export function mockNextLink() {
   vi.mock('next/link', () => ({
     __esModule: true,
-    default: ({ children, href, ...props }: any) => {
-      const React = require('react')
-      return React.createElement('a', { href, ...props }, children)
-    }
+    default: ({ children, href, ...props }: any) =>
+      React.createElement('a', { href, ...props }, children),
   }))
 }
 
@@ -51,8 +50,8 @@ export function mockNextThemes() {
       setTheme: vi.fn(),
       systemTheme: 'light',
       themes: ['light', 'dark'],
-      resolvedTheme: 'light'
-    }))
+      resolvedTheme: 'light',
+    })),
   }))
 }
 
@@ -64,7 +63,7 @@ export function mockContentLoader() {
     getContentItem: vi.fn(),
     getAllContent: vi.fn(() => []),
     getContentByType: vi.fn(() => []),
-    searchContent: vi.fn(() => [])
+    searchContent: vi.fn(() => []),
   }))
 }
 
@@ -73,10 +72,9 @@ export function mockContentLoader() {
  */
 export function mockLucideIcons() {
   vi.mock('lucide-react', () => {
-    const React = require('react')
-    const createIcon = (testId: string) => () => 
+    const createIcon = (testId: string) => () =>
       React.createElement('span', { 'data-testid': testId, 'aria-hidden': 'true' })
-    
+
     return {
       Home: createIcon('home-icon'),
       Search: createIcon('search-icon'),
@@ -94,7 +92,7 @@ export function mockLucideIcons() {
       ExternalLink: createIcon('external-link-icon'),
       Star: createIcon('star-icon'),
       Filter: createIcon('filter-icon'),
-      Settings: createIcon('settings-icon')
+      Settings: createIcon('settings-icon'),
     }
   })
 }
@@ -108,9 +106,9 @@ export function mockSonner() {
       success: vi.fn(),
       error: vi.fn(),
       info: vi.fn(),
-      warning: vi.fn()
+      warning: vi.fn(),
     },
-    Toaster: () => null
+    Toaster: () => null,
   }))
 }
 
@@ -123,15 +121,15 @@ export function mockBrowserAPIs() {
     globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),
       unobserve: vi.fn(),
-      disconnect: vi.fn()
+      disconnect: vi.fn(),
     }))
   }
-  
+
   // scrollIntoView pour les éléments
   if (!Element.prototype.scrollIntoView) {
     Element.prototype.scrollIntoView = vi.fn()
   }
-  
+
   // Process env pour les variables d'environnement
   if (!globalThis.process) {
     globalThis.process = { env: { NODE_ENV: 'test' } } as any

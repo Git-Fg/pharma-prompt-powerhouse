@@ -1,8 +1,8 @@
-import { fireEvent, screen } from '@/tests/utils/test-utils'
 import { useTheme } from 'next-themes'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Header } from '@/components/layout/Header'
 import { createMockTheme } from '@/tests/utils/mocks'
+import { fireEvent, screen } from '@/tests/utils/test-utils'
 
 // Mock next-themes (not mocked globally)
 vi.mock('next-themes', () => ({
@@ -33,7 +33,7 @@ describe('header', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseTheme.mockReturnValue(createMockTheme({
-      setTheme: mockSetTheme
+      setTheme: mockSetTheme,
     }))
   })
 
@@ -102,7 +102,7 @@ describe('header', () => {
     it('shows theme toggle button when theme is dark', () => {
       mockUseTheme.mockReturnValue(createMockTheme({
         theme: 'dark',
-        setTheme: mockSetTheme
+        setTheme: mockSetTheme,
       }))
 
       render(<Header />)
