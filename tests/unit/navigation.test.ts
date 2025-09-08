@@ -165,7 +165,7 @@ describe('navigation Utilities', () => {
       // Home link should be active for root path
       const activeLinks = links.filter(link => link.isActive)
       expect(activeLinks.length).toBe(1)
-      expect(activeLinks[0].name).toBe('Accueil')
+      expect(activeLinks[0]?.name).toBe('Accueil')
     })
   })
 

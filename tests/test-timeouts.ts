@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 // Test timeout configuration for slow tests
 // This file can be imported in test files that need custom timeouts
 

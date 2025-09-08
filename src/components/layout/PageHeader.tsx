@@ -4,7 +4,7 @@ import React from 'react'
 import { AnimatedItem, AnimatedList } from '@/components/ui/animated'
 import Badge from '@/components/ui/badge'
 import { StaggeredItem } from '@/components/ui/transitions'
-import { createTestIdProps, TestIds } from '@/lib/test-utils'
+import { createTestIdProps } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 import { Container, Section } from './Container'
 
