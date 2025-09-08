@@ -5,7 +5,7 @@ import { PWALifecycle } from '@/components/pwa/PWALifecycle'
 // Mock service worker
 const mockServiceWorker = {
   register: vi.fn(),
-  controller: null,
+  controller: null as { state: string } | null,
   addEventListener: vi.fn(),
   removeEventListener: vi.fn(),
 }
@@ -49,7 +49,7 @@ describe('pWALifecycle', () => {
     console.error = vi.fn()
 
     // Reset environment
-    process.env.NODE_ENV = 'test'
+    vi.stubEnv('NODE_ENV', 'test')
   })
 
   afterEach(() => {
@@ -88,15 +88,15 @@ describe('pWALifecycle', () => {
 
     it('handles server-side rendering gracefully', () => {
       // Mock window as undefined
-      const originalWindow = global.window
-      delete (global as any).window
+      const originalWindow = globalThis.window
+      delete (globalThis as any).window
 
       expect(() => {
         render(<PWALifecycle />)
       }).not.toThrow()
 
       // Restore
-      global.window = originalWindow
+      globalThis.window = originalWindow
     })
   })
 
@@ -125,7 +125,7 @@ describe('pWALifecycle', () => {
     })
 
     it('logs registration errors in development', async () => {
-      process.env.NODE_ENV = 'development'
+      vi.stubEnv('NODE_ENV', 'development')
       const registrationError = new Error('Registration failed')
       mockServiceWorker.register.mockRejectedValue(registrationError)
 
@@ -140,7 +140,7 @@ describe('pWALifecycle', () => {
     })
 
     it('does not log registration errors in production', async () => {
-      process.env.NODE_ENV = 'production'
+      vi.stubEnv('NODE_ENV', 'production')
       const registrationError = new Error('Registration failed')
       mockServiceWorker.register.mockRejectedValue(registrationError)
 
@@ -172,7 +172,7 @@ describe('pWALifecycle', () => {
 
     it('handles state changes of installing worker', () => {
       const mockInstallingWorker = { ...mockWorker, state: 'installed' }
-      mockServiceWorker.controller = {} // Simulate existing controller
+      mockServiceWorker.controller = { state: 'activated' } // Simulate existing controller
 
       const registration = {
         ...mockRegistration,
@@ -199,10 +199,10 @@ describe('pWALifecycle', () => {
     })
 
     it('shows update notification in development', () => {
-      process.env.NODE_ENV = 'development'
+      vi.stubEnv('NODE_ENV', 'development')
 
       const mockInstallingWorker = { ...mockWorker, state: 'installed' }
-      mockServiceWorker.controller = {} // Simulate existing controller
+      mockServiceWorker.controller = { state: 'activated' } // Simulate existing controller
 
       const registration = {
         ...mockRegistration,
@@ -237,10 +237,10 @@ describe('pWALifecycle', () => {
     })
 
     it('does not show notification in production', () => {
-      process.env.NODE_ENV = 'production'
+      vi.stubEnv('NODE_ENV', 'production')
 
       const mockInstallingWorker = { ...mockWorker, state: 'installed' }
-      mockServiceWorker.controller = {}
+      mockServiceWorker.controller = { state: 'activated' }
 
       const registration = {
         ...mockRegistration,

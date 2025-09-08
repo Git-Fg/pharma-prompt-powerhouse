@@ -28,10 +28,13 @@
 
 <essential_disclaimers>
 **Avertissements Essentiels (Disclaimers)**
-- **Intégration Obligatoire :** Ces trois avertissements doivent être présents et visibles sur chaque workflow et chaque fiche d'outil.
-- **Sur la Performance :** *"Les résultats présentés ici sont des exemples. Le paysage de l'IA évolue constamment et les performances des modèles peuvent changer. La seule façon de trouver la solution optimale pour *votre* besoin est d'expérimenter et de comparer."*
-- **Sur la Fiabilité du Contenu Généré :** *"Une IA, même la plus avancée, peut commettre des erreurs, omettre des informations cruciales ou "halluciner". Dans le domaine de la santé, toute information générée par une IA doit être systématiquement vérifiée avec des sources fiables et validées. **N'utilisez jamais une information non vérifiée pour une décision clinique ou académique importante.**"*
-- **Sur la Confidentialité :** *"La règle d'or : si vous ne l'écririez pas sur une carte postale, ne le mettez pas dans un prompt. N'utilisez **jamais** de données personnelles, identifiables ou de patient sur une plateforme en ligne. Je précise le niveau de risque perçu pour chaque outil, mais la prudence absolue reste votre meilleure protection."*
+- **Implémentation Centralisée :** Les trois avertissements obligatoires sont implémentés de manière centralisée via le composant `DisclaimerBanner` dans `src/components/shared/DisclaimerBanner.tsx`.
+- **Intégration Automatique :** Les avertissements s'affichent automatiquement sur toutes les pages de workflows (via `ContentBodyRenderer` ligne 142) et les pages d'outils externes (via `ContentBodyRenderer` ligne 317).
+- **Types d'Avertissements :**
+  - **Performance :** Les résultats sont des exemples, le paysage IA évolue, l'expérimentation est essentielle
+  - **Fiabilité :** L'IA peut faire des erreurs, les informations de santé doivent être vérifiées avec des sources fiables
+  - **Confidentialité :** Ne jamais partager de données personnelles/identifiables/patients (règle de la carte postale)
+- **Aucune Duplication Manuelle :** Les créateurs de contenu ne doivent PAS ajouter manuellement ces avertissements aux fichiers de contenu individuels, car ils sont injectés automatiquement par le système de rendu.
 </essential_disclaimers>
 </content_rules>
 

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { MultiFormatPrompt } from '@/components/prompts/MultiFormatPrompt'
+import MultiFormatPrompt from '@/components/prompts/MultiFormatPrompt'
 
 // Mock UI components
 vi.mock('@/components/ui/alert', () => ({
@@ -14,7 +14,7 @@ vi.mock('@/components/ui/badge', () => ({
 
 vi.mock('@/components/ui/button', () => ({
   default: ({ children, onClick, ...props }: any) => (
-    <button onClick={onClick} data-testid="button" {...props}>
+    <button type="button" onClick={onClick} data-testid="button" {...props}>
       {children}
     </button>
   ),
@@ -35,7 +35,7 @@ vi.mock('@/components/ui/tabs', () => ({
   ),
   TabsList: ({ children }: any) => <div data-testid="tabs-list">{children}</div>,
   TabsTrigger: ({ children, value }: any) => (
-    <button data-testid={`tab-trigger-${value}`} data-value={value}>
+    <button type="button" data-testid={`tab-trigger-${value}`} data-value={value}>
       {children}
     </button>
   ),
@@ -55,10 +55,13 @@ vi.mock('lucide-react', () => ({
 }))
 
 // Mock clipboard API
-Object.assign(navigator, {
-  clipboard: {
-    writeText: vi.fn().mockResolvedValue(undefined),
+const mockClipboardWriteText = vi.fn().mockResolvedValue(undefined)
+
+Object.defineProperty(navigator, 'clipboard', {
+  value: {
+    writeText: mockClipboardWriteText,
   },
+  writable: true,
 })
 
 const mockPromptData = {
@@ -237,6 +240,9 @@ describe('multiFormatPrompt', () => {
       render(<MultiFormatPrompt {...mockPromptData} />)
 
       const copyButton = screen.getAllByTestId('button')[0]
+      if (!copyButton) {
+        throw new Error('Copy button not found')
+      }
       fireEvent.click(copyButton)
 
       await waitFor(() => {
@@ -250,6 +256,9 @@ describe('multiFormatPrompt', () => {
       render(<MultiFormatPrompt {...mockPromptData} />)
 
       const copyButton = screen.getAllByTestId('button')[0]
+      if (!copyButton) {
+        throw new Error('Copy button not found')
+      }
       fireEvent.click(copyButton)
 
       await waitFor(() => {
@@ -265,6 +274,9 @@ describe('multiFormatPrompt', () => {
       render(<MultiFormatPrompt {...mockPromptData} />)
 
       const copyButton = screen.getAllByTestId('button')[0]
+      if (!copyButton) {
+        throw new Error('Copy button not found')
+      }
 
       expect(() => {
         fireEvent.click(copyButton)

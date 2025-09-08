@@ -46,3 +46,35 @@ export function useAutoAnimateLayout() {
 
   return prefersReducedMotion ? null : enabledRef
 }
+
+/**
+ * Hook for grid animations with custom options
+ */
+export function useAutoAnimateGrid(options?: {
+  duration?: number
+  easing?: string
+}) {
+  const prefersReducedMotion = useReducedMotion()
+  const [enabledRef] = useAutoAnimate({
+    duration: options?.duration || 300,
+    easing: options?.easing || 'ease-out',
+  })
+
+  return prefersReducedMotion ? null : enabledRef
+}
+
+/**
+ * Hook for animations with full configuration options
+ */
+export function useAutoAnimateWithConfig(options?: {
+  duration?: number
+  easing?: string
+}) {
+  const prefersReducedMotion = useReducedMotion()
+  const [enabledRef] = useAutoAnimate({
+    duration: options?.duration || 250,
+    easing: options?.easing || 'ease-in-out',
+  })
+
+  return prefersReducedMotion ? null : enabledRef
+}

@@ -3,7 +3,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ConsentBanner } from '@/components/consent/ConsentBanner'
 
 // Mock the consent hook
-const mockSetConsent = vi.fn()
+const mockAccept = vi.fn()
+const mockDecline = vi.fn()
 const mockUseConsent = vi.fn()
 
 vi.mock('@/hooks/useConsent', () => ({
@@ -12,34 +13,36 @@ vi.mock('@/hooks/useConsent', () => ({
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
+  Cookie: () => <div data-testid="cookie-icon">Cookie</div>,
   Shield: () => <div data-testid="shield-icon">Shield</div>,
-  X: () => <div data-testid="close-icon">X</div>,
+  Settings: () => <div data-testid="settings-icon">Settings</div>,
 }))
 
 describe('consentBanner', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockUseConsent.mockReturnValue({
-      consent: null,
-      setConsent: mockSetConsent,
-      isLoading: false,
+      status: 'pending',
+      accept: mockAccept,
+      decline: mockDecline,
     })
   })
 
   it('renders banner when consent is null', () => {
     render(<ConsentBanner />)
 
-    expect(screen.getByText('Utilisation des données')).toBeInTheDocument()
-    expect(screen.getByText('Accepter')).toBeInTheDocument()
-    expect(screen.getByText('Refuser')).toBeInTheDocument()
+    expect(screen.getByText('Confort et Confidentialité')).toBeInTheDocument()
+    expect(screen.getByText('Activer le confort')).toBeInTheDocument()
+    expect(screen.getByText('Naviguer sans sauvegarde')).toBeInTheDocument()
     expect(screen.getByTestId('shield-icon')).toBeInTheDocument()
+    expect(screen.getByTestId('settings-icon')).toBeInTheDocument()
   })
 
   it('does not render when consent is already given', () => {
     mockUseConsent.mockReturnValue({
-      consent: true,
-      setConsent: mockSetConsent,
-      isLoading: false,
+      status: 'accepted',
+      accept: mockAccept,
+      decline: mockDecline,
     })
 
     const { container } = render(<ConsentBanner />)
@@ -48,9 +51,9 @@ describe('consentBanner', () => {
 
   it('does not render when consent is refused', () => {
     mockUseConsent.mockReturnValue({
-      consent: false,
-      setConsent: mockSetConsent,
-      isLoading: false,
+      status: 'declined',
+      accept: mockAccept,
+      decline: mockDecline,
     })
 
     const { container } = render(<ConsentBanner />)
@@ -60,51 +63,31 @@ describe('consentBanner', () => {
   it('calls setConsent with true when accept button is clicked', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByText('Accepter')
+    const acceptButton = screen.getByText('Activer le confort')
     fireEvent.click(acceptButton)
 
-    expect(mockSetConsent).toHaveBeenCalledWith(true)
+    expect(mockAccept).toHaveBeenCalled()
   })
 
   it('calls setConsent with false when refuse button is clicked', () => {
     render(<ConsentBanner />)
 
-    const refuseButton = screen.getByText('Refuser')
+    const refuseButton = screen.getByText('Naviguer sans sauvegarde')
     fireEvent.click(refuseButton)
 
-    expect(mockSetConsent).toHaveBeenCalledWith(false)
+    expect(mockDecline).toHaveBeenCalled()
   })
 
-  it('calls setConsent with false when close button is clicked', () => {
-    render(<ConsentBanner />)
+  // Note: There's no close button in the current implementation
 
-    const closeButton = screen.getByTestId('close-icon').closest('button')
-    fireEvent.click(closeButton!)
-
-    expect(mockSetConsent).toHaveBeenCalledWith(false)
-  })
-
-  it('shows loading state when isLoading is true', () => {
-    mockUseConsent.mockReturnValue({
-      consent: null,
-      setConsent: mockSetConsent,
-      isLoading: true,
-    })
-
-    render(<ConsentBanner />)
-
-    const acceptButton = screen.getByText('Accepter')
-    const refuseButton = screen.getByText('Refuser')
-
-    expect(acceptButton).toBeDisabled()
-    expect(refuseButton).toBeDisabled()
-  })
+  // Note: There's no loading state in the current implementation
 
   it('displays consent description correctly', () => {
     render(<ConsentBanner />)
 
-    expect(screen.getByText(/Ce site utilise des cookies/)).toBeInTheDocument()
-    expect(screen.getByText(/pour améliorer votre expérience/)).toBeInTheDocument()
+    expect(screen.getByText(/Nous souhaitons sauvegarder vos préférences/)).toBeInTheDocument()
+    expect(screen.getByText(/Aucune donnée personnelle ou de santé n'est collectée/)).toBeInTheDocument()
+    expect(screen.getByText(/Vous gardez le contrôle total/)).toBeInTheDocument()
   })
 
   it('has proper accessibility attributes', () => {
@@ -149,14 +132,14 @@ describe('consentBanner', () => {
 
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape' })
 
-    expect(mockSetConsent).toHaveBeenCalledWith(false)
+    expect(mockDecline).toHaveBeenCalled()
   })
 
   it('provides clear visual hierarchy with proper contrast', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByText('Accepter')
-    const refuseButton = screen.getByText('Refuser')
+    const acceptButton = screen.getByText('Activer le confort')
+    const refuseButton = screen.getByText('Naviguer sans sauvegarde')
 
     // Accept button should be primary (more prominent)
     expect(acceptButton).toHaveClass('bg-primary', 'text-primary-foreground')
@@ -168,31 +151,18 @@ describe('consentBanner', () => {
   it('handles rapid clicking gracefully', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByText('Accepter')
+    const acceptButton = screen.getByText('Activer le confort')
 
     // Click multiple times rapidly
     fireEvent.click(acceptButton)
     fireEvent.click(acceptButton)
     fireEvent.click(acceptButton)
 
-    // Should only call setConsent once
-    expect(mockSetConsent).toHaveBeenCalledTimes(3)
-    expect(mockSetConsent).toHaveBeenCalledWith(true)
+    // Should call accept for each click
+    expect(mockAccept).toHaveBeenCalledTimes(3)
   })
 
-  it('maintains banner visibility during loading state', () => {
-    mockUseConsent.mockReturnValue({
-      consent: null,
-      setConsent: mockSetConsent,
-      isLoading: true,
-    })
-
-    render(<ConsentBanner />)
-
-    expect(screen.getByText('Utilisation des données')).toBeInTheDocument()
-    expect(screen.getByText('Accepter')).toBeDisabled()
-    expect(screen.getByText('Refuser')).toBeDisabled()
-  })
+  // Note: Loading state test removed as there's no loading state in current implementation
 
   it('provides safe area padding for mobile devices', () => {
     render(<ConsentBanner />)

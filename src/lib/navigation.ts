@@ -145,6 +145,8 @@ export interface NavItem {
   description?: string // Optionnel, pour plus de contexte
   section: 'main' | 'legal' | 'ressources' // Pour organiser le footer
   showInMobileNav?: boolean // Optionnel, pour afficher dans la navigation mobile
+  isActive?: boolean // Optionnel, pour indiquer si le lien est actif
+  label?: string // Optionnel, pour l'accessibilité
 }
 
 export const navigationLinks: NavItem[] = [
@@ -197,9 +199,117 @@ export const navigationLinks: NavItem[] = [
 ]
 
 // Fonctions utilitaires pour filtrer par section
-export const getMainNavigationLinks = () => navigationLinks.filter(link => link.section === 'main')
+export function getMainNavigationLinks(currentPath: string = '/') {
+  return navigationLinks.filter(link => link.section === 'main').map(link => ({
+    ...link,
+    isActive: isActiveRoute(currentPath, link.href),
+  }))
+}
 export const getLegalNavigationLinks = () => navigationLinks.filter(link => link.section === 'legal')
 export const getNavigationLinksBySection = (section: NavItem['section']) => navigationLinks.filter(link => link.section === section)
 
 // Fonction utilitaire pour obtenir les liens de navigation mobile
-export const getMobileNavigationLinks = () => navigationLinks.filter(link => link.showInMobileNav)
+export function getMobileNavigationLinks(currentPath: string = '/') {
+  return navigationLinks.filter(link => link.showInMobileNav).map(link => ({
+    ...link,
+    isActive: isActiveRoute(currentPath, link.href),
+  }))
+}
+
+/**
+ * Génère le fil d'Ariane pour une page donnée
+ */
+export function generateBreadcrumbs(pathname: string): Array<{
+  path: string
+  label: string
+  isCurrent: boolean
+}> {
+  const segments = pathname.split('/').filter(Boolean)
+  const breadcrumbs = []
+
+  // Ajouter la page d'accueil
+  breadcrumbs.push({
+    path: '/',
+    label: 'Accueil',
+    isCurrent: segments.length === 0,
+  })
+
+  // Construire le chemin progressivement
+  let currentPath = ''
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i]
+    currentPath += `/${segment}`
+    const isCurrent = i === segments.length - 1
+
+    const label: string = getRouteSegmentName(segment || '') || segment || ''
+    breadcrumbs.push({
+      path: currentPath,
+      label,
+      isCurrent,
+    })
+  }
+
+  return breadcrumbs
+}
+
+/**
+ * Détermine le type de contenu à partir d'un chemin
+ */
+export function getContentTypeFromPath(path: string): 'workflow' | 'guide' | 'concept' | 'tool' | null {
+  const segments = path.split('/').filter(Boolean)
+
+  if (segments.length !== 2) {
+    return null
+  }
+
+  const [type, _] = segments
+
+  switch (type) {
+    case 'guides':
+      return 'guide'
+    case 'workflows':
+      return 'workflow'
+    case 'concepts':
+      return 'concept'
+    case 'l-arsenal-ia':
+      return 'tool'
+    default:
+      return null
+  }
+}
+
+/**
+ * Construit le chemin pour un contenu donné
+ */
+export function buildContentPath(type: 'workflow' | 'guide' | 'concept' | 'tool', slug: string): string | null {
+  if (!slug) {
+    return null
+  }
+
+  switch (type) {
+    case 'guide':
+      return `/guides/${slug}`
+    case 'workflow':
+      return `/workflows/${slug}`
+    case 'concept':
+      return `/concepts/${slug}`
+    case 'tool':
+      return `/l-arsenal-ia/${slug}`
+    default:
+      return null
+  }
+}
+
+/**
+ * Alias pour getRouteSegmentName pour la compatibilité
+ */
+export function getDisplayNameForSegment(segment: string): string {
+  return getRouteSegmentName(segment)
+}
+
+/**
+ * Détermine si une route est active
+ */
+export function isActiveRoute(currentPath: string, targetPath: string): boolean {
+  return currentPath === targetPath
+}

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { usePathname } from 'next/navigation'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
 
 // Mock Next.js navigation
@@ -18,13 +18,22 @@ vi.mock('@/hooks/use-mobile', () => ({
   useIsMobile: vi.fn(() => true),
 }))
 
+// Import the mocked hook
+import { useIsMobile } from '@/hooks/use-mobile'
+
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
   Home: () => <div data-testid="home-icon">Home</div>,
   BookOpen: () => <div data-testid="book-icon">Book</div>,
   Search: () => <div data-testid="search-icon">Search</div>,
+  SearchIcon: () => <div data-testid="search-icon">Search</div>,
   Lightbulb: () => <div data-testid="lightbulb-icon">Lightbulb</div>,
   Wrench: () => <div data-testid="wrench-icon">Wrench</div>,
+  XIcon: () => <div data-testid="x-icon">X</div>,
+  Brain: () => <div data-testid="brain-icon">Brain</div>,
+  Target: () => <div data-testid="target-icon">Target</div>,
+  Shield: () => <div data-testid="shield-icon">Shield</div>,
+  ExternalLink: () => <div data-testid="external-link-icon">External</div>,
 }))
 
 describe('mobileBottomNav', () => {
@@ -49,7 +58,7 @@ describe('mobileBottomNav', () => {
   })
 
   it('does not render on desktop', () => {
-    vi.mocked(useMobile).mockReturnValue(false)
+    vi.mocked(useIsMobile).mockReturnValue(false)
 
     const { container } = render(<MobileBottomNav />)
     expect(container.firstChild).toBeNull()

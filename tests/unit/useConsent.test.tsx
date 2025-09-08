@@ -24,8 +24,8 @@ function TestComponent() {
   return (
     <div>
       <div data-testid="status">{status}</div>
-      <button data-testid="accept" onClick={accept}>Accept</button>
-      <button data-testid="decline" onClick={decline}>Decline</button>
+      <button type="button" data-testid="accept" onClick={accept}>Accept</button>
+      <button type="button" data-testid="decline" onClick={decline}>Decline</button>
     </div>
   )
 }

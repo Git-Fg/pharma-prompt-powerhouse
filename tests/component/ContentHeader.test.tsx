@@ -9,7 +9,7 @@ vi.mock('@/components/ui/button', () => ({
     if (asChild && typeof children === 'object' && children.type === 'a') {
       return <a {...props} {...children.props}>{children.props.children}</a>
     }
-    return <button {...props}>{children}</button>
+    return <button type="button" {...props}>{children}</button>
   },
 }))
 
@@ -41,6 +41,7 @@ const mockGuide: Guide = {
   content: [],
   conceptSlugs: ['concept1'],
   estimatedTime: '10 min',
+  keyTakeaways: ['Test takeaway'],
 }
 
 const mockWorkflow: Workflow = {
@@ -51,10 +52,10 @@ const mockWorkflow: Workflow = {
   difficulty: 'intermediate',
   tags: ['workflow', 'test'],
   isFavorite: false,
-  isWorkflow: true,
   content: [],
   conceptSlugs: ['concept1', 'concept2'],
   estimatedTime: '20 min',
+  keyTakeaways: ['Workflow takeaway'],
 }
 
 const mockConcept: Concept = {
@@ -76,16 +77,14 @@ const mockExternalTool: ExternalTool = {
   url: 'https://example.com/tool',
   tags: ['tool'],
   isFavorite: false,
-  isPaid: false,
   content: [],
-  pricing: {
-    free: 'Limited usage',
-    paid: 'Unlimited access for $10/month',
-  },
-  strengths: ['Feature 1', 'Feature 2'],
-  limitations: ['Limitation 1'],
-  riskLevel: 'low',
-  confidenceScore: 8,
+  category: 'general',
+  personalReview: 'Test review',
+  strongPoints: ['Feature 1', 'Feature 2'],
+  vigilancePoints: ['Limitation 1'],
+  confidenceScore: 4,
+  confidenceJustification: 'Test justification',
+  freeVsPaidOffer: 'Free: Limited\nPaid: Full access',
 }
 
 describe('contentHeader', () => {
@@ -305,6 +304,7 @@ describe('contentHeader', () => {
         isFavorite: false,
         isWorkflow: false,
         content: [],
+        keyTakeaways: ['test'],
       } as Guide
 
       expect(() => {

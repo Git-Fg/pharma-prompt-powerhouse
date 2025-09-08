@@ -98,7 +98,8 @@ describe('responsiveDataTable', () => {
       <ResponsiveDataTable
         data={[]}
         columns={mockColumns}
-        ariaLabel="Empty data table"
+        renderMobileCard={mockRenderMobileCard}
+        tableCaption="Empty data table"
       />,
     )
 
@@ -145,12 +146,14 @@ describe('responsiveDataTable', () => {
       <ResponsiveDataTable
         data={mockData}
         columns={mockColumns}
-        ariaLabel="Accessible data table"
+        renderMobileCard={mockRenderMobileCard}
+        tableCaption="Accessible data table"
       />,
     )
 
     const table = screen.getByRole('table')
-    expect(table).toHaveAccessibleName('Accessible data table')
+    const caption = screen.getByText('Accessible data table')
+    expect(caption).toBeInTheDocument()
   })
 
   it('handles sorting when sortable columns are provided', () => {
@@ -176,7 +179,8 @@ describe('responsiveDataTable', () => {
       <ResponsiveDataTable
         data={mockData}
         columns={sortableColumns}
-        ariaLabel="Sortable data table"
+        renderMobileCard={mockRenderMobileCard}
+        tableCaption="Sortable data table"
       />,
     )
 
@@ -197,7 +201,8 @@ describe('responsiveDataTable', () => {
       <ResponsiveDataTable
         data={largeDataset}
         columns={mockColumns}
-        ariaLabel="Large dataset table"
+        renderMobileCard={mockRenderMobileCard}
+        tableCaption="Large dataset table"
       />,
     )
 

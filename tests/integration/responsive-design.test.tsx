@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import Link from 'next/link'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock Next.js components and hooks
@@ -14,7 +15,17 @@ vi.mock('next/navigation', () => ({
 }))
 
 vi.mock('next/image', () => ({
-  default: ({ src, alt, ...props }: any) => <img src={src} alt={alt} {...props} />,
+  default: ({ src, alt, ...props }: any) => (
+    // eslint-disable-next-line next/no-img-element -- Mock component for testing
+    <img src={src} alt={alt} {...props} />
+  ),
+}))
+
+vi.mock('next/link', () => ({
+  default: ({ href, children, ...props }: any) => (
+
+    <a href={href} {...props}>{children}</a>
+  ),
 }))
 
 vi.mock('@/hooks/use-mobile', () => ({
@@ -104,11 +115,11 @@ describe('application Integration Tests', () => {
   it('supports accessibility features across components', () => {
     const AccessibleComponent = () => (
       <div>
-        <button aria-label="Test button">Click me</button>
+        <button type="button" aria-label="Test button">Click me</button>
         <nav aria-label="Test navigation">
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/about">About</Link></li>
           </ul>
         </nav>
         <main aria-label="Main content">
@@ -153,6 +164,7 @@ describe('application Integration Tests', () => {
     const InteractiveComponent = () => (
       <div>
         <button
+          type="button"
           onClick={() => clickCount++}
           className="bg-primary text-primary-foreground px-4 py-2 rounded"
         >
@@ -191,10 +203,10 @@ describe('application Integration Tests', () => {
   it('supports keyboard navigation properly', () => {
     const KeyboardNavComponent = () => (
       <div>
-        <button tabIndex={0}>First Button</button>
+        <button type="button" tabIndex={0}>First Button</button>
         <input type="text" tabIndex={0} placeholder="Input field" />
         <a href="#" tabIndex={0}>Link</a>
-        <button tabIndex={0}>Last Button</button>
+        <button type="button" tabIndex={0}>Last Button</button>
       </div>
     )
 
@@ -269,8 +281,8 @@ describe('application Integration Tests', () => {
           <h1>Application Header</h1>
           <nav>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/about">About</Link></li>
             </ul>
           </nav>
         </header>

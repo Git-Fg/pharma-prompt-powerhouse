@@ -41,7 +41,7 @@ vi.mock('@/lib/navigation', () => ({
 // Mock UI components
 vi.mock('@/components/ui/button', () => ({
   default: ({ children, onClick, ...props }: any) => (
-    <button onClick={onClick} {...props}>
+    <button type="button" onClick={onClick} {...props}>
       {children}
     </button>
   ),

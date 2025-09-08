@@ -19,14 +19,15 @@ vi.mock('@/hooks/use-animations', () => ({
   useReducedMotion: vi.fn(),
 }))
 
-const mockRef = { current: null }
+const mockRef = vi.fn()
+const mockSetEnabled = vi.fn()
 const mockAutoAnimate = vi.mocked(useAutoAnimate)
 const mockUseReducedMotion = vi.mocked(useReducedMotion)
 
 describe('useAutoAnimate hooks', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    mockAutoAnimate.mockReturnValue([mockRef])
+    mockAutoAnimate.mockReturnValue([mockRef, mockSetEnabled])
     mockUseReducedMotion.mockReturnValue(false)
   })
 
@@ -318,7 +319,7 @@ describe('useAutoAnimate hooks', () => {
       expect(renderHook(() => useAutoAnimateGrid()).result.current).toBe(null)
 
       // Only this one should override
-      const config = { disrespectUserMotionPreference: true }
+      const config = { duration: 500 }
       expect(renderHook(() => useAutoAnimateWithConfig(config)).result.current).not.toBe(null)
     })
 

@@ -11,8 +11,7 @@ interface AutoGlossaryProcessorProps {
 
 /**
  * Component that automatically detects and wraps glossary terms in text content.
- * This processor scans text nodes and replaces glossary terms with DefinedTerm components.
- * Only runs on the client side to avoid SSR issues.
+ * This processor only processes direct text children and avoids complex React element manipulation.
  */
 export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) {
   // Only process on client side to avoid SSR issues
@@ -37,16 +36,17 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
     // Escape special regex characters and create alternation pattern
     const escapedTerms = glossaryTerms.map(term =>
-      term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+      term.replace(/[.*+?^${}()|[\\]\\\\\]/g, '\\\\$&'),
     )
 
     // Create pattern that matches whole words only
-    return new RegExp(`\\b(${escapedTerms.join('|')})\\b`, 'gi')
+    return new RegExp(`\\\\b(${escapedTerms.join('|')})\\\\b`, 'gi')
   }, [glossaryTerms])
 
-  const processTextNode = React.useCallback((text: string): React.ReactNode[] => {
+  // Process text content by replacing glossary terms with DefinedTerm components
+  const processTextContent = React.useCallback((text: string): React.ReactNode => {
     if (!termPattern)
-      return [text]
+      return text
 
     const parts: React.ReactNode[] = []
     let lastIndex = 0
@@ -62,7 +62,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       if (match.index > lastIndex) {
         const textPart = text.slice(lastIndex, match.index)
         if (textPart.length > 0) {
-          parts.push(<React.Fragment key={`text-${keyCounter++}`}>{textPart}</React.Fragment>)
+          parts.push(textPart)
         }
       }
 
@@ -86,7 +86,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       }
       else {
         // Fallback if term not found (shouldn't happen)
-        parts.push(<React.Fragment key={`fallback-${keyCounter++}`}>{matchedTerm}</React.Fragment>)
+        parts.push(matchedTerm)
       }
 
       lastIndex = termPattern.lastIndex
@@ -96,78 +96,14 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     if (lastIndex < text.length) {
       const remainingText = text.slice(lastIndex)
       if (remainingText.length > 0) {
-        parts.push(<React.Fragment key={`text-${keyCounter++}`}>{remainingText}</React.Fragment>)
+        parts.push(remainingText)
       }
     }
 
-    return parts.length > 0 ? parts : [text]
+    return parts.length > 1 ? parts : text
   }, [termPattern])
 
-  const processNode = React.useCallback((node: React.ReactNode, nodeIndex = 0): React.ReactNode => {
-    if (typeof node === 'string') {
-      const processed = processTextNode(node)
-      // Toujours retourner les éléments individuellement, pas en tant que tableau
-      if (processed.length === 1) {
-        return processed[0]
-      }
-      // Si plusieurs éléments, les retourner dans un Fragment sans key
-      return processed
-    }
-
-    if (React.isValidElement(node)) {
-      // Don't process if it's already a DefinedTerm to avoid double wrapping
-      // Check for DefinedTerm by component name or props
-      if (node.type === DefinedTerm
-        || (typeof node.type === 'function' && node.type.name === 'DefinedTerm')
-        || (node.props && typeof node.props === 'object' && node.props !== null
-          && 'term' in node.props && 'children' in node.props)) {
-        return node
-      }
-
-      // Don't process code blocks, links, or other special elements
-      if (typeof node.type === 'string' && ['code', 'pre', 'a'].includes(node.type)) {
-        return node
-      }
-
-      // Process children recursively - handle different types of children properly
-      const props = node.props as { children?: React.ReactNode }
-
-      // Handle children more robustly
-      let childrenProcessed: React.ReactNode
-
-      if (props.children !== undefined) {
-        if (Array.isArray(props.children)) {
-          childrenProcessed = props.children.map((child, idx) => processNode(child, idx))
-        }
-        else if (React.isValidElement(props.children)) {
-          childrenProcessed = processNode(props.children, 0)
-        }
-        else if (typeof props.children === 'string') {
-          const processed = processTextNode(props.children)
-          childrenProcessed = processed.length === 1 ? processed[0] : processed
-        }
-        else {
-          // For other types (numbers, booleans, etc.), leave as-is
-          childrenProcessed = props.children
-        }
-      }
-
-      // Instead of cloneElement, create a new element with the same type and props
-      return React.createElement(
-        // eslint-disable-next-line ts/no-explicit-any -- Type casting nécessaire pour le traitement de nœuds markdown complexes
-        node.type as any,
-        {
-          ...(node.props as object),
-          key: node.key || `processed-${nodeIndex}`,
-          children: childrenProcessed,
-        },
-      )
-    }
-
-    return node
-  }, [processTextNode])
-
-  // Process all children using modern React patterns with better type safety
+  // Process children - only handle simple cases to avoid complex React element manipulation
   const processedChildren = React.useMemo(() => {
     if (!shouldProcess)
       return children
@@ -175,21 +111,24 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     if (!children)
       return undefined
 
+    // Only process direct string children or simple arrays
+    if (typeof children === 'string') {
+      return processTextContent(children)
+    }
+
     if (Array.isArray(children)) {
-      return children.map((child, idx) => processNode(child, idx))
+      // Process each child in the array
+      return children.map((child, _index) => {
+        if (typeof child === 'string') {
+          return processTextContent(child)
+        }
+        return child
+      })
     }
-    else if (React.isValidElement(children)) {
-      return processNode(children, 0)
-    }
-    else if (typeof children === 'string') {
-      const processed = processTextNode(children)
-      return processed.length === 1 ? processed[0] : processed
-    }
-    else {
-      // For other types (numbers, booleans, etc.), return as-is
-      return children
-    }
-  }, [children, shouldProcess, processNode, processTextNode])
+
+    // For complex React elements, don't process to avoid issues
+    return children
+  }, [children, shouldProcess, processTextContent])
 
   return <>{processedChildren}</>
 }
