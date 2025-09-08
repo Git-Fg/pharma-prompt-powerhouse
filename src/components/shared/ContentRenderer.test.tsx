@@ -119,7 +119,7 @@ describe('contentRenderer', () => {
     render(<ContentRenderer content={contentBlocks} />)
 
     expect(screen.getByTestId('guide-recommendation')).toHaveTextContent(
-      'test-guide: Helpful for understanding concepts',
+      'test-guide:Helpful for understanding concepts',
     )
   })
 
@@ -135,7 +135,7 @@ describe('contentRenderer', () => {
     render(<ContentRenderer content={contentBlocks} />)
 
     expect(screen.getByTestId('concept-recommendation')).toHaveTextContent(
-      'test-concept: Essential background knowledge',
+      'test-concept:Essential background knowledge',
     )
   })
 

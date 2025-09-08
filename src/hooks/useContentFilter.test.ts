@@ -121,7 +121,7 @@ describe('useContentFilter Hook', () => {
     const { result } = renderHook(() => useContentFilter(mockItems))
 
     act(() => {
-      result.current.setSearchTerm('javascript')
+      result.current.setSelectedTags(['javascript'])
     })
 
     expect(result.current.filteredItems).toHaveLength(3)

@@ -70,8 +70,8 @@ describe('header', () => {
 
       // Find the mobile menu trigger by looking for the Menu icon
       const menuButtons = screen.getAllByRole('button')
-      const mobileMenuTrigger = menuButtons.find(button => 
-        button.querySelector('svg.lucide-menu')
+      const mobileMenuTrigger = menuButtons.find(button =>
+        button.querySelector('svg.lucide-menu'),
       )
       expect(mobileMenuTrigger).toBeInTheDocument()
     })
@@ -101,8 +101,8 @@ describe('header', () => {
 
       // Find the mobile menu trigger by looking for the Menu icon
       const menuButtons = screen.getAllByRole('button')
-      const mobileTrigger = menuButtons.find(button => 
-        button.querySelector('svg.lucide-menu')
+      const mobileTrigger = menuButtons.find(button =>
+        button.querySelector('svg.lucide-menu'),
       )
       expect(mobileTrigger).toBeInTheDocument()
 
