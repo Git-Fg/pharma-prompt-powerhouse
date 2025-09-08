@@ -129,7 +129,7 @@ export default antfu(
   },
   {
     // Specific rules for test files
-    files: ['**/*.test.ts', '**/*.test.tsx', 'tests/**/*'],
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.integration.test.tsx', 'tests/**/*'],
     rules: {
       // React hooks rules for tests
       'react-hooks-extra/no-unnecessary-use-prefix': 'off',

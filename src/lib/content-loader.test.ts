@@ -1,6 +1,44 @@
 import type { BaseConcept, BaseGuide } from '@/lib/content-schema'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+// Mock content modules first
+vi.mock('@/content/guides', () => ({
+  allGuides: [{
+    slug: 'test-guide',
+    title: 'Test Guide',
+    description: 'A test guide',
+    category: 'general',
+    difficulty: 'beginner',
+    tags: ['test'],
+    isFavorite: false,
+    isWorkflow: false,
+    content: [],
+    conceptSlugs: ['test-concept'],
+  }],
+}))
+
+vi.mock('@/content/concepts', () => ({
+  allConcepts: [{
+    slug: 'test-concept',
+    title: 'Test Concept',
+    description: 'A test concept',
+    category: 'general',
+    difficulty: 'beginner',
+    tags: ['test'],
+    isFavorite: false,
+    keyTakeaways: ['Key point 1'],
+    content: [],
+  }],
+}))
+
+vi.mock('@/content/workflows', () => ({
+  allWorkflows: [],
+}))
+
+vi.mock('@/content/external-tools', () => ({
+  allExternalTools: [],
+}))
+
 // Import the actual content loader functions for testing
 import {
   content,
@@ -10,7 +48,7 @@ import {
   isValidContentType,
 } from './content-loader'
 
-// Mock content data
+// Mock content data for assertions
 const mockGuide: BaseGuide = {
   slug: 'test-guide',
   title: 'Test Guide',
@@ -35,23 +73,6 @@ const mockConcept: BaseConcept = {
   keyTakeaways: ['Key point 1'],
   content: [],
 }
-
-// Mock content modules
-vi.mock('@/content/guides', () => ({
-  allGuides: [mockGuide],
-}))
-
-vi.mock('@/content/concepts', () => ({
-  allConcepts: [mockConcept],
-}))
-
-vi.mock('@/content/workflows', () => ({
-  allWorkflows: [],
-}))
-
-vi.mock('@/content/external-tools', () => ({
-  allExternalTools: [],
-}))
 
 describe('content Loader', () => {
   beforeEach(() => {

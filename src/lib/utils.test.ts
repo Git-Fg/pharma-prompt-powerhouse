@@ -3,7 +3,7 @@
  * Tests unitaires simples sans mocks complexes
  */
 
-import { describe, expect, it } from '@/test-utils'
+import { describe, expect, it } from 'vitest'
 import { cn, normalizeSlug } from './utils'
 
 describe('utils', () => {

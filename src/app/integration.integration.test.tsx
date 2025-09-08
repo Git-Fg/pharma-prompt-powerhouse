@@ -3,9 +3,9 @@
  * Focus sur le comportement réel plutôt que les mocks complexes
  */
 
-import { describe, expect, it } from '@/test-utils'
+import { describe, expect, it } from 'vitest'
 
-describe('Integration Tests - Homepage', () => {
+describe('integration tests - Homepage', () => {
   it('should render basic page structure without errors', () => {
     // Test d'intégration simple pour vérifier que la structure de base fonctionne
     expect(true).toBe(true)

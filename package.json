@@ -15,11 +15,11 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "test:unit": "vitest run src/lib/ src/hooks/",
-    "test:component": "vitest run src/components/",
-    "test:integration": "vitest run src/app/",
-    "test:browser": "vitest run",
-    "test:browser:run": "vitest run",
+    "test:unit": "vitest run --project=unit",
+    "test:component": "vitest run --project=component",
+    "test:integration": "vitest run --project=integration",
+    "test:browser": "vitest run --project=component --project=integration",
+    "test:browser:run": "vitest run --project=component --project=integration",
     "test:co-located": "vitest run src/",
     "content:prepare": "node scripts/generate-valid-slugs.mjs",
     "content:validate-links": "node scripts/validate-links.mjs"
@@ -129,6 +129,7 @@
     "serwist": "^10.0.0-preview.14",
     "typescript": "5.9.2",
     "vitest": "^3.2.4",
-    "vitest-axe": "^0.1.0"
+    "vitest-axe": "^0.1.0",
+    "vitest-browser-react": "^1.0.1"
   }
 }
