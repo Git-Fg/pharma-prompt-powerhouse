@@ -75,13 +75,20 @@ export function createMockRouter() {
   }
 }
 
-export function createMockTheme() {
+export function createMockTheme(overrides: Partial<{
+  theme: string
+  setTheme: any
+  systemTheme: 'light' | 'dark' | undefined
+  themes: string[]
+  resolvedTheme: string
+}> = {}) {
   return {
     theme: 'light',
     setTheme: vi.fn(),
-    systemTheme: 'light',
+    systemTheme: 'light' as const,
     themes: ['light', 'dark'],
     resolvedTheme: 'light',
+    ...overrides,
   }
 }
 
