@@ -8,7 +8,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { BreadcrumbNavigation } from '@/components/layout/BreadcrumbNavigation'
-import { clearAllMocks, renderWithUserEvent, TestAssertions } from '@/tests/utils/modern-test-utils'
+import { clearAllMocks, renderWithUserEvent, TestAssertions } from '../utils/modern-test-utils'
 
 // Mock UNIQUEMENT les dépendances externes selon Glass Box Principle
 const mockUsePathname = vi.fn()

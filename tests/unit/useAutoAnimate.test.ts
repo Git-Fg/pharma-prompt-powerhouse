@@ -320,10 +320,11 @@ describe('useAutoAnimate hooks', () => {
       expect(renderHook(() => useAutoAnimateIfEnabled()).result.current).toBe(null)
       expect(renderHook(() => useAutoAnimateList()).result.current).toBe(null)
       expect(renderHook(() => useAutoAnimateGrid()).result.current).toBe(null)
+      expect(renderHook(() => useAutoAnimateWithConfig({ duration: 500 })).result.current).toBe(null)
 
-      // Only this one should override
-      const config = { duration: 500 }
-      expect(renderHook(() => useAutoAnimateWithConfig(config)).result.current).not.toBe(null)
+      // Only this one should override reduced motion preferences
+      const configWithOverride = { duration: 500, disrespectUserMotionPreference: true }
+      expect(renderHook(() => useAutoAnimateWithConfig(configWithOverride)).result.current).not.toBe(null)
     })
 
     it('provides appropriate animation durations for accessibility', () => {

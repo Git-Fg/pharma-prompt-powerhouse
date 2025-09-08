@@ -96,6 +96,8 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     if (!children)
       return undefined
 
+    let uniqueCounter = 0
+
     // Helper function to process React elements recursively
     const processElement = (element: React.ReactNode): React.ReactNode => {
       if (typeof element === 'string') {
@@ -103,11 +105,13 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       }
 
       if (Array.isArray(element)) {
-        return element.map((child, index) => {
+        return element.map((child) => {
           const processed = processElement(child)
-          // Add key for array elements using unique identifier
+          // Use stable unique key instead of array index
+          const uniqueKey = `auto-glossary-${++uniqueCounter}`
           if (React.isValidElement(processed)) {
-            return React.cloneElement(processed, { key: `auto-glossary-${index}` })
+            // eslint-disable-next-line react/no-clone-element -- Required for preserving element structure while processing glossary terms
+            return React.cloneElement(processed, { key: uniqueKey })
           }
           return processed
         })
@@ -124,9 +128,10 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
         // Process children recursively
         const processedChildren = processElement(elementChildren)
 
+        // eslint-disable-next-line react/no-clone-element -- Required for preserving element structure while processing glossary terms
         return React.cloneElement(
           element,
-          { ...props, key: `auto-glossary-element-${Date.now()}` },
+          { ...props, key: `auto-glossary-element-${++uniqueCounter}` },
           processedChildren,
         )
       }
