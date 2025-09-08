@@ -1,22 +1,14 @@
 import type { BaseConcept, BaseGuide } from '@/lib/content-schema'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-// Mock functions for compatibility
-vi.mock('@/lib/content-loader', () => ({
-  content: {
-    guides: [],
-    workflows: [],
-    concepts: [],
-    externalTools: [],
-  },
-  getGuideBySlug: vi.fn(),
-  getWorkflowBySlug: vi.fn(),
-  getConceptBySlug: vi.fn(),
-  getExternalToolBySlug: vi.fn(),
-  getContentItem: vi.fn(),
-  getRouteToContentTypeMapping: vi.fn(),
-  getContentTypeToRouteMapping: vi.fn(),
-}))
+// Import the actual content loader functions for testing
+import {
+  content,
+  getContentItem,
+  getContentTypeToRouteMapping,
+  getRouteToContentTypeMapping,
+  isValidContentType,
+} from '@/lib/content-loader'
 
 // Mock content data
 const mockGuide: BaseGuide = {
@@ -66,269 +58,221 @@ describe('content Loader', () => {
     vi.clearAllMocks()
   })
 
-  // TODO: Fix these tests after understanding the actual API
+  // Test the actual content loader API with proper mocking
   describe('content object', () => {
     it('returns content with correct structure', () => {
-      // Since we're mocking the content loader, we can't test the actual content object
-      // This test should be updated when we have a better understanding of the API
-      expect(true).toBe(true)
-    })
-  })
+      // Test the imported content object
 
-  /*
-  describe('getAllContent', () => {
-    it('returns all content items from all types', () => {
-      const allContent = getAllContent()
+      expect(content).toBeDefined()
+      expect(content).toHaveProperty('guides')
+      expect(content).toHaveProperty('workflows')
+      expect(content).toHaveProperty('concepts')
+      expect(content).toHaveProperty('externalTools')
 
-      expect(allContent).toBeDefined()
-      expect(allContent.length).toBeGreaterThanOrEqual(2) // guide + concept
-
-      const guideItem = allContent.find((item: any) => item.slug === 'test-guide')
-      const conceptItem = allContent.find((item: any) => item.slug === 'test-concept')
-
-      expect(guideItem).toBeDefined()
-      expect(conceptItem).toBeDefined()
-      expect(guideItem?.title).toBe('Test Guide')
-      expect(conceptItem?.title).toBe('Test Concept')
+      // Verify arrays are returned
+      expect(Array.isArray(content.guides)).toBe(true)
+      expect(Array.isArray(content.workflows)).toBe(true)
+      expect(Array.isArray(content.concepts)).toBe(true)
+      expect(Array.isArray(content.externalTools)).toBe(true)
     })
 
-    it('includes content type information', () => {
-      const allContent = getAllContent()
-      const guideItem = allContent.find((item: any) => item.slug === 'test-guide')
+    it('provides enriched content with related items', () => {
+      // Test that guides are enriched with related items and concepts
+      if (content.guides.length > 0) {
+        const guide = content.guides[0]!
+        expect(guide).toHaveProperty('relatedItems')
+        expect(Array.isArray(guide.relatedItems)).toBe(true)
 
-      // Should have type information or related properties
-      expect(guideItem).toHaveProperty('slug')
-      expect(guideItem).toHaveProperty('title')
-      expect(guideItem).toHaveProperty('description')
-    })
-  })
-
-  describe('getContentBySlug', () => {
-    it('returns content item by slug', () => {
-      const guide = getContentBySlug('test-guide')
-      const concept = getContentBySlug('test-concept')
-
-      expect(guide).toBeDefined()
-      expect(guide?.slug).toBe('test-guide')
-      expect(guide?.title).toBe('Test Guide')
-
-      expect(concept).toBeDefined()
-      expect(concept?.slug).toBe('test-concept')
-      expect(concept?.title).toBe('Test Concept')
-    })
-
-    it('returns undefined for non-existent slug', () => {
-      const nonExistent = getContentBySlug('non-existent-slug')
-      expect(nonExistent).toBeUndefined()
-    })
-
-    it('handles empty or invalid slugs', () => {
-      expect(getContentBySlug('')).toBeUndefined()
-      expect(getContentBySlug('   ')).toBeUndefined()
-    })
-  })
-
-  describe('getContentByType', () => {
-    it('returns content filtered by type', () => {
-      const guides = getContentByType('guide')
-      const concepts = getContentByType('concept')
-
-      expect(guides).toBeDefined()
-      expect(Array.isArray(guides)).toBe(true)
-      expect(guides.length).toBeGreaterThanOrEqual(1)
-
-      expect(concepts).toBeDefined()
-      expect(Array.isArray(concepts)).toBe(true)
-      expect(concepts.length).toBeGreaterThanOrEqual(1)
-
-      // Verify content types
-      const guide = guides.find((g: any) => g.slug === 'test-guide')
-      expect(guide).toBeDefined()
-    })
-
-    it('returns empty array for unknown content type', () => {
-      const unknown = getContentByType('unknown' as any)
-      expect(Array.isArray(unknown)).toBe(true)
-      expect(unknown.length).toBe(0)
-    })
-  })
-
-  describe('getContentMap', () => {
-    it('returns a map of all content keyed by slug', () => {
-      const contentMap = getContentMap()
-
-      expect(contentMap).toBeDefined()
-      expect(contentMap instanceof Map).toBe(true)
-      expect(contentMap.size).toBeGreaterThanOrEqual(2)
-
-      expect(contentMap.has('test-guide')).toBe(true)
-      expect(contentMap.has('test-concept')).toBe(true)
-
-      const guide = contentMap.get('test-guide')
-      expect(guide?.title).toBe('Test Guide')
-    })
-
-    it('provides O(1) lookup performance', () => {
-      const contentMap = getContentMap()
-
-      // Multiple lookups should be fast
-      const start = performance.now()
-      for (let i = 0; i < 1000; i++) {
-        contentMap.get('test-guide')
-        contentMap.get('test-concept')
-      }
-      const end = performance.now()
-
-      // Should complete very quickly (< 10ms for 2000 lookups)
-      expect(end - start).toBeLessThan(10)
-    })
-  })
-
-  describe('getRelatedContent', () => {
-    it('finds related content based on concepts and tags', () => {
-      const related = getRelatedContent('test-guide')
-
-      expect(related).toBeDefined()
-      expect(Array.isArray(related)).toBe(true)
-
-      // Should find the concept that shares conceptSlugs
-      const relatedConcept = related.find((item: any) => item.slug === 'test-concept')
-      expect(relatedConcept).toBeDefined()
-    })
-
-    it('excludes the original item from related content', () => {
-      const related = getRelatedContent('test-guide')
-
-      // Should not include the original guide
-      const originalItem = related.find((item: any) => item.slug === 'test-guide')
-      expect(originalItem).toBeUndefined()
-    })
-
-    it('returns empty array for non-existent content', () => {
-      const related = getRelatedContent('non-existent-slug')
-      expect(Array.isArray(related)).toBe(true)
-      expect(related.length).toBe(0)
-    })
-
-    it('limits the number of related items returned', () => {
-      const related = getRelatedContent('test-guide', 5)
-      expect(related.length).toBeLessThanOrEqual(5)
-    })
-
-    it('scores and sorts related content by relevance', () => {
-      const related = getRelatedContent('test-guide')
-
-      if (related.length > 1) {
-        // First item should have highest score
-        for (let i = 1; i < related.length; i++) {
-          expect(related[i - 1].score).toBeGreaterThanOrEqual(related[i].score)
+        if (guide.concepts) {
+          expect(Array.isArray(guide.concepts)).toBe(true)
         }
       }
-    })
-  })
 
-  describe('content Enrichment', () => {
-    it('enriches content with related items and concepts', () => {
-      const guide = getContentBySlug('test-guide')
+      // Test that workflows are enriched with related items and concepts
+      if (content.workflows.length > 0) {
+        const workflow = content.workflows[0]!
+        expect(workflow).toHaveProperty('relatedItems')
+        expect(Array.isArray(workflow.relatedItems)).toBe(true)
 
-      expect(guide).toBeDefined()
-
-      // Check for enriched properties
-      if ('relatedItems' in guide!) {
-        expect(guide.relatedItems).toBeDefined()
-        expect(Array.isArray(guide.relatedItems)).toBe(true)
+        if (workflow.concepts) {
+          expect(Array.isArray(workflow.concepts)).toBe(true)
+        }
       }
 
-      if ('concepts' in guide!) {
-        expect(guide.concepts).toBeDefined()
-        expect(Array.isArray(guide.concepts)).toBe(true)
+      // Test that concepts are enriched with related items
+      if (content.concepts.length > 0) {
+        const concept = content.concepts[0]!
+        expect(concept).toHaveProperty('relatedItems')
+        expect(Array.isArray(concept.relatedItems)).toBe(true)
       }
     })
 
-    it('maintains original content properties', () => {
-      const guide = getContentBySlug('test-guide')
+    it('ensures content integrity - all required properties exist', () => {
+      // Test guides structure
+      content.guides.forEach((guide: any) => {
+        expect(guide).toHaveProperty('slug')
+        expect(guide).toHaveProperty('title')
+        expect(guide).toHaveProperty('description')
+        expect(guide).toHaveProperty('category')
+        expect(guide).toHaveProperty('difficulty')
+        expect(guide).toHaveProperty('tags')
+        expect(guide).toHaveProperty('isFavorite')
+        expect(guide).toHaveProperty('content')
+        expect(typeof guide.slug).toBe('string')
+        expect(typeof guide.title).toBe('string')
+        expect(Array.isArray(guide.tags)).toBe(true)
+        expect(Array.isArray(guide.content)).toBe(true)
+        expect(typeof guide.isFavorite).toBe('boolean')
+      })
 
-      expect(guide?.slug).toBe('test-guide')
-      expect(guide?.title).toBe('Test Guide')
-      expect(guide?.description).toBe('A test guide')
-      expect(guide?.category).toBe('general')
-      expect(guide?.difficulty).toBe('beginner')
-    })
-  })
-
-  describe('performance and Caching', () => {
-    it('loads content efficiently on repeated calls', () => {
-      const start = performance.now()
-
-      // Multiple calls should use cached results
-      for (let i = 0; i < 100; i++) {
-        getAllContent()
-        getContentBySlug('test-guide')
-        getContentMap()
-      }
-
-      const end = performance.now()
-
-      // Should complete quickly due to caching
-      expect(end - start).toBeLessThan(50)
-    })
-
-    it('maintains data consistency across calls', () => {
-      const content1 = getAllContent()
-      const content2 = getAllContent()
-      const map1 = getContentMap()
-      const map2 = getContentMap()
-
-      expect(content1).toBe(content2) // Should be same reference due to caching
-      expect(map1).toBe(map2) // Should be same reference due to caching
-    })
-  })
-
-  describe('error Handling', () => {
-    it('handles malformed content gracefully', () => {
-      // This tests the robustness of the content loader
-      expect(() => {
-        getContentBySlug('test-guide')
-        getContentByType('guide')
-        getAllContent()
-      }).not.toThrow()
-    })
-
-    it('provides fallback values for missing properties', () => {
-      const guide = getContentBySlug('test-guide')
-
-      // Should have default values for optional properties
-      expect(guide?.tags).toBeDefined()
-      expect(Array.isArray(guide?.tags)).toBe(true)
-      expect(typeof guide?.isFavorite).toBe('boolean')
-    })
-  })
-
-  describe('content Validation', () => {
-    it('ensures all content items have required properties', () => {
-      const allContent = getAllContent()
-
-      allContent.forEach((item: any) => {
-        expect(item.slug).toBeDefined()
-        expect(typeof item.slug).toBe('string')
-        expect(item.slug.length).toBeGreaterThan(0)
-
-        expect(item.title).toBeDefined()
-        expect(typeof item.title).toBe('string')
-        expect(item.title.length).toBeGreaterThan(0)
-
-        expect(item.description).toBeDefined()
-        expect(typeof item.description).toBe('string')
+      // Test concepts structure
+      content.concepts.forEach((concept: any) => {
+        expect(concept).toHaveProperty('slug')
+        expect(concept).toHaveProperty('title')
+        expect(concept).toHaveProperty('description')
+        expect(concept).toHaveProperty('category')
+        expect(concept).toHaveProperty('difficulty')
+        expect(concept).toHaveProperty('tags')
+        expect(concept).toHaveProperty('isFavorite')
+        expect(concept).toHaveProperty('keyTakeaways')
+        expect(concept).toHaveProperty('content')
+        expect(typeof concept.slug).toBe('string')
+        expect(typeof concept.title).toBe('string')
+        expect(Array.isArray(concept.tags)).toBe(true)
+        expect(Array.isArray(concept.keyTakeaways)).toBe(true)
+        expect(Array.isArray(concept.content)).toBe(true)
+        expect(typeof concept.isFavorite).toBe('boolean')
       })
     })
 
-    it('ensures slug uniqueness across all content', () => {
-      const allContent = getAllContent()
-      const slugs = allContent.map((item: any) => item.slug)
-      const uniqueSlugs = new Set(slugs)
+    it('maintains slug uniqueness across all content types', () => {
+      const allSlugs = [
+        ...content.guides.map((g: any) => g.slug),
+        ...content.workflows.map((w: any) => w.slug),
+        ...content.concepts.map((c: any) => c.slug),
+        ...content.externalTools.map((t: any) => t.slug),
+      ]
 
-      expect(slugs.length).toBe(uniqueSlugs.size)
+      const uniqueSlugs = new Set(allSlugs)
+      expect(allSlugs.length).toBe(uniqueSlugs.size)
     })
   })
-  */
+
+  // Test the content loader utility functions
+  describe('getContentItem', () => {
+    it('returns content item by type and slug', () => {
+      if (content.guides.length > 0) {
+        const guide = content.guides[0]!
+        const retrieved = getContentItem('guide', guide.slug)
+        expect(retrieved).toBeDefined()
+        expect(retrieved?.slug).toBe(guide.slug)
+      }
+
+      if (content.concepts.length > 0) {
+        const concept = content.concepts[0]!
+        const retrieved = getContentItem('concept', concept.slug)
+        expect(retrieved).toBeDefined()
+        expect(retrieved?.slug).toBe(concept.slug)
+      }
+    })
+
+    it('returns undefined for non-existent content', () => {
+      const nonExistent = getContentItem('guide', 'non-existent-slug')
+      expect(nonExistent).toBeUndefined()
+    })
+
+    it('handles unknown content types gracefully', () => {
+      const unknownType = getContentItem('unknown-type', 'some-slug')
+      expect(unknownType).toBeUndefined()
+    })
+  })
+
+  describe('getContentType utility functions', () => {
+    it('provides correct route to content type mapping', () => {
+      const mapping = getRouteToContentTypeMapping()
+
+      expect(mapping).toBeDefined()
+      expect(mapping.concepts).toBe('concept')
+      expect(mapping.guides).toBe('guide')
+      expect(mapping.workflows).toBe('workflow')
+      expect(mapping['l-arsenal-ia']).toBe('tool')
+    })
+
+    it('provides correct content type to route mapping', () => {
+      const mapping = getContentTypeToRouteMapping()
+
+      expect(mapping).toBeDefined()
+      expect(mapping.concept).toBe('concepts')
+      expect(mapping.guide).toBe('guides')
+      expect(mapping.workflow).toBe('workflows')
+      expect(mapping.tool).toBe('l-arsenal-ia')
+    })
+  })
+
+  describe('content validation', () => {
+    it('validates content types correctly', () => {
+      expect(isValidContentType('concept')).toBe(true)
+      expect(isValidContentType('guide')).toBe(true)
+      expect(isValidContentType('workflow')).toBe(true)
+      expect(isValidContentType('tool')).toBe(true)
+      expect(isValidContentType('unknown')).toBe(false)
+    })
+
+    it('ensures all content has required fields', () => {
+      // Test guides
+      content.guides.forEach((guide: any) => {
+        expect(guide.slug).toBeDefined()
+        expect(guide.slug).not.toBe('')
+        expect(guide.title).toBeDefined()
+        expect(guide.title).not.toBe('')
+        expect(guide.description).toBeDefined()
+        expect(Array.isArray(guide.content)).toBe(true)
+        expect(Array.isArray(guide.tags)).toBe(true)
+        expect(typeof guide.isFavorite).toBe('boolean')
+      })
+
+      // Test concepts
+      content.concepts.forEach((concept: any) => {
+        expect(concept.slug).toBeDefined()
+        expect(concept.slug).not.toBe('')
+        expect(concept.title).toBeDefined()
+        expect(concept.title).not.toBe('')
+        expect(concept.description).toBeDefined()
+        expect(Array.isArray(concept.content)).toBe(true)
+        expect(Array.isArray(concept.keyTakeaways)).toBe(true)
+        expect(Array.isArray(concept.tags)).toBe(true)
+        expect(typeof concept.isFavorite).toBe('boolean')
+      })
+    })
+  })
+
+  describe('related items functionality', () => {
+    it('includes related items in enriched content', () => {
+      // Test that content has related items array
+      const allContent = [...content.guides, ...content.workflows, ...content.concepts]
+
+      allContent.forEach((item: any) => {
+        expect(item).toHaveProperty('relatedItems')
+        expect(Array.isArray(item.relatedItems)).toBe(true)
+
+        // Each related item should have required properties
+        item.relatedItems.forEach((related: any) => {
+          expect(related).toHaveProperty('slug')
+          expect(related).toHaveProperty('title')
+          expect(related).toHaveProperty('description')
+          expect(related).toHaveProperty('type')
+          expect(related).toHaveProperty('score')
+          expect(typeof related.score).toBe('number')
+        })
+      })
+    })
+
+    it('does not include self in related items', () => {
+      if (content.guides.length > 0) {
+        const guide = content.guides[0]!
+        const relatedSlugs = guide.relatedItems.map((item: any) => item.slug)
+        expect(relatedSlugs).not.toContain(guide.slug)
+      }
+    })
+  })
 })

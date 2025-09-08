@@ -160,17 +160,19 @@ The project uses a sophisticated content system with these key characteristics:
 - AutoAnimate integration for smooth transitions respecting accessibility preferences
 
 ### **Testing Architecture**
-**Vitest Browser Mode:**
-- Modern browser-based testing replacing Jest
-- Global test setup in `tests/setup.ts` with optimized mocks
-- Performance-focused configuration with pooled processes
-- Browser automation via Playwright provider for integration tests
+**Vitest Browser Mode (Simplifiée):**
+- Configuration ultra-minimaliste avec détection automatique
+- Librairies modernes : `@testing-library/react`, `@testing-library/jest-dom`, `@vitest/coverage-v8`
+- Performance optimisée avec le provider V8 pour la couverture
+- Mocks globaux gérés dans `tests/setup.ts` et `tests/utils/`
+- Browser automation via Playwright provider pour les tests d'intégration
 
-**Mock Strategy:**
-- Framework-level mocks handled globally (Next.js, browser APIs)
-- Component-specific mocks in individual test files only
-- Strict separation to avoid "Element type is invalid" errors
-- All button mocks include `type="button"` to prevent form submission issues
+**Mock Strategy (Glass Box Principle):**
+- **Mocker uniquement les dépendances externes** : navigation, data fetching, APIs
+- **NE JAMAIS mock les composants internes** : tester l'intégration réelle
+- **Mocks globaux** : Next.js, React, browser APIs, icônes
+- **Mocks locaux** : seulement les dépendances spécifiques au composant testé
+- **Utiliser les utilitaires de mock** : `createMockGuide()`, `createMockTheme()`, etc.
 
 ---
 
@@ -212,61 +214,65 @@ Your team of agents is equipped with powerful tools to enhance their analysis an
 - **File-Specific Rules**: Different rule sets for UI components, tests, and regular files
 
 ### **Testing Requirements**
-- **Vitest Browser Mode**: Exclusively use with Playwright provider
-- **No Jest**: Legacy Jest configuration has been removed
-- **Glass Box Principle**: Test components with their real children, not mocks
-- **Test Organization**: Separate unit, integration, and component tests
-- **Browser Testing**: All tests should run in real browser environment when possible
+- **Vitest Browser Mode**: Utiliser exclusivement avec Playwright provider
+- **Configuration simplifiée**: Détecter automatiquement React, TypeScript et l'environnement
+- **Glass Box Principle**: Tester les composants avec leurs enfants réels, pas des mocks
+- **Librairies modernes**: `@testing-library/react` pour le rendu, `@testing-library/jest-dom` pour les matchers
+- **Coverage V8**: Utiliser le provider V8 pour des rapports de couverture rapides
+- **Test Organization**: Tests unitaires, d'intégration et de composants séparés
+- **Browser Testing**: Tous les tests doivent s'exécuter dans un vrai navigateur quand possible
 
 ---
 
 ## **Testing Architecture & Best Practices**
 
-### **The Glass Box Principle**
+### **The Glass Box Principle (Simplifié)**
 
-**Philosophy:** Tests should verify what users actually see and interact with. Components are tested in a "transparent glass box" with their real children, only mocking external dependencies.
+**Philosophie:** Les tests doivent vérifier ce que les utilisateurs voient et interagissent réellement. Les composants sont testés dans une "boîte de verre transparente" avec leurs enfants réels, en mockant uniquement les dépendances externes.
 
-**What to Mock (External Boundaries):**
-- `next/navigation` - Framework navigation APIs
-- `next/link` - Framework routing components
-- `@/lib/content-loader` - Data fetching and business logic
-- `next-themes` - Theme management
+**What to Mock (Dépendances Externes):**
+- `next/navigation` - APIs de navigation du framework
+- `next/link` - Composants de routage du framework  
+- `@/lib/content-loader` - Chargement des données et logique métier
+- `next-themes` - Gestion des thèmes
 - Browser APIs - `ResizeObserver`, `scrollIntoView`
 
-**What NOT to Mock (Internal Components):**
-- Shared components (`ContentRenderer`, `KeyTakeaways`, `DisclaimerBanner`)
-- UI components (`Card`, `Button`, `Separator`)
-- Layout components (`ContentPageLayout`, `Header`)
+**What NOT to Mock (Composants Internes):**
+- Composants partagés (`ContentRenderer`, `KeyTakeaways`, `DisclaimerBanner`)
+- Composants UI (`Card`, `Button`, `Separator`)
+- Composants de layout (`ContentPageLayout`, `Header`)
 
 ### **Mock Implementation Standards**
 
 **✅ Correct Pattern (Glass Box):**
 \`\`\`typescript
-// In individual test files - mock only external dependencies
+// Importer les utilitaires de test
+import { render, screen } from '@/tests/utils/test-utils'
+import { createMockGuide, createMockTheme } from '@/tests/utils/mocks'
+
+// Mock uniquement les dépendances externes
 vi.mock('@/lib/content-loader', () => ({
-  getContentItem: vi.fn(),
+  getContentItem: vi.fn(() => createMockGuide()),
 }))
 
-vi.mock('next/navigation', () => ({
-  useRouter: vi.fn(),
-  usePathname: vi.fn(),
+vi.mock('next-themes', () => ({
+  useTheme: vi.fn(() => createMockTheme()),
 }))
 
-// Note: Real components will be rendered internally
-// Note: ContentRenderer, Card, Button are real components
+// Les composants internes sont rendus réellement
+// ContentRenderer, Card, Button sont des composants réels
 \`\`\`
 
 **❌ Anti-Patterns to Avoid:**
 \`\`\`typescript
-// NEVER mock internal/shared components
+// NE JAMAIS mock les composants internes
 vi.mock('@/components/shared/ContentRenderer', () => ({ ... })) // ❌ Wrong
 vi.mock('@/components/ui/card', () => ({ ... }))              // ❌ Wrong
-vi.mock('@/components/layout/ContentPageLayout', () => ({ ... })) // ❌ Wrong
 
-// NEVER use JSX syntax in mocks
+// NE JAMAIS utiliser JSX dans les mocks
 vi.mock('next/link', () => ({
   default: ({ children, href, ...props }) => (
-    <a href={href} {...props}>{children}</a>  // ❌ Wrong: JSX in mock context
+    <a href={href} {...props}>{children}</a>  // ❌ Wrong: JSX dans un mock
   ),
 }))
 \`\`\`
@@ -274,70 +280,79 @@ vi.mock('next/link', () => ({
 ### **Test Organization**
 
 **Unit Tests:**
-- Test individual functions and utilities
-- Mock all dependencies
-- Fast and isolated
+- Tester les fonctions et utilitaires individuels
+- Mock toutes les dépendances
+- Rapides et isolés
 
 **Component Tests:**
-- Test components with their real children (Glass Box Principle)
-- Mock only external dependencies (navigation, data fetching)
-- Verify actual DOM output and user interactions
+- Tester les composants avec leurs enfants réels (Glass Box Principle)
+- Mock uniquement les dépendances externes (navigation, data fetching)
+- Vérifier le rendu DOM réel et les interactions utilisateur
 
 **Integration Tests:**
-- Test complete flows and data pipelines
-- Focus on page-level integration (Server Components + children)
-- Mock data sources, test data flow and rendering
+- Tester les flux complets et pipelines de données
+- Se concentrer sur l'intégration au niveau des pages (Server Components + enfants)
+- Mock les sources de données, tester le flux et le rendu
 
 ### **Mock Factory Pattern**
 
-**Essential Mocks Only:** Use simple mock factories with override patterns:
+**Mock Essentiels Uniquement:** Utiliser des factories de mock simples avec surcharges :
 \`\`\`typescript
-// ✅ Correct: Simple factory with overrides
+// ✅ Correct: Factory simple avec surcharges
+import { createMockGuide, createMockTheme } from '@/tests/utils/mocks'
+
 const mockGuide = createMockGuide({
-  keyTakeaways: undefined, // Explicit override
-  conceptSlugs: [],        // Clear intent
+  keyTakeaways: undefined, // Surchage explicite
+  conceptSlugs: [],        // Intention claire
 })
 
-// ❌ Avoid: Complex specialized factories
-const mockGuide = createGuideWithoutTakeaways() // Hidden complexity
+const mockTheme = createMockTheme({
+  theme: 'dark',
+  setTheme: vi.fn()
+})
+
+// ❌ Éviter: Factories spécialisées complexes
+const mockGuide = createGuideWithoutTakeaways() // Complexité cachée
 \`\`\`
 
 ### **Component Testing Requirements**
 
 **Button Elements:**
-- All button mocks must include `type="button"` to prevent form submission issues
-- Example: \`<button type="button" {...props}>{children}</button>\`
+- Tous les mocks de boutons doivent inclure `type="button"` pour éviter les problèmes de soumission de formulaire
+- Exemple: \`<button type="button" {...props}>{children}</button>\`
 
 **React Element Creation:**
-- Use `React.createElement()` for component mocks, not JSX syntax
-- Ensures proper React element construction in mock contexts
+- Utiliser `React.createElement()` pour les mocks de composants, pas la syntaxe JSX
+- Assure une construction correcte des éléments React dans les contextes de mock
 
 **Test IDs:**
-- Use consistent test ID patterns from `src/lib/test-utils.ts`
-- Follow pattern: `{component-type}-{component-name}-{optional-identifier}`
-- Use `getAllByTestId()` when elements appear multiple times (desktop/mobile)
+- Utiliser des patterns de test ID cohérents : `{component-type}-{component-name}-{identifier}`
+- Utiliser `getAllByTestId()` quand les éléments apparaissent plusieurs fois (desktop/mobile)
 
 ### **Test File Structure**
 
 \`\`\`typescript
-// 1. Import dependencies
-import { render, screen } from '@testing-library/react'
+// 1. Importer les dépendances
+import { render, screen } from '@/tests/utils/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-// 2. Import component to test
+// 2. Importer le composant à tester
 import { MyComponent } from '@/components/MyComponent'
 
-// 3. Mock ONLY external dependencies
+// 3. Importer les utilitaires de mock
+import { createMockGuide, createMockTheme } from '@/tests/utils/mocks'
+
+// 4. Mock UNIQUEMENT les dépendances externes
 vi.mock('@/lib/content-loader', () => ({
-  getContentItem: vi.fn(),
+  getContentItem: vi.fn(() => createMockGuide()),
 }))
 
-vi.mock('next/navigation', () => ({
-  useRouter: vi.fn(),
+vi.mock('next-themes', () => ({
+  useTheme: vi.fn(() => createMockTheme()),
 }))
 
-// 4. Note what's NOT mocked (real components)
-// Note: ContentRenderer, Card, Button are real components
+// 5. Note : les composants internes ne sont PAS mockés
+// Note: ContentRenderer, Card, Button sont des composants réels
 
 describe('MyComponent', () => {
   beforeEach(() => {
@@ -347,7 +362,7 @@ describe('MyComponent', () => {
   it('should render with real children components', () => {
     render(<MyComponent />)
 
-    // Test actual DOM output, not mock calls
+    // Tester le rendu DOM réel, pas les appels de mock
     expect(screen.getByTestId('real-content-renderer')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument()
   })

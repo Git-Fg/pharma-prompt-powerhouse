@@ -50,13 +50,7 @@ vi.mock('@/components/ui/tabs', () => ({
   ),
 }))
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  Check: () => <div data-testid="check-icon">✓</div>,
-  Copy: () => <div data-testid="copy-icon">📋</div>,
-  ExternalLink: () => <div data-testid="external-link-icon">🔗</div>,
-  Settings: () => <div data-testid="settings-icon">⚙️</div>,
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 // Mock clipboard API
 const mockClipboardWriteText = vi.fn().mockResolvedValue(undefined)

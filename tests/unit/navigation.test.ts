@@ -9,15 +9,7 @@ import {
   isActiveRoute,
 } from '@/lib/navigation'
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  BookOpen: vi.fn(),
-  Brain: vi.fn(),
-  ExternalLink: vi.fn(),
-  Home: vi.fn(),
-  Shield: vi.fn(),
-  Target: vi.fn(),
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 describe('navigation Utilities', () => {
   beforeEach(() => {

@@ -46,10 +46,7 @@ vi.mock('@/components/ui/code-block', () => ({
   ),
 }))
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  ChevronDownIcon: () => <div data-testid="chevron-down-icon">▼</div>,
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 describe('contentRenderer', () => {
   describe('renders different content block types correctly', () => {

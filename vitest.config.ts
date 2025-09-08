@@ -1,73 +1,50 @@
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      '@testing-library/react',
-      '@testing-library/jest-dom',
-      'sonner',
-      'next/navigation',
-      'next/link',
-      'lucide-react',
-    ],
-  },
   test: {
-    globals: true,
-    environment: 'jsdom', // Fallback for pure unit tests
-    setupFiles: './tests/setup.ts',
-    include: ['tests/**/*.{test,spec}.{ts,tsx}'],
-    reporters: 'default',
-
-    // Performance optimizations
-    pool: 'forks', // Use process pool for better isolation
-    poolOptions: {
-      forks: {
-        singleFork: true, // Use single fork for faster startup
-      },
+    // Vitest détecte automatiquement :
+    // - React via le plugin
+    // - TypeScript via tsconfig.json
+    // - L'environnement approprié
+    globals: true, // Pas besoin d'importer describe/it/expect
+    
+    // Coverage avec V8 (le plus rapide en 2025)
+    coverage: {
+      provider: 'v8',
+      reporter: ['text'],
+      exclude: [
+        'node_modules/',
+        'tests/',
+        '**/*.config.*',
+        '**/coverage/**'
+      ]
     },
-    maxConcurrency: 4, // Run more tests in parallel
-    isolate: false, // Disable isolation for speed (use carefully)
-    testTimeout: 10000, // 10 seconds default timeout
-    hookTimeout: 10000, // 10 seconds hook timeout
-
-    // ✅ Optimized Browser Mode Configuration (2025)
+    
+    // Configuration automatique pour browser mode
     browser: {
       enabled: true,
       provider: 'playwright',
-      headless: true,
-      instances: [
-        {
-          browser: 'chromium',
-        },
-      ],
-      // Faster browser settings
-      isolate: false, // Reuse browser instances between tests
-      screenshotFailures: false, // Disable screenshots for speed
+      instances: [{ browser: 'chromium' }]
     },
-
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'coverage/**',
-        'dist/**',
-        '**/[.]**',
-        '**/*.d.ts',
-        '**/node_modules/**',
-        'tests/**',
-        '**/*.config.*',
-        '**/content/**', // Content files are validated by TypeScript + satisfies
-        '**/types/**', // Type definitions don't need testing
-      ],
-    },
-    watch: false,
+    
+    // Configuration simplifiée pour les tests
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts'],
+    include: ['tests/**/*.{test,spec}.{ts,tsx}'],
+    
+    // Optimisations de performance
+    isolate: true,
+    threads: true,
+    maxConcurrency: 4,
+    timeout: 5000,
+    hookTimeout: 10000
   },
   resolve: {
     alias: {
-      '@': new URL('./src', import.meta.url).pathname,
-    },
-  },
+      '@': path.resolve(__dirname, './src')
+    }
+  }
 })

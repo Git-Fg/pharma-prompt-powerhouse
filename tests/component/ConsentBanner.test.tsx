@@ -12,12 +12,7 @@ vi.mock('@/hooks/useConsent', () => ({
   useConsent: () => mockUseConsent(),
 }))
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  Cookie: () => React.createElement('div', { 'data-testid': 'cookie-icon' }, 'Cookie'),
-  Shield: () => React.createElement('div', { 'data-testid': 'shield-icon' }, 'Shield'),
-  Settings: () => React.createElement('div', { 'data-testid': 'settings-icon' }, 'Settings'),
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 describe('consentBanner', () => {
   beforeEach(() => {

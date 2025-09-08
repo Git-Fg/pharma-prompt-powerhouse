@@ -1,8 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, screen } from '@/tests/utils/test-utils'
 import { useTheme } from 'next-themes'
-// Note: usePathname is mocked globally in tests/setup.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Header } from '@/components/layout/Header'
+import { createMockTheme } from '@/tests/utils/mocks'
 
 // Mock next-themes (not mocked globally)
 vi.mock('next-themes', () => ({
@@ -12,24 +12,6 @@ vi.mock('next-themes', () => ({
 // Mock CommandPalette
 vi.mock('@/components/search/CommandPalette', () => ({
   CommandPalette: () => <div data-testid="command-palette">Command Palette</div>,
-}))
-
-// Mock all UI components to be safe
-vi.mock('@/components/ui/button', () => ({
-  default: ({ children, onClick, ...props }: any) => (
-    <button type="button" onClick={onClick} {...props}>
-      {children}
-    </button>
-  ),
-}))
-
-vi.mock('@/components/ui/sheet', () => ({
-  Sheet: ({ children }: any) => <div data-testid="sheet">{children}</div>,
-  SheetTrigger: ({ children }: any) => <div data-testid="sheet-trigger">{children}</div>,
-  SheetContent: ({ children }: any) => <div data-testid="sheet-content">{children}</div>,
-  SheetHeader: ({ children }: any) => <div data-testid="sheet-header">{children}</div>,
-  SheetTitle: ({ children }: any) => <h2 data-testid="sheet-title">{children}</h2>,
-  SheetDescription: ({ children }: any) => <div data-testid="sheet-description">{children}</div>,
 }))
 
 // Mock navigation
@@ -42,14 +24,7 @@ vi.mock('@/lib/navigation', () => ({
   ]),
 }))
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  Brain: () => <div data-testid="brain-icon">Brain</div>,
-  Menu: () => <div data-testid="menu-icon">Menu</div>,
-  Moon: () => <div data-testid="moon-icon">Moon</div>,
-  Sun: () => <div data-testid="sun-icon">Sun</div>,
-  Search: () => <div data-testid="search-icon">Search</div>,
-}))
+// Note: UI components and icons are mocked globally in tests/setup.ts
 
 describe('header', () => {
   const mockSetTheme = vi.fn()
@@ -57,13 +32,9 @@ describe('header', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    mockUseTheme.mockReturnValue({
-      theme: 'light',
-      setTheme: mockSetTheme,
-      systemTheme: 'light',
-      themes: ['light', 'dark'],
-      resolvedTheme: 'light',
-    } as any)
+    mockUseTheme.mockReturnValue(createMockTheme({
+      setTheme: mockSetTheme
+    }))
   })
 
   // Simple test to isolate the issue
@@ -129,13 +100,10 @@ describe('header', () => {
     })
 
     it('shows theme toggle button when theme is dark', () => {
-      mockUseTheme.mockReturnValue({
+      mockUseTheme.mockReturnValue(createMockTheme({
         theme: 'dark',
-        setTheme: mockSetTheme,
-        systemTheme: 'dark',
-        themes: ['light', 'dark'],
-        resolvedTheme: 'dark',
-      } as any)
+        setTheme: mockSetTheme
+      }))
 
       render(<Header />)
 

@@ -32,20 +32,7 @@ vi.mock('@/lib/navigation', () => ({
 // Import the mocked hook
 import { useIsMobile } from '@/hooks/use-mobile'
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  Home: () => <div data-testid="home-icon">Home</div>,
-  BookOpen: () => <div data-testid="book-icon">Book</div>,
-  Search: () => <div data-testid="search-icon">Search</div>,
-  SearchIcon: () => <div data-testid="search-icon">Search</div>,
-  Lightbulb: () => <div data-testid="lightbulb-icon">Lightbulb</div>,
-  Wrench: () => <div data-testid="wrench-icon">Wrench</div>,
-  XIcon: () => <div data-testid="x-icon">X</div>,
-  Brain: () => <div data-testid="brain-icon">Brain</div>,
-  Target: () => <div data-testid="target-icon">Target</div>,
-  Shield: () => <div data-testid="shield-icon">Shield</div>,
-  ExternalLink: () => <div data-testid="external-link-icon">External</div>,
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 describe('mobileBottomNav', () => {
   beforeEach(() => {

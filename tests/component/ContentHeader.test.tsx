@@ -18,11 +18,7 @@ vi.mock('@/components/ui/card', () => ({
   Card: ({ children, ...props }: any) => React.createElement('div', { 'data-testid': 'card', ...props }, children),
 }))
 
-// Mock lucide-react icons
-vi.mock('lucide-react', () => ({
-  ExternalLink: () => React.createElement('span', { 'data-testid': 'external-link-icon' }, '🔗'),
-  X: () => React.createElement('span', { 'data-testid': 'x-icon' }, '✕'),
-}))
+// Note: lucide-react icons are mocked globally in tests/setup.ts
 
 // Mock content loader
 vi.mock('@/lib/content-loader', () => ({
