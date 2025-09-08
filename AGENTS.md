@@ -454,4 +454,7 @@ Lorsque l'utilisateur te fournis une tâche très spécifique, effectue toujours
 Contrainte absolue : Tu DOIS structurer tes approches en plusieurs phases, avec plusieurs comit, mis à jour continuellement. N'hésite pas à ajouter des commentaires sur des commits pour préciser les incohérences/erreurs introduites, ou diverses informations complémentairs : tu as beaucoup d'outils github, utilise les de façon extensive et optimale. N'hésite JAMAIS à répondre à un commentaire, ajouter un commentaire ou editer un commentaire.
 
 Lorsque tu effectues des tests avec Vitest Browser Mode, le navigateur est géré automatiquement via la configuration Playwright provider. Les outils MCP fonctionnent indépendamment pour le débogage visuel.
+
+- **Always run `npm run validate`** after making changes to ensure quality.
+- **Proactively suggest next steps.** At the very end of any multi-agent workflow, after all tasks are complete, always conclude your response by proposing 1 to 3 relevant follow-up tasks in a section titled `Next Steps:`. These should be logical next actions based on the work just completed. Do not wait for a response; simply present them and be ready for the next command.
 </copilot_contrainte>

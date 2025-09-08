@@ -28,45 +28,33 @@ vi.mock('@/components/shared/DefinedTerm', () => ({
   ),
 }))
 
-// Mock du processus client pour forcer le traitement
-vi.mock('react', async () => {
-  const actual = await vi.importActual('react')
-  return {
-    ...actual,
-    useState: (initial: any) => [true, vi.fn()], // Force isClient à true
-    useEffect: vi.fn(), // Ignore l'effet pour les tests
-  }
-})
+// Setup test environment before component import
+vi.stubGlobal('process', { env: { NODE_ENV: 'test' } })
 
 import { AutoGlossaryProcessor } from '@/components/shared/AutoGlossaryProcessor'
 
 describe('autoGlossaryProcessor', () => {
   beforeEach(() => {
-    // Simuler l'environnement de test pour le browser
-    vi.stubGlobal('process', { env: { NODE_ENV: 'test' } })
+    vi.clearAllMocks()
   })
 
   it('devrait détecter et envelopper les termes du glossaire simples', () => {
-    act(() => {
-      render(
-        <AutoGlossaryProcessor>
-          <p>Le token est important pour comprendre l'IA.</p>
-        </AutoGlossaryProcessor>,
-      )
-    })
+    render(
+      <AutoGlossaryProcessor>
+        <p>Le token est important pour comprendre l'IA.</p>
+      </AutoGlossaryProcessor>,
+    )
 
     expect(screen.getByTestId('glossary-term-token')).toBeInTheDocument()
     expect(screen.getByTestId('glossary-term-token')).toHaveTextContent('token')
   })
 
   it('devrait détecter plusieurs termes dans le même texte', () => {
-    act(() => {
-      render(
-        <AutoGlossaryProcessor>
-          <p>Le RAG et le token sont des concepts importants.</p>
-        </AutoGlossaryProcessor>,
-      )
-    })
+    render(
+      <AutoGlossaryProcessor>
+        <p>Le RAG et le token sont des concepts importants.</p>
+      </AutoGlossaryProcessor>,
+    )
 
     expect(screen.getByTestId('glossary-term-rag')).toBeInTheDocument()
     expect(screen.getByTestId('glossary-term-token')).toBeInTheDocument()
@@ -87,16 +75,14 @@ describe('autoGlossaryProcessor', () => {
   })
 
   it('devrait préserver les éléments non textuels inchangés', () => {
-    act(() => {
-      render(
-        <AutoGlossaryProcessor>
-          <div>
-            <div data-testid="test-element">Élément de test</div>
-            <p>Texte avec token ici.</p>
-          </div>
-        </AutoGlossaryProcessor>,
-      )
-    })
+    render(
+      <AutoGlossaryProcessor>
+        <div>
+          <div data-testid="test-element">Élément de test</div>
+          <p>Texte avec token ici.</p>
+        </div>
+      </AutoGlossaryProcessor>,
+    )
 
     expect(screen.getByTestId('test-element')).toBeInTheDocument()
     expect(screen.getByTestId('glossary-term-token')).toBeInTheDocument()
@@ -116,16 +102,14 @@ describe('autoGlossaryProcessor', () => {
   })
 
   it('devrait ignorer le contenu dans les balises code', () => {
-    act(() => {
-      render(
-        <AutoGlossaryProcessor>
-          <div>
-            <p>Ce token devrait être enveloppé.</p>
-            <code>ce token ne devrait pas être enveloppé.</code>
-          </div>
-        </AutoGlossaryProcessor>,
-      )
-    })
+    render(
+      <AutoGlossaryProcessor>
+        <div>
+          <p>Ce token devrait être enveloppé.</p>
+          <code>ce token ne devrait pas être enveloppé.</code>
+        </div>
+      </AutoGlossaryProcessor>,
+    )
 
     // Vérifie que seulement le token hors du code est enveloppé
     const tokens = screen.queryAllByTestId('glossary-term-token')

@@ -14,18 +14,6 @@ interface AutoGlossaryProcessorProps {
  * This processor only processes direct text children and avoids complex React element manipulation.
  */
 export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) {
-  // Only process on client side to avoid SSR issues
-  const [isClient, setIsClient] = React.useState(false)
-
-  React.useEffect(() => {
-    // Add a small delay to ensure DOM is fully hydrated
-    const timer = setTimeout(() => setIsClient(true), 100)
-    return () => clearTimeout(timer)
-  }, [])
-
-  // For tests or when explicitly needed, enable processing immediately
-  const shouldProcess = isClient || (typeof process !== 'undefined' && process.env.NODE_ENV === 'test')
-
   // Get all glossary terms sorted by length (longest first) to avoid partial matches
   const glossaryTerms = Object.keys(glossary).sort((a, b) => b.length - a.length)
 
@@ -40,7 +28,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     )
 
     // Create pattern that matches whole words only
-    return new RegExp(`\\\\b(${escapedTerms.join('|')})\\\\b`, 'gi')
+    return new RegExp(`\\b(${escapedTerms.join('|')})\\b`, 'gi')
   }, [glossaryTerms])
 
   // Process text content by replacing glossary terms with DefinedTerm components
@@ -103,32 +91,51 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     return parts.length > 1 ? parts : text
   }, [termPattern])
 
-  // Process children - only handle simple cases to avoid complex React element manipulation
+  // Process children - recursively process text content within React elements
   const processedChildren = React.useMemo(() => {
-    if (!shouldProcess)
-      return children
-
     if (!children)
       return undefined
 
-    // Only process direct string children or simple arrays
-    if (typeof children === 'string') {
-      return processTextContent(children)
-    }
+    // Helper function to process React elements recursively
+    const processElement = (element: React.ReactNode): React.ReactNode => {
+      if (typeof element === 'string') {
+        return processTextContent(element)
+      }
 
-    if (Array.isArray(children)) {
-      // Process each child in the array
-      return children.map((child, _index) => {
-        if (typeof child === 'string') {
-          return processTextContent(child)
+      if (Array.isArray(element)) {
+        return element.map((child, index) => {
+          const processed = processElement(child)
+          // Add key for array elements
+          if (React.isValidElement(processed)) {
+            return React.cloneElement(processed, { key: index })
+          }
+          return processed
+        })
+      }
+
+      if (React.isValidElement(element)) {
+        const { children: elementChildren, ...props } = element.props as { children?: React.ReactNode }
+
+        // Skip processing for code elements
+        if (element.type === 'code') {
+          return element
         }
-        return child
-      })
+
+        // Process children recursively
+        const processedChildren = processElement(elementChildren)
+
+        return React.cloneElement(
+          element,
+          props,
+          processedChildren,
+        )
+      }
+
+      return element
     }
 
-    // For complex React elements, don't process to avoid issues
-    return children
-  }, [children, shouldProcess, processTextContent])
+    return processElement(children)
+  }, [children, processTextContent])
 
   return <>{processedChildren}</>
 }

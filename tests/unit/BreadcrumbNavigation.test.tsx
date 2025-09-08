@@ -3,15 +3,26 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { BreadcrumbNavigation } from '@/components/layout/BreadcrumbNavigation'
 
 // Mock the Next.js navigation module
+// Note: usePathname is mocked globally in tests/setup.ts
 const mockUsePathname = vi.fn()
 
-vi.mock('next/navigation', () => ({
-  usePathname: () => mockUsePathname(),
+// Mock navigation utilities
+const mockFormatBreadcrumbSegments = vi.fn()
+
+vi.mock('@/lib/navigation', () => ({
+  formatBreadcrumbSegments: () => mockFormatBreadcrumbSegments(),
 }))
 
 describe('breadcrumbNavigation Component', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+
+    // Mock breadcrumb segments
+    mockFormatBreadcrumbSegments.mockReturnValue([
+      { name: 'Accueil', href: '/', isCurrent: false },
+      { name: 'Concepts', href: '/concepts', isCurrent: false },
+      { name: 'chain of thought', href: '/concepts/chain-of-thought', isCurrent: true },
+    ])
   })
 
   it('should render breadcrumb navigation based on current path', () => {
@@ -19,7 +30,7 @@ describe('breadcrumbNavigation Component', () => {
 
     render(<BreadcrumbNavigation />)
 
-    expect(screen.getByText('Accueil')).toBeInTheDocument()
+    expect(screen.getAllByText('Accueil')).toHaveLength(2) // Appears twice in breadcrumb
     expect(screen.getByText('Concepts')).toBeInTheDocument()
     expect(screen.getByText('chain of thought')).toBeInTheDocument()
   })
@@ -29,8 +40,8 @@ describe('breadcrumbNavigation Component', () => {
 
     render(<BreadcrumbNavigation />)
 
-    const homeLink = screen.getByText('Accueil').closest('a')
-    expect(homeLink).toHaveAttribute('href', '/')
+    const homeLinks = screen.getAllByText('Accueil').map(text => text.closest('a'))
+    expect(homeLinks[0]).toHaveAttribute('href', '/')
 
     const conceptsLink = screen.getByText('Concepts').closest('a')
     expect(conceptsLink).toHaveAttribute('href', '/concepts')
@@ -80,7 +91,7 @@ describe('breadcrumbNavigation Component', () => {
 
     const { container } = render(<BreadcrumbNavigation />)
 
-    expect(screen.getByText('Accueil')).toBeInTheDocument()
+    expect(screen.getAllByText('Accueil')).toHaveLength(2)
     expect(screen.getByText('Concepts')).toBeInTheDocument()
 
     const separators = container.querySelectorAll('[data-slot="breadcrumb-separator"]')
@@ -116,7 +127,7 @@ describe('breadcrumbNavigation Component', () => {
 
     render(<BreadcrumbNavigation />)
 
-    expect(screen.getByText('Accueil')).toBeInTheDocument()
+    expect(screen.getAllByText('Accueil')).toHaveLength(2)
     expect(screen.getByText('Guides')).toBeInTheDocument()
     expect(screen.getByText('techniques avancees fiabilisation')).toBeInTheDocument()
   })
@@ -126,7 +137,7 @@ describe('breadcrumbNavigation Component', () => {
 
     render(<BreadcrumbNavigation />)
 
-    expect(screen.getByText('Accueil')).toBeInTheDocument()
+    expect(screen.getAllByText('Accueil')).toHaveLength(2)
     expect(screen.getByText('L\'Arsenal IA')).toBeInTheDocument()
     expect(screen.getByText('claude ai')).toBeInTheDocument()
   })

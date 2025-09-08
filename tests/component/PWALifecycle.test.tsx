@@ -37,6 +37,9 @@ describe('pWALifecycle', () => {
   beforeEach(() => {
     vi.clearAllMocks()
 
+    // Mock process global for test environment
+    vi.stubGlobal('process', { env: { NODE_ENV: 'test' } })
+
     // Mock navigator.serviceWorker
     Object.defineProperty(navigator, 'serviceWorker', {
       value: mockServiceWorker,
