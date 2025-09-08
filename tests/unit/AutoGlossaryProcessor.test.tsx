@@ -85,7 +85,7 @@ describe('autoGlossaryProcessor', () => {
     )
 
     expect(screen.getByTestId('test-element')).toBeInTheDocument()
-    expect(screen.getByTestId('glossary-term-token')).toBeInTheDocument()
+    expect(screen.getAllByTestId('glossary-term-token')).toHaveLength(1)
   })
 
   it('devrait gérer le contenu vide', () => {
@@ -98,7 +98,7 @@ describe('autoGlossaryProcessor', () => {
     })
 
     // Ne devrait pas lancer d'erreur et devrait rendre le paragraphe vide
-    expect(screen.getByRole('paragraph')).toBeInTheDocument()
+    expect(screen.getAllByRole('paragraph')).toHaveLength(1)
   })
 
   it('devrait ignorer le contenu dans les balises code', () => {

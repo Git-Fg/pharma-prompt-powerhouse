@@ -21,6 +21,7 @@ vi.mock('@/components/ui/card', () => ({
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
   ExternalLink: () => React.createElement('span', { 'data-testid': 'external-link-icon' }, '🔗'),
+  X: () => React.createElement('span', { 'data-testid': 'x-icon' }, '✕'),
 }))
 
 // Mock content loader
@@ -73,6 +74,7 @@ vi.mock('@/lib/content-loader', () => ({
     ],
     externalTools: [],
   },
+  getContentItem: vi.fn(),
 }))
 
 const mockGuide: Guide = {

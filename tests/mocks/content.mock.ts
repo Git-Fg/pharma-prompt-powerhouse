@@ -142,78 +142,6 @@ export function createMockTool(overrides: Partial<BaseExternalTool> = {}): BaseE
   }
 }
 
-// Specialized mock factories for specific test cases
-export function createMinimalGuide(): BaseGuide {
-  return createMockGuide({
-    slug: 'minimal-guide',
-    title: 'Minimal Guide',
-    description: 'A minimal guide',
-    category: 'basic',
-    tags: ['minimal'],
-    keyTakeaways: [],
-    conceptSlugs: [],
-    content: [],
-  })
-}
-
-export function createGuideWithoutTakeaways(): BaseGuide {
-  return createMockGuide({
-    keyTakeaways: undefined,
-  })
-}
-
-export function createMinimalConcept(): BaseConcept {
-  return createMockConcept({
-    slug: 'minimal-concept',
-    title: 'Minimal Concept',
-    description: 'A minimal concept',
-    category: 'basic',
-    tags: ['minimal'],
-    keyTakeaways: [],
-    content: [],
-  })
-}
-
-export function createConceptWithoutTakeaways(): BaseConcept {
-  return createMockConcept({
-    keyTakeaways: undefined,
-  })
-}
-
-export function createMinimalTool(): BaseExternalTool {
-  return createMockTool({
-    slug: 'minimal-tool',
-    title: 'Minimal Tool',
-    description: 'A minimal tool',
-    url: 'https://minimal.example.com',
-    category: 'basic',
-    tags: ['minimal'],
-    personalReview: undefined,
-    strongPoints: [],
-    vigilancePoints: [],
-    confidenceScore: 3,
-    confidenceJustification: 'Basic confidence',
-    freeVsPaidOffer: '',
-    tldr: undefined,
-    use_cases: [],
-    capabilities: [],
-    content: [],
-  })
-}
-
-export function createToolWithoutConfidence(): BaseExternalTool {
-  return createMockTool({
-    confidenceScore: undefined,
-    confidenceJustification: undefined,
-  })
-}
-
-export function createWorkflowWithoutConcepts(): BaseWorkflow {
-  return createMockWorkflow({
-    conceptSlugs: [],
-  })
-}
-
 // Enriched mock factories for testing content-loader functionality
 export function createMockEnrichedGuide(overrides: Partial<EnrichedGuide> = {}): EnrichedGuide {
   const baseGuide = createMockGuide()
@@ -311,25 +239,68 @@ export function createMockEnrichedConcept(overrides: Partial<EnrichedConcept> = 
 // Collections of mocks for comprehensive testing
 export const mockGuides = [
   createMockGuide(),
-  createMinimalGuide(),
-  createGuideWithoutTakeaways(),
+  createMockGuide({
+    slug: 'minimal-guide',
+    title: 'Minimal Guide',
+    description: 'A minimal guide',
+    category: 'basic',
+    tags: ['minimal'],
+    keyTakeaways: [],
+    conceptSlugs: [],
+    content: [],
+  }),
+  createMockGuide({
+    keyTakeaways: undefined,
+  }),
 ]
 
 export const mockConcepts = [
   createMockConcept(),
-  createMinimalConcept(),
-  createConceptWithoutTakeaways(),
+  createMockConcept({
+    slug: 'minimal-concept',
+    title: 'Minimal Concept',
+    description: 'A minimal concept',
+    category: 'basic',
+    tags: ['minimal'],
+    keyTakeaways: [],
+    content: [],
+  }),
+  createMockConcept({
+    keyTakeaways: undefined,
+  }),
 ]
 
 export const mockWorkflows = [
   createMockWorkflow(),
-  createWorkflowWithoutConcepts(),
+  createMockWorkflow({
+    conceptSlugs: [],
+  }),
 ]
 
 export const mockTools = [
   createMockTool(),
-  createMinimalTool(),
-  createToolWithoutConfidence(),
+  createMockTool({
+    slug: 'minimal-tool',
+    title: 'Minimal Tool',
+    description: 'A minimal tool',
+    url: 'https://minimal.example.com',
+    category: 'basic',
+    tags: ['minimal'],
+    personalReview: undefined,
+    strongPoints: [],
+    vigilancePoints: [],
+    confidenceScore: 3,
+    confidenceJustification: 'Basic confidence',
+    freeVsPaidOffer: '',
+    tldr: undefined,
+    use_cases: [],
+    capabilities: [],
+    content: [],
+  }),
+  createMockTool({
+    confidenceScore: undefined,
+    confidenceJustification: undefined,
+  }),
 ]
 
 // Default exports for convenience

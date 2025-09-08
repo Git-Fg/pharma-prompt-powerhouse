@@ -37,14 +37,14 @@ function runTest(configName) {
   const config = testConfigs[configName]
   if (!config) {
     console.error(`Unknown test config: ${configName}`)
-    console.log('Available configs:', Object.keys(testConfigs).join(', '))
+    console.error('Available configs:', Object.keys(testConfigs).join(', '))
     process.exit(1)
   }
 
-  console.log(`\n🚀 Running ${config.description}...`)
-  console.log(`⏱️  Timeout: ${config.timeout}ms`)
-  console.log(`📝 Command: ${config.command}`)
-  console.log(''.repeat(50))
+  console.error(`\n🚀 Running ${config.description}...`)
+  console.error(`⏱️  Timeout: ${config.timeout}ms`)
+  console.error(`📝 Command: ${config.command}`)
+  console.error(''.repeat(50))
 
   const startTime = Date.now()
 
@@ -56,22 +56,22 @@ function runTest(configName) {
     })
 
     const duration = Date.now() - startTime
-    console.log(''.repeat(50))
-    console.log(`✅ ${config.description} completed successfully`)
-    console.log(`⏱️  Duration: ${duration}ms`)
-    console.log(`🎯 Performance: ${duration < config.timeout / 2 ? 'Excellent' : duration < config.timeout * 0.8 ? 'Good' : 'Needs attention'}`)
+    console.error(''.repeat(50))
+    console.error(`✅ ${config.description} completed successfully`)
+    console.error(`⏱️  Duration: ${duration}ms`)
+    console.error(`🎯 Performance: ${duration < config.timeout / 2 ? 'Excellent' : duration < config.timeout * 0.8 ? 'Good' : 'Needs attention'}`)
   }
   catch (error) {
     const duration = Date.now() - startTime
-    console.log(''.repeat(50))
+    console.error(''.repeat(50))
 
     if (error.signal === 'SIGTERM') {
-      console.log(`⏰ ${config.description} timed out after ${duration}ms`)
-      console.log(`💡 Consider using a faster test config or optimizing slow tests`)
+      console.error(`⏰ ${config.description} timed out after ${duration}ms`)
+      console.error(`💡 Consider using a faster test config or optimizing slow tests`)
     }
     else {
-      console.log(`❌ ${config.description} failed after ${duration}ms`)
-      console.log(`📊 Error: ${error.message}`)
+      console.error(`❌ ${config.description} failed after ${duration}ms`)
+      console.error(`📊 Error: ${error.message}`)
     }
 
     process.exit(1)

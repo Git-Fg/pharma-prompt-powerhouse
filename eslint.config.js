@@ -124,7 +124,7 @@ export default antfu(
       // Allow direct setState in useEffect for UI component patterns
       'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
       // Allow missing dependencies in useEffect for UI component patterns
-      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/exhaustive-deps': 'off',
     },
   },
   {

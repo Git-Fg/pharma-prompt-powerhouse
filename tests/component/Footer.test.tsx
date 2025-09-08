@@ -2,6 +2,9 @@ import { render, screen, within } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Footer } from '@/components/layout/Footer'
 
+// Setup test environment before component import
+vi.stubGlobal('process', { env: { NODE_ENV: 'test' } })
+
 // Mock the content loader to provide consistent test data
 vi.mock('@/lib/content-loader', () => ({
   content: {

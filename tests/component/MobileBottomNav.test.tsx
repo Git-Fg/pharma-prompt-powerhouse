@@ -18,6 +18,17 @@ vi.mock('@/hooks/use-mobile', () => ({
   useIsMobile: vi.fn(() => true),
 }))
 
+// Mock navigation
+vi.mock('@/lib/navigation', () => ({
+  getMobileNavigationLinks: vi.fn(() => [
+    { name: 'Accueil', href: '/', isActive: false },
+    { name: 'Guides', href: '/guides', isActive: false },
+    { name: 'Workflows', href: '/workflows', isActive: false },
+    { name: 'Concepts', href: '/concepts', isActive: false },
+    { name: 'L\'Arsenal IA', href: '/l-arsenal-ia', isActive: false },
+  ]),
+}))
+
 // Import the mocked hook
 import { useIsMobile } from '@/hooks/use-mobile'
 

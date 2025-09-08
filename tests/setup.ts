@@ -2,6 +2,13 @@ import React from 'react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
+// Mock process global for Next.js compatibility
+globalThis.process = {
+  env: {
+    NODE_ENV: 'test',
+  },
+} as any
+
 // Test setup file for Vitest Browser Mode
 // Optimized for performance with minimal global setup
 
@@ -72,6 +79,53 @@ vi.mock('sonner', () => ({
     warning: mocks.warning,
   },
   Toaster: () => null,
+}))
+
+// Mock common lucide-react icons that are used in tests
+vi.mock('lucide-react', () => ({
+  // Navigation icons
+  Home: () => React.createElement('span', { 'data-testid': 'home-icon' }, '🏠'),
+  BookOpen: () => React.createElement('span', { 'data-testid': 'book-icon' }, '📚'),
+  Search: () => React.createElement('span', { 'data-testid': 'search-icon' }, '🔍'),
+  Lightbulb: () => React.createElement('span', { 'data-testid': 'lightbulb-icon' }, '💡'),
+  Wrench: () => React.createElement('span', { 'data-testid': 'wrench-icon' }, '🔧'),
+  Brain: () => React.createElement('span', { 'data-testid': 'brain-icon' }, '🧠'),
+  Target: () => React.createElement('span', { 'data-testid': 'target-icon' }, '🎯'),
+  Shield: () => React.createElement('span', { 'data-testid': 'shield-icon' }, '🛡️'),
+  ExternalLink: () => React.createElement('span', { 'data-testid': 'external-link-icon' }, '🔗'),
+
+  // Action icons
+  X: () => React.createElement('span', { 'data-testid': 'x-icon' }, '✕'),
+  ChevronRight: () => React.createElement('span', { 'data-testid': 'chevron-right-icon' }, '▶'),
+  ChevronDown: () => React.createElement('span', { 'data-testid': 'chevron-down-icon' }, '▼'),
+  ArrowLeft: () => React.createElement('span', { 'data-testid': 'arrow-left-icon' }, '←'),
+  MoreHorizontal: () => React.createElement('span', { 'data-testid': 'more-horizontal-icon' }, '⋯'),
+
+  // Special icons
+  Cookie: () => React.createElement('span', { 'data-testid': 'cookie-icon' }, '🍪'),
+  XIcon: () => React.createElement('span', { 'data-testid': 'x-icon-component' }, '✕'),
+  SearchIcon: () => React.createElement('span', { 'data-testid': 'search-icon-component' }, '🔍'),
+  ChevronDownIcon: () => React.createElement('span', { 'data-testid': 'chevron-down-icon-component' }, '▼'),
+
+  // Footer icons
+  Github: () => React.createElement('span', { 'data-testid': 'github-icon' }, '📂'),
+  Mail: () => React.createElement('span', { 'data-testid': 'mail-icon' }, '✉️'),
+  Twitter: () => React.createElement('span', { 'data-testid': 'twitter-icon' }, '🐦'),
+  Linkedin: () => React.createElement('span', { 'data-testid': 'linkedin-icon' }, '💼'),
+
+  // Other common icons
+  Heart: () => React.createElement('span', { 'data-testid': 'heart-icon' }, '❤️'),
+  Users: () => React.createElement('span', { 'data-testid': 'users-icon' }, '👥'),
+  FileText: () => React.createElement('span', { 'data-testid': 'file-text-icon' }, '📄'),
+
+  // Additional icons that are missing
+  Settings: () => React.createElement('span', { 'data-testid': 'settings-icon' }, '⚙️'),
+  CheckIcon: () => React.createElement('span', { 'data-testid': 'check-icon' }, '✓'),
+  ArrowRight: () => React.createElement('span', { 'data-testid': 'arrow-right-icon' }, '→'),
+  Clock: () => React.createElement('span', { 'data-testid': 'clock-icon' }, '🕐'),
+
+  // Default fallback for any other icon
+  default: () => React.createElement('span', { 'data-testid': 'default-icon' }, '🔹'),
 }))
 
 // Performance optimization: pre-warm React createElement

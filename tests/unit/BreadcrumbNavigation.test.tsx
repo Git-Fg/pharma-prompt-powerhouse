@@ -13,6 +13,11 @@ vi.mock('@/lib/navigation', () => ({
   formatBreadcrumbSegments: () => mockFormatBreadcrumbSegments(),
 }))
 
+// Mock lucide-react icons
+vi.mock('lucide-react', () => ({
+  ChevronRight: () => <div data-testid="chevron-right-icon">▶</div>,
+}))
+
 describe('breadcrumbNavigation Component', () => {
   beforeEach(() => {
     vi.clearAllMocks()

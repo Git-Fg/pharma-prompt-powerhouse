@@ -137,7 +137,7 @@ export function CardItem({
 
   useEffect(() => {
     handleAnimations()
-  }, [isMouseEntered])
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ])
 
   return React.createElement(
     Tag,

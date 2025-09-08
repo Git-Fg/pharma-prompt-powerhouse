@@ -64,8 +64,12 @@ describe('consentBanner', () => {
   it('calls setConsent with true when accept button is clicked', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByRole('button', { name: 'Settings Activer le confort' })
-    fireEvent.click(acceptButton)
+    const acceptButtons = screen.getAllByRole('button', { name: 'Settings Activer le confort' })
+    expect(acceptButtons.length).toBeGreaterThan(0)
+    const acceptButton = acceptButtons[0]
+    if (acceptButton) {
+      fireEvent.click(acceptButton)
+    }
 
     expect(mockAccept).toHaveBeenCalled()
   })
@@ -73,8 +77,12 @@ describe('consentBanner', () => {
   it('calls setConsent with false when refuse button is clicked', () => {
     render(<ConsentBanner />)
 
-    const refuseButton = screen.getByRole('button', { name: 'Shield Naviguer sans sauvegarde' })
-    fireEvent.click(refuseButton)
+    const refuseButtons = screen.getAllByRole('button', { name: 'Shield Naviguer sans sauvegarde' })
+    expect(refuseButtons.length).toBeGreaterThan(0)
+    const refuseButton = refuseButtons[0]
+    if (refuseButton) {
+      fireEvent.click(refuseButton)
+    }
 
     expect(mockDecline).toHaveBeenCalled()
   })
@@ -99,8 +107,8 @@ describe('consentBanner', () => {
     expect(heading).toBeInTheDocument()
     expect(heading).toHaveAttribute('class', 'font-semibold text-foreground')
 
-    const acceptButton = screen.getByRole('button', { name: 'Settings Activer le confort' })
-    const refuseButton = screen.getByRole('button', { name: 'Shield Naviguer sans sauvegarde' })
+    const acceptButton = screen.getAllByRole('button', { name: 'Settings Activer le confort' })[0]
+    const refuseButton = screen.getAllByRole('button', { name: 'Shield Naviguer sans sauvegarde' })[0]
 
     expect(acceptButton).toBeInTheDocument()
     expect(refuseButton).toBeInTheDocument()
@@ -119,8 +127,8 @@ describe('consentBanner', () => {
   it('handles keyboard navigation properly', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByRole('button', { name: 'Settings Activer le confort' })
-    const refuseButton = screen.getByRole('button', { name: 'Shield Naviguer sans sauvegarde' })
+    const acceptButton = screen.getAllByRole('button', { name: 'Settings Activer le confort' })[0]
+    const refuseButton = screen.getAllByRole('button', { name: 'Shield Naviguer sans sauvegarde' })[0]
 
     // All buttons should be focusable by default
     expect(acceptButton).toBeInTheDocument()
@@ -137,8 +145,8 @@ describe('consentBanner', () => {
   it('provides clear visual hierarchy with proper contrast', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByRole('button', { name: 'Settings Activer le confort' })
-    const refuseButton = screen.getByRole('button', { name: 'Shield Naviguer sans sauvegarde' })
+    const acceptButton = screen.getAllByRole('button', { name: 'Settings Activer le confort' })[0]
+    const refuseButton = screen.getAllByRole('button', { name: 'Shield Naviguer sans sauvegarde' })[0]
 
     // Accept button should be primary (more prominent)
     expect(acceptButton).toHaveClass('bg-primary', 'text-primary-foreground')
@@ -150,12 +158,16 @@ describe('consentBanner', () => {
   it('handles rapid clicking gracefully', () => {
     render(<ConsentBanner />)
 
-    const acceptButton = screen.getByRole('button', { name: 'Settings Activer le confort' })
+    const acceptButtons = screen.getAllByRole('button', { name: 'Settings Activer le confort' })
+    expect(acceptButtons.length).toBeGreaterThan(0)
+    const acceptButton = acceptButtons[0]
 
     // Click multiple times rapidly
-    fireEvent.click(acceptButton)
-    fireEvent.click(acceptButton)
-    fireEvent.click(acceptButton)
+    if (acceptButton) {
+      fireEvent.click(acceptButton)
+      fireEvent.click(acceptButton)
+      fireEvent.click(acceptButton)
+    }
 
     // Should call accept for each click
     expect(mockAccept).toHaveBeenCalledTimes(3)

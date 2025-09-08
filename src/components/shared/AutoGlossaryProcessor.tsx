@@ -105,9 +105,9 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       if (Array.isArray(element)) {
         return element.map((child, index) => {
           const processed = processElement(child)
-          // Add key for array elements
+          // Add key for array elements using unique identifier
           if (React.isValidElement(processed)) {
-            return React.cloneElement(processed, { key: index })
+            return React.cloneElement(processed, { key: `auto-glossary-${index}` })
           }
           return processed
         })
@@ -126,7 +126,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
 
         return React.cloneElement(
           element,
-          props,
+          { ...props, key: `auto-glossary-element-${Date.now()}` },
           processedChildren,
         )
       }

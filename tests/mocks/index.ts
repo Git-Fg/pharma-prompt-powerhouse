@@ -5,4 +5,3 @@
  */
 
 export * from './content.mock'
-export * from './mock-setup'
