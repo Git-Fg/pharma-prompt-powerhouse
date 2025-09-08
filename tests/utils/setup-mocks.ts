@@ -1,83 +1,108 @@
+/**
+ * Setup de mocks modernes pour les tests
+ * 
+ * Suit le Glass Box Principle :
+ * - Mock UNIQUEMENT les dépendances externes
+ * - Les composants internes restent réels pour tester l'intégration
+ */
+
 import { vi } from 'vitest'
 
-// Mocks pour les hooks Next.js
-export const mockNextNavigation = () => {
+/**
+ * Mock pour Next.js navigation - External dependency
+ */
+export function mockNextNavigation() {
   vi.mock('next/navigation', () => ({
-    useRouter: () => createMockRouter(),
-    useSearchParams: () => createMockSearchParams(),
-    usePathname: () => '/',
+    useRouter: vi.fn(() => ({
+      push: vi.fn(),
+      replace: vi.fn(),
+      back: vi.fn(),
+      forward: vi.fn(),
+      refresh: vi.fn(),
+      prefetch: vi.fn()
+    })),
+    useSearchParams: vi.fn(() => new URLSearchParams()),
+    usePathname: vi.fn(() => '/'),
     redirect: vi.fn(),
     notFound: vi.fn()
   }))
 }
 
-export const mockNextLink = () => {
+/**
+ * Mock pour Next.js Link - External dependency
+ */
+export function mockNextLink() {
   vi.mock('next/link', () => ({
     __esModule: true,
-    default: ({ children, href, ...props }: any) => 
-      require('react').createElement('a', { href, ...props }, children)
+    default: ({ children, href, ...props }: any) => {
+      const React = require('react')
+      return React.createElement('a', { href, ...props }, children)
+    }
   }))
 }
 
-export const mockNextThemes = () => {
+/**
+ * Mock pour next-themes - External dependency
+ */
+export function mockNextThemes() {
   vi.mock('next-themes', () => ({
-    useTheme: () => createMockTheme()
+    useTheme: vi.fn(() => ({
+      theme: 'light',
+      setTheme: vi.fn(),
+      systemTheme: 'light',
+      themes: ['light', 'dark'],
+      resolvedTheme: 'light'
+    }))
   }))
 }
 
-// Mocks pour les composants UI
-export const mockUIComponents = () => {
-  vi.mock('@/components/ui/button', () => ({
-    default: ({ children, onClick, ...props }: any) => 
-      require('react').createElement('button', { type: 'button', onClick, ...props }, children)
-  }))
-  
-  vi.mock('@/components/ui/card', () => ({
-    Card: ({ children, ...props }: any) => 
-      require('react').createElement('div', { 'data-testid': 'card', ...props }, children),
-    CardHeader: ({ children, ...props }: any) => 
-      require('react').createElement('div', { 'data-testid': 'card-header', ...props }, children),
-    CardContent: ({ children, ...props }: any) => 
-      require('react').createElement('div', { 'data-testid': 'card-content', ...props }, children),
-    CardTitle: ({ children, ...props }: any) => 
-      require('react').createElement('h3', { 'data-testid': 'card-title', ...props }, children),
-    CardDescription: ({ children, ...props }: any) => 
-      require('react').createElement('p', { 'data-testid': 'card-description', ...props }, children)
+/**
+ * Mock pour le content loader - External data dependency
+ */
+export function mockContentLoader() {
+  vi.mock('@/lib/content-loader', () => ({
+    getContentItem: vi.fn(),
+    getAllContent: vi.fn(() => []),
+    getContentByType: vi.fn(() => []),
+    searchContent: vi.fn(() => [])
   }))
 }
 
-// Mocks pour les composants partagés
-export const mockSharedComponents = () => {
-  vi.mock('@/components/shared/ContentRenderer', () => ({
-    ContentRenderer: ({ item }: any) => 
-      require('react').createElement('div', { 'data-testid': 'content-renderer' }, item?.title || 'Content')
-  }))
-  
-  vi.mock('@/components/shared/KeyTakeaways', () => ({
-    KeyTakeaways: ({ takeaways }: any) => 
-      require('react').createElement('div', { 'data-testid': 'key-takeaways' }, 
-        takeaways?.map((takeaway: string, i: number) => 
-          require('react').createElement('div', { key: i }, takeaway)
-        )
-      )
-  }))
+/**
+ * Mock pour lucide-react icons - External dependency
+ */
+export function mockLucideIcons() {
+  vi.mock('lucide-react', () => {
+    const React = require('react')
+    const createIcon = (testId: string) => () => 
+      React.createElement('span', { 'data-testid': testId, 'aria-hidden': 'true' })
+    
+    return {
+      Home: createIcon('home-icon'),
+      Search: createIcon('search-icon'),
+      Menu: createIcon('menu-icon'),
+      Moon: createIcon('moon-icon'),
+      Sun: createIcon('sun-icon'),
+      BookOpen: createIcon('book-icon'),
+      ChevronDown: createIcon('chevron-down-icon'),
+      ChevronUp: createIcon('chevron-up-icon'),
+      ChevronLeft: createIcon('chevron-left-icon'),
+      ChevronRight: createIcon('chevron-right-icon'),
+      X: createIcon('x-icon'),
+      Check: createIcon('check-icon'),
+      Copy: createIcon('copy-icon'),
+      ExternalLink: createIcon('external-link-icon'),
+      Star: createIcon('star-icon'),
+      Filter: createIcon('filter-icon'),
+      Settings: createIcon('settings-icon')
+    }
+  })
 }
 
-// Mocks pour les icônes
-export const mockIcons = () => {
-  vi.mock('lucide-react', () => ({
-    Home: () => require('react').createElement('span', { 'data-testid': 'home-icon' }),
-    BookOpen: () => require('react').createElement('span', { 'data-testid': 'book-icon' }),
-    Search: () => require('react').createElement('span', { 'data-testid': 'search-icon' }),
-    Menu: () => require('react').createElement('span', { 'data-testid': 'menu-icon' }),
-    Moon: () => require('react').createElement('span', { 'data-testid': 'moon-icon' }),
-    Sun: () => require('react').createElement('span', { 'data-testid': 'sun-icon' }),
-    // Ajouter d'autres icônes au besoin
-  }))
-}
-
-// Mocks pour les notifications
-export const mockToasts = () => {
+/**
+ * Mock pour sonner toasts - External dependency
+ */
+export function mockSonner() {
   vi.mock('sonner', () => ({
     toast: {
       success: vi.fn(),
@@ -89,30 +114,39 @@ export const mockToasts = () => {
   }))
 }
 
-// Setup global pour tous les mocks
-export const setupGlobalMocks = () => {
-  // Mock ResizeObserver
-  global.ResizeObserver = vi.fn().mockImplementation(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn()
-  }))
+/**
+ * Mock pour les APIs du navigateur si nécessaires
+ */
+export function mockBrowserAPIs() {
+  // ResizeObserver est maintenant natif en browser mode
+  if (!globalThis.ResizeObserver) {
+    globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
+      observe: vi.fn(),
+      unobserve: vi.fn(),
+      disconnect: vi.fn()
+    }))
+  }
   
-  // Mock scrollIntoView
-  Element.prototype.scrollIntoView = vi.fn()
+  // scrollIntoView pour les éléments
+  if (!Element.prototype.scrollIntoView) {
+    Element.prototype.scrollIntoView = vi.fn()
+  }
   
-  // Mock process
-  global.process = { env: { NODE_ENV: 'test' } } as any
-  
-  // Appeler tous les mocks
+  // Process env pour les variables d'environnement
+  if (!globalThis.process) {
+    globalThis.process = { env: { NODE_ENV: 'test' } } as any
+  }
+}
+
+/**
+ * Setup complet des mocks - À utiliser dans les tests individuels au besoin
+ */
+export function setupExternalMocks() {
   mockNextNavigation()
   mockNextLink()
   mockNextThemes()
-  mockUIComponents()
-  mockSharedComponents()
-  mockIcons()
-  mockToasts()
+  mockContentLoader()
+  mockLucideIcons()
+  mockSonner()
+  mockBrowserAPIs()
 }
-
-// Importer les fonctions utilitaires
-import { createMockRouter, createMockTheme, createMockSearchParams } from './mocks'

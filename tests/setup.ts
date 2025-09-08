@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
-import { setupGlobalMocks } from './utils/setup-mocks'
 
-// Setup global mocks simplifié
-setupGlobalMocks()
+// Setup minimal pour Browser Mode avec gestion de process global
+if (typeof globalThis !== 'undefined' && !globalThis.process) {
+  globalThis.process = { env: { NODE_ENV: 'test' } } as any
+}
