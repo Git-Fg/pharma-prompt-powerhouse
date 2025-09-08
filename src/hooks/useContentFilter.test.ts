@@ -101,7 +101,8 @@ describe('useContentFilter Hook', () => {
     })
 
     expect(result.current.filteredItems).toHaveLength(1)
-    expect(result.current.filteredItems[0].title).toBe('React Hooks')
+    expect(result.current.filteredItems[0]).toBeDefined()
+    expect(result.current.filteredItems[0]!.title).toBe('React Hooks')
   })
 
   it('should handle search in title and description', () => {
@@ -112,7 +113,8 @@ describe('useContentFilter Hook', () => {
     })
 
     expect(result.current.filteredItems).toHaveLength(1)
-    expect(result.current.filteredItems[0].title).toBe('TypeScript Basics')
+    expect(result.current.filteredItems[0]).toBeDefined()
+    expect(result.current.filteredItems[0]!.title).toBe('TypeScript Basics')
   })
 
   it('should handle search in tags', () => {
@@ -133,7 +135,8 @@ describe('useContentFilter Hook', () => {
     })
 
     expect(result.current.filteredItems).toHaveLength(1)
-    expect(result.current.filteredItems[0].title).toBe('React Hooks')
+    expect(result.current.filteredItems[0]).toBeDefined()
+    expect(result.current.filteredItems[0]!.title).toBe('React Hooks')
   })
 
   it('should reset filters correctly', () => {

@@ -45,7 +45,8 @@ describe('breadcrumbNavigation Component', () => {
     render(<BreadcrumbNavigation />)
 
     const homeLinks = screen.getAllByText('Accueil')
-    expect(homeLinks[0].closest('a')).toHaveAttribute('href', '/')
+    expect(homeLinks[0]).toBeDefined()
+    expect(homeLinks[0]!.closest('a')).toHaveAttribute('href', '/')
 
     const conceptsLink = screen.getByText('Concepts').closest('a')
     expect(conceptsLink).toHaveAttribute('href', '/concepts')

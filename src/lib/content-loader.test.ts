@@ -68,9 +68,11 @@ describe('content Loader', () => {
 
     it('should contain mocked content', () => {
       expect(content.guides).toHaveLength(1)
-      expect(content.guides[0].slug).toBe('test-guide')
+      expect(content.guides[0]).toBeDefined()
+      expect(content.guides[0]!.slug).toBe('test-guide')
       expect(content.concepts).toHaveLength(1)
-      expect(content.concepts[0].slug).toBe('test-concept')
+      expect(content.concepts[0]).toBeDefined()
+      expect(content.concepts[0]!.slug).toBe('test-concept')
     })
   })
 
@@ -93,8 +95,8 @@ describe('content Loader', () => {
     })
 
     it('should handle invalid content type gracefully', () => {
-      // @ts-expect-error Testing invalid content type
-      const result = getContentItem('invalid', 'test')
+      // Testing invalid content type
+      const result = getContentItem('invalid' as any, 'test')
       expect(result).toBeUndefined()
     })
   })
@@ -117,10 +119,10 @@ describe('content Loader', () => {
   describe('route mappings', () => {
     it('should provide correct content type to route mapping', () => {
       const mapping = getContentTypeToRouteMapping()
-      expect(mapping.guides).toBe('guides')
-      expect(mapping.concepts).toBe('concepts')
-      expect(mapping.workflows).toBe('workflows')
-      expect(mapping.externalTools).toBe('l-arsenal-ia')
+      expect(mapping.guide).toBe('guides')
+      expect(mapping.concept).toBe('concepts')
+      expect(mapping.workflow).toBe('workflows')
+      expect(mapping.tool).toBe('l-arsenal-ia')
     })
 
     it('should provide correct route to content type mapping', () => {

@@ -17,7 +17,8 @@ export { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 // Types pour les mocks simplifiés
 export interface MockTheme {
   theme: string
-  setTheme: (theme: string) => void
+  setTheme: (theme: string | ((prevTheme: string) => string)) => void
+  themes: string[]
 }
 
 export interface MockNavigation {
@@ -34,6 +35,7 @@ export function createMockTheme(overrides: Partial<MockTheme> = {}): MockTheme {
   return {
     theme: 'light',
     setTheme: vi.fn(),
+    themes: ['light', 'dark', 'system'],
     ...overrides,
   }
 }

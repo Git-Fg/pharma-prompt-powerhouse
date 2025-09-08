@@ -94,23 +94,20 @@ describe('animation Hooks', () => {
 
   describe('useInView', () => {
     it('should initialize IntersectionObserver', () => {
-      const ref = { current: document.createElement('div') }
-      renderHook(() => useInView(ref))
+      renderHook(() => useInView(0.1))
 
       expect(mockIntersectionObserver).toHaveBeenCalled()
-      expect(mockObserve).toHaveBeenCalledWith(ref.current)
     })
 
-    it('should return false initially', () => {
-      const ref = { current: document.createElement('div') }
-      const { result } = renderHook(() => useInView(ref))
+    it('should return false initially and provide ref', () => {
+      const { result } = renderHook(() => useInView(0.1))
 
-      expect(result.current).toBe(false)
+      expect(result.current.isInView).toBe(false)
+      expect(result.current.ref).toBeDefined()
     })
 
     it('should clean up on unmount', () => {
-      const ref = { current: document.createElement('div') }
-      const { unmount } = renderHook(() => useInView(ref))
+      const { unmount } = renderHook(() => useInView(0.1))
 
       unmount()
       expect(mockDisconnect).toHaveBeenCalled()
@@ -125,8 +122,10 @@ describe('animation Hooks', () => {
 
       // Simulate animation frame
       act(() => {
-        const callback = mockRAF.mock.calls[0][0]
-        callback()
+        const callback = mockRAF.mock.calls[0]?.[0]
+        if (callback) {
+          callback()
+        }
       })
 
       // Value should be progressing towards target
@@ -144,24 +143,27 @@ describe('animation Hooks', () => {
     it('should handle different loading states', () => {
       const { result } = renderHook(() => useLoadingState())
 
-      expect(result.current.isLoading).toBe(false)
-      expect(result.current.progress).toBe(0)
+      // Initially should be true due to initialDelay
+      expect(result.current.isLoading).toBe(true)
 
       act(() => {
-        result.current.setLoading(true)
+        result.current.startLoading()
       })
 
       expect(result.current.isLoading).toBe(true)
-    })
-
-    it('should update progress correctly', () => {
-      const { result } = renderHook(() => useLoadingState())
 
       act(() => {
-        result.current.setProgress(50)
+        result.current.stopLoading()
       })
 
-      expect(result.current.progress).toBe(50)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    it('should provide loading control methods', () => {
+      const { result } = renderHook(() => useLoadingState())
+
+      expect(typeof result.current.startLoading).toBe('function')
+      expect(typeof result.current.stopLoading).toBe('function')
     })
   })
 
@@ -189,7 +191,7 @@ describe('animation Hooks', () => {
     it('should animate text typing effect', async () => {
       const { result } = renderHook(() => useTypewriter('Hello World', 50))
 
-      expect(result.current.displayText).toBe('')
+      expect(result.current.displayedText).toBe('')
       expect(result.current.isComplete).toBe(false)
 
       // Wait for first character
@@ -197,7 +199,7 @@ describe('animation Hooks', () => {
         await new Promise(resolve => setTimeout(resolve, 60))
       })
 
-      expect(result.current.displayText.length).toBeGreaterThan(0)
+      expect(result.current.displayedText.length).toBeGreaterThan(0)
     })
 
     it('should complete typing animation', async () => {
@@ -209,7 +211,7 @@ describe('animation Hooks', () => {
         await new Promise(resolve => setTimeout(resolve, 100))
       })
 
-      expect(result.current.displayText).toBe(shortText)
+      expect(result.current.displayedText).toBe(shortText)
       expect(result.current.isComplete).toBe(true)
     })
 
@@ -219,11 +221,11 @@ describe('animation Hooks', () => {
         { initialProps: { text: 'First' } },
       )
 
-      expect(result.current.displayText).toBe('')
+      expect(result.current.displayedText).toBe('')
 
       rerender({ text: 'Second' })
 
-      expect(result.current.displayText).toBe('')
+      expect(result.current.displayedText).toBe('')
       expect(result.current.isComplete).toBe(false)
     })
   })

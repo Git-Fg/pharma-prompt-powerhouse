@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { createMockTheme, fireEvent, screen } from '@/test-utils'
+import { createMockTheme, fireEvent, render, screen } from '@/test-utils'
 import { Header } from './Header'
 
 // Mock next-themes
@@ -88,7 +88,8 @@ describe('header', () => {
       render(<Header />)
 
       const themeToggleButtons = screen.getAllByTestId('nav-theme-toggle')
-      fireEvent.click(themeToggleButtons[0])
+      expect(themeToggleButtons[0]).toBeDefined()
+      fireEvent.click(themeToggleButtons[0]!)
 
       expect(mockSetTheme).toHaveBeenCalled()
     })

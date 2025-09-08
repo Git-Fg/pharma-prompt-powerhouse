@@ -76,6 +76,7 @@ vi.mock('next-themes', () => ({
   useTheme: vi.fn(() => ({
     theme: 'light',
     setTheme: vi.fn(),
+    themes: ['light', 'dark', 'system'],
   })),
   ThemeProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
