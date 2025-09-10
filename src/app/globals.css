@@ -700,6 +700,50 @@
 
   .stat-card {
     @apply text-center p-4 bg-card text-card-foreground border rounded-lg shadow-sm;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stat-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  /* Enhanced Card Utilities */
+  .card-elevated {
+    @apply bg-card/60 backdrop-blur-sm border border-border/60 shadow-sm;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-elevated:hover {
+    @apply shadow-md;
+    transform: translateY(-1px);
+    border-color: var(--border);
+  }
+
+  .card-subtle {
+    @apply bg-card/30 backdrop-blur-sm border border-border/30 rounded-xl;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-subtle:hover {
+    @apply shadow-md;
+    background-color: rgb(from var(--card) r g b / 0.5);
+    border-color: var(--border);
+  }
+
+  /* Glass Card Effect */
+  .card-glass {
+    @apply backdrop-blur-md bg-card/20 border border-border/20 rounded-xl;
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.1),
+      inset 0 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .card-glass:hover {
+    @apply bg-card/30 border-border/40;
+    box-shadow: 
+      0 12px 40px 0 rgba(31, 38, 135, 0.15),
+      inset 0 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .stat-number {
