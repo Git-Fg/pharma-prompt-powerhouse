@@ -106,7 +106,10 @@ export default function RootLayout({
           >
             <div className="min-h-screen flex flex-col">
               <Header />
-              <main className="flex-1 pb-20 md:pb-0">{children}</main>
+              {/* Page content container with modern 2025 design: subtle borders and shadow */}
+              <div className="flex-1 page-container bg-background/95 backdrop-blur-sm border-x border-border/50 shadow-lg shadow-black/5 dark:shadow-black/20">
+                <main className="pb-20 md:pb-0">{children}</main>
+              </div>
               <Footer />
               <MobileBottomNav />
             </div>
