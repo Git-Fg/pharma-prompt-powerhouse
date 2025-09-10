@@ -68,8 +68,9 @@ export function CollectionPageLayout({
                           'border-2 border-border/50 backdrop-blur-sm',
                           'hover:border-border transition-all duration-300',
                           'hover:shadow-lg hover:shadow-primary/5',
-                          styles.bg
-                        )}>
+                          styles.bg,
+                        )}
+                        >
                           <div className={cn('stat-number animate-bounce-subtle', styles.color)}>
                             {stat.value}
                           </div>

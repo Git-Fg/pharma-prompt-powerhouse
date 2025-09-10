@@ -30,8 +30,9 @@ export function ContentPageLayout({ item, children, prose = true }: ContentPageL
         <Card className="bg-card/40 backdrop-blur-sm border-border/40 shadow-sm hover:shadow-md transition-shadow duration-300">
           <main className={cn(
             'p-6 md:p-8 lg:p-10',
-            prose && 'prose prose-lg dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground prose-strong:text-foreground'
-          )}>
+            prose && 'prose prose-lg dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground prose-strong:text-foreground',
+          )}
+          >
             {children}
           </main>
         </Card>
