@@ -63,7 +63,13 @@ export function CollectionPageLayout({
                         key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}-${index}`}
                         delay={index * 0.1}
                       >
-                        <div className={cn('stat-card hover-glow hover-scale cursor-pointer', styles.bg)}>
+                        <div className={cn(
+                          'stat-card hover-glow hover-scale cursor-pointer',
+                          'border-2 border-border/50 backdrop-blur-sm',
+                          'hover:border-border transition-all duration-300',
+                          'hover:shadow-lg hover:shadow-primary/5',
+                          styles.bg
+                        )}>
                           <div className={cn('stat-number animate-bounce-subtle', styles.color)}>
                             {stat.value}
                           </div>
@@ -86,7 +92,10 @@ export function CollectionPageLayout({
         <Section>
           <Container variant="collection">
             <ScrollAnimated variant="slideUp" className="animate-fade-in">
-              {children}
+              {/* Enhanced card container for main content */}
+              <div className="bg-card/30 backdrop-blur-sm border border-border/30 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+                {children}
+              </div>
             </ScrollAnimated>
           </Container>
         </Section>
