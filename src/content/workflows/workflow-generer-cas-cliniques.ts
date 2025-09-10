@@ -12,7 +12,7 @@ export const workflow = {
   isFavorite: false,
   conceptSlugs: [
     'structuration-par-balises',
-    'chaîne-de-prompts',
+    'chaine-de-prompts',
   ],
 
   content: [

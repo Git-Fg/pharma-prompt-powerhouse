@@ -1,7 +1,7 @@
 import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
-  slug: 'chaîne-de-prompts',
+  slug: 'chaine-de-prompts',
   title: 'Chaîne de Prompts',
   description: 'Découpez vos tâches complexes en une série de prompts logiques, comme un protocole de soin',
   icon: 'GitBranch',

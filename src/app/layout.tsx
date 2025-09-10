@@ -95,7 +95,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans gradient-mesh`}
       >
         <ConsentProvider>
           <ThemeProvider
@@ -107,7 +107,7 @@ export default function RootLayout({
             <div className="min-h-screen flex flex-col">
               <Header />
               {/* Page content container with modern 2025 design: subtle borders and shadow */}
-              <div className="flex-1 page-container bg-background/95 backdrop-blur-sm border-x border-border/50 shadow-lg shadow-black/5 dark:shadow-black/20">
+              <div className="flex-1 page-container backdrop-blur-sm shadow-2xl shadow-primary/5 dark:shadow-black/30">
                 <main className="pb-20 md:pb-0">{children}</main>
               </div>
               <Footer />

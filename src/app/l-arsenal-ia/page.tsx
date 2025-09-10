@@ -1,5 +1,4 @@
-import { getCollectionStats } from '@/components/layout/CollectionPage'
-import { CollectionPageLayout } from '@/components/layout/CollectionPageLayout'
+import { PageRenderer } from '@/components/layout/PageRenderer'
 import { ResponsiveComparisonTable } from '@/components/shared/ResponsiveComparisonTable'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { content } from '@/lib/content-loader'
@@ -8,14 +7,13 @@ import { content } from '@/lib/content-loader'
 export const dynamic = 'force-dynamic'
 
 export default function ExternalToolsPage() {
-  const stats = getCollectionStats('tools')
   const tools = content.externalTools
 
   return (
-    <CollectionPageLayout
-      title="L'Arsenal IA 2025"
-      description="Mon guide personnel des outils IA pour les étudiants en pharmacie"
-      stats={stats}
+    <PageRenderer
+      collectionType="tools"
+      collectionTitle="L'Arsenal IA 2025"
+      collectionDescription="Mon guide personnel des outils IA pour les étudiants en pharmacie"
     >
       {/* Comparative Table */}
       <Card>
@@ -26,6 +24,6 @@ export default function ExternalToolsPage() {
           <ResponsiveComparisonTable tools={tools} />
         </CardContent>
       </Card>
-    </CollectionPageLayout>
+    </PageRenderer>
   )
 }

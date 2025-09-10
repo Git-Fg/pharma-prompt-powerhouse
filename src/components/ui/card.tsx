@@ -20,7 +20,7 @@ function useCardContext() {
 }
 
 const cardVariants = cva(
-  'bg-card text-card-foreground rounded-lg border shadow-sm transition-all duration-200 ease-spring hover-lift',
+  'bg-card/70 dark:bg-card/50 text-card-foreground backdrop-blur-xl rounded-lg border border-border/20 shadow-lg shadow-black/5 dark:shadow-black/20 transition-all duration-200 ease-spring hover-lift',
   {
     variants: {
       padding: {
@@ -92,7 +92,7 @@ function Card({ className, children, ...props }: CardProps) {
   // Padding par défaut pour les cartes sans sous-composants
   const contextValue = React.useMemo(() => ({ padding: 'md' as const }), [])
   return (
-    <CardContext.Provider value={contextValue}>
+    <CardContext value={contextValue}>
       <div
         data-slot="card"
         className={cn(
@@ -103,7 +103,7 @@ function Card({ className, children, ...props }: CardProps) {
       >
         {children}
       </div>
-    </CardContext.Provider>
+    </CardContext>
   )
 }
 

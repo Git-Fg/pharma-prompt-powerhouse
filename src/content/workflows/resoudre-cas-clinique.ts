@@ -10,7 +10,7 @@ export const workflow = {
   category: 'cas-pratiques',
   difficulty: 'avancé',
   estimatedTime: '25 min',
-  conceptSlugs: ['chaîne-de-prompts', 'structuration-par-balises'],
+  conceptSlugs: ['chaine-de-prompts', 'structuration-par-balises'],
 
   content: [
     {
@@ -59,7 +59,7 @@ Cette méthode utilise une **chaîne de prompts** pour décomposer le problème.
     },
     {
       type: 'conceptRecommendation',
-      slug: 'chaîne-de-prompts',
+      slug: 'chaine-de-prompts',
       reason: 'Cette technique est la base de notre workflow pour analyser un cas clinique de manière structurée.',
     },
     {

@@ -171,10 +171,22 @@ export function loadContent(): ContentData {
   }
 
   // --- LOGIQUE EXISTANTE OPTIMISÉE (O(N)) ---
-  const concepts: BaseConcept[] = allConcepts
-  const guides: BaseGuide[] = allGuides
-  const workflows: BaseWorkflow[] = allWorkflows
-  const externalTools: BaseExternalTool[] = allExternalTools
+  const concepts: BaseConcept[] = allConcepts.map(concept => ({
+    ...concept,
+    slug: normalizeSlug(concept.slug),
+  }))
+  const guides: BaseGuide[] = allGuides.map(guide => ({
+    ...guide,
+    slug: normalizeSlug(guide.slug),
+  }))
+  const workflows: BaseWorkflow[] = allWorkflows.map(workflow => ({
+    ...workflow,
+    slug: normalizeSlug(workflow.slug),
+  }))
+  const externalTools: BaseExternalTool[] = allExternalTools.map(tool => ({
+    ...tool,
+    slug: normalizeSlug(tool.slug),
+  }))
 
   // --- PASSE 1: INDEXATION (Complexité O(N)) ---
   // Crée des dictionnaires rapides pour un accès instantané par slug.
@@ -400,8 +412,8 @@ export function getWorkflowBySlug(slug: string): EnrichedWorkflow | undefined {
 }
 
 export function getConceptBySlug(slug: string): EnrichedConcept | undefined {
-  // Essaie d'abord avec le slug exact, puis avec la normalisation
-  return content.concepts.find((c: EnrichedConcept) => c.slug === slug || normalizeSlug(c.slug) === slug)
+  // Garanti propre par le loader
+  return content.concepts.find((c: EnrichedConcept) => c.slug === slug)
 }
 
 export function getExternalToolBySlug(slug: string): BaseExternalTool | undefined {
@@ -458,5 +470,139 @@ export function getContentTypeToRouteMapping(): Record<'concept' | 'guide' | 'wo
     guide: 'guides',
     workflow: 'workflows',
     tool: 'l-arsenal-ia',
+  }
+}
+
+// Collection analytics functions moved from CollectionPage.tsx
+export type CollectionType = 'concepts' | 'guides' | 'workflows' | 'tools'
+
+export interface StatCardProps {
+  value: string | number
+  label: string
+  type: 'concepts' | 'guides' | 'workflows' | 'tools' | 'primary'
+}
+
+export function getCollectionStats(type: CollectionType): StatCardProps[] {
+  switch (type) {
+    case 'concepts': {
+      const totalConcepts = content.concepts.length
+      const categoriesCount = new Set(content.concepts.map(c => c.category)).size
+
+      return [
+        { value: totalConcepts, label: 'Concepts disponibles', type: 'concepts' },
+        { value: categoriesCount, label: 'Catégories', type: 'guides' },
+        { value: '100%', label: 'Contenus liés', type: 'primary' },
+        { value: '∞', label: 'Possibilités', type: 'tools' },
+      ]
+    }
+
+    case 'guides': {
+      const guides = content.guides
+      const totalGuides = guides.length
+      const guideCategoriesCount = new Set(guides.map(g => g.category)).size
+      const beginnerGuides = guides.filter(g => g.difficulty === 'débutant').length
+      const averageReadingTime = Math.round(
+        guides.reduce((acc, guide) => {
+          const timeMatch = guide.estimatedTime?.match(/\d+/)
+          return acc + (timeMatch ? Number.parseInt(timeMatch[0]) : 0)
+        }, 0) / guides.length,
+      )
+
+      return [
+        { value: totalGuides, label: 'Guides disponibles', type: 'guides' },
+        { value: guideCategoriesCount, label: 'Catégories', type: 'concepts' },
+        { value: beginnerGuides, label: 'Pour débuter', type: 'workflows' },
+        { value: `${averageReadingTime}min`, label: 'Temps moyen', type: 'tools' },
+      ]
+    }
+
+    case 'workflows': {
+      const workflows = content.workflows
+      const totalWorkflows = workflows.length
+      const beginnerCount = workflows.filter(w => w.difficulty === 'débutant').length
+      const tagCount = new Set(workflows.flatMap(w => w.tags)).size
+      const avgTime = Math.round(
+        workflows.reduce((acc, w) => {
+          const timeMatch = w.estimatedTime?.match(/\d+/)
+          return acc + (timeMatch ? Number.parseInt(timeMatch[0]) : 15)
+        }, 0) / workflows.length,
+      )
+
+      return [
+        { value: totalWorkflows, label: 'Workflows disponibles', type: 'workflows' },
+        { value: beginnerCount, label: 'Pour débuter', type: 'guides' },
+        { value: tagCount, label: 'Cas d\'usage', type: 'concepts' },
+        { value: `${avgTime}min`, label: 'Temps moyen', type: 'tools' },
+      ]
+    }
+
+    case 'tools': {
+      const tools = content.externalTools
+      const totalTools = tools.length
+      const favoriteCount = tools.filter(t => t.isFavorite).length
+      const reviewedCount = tools.filter(t => t.personalReview).length
+      const freeCount = tools.filter((t) => {
+        // Safe check for freeVsPaidOffer
+        if (!t.freeVsPaidOffer)
+          return true
+        if (typeof t.freeVsPaidOffer !== 'string')
+          return false
+        return t.freeVsPaidOffer.includes('Gratuit')
+      }).length
+
+      return [
+        { value: totalTools, label: 'Outils testés', type: 'tools' },
+        { value: favoriteCount, label: 'Favoris', type: 'primary' },
+        { value: reviewedCount, label: 'Avis détaillés', type: 'workflows' },
+        { value: freeCount, label: 'Accès gratuit', type: 'guides' },
+      ]
+    }
+  }
+}
+
+export function getCollectionItems(type: CollectionType) {
+  switch (type) {
+    case 'concepts':
+      return content.concepts
+    case 'guides':
+      return content.guides
+    case 'workflows':
+      return content.workflows
+    case 'tools':
+      // Return empty array for tools since they don't use FilterableContentList
+      return []
+  }
+}
+
+export function getCollectionConfig(type: CollectionType) {
+  switch (type) {
+    case 'concepts':
+      return {
+        searchPlaceholder: 'Rechercher un concept...',
+        showCategoryFilter: true,
+        showDifficultyFilter: false,
+        gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+      }
+    case 'guides':
+      return {
+        searchPlaceholder: 'Rechercher un guide...',
+        showCategoryFilter: true,
+        showDifficultyFilter: true,
+        gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+      }
+    case 'workflows':
+      return {
+        searchPlaceholder: 'Rechercher un workflow...',
+        showCategoryFilter: false,
+        showDifficultyFilter: true,
+        gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+      }
+    case 'tools':
+      return {
+        searchPlaceholder: 'Rechercher un outil...',
+        showCategoryFilter: true,
+        showDifficultyFilter: false,
+        gridClassName: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+      }
   }
 }

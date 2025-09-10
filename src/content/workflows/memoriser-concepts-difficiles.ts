@@ -10,7 +10,7 @@ export const workflow = {
   category: 'apprentissage',
   difficulty: 'intermédiaire',
   estimatedTime: '12 min',
-  conceptSlugs: ['température-dosage'],
+  conceptSlugs: ['temperature-dosage'],
 
   content: [
     {
@@ -57,7 +57,7 @@ Cette approche utilise la **température de dosage** pour contrôler la créativ
     },
     {
       type: 'conceptRecommendation',
-      slug: 'température-dosage',
+      slug: 'temperature-dosage',
       reason: 'Comprendre comment ajuster la créativité de l\'IA vous permet de générer des mnémoniques plus originales et mémorables.',
     },
     {

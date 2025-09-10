@@ -3,10 +3,10 @@ import { render } from 'vitest-browser-react'
 import { BreadcrumbNavigation } from './BreadcrumbNavigation'
 
 // Mock the Next.js navigation module
-const mockUsePathname = vi.fn()
+const mockPathname = vi.fn()
 
 vi.mock('next/navigation', () => ({
-  usePathname: () => mockUsePathname(),
+  usePathname: () => mockPathname(),
 }))
 
 describe('breadcrumb navigation component', () => {
@@ -15,7 +15,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should render breadcrumb navigation based on current path', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -25,7 +25,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should render links for all but the last breadcrumb', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -44,7 +44,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should render correct number of separators', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -53,7 +53,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should apply proper styling to current page', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -62,7 +62,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should apply proper styling to breadcrumb links', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -71,7 +71,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should handle root path', async () => {
-    mockUsePathname.mockReturnValue('/')
+    mockPathname.mockReturnValue('/')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -83,7 +83,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should handle single level path', async () => {
-    mockUsePathname.mockReturnValue('/concepts')
+    mockPathname.mockReturnValue('/concepts')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -95,7 +95,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should apply proper navigation attributes', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -105,7 +105,7 @@ describe('breadcrumb navigation component', () => {
   })
 
   it('should render breadcrumb items in correct order', async () => {
-    mockUsePathname.mockReturnValue('/concepts/chain-of-thought')
+    mockPathname.mockReturnValue('/concepts/chain-of-thought')
 
     const screen = await render(<BreadcrumbNavigation />)
 
@@ -124,7 +124,7 @@ describe('breadcrumb navigation component', () => {
 })
 
 it('should handle custom path segments with hyphens', async () => {
-  mockUsePathname.mockReturnValue('/guides/techniques-avancees-fiabilisation')
+  mockPathname.mockReturnValue('/guides/techniques-avancees-fiabilisation')
 
   const screen = await render(<BreadcrumbNavigation />)
 
@@ -134,7 +134,7 @@ it('should handle custom path segments with hyphens', async () => {
 })
 
 it('should handle l-arsenal-ia path segment', async () => {
-  mockUsePathname.mockReturnValue('/l-arsenal-ia/claude-ai')
+  mockPathname.mockReturnValue('/l-arsenal-ia/claude-ai')
 
   const screen = await render(<BreadcrumbNavigation />)
 

@@ -201,6 +201,8 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      <Separator className="my-8 container mx-auto" />
+
       {/* 5. PERSONAL NOTE : Design unifié */}
       <Section size="sm">
         <Container variant="detail">

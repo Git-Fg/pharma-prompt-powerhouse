@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
-import { cn, normalizeSlug } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { InfoButton } from './InfoButton'
 
 interface ConceptCardProps {
@@ -65,7 +65,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
               </Badge>
             ))}
           </div>
-          <Link href={`/concepts/${normalizeSlug(concept.slug)}`} className="block" {...createTestIdProps(TestIds.Interactive.Button('discover-concept'))}>
+          <Link href={`/concepts/${concept.slug}`} className="block" {...createTestIdProps(TestIds.Interactive.Button('discover-concept'))}>
             <Button className="w-full" size="sm">
               Découvrir le concept
             </Button>

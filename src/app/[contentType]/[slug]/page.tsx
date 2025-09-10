@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { ContentPageLayout } from '@/components/layout/ContentPageLayout'
+import { PageRenderer } from '@/components/layout/PageRenderer'
 import { ContentBodyRenderer } from '@/components/shared/ContentBodyRenderer'
 import { getContentItem } from '@/lib/content-loader'
 import { generateAllStaticParams, generateContentMetadataDynamic, getContentTypeFromRoute } from '@/lib/content-utils'
@@ -46,19 +46,12 @@ export default async function DynamicContentPage({
     notFound()
   }
 
-  // Déterminer si on doit utiliser le mode prose ou non
-  // Les concepts et outils n'utilisent pas prose par défaut
-  const useProse = actualContentType !== 'concept' && actualContentType !== 'tool'
-
   return (
-    <ContentPageLayout
-      item={item}
-      prose={useProse}
-    >
+    <PageRenderer item={item}>
       <ContentBodyRenderer
         item={item}
         contentType={actualContentType}
       />
-    </ContentPageLayout>
+    </PageRenderer>
   )
 }

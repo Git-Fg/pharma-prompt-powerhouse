@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { content, getContentTypeToRouteMapping, getRouteToContentTypeMapping } from '@/lib/content-loader'
 import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
-import { normalizeSlug } from '@/lib/utils'
 
 /**
  * Génère les paramètres statiques pour tous les types de contenu
@@ -22,7 +21,7 @@ export function generateAllStaticParams() {
     // eslint-disable-next-line ts/no-explicit-any -- Type dynamique nécessaire pour itérer sur différents types de contenu
     const paramsForType = contentArray.map((item: any) => ({
       contentType: routeName,
-      slug: normalizeSlug(item.slug),
+      slug: item.slug, // Garanti propre par le loader
     }))
 
     staticParams.push(...paramsForType)
@@ -56,7 +55,7 @@ export async function generateContentMetadataDynamic({
       ? 'guides'
       : actualContentType === 'workflow' ? 'workflows' : 'externalTools']
     // eslint-disable-next-line ts/no-explicit-any -- Type dynamique nécessaire pour itérer sur différents types de contenu
-    .find((item: any) => item.slug === slug || normalizeSlug(item.slug) === slug)
+    .find((item: any) => item.slug === slug) // Garanti propre par le loader
 
   if (!item) {
     return generateNotFoundMetadata(actualContentType)

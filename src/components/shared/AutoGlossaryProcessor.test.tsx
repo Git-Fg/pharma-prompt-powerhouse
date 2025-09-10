@@ -3,6 +3,8 @@ import React from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 
+import { AutoGlossaryProcessor } from './AutoGlossaryProcessor'
+
 // Mock du glossaire pour contrôler les données de test
 vi.mock('@/content/glossary', () => ({
   glossary: {
@@ -37,8 +39,6 @@ vi.mock('react', async () => {
     useEffect: vi.fn(), // Ignore l'effet pour les tests
   }
 })
-
-import { AutoGlossaryProcessor } from './AutoGlossaryProcessor'
 
 describe('autoGlossaryProcessor', () => {
   beforeEach(() => {

@@ -52,9 +52,9 @@ export function mockUiUtils() {
 
 // Mock layout components
 export function mockLayoutComponents() {
-  vi.mock('@/components/layout/ContentPageLayout', () => ({
-    ContentPageLayout: ({ children, item, prose }: any) => (
-      <div data-testid="content-page-layout" data-prose={prose}>
+  vi.mock('@/components/layout/PageRenderer', () => ({
+    PageRenderer: ({ children, item }: any) => (
+      <div data-testid="page-renderer">
         <h1 data-testid="item-title" role="heading" aria-level={1}>{item?.title}</h1>
         <p data-testid="item-description">{item?.description}</p>
         <div data-testid="item-category">{item?.category}</div>

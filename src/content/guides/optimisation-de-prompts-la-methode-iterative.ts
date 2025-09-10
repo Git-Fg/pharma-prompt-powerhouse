@@ -25,7 +25,7 @@ export const guide = {
     'Fournissez un feedback précis et actionnable au lieu de critiques vagues pour guider efficacement l\'IA.',
   ],
   conceptSlugs: [
-    'chaîne-de-prompts',
+    'chaine-de-prompts',
   ],
   content: [
     {
@@ -111,7 +111,7 @@ export const guide = {
     },
     {
       type: 'conceptRecommendation',
-      slug: 'chaîne-de-prompts',
+      slug: 'chaine-de-prompts',
       reason: 'Découvrez comment décomposer des tâches complexes en séquences de prompts simples et fiables pour des résultats reproductibles.',
     },
     {

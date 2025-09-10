@@ -10,7 +10,6 @@ module.exports = {
       category: 'Possible Errors',
       recommended: true,
     },
-    fixable: 'code',
     schema: [],
   },
 
@@ -34,9 +33,6 @@ module.exports = {
             node,
             loc: sourceCode.getLocFromIndex(apostropheMatch.index),
             message: `Typographic apostrophe "${apostropheMatch[0]}" found. Use regular apostrophe "'" instead to prevent TypeScript syntax errors.`,
-            fix(fixer) {
-              return fixer.replaceTextRange([apostropheMatch.index, apostropheMatch.index + apostropheMatch[0].length], '\'')
-            },
           })
         }
 
@@ -47,9 +43,6 @@ module.exports = {
             node,
             loc: sourceCode.getLocFromIndex(quoteMatch.index),
             message: `Typographic quote "${quoteMatch[0]}" found. Use regular quotes '"' instead to prevent TypeScript syntax errors.`,
-            fix(fixer) {
-              return fixer.replaceTextRange([quoteMatch.index, quoteMatch.index + quoteMatch[0].length], '"')
-            },
           })
         }
 
@@ -60,9 +53,6 @@ module.exports = {
             node,
             loc: sourceCode.getLocFromIndex(malformedMatch.index),
             message: `Malformed string ending "${malformedMatch[0]}" found. Should be ".'," instead.`,
-            fix(fixer) {
-              return fixer.replaceTextRange([malformedMatch.index, malformedMatch.index + malformedMatch[0].length], '.\',')
-            },
           })
         }
       },
