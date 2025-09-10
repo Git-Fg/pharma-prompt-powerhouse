@@ -110,8 +110,8 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
       if (processed.length === 1) {
         return processed[0]
       }
-      // Si plusieurs éléments, les retourner dans un Fragment sans key
-      return processed
+      // Si plusieurs éléments, les retourner dans un Fragment avec key appropriée
+      return <React.Fragment key={`processed-text-${nodeIndex}`}>{processed}</React.Fragment>
     }
 
     if (React.isValidElement(node)) {
@@ -144,7 +144,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
         }
         else if (typeof props.children === 'string') {
           const processed = processTextNode(props.children)
-          childrenProcessed = processed.length === 1 ? processed[0] : processed
+          childrenProcessed = processed.length === 1 ? processed[0] : <React.Fragment>{processed}</React.Fragment>
         }
         else {
           // For other types (numbers, booleans, etc.), leave as-is
@@ -183,7 +183,7 @@ export function AutoGlossaryProcessor({ children }: AutoGlossaryProcessorProps) 
     }
     else if (typeof children === 'string') {
       const processed = processTextNode(children)
-      return processed.length === 1 ? processed[0] : processed
+      return processed.length === 1 ? processed[0] : <React.Fragment>{processed}</React.Fragment>
     }
     else {
       // For other types (numbers, booleans, etc.), return as-is
