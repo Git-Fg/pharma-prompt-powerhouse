@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'structurer-ses-prompts-avec-des-balises-methode-xml',
+  type: 'guide',
   title: 'Structurer ses Prompts avec des Balises (Méthode XML)',
   description: 'Apprenez à utiliser des balises simples pour organiser vos prompts complexes et obtenir des réponses plus fiables de l\'IA, sans écrire de code.',
   icon: 'CodeXml',

@@ -3,6 +3,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'ia-en-local-confidentialite-totale',
+  type: 'guide',
   title: 'IA en Local : Le Guide Complet Q3 2025 pour une Confidentialité Totale',
   description: 'Le guide de référence pour héberger des modèles IA sur votre machine en Q3 2025. Prérequis matériel (RTX 50-series, Apple M5), modèles recommandés (Qwen2.5-7B) et plateformes de déploiement (LM Studio, Ollama, Jan.ai).',
   difficulty: 'avancé',

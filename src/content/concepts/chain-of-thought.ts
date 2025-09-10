@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'chain-of-thought',
+  type: 'concept',
   title: 'Chain-of-Thought (CoT)',
   description: 'Une technique fondamentale où l\'IA explicite son raisonnement étape par étape, améliorant la qualité et la traçabilité de ses réponses.',
   category: 'Concepts Fondamentaux',

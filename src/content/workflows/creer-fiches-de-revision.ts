@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'creer-fiches-de-revision',
+  type: 'workflow',
   title: 'Créer des Fiches de Révision Efficaces',
   description: 'Transformez vos notes de cours en fiches de révision et QCM interactifs pour un apprentissage actif.',
   icon: 'FileText',

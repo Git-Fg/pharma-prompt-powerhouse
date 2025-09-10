@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'analyse-pharmacovigilance',
+  type: 'workflow',
   title: 'Le Comité d\'Experts IA pour l\'Analyse de Pharmacovigilance',
   description: 'Un workflow avancé utilisant un système multi-agents pour analyser un signal de pharmacovigilance sous plusieurs angles et éviter les conclusions hâtives.',
   category: 'recherche-et-veille',

@@ -2,8 +2,8 @@
 
 import { CheckCircle, Info, Lightbulb, Target, TrendingUp, Zap } from 'lucide-react'
 import React from 'react'
+import { Animate } from '@/components/ui/Animate'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AnimatedElement } from '@/components/ui/css-animations'
 import { cn } from '@/lib/utils'
 
 interface KeyTakeawaysProps {
@@ -171,13 +171,13 @@ export function KeyTakeaways({
 
   if (animated) {
     return (
-      <AnimatedElement
+      <Animate
         variant="slideUp"
         delay={200}
         className="my-8"
       >
         {cardContent}
-      </AnimatedElement>
+      </Animate>
     )
   }
 

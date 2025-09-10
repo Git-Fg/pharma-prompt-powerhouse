@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'google-ai-studio',
+  type: 'tool',
   title: 'Google AI Studio',
   description: 'Mon écosystème de prédilection pour l\'expérimentation, l\'analyse multimodale et maintenant, l\'apprentissage guidé, totalement gratuit.',
   url: 'https://aistudio.google.com/',

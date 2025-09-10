@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'framework-costar',
+  type: 'concept',
   title: 'Framework CO-STAR',
   description: 'Une introduction au framework de prompting CO-STAR (Context, Objective, Style, Tone, Audience, Response), une méthode complète pour des instructions détaillées.',
   category: 'Prompting',

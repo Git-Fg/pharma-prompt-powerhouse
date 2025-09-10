@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'claude-ai',
+  type: 'tool',
   title: 'Claude.ai',
   description: 'Mon assistant de recherche pour l\'analyse de documents et le raisonnement complexe, avec des capacités agentiques en version Pro.',
   url: 'https://claude.ai/',

@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'obtenir-donnees-fiables',
+  type: 'guide',
   title: 'Méthodologie de Recherche Bibliographique avec l\'IA',
   description: 'Apprenez les principes universels pour obtenir des données fiables avec n\'importe quel outil d\'IA : méthode PICO, analyse critique des sources et techniques anti-hallucination.',
   icon: 'ShieldCheck',

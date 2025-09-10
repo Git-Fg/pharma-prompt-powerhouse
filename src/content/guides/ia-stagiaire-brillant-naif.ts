@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'ia-stagiaire-brillant-naif',
+  type: 'guide',
   title: 'IA : Stagiaire Brillant mais Naïf',
   description: 'Comprendre et gérer les limites de l\'IA pour l\'utiliser efficacement en pharmacie',
   icon: 'GraduationCap',

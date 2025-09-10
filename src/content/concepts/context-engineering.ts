@@ -3,6 +3,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'context-engineering',
+  type: 'concept',
   title: 'Context Engineering',
   description: 'Optimisez la fenêtre de contexte de l\'IA pour maximiser la pertinence et la précision des réponses en pharmacie.',
   icon: 'Target',

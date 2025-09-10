@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'quantification-ia',
+  type: 'concept',
   title: 'La Quantification : La Clé de l\'IA Locale',
   description: 'Comprendre comment la quantification (GGUF, INT8, INT4) réduit la taille des modèles pour les faire tourner sur du matériel grand public.',
   category: 'concepts-cles',

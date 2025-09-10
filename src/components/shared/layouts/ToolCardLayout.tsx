@@ -1,8 +1,6 @@
-'use client'
-
 import type { ExternalTool } from '@/lib/content-schema'
 import Link from 'next/link'
-import React from 'react'
+import { InfoButton } from '@/components/shared/InfoButton'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -11,13 +9,12 @@ import { contentCardVariants } from '@/components/ui/variants'
 import { getContentUrl } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 import { getIcon } from '@/types/icon-taxonomy'
-import { InfoButton } from './InfoButton'
 
-interface ToolCardProps {
+interface ToolCardLayoutProps {
   tool: ExternalTool
 }
 
-export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
+export function ToolCardLayout({ tool }: ToolCardLayoutProps) {
   // Utilisation des utilitaires centralisés
   const toolUrl = getContentUrl('tool', tool.slug)
 

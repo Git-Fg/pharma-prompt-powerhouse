@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'optimisation-de-prompts-la-methode-iterative',
+  type: 'guide',
   title: 'Optimisation de Prompts : La Méthode Itérative',
   description: 'Maîtrisez l\'art de l\'amélioration continue de vos prompts grâce au dialogue, à l\'auto-critique et aux chaînes de prompts.',
   icon: 'TrendingUp',

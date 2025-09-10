@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'desapprentissage-cognitif',
+  type: 'concept',
   title: 'Le Désapprentissage Cognitif (Deskilling)',
   description: 'Le risque de perdre ses compétences en déléguant trop de tâches cognitives à une intelligence artificielle.',
   category: 'concepts',

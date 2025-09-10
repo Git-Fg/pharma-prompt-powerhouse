@@ -828,31 +828,80 @@
   }
 
   /* Animation utilities - Modern 2025 patterns */
+
+  /* Base animation class for Intersection Observer */
+  .animate-on-view {
+    opacity: 0;
+    animation-play-state: paused;
+  }
+
+  .animate-on-view.in-view {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  /* Individual animation classes with CSS custom properties */
   .animate-fade-in {
-    animation: var(--animate-fade-in);
+    animation: fadeIn var(--duration-normal, 0.4s) var(--ease-smooth, ease-out) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-up {
-    animation: var(--animate-slide-up);
+    animation: slideUp var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-down {
-    animation: var(--animate-slide-down);
+    animation: slideDown var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-left {
-    animation: var(--animate-slide-left);
+    animation: slideLeft var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-right {
-    animation: var(--animate-slide-right);
+    animation: slideRight var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-scale-up {
-    animation: var(--animate-scale-up);
+    animation: scaleUp var(--duration-fast, 0.3s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-scale-down {
+    animation: scaleDown var(--duration-fast, 0.3s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: var(--animation-delay, 0s);
+  }
+
+  /* Legacy animation classes (for backward compatibility) */
+  .animate-fade-in-legacy {
+    animation: var(--animate-fade-in);
+  }
+
+  .animate-slide-up-legacy {
+    animation: var(--animate-slide-up);
+  }
+
+  .animate-slide-down-legacy {
+    animation: var(--animate-slide-down);
+  }
+
+  .animate-slide-left-legacy {
+    animation: var(--animate-slide-left);
+  }
+
+  .animate-slide-right-legacy {
+    animation: var(--animate-slide-right);
+  }
+
+  .animate-scale-up-legacy {
+    animation: var(--animate-scale-up);
+  }
+
+  .animate-scale-down-legacy {
     animation: var(--animate-scale-down);
   }
 
@@ -930,7 +979,65 @@
     animation: var(--animate-shimmer);
   }
 
-  /* Stagger animation utility classes */
+  /* Modern stagger animation system */
+  .stagger-container {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .stagger-container.in-view {
+    opacity: 1;
+  }
+
+  .stagger-container.in-view > * {
+    animation-fill-mode: both;
+    animation-duration: var(--duration-normal, 0.5s);
+    animation-timing-function: var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1));
+    opacity: 0;
+  }
+
+  .stagger-container.in-view > *:nth-child(1) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 0);
+  }
+  .stagger-container.in-view > *:nth-child(2) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 1);
+  }
+  .stagger-container.in-view > *:nth-child(3) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 2);
+  }
+  .stagger-container.in-view > *:nth-child(4) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 3);
+  }
+  .stagger-container.in-view > *:nth-child(5) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 4);
+  }
+  .stagger-container.in-view > *:nth-child(6) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 5);
+  }
+  .stagger-container.in-view > *:nth-child(7) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 6);
+  }
+  .stagger-container.in-view > *:nth-child(8) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 7);
+  }
+  .stagger-container.in-view > *:nth-child(9) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 8);
+  }
+  .stagger-container.in-view > *:nth-child(10) {
+    animation-name: slideUp;
+    animation-delay: calc(var(--stagger-delay, 100ms) * 9);
+  }
+
+  /* Legacy stagger system (for backward compatibility) */
   .stagger-children > * {
     animation-fill-mode: both;
   }

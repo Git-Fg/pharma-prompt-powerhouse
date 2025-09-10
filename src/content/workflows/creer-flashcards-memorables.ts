@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'creer-flashcards-memorables',
+  type: 'workflow',
   title: 'Le Générateur de Flashcards Actives',
   description: 'Un workflow pour créer des flashcards qui forcent la réflexion et l\'application, bien plus efficaces que de simples paires question/réponse.',
   category: 'creation-contenu',

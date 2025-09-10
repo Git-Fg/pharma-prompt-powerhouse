@@ -55,6 +55,7 @@ export function createMockCardBlock(title: string, content: string): ContentBloc
 export function createMockGuide(overrides: Partial<BaseGuide> = {}): BaseGuide {
   return {
     slug: 'test-guide',
+    type: 'guide',
     title: 'Test Guide',
     description: 'A test guide for demonstration',
     category: 'testing',
@@ -76,6 +77,7 @@ export function createMockGuide(overrides: Partial<BaseGuide> = {}): BaseGuide {
 export function createMockConcept(overrides: Partial<BaseConcept> = {}): BaseConcept {
   return {
     slug: 'test-concept',
+    type: 'concept',
     title: 'Test Concept',
     description: 'A test concept for demonstration',
     category: 'methodology',
@@ -100,6 +102,7 @@ export function createMockConcept(overrides: Partial<BaseConcept> = {}): BaseCon
 export function createMockWorkflow(overrides: Partial<BaseWorkflow> = {}): BaseWorkflow {
   return {
     slug: 'test-workflow',
+    type: 'workflow',
     title: 'Test Workflow',
     description: 'A test workflow for demonstration',
     category: 'test',
@@ -120,6 +123,7 @@ export function createMockWorkflow(overrides: Partial<BaseWorkflow> = {}): BaseW
 export function createMockTool(overrides: Partial<BaseExternalTool> = {}): BaseExternalTool {
   return {
     slug: 'test-tool',
+    type: 'tool',
     title: 'Test Tool',
     description: 'A test AI tool for demonstration',
     url: 'https://test-tool.example.com',
@@ -247,6 +251,7 @@ export function createMockEnrichedWorkflow(overrides: Partial<EnrichedWorkflow> 
     concepts: [
       {
         slug: 'workflow-concept',
+        type: 'concept',
         title: 'Workflow Concept',
         description: 'A concept related to this workflow',
         category: 'methodology',

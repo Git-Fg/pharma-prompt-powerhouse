@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'memoriser-concepts-difficiles',
+  type: 'workflow',
   title: 'Mémoriser des Concepts Difficiles avec l\'IA',
   description: 'Vaincre les listes et mécanismes complexes en utilisant l\'IA pour générer des mnémoniques, analogies et histoires mémorables.',
   icon: 'Brain',

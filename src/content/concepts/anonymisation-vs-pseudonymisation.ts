@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'anonymisation-vs-pseudonymisation',
+  type: 'concept',
   title: 'Anonymisation vs. Pseudonymisation',
   description: 'Comprendre la différence juridique et technique cruciale entre l\'anonymisation (irréversible) et la pseudonymisation (réversible) sous le RGPD.',
   icon: 'Scale',

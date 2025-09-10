@@ -3,6 +3,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'token-acide-amine',
+  type: 'concept',
   title: 'Le Token : L\'Acide Aminé de l\'IA',
   description: 'Comprendre ce qu\'est un token, l\'unité de base que les modèles de langage utilisent pour lire, comprendre et générer du texte.',
   icon: 'Dna',

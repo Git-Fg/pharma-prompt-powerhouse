@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'step-back-prompting',
+  type: 'concept',
   title: 'Step-Back Prompting',
   description: 'Une méthode de raisonnement qui force l\'IA à s\'abstraire des détails pour identifier les principes fondamentaux avant de résoudre un problème spécifique.',
   category: 'Concepts Avancés',

@@ -201,6 +201,7 @@ const baseContentSchema = z.object({
 })
 
 export const conceptSchema = baseContentSchema.extend({
+  type: z.literal('concept'), // Discriminant de type pour unions discriminées
   category: z.string(),
   difficulty: z.string(),
   keyTakeaways: z.array(z.string()).min(1),
@@ -208,6 +209,7 @@ export const conceptSchema = baseContentSchema.extend({
 })
 
 export const guideSchema = baseContentSchema.extend({
+  type: z.literal('guide'), // Discriminant de type pour unions discriminées
   category: z.string(),
   difficulty: z.string(),
   estimatedTime: z.string().optional(),
@@ -217,6 +219,7 @@ export const guideSchema = baseContentSchema.extend({
 })
 
 export const workflowSchema = baseContentSchema.extend({
+  type: z.literal('workflow'), // Discriminant de type pour unions discriminées
   category: z.string(),
   difficulty: z.string(),
   cover: z.string().optional(),
@@ -227,6 +230,7 @@ export const workflowSchema = baseContentSchema.extend({
 
 // Enhanced external tool schema for L'Arsenal IA
 export const externalToolSchema = baseContentSchema.extend({
+  type: z.literal('tool'), // Discriminant de type pour unions discriminées
   url: z.string().url(),
   category: z.string(),
   personalReview: z.string(), // "Mon Avis en Bref" - mandatory for quality assurance

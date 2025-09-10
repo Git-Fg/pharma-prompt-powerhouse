@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'investigation-pharmacovigilance-avec-tot',
+  type: 'workflow',
   title: 'Analyser un Signal de Pharmacovigilance avec Tree-of-Thought',
   description: 'Apprenez à utiliser le Tree-of-Thought pour mener une investigation structurée et rigoureuse face à un signal de sécurité médicamenteuse.',
   icon: 'AlertTriangle',

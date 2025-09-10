@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'plan-and-solve',
+  type: 'concept',
   title: 'Plan-and-Solve',
   description: 'L\'architecture des stratèges : comment une IA peut planifier une tâche complexe de A à Z avant de commencer.',
   category: 'concepts',

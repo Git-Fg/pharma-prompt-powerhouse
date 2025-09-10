@@ -3,6 +3,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'tree-of-thought',
+  type: 'concept',
   title: 'Tree-of-Thought',
   description: 'Explorez plusieurs hypothèses en parallèle avec la technique Tree-of-Thought pour résoudre des problèmes complexes.',
   icon: 'GitBranch',

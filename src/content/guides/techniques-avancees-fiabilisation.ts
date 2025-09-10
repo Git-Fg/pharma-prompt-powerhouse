@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 const guide = {
   slug: 'techniques-avancees-fiabilisation',
+  type: 'guide',
   title: 'Techniques de Fiabilisation 2025 : De l\'Instruction à la Vérification Autonome',
   description: 'Le guide de référence sur les techniques de fiabilisation pour les LLMs de 2025 : Chain-of-Verification (CoVe), Step-Back Prompting, RASC et l\'évolution du Tree-of-Thought.',
   icon: 'ShieldCheck',

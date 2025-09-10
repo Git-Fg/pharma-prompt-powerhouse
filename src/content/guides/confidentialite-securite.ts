@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'confidentialite-securite',
+  type: 'guide',
   title: 'Confidentialité & Sécurité IA en Santé : Guide Juridique et Technique Q3 2025',
   description: 'Le guide de référence 2025 pour un usage conforme de l\'IA. Analyse de l\'AI Act européen, du cadre américain, des politiques "Opt-Out" des fournisseurs et des risques de sécurité de l\'IA locale.',
   icon: 'ShieldCheck', // Icône plus positive

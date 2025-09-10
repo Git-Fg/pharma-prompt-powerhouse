@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'chain-of-verification',
+  type: 'concept',
   title: 'Chain-of-Verification (CoVe)',
   description: 'Une technique où l\'IA devient son propre fact-checker, planifiant et exécutant des vérifications sur ses propres affirmations pour réduire les hallucinations.',
   category: 'Concepts Avancés',

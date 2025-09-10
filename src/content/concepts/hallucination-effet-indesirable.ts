@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'hallucination-effet-indesirable',
+  type: 'concept',
   title: 'Hallucination : Effet Indésirable',
   description: 'Comprendre et prévenir les hallucinations de l\'IA comme des effets indésirables prévisibles',
   icon: 'AlertTriangle',

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { CommandPalette } from '@/components/search/CommandPalette'
-import { useAutoAnimateLayout } from '@/hooks/useAutoAnimate'
+import { useLayoutAnimation } from '@/hooks/useAutoAnimate'
 import { getMobileNavigationLinks } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
@@ -55,7 +55,7 @@ function createMobileNavItems(): MobileNavItem[] {
 
 export function MobileBottomNav() {
   const pathname = usePathname()
-  const navRef = useAutoAnimateLayout()
+  const navRef = useLayoutAnimation()
 
   const bottomNavItems = createMobileNavItems()
 

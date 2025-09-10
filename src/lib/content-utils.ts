@@ -1,6 +1,17 @@
 import type { Metadata } from 'next'
+import type { AnyContent } from '@/types'
 import { content, getContentTypeToRouteMapping, getRouteToContentTypeMapping } from '@/lib/content-loader'
 import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-optimization'
+
+interface BaseContentItem {
+  slug: string
+  title: string
+  description: string
+  tags: string[]
+  isFavorite: boolean
+  category: string
+  difficulty?: string // Optional for external tools
+}
 
 /**
  * Génère les paramètres statiques pour tous les types de contenu
@@ -8,18 +19,30 @@ import { generateContentMetadata, generateNotFoundMetadata } from '@/lib/seo-opt
  */
 export function generateAllStaticParams() {
   const routeMapping = getRouteToContentTypeMapping()
-  const staticParams = []
+  const staticParams: Array<{ contentType: string, slug: string }> = []
 
   // Générer les params pour chaque type de contenu
   for (const [routeName, contentType] of Object.entries(routeMapping)) {
-    const contentArray = content[contentType === 'concept'
-      ? 'concepts'
-      : contentType === 'guide'
-        ? 'guides'
-        : contentType === 'workflow' ? 'workflows' : 'externalTools']
+    let contentArray: BaseContentItem[]
 
-    // eslint-disable-next-line ts/no-explicit-any -- Type dynamique nécessaire pour itérer sur différents types de contenu
-    const paramsForType = contentArray.map((item: any) => ({
+    switch (contentType) {
+      case 'concept':
+        contentArray = content.concepts
+        break
+      case 'guide':
+        contentArray = content.guides
+        break
+      case 'workflow':
+        contentArray = content.workflows
+        break
+      case 'tool':
+        contentArray = content.externalTools
+        break
+      default:
+        continue
+    }
+
+    const paramsForType = contentArray.map(item => ({
       contentType: routeName,
       slug: item.slug, // Garanti propre par le loader
     }))
@@ -49,19 +72,32 @@ export async function generateContentMetadataDynamic({
   }
 
   // Récupérer le contenu en utilisant notre fonction unifiée
-  const item = content[actualContentType === 'concept'
-    ? 'concepts'
-    : actualContentType === 'guide'
-      ? 'guides'
-      : actualContentType === 'workflow' ? 'workflows' : 'externalTools']
-    // eslint-disable-next-line ts/no-explicit-any -- Type dynamique nécessaire pour itérer sur différents types de contenu
-    .find((item: any) => item.slug === slug) // Garanti propre par le loader
+  let contentArray: BaseContentItem[]
+
+  switch (actualContentType) {
+    case 'concept':
+      contentArray = content.concepts
+      break
+    case 'guide':
+      contentArray = content.guides
+      break
+    case 'workflow':
+      contentArray = content.workflows
+      break
+    case 'tool':
+      contentArray = content.externalTools
+      break
+    default:
+      return generateNotFoundMetadata('guide')
+  }
+
+  const item = contentArray.find(item => item.slug === slug)
 
   if (!item) {
     return generateNotFoundMetadata(actualContentType)
   }
 
-  return generateContentMetadata(item)
+  return generateContentMetadata(item as AnyContent)
 }
 
 /**

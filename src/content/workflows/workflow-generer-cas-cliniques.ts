@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'workflow-generer-cas-cliniques',
+  type: 'workflow',
   title: 'Générer des Cas Cliniques pour la Révision',
   description: 'Apprenez à utiliser l\'IA pour générer des cas cliniques riches, pertinents et adaptés à votre niveau d\'étude, transformant la préparation aux examens.',
   icon: 'ClipboardList',

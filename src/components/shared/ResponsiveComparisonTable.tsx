@@ -4,11 +4,11 @@ import type { ExternalTool } from '@/lib/content-schema'
 import { ExternalLink, Star } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { AnimatedItem, AnimatedList, ScrollAnimated } from '@/components/ui/animated'
+import { Animate, StaggeredContainer } from '@/components/ui/Animate'
 import Badge from '@/components/ui/badge'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ResponsiveDataTable } from '@/components/ui/data-table/ResponsiveDataTable'
-import { MagneticCard } from '@/components/ui/interactions'
+import { SimpleCard } from '@/components/ui/SimpleCard'
 import { getStarRatingProps } from '@/lib/ui-utils'
 import { comparisonTableColumns } from './ComparisonTableColumns'
 
@@ -30,8 +30,8 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
     const availability = getAvailability(tool)
 
     return (
-      <AnimatedItem delay={index * 0.1}>
-        <MagneticCard className="hover:border-primary transition-colors duration-300">
+      <Animate variant="slideUp" staggerIndex={index}>
+        <SimpleCard className="hover:border-primary transition-colors duration-300">
           <CardHeader className="card-header">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -106,14 +106,14 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
               </Link>
             </div>
           </CardContent>
-        </MagneticCard>
-      </AnimatedItem>
+        </SimpleCard>
+      </Animate>
     )
   }
 
   return (
-    <ScrollAnimated className={className} variant="slideUp">
-      <AnimatedList className="content-spacing flex flex-col" staggerDelay={0.1}>
+    <Animate variant="fadeIn" delay={200} className={className}>
+      <StaggeredContainer staggerDelay={100} className="content-spacing flex flex-col">
         <ResponsiveDataTable
           data={tools}
           columns={comparisonTableColumns}
@@ -121,7 +121,7 @@ export function ResponsiveComparisonTable({ tools, className = '' }: ResponsiveC
           mobileClassName="space-y-4"
           desktopClassName="table-wrapper"
         />
-      </AnimatedList>
-    </ScrollAnimated>
+      </StaggeredContainer>
+    </Animate>
   )
 }

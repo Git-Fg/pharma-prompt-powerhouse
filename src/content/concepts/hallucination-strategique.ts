@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'hallucination-strategique',
+  type: 'concept',
   title: 'L\'Hallucination Stratégique',
   description: 'Un risque subtil des agents planificateurs : quand le plan lui-même est basé sur une mauvaise prémisse.',
   category: 'concepts',

@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'temperature-dosage',
+  type: 'concept',
   title: 'La Température : Le Dosage de la Créativité de l\'IA',
   description: 'Découvrez comment le paramètre de température influence la créativité et la prévisibilité des réponses d\'un modèle de langage.',
   icon: 'Thermometer',

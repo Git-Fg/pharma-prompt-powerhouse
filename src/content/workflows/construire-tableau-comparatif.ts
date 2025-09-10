@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'construire-tableau-comparatif',
+  type: 'workflow',
   title: 'Construire un Tableau Comparatif Efficace',
   description: 'Maîtrisez l\'art de la synthèse visuelle en générant des tableaux clairs pour comparer des médicaments, des pathologies ou des concepts.',
   icon: 'Table',

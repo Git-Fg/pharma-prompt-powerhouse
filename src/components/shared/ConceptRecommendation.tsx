@@ -1,4 +1,5 @@
 'use client'
+import type { EnrichedConcept } from '@/types'
 import { AlertCircle, Info, Lightbulb } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
@@ -14,8 +15,7 @@ interface ConceptRecommendationProps {
 }
 
 function RecommendationContent({ concept, reason }: {
-  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
-  concept: any
+  concept: EnrichedConcept
   reason: string
 }) {
   return (

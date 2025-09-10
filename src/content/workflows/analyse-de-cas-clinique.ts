@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'analyse-de-cas-clinique',
+  type: 'workflow',
   title: 'Le Tuteur Socratique : Analyser un Cas Clinique',
   description: 'Un workflow pour transformer l\'IA en un tuteur qui vous guide dans votre raisonnement plutôt que de vous donner la solution.',
   category: 'analyse-de-cas',

@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'perplexity-ai',
+  type: 'tool',
   title: 'Perplexity AI',
   description: 'Le "Hub de Modèles" pour la recherche. Accédez aux meilleurs modèles du marché (GPT-5, Claude 4 Opus) et à un agent de recherche autonome.',
   url: 'https://www.perplexity.ai/',

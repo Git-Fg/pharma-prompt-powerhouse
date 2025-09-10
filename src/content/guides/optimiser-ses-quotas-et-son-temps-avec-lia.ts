@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'optimiser-ses-quotas-et-son-temps-avec-lia',
+  type: 'guide',
   title: 'Optimiser ses Quotas et son Temps avec l\'IA',
   description: 'Maîtrisez l\'équilibre entre qualité, vitesse et utilisation de vos quotas gratuits dans vos interactions avec l\'IA.',
   icon: 'Gauge',

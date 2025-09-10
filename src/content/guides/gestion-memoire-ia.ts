@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'gestion-memoire-ia',
+  type: 'guide',
   title: 'Gérer la Mémoire de l\'IA : Le Guide Pratique',
   description: 'Devenez un pilote d\'IA efficace en apprenant à gérer activement sa mémoire volatile (contexte) et sa mémoire persistante (instructions, GPTs).',
   icon: 'Database',

@@ -1,9 +1,7 @@
-'use client'
-
 import type { Concept } from '@/lib/content-schema'
 import { BookOpen, Lightbulb } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import { InfoButton } from '@/components/shared/InfoButton'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -11,13 +9,12 @@ import { CategoryBadge, DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
-import { InfoButton } from './InfoButton'
 
-interface ConceptCardProps {
+interface ConceptCardLayoutProps {
   concept: Concept
 }
 
-export const ConceptCard: React.FC<ConceptCardProps> = ({ concept }) => {
+export function ConceptCardLayout({ concept }: ConceptCardLayoutProps) {
   return (
     <Card
       className={cn(

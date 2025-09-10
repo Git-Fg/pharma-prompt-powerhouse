@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'inference-causale-ia',
+  type: 'concept',
   title: 'L\'Inférence Causale et l\'IA',
   description: 'La limite fondamentale des IA actuelles : pourquoi trouver une corrélation n\'est pas prouver une causalité.',
   category: 'concepts',

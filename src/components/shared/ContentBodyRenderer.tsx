@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Target } from 'lucide-react'
 import Link from 'next/link'
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer'
 import { ConceptListSection } from '@/components/shared/ConceptListSection'
-import { ContentRenderer } from '@/components/shared/ContentRenderer'
+import { ContentRenderer as ContentBlockRenderer } from '@/components/shared/ContentBlockRenderer'
 import { DisclaimerBanner } from '@/components/shared/DisclaimerBanner'
 import { KeyTakeaways } from '@/components/shared/KeyTakeaways'
 import { SmartRecommendationsSection } from '@/components/shared/SmartRecommendationsSection'
@@ -65,7 +65,7 @@ function ConceptBody({ item }: { item: AnyEnrichedContent }) {
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert">
-            <ContentRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
+            <ContentBlockRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
           </div>
         </CardContent>
       </Card>
@@ -104,7 +104,7 @@ function GuideBody({ item }: { item: AnyEnrichedContent }) {
       )}
 
       {/* Contenu principal */}
-      <ContentRenderer content={guide.content} currentItem={item} enableAutoGlossary={false} />
+      <ContentBlockRenderer content={guide.content} currentItem={item} enableAutoGlossary={false} />
 
       <Separator className="my-12" />
 
@@ -135,7 +135,7 @@ function WorkflowBody({ item }: { item: AnyEnrichedContent }) {
       )}
 
       {/* Contenu du workflow */}
-      <ContentRenderer content={workflow.content} currentItem={item} enableAutoGlossary={false} />
+      <ContentBlockRenderer content={workflow.content} currentItem={item} enableAutoGlossary={false} />
 
       {/* Disclaimer Banner */}
       <div className="mt-16">
@@ -308,7 +308,7 @@ function ToolBody({ item }: { item: AnyEnrichedContent }) {
       {/* Main Content */}
       {item.content && item.content.length > 0 && (
         <div className="prose dark:prose-invert">
-          <ContentRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
+          <ContentBlockRenderer content={item.content} currentItem={item} enableAutoGlossary={false} />
         </div>
       )}
 

@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'choisir-ses-outils-ia-en-2025-chat-vs-studio',
+  type: 'guide',
   title: 'Choisir ses Outils IA en 2025 : Le Guide Stratégique',
   description: 'Un guide pour naviguer l\'écosystème IA de 2025, des agents de recherche aux tuteurs personnels, en passant par les hubs de modèles.',
   icon: 'Workflow',

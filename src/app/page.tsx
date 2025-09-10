@@ -1,11 +1,11 @@
 import { AlertTriangle, ArrowRight, BookOpen, Brain, ExternalLink, Shield, Star, Target, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { Container, Section } from '@/components/layout/Container'
+import { Animate } from '@/components/ui/Animate'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { StaggeredItem, StaggeredPage } from '@/components/ui/transitions'
 import { content } from '@/lib/content-loader'
 
 export default function HomePage() {
@@ -18,13 +18,13 @@ export default function HomePage() {
     : [...favoriteWorkflows, ...recentNonFavorites].slice(0, 3)
 
   return (
-    // Utilisation de StaggeredPage pour une animation d'entrée élégante
-    <StaggeredPage className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    // Utilisation de Animate pour une animation d'entrée élégante
+    <Animate variant="fadeIn" className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
 
       {/* 1. HERO SECTION CORRIGÉE : Contenue dans une Card pour un impact visuel fort */}
       <Section size="lg">
         <Container variant="detail">
-          <StaggeredItem>
+          <Animate variant="slideUp" delay={100}>
             <Card className="text-center shadow-lg bg-card/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="responsive-heading text-balance">
@@ -43,14 +43,14 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-          </StaggeredItem>
+          </Animate>
         </Container>
       </Section>
 
       {/* 2. DISCLAIMERS SECTION : Unifiée avec des Cards pour la cohérence */}
       <Section size="md">
         <Container variant="collection">
-          <StaggeredItem>
+          <Animate variant="slideUp" delay={200}>
             <div className="grid md:grid-cols-3 gap-4 md:gap-6">
               <Card className="flex items-start gap-3">
                 <Zap className="size-5 text-primary flex-shrink-0 mt-1" />
@@ -82,14 +82,14 @@ export default function HomePage() {
                 </div>
               </Card>
             </div>
-          </StaggeredItem>
+          </Animate>
         </Container>
       </Section>
 
       {/* 3. QUICK ACCESS SECTION : Titre plus visible */}
       <Section size="md">
         <Container variant="collection">
-          <StaggeredItem>
+          <Animate variant="slideUp" delay={300}>
             <h2 className="responsive-subheading text-center mb-8">Accès Rapides</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="border-2 border-primary/50 shadow-primary/10">
@@ -144,7 +144,7 @@ export default function HomePage() {
                 </CardContent>
               </Card>
             </div>
-          </StaggeredItem>
+          </Animate>
         </Container>
       </Section>
 
@@ -153,7 +153,7 @@ export default function HomePage() {
       {/* 4. FEATURED WORKFLOWS : Titre plus engageant et structure de carte améliorée */}
       <Section size="md">
         <Container variant="collection">
-          <StaggeredItem>
+          <Animate variant="slideUp" delay={400}>
             <div className="flex items-center justify-between mb-8">
               <h2 className="responsive-subheading">Workflows à la Une</h2>
               <Button variant="ghost" asChild>
@@ -197,7 +197,7 @@ export default function HomePage() {
                 </Card>
               ))}
             </div>
-          </StaggeredItem>
+          </Animate>
         </Container>
       </Section>
 
@@ -206,7 +206,7 @@ export default function HomePage() {
       {/* 5. PERSONAL NOTE : Design unifié */}
       <Section size="sm">
         <Container variant="detail">
-          <StaggeredItem>
+          <Animate variant="slideUp" delay={500}>
             <Card className="bg-muted/50 border-dashed text-center">
               <Brain className="w-12 h-12 mx-auto mb-4 text-primary" />
               <h3 className="text-lg md:text-xl font-semibold mb-4">Mon Approche</h3>
@@ -215,9 +215,9 @@ export default function HomePage() {
                 <strong className="text-foreground font-semibold"> Je vous encourage systématiquement à tester par vous-même.</strong>
               </p>
             </Card>
-          </StaggeredItem>
+          </Animate>
         </Container>
       </Section>
-    </StaggeredPage>
+    </Animate>
   )
 }

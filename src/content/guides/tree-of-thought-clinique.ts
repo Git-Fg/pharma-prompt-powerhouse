@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'tree-of-thought-clinique',
+  type: 'guide',
   title: 'Guide Pratique : Résoudre un Cas Clinique Complexe avec Tree-of-Thought',
   description: 'Apprenez à construire et utiliser un prompt Tree-of-Thought pour analyser un cas clinique avec plusieurs hypothèses diagnostiques.',
   icon: 'Network',

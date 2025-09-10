@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'openai-playground',
+  type: 'tool',
   title: 'OpenAI Playground',
   description: 'Le studio d\'expérimentation d\'OpenAI, essentiel pour maîtriser les modèles GPT.',
   url: 'https://platform.openai.com/playground',

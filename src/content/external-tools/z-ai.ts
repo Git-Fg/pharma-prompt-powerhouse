@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'z-ai',
+  type: 'tool',
   title: 'Chat Z.AI',
   description: 'Mon outil de recherche N°1, un agent planificateur gratuit qui surpasse souvent les alternatives payantes pour les tâches complexes.',
   url: 'https://chat.z.ai/',

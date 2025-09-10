@@ -1,7 +1,7 @@
 'use client'
 
 import { SectionCard } from '@/components/shared/SectionCard'
-import { AnimatedElement } from '@/components/ui/css-animations'
+import { Animate } from '@/components/ui/Animate'
 import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 
@@ -30,7 +30,7 @@ export function PointsBlock({ title, points, className, testId }: PointsBlockPro
     >
       <div className="space-y-4">
         {points.map((point, index) => (
-          <AnimatedElement
+          <Animate
             // eslint-disable-next-line react/no-array-index-key -- Liste de points statique, pas de réordonnancement possible
             key={`point-${index}`}
             variant="slideUp"
@@ -48,7 +48,7 @@ export function PointsBlock({ title, points, className, testId }: PointsBlockPro
                 {point.description}
               </p>
             </div>
-          </AnimatedElement>
+          </Animate>
         ))}
       </div>
     </SectionCard>

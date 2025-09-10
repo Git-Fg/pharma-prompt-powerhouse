@@ -1,3 +1,4 @@
+import type { ExternalTool } from '@/types'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
@@ -11,8 +12,7 @@ interface ToolRecommendationProps {
 }
 
 interface QuickLinkProps {
-  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
-  tool: any
+  tool: ExternalTool
   reason: string
 }
 

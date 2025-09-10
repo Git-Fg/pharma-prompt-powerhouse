@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'biais-automatisation',
+  type: 'concept',
   title: 'Le Biais d\'Automatisation',
   description: 'Le piège de la confiance excessive : quand l\'efficacité de l\'IA nous fait baisser notre garde et notre esprit critique.',
   category: 'concepts',

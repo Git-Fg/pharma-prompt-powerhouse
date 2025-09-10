@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'chatgpt',
+  type: 'tool',
   title: 'ChatGPT',
   description: 'L\'interface de chat d\'OpenAI, une référence polyvalente avec un accès exclusif à GPT-5 en version payante.',
   url: 'https://chatgpt.com/',

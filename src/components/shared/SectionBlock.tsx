@@ -2,9 +2,9 @@
 
 import type { VariantProps } from 'class-variance-authority'
 import type { badgeVariants } from '@/components/ui/badge-variants'
+import { Animate } from '@/components/ui/Animate'
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AnimatedElement } from '@/components/ui/css-animations'
 import { createTestIdProps, generateTestId } from '@/lib/test-utils'
 import { cn } from '@/lib/utils'
 
@@ -110,7 +110,7 @@ export function SectionBlock({ type, title, content, className, variant = 'defau
     console.warn(`Unknown section type: "${type}". Using default fallback.`)
     // Return a fallback section with basic styling
     return (
-      <AnimatedElement variant="slideUp" className="w-full">
+      <Animate variant="slideUp" className="w-full">
         <Card
           {...createTestIdProps(sectionTestId)}
           className={cn(
@@ -130,12 +130,12 @@ export function SectionBlock({ type, title, content, className, variant = 'defau
             </div>
           </CardContent>
         </Card>
-      </AnimatedElement>
+      </Animate>
     )
   }
 
   return (
-    <AnimatedElement variant="slideUp" className="w-full">
+    <Animate variant="slideUp" className="w-full">
       <Card
         {...createTestIdProps(sectionTestId)}
         className={cn(
@@ -172,6 +172,6 @@ export function SectionBlock({ type, title, content, className, variant = 'defau
           </div>
         </CardContent>
       </Card>
-    </AnimatedElement>
+    </Animate>
   )
 }

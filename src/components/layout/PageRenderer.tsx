@@ -1,21 +1,27 @@
 import type { CollectionType } from '@/lib/content-loader'
-import type { AnyContent } from '@/types'
+import type { Concept, ExternalTool, Guide, Workflow } from '@/lib/content-schema'
 import { ArrowRight } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import Link from 'next/link'
+import { ContentCard } from '@/components/shared/ContentCard'
 import { ContentHeader } from '@/components/shared/ContentHeader'
 import { ContentMetadata } from '@/components/shared/ContentMetadata'
-import { FilterableContentList } from '@/components/shared/FilterableContentList'
-import { AnimatedItem, AnimatedList, ScrollAnimated } from '@/components/ui/animated'
+import { FilterableGrid } from '@/components/shared/FilterableGrid'
+import { Animate, StaggeredContainer } from '@/components/ui/Animate'
 import Button from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { StaggeredItem, StaggeredPage } from '@/components/ui/transitions'
 import { getCollectionConfig, getCollectionItems, getCollectionStats } from '@/lib/content-loader'
 import { cn } from '@/lib/utils'
 import { BreadcrumbNavigation } from './BreadcrumbNavigation'
 import { Container, Section } from './Container'
 
 type StatType = 'primary' | 'concepts' | 'guides' | 'workflows' | 'tools' | 'default'
+
+// Type union pour les types de base utilisés dans le content-loader
+type BaseContent = Concept | Guide | Workflow | ExternalTool
+
+// Wrapper universel pour FilterableGrid utilisant le composant polymorphe ContentCard
+const CardWrapper = ({ item }: { item: BaseContent }) => <ContentCard item={item} />
 
 interface PageRendererProps {
   // Pour les pages de collection
@@ -26,7 +32,7 @@ interface PageRendererProps {
   showCollectionCTA?: boolean
 
   // Pour les pages de contenu individuel
-  item?: AnyContent
+  item?: Concept | Guide | Workflow | ExternalTool
 
   // Enfants (pour le contenu personnalisé)
   children?: React.ReactNode
@@ -60,9 +66,9 @@ export function PageRenderer({
 
   if (item) {
     return (
-      <ContentRenderer item={item}>
+      <ContentPageLayout item={item}>
         {children}
-      </ContentRenderer>
+      </ContentPageLayout>
     )
   }
 
@@ -95,9 +101,9 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
   }
 
   return (
-    <StaggeredPage className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <Animate variant="fadeIn" className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Header avec responsive design mobile-first et animations */}
-      <StaggeredItem>
+      <Animate variant="slideUp" delay={100}>
         <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <Section size="md">
             <Container variant="detail">
@@ -111,14 +117,16 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
               </div>
 
               {stats && stats.length > 0 && (
-                <AnimatedList className="stats-grid" staggerDelay={0.15}>
+                <StaggeredContainer staggerDelay={100} className="stats-grid">
                   {stats.map((stat, index) => {
                     const styles = statStyles[stat.type] || statStyles.default
                     return (
-                      <AnimatedItem
+                      <Animate
                         // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des cartes statistiques avec labels uniques
                         key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}-${index}`}
-                        delay={index * 0.1}
+                        variant="slideUp"
+                        staggerIndex={index}
+                        className="stats-grid-item"
                       >
                         <div className={cn('stat-card hover-glow hover-scale cursor-pointer', styles.bg)}>
                           <div className={cn('stat-number animate-bounce-subtle', styles.color)}>
@@ -128,33 +136,32 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
                             {stat.label}
                           </div>
                         </div>
-                      </AnimatedItem>
+                      </Animate>
                     )
                   })}
-                </AnimatedList>
+                </StaggeredContainer>
               )}
             </Container>
           </Section>
         </div>
-      </StaggeredItem>
+      </Animate>
 
       {/* Contenu principal avec marges standardisées et animations */}
-      <StaggeredItem>
+      <Animate variant="slideUp" delay={200}>
         <Section>
           <Container variant="collection">
-            <ScrollAnimated variant="slideUp" className="animate-fade-in">
-              {type !== 'tools'
-                ? (
-                    <FilterableContentList
-                      items={items}
-                      type={type}
-                      searchPlaceholder={config.searchPlaceholder}
-                      showCategoryFilter={config.showCategoryFilter}
-                      showDifficultyFilter={config.showDifficultyFilter}
-                      gridClassName={config.gridClassName}
-                    />
-                  )
-                : null}
+            <Animate variant="fadeIn" delay={300} className="animate-fade-in">
+              {/* Utilisation universelle de ContentCard pour tous les types de contenu */}
+              {(type === 'concepts' || type === 'guides' || type === 'workflows') && (
+                <FilterableGrid
+                  items={items as BaseContent[]}
+                  renderComponent={CardWrapper}
+                  searchPlaceholder={config.searchPlaceholder}
+                  showCategoryFilter={config.showCategoryFilter}
+                  showDifficultyFilter={config.showDifficultyFilter}
+                  gridClassName={config.gridClassName}
+                />
+              )}
 
               {showHelp && type === 'concepts' && (
                 <>
@@ -228,20 +235,20 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
               )}
 
               {children}
-            </ScrollAnimated>
+            </Animate>
           </Container>
         </Section>
-      </StaggeredItem>
-    </StaggeredPage>
+      </Animate>
+    </Animate>
   )
 }
 
-interface ContentRendererProps {
-  item: AnyContent
+interface ContentPageLayoutProps {
+  item: Concept | Guide | Workflow | ExternalTool
   children?: React.ReactNode
 }
 
-function ContentRenderer({ item, children }: ContentRendererProps) {
+function ContentPageLayout({ item, children }: ContentPageLayoutProps) {
   // Déterminer si on doit utiliser le mode prose ou non
   // Les concepts et outils n'utilisent pas prose par défaut
   const applyProseStyles = !('url' in item) && !('keyTakeaways' in item && 'category' in item && !('estimatedTime' in item))

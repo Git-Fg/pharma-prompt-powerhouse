@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'notebooklm',
+  type: 'tool',
   title: 'NotebookLM',
   description: 'Mon assistant de recherche personnel qui transforme mes documents en une base de connaissance interactive.',
   url: 'https://notebooklm.google.com/',

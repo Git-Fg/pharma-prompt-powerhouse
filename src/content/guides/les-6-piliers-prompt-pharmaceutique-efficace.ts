@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'les-6-piliers-prompt-pharmaceutique-efficace',
+  type: 'guide',
   title: 'Les 6 Piliers d\'un Prompt Pharmaceutique Efficace',
   description: 'Apprenez la méthode complète en 6 piliers pour construire un prompt fiable : Rôle, Tâche, Contexte, Format, Ton/Style, et Fiabilisation.',
   icon: 'Pill',

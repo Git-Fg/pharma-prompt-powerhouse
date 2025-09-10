@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'self-consistency',
+  type: 'concept',
   title: 'Self-Consistency',
   description: 'Améliorer la robustesse des réponses en générant plusieurs chemins de raisonnement et en sélectionnant la conclusion la plus fréquente par un vote majoritaire.',
   category: 'Concepts Avancés',

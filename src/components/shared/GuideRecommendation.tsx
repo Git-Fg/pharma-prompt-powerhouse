@@ -1,4 +1,5 @@
 'use client'
+import type { EnrichedGuide } from '@/types'
 import { BookOpen, Clock, Info } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
@@ -15,8 +16,7 @@ interface GuideRecommendationProps {
 }
 
 function GuideRecommendationContent({ guide, reason, includeTitle = true }: {
-  // eslint-disable-next-line ts/no-explicit-any -- Composant générique pour différents types de contenu, accès aux propriétés communes
-  guide: any
+  guide: EnrichedGuide
   reason: string
   includeTitle?: boolean
 }) {

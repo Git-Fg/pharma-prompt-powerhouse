@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'anthropic-console',
+  type: 'tool',
   title: 'Anthropic Console',
   description: 'Mon laboratoire pour pousser les modèles Claude dans leurs retranchements, sans écrire de code.',
   url: 'https://console.anthropic.com/',

@@ -14,10 +14,34 @@ import { allGuides } from '@/content/guides'
 import { allWorkflows } from '@/content/workflows'
 import { normalizeSlug } from './utils'
 
+// Types pour les modules Node.js
+interface NodeCrypto {
+  createHash: (algorithm: string) => {
+    update: (data: string) => {
+      digest: (encoding: string) => string
+    }
+  }
+}
+
+interface NodeFS {
+  readFileSync: (path: string, encoding: string) => string
+  writeFileSync: (path: string, data: string) => void
+  existsSync: (path: string) => boolean
+  mkdirSync: (path: string, options?: { recursive?: boolean }) => void
+}
+
+interface NodePath {
+  join: (...paths: string[]) => string
+}
+
 // Imports conditionnels pour Node.js uniquement (build time)
 /* eslint-disable ts/no-require-imports -- Import conditionnel de modules Node.js côté serveur uniquement */
-// eslint-disable-next-line ts/no-explicit-any -- Modules Node.js conditionnels importés uniquement côté serveur, typés correctement lors de l'importation réel
-let createHash: any, readFileSync: any, writeFileSync: any, existsSync: any, mkdirSync: any, path: any
+let createHash: NodeCrypto['createHash'] | undefined
+let readFileSync: NodeFS['readFileSync'] | undefined
+let writeFileSync: NodeFS['writeFileSync'] | undefined
+let existsSync: NodeFS['existsSync'] | undefined
+let mkdirSync: NodeFS['mkdirSync'] | undefined
+let path: NodePath | undefined
 
 if (typeof window === 'undefined') {
   // Server-side only
@@ -55,13 +79,17 @@ function getCacheConfig() {
     return null
   }
 
+  if (!path) {
+    throw new Error('Node.js path module not available')
+  }
+
   return {
-    CACHE_DIR: path?.join(process.cwd(), '.content-cache'),
+    CACHE_DIR: path.join(process.cwd(), '.content-cache'),
     get MANIFEST_PATH() {
-      return path?.join(this.CACHE_DIR, 'cache-manifest.json')
+      return path.join(this.CACHE_DIR, 'cache-manifest.json')
     },
     get CONTENT_CACHE_PATH() {
-      return path?.join(this.CACHE_DIR, 'content.json')
+      return path.join(this.CACHE_DIR, 'content.json')
     },
   }
 }
@@ -128,7 +156,7 @@ export function loadContent(): ContentData {
   const cacheEnabled = ensureCacheDir()
 
   // --- LOGIQUE DE CACHE INCRÉMENTAL (Développement uniquement) ---
-  if (cacheEnabled && config && readFileSync && existsSync && writeFileSync) {
+  if (cacheEnabled && config && readFileSync && existsSync && writeFileSync && path) {
     let cachedManifest: CacheManifest = {}
     try {
       if (existsSync(config.MANIFEST_PATH)) {
@@ -569,7 +597,7 @@ export function getCollectionItems(type: CollectionType) {
     case 'workflows':
       return content.workflows
     case 'tools':
-      // Return empty array for tools since they don't use FilterableContentList
+      // Return empty array for tools since they don't use FilterableGrid
       return []
   }
 }

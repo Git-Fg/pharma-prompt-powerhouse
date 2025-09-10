@@ -1,8 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { easings } from './animation-constants'
+import { Animate } from './Animate'
 
 // Enhanced skeleton with modern shimmer effect
 interface SkeletonProps {
@@ -42,7 +41,7 @@ export function Skeleton({
     return (
       <div className="space-y-2">
         {Array.from({ length: lines }).map((_, index) => (
-          <motion.div
+          <div
             // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des lignes de loading avec identifiant unique généré
             key={`text-line-${index}-${Math.random().toString(36).substr(2, 9)}`}
             className={cn(
@@ -56,15 +55,6 @@ export function Skeleton({
               height,
               ...style,
             }}
-            initial={animate ? { opacity: 0 } : false}
-            animate={animate ? { opacity: 1 } : false}
-            transition={animate
-              ? {
-                  delay: index * 0.1,
-                  duration: 0.3,
-                  ease: easings.smooth,
-                }
-              : undefined}
             {...props}
             data-sidebar={dataSidebar}
           />
@@ -74,7 +64,7 @@ export function Skeleton({
   }
 
   return (
-    <motion.div
+    <div
       className={cn(
         baseClasses,
         variantClasses[variant],
@@ -82,14 +72,6 @@ export function Skeleton({
         className,
       )}
       style={{ width, height, ...style }}
-      initial={animate ? { opacity: 0 } : false}
-      animate={animate ? { opacity: 1 } : false}
-      transition={animate
-        ? {
-            duration: 0.3,
-            ease: easings.smooth,
-          }
-        : undefined}
       {...props}
       data-sidebar={dataSidebar}
     />
@@ -115,15 +97,7 @@ export function CardSkeleton({
   className,
 }: CardSkeletonProps) {
   return (
-    <motion.div
-      className={cn('p-6 border rounded-lg bg-card', className)}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.3,
-        ease: easings.spring,
-      }}
-    >
+    <Animate variant="slideUp" className={cn('p-6 border rounded-lg bg-card', className)}>
       {showImage && (
         <Skeleton
           className="mb-4"
@@ -152,7 +126,7 @@ export function CardSkeleton({
           <Skeleton width="100px" height="36px" variant="rounded" />
         </div>
       )}
-    </motion.div>
+    </Animate>
   )
 }
 
@@ -171,17 +145,12 @@ export function ListSkeleton({
   return (
     <div className={cn('space-y-4', className)}>
       {Array.from({ length: items }).map((_, index) => (
-        <motion.div
+        <Animate
           // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des items de liste avec identifiant unique généré
           key={`list-item-${index}-${Math.random().toString(36).substr(2, 9)}`}
+          variant="slideUp"
+          staggerIndex={index}
           className="flex gap-4 p-4 border rounded-lg bg-card"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: index * 0.1,
-            duration: 0.4,
-            ease: easings.spring,
-          }}
         >
           {showImages && (
             <Skeleton
@@ -200,7 +169,7 @@ export function ListSkeleton({
               <Skeleton width="80px" height="20px" variant="rounded" />
             </div>
           </div>
-        </motion.div>
+        </Animate>
       ))}
     </div>
   )
@@ -237,17 +206,12 @@ export function TableSkeleton({
 
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
-        <motion.div
+        <Animate
           // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des lignes de table avec identifiant unique généré
           key={`row-${rowIndex}-${Math.random().toString(36).substr(2, 9)}`}
+          variant="fadeIn"
+          staggerIndex={rowIndex}
           className="border-b last:border-b-0 p-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            delay: rowIndex * 0.05,
-            duration: 0.3,
-            ease: easings.smooth,
-          }}
         >
           <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
             {Array.from({ length: columns }).map((_, colIndex) => (
@@ -260,7 +224,7 @@ export function TableSkeleton({
               />
             ))}
           </div>
-        </motion.div>
+        </Animate>
       ))}
     </div>
   )
@@ -286,17 +250,11 @@ export function Spinner({
 
   return (
     <div className={cn('flex items-center justify-center gap-3', className)}>
-      <motion.div
+      <div
         className={cn(
-          'border-2 border-primary/20 border-t-primary rounded-full',
+          'border-2 border-primary/20 border-t-primary rounded-full animate-spin',
           sizes[size],
         )}
-        animate={{ rotate: 360 }}
-        transition={{
-          duration: 1,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
       />
       {label && (
         <span className="text-sm text-muted-foreground animate-pulse-subtle">
@@ -336,18 +294,11 @@ export function LoadingState({
       <div className={cn('flex items-center justify-center py-8', className)}>
         <div className="flex space-x-2">
           {[0, 1, 2].map(index => (
-            <motion.div
+            <div
               key={`dot-${index}`}
-              className="w-2 h-2 bg-primary rounded-full"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 0.8,
-                repeat: Infinity,
-                delay: index * 0.2,
-                ease: easings.smooth,
+              className="w-2 h-2 bg-primary rounded-full animate-bounce"
+              style={{
+                animationDelay: `${index * 0.2}s`,
               }}
             />
           ))}

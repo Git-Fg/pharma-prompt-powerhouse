@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'memoire-ia',
+  type: 'concept',
   title: 'La Mémoire de l\'IA : Contexte (RAM) vs Instructions (Disque Dur)',
   description: 'Comprenez la différence fondamentale entre la mémoire de travail volatile (fenêtre de contexte) et les techniques de mémoire persistante (instructions, GPTs, RAG).',
   icon: 'BrainCircuit',

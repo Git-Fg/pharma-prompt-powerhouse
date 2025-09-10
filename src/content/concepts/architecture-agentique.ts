@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'architecture-agentique',
+  type: 'concept',
   title: 'L\'Architecture Agentique : Au-delà du Chatbot',
   description: 'Comprendre la différence entre un chatbot réactif et un agent proactif qui planifie, agit et s\'auto-corrige.',
   category: 'concepts-fondamentaux',

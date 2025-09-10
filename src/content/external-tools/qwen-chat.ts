@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'qwen-chat',
+  type: 'tool',
   title: 'Qwen Chat',
   description: 'La puissante suite IA d\'Alibaba, gratuite et open-source, que j\'utilise pour des tâches techniques.',
   url: 'https://chat.qwen.ai/',

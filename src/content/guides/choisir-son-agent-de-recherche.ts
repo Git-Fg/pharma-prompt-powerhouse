@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'choisir-son-agent-de-recherche',
+  type: 'guide',
   title: 'Choisir son Agent de Recherche : Z.AI vs Perplexity vs Claude',
   description: 'Un guide stratégique pour choisir le bon outil de recherche IA en fonction de la complexité de votre tâche, basé sur leurs architectures sous-jacentes.',
   category: 'guides',

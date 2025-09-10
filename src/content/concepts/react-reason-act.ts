@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'react-reason-act',
+  type: 'concept',
   title: 'ReAct (Reason+Act)',
   description: 'La boucle de raisonnement courte : comment une IA réfléchit, agit, et observe pour accomplir des tâches étape par étape.',
   category: 'concepts',

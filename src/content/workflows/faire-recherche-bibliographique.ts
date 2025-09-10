@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'faire-recherche-bibliographique',
+  type: 'workflow',
   title: 'Faire une Recherche Bibliographique Efficace',
   description: 'Ma méthode pour utiliser l\'IA comme assistant de recherche et organiser une bibliographie scientifique de qualité.',
   icon: 'Search',

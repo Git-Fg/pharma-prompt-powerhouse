@@ -7,11 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { DifficultyBadge } from '@/components/ui/enhanced-badge'
 import { getIcon } from '@/types/icon-taxonomy'
 
-interface SimpleWorkflowCardProps {
+interface WorkflowCardLayoutProps {
   workflow: Workflow
 }
 
-export function SimpleWorkflowCard({ workflow }: SimpleWorkflowCardProps) {
+export function WorkflowCardLayout({ workflow }: WorkflowCardLayoutProps) {
   const Icon = workflow.icon ? getIcon(workflow.icon) : Target
 
   return (

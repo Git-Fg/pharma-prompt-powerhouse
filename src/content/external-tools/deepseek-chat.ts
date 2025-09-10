@@ -2,6 +2,7 @@ import type { ExternalTool } from '@/lib/content-schema'
 
 const externalTool = {
   slug: 'deepseek-chat',
+  type: 'tool',
   title: 'DeepSeek Chat',
   description: 'Une alternative open-source gratuite et puissante, que j\'utilise pour l\'expérimentation non sensible.',
   url: 'https://chat.deepseek.com/',

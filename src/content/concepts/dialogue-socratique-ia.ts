@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'dialogue-socratique-ia',
+  type: 'concept',
   title: 'Le Dialogue Socratique avec une IA',
   description: 'Comment transformer une IA en un tuteur qui vous guide plutôt qu\'en une machine qui donne des réponses.',
   category: 'concepts',

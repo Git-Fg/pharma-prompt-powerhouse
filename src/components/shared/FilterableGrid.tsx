@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useAutoAnimateList } from '@/hooks/useAutoAnimate'
+import { useListAnimation } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
@@ -27,7 +27,7 @@ export interface BaseContentItem {
   slug?: string
 }
 
-export interface FilterableContentGridProps<TItem extends BaseContentItem> {
+export interface FilterableGridProps<TItem extends BaseContentItem> {
   /** Le tableau initial de contenu à filtrer */
   items: TItem[]
   /** Composant de rendu pour chaque item */
@@ -46,7 +46,7 @@ export interface FilterableContentGridProps<TItem extends BaseContentItem> {
   emptyTitle?: string
 }
 
-export function FilterableContentGrid<TItem extends BaseContentItem>({
+export function FilterableGrid<TItem extends BaseContentItem>({
   items,
   renderComponent,
   searchPlaceholder,
@@ -55,8 +55,8 @@ export function FilterableContentGrid<TItem extends BaseContentItem>({
   gridClassName = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
   emptyMessage = 'Essayez de modifier votre recherche ou vos filtres.',
   emptyTitle = 'Aucun contenu trouvé',
-}: FilterableContentGridProps<TItem>) {
-  const listRef = useAutoAnimateList()
+}: FilterableGridProps<TItem>) {
+  const listRef = useListAnimation()
 
   // Utiliser le hook de filtrage centralisé
   const {

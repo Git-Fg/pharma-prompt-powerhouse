@@ -1,8 +1,5 @@
-'use client'
-
-import type { EnrichedGuide } from '@/lib/content-schema'
+import type { Guide } from '@/lib/content-schema'
 import Link from 'next/link'
-import React from 'react'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,11 +10,11 @@ import { formatEstimatedTime } from '@/lib/ui-utils'
 import { cn } from '@/lib/utils'
 import { getIcon } from '@/types/icon-taxonomy'
 
-interface GuideCardProps {
-  guide: EnrichedGuide
+interface GuideCardLayoutProps {
+  guide: Guide
 }
 
-export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
+export function GuideCardLayout({ guide }: GuideCardLayoutProps) {
   // Utilisation des utilitaires centralisés
   const estimatedTime = formatEstimatedTime(guide.estimatedTime, 'guide')
   const guideUrl = getContentUrl('guide', guide.slug)

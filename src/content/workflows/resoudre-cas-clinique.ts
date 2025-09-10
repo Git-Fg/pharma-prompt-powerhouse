@@ -2,6 +2,7 @@ import type { Workflow } from '@/lib/content-schema'
 
 export const workflow = {
   slug: 'resoudre-cas-clinique',
+  type: 'workflow',
   title: 'Résoudre un Cas Clinique Complexe',
   description: 'Apprenez ma méthode pour analyser méthodiquement un cas clinique et proposer une prise en charge thérapeutique argumentée.',
   icon: 'Stethoscope',

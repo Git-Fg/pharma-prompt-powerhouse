@@ -2,6 +2,7 @@ import type { Guide } from '@/lib/content-schema'
 
 export const guide = {
   slug: 'le-core-kit-ia-gratuit-en-2025',
+  type: 'guide',
   title: 'Le Core Kit de l\'Étudiant : Maîtriser l\'IA de Pointe sans Carte Bancaire en 2025',
   description: 'Découvrez le duo gagnant Z.AI + Google AI Studio : comment accéder aux capacités IA les plus avancées du moment sans débourser un euro. Guide complet d\'un workflow éprouvé sur le terrain.',
   difficulty: 'intermédiaire',

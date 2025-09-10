@@ -2,6 +2,7 @@ import type { Concept } from '@/lib/content-schema'
 
 export const concept = {
   slug: 'systemes-multi-agents',
+  type: 'concept',
   title: 'Les Systèmes Multi-Agents (SMA)',
   description: 'Simuler un comité d\'experts : comment faire collaborer plusieurs IA spécialisées pour résoudre un problème complexe.',
   category: 'concepts',
