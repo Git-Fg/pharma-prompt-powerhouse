@@ -18,7 +18,7 @@ export default defineConfig({
     environment: 'jsdom', // Fallback for pure unit tests
     setupFiles: './tests/setup.ts',
     include: [
-      'src/**/*.{test,spec}.{ts,tsx}',  // Colocated tests
+      'src/**/*.{test,spec}.{ts,tsx}', // Colocated tests
       'tests/**/*.{test,spec}.{ts,tsx}', // Keep old tests temporarily
     ],
     reporters: 'default',

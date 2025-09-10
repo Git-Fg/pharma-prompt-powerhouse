@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest'
 import { renderHook } from 'vitest-browser-react'
-import { act, describe, expect, it } from 'vitest'
 import { useContentFilter } from './useContentFilter'
 
 // Mock data for testing
@@ -40,7 +40,7 @@ const mockItems = [
 
 describe('useContentFilter Hook', () => {
   it('should return all items when no filters are applied', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     expect(result.current.filteredItems).toEqual(mockItems)
     expect(result.current.stats.total).toBe(4)
@@ -48,7 +48,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should filter items by search term', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setSearchTerm('React')
@@ -60,7 +60,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should filter items by category', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setSelectedCategory('backend')
@@ -72,7 +72,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should filter items by difficulty', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setSelectedDifficulty('beginner')
@@ -84,7 +84,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should filter items by tags', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.addTag('javascript')
@@ -100,7 +100,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should filter items by favorites only', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setShowFavoritesOnly(true)
@@ -115,7 +115,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should combine multiple filters correctly', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setSearchTerm('react') // This will be found in title
@@ -128,19 +128,19 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should provide correct available categories', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     expect(result.current.availableCategories).toEqual(['backend', 'data', 'frontend'])
   })
 
   it('should provide correct available difficulties', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     expect(result.current.availableDifficulties).toEqual(['advanced', 'beginner', 'intermediate'])
   })
 
   it('should provide correct available tags', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     expect(result.current.availableTags).toEqual([
       'data-science',
@@ -154,7 +154,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle tag operations correctly', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.addTag('react')
@@ -182,7 +182,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should reset all filters correctly', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     await act(() => {
       result.current.setSearchTerm('test')
@@ -208,7 +208,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle case sensitivity option', async () => {
-    const { result } = await renderHook(() =>
+    const { result, act } = await renderHook(() =>
       useContentFilter(mockItems, { caseSensitive: true }),
     )
 
@@ -226,7 +226,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle custom search fields', async () => {
-    const { result } = await renderHook(() =>
+    const { result, act } = await renderHook(() =>
       useContentFilter(mockItems, { searchFields: ['title'] }),
     )
 
@@ -244,7 +244,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle disabled tag filtering', async () => {
-    const { result } = await renderHook(() =>
+    const { result, act } = await renderHook(() =>
       useContentFilter(mockItems, { enableTagFiltering: false }),
     )
 
@@ -259,7 +259,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle disabled favorite filtering', async () => {
-    const { result } = await renderHook(() =>
+    const { result, act } = await renderHook(() =>
       useContentFilter(mockItems, { enableFavoriteFiltering: false }),
     )
 
@@ -271,7 +271,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should calculate stats correctly', async () => {
-    const { result } = await renderHook(() => useContentFilter(mockItems))
+    const { result, act } = await renderHook(() => useContentFilter(mockItems))
 
     expect(result.current.stats).toEqual({
       total: 4,
@@ -290,7 +290,7 @@ describe('useContentFilter Hook', () => {
   })
 
   it('should handle empty items array', async () => {
-    const { result } = await renderHook(() => useContentFilter([]))
+    const { result, act } = await renderHook(() => useContentFilter([]))
 
     expect(result.current.filteredItems).toEqual([])
     expect(result.current.availableCategories).toEqual([])
@@ -314,7 +314,7 @@ describe('useContentFilter Hook', () => {
       },
     ]
 
-    const { result } = await renderHook(() => useContentFilter(itemsWithoutOptional))
+    const { result, act } = await renderHook(() => useContentFilter(itemsWithoutOptional))
 
     expect(result.current.availableDifficulties).toEqual(['beginner'])
     expect(result.current.availableTags).toEqual([])

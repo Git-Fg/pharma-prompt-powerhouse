@@ -1,8 +1,8 @@
-import { render } from 'vitest-browser-react'
 import { describe, expect, it } from 'vitest'
+import { render } from 'vitest-browser-react'
 import { Container } from './Container'
 
-describe('Container Component', () => {
+describe('container component', () => {
   it('should render children with default className', async () => {
     const screen = await render(
       <Container>
@@ -12,7 +12,7 @@ describe('Container Component', () => {
 
     // Use expect.element for vitest-browser-react assertions
     await expect.element(screen.getByText('Test Content')).toBeVisible()
-    
+
     // For class testing, use a different approach with query selectors or roles
     const container = screen.container.querySelector('div')
     expect(container).toHaveClass('w-full')
@@ -59,7 +59,7 @@ describe('Container Component', () => {
 
   it('should handle empty children', async () => {
     const screen = await render(<Container>{null}</Container>)
-    
+
     // Get the rendered container element
     const container = screen.container.firstElementChild as HTMLElement
     expect(container).toHaveClass('container-layout-detail')

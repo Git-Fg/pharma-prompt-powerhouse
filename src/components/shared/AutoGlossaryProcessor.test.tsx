@@ -1,7 +1,7 @@
-// AutoGlossaryProcessor.test.tsx
-import { render } from 'vitest-browser-react'
 import React from 'react'
+// AutoGlossaryProcessor.test.tsx
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { render } from 'vitest-browser-react'
 
 // Mock du glossaire pour contrôler les données de test
 vi.mock('@/content/glossary', () => ({
@@ -40,7 +40,7 @@ vi.mock('react', async () => {
 
 import { AutoGlossaryProcessor } from './AutoGlossaryProcessor'
 
-describe('AutoGlossaryProcessor', () => {
+describe('autoGlossaryProcessor', () => {
   beforeEach(() => {
     // Simuler l'environnement de test pour le browser
     vi.stubGlobal('process', { env: { NODE_ENV: 'test' } })
@@ -55,7 +55,7 @@ describe('AutoGlossaryProcessor', () => {
 
     const tokenTerm = screen.getByLabelText('Glossary term: token')
     await expect.element(tokenTerm).toBeVisible()
-    expect(tokenTerm).toHaveTextContent('token')
+    await expect.element(tokenTerm).toHaveTextContent('token')
   })
 
   it('devrait détecter plusieurs termes dans le même texte', async () => {
@@ -78,7 +78,9 @@ describe('AutoGlossaryProcessor', () => {
 
     // Vérifie que le paragraphe existe mais n'a pas de termes enveloppés
     await expect.element(screen.getByText('Ceci est un texte sans termes techniques.')).toBeVisible()
-    expect(screen.queryByLabelText(/Glossary term:/)).not.toBeInTheDocument()
+    // Test that no glossary terms are present by checking the container directly
+    const glossaryElements = screen.container.querySelectorAll('[aria-label*="Glossary term:"]')
+    expect(glossaryElements).toHaveLength(0)
   })
 
   it('devrait préserver les éléments non textuels inchangés', async () => {
@@ -103,7 +105,7 @@ describe('AutoGlossaryProcessor', () => {
     )
 
     // Ne devrait pas lancer d'erreur et devrait rendre le paragraphe vide
-    expect(screen.getByRole('paragraph')).toBeInTheDocument()
+    await expect.element(screen.getByRole('paragraph')).toBeInTheDocument()
   })
 
   it('devrait ignorer le contenu dans les balises code', async () => {
@@ -117,7 +119,23 @@ describe('AutoGlossaryProcessor', () => {
     )
 
     // Vérifie que seulement le token hors du code est enveloppé
-    const tokens = screen.queryAllByLabelText('Glossary term: token')
-    expect(tokens.length).toBe(1)
+    // Count glossary term instances by testing for them individually
+    let tokenCount = 0
+    try {
+      screen.getByLabelText('Glossary term: token')
+      tokenCount = 1
+      // Try to find a second one - should fail
+      try {
+        const allTokens = screen.container.querySelectorAll('[aria-label="Glossary term: token"]')
+        tokenCount = allTokens.length
+      }
+      catch {
+        // Expected if only one exists
+      }
+    }
+    catch {
+      // No tokens found
+    }
+    expect(tokenCount).toBe(1)
   })
 })
