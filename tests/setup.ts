@@ -1,6 +1,8 @@
 import React from 'react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
+// Import vitest-browser-react types and setup
+import 'vitest-browser-react'
 
 // Test setup file for Vitest Browser Mode
 // Global test configuration for modern browser testing

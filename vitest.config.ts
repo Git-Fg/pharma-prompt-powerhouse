@@ -10,13 +10,17 @@ export default defineConfig({
       '@testing-library/react',
       '@testing-library/jest-dom',
       'sonner',
+      'vitest-browser-react',
     ],
   },
   test: {
     globals: true,
     environment: 'jsdom', // Fallback for pure unit tests
     setupFiles: './tests/setup.ts',
-    include: ['tests/**/*.{test,spec}.{ts,tsx}'],
+    include: [
+      'src/**/*.{test,spec}.{ts,tsx}',  // Colocated tests
+      'tests/**/*.{test,spec}.{ts,tsx}', // Keep old tests temporarily
+    ],
     reporters: 'default',
 
     // ✅ Modern Browser Mode Configuration (2025)

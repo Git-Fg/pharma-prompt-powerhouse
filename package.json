@@ -120,9 +120,11 @@
     "glob": "^11.0.3",
     "jsdom": "^26.1.0",
     "markdown-link-check": "^3.13.7",
+    "playwright": "^1.55.0",
     "serwist": "^10.0.0-preview.14",
     "typescript": "5.9.2",
     "vitest": "^3.2.4",
-    "vitest-axe": "^0.1.0"
+    "vitest-axe": "^0.1.0",
+    "vitest-browser-react": "^1.0.1"
   }
 }
