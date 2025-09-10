@@ -93,10 +93,7 @@ export function CollectionPageLayout({
         <Section>
           <Container variant="collection">
             <ScrollAnimated variant="slideUp" className="animate-fade-in">
-              {/* Enhanced card container for main content */}
-              <div className="bg-card/30 backdrop-blur-sm border border-border/30 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                {children}
-              </div>
+              {children}
             </ScrollAnimated>
           </Container>
         </Section>
