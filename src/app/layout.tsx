@@ -78,13 +78,13 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'default',
     'apple-mobile-web-app-title': APP_NAME,
     'application-name': APP_NAME,
-    'msapplication-TileColor': '#2563eb',
+    'msapplication-TileColor': 'var(--primary)',
     'msapplication-tap-highlight': 'no',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#2563eb',
+  themeColor: 'var(--primary)',
 }
 
 export default function RootLayout({

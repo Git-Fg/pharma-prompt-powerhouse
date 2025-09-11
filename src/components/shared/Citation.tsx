@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import Badge from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { designTokens } from '@/design-system/tokens'
 
 interface CitationProps {
   source: string
@@ -85,7 +86,7 @@ export function Citation({
 
   if (isCompact) {
     return (
-      <span className={cn('inline-flex items-center gap-1 text-sm', className)}>
+      <span className={cn('inline-flex items-center gap-1 prose-caption', className)} style={{ gap: designTokens.spacing.xs }}>
         <IconComponent className="size-3 text-muted-foreground" />
         <span className="text-muted-foreground">
           [
@@ -108,7 +109,7 @@ export function Citation({
 
   if (variant === 'inline') {
     return (
-      <span className={cn('inline-flex items-center gap-2 text-sm', className)}>
+      <span className={cn('inline-flex items-center gap-2 prose-caption', className)} style={{ gap: designTokens.spacing.sm }}>
         <IconComponent className="size-3 text-muted-foreground" />
         <span className="text-muted-foreground">
           [
@@ -139,16 +140,16 @@ export function Citation({
   }
 
   return (
-    <Card className={cn('my-4', className)}>
+    <Card className={cn('my-4', className)} style={{ marginTop: designTokens.spacing.lg, marginBottom: designTokens.spacing.lg }}>
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-start justify-between" style={{ gap: designTokens.spacing.md }}>
+          <div className="flex items-center gap-2" style={{ gap: designTokens.spacing.sm }}>
             <IconComponent className="size-4 text-muted-foreground" />
             <Badge variant="outline" className="text-xs">
               {typeLabels[type]}
             </Badge>
           </div>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1 prose-caption prose-caption-xs text-muted-foreground" style={{ gap: designTokens.spacing.xs }}>
             [
             {source}
             ]
@@ -165,21 +166,21 @@ export function Citation({
           </div>
         </div>
         {title && (
-          <CardTitle className="text-base leading-tight">{title}</CardTitle>
+          <CardTitle className="prose-lg leading-tight">{title}</CardTitle>
         )}
       </CardHeader>
       <CardContent className="pt-0">
         {citationText && (
-          <p className="text-sm text-muted-foreground mb-2">
+          <p className="prose-caption text-muted-foreground" style={{ marginBottom: designTokens.spacing.sm }}>
             {citationText}
           </p>
         )}
         {abstract && (
           <details className="group">
-            <summary className="cursor-pointer text-sm font-medium hover:text-primary transition-colors">
+            <summary className="cursor-pointer prose-caption prose-caption-sm font-medium hover:text-primary transition-colors">
               Résumé
             </summary>
-            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+            <p className="prose-caption text-muted-foreground leading-relaxed" style={{ marginTop: designTokens.spacing.sm }}>
               {abstract}
             </p>
           </details>

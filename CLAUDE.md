@@ -344,7 +344,7 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - Use animation components (`ScrollAnimated`, `AnimatedList`, `MagneticCard`) for modern UX
 - Respect modern easing curves (`easings.spring`, `easings.bounce`) for natural animations
 - Use @antfu/eslint-config for simplified, modern ESLint configuration
-- Justify all `any` type usage with descriptive ESLint disable comments explaining why it's unavoidable
+- Always implement optimal type safety. If it's not possible, justify all `any` type usage with descriptive ESLint disable comments explaining why it's unavoidable
 - Use test-specific ESLint rules to maintain code quality while allowing flexibility in tests
 - Wrap Lucide React components in div elements when used in server components to prevent serialization issues
 - Use Vitest Browser Mode for automated browser tests in CI/CD pipelines
@@ -355,7 +355,7 @@ This is a French-language pharmaceutical AI education platform. When adding cont
 - **Plan complex tasks in multiple phases** with clear milestones and deliverables
 - **Commit changes to repository after each milestone** to maintain version control and progress tracking
 - **Always verify final implementation** with `npm run validate` unless explicitly told otherwise
-- Use smartly your agents team to deleguate tasks
+- Use available tools and subagents (software-engineer, software-debugger, technical-planner, technical-qa..) extensively
 
 **DO NOT:**
 - Repeat long utility class chains; prefer creating semantic utility

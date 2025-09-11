@@ -68,4 +68,10 @@ export const lucideIconsMock = {
   Circle: () => <span data-testid="circle-icon">○</span>,
   CircleIcon: () => <span data-testid="circle-icon">○</span>,
   LucideIcon: () => <span data-testid="lucide-icon">⭐</span>,
+
+  // Icons added during icon-taxonomy refactoring
+  ClipboardList: () => <span data-testid="clipboard-list-icon">📋</span>,
+  Stethoscope: () => <span data-testid="stethoscope-icon">🩺</span>,
+  Table: () => <span data-testid="table-icon">📊</span>,
+  Home: () => <span data-testid="home-icon">🏠</span>,
 }

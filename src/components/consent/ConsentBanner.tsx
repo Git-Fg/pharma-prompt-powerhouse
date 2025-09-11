@@ -5,6 +5,7 @@ import { Cookie, Settings, Shield } from 'lucide-react'
 import Button from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useConsent } from '@/hooks/useConsent'
+import { designTokens } from '@/design-system/tokens'
 
 /**
  * Bannière de consentement discrète et respectueuse.
@@ -20,54 +21,54 @@ export function ConsentBanner() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/95 backdrop-blur-md border-t animate-slide-up">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t animate-slide-up" style={{ padding: designTokens.spacing.md }}>
       <div className="container mx-auto container">
         <Card className="shadow-lg">
           <CardContent>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between" style={{ gap: designTokens.spacing.lg }}>
 
               {/* Icône et message principal */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start" style={{ gap: designTokens.spacing.sm }}>
                 <div className="flex-shrink-0">
-                  <Cookie className="h-6 w-6 text-primary mt-0.5" />
+                  <Cookie className="text-primary" style={{ width: '1.5rem', height: '1.5rem', marginTop: '0.125rem' }} />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2" style={{ gap: designTokens.spacing.sm }}>
                   <h3 className="font-semibold text-foreground">
                     Confort et Confidentialité
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed" style={{ fontSize: designTokens.typography.fontSize.sm }}>
                     Nous souhaitons sauvegarder vos préférences (thème, favoris) pour améliorer votre expérience.
                     Aucune donnée personnelle ou de santé n'est collectée.
-                    <span className="font-medium"> Vous gardez le contrôle total.</span>
+                    <span className="font-medium" style={{ fontSize: designTokens.typography.fontSize.sm }}> Vous gardez le contrôle total.</span>
                   </p>
                 </div>
               </div>
 
               {/* Boutons d'action */}
-              <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
+              <div className="flex flex-col sm:flex-row lg:flex-shrink-0" style={{ gap: designTokens.spacing.sm }}>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={decline}
-                  className="text-sm"
+                  style={{ fontSize: designTokens.typography.fontSize.sm }}
                 >
-                  <Shield className="h-4 w-4 mr-2" />
+                  <Shield className="mr-2" style={{ width: '1rem', height: '1rem' }} />
                   Naviguer sans sauvegarde
                 </Button>
                 <Button
                   size="sm"
                   onClick={accept}
-                  className="text-sm"
+                  style={{ fontSize: designTokens.typography.fontSize.sm }}
                 >
-                  <Settings className="h-4 w-4 mr-2" />
+                  <Settings className="mr-2" style={{ width: '1rem', height: '1rem' }} />
                   Activer le confort
                 </Button>
               </div>
             </div>
 
             {/* Note de transparence */}
-            <div className="mt-4 pt-4 border-t">
-              <p className="text-xs text-muted-foreground">
+            <div className="border-t" style={{ marginTop: designTokens.spacing.lg, paddingTop: designTokens.spacing.lg }}>
+              <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.xs }}>
                 <strong>Transparence totale :</strong>
                 {' '}
                 En mode "confort", nous sauvegardons uniquement vos préférences d'interface.

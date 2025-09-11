@@ -1,3 +1,5 @@
+'use client'
+
 import type { Concept, ExternalTool, Guide, Workflow } from '@/lib/content-schema'
 import { ConceptCardLayout } from './layouts/ConceptCardLayout'
 import { GuideCardLayout } from './layouts/GuideCardLayout'

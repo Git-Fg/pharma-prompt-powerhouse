@@ -30,7 +30,7 @@ export default antfu(
       'next-env.d.ts',
       '**/*.d.ts',
       'docs/**',
-      '**/README.md',
+      '**/*.md',
       '.claude/**',
       '.claude*',
     ],
@@ -61,6 +61,11 @@ export default antfu(
     },
     rules: {
       'pharma/no-prohibited-tailwind-classes': 'error',
+      'pharma/no-tailwind-v4-workaround': 'error',
+      'pharma/no-hardcoded-values': 'warn',
+      'pharma/prefer-design-system-tokens': 'warn',
+      'pharma/no-multiple-variant-libraries': 'error',
+      'pharma/no-inconsistent-typography': 'warn',
       // 'pharma/no-typographic-characters': 'error', // Temporarily disabled due to existing content issues
     },
   },

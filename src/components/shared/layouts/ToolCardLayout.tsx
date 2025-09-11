@@ -1,4 +1,5 @@
 import type { ExternalTool } from '@/lib/content-schema'
+import { ExternalLink, Globe } from 'lucide-react'
 import Link from 'next/link'
 import { InfoButton } from '@/components/shared/InfoButton'
 import Badge from '@/components/ui/badge'
@@ -8,7 +9,6 @@ import { CategoryBadge, ConfidenceBadge } from '@/components/ui/enhanced-badge'
 import { contentCardVariants } from '@/components/ui/variants'
 import { getContentUrl } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
-import { getIcon } from '@/types/icon-taxonomy'
 
 interface ToolCardLayoutProps {
   tool: ExternalTool
@@ -17,10 +17,6 @@ interface ToolCardLayoutProps {
 export function ToolCardLayout({ tool }: ToolCardLayoutProps) {
   // Utilisation des utilitaires centralisés
   const toolUrl = getContentUrl('tool', tool.slug)
-
-  // Créer les composants d'icônes
-  const GlobeIcon = getIcon('Globe')
-  const ExternalLinkIcon = getIcon('ExternalLink')
 
   return (
     <Card className={cn(
@@ -32,7 +28,7 @@ export function ToolCardLayout({ tool }: ToolCardLayoutProps) {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-4 flex-1">
             <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <GlobeIcon className="size-6 text-primary" />
+              <Globe className="size-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
               <CardTitle className="group-hover:text-primary transition-colors line-clamp-2 mb-2">
@@ -67,7 +63,7 @@ export function ToolCardLayout({ tool }: ToolCardLayoutProps) {
             <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full" size="sm">
                 Visiter l'outil
-                <ExternalLinkIcon className="ml-1 size-4" />
+                <ExternalLink className="ml-1 size-4" />
               </Button>
             </a>
             <Link href={toolUrl} className="flex-1">

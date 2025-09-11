@@ -4,6 +4,18 @@ import { Wifi, WifiOff, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Container } from '@/components/layout/Container'
+import { designTokens } from '@/design-system/tokens'
+
+// Helper function to get CSS custom property values
+function getCssDuration(variableName: string, fallback: number): number {
+  if (typeof window !== 'undefined') {
+    const cssValue = getComputedStyle(document.documentElement)
+      .getPropertyValue(variableName)
+      .trim()
+    return cssValue ? Number.parseInt(cssValue) : fallback
+  }
+  return fallback
+}
 
 /**
  * PWA Offline Status Manager
@@ -35,7 +47,7 @@ export function PWAOfflineManager() {
       toast.success('Connexion rétablie', {
         description: 'Toutes les fonctionnalités sont à nouveau disponibles',
         icon: <Wifi className="size-4" />,
-        duration: 3000,
+        duration: getCssDuration('--toast-duration-medium', 3000),
       })
     }
 
@@ -51,7 +63,7 @@ export function PWAOfflineManager() {
         toast.error('Mode hors ligne activé', {
           description: 'Le contenu en cache reste accessible.',
           icon: <WifiOff className="size-4" />,
-          duration: 5000,
+          duration: getCssDuration('--toast-duration-extra-long', 5000),
         })
       }
     }
@@ -70,7 +82,7 @@ export function PWAOfflineManager() {
           toast.info('Contenu en cache', {
             description: 'Affichage de la version sauvegardée hors ligne',
             icon: <WifiOff className="size-4" />,
-            duration: 4000,
+            duration: getCssDuration('--toast-duration-long', 4000),
           })
         }
       }
@@ -104,7 +116,7 @@ export function PWAOfflineManager() {
         <Container variant="detail" className="flex items-center justify-between px-0">
           <div className="flex items-center gap-3">
             <WifiOff className="h-5 w-5 text-amber-600 flex-shrink-0" />
-            <div className="text-sm">
+            <div className="prose-caption">
               <p className="font-medium text-amber-900">Mode hors ligne</p>
               <p className="text-amber-700">Le contenu en cache reste accessible</p>
             </div>
@@ -122,25 +134,29 @@ export function PWAOfflineManager() {
                       toast.success('Connexion rétablie', {
                         description: 'Toutes les fonctionnalités sont à nouveau disponibles',
                         icon: <Wifi className="size-4" />,
-                        duration: 3000,
+                        duration: getCssDuration('--toast-duration-medium', 3000),
                       })
                     }
                   })
                   .catch(() => {
                     toast.info('Toujours hors ligne', {
                       description: 'Vérifiez votre connexion internet',
-                      duration: 2000,
+                      duration: getCssDuration('--toast-duration-short', 2000),
                     })
                   })
               }}
-              className="px-3 py-1.5 text-xs font-medium text-amber-700 bg-amber-100 hover:bg-amber-200 rounded-md transition-colors"
+              className="px-3 py-1.5 prose-caption-xs font-medium text-amber-700 bg-amber-100 hover:bg-amber-200 transition-colors" style={{
+                borderRadius: designTokens.radius.md
+              }}
             >
               Réessayer
             </button>
             <button
               type="button"
               onClick={() => setDismissedBanner(true)}
-              className="p-1.5 text-amber-600 hover:text-amber-800 rounded-md hover:bg-amber-100 transition-colors"
+              className="p-1.5 text-amber-600 hover:text-amber-800 hover:bg-amber-100 transition-colors" style={{
+                borderRadius: designTokens.radius.md
+              }}
               aria-label="Masquer la bannière"
             >
               <X className="h-4 w-4" />

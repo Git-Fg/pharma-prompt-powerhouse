@@ -11,19 +11,18 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { CodeBlock } from '@/components/ui/code-block'
 import { ContentTable } from '@/components/ui/data-table/ContentTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { getContentItem } from '@/lib/content-loader'
 import { createTestIdProps, generateContentTestId, generateTestId } from '@/lib/test-utils'
 import MultiFormatPrompt from '../prompts/MultiFormatPrompt'
 import { ActionChecklist } from './ActionChecklist'
 import { Citation } from './Citation'
-import { ConceptRecommendation } from './ConceptRecommendation'
 import { DefinedTerm } from './DefinedTerm'
 import { Example } from './Example'
-import { GuideRecommendation } from './GuideRecommendation'
 import { KeyTakeaways } from './KeyTakeaways'
 import { PointsBlock } from './PointsBlock'
 import { Prerequisites } from './Prerequisites'
 import { SectionBlock } from './SectionBlock'
-import { ToolRecommendation } from './ToolRecommendation'
+import { SmartRecommendationPopup } from './SmartRecommendationPopup'
 
 function assertNever(x: never): never {
   throw new Error(`Unhandled block variant: ${JSON.stringify(x)}`)
@@ -54,11 +53,35 @@ function BlockSwitch({ block, index, currentItem, enableAutoGlossary = true }: {
         </Alert>
       )
     case 'toolRecommendation':
-      return <ToolRecommendation {...createTestIdProps(testId)} tags={currentItem?.tags || []} currentSlug={String(block.slug || '')} />
+      return (
+        <SmartRecommendationPopup
+          type="tool"
+          slug={block.slug}
+          {...createTestIdProps(testId)}
+        >
+          {getContentItem('tool', block.slug)?.title || block.slug}
+        </SmartRecommendationPopup>
+      )
     case 'guideRecommendation':
-      return <GuideRecommendation {...createTestIdProps(testId)} guideSlug={String(block.slug || '')} reason={String(block.reason || '')} />
+      return (
+        <SmartRecommendationPopup
+          type="guide"
+          slug={block.slug}
+          {...createTestIdProps(testId)}
+        >
+          {getContentItem('guide', block.slug)?.title || block.slug}
+        </SmartRecommendationPopup>
+      )
     case 'conceptRecommendation':
-      return <ConceptRecommendation {...createTestIdProps(testId)} conceptSlug={String(block.slug || '')} reason={String(block.reason || '')} />
+      return (
+        <SmartRecommendationPopup
+          type="concept"
+          slug={block.slug}
+          {...createTestIdProps(testId)}
+        >
+          {getContentItem('concept', block.slug)?.title || block.slug}
+        </SmartRecommendationPopup>
+      )
     case 'codeBlock':
       return (
         <CodeBlock

@@ -1,18 +1,29 @@
+import type { LucideIcon } from 'lucide-react'
 import type { Workflow } from '@/lib/content-schema'
-import { ArrowRight, Clock, Target } from 'lucide-react'
+import { AlertTriangle, ArrowRight, Brain, ClipboardList, Clock, FileText, Search, Stethoscope, Table, Target } from 'lucide-react'
 import Link from 'next/link'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { DifficultyBadge } from '@/components/ui/enhanced-badge'
-import { getIcon } from '@/types/icon-taxonomy'
+
+// Mapping local des icônes utilisées dans les workflows
+const workflowIconMap: Record<string, LucideIcon> = {
+  ClipboardList,
+  Stethoscope,
+  AlertTriangle,
+  FileText,
+  Brain,
+  Table,
+  Search,
+}
 
 interface WorkflowCardLayoutProps {
   workflow: Workflow
 }
 
 export function WorkflowCardLayout({ workflow }: WorkflowCardLayoutProps) {
-  const Icon = workflow.icon ? getIcon(workflow.icon) : Target
+  const Icon = workflow.icon ? workflowIconMap[workflow.icon] || Target : Target
 
   return (
     <Card className="flex flex-col h-full hover:shadow-lg transition-all duration-200 group">

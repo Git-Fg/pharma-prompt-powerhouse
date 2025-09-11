@@ -1,9 +1,9 @@
-import type { VariantProps } from 'class-variance-authority'
+import type { VariantProps } from 'tailwind-variants'
 import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 
+import { badgeVariants } from '@/design-system/variants'
 import { cn } from '@/lib/utils'
-import { badgeVariants } from './badge-variants'
 
 function Badge({
   className,

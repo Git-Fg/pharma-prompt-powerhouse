@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import { AutoGlossaryProcessor } from '@/components/shared/AutoGlossaryProcessor'
 import { CodeBlock } from '@/components/ui/code-block'
 import { cn } from '@/lib/utils'
+import { designTokens } from '@/design-system/tokens'
 
 interface MarkdownRendererProps {
   content: string
@@ -25,12 +26,12 @@ export function MarkdownRenderer({ content, className, enableAutoGlossary = true
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ ...props }) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
+          h1: ({ ...props }) => <h1 className="prose-title font-bold" style={{ marginTop: designTokens.spacing.xl2, marginBottom: designTokens.spacing.lg }} {...props} />,
           h2: ({ ...props }) => <h2 {...props} />, // Uses centralized .prose h2 styles
           h3: ({ ...props }) => <h3 {...props} />, // Uses centralized .prose h3 styles
           p: ({ ...props }) => <p {...props} />, // Uses centralized .prose p styles
-          ul: ({ ...props }) => <ul className="list-disc pl-6 my-4" {...props} />,
-          ol: ({ ...props }) => <ol className="list-decimal pl-6 my-4" {...props} />,
+          ul: ({ ...props }) => <ul className="list-disc pl-6" style={{ marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }} {...props} />,
+          ol: ({ ...props }) => <ol className="list-decimal pl-6" style={{ marginTop: designTokens.spacing.md, marginBottom: designTokens.spacing.md }} {...props} />,
           li: ({ ...props }) => <li className="mb-2" {...props} />,
           a: ({ ...props }) => <a {...props} />, // Uses centralized .prose a styles
           code(props) {

@@ -7,7 +7,9 @@ import { useState } from 'react'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Checkbox } from '@/components/ui/checkbox'
+import { actionChecklistItemVariants, actionChecklistPriorityBadgeVariants, actionChecklistSummaryVariants, actionChecklistTitleVariants } from '@/components/ui/variants'
 import { createTestIdProps, generateTestId } from '@/lib/test-utils'
+import { designTokens } from '@/design-system/tokens'
 
 interface ActionItem {
   id: string
@@ -30,8 +32,6 @@ interface ChecklistContentProps {
   checkedItems: Set<string>
   allowChecking: boolean
   toggleItem: (itemId: string) => void
-  getPriorityColor: (priority?: string) => string
-  getPriorityBadge: (priority?: string) => React.ReactNode
   testId?: string
 }
 
@@ -40,13 +40,11 @@ function ChecklistContent({
   checkedItems,
   allowChecking,
   toggleItem,
-  getPriorityColor,
-  getPriorityBadge,
   testId,
 }: ChecklistContentProps) {
   return (
-    <div className="space-y-4">
-      <div className="space-y-3">
+    <div className="space-y-4" style={{ gap: designTokens.spacing.lg }}>
+      <div className="space-y-3" style={{ gap: designTokens.spacing.md }}>
         {items.map((item) => {
           const isChecked = checkedItems.has(item.id)
 
@@ -54,11 +52,7 @@ function ChecklistContent({
             <div
               key={item.id}
               {...createTestIdProps(testId ? `${testId}-item-${item.id}` : `checklist-item-${item.id}`)}
-              className={`flex items-start gap-3 p-3 rounded-lg border transition-all ${
-                isChecked
-                  ? 'bg-green-50/50 border-green-200 dark:bg-green-950/20 dark:border-green-800'
-                  : 'bg-background hover:bg-accent/50'
-              } ${allowChecking ? 'cursor-pointer' : ''}`}
+              className={actionChecklistItemVariants({ isChecked, allowChecking })}
               onClick={() => toggleItem(item.id)}
             >
               {allowChecking
@@ -75,17 +69,18 @@ function ChecklistContent({
                   )}
 
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h4 className={`font-medium text-sm ${
-                    isChecked ? 'line-through text-muted-foreground' : getPriorityColor(item.priority)
-                  }`}
-                  >
+                <div className="flex items-center gap-2" style={{ marginBottom: designTokens.spacing.xs }}>
+                  <h4 className={actionChecklistTitleVariants({ isChecked, priority: item.priority || 'default' })}>
                     {item.title}
                   </h4>
-                  {getPriorityBadge(item.priority)}
+                  {item.priority && (
+                    <span className={actionChecklistPriorityBadgeVariants({ priority: item.priority })}>
+                      {item.priority === 'high' ? 'Priorité haute' : item.priority === 'medium' ? 'Priorité moyenne' : 'Priorité basse'}
+                    </span>
+                  )}
                 </div>
                 {item.description && (
-                  <p className={`text-xs ${
+                  <p className={`prose-caption prose-caption-sm ${
                     isChecked ? 'line-through text-muted-foreground' : 'text-muted-foreground'
                   }`}
                   >
@@ -103,10 +98,10 @@ function ChecklistContent({
       </div>
 
       {allowChecking && checkedItems.size > 0 && (
-        <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg dark:bg-green-950/20 dark:border-green-800">
-          <div className="flex items-center gap-2">
+        <div className={actionChecklistSummaryVariants({ hasCompleted: true })}>
+          <div className="flex items-center gap-2" style={{ gap: designTokens.spacing.sm }}>
             <Check className="size-4 text-green-600 dark:text-green-400" />
-            <span className="text-sm font-medium text-green-700 dark:text-green-300">
+            <span className="prose-caption prose-caption-sm font-medium text-green-700 dark:text-green-300">
               {checkedItems.size}
               {' '}
               sur
@@ -117,7 +112,7 @@ function ChecklistContent({
             </span>
           </div>
           {checkedItems.size === items.length && (
-            <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+            <p className="prose-caption prose-caption-xs text-green-600 dark:text-green-400" style={{ marginTop: designTokens.spacing.xs }}>
               Excellent travail ! Vous avez terminé toutes les actions recommandées.
             </p>
           )}
@@ -152,50 +147,11 @@ export function ActionChecklist({
     setCheckedItems(newCheckedItems)
   }
 
-  const getPriorityColor = (priority?: string) => {
-    switch (priority) {
-      case 'high':
-        return 'text-red-600 dark:text-red-400'
-      case 'medium':
-        return 'text-orange-600 dark:text-orange-400'
-      case 'low':
-        return 'text-blue-600 dark:text-blue-400'
-      default:
-        return 'text-foreground'
-    }
-  }
-
-  const getPriorityBadge = (priority?: string) => {
-    if (!priority) {
-      return null
-    }
-
-    const labels: Record<string, string> = {
-      high: 'Priorité haute',
-      medium: 'Priorité moyenne',
-      low: 'Priorité basse',
-    }
-
-    const priorityClassName = priority === 'high'
-      ? 'bg-red-50 border-red-200 text-red-700 dark:bg-red-950 dark:border-red-800 dark:text-red-300'
-      : priority === 'medium'
-        ? 'bg-orange-50 border-orange-200 text-orange-700 dark:bg-orange-950 dark:border-orange-800 dark:text-orange-300'
-        : 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300'
-
-    return (
-      <span className={`text-xs px-2 py-1 rounded-full border ${priorityClassName}`}>
-        {labels[priority]}
-      </span>
-    )
-  }
-
   const checklistProps = {
     items,
     checkedItems,
     allowChecking,
     toggleItem,
-    getPriorityColor,
-    getPriorityBadge,
     testId,
   }
 
@@ -207,7 +163,7 @@ export function ActionChecklist({
         <CheckCircle2 className="size-4" />
         <AlertTitle>{title}</AlertTitle>
         <AlertDescription>
-          <div className="mt-4">
+          <div style={{ marginTop: designTokens.spacing.md }}>
             <ChecklistContent {...checklistProps} />
           </div>
         </AlertDescription>
@@ -231,7 +187,7 @@ export function ActionChecklist({
 
   return (
     <div {...createTestIdProps(checklistTestId)} className="mb-8 p-6 border rounded-lg bg-background">
-      <h3 className="font-semibold mb-4 flex items-center gap-2">
+      <h3 className="font-semibold flex items-center gap-2" style={{ marginBottom: designTokens.spacing.md }}>
         <CheckCircle2 className="size-5" />
         {title}
       </h3>

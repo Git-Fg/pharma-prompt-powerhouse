@@ -2,7 +2,9 @@ import type { CollectionType } from '@/lib/content-loader'
 import type { Concept, ExternalTool, Guide, Workflow } from '@/lib/content-schema'
 import { ArrowRight } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
+
 import Link from 'next/link'
+import React from 'react'
 import { ContentCard } from '@/components/shared/ContentCard'
 import { ContentHeader } from '@/components/shared/ContentHeader'
 import { ContentMetadata } from '@/components/shared/ContentMetadata'
@@ -10,18 +12,20 @@ import { FilterableGrid } from '@/components/shared/FilterableGrid'
 import { Animate, StaggeredContainer } from '@/components/ui/Animate'
 import Button from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+
 import { getCollectionConfig, getCollectionItems, getCollectionStats } from '@/lib/content-loader'
 import { cn } from '@/lib/utils'
 import { BreadcrumbNavigation } from './BreadcrumbNavigation'
 import { Container, Section } from './Container'
+import { designTokens } from '@/design-system/tokens'
 
 type StatType = 'primary' | 'concepts' | 'guides' | 'workflows' | 'tools' | 'default'
 
 // Type union pour les types de base utilisés dans le content-loader
 type BaseContent = Concept | Guide | Workflow | ExternalTool
 
-// Wrapper universel pour FilterableGrid utilisant le composant polymorphe ContentCard
-const CardWrapper = ({ item }: { item: BaseContent }) => <ContentCard item={item} />
+// Le composant ContentCard peut directement gérer tous les types de base
+// Pas besoin de wrapper intermédiaire
 
 interface PageRendererProps {
   // Pour les pages de collection
@@ -155,7 +159,7 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
               {(type === 'concepts' || type === 'guides' || type === 'workflows') && (
                 <FilterableGrid
                   items={items as BaseContent[]}
-                  renderComponent={CardWrapper}
+                  renderComponent={ContentCard}
                   searchPlaceholder={config.searchPlaceholder}
                   showCategoryFilter={config.showCategoryFilter}
                   showDifficultyFilter={config.showDifficultyFilter}
@@ -173,32 +177,46 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
                     <h2 className="text-2xl font-semibold mb-4">
                       Comment utiliser le Hub de Concepts ?
                     </h2>
-                    <div className="grid md:grid-cols-3 gap-6 container mx-auto">
+                    <div className="grid md:grid-cols-3 container mx-auto" style={{
+                      gap: designTokens.spacing.lg
+                    }}>
                       <div className="text-center">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <div className="bg-primary/10 flex items-center justify-center mx-auto mb-3" style={{
+                          width: designTokens.spacing.xl3,
+                          height: designTokens.spacing.xl3,
+                          borderRadius: designTokens.radius.lg
+                        }}>
                           <LucideIcons.BookOpen className="size-6 text-primary" />
                         </div>
                         <h3 className="font-semibold mb-2">1. Choisissez un concept</h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="prose-caption">
                           Explorez les concepts qui correspondent à vos besoins
                           d'apprentissage
                         </p>
                       </div>
                       <div className="text-center">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <div className="bg-primary/10 flex items-center justify-center mx-auto mb-3" style={{
+                          width: designTokens.spacing.xl3,
+                          height: designTokens.spacing.xl3,
+                          borderRadius: designTokens.radius.lg
+                        }}>
                           <LucideIcons.Lightbulb className="size-6 text-primary" />
                         </div>
                         <h3 className="font-semibold mb-2">2. Découvrez les ressources</h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="prose-caption">
                           Accédez aux guides, workflows et outils liés à ce concept
                         </p>
                       </div>
                       <div className="text-center">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <div className="bg-primary/10 flex items-center justify-center mx-auto mb-3" style={{
+                          width: designTokens.spacing.xl3,
+                          height: designTokens.spacing.xl3,
+                          borderRadius: designTokens.radius.lg
+                        }}>
                           <LucideIcons.Wrench className="size-6 text-primary" />
                         </div>
                         <h3 className="font-semibold mb-2">3. Mettez en pratique</h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="prose-caption">
                           Utilisez l'éditeur de prompts pour tester et adapter les
                           workflows pratiques
                         </p>
@@ -211,13 +229,20 @@ function CollectionRenderer({ type, title, description, showHelp, showCTA, child
               {showCTA && type === 'workflows' && (
                 <>
                   {/* Bottom CTA */}
-                  <div className="mt-16 text-center bg-muted p-6 md:p-8 rounded-lg">
+                  <div className="mt-16 text-center bg-muted rounded-lg" style={{
+                    padding: designTokens.spacing.lg,
+                    paddingTop: designTokens.spacing.xl2,
+                    paddingBottom: designTokens.spacing.xl2,
+                    borderRadius: designTokens.radius.lg
+                  }}>
                     <h3 className="responsive-subheading mb-4">Nouveau dans l'IA ?</h3>
                     <p className="prose-description mb-6">
                       Je recommande de commencer par comprendre les concepts essentiels avant de vous lancer
                       dans un workflow. Cela vous évitera les erreurs courantes que j'ai faites à mes débuts.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row justify-center" style={{
+                      gap: designTokens.spacing.md
+                    }}>
                       <Link href="/par-ou-commencer">
                         <Button>
                           Par où commencer ?
@@ -259,16 +284,26 @@ function ContentPageLayout({ item, children }: ContentPageLayoutProps) {
         <BreadcrumbNavigation />
 
         <div className="mb-8">
-          <div className="p-6 md:p-8">
+          <div style={{
+            padding: designTokens.spacing.lg,
+            paddingTop: designTokens.spacing.xl2,
+            paddingBottom: designTokens.spacing.xl2
+          }}>
             <ContentHeader item={item} />
             <ContentMetadata item={item} />
           </div>
         </div>
 
         <main className={cn(
-          'p-6 md:p-8 lg:p-10',
+          '',
           applyProseStyles && 'prose prose-lg dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground prose-strong:text-foreground',
-        )}
+        )}" style={{
+          padding: designTokens.spacing.lg,
+          paddingTop: designTokens.spacing.xl2,
+          paddingBottom: designTokens.spacing.xl2,
+          paddingLeft: designTokens.spacing.xl3,
+          paddingRight: designTokens.spacing.xl3
+        }}
         >
           {children}
         </main>

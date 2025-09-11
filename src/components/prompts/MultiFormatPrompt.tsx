@@ -7,7 +7,9 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { contentCardVariants } from '@/components/ui/variants'
+import { multiFormatPromptCardVariants, multiFormatPromptCodeVariants } from '@/components/ui/variants'
+import { cn } from '@/lib/utils'
+import { designTokens } from '@/design-system/tokens'
 
 interface MultiFormatPromptProps {
   alternativeVersions?: {
@@ -54,7 +56,7 @@ export default function MultiFormatPrompt({
   if (!hasMultipleFormats && alternativeVersions?.standard) {
     // Single format display
     return (
-      <Card className={className}>
+      <Card className={cn(multiFormatPromptCardVariants({ format: 'standard' }), className)}>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             Prompt
@@ -62,14 +64,14 @@ export default function MultiFormatPrompt({
               size="sm"
               variant="outline"
               onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
-              className="ml-2"
+              style={{ marginLeft: designTokens.spacing.sm }}
             >
-              {copiedStates.standard ? <Check className="size-4" /> : <Copy className="size-4" />}
+              {copiedStates.standard ? <Check style={{ width: '1rem', height: '1rem' }} /> : <Copy style={{ width: '1rem', height: '1rem' }} />}
             </Button>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm">
+          <pre className={multiFormatPromptCodeVariants({ promptType: 'standard' })}>
             {alternativeVersions.standard}
           </pre>
         </CardContent>
@@ -97,32 +99,32 @@ export default function MultiFormatPrompt({
         </TabsList>
 
         {alternativeVersions?.standard && (
-          <TabsContent value="standard" className="mt-4">
-            <Card>
+          <TabsContent value="standard" style={{ marginTop: designTokens.spacing.lg }}>
+            <Card className={multiFormatPromptCardVariants({ format: 'standard' })}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Version Standard</CardTitle>
+                  <CardTitle style={{ fontSize: designTokens.typography.fontSize.lg }}>Version Standard</CardTitle>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.standard!, 'standard')}
                   >
-                    {copiedStates.standard ? <Check className="size-4" /> : <Copy className="size-4" />}
+                    {copiedStates.standard ? <Check style={{ width: '1rem', height: '1rem' }} /> : <Copy style={{ width: '1rem', height: '1rem' }} />}
                   </Button>
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
                   Pour interfaces de chat classiques
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm">
+              <CardContent style={{ gap: designTokens.spacing.lg }}>
+                <pre className={multiFormatPromptCodeVariants({ promptType: 'standard' })}>
                   {alternativeVersions.standard}
                 </pre>
 
                 {recommendedTools?.standard && (
                   <div>
-                    <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="font-medium" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.sm }}>Outils recommandés :</h4>
+                    <div className="flex flex-wrap" style={{ gap: designTokens.spacing.sm }}>
                       {recommendedTools.standard.map(tool => (
                         <Badge key={tool} variant="secondary">{tool}</Badge>
                       ))}
@@ -135,39 +137,39 @@ export default function MultiFormatPrompt({
         )}
 
         {alternativeVersions?.xml && (
-          <TabsContent value="xml" className="mt-4">
-            <Card>
+          <TabsContent value="xml" style={{ marginTop: designTokens.spacing.lg }}>
+            <Card className={multiFormatPromptCardVariants({ format: 'xml' })}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Version XML Structurée</CardTitle>
+                  <CardTitle style={{ fontSize: designTokens.typography.fontSize.lg }}>Version XML Structurée</CardTitle>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => copyToClipboard(alternativeVersions.xml!, 'xml')}
                   >
-                    {copiedStates.xml ? <Check className="size-4" /> : <Copy className="size-4" />}
+                    {copiedStates.xml ? <Check style={{ width: '1rem', height: '1rem' }} /> : <Copy style={{ width: '1rem', height: '1rem' }} />}
                   </Button>
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
                   Optimisé pour Claude et modèles sensibles à la structure
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent style={{ gap: designTokens.spacing.lg }}>
                 <Alert>
-                  <Settings className="size-4" />
+                  <Settings style={{ width: '1rem', height: '1rem' }} />
                   <AlertDescription>
                     Cette version utilise des balises XML pour une structuration claire des instructions et une meilleure fiabilité des réponses.
                   </AlertDescription>
                 </Alert>
 
-                <pre className="whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm">
+                <pre className={multiFormatPromptCodeVariants({ promptType: 'xml' })}>
                   {alternativeVersions.xml}
                 </pre>
 
                 {recommendedTools?.xml && (
                   <div>
-                    <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="font-medium" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.sm }}>Outils recommandés :</h4>
+                    <div className="flex flex-wrap" style={{ gap: designTokens.spacing.sm }}>
                       {recommendedTools.xml.map(tool => (
                         <Badge key={tool} variant="secondary">{tool}</Badge>
                       ))}
@@ -180,18 +182,18 @@ export default function MultiFormatPrompt({
         )}
 
         {alternativeVersions?.aiStudio && (
-          <TabsContent value="aiStudio" className="mt-4">
-            <Card>
+          <TabsContent value="aiStudio" style={{ marginTop: designTokens.spacing.lg }}>
+            <Card className={multiFormatPromptCardVariants({ format: 'aiStudio' })}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Version AI Studio</CardTitle>
+                  <CardTitle style={{ fontSize: designTokens.typography.fontSize.lg }}>Version AI Studio</CardTitle>
                   <div className="flex gap-2">
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.systemPrompt || '', 'system')}
                     >
-                      {copiedStates.system ? <Check className="size-4" /> : <Copy className="size-4" />}
+                      {copiedStates.system ? <Check style={{ width: '1rem', height: '1rem' }} /> : <Copy style={{ width: '1rem', height: '1rem' }} />}
                       System
                     </Button>
                     <Button
@@ -199,18 +201,18 @@ export default function MultiFormatPrompt({
                       variant="outline"
                       onClick={() => copyToClipboard(alternativeVersions.aiStudio?.userPrompt || '', 'user')}
                     >
-                      {copiedStates.user ? <Check className="size-4" /> : <Copy className="size-4" />}
+                      {copiedStates.user ? <Check style={{ width: '1rem', height: '1rem' }} /> : <Copy style={{ width: '1rem', height: '1rem' }} />}
                       User
                     </Button>
                   </div>
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
                   Optimisé pour les environnements avec System Prompt séparé
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent style={{ gap: designTokens.spacing.lg }}>
                 <Alert>
-                  <ExternalLink className="size-4" />
+                  <ExternalLink style={{ width: '1rem', height: '1rem' }} />
                   <AlertDescription>
                     Copiez le System Prompt dans le champ dédié et le User Prompt dans la zone principale pour une performance optimale.
                   </AlertDescription>
@@ -218,22 +220,22 @@ export default function MultiFormatPrompt({
 
                 <div>
                   <h4 className="text-sm font-medium mb-2">System Prompt :</h4>
-                  <pre className={`${contentCardVariants({ variant: 'concept', size: 'compact', interactive: false })} whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm`}>
+                  <pre className={multiFormatPromptCodeVariants({ promptType: 'system' })}>
                     {alternativeVersions.aiStudio.systemPrompt}
                   </pre>
                 </div>
 
                 <div>
                   <h4 className="text-sm font-medium mb-2">User Prompt :</h4>
-                  <pre className={`${contentCardVariants({ variant: 'guide', size: 'compact', interactive: false })} whitespace-pre-wrap bg-muted p-4 rounded-lg text-sm`}>
+                  <pre className={multiFormatPromptCodeVariants({ promptType: 'user' })}>
                     {alternativeVersions.aiStudio.userPrompt}
                   </pre>
                 </div>
 
                 {recommendedTools?.aiStudio && (
                   <div>
-                    <h4 className="text-sm font-medium mb-2">Outils recommandés :</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="font-medium" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.sm }}>Outils recommandés :</h4>
+                    <div className="flex flex-wrap" style={{ gap: designTokens.spacing.sm }}>
                       {recommendedTools.aiStudio.map(tool => (
                         <Badge key={tool} variant="secondary">{tool}</Badge>
                       ))}
@@ -247,9 +249,9 @@ export default function MultiFormatPrompt({
       </Tabs>
 
       {variables && variables.length > 0 && (
-        <Card className="mt-4">
+        <Card style={{ marginTop: designTokens.spacing.lg }}>
           <CardHeader>
-            <CardTitle className="text-lg">Variables à Remplacer</CardTitle>
+            <CardTitle style={{ fontSize: designTokens.typography.fontSize.lg }}>Variables à Remplacer</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

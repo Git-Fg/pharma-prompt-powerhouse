@@ -7,7 +7,6 @@ Ce dossier contient les types globaux partagés de l'application.
 ```
 src/types/
 ├── index.ts          # Point d'entrée principal - ré-exporte les types importants
-├── icon-taxonomy.ts  # Types et logique pour les icônes
 └── README.md         # Cette documentation
 ```
 

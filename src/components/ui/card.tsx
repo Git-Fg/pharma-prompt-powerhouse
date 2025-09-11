@@ -1,8 +1,8 @@
 'use client'
 
-import { cva } from 'class-variance-authority'
-
 import * as React from 'react'
+
+import { tv } from 'tailwind-variants'
 import { cn } from '@/lib/utils'
 
 interface CardContextValue {
@@ -19,7 +19,7 @@ function useCardContext() {
   return context
 }
 
-const cardVariants = cva(
+const cardVariants = tv(
   'bg-card/70 dark:bg-card/50 text-card-foreground backdrop-blur-xl rounded-lg border border-border/20 shadow-lg shadow-black/5 dark:shadow-black/20 transition-all duration-200 ease-spring hover-lift',
   {
     variants: {
@@ -35,7 +35,7 @@ const cardVariants = cva(
   },
 )
 
-const cardHeaderVariants = cva(
+const cardHeaderVariants = tv(
   'flex flex-col space-y-1.5 @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
   {
     variants: {
@@ -51,7 +51,7 @@ const cardHeaderVariants = cva(
   },
 )
 
-const cardContentVariants = cva(
+const cardContentVariants = tv(
   '',
   {
     variants: {
@@ -67,7 +67,7 @@ const cardContentVariants = cva(
   },
 )
 
-const cardFooterVariants = cva(
+const cardFooterVariants = tv(
   'flex items-center [.border-t]:pt-6',
   {
     variants: {

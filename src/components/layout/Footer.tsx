@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { content } from '@/lib/content-loader'
 import { getNavigationLinksBySection } from '@/lib/navigation'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
+import { designTokens } from '@/design-system/tokens'
 
 export function Footer() {
   // La logique de récupération des données reste la même
@@ -25,7 +26,12 @@ export function Footer() {
       {...createTestIdProps(TestIds.Layout.Footer)}
       className="bg-muted/50 border-t"
     >
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <div className="container mx-auto" style={{ 
+              paddingLeft: designTokens.spacing.md,
+              paddingRight: designTokens.spacing.md,
+              paddingTop: designTokens.spacing.xl3,
+              paddingBottom: designTokens.spacing.xl3
+            }}>
 
         {/* ====================================================================== */}
         {/* == 1. LAYOUT DESKTOP (GRAND ÉCRAN) - Inchangé mais caché par défaut == */}
@@ -33,24 +39,24 @@ export function Footer() {
         {/* ====================================================================== */}
         <div
           {...createTestIdProps('desktop-footer')}
-          className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-12"
+          className="hidden lg:grid lg:grid-cols-12" style={{ gap: designTokens.spacing.xl3 }}>
         >
           {/* Brand Section */}
-          <div className="lg:col-span-5 space-y-4" {...createTestIdProps('footer-brand-section')}>
-            <Link href="/" className="inline-flex items-center space-x-2 mb-3" {...createTestIdProps(TestIds.Navigation.Logo)}>
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+          <div className="lg:col-span-5" style={{ gap: designTokens.spacing.lg }} {...createTestIdProps('footer-brand-section')}>
+            <Link href="/" className="inline-flex items-center mb-3" style={{ gap: designTokens.spacing.sm }} {...createTestIdProps(TestIds.Navigation.Logo)}>
+              <div className="w-10 h-10 bg-primary flex items-center justify-center shadow-lg" style={{ borderRadius: designTokens.radius.xl }}>
                 <Brain className="size-6 text-primary-foreground" />
               </div>
-              <span className="font-bold text-xl">Pharma Prompt</span>
+              <span className="font-bold" style={{ fontSize: designTokens.typography.fontSize.xl }}>Pharma Prompt</span>
             </Link>
             <p className="prose-slogan mx-0" {...createTestIdProps('footer-brand-description')}>Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
 
           {/* Links Wrapper */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3" style={{ gap: designTokens.spacing.xl3 }}>
             {/* Navigation Section */}
             <nav aria-label="Navigation principale" {...createTestIdProps('footer-navigation-section')}>
-              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Navigation</h3>
+              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Navigation</h3>
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
                   <li key={link.name}>
@@ -69,7 +75,7 @@ export function Footer() {
             {/* Legal & Workflows */}
             <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
               <nav aria-label="Sécurité & Légal" {...createTestIdProps('footer-legal-section')}>
-                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Sécurité & Légal</h3>
+                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Sécurité & Légal</h3>
                 <ul className="space-y-3">
                   {legalLinks.map(link => (
                     <li key={link.name}>
@@ -86,7 +92,7 @@ export function Footer() {
                 </ul>
               </nav>
               <nav aria-label="Workflows" {...createTestIdProps('footer-workflows-section')}>
-                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">Workflows</h3>
+                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Workflows</h3>
                 <div className="space-y-3">
                   {recentWorkflows.map(workflow => (
                     <Link
@@ -120,10 +126,10 @@ export function Footer() {
           {...createTestIdProps('mobile-footer')}
           className="lg:hidden"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm" style={{ gap: designTokens.spacing.xl3, fontSize: designTokens.typography.fontSize.sm }}>
             {/* Colonne 1: Navigation */}
             <nav aria-label="Navigation principale">
-              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Navigation</h3>
+              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Navigation</h3>
               <ul className="space-y-3">
                 {navigationLinks.map(link => (
                   <li key={link.name}><Link href={link.href} className="text-muted-foreground hover:text-foreground">{link.name}</Link></li>
@@ -132,7 +138,7 @@ export function Footer() {
             </nav>
             {/* Colonne 2: Workflows */}
             <nav aria-label="Workflows">
-              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Workflows</h3>
+              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Workflows</h3>
               <ul className="space-y-3">
                 {recentWorkflows.map(workflow => (
                   <li key={workflow.slug}><Link href={`/workflows/${workflow.slug}`} className="text-muted-foreground hover:text-foreground">{workflow.title}</Link></li>
@@ -142,7 +148,7 @@ export function Footer() {
             </nav>
             {/* Colonne 3: Légal (apparaît sur sm et +) */}
             <nav aria-label="Sécurité & Légal" className="col-span-2 sm:col-span-1">
-              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground">Sécurité & Légal</h3>
+              <h3 className="font-semibold uppercase tracking-wider mb-4 text-foreground" style={{ fontSize: designTokens.typography.fontSize.sm, marginBottom: designTokens.spacing.lg }}>Sécurité & Légal</h3>
               <ul className="space-y-3">
                 {legalLinks.map(link => (
                   <li key={link.name}><Link href={link.href} className="text-muted-foreground hover:text-foreground">{link.name}</Link></li>
@@ -152,21 +158,21 @@ export function Footer() {
           </div>
 
           {/* Brand & Description centrés en bas pour mobile */}
-          <div className="text-center mt-8 pt-6 border-t" {...createTestIdProps('mobile-footer-brand')}>
-            <Link href="/" className="inline-flex items-center space-x-2 mb-3" {...createTestIdProps(TestIds.Navigation.Logo)}>
+          <div className="text-center mt-8 pt-6 border-t" style={{ marginTop: designTokens.spacing.xl2, paddingTop: designTokens.spacing.lg }} {...createTestIdProps('mobile-footer-brand')}>
+            <Link href="/" className="inline-flex items-center mb-3" style={{ gap: designTokens.spacing.sm }} {...createTestIdProps(TestIds.Navigation.Logo)}>
               <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-md">
                 <Brain className="size-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-lg">Pharma Prompt</span>
             </Link>
-            <p className="prose-slogan text-xs mx-auto" {...createTestIdProps('mobile-footer-description')}>Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
+            <p className="prose-slogan text-xs mx-auto" style={{ fontSize: designTokens.typography.fontSize.xs }} {...createTestIdProps('mobile-footer-description')}>Mon carnet de notes personnel pour travailler avec l'IA en pharmacie, partagé avec ❤️ pour la communauté.</p>
           </div>
         </div>
 
         {/* ====================================================================== */}
         {/* == 3. COPYRIGHT - Commun aux deux layouts pour éviter la duplication == */}
         {/* ====================================================================== */}
-        <div className="border-t mt-8 pt-6 text-center" {...createTestIdProps('footer-copyright')}>
+        <div className="border-t mt-8 pt-6 text-center" style={{ marginTop: designTokens.spacing.xl2, paddingTop: designTokens.spacing.lg }} {...createTestIdProps('footer-copyright')}>
           <p className="text-sm text-muted-foreground">
             ©
             {new Date().getFullYear()}

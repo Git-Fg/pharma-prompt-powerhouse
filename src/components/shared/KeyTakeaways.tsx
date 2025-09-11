@@ -4,6 +4,7 @@ import { CheckCircle, Info, Lightbulb, Target, TrendingUp, Zap } from 'lucide-re
 import React from 'react'
 import { Animate } from '@/components/ui/Animate'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { keyTakeawaysIconVariants, keyTakeawaysItemIconVariants, keyTakeawaysItemsVariants, keyTakeawaysItemTextVariants, keyTakeawaysItemVariants, keyTakeawaysTitleVariants, keyTakeawaysVariants } from '@/components/ui/variants'
 import { cn } from '@/lib/utils'
 
 interface KeyTakeawaysProps {
@@ -21,33 +22,6 @@ interface KeyTakeawaysProps {
    */
   animated?: boolean
   className?: string
-}
-
-const variantStyles = {
-  default: {
-    container: 'bg-primary/5 border-primary/20',
-    title: 'text-primary',
-    items: 'space-y-3',
-    icon: 'bg-primary/20',
-  },
-  highlighted: {
-    container: 'bg-gradient-to-r from-primary/15 via-primary/10 to-primary/5 border-2 border-primary/30 shadow-lg',
-    title: 'text-primary font-bold text-xl',
-    items: 'space-y-4',
-    icon: 'bg-primary/30',
-  },
-  compact: {
-    container: 'bg-muted/30 border-l-4 border-l-primary/60',
-    title: 'text-sm text-foreground font-medium',
-    items: 'space-y-2',
-    icon: 'bg-primary/15',
-  },
-  featured: {
-    container: 'bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-2 border-primary/40 shadow-xl relative overflow-hidden',
-    title: 'text-primary font-bold text-xl',
-    items: 'space-y-5',
-    icon: 'bg-primary/40',
-  },
 }
 
 const contentIcons = {
@@ -68,17 +42,10 @@ export function KeyTakeaways({
     return null
   }
 
-  const styles = variantStyles[variant] || variantStyles.default
   const IconComponent = contentIcons[contentType] || Info
 
-  // Safety check for undefined styles
-  if (!styles) {
-    console.warn(`Unknown KeyTakeaways variant: "${variant}". Using default.`)
-    return null
-  }
-
   const cardContent = (
-    <Card className={cn(styles.container, className)}>
+    <Card className={cn(keyTakeawaysVariants({ variant }), className)}>
       {/* Background decoration for featured variant */}
       {variant === 'featured' && (
         <div className="absolute top-0 right-0 w-24 h-24 -mr-6 -mt-6 opacity-10">
@@ -88,16 +55,10 @@ export function KeyTakeaways({
 
       <CardHeader className={variant === 'compact' ? 'pb-3' : undefined}>
         <CardTitle className={cn(
-          'flex items-center gap-3',
-          styles.title,
-          variant === 'compact' ? 'text-base' : 'text-lg',
+          keyTakeawaysTitleVariants({ variant }),
         )}
         >
-          <div className={cn(
-            'flex items-center justify-center rounded-lg',
-            variant === 'featured' ? 'w-10 h-10 bg-primary/30' : 'w-6 h-6 bg-primary/20',
-          )}
-          >
+          <div className={keyTakeawaysIconVariants({ variant })}>
             <IconComponent className={cn(
               'text-primary',
               variant === 'featured' ? 'size-5' : 'size-4',
@@ -113,24 +74,14 @@ export function KeyTakeaways({
       </CardHeader>
 
       <CardContent className={variant === 'compact' ? 'pt-0' : undefined}>
-        <ul className={styles.items}>
+        <ul className={keyTakeawaysItemsVariants({ variant })}>
           {points.map((point, index) => (
             <li
               // eslint-disable-next-line react/no-array-index-key -- Index acceptable pour des points clés avec contenu unique
               key={`takeaway-${point.slice(0, 30).replace(/\s+/g, '-')}-${index}`}
-              className={cn(
-                'flex items-start gap-3 group',
-                variant === 'featured' && 'p-3 rounded-lg hover:bg-background/30 transition-colors',
-              )}
+              className={keyTakeawaysItemVariants({ variant })}
             >
-              <div className={cn(
-                'flex items-center justify-center rounded-full flex-shrink-0',
-                variant === 'compact' ? 'w-4 h-4 mt-1' : 'w-5 h-5 mt-1',
-                variant === 'featured'
-                  ? 'bg-green-100 dark:bg-green-900/30 group-hover:bg-green-200 dark:group-hover:bg-green-800/40'
-                  : 'bg-green-100 dark:bg-green-900/30',
-              )}
-              >
+              <div className={keyTakeawaysItemIconVariants({ variant })}>
                 <CheckCircle className={cn(
                   'text-green-600 dark:text-green-400',
                   variant === 'compact' ? 'size-2.5' : 'size-3',
@@ -138,12 +89,7 @@ export function KeyTakeaways({
                 />
               </div>
 
-              <p className={cn(
-                'text-muted-foreground leading-relaxed',
-                variant === 'compact' ? 'text-sm' : 'text-base',
-                variant === 'featured' && 'text-foreground font-medium',
-              )}
-              >
+              <p className={keyTakeawaysItemTextVariants({ variant })}>
                 {point}
               </p>
 

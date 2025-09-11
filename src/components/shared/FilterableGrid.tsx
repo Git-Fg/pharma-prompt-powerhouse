@@ -16,6 +16,7 @@ import { useListAnimation } from '@/hooks/useAutoAnimate'
 import { useContentFilter } from '@/hooks/useContentFilter'
 import { categoryLabels, difficultyLabels } from '@/lib/constants'
 import { createTestIdProps, TestIds } from '@/lib/test-utils'
+import { designTokens } from '@/design-system/tokens'
 
 // Interface de base que les items doivent respecter pour utiliser ce composant
 export interface BaseContentItem {
@@ -88,17 +89,17 @@ export function FilterableGrid<TItem extends BaseContentItem>({
         {/* Search and Filters */}
         <div className="space-y-4">
           <Container variant="detail" className="relative px-0" {...createTestIdProps(TestIds.Form.Input('search'))}>
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" style={{ width: '1rem', height: '1rem' }} />
             <Input
               placeholder={searchPlaceholder}
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="pl-10"
+              style={{ paddingLeft: '2.5rem' }}
             />
           </Container>
 
           {(showCategoryFilter && categories.length > 1) && (
-            <div className="flex justify-center gap-2 flex-wrap" {...createTestIdProps(TestIds.Form.Select('category'))}>
+            <div className="flex justify-center flex-wrap" style={{ gap: designTokens.spacing.sm }} {...createTestIdProps(TestIds.Form.Select('category'))}>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="Catégorie" />
@@ -116,7 +117,7 @@ export function FilterableGrid<TItem extends BaseContentItem>({
           )}
 
           {(showDifficultyFilter && difficulties.length > 1) && (
-            <div className="flex justify-center gap-2 flex-wrap">
+            <div className="flex justify-center flex-wrap" style={{ gap: designTokens.spacing.sm }}>
               <Button
                 variant={selectedDifficulty === 'all' ? 'default' : 'outline'}
                 size="sm"
@@ -158,12 +159,12 @@ export function FilterableGrid<TItem extends BaseContentItem>({
       {/* Search and Filters */}
       <div className="space-y-4">
         <Container variant="detail" className="relative px-0" {...createTestIdProps(TestIds.Form.Input('search'))}>
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground size-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" style={{ width: '1rem', height: '1rem' }} />
           <Input
             placeholder={searchPlaceholder}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="pl-10"
+            style={{ paddingLeft: '2.5rem' }}
           />
         </Container>
 

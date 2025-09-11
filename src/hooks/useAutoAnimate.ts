@@ -18,8 +18,20 @@ export function useListAnimation(options?: {
   easing?: string
 }) {
   const prefersReducedMotion = useReducedMotion()
+
+  // Get duration from CSS custom property
+  const getDuration = () => {
+    if (typeof window !== 'undefined') {
+      const cssDuration = getComputedStyle(document.documentElement)
+        .getPropertyValue('--duration-normal')
+        .trim()
+      return options?.duration || (cssDuration ? Number.parseInt(cssDuration) : 250)
+    }
+    return options?.duration || 250
+  }
+
   const [enabledRef] = useAutoAnimate({
-    duration: options?.duration || 200,
+    duration: getDuration(),
     easing: options?.easing || 'ease-out',
   })
 
@@ -31,8 +43,20 @@ export function useListAnimation(options?: {
  */
 export function useLayoutAnimation() {
   const prefersReducedMotion = useReducedMotion()
+
+  // Get duration from CSS custom property
+  const getDuration = () => {
+    if (typeof window !== 'undefined') {
+      const cssDuration = getComputedStyle(document.documentElement)
+        .getPropertyValue('--duration-fast')
+        .trim()
+      return cssDuration ? Number.parseInt(cssDuration) : 150
+    }
+    return 150
+  }
+
   const [enabledRef] = useAutoAnimate({
-    duration: 150,
+    duration: getDuration(),
     easing: 'ease-in-out',
   })
 

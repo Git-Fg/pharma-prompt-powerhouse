@@ -2,16 +2,6 @@ import type { LucideIcon } from 'lucide-react'
 // src/lib/navigation.ts
 import { BookOpen, Brain, ExternalLink, Home, Shield, Target } from 'lucide-react'
 
-// Type-safe icon mapping for navigation
-const navigationIcons: Record<string, LucideIcon> = {
-  Home,
-  Target,
-  BookOpen,
-  ExternalLink,
-  Brain,
-  Shield,
-}
-
 // =================================================================
 // UTILITAIRES DE CHEMIN D'ACCÈS ET FIL D'ARIANE
 // =================================================================
@@ -151,7 +141,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Accueil',
     href: '/',
-    icon: navigationIcons.Home!,
+    icon: Home,
     section: 'main',
     description: 'Page d\'accueil du site',
     showInMobileNav: true,
@@ -159,7 +149,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Par où commencer ?',
     href: '/par-ou-commencer',
-    icon: navigationIcons.Target!,
+    icon: Target,
     section: 'main',
     description: 'Guide de démarrage pour débuter avec l\'IA',
     showInMobileNav: true,
@@ -167,7 +157,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Workflows Stratégiques',
     href: '/workflows',
-    icon: navigationIcons.BookOpen!,
+    icon: BookOpen,
     section: 'main',
     description: 'Méthodes complètes pour vos cas d\'usage',
     showInMobileNav: true,
@@ -175,7 +165,7 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'L\'Arsenal IA',
     href: '/l-arsenal-ia',
-    icon: navigationIcons.ExternalLink!,
+    icon: ExternalLink,
     section: 'main',
     description: 'Comparaison d\'outils avec mon retour d\'expérience',
     showInMobileNav: true,
@@ -183,14 +173,14 @@ export const navigationLinks: NavItem[] = [
   {
     name: 'Concepts',
     href: '/concepts',
-    icon: navigationIcons.Brain!,
+    icon: Brain,
     section: 'main',
     description: 'Définitions claires pour comprendre l\'IA',
   },
   {
     name: 'Confidentialité',
     href: '/guides/confidentialite-securite',
-    icon: navigationIcons.Shield!,
+    icon: Shield,
     section: 'legal',
     description: 'Guide de sécurité et confidentialité',
   },

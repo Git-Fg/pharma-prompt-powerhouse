@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { designTokens } from '@/design-system/tokens'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -94,12 +95,18 @@ export function InstallPrompt() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 md:left-auto md:right-4">
+    <div className="fixed bottom-4 left-4 right-4 z-50 md:left-auto md:right-4" style={{
+      marginBottom: designTokens.spacing.lg,
+      marginLeft: designTokens.spacing.md,
+      marginRight: designTokens.spacing.md
+    }}>
       <Container variant="detail" className="px-0">
-        <Card className="shadow-lg border-2 border-primary/20">
+        <Card className="shadow-lg border-2" style={{
+          borderColor: designTokens.color.primary.DEFAULT + '20'
+        }}>
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">Installer l'app</CardTitle>
+              <CardTitle className="prose-lg">Installer l'app</CardTitle>
               <Button
                 variant="ghost"
                 size="sm"

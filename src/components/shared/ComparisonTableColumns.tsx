@@ -8,22 +8,23 @@ import Link from 'next/link'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { getStarRatingProps } from '@/lib/ui-utils'
+import { designTokens } from '@/design-system/tokens'
 
 // Helper pour le rendu des étoiles
 function renderStarRating(score?: number) {
   if (!score)
-    return <span className="text-muted-foreground text-xs">N/A</span>
+    return <span className="text-muted-foreground prose-caption prose-caption-xs">N/A</span>
 
   const starProps = getStarRatingProps(score)
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1" style={{ gap: designTokens.spacing.xs }}>
       {starProps.stars.map(star => (
         <Star
           key={star.index}
           className={`w-3 h-3 ${star.className}`}
         />
       ))}
-      <span className="ml-1 text-xs text-muted-foreground">
+      <span className="prose-caption prose-caption-xs text-muted-foreground" style={{ marginLeft: designTokens.spacing.xs }}>
         {score}
         /5
       </span>

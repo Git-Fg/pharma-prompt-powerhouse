@@ -114,12 +114,87 @@
   --z-toast: 1700;
   --z-tooltip: 1800;
 
-  /* Animation Durations - Modern 2025 Standards */
+  /* Loading and Skeleton Tokens */
+  --skeleton-height-sm: 1rem; /* 16px - pour les lignes de texte */
+  --skeleton-height-md: 1.25rem; /* 20px - pour les sous-titres */
+  --skeleton-height-lg: 1.5rem; /* 24px - pour les titres */
+  --skeleton-height-xl: 2rem; /* 32px - pour les cards */
+  --skeleton-height-2xl: 3rem; /* 48px - pour les headers */
+  --skeleton-height-3xl: 4rem; /* 64px - pour les grandes images */
+  --skeleton-width-full: 100%;
+  --skeleton-width-3xs: 4rem; /* 64px */
+  --skeleton-width-2xs: 6rem; /* 96px */
+  --skeleton-width-xs: 8rem; /* 128px */
+  --skeleton-width-sm: 12rem; /* 192px */
+  --skeleton-width-md: 16rem; /* 256px */
+  --skeleton-width-lg: 20rem; /* 320px */
+  --skeleton-width-xl: 24rem; /* 384px */
+  --skeleton-width-2xl: 32rem; /* 512px */
+  --skeleton-width-3xl: 40rem; /* 640px */
+  --skeleton-width-4xl: 48rem; /* 768px */
+  --skeleton-width-5xl: 56rem; /* 896px */
+  --skeleton-radius: var(--radius-md);
+  --skeleton-shimmer-duration: 2.5s;
+  --skeleton-pulse-duration: 2s;
+  --skeleton-delay: 150ms;
+
+  /* Icon and Interactive Element Tokens */
+  --icon-size-xs: 0.75rem; /* 12px - très petits détails */
+  --icon-size-sm: 1rem; /* 16px - icônes standards */
+  --icon-size-md: 1.25rem; /* 20px - icônes moyennes */
+  --icon-size-lg: 1.5rem; /* 24px - icônes importantes */
+  --icon-size-xl: 2rem; /* 32px - grandes icônes */
+  --icon-size-2xl: 2.5rem; /* 40px - très grandes icônes */
+  --icon-size-3xl: 3rem; /* 48px - icônes d'hero */
+  --icon-spacing-xs: 0.25rem; /* 4px - espacement minimal */
+  --icon-spacing-sm: 0.5rem; /* 8px - espacement standard */
+  --icon-spacing-md: 0.75rem; /* 12px - espacement moyen */
+  --icon-spacing-lg: 1rem; /* 16px - espacement important */
+  --icon-spacing-xl: 1.5rem; /* 24px - espacement large */
+
+  /* Advanced Spacing Tokens */
+  --spacing-4xs: 0.125rem; /* 2px - espacement micro */
+  --spacing-3xs: 0.25rem; /* 4px - espacement très petit */
+  --spacing-2xs: 0.375rem; /* 6px - espacement extra petit */
+  --spacing-xs: 0.5rem; /* 8px - espacement petit */
+  --spacing-sm: 0.75rem; /* 12px - espacement moyen petit */
+  --spacing-md: 1rem; /* 16px - espacement standard */
+  --spacing-lg: 1.5rem; /* 24px - espacement moyen */
+  --spacing-xl: 2rem; /* 32px - espacement grand */
+  --spacing-2xl: 3rem; /* 48px - espacement très grand */
+  --spacing-3xl: 4rem; /* 64px - espacement extra grand */
+  --spacing-4xl: 6rem; /* 96px - espacement XXL */
+  --spacing-5xl: 8rem; /* 128px - espacement XXXL */
+  --spacing-6xl: 12rem; /* 192px - espacement maximal */
+  --spacing-7xl: 16rem; /* 256px - espacement hero */
+
+  /* Interactive Component Tokens */
+  --interactive-height-sm: 2rem; /* 32px - petits boutons */
+  --interactive-height-md: 2.5rem; /* 40px - boutons standards */
+  --interactive-height-lg: 3rem; /* 48px - grands boutons */
+  --interactive-height-xl: 3.5rem; /* 56px - très grands boutons */
+  --interactive-padding-sm: 0.5rem 1rem; /* 8px 16px */
+  --interactive-padding-md: 0.75rem 1.5rem; /* 12px 24px */
+  --interactive-padding-lg: 1rem 2rem; /* 16px 32px */
+  --interactive-radius: var(--radius-md);
+  --interactive-border-width: 1px;
+  --interactive-border-focus: 2px;
+
+  /* Advanced Animation Tokens */
   --duration-instant: 0ms;
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
   --duration-slower: 600ms;
+  --duration-extra-slow: 800ms;
+  --stagger-delay-xs: 50ms;
+  --stagger-delay-sm: 100ms;
+  --stagger-delay-md: 150ms;
+  --stagger-delay-lg: 200ms;
+  --stagger-delay-xl: 250ms;
+  --loading-delay-sm: 100ms;
+  --loading-delay-md: 200ms;
+  --loading-delay-lg: 300ms;
 
   /* Modern Easing Functions */
   --ease-linear: linear;
@@ -129,12 +204,160 @@
   --ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-power: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Typography Refinements */
+  --line-height-tight: 1.1; /* pour les titres */
+  --line-height-normal: 1.2; /* pour les sous-titres */
+  --line-height-comfortable: 1.4; /* pour les textes */
+  --line-height-relaxed: 1.6; /* pour les paragraphes */
+  --line-height-loose: 1.8; /* pour les citations */
+  --letter-spacing-tight: -0.025em; /* pour les titres */
+  --letter-spacing-normal: 0; /* pour le texte normal */
+  --letter-spacing-wide: 0.025em; /* pour le texte espacé */
+  --letter-spacing-wider: 0.05em; /* pour les textes décoratifs */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* Shadow System Enhancements */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-3xl: 0 35px 60px -15px rgb(0 0 0 / 0.3);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-colored: 0 10px 25px -3px var(--primary);
+  --shadow-glow: 0 0 20px color-mix(in oklab, var(--primary) 30%, transparent);
+  --shadow-interactive: 0 4px 12px color-mix(in oklab, var(--primary) 20%, transparent);
+
+  /* Grid and Layout Tokens */
+  --grid-gap-xs: 0.5rem; /* 8px */
+  --grid-gap-sm: 1rem; /* 16px */
+  --grid-gap-md: 1.5rem; /* 24px */
+  --grid-gap-lg: 2rem; /* 32px */
+  --grid-gap-xl: 3rem; /* 48px */
+  --grid-cols-1: 1;
+  --grid-cols-2: 2;
+  --grid-cols-3: 3;
+  --grid-cols-4: 4;
+  --grid-cols-5: 5;
+  --grid-cols-6: 6;
+
+  /* Responsive Container Tokens */
+  --container-xs: 20rem; /* 320px - mobile */
+  --container-sm: 24rem; /* 384px */
+  --container-md: 28rem; /* 448px */
+  --container-lg: 32rem; /* 512px */
+  --container-xl: 36rem; /* 576px */
+  --container-2xl: 42rem; /* 672px */
+  --container-3xl: 48rem; /* 768px */
+  --container-4xl: 56rem; /* 896px */
+  --container-5xl: 64rem; /* 1024px */
+  --container-6xl: 72rem; /* 1152px */
+  --container-7xl: 80rem; /* 1280px */
+  --container-8xl: 96rem; /* 1536px */
+
+  /* Border Width Tokens */
+  --border-width-none: 0;
+  --border-width-hairline: 1px;
+  --border-width-thin: 2px;
+  --border-width-medium: 3px;
+  --border-width-thick: 4px;
+  --border-width-extra-thick: 6px;
+
+  /* Opacity Tokens */
+  --opacity-none: 0;
+  --opacity-minimal: 0.1;
+  --opacity-light: 0.2;
+  --opacity-regular: 0.3;
+  --opacity-medium: 0.4;
+  --opacity-strong: 0.5;
+  --opacity-heavy: 0.6;
+  --opacity-intense: 0.7;
+  --opacity-dense: 0.8;
+  --opacity-almost: 0.9;
+  --opacity-full: 1;
 
   /* Layout Spacing */
   --section-padding-mobile: 2rem 0;
   --section-padding-desktop: 3rem 0;
   --content-gap-mobile: 1.5rem;
   --content-gap-desktop: 2rem;
+
+  /* Toast and Notification Tokens */
+  --toast-duration-short: 2000ms; /* 2s - notifications rapides */
+  --toast-duration-medium: 3000ms; /* 3s - notifications standards */
+  --toast-duration-long: 4000ms; /* 4s - notifications importantes */
+  --toast-duration-extra-long: 5000ms; /* 5s - notifications critiques */
+
+  /* Drawer and Sheet Tokens */
+  --drawer-height-mobile: 80vh;
+  --drawer-height-tablet: 85vh;
+  --drawer-height-desktop: 90vh;
+  --sheet-width-mobile: 20rem; /* 320px */
+  --sheet-width-tablet: 25rem; /* 400px */
+  --sheet-width-desktop: 30rem; /* 480px */
+
+  /* Filter and Form Component Tokens */
+  --filter-width-category: 15rem; /* 240px */
+  --filter-width-difficulty: 11.25rem; /* 180px */
+  --filter-width-search: 12rem; /* 192px */
+  --filter-width-type: 10rem; /* 160px */
+
+  /* Sidebar Tokens */
+  --sidebar-width-mobile: 3rem; /* 48px - version icônes */
+  --sidebar-width-tablet: 16rem; /* 256px - version réduite */
+  --sidebar-width-desktop: 18rem; /* 288px - version complète */
+  --sidebar-icon-size: 1.5rem; /* 24px */
+
+  /* Table and Data Display Tokens */
+  --table-min-width: 37.5rem; /* 600px */
+  --table-cell-padding: 1rem; /* 16px */
+  --table-header-height: 3rem; /* 48px */
+  --table-row-height: 2.5rem; /* 40px */
+
+  /* Transform and Animation Distance Tokens */
+  --transform-distance-xs: 2px; /* pour les micro-interactions */
+  --transform-distance-sm: 4px; /* pour les interactions légères */
+  --transform-distance-md: 10px; /* pour les interactions moyennes */
+  --transform-distance-lg: 20px; /* pour les animations principales */
+  --transform-distance-xl: 40px; /* pour les animations dramatiques */
+  --transform-scale-small: 0.95; /* pour le scale-down subtil */
+  --transform-scale-medium: 0.9; /* pour le scale-down prononcé */
+  --transform-scale-large: 1.05; /* pour le scale-up prononcé */
+
+  /* Visual Effect Tokens */
+  --blur-amount-sm: 4px; /* pour les effets légers */
+  --blur-amount-md: 8px; /* pour les effets standards */
+  --blur-amount-lg: 12px; /* pour les effets prononcés */
+  --blur-amount-xl: 16px; /* pour les effets importants */
+  --blur-amount-2xl: 20px; /* pour les effets glassmorphism */
+
+  /* Command Palette Tokens */
+  --kbd-height: 1.25rem; /* 20px */
+  --kbd-padding-xs: 0.375rem; /* 6px */
+  --kbd-text-size: 0.625rem; /* 10px */
+  --kbd-border-radius: 0.25rem; /* 4px */
+  --kbd-border-width: 1px; /* 1px */
+
+  /* Loading States Tokens */
+  --loading-spinner-size-sm: 1rem; /* 16px */
+  --loading-spinner-size-md: 1.5rem; /* 24px */
+  --loading-spinner-size-lg: 2rem; /* 32px */
+  --loading-spinner-size-xl: 3rem; /* 48px */
+  --loading-duration-sm: 1000ms;
+  --loading-duration-md: 1500ms;
+  --loading-duration-lg: 2000ms;
 
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -262,7 +485,7 @@
 
 @keyframes slideUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(var(--transform-distance-lg));
     opacity: 0;
   }
   to {
@@ -273,7 +496,7 @@
 
 @keyframes slideDown {
   from {
-    transform: translateY(-20px);
+    transform: translateY(calc(var(--transform-distance-lg) * -1));
     opacity: 0;
   }
   to {
@@ -284,7 +507,7 @@
 
 @keyframes slideLeft {
   from {
-    transform: translateX(20px);
+    transform: translateX(var(--transform-distance-lg));
     opacity: 0;
   }
   to {
@@ -295,7 +518,7 @@
 
 @keyframes slideRight {
   from {
-    transform: translateX(-20px);
+    transform: translateX(calc(var(--transform-distance-lg) * -1));
     opacity: 0;
   }
   to {
@@ -306,7 +529,7 @@
 
 @keyframes scaleUp {
   from {
-    transform: scale(0.95);
+    transform: scale(var(--transform-scale-small));
     opacity: 0;
   }
   to {
@@ -317,7 +540,7 @@
 
 @keyframes scaleDown {
   from {
-    transform: scale(1.05);
+    transform: scale(var(--transform-scale-large));
     opacity: 1;
   }
   to {
@@ -335,10 +558,10 @@
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-4px);
+    transform: translateY(calc(var(--transform-distance-sm) * -1));
   }
   60% {
-    transform: translateY(-2px);
+    transform: translateY(calc(var(--transform-distance-xs) * -1));
   }
 }
 
@@ -367,7 +590,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(calc(var(--transform-distance-md) * -1));
   }
 }
 
@@ -478,7 +701,7 @@
 }
 
 @utility prose-slogan {
-  @apply text-xl/relaxed text-muted-foreground text-pretty;
+  @apply text-sm/relaxed text-muted-foreground text-pretty;
 }
 
 @utility prose-description {
@@ -572,6 +795,115 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+/* =================================================================
+ * SEMANTIC CONTAINER UTILITIES - Tailwind v4 Bug Workaround
+ * =================================================================
+ * These utilities provide semantic container classes that use CSS custom
+ * properties instead of problematic Tailwind v4 max-width classes.
+ * Use these instead of: max-w-xs, max-w-sm, max-w-md, max-w-lg, etc.
+ */
+
+@utility container-sm {
+  max-width: var(--container-sm); /* 24rem - 384px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-md {
+  max-width: var(--container-md); /* 28rem - 448px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-lg {
+  max-width: var(--container-lg); /* 32rem - 512px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-xl {
+  max-width: var(--container-xl); /* 36rem - 576px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-2xl {
+  max-width: var(--container-2xl); /* 42rem - 672px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-3xl {
+  max-width: var(--container-3xl); /* 48rem - 768px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-4xl {
+  max-width: var(--container-4xl); /* 56rem - 896px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-5xl {
+  max-width: var(--container-5xl); /* 64rem - 1024px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-prose {
+  max-width: var(--prose-max-width); /* 65rem - 1040px */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-full {
+  max-width: var(--container-full); /* 100% */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Responsive container utilities with padding */
+@utility container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+
+  @media (min-width: var(--breakpoint-sm)) {
+    max-width: var(--container-sm);
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+
+  @media (min-width: var(--breakpoint-md)) {
+    max-width: var(--container-md);
+  }
+
+  @media (min-width: var(--breakpoint-lg)) {
+    max-width: var(--container-lg);
+  }
+
+  @media (min-width: var(--breakpoint-xl)) {
+    max-width: var(--container-xl);
+  }
+
+  @media (min-width: var(--breakpoint-2xl)) {
+    max-width: var(--container-2xl);
+  }
 }
 
 /* Semantic layout utilities for consistent page widths */
@@ -817,13 +1149,13 @@
 
   .glass {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--blur-amount-2xl));
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .glass-dark {
     background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--blur-amount-2xl));
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -842,37 +1174,37 @@
 
   /* Individual animation classes with CSS custom properties */
   .animate-fade-in {
-    animation: fadeIn var(--duration-normal, 0.4s) var(--ease-smooth, ease-out) forwards;
+    animation: fadeIn var(--duration-normal) var(--ease-smooth) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-up {
-    animation: slideUp var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: slideUp var(--duration-normal) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-down {
-    animation: slideDown var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: slideDown var(--duration-normal) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-left {
-    animation: slideLeft var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: slideLeft var(--duration-normal) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-slide-right {
-    animation: slideRight var(--duration-normal, 0.5s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: slideRight var(--duration-normal) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-scale-up {
-    animation: scaleUp var(--duration-fast, 0.3s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: scaleUp var(--duration-fast) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
   .animate-scale-down {
-    animation: scaleDown var(--duration-fast, 0.3s) var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation: scaleDown var(--duration-fast) var(--ease-spring) forwards;
     animation-delay: var(--animation-delay, 0s);
   }
 
@@ -933,7 +1265,7 @@
   }
 
   .hover-lift:hover {
-    transform: translateY(-2px);
+    transform: translateY(calc(var(--transform-distance-sm) * -1));
   }
 
   .hover-scale {
@@ -949,7 +1281,7 @@
   }
 
   .hover-glow:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lg);
   }
 
   /* New interaction utilities for recipes */
@@ -963,7 +1295,9 @@
 
   /* Loading and skeleton states */
   .skeleton {
-    @apply bg-muted animate-pulse-subtle rounded;
+    background-color: var(--muted);
+    animation: var(--animate-pulse-subtle);
+    border-radius: var(--skeleton-radius);
     position: relative;
     overflow: hidden;
   }
@@ -977,6 +1311,80 @@
     bottom: 0;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
     animation: var(--animate-shimmer);
+  }
+
+  /* Skeleton height utilities */
+  .skeleton-h-sm {
+    height: var(--skeleton-height-sm);
+  }
+
+  .skeleton-h-md {
+    height: var(--skeleton-height-md);
+  }
+
+  .skeleton-h-lg {
+    height: var(--skeleton-height-lg);
+  }
+
+  .skeleton-h-xl {
+    height: var(--skeleton-height-xl);
+  }
+
+  .skeleton-h-2xl {
+    height: var(--skeleton-height-2xl);
+  }
+
+  .skeleton-h-3xl {
+    height: var(--skeleton-height-3xl);
+  }
+
+  /* Skeleton width utilities */
+  .skeleton-w-full {
+    width: var(--skeleton-width-full);
+  }
+
+  .skeleton-w-3xs {
+    width: var(--skeleton-width-3xs);
+  }
+
+  .skeleton-w-2xs {
+    width: var(--skeleton-width-2xs);
+  }
+
+  .skeleton-w-xs {
+    width: var(--skeleton-width-xs);
+  }
+
+  .skeleton-w-sm {
+    width: var(--skeleton-width-sm);
+  }
+
+  .skeleton-w-md {
+    width: var(--skeleton-width-md);
+  }
+
+  .skeleton-w-lg {
+    width: var(--skeleton-width-lg);
+  }
+
+  .skeleton-w-xl {
+    width: var(--skeleton-width-xl);
+  }
+
+  .skeleton-w-2xl {
+    width: var(--skeleton-width-2xl);
+  }
+
+  .skeleton-w-3xl {
+    width: var(--skeleton-width-3xl);
+  }
+
+  .skeleton-w-4xl {
+    width: var(--skeleton-width-4xl);
+  }
+
+  .skeleton-w-5xl {
+    width: var(--skeleton-width-5xl);
   }
 
   /* Modern stagger animation system */
@@ -1152,6 +1560,63 @@
   /* Mobile safe area padding for bottom navigation */
   .safe-area-padding-bottom {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Icon size utilities */
+  .icon-size-xs {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+  }
+
+  .icon-size-sm {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+
+  .icon-size-md {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  .icon-size-lg {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+  }
+
+  .icon-size-xl {
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
+  }
+
+  .icon-size-2xl {
+    width: var(--icon-size-2xl);
+    height: var(--icon-size-2xl);
+  }
+
+  .icon-size-3xl {
+    width: var(--icon-size-3xl);
+    height: var(--icon-size-3xl);
+  }
+
+  /* Icon spacing utilities */
+  .icon-spacing-xs {
+    margin-right: var(--icon-spacing-xs);
+  }
+
+  .icon-spacing-sm {
+    margin-right: var(--icon-spacing-sm);
+  }
+
+  .icon-spacing-md {
+    margin-right: var(--icon-spacing-md);
+  }
+
+  .icon-spacing-lg {
+    margin-right: var(--icon-spacing-lg);
+  }
+
+  .icon-spacing-xl {
+    margin-right: var(--icon-spacing-xl);
   }
 
   /* Semantic highlighting for CodeBlock component */

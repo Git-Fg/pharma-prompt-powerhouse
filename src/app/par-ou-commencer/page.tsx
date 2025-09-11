@@ -6,6 +6,9 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { contentCardVariants } from '@/components/ui/variants'
+import { getConceptBySlug, getWorkflowBySlug } from '@/lib/content-loader'
+import { gettingStartedConfig } from './config'
+import { designTokens } from '@/design-system/tokens'
 
 export const metadata = {
   title: 'Par où commencer ? - Guide pour débuter avec l\'IA',
@@ -13,16 +16,32 @@ export const metadata = {
 }
 
 export default function ParOuCommencerPage() {
+  // Récupération dynamique des données depuis le content-loader
+  const essentialConcepts = gettingStartedConfig.essentialConcepts
+    .map(slug => getConceptBySlug(slug))
+    .filter((concept): concept is NonNullable<typeof concept> => Boolean(concept))
+
+  const firstWorkflow = getWorkflowBySlug(gettingStartedConfig.firstWorkflow)
+
+  const advancedWorkflows = gettingStartedConfig.advancedWorkflows
+    .map(slug => getWorkflowBySlug(slug))
+    .filter((workflow): workflow is NonNullable<typeof workflow> => Boolean(workflow))
+
+  // Validation que toutes les données ont été trouvées
+  if (essentialConcepts.length !== 3 || !firstWorkflow || advancedWorkflows.length !== 2) {
+    throw new Error('Contenu manquant pour la page \'Par où commencer\'. Vérifiez les slugs dans config.ts.')
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
       <Section size="lg">
         <Container variant="detail">
-          <div className="flex flex-col items-center space-y-4">
-            <Badge variant="outline" className="mb-4">
+          <div className="flex flex-col items-center" style={{ gap: designTokens.spacing.lg }}>
+            <Badge variant="outline" style={{ marginBottom: designTokens.spacing.lg }}>
               Guide pour débutants
             </Badge>
-            <h1 className="text-2xl md:text-4xl font-bold leading-tight text-center">Par où commencer ?</h1>
+            <h1 className="prose-title prose-title-hero text-center">Par où commencer ?</h1>
             <p className="prose-description">
               Vous découvrez l'IA ? Parfait ! J'ai conçu ce parcours pour vous accompagner
               pas à pas dans votre apprentissage. Suivez ces étapes dans l'ordre.
@@ -34,16 +53,19 @@ export default function ParOuCommencerPage() {
       {/* Étapes du parcours */}
       <Section size="md">
         <Container variant="collection">
-          <ol className="space-y-8 [counter-reset:step-counter]">
+          <ol className="[counter-reset:step-counter]" style={{ gap: designTokens.spacing.xl3 }}>
             {/* Étape 1 */}
             <li className="[counter-increment:step-counter] relative">
               <Card className={contentCardVariants({ variant: 'concept' })}>
                 <CardHeader>
-                  <div className="flex items-center space-x-2">
-                    <div className="size-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center">
+                  <div className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
+                    <div className="size-8 bg-blue-500 text-white flex items-center justify-center font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center" style={{ 
+                        borderRadius: designTokens.radius.full,
+                        fontSize: designTokens.typography.fontSize.sm
+                      }}>
                       <span className="sr-only">Étape 1</span>
                     </div>
-                    <CardTitle className="flex items-center space-x-2">
+                    <CardTitle className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
                       <Brain className="size-5" />
                       <span>Les Concepts Clés</span>
                     </CardTitle>
@@ -52,38 +74,25 @@ export default function ParOuCommencerPage() {
                     Avant de commencer, comprenons ensemble le vocabulaire essentiel.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
+                <CardContent style={{ gap: designTokens.spacing.lg }}>
+                  <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
                     J'ai sélectionné les 3 concepts les plus importants à maîtriser avant tout :
                   </p>
 
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <Link href="/concepts/context-engineering" className="block">
-                      <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
-                        <h4 className="font-semibold mb-2">Context Engineering</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Comment donner le bon contexte à l'IA pour obtenir des réponses pertinentes.
-                        </p>
-                      </div>
-                    </Link>
-
-                    <Link href="/concepts/hallucination-effet-indesirable" className="block">
-                      <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
-                        <h4 className="font-semibold mb-2">Hallucinations</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Pourquoi l'IA peut parfois "inventer" des informations et comment s'en protéger.
-                        </p>
-                      </div>
-                    </Link>
-
-                    <Link href="/concepts/structuration-par-balises" className="block">
-                      <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
-                        <h4 className="font-semibold mb-2">Structuration</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Comment organiser ses prompts pour des résultats clairs et utilisables.
-                        </p>
-                      </div>
-                    </Link>
+                  <div className="grid md:grid-cols-3" style={{ gap: designTokens.spacing.md }}>
+                    {essentialConcepts.map(concept => (
+                      <Link key={concept.slug} href={`/concepts/${concept.slug}`} className="block">
+                        <div className="border hover:bg-accent transition-colors" style={{ 
+                              padding: designTokens.spacing.md,
+                              borderRadius: designTokens.radius.lg 
+                            }}>
+                          <h4 className="font-semibold" style={{ marginBottom: designTokens.spacing.sm }}>{concept.title}</h4>
+                          <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
+                            {concept.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -93,11 +102,14 @@ export default function ParOuCommencerPage() {
             <li className="[counter-increment:step-counter] relative">
               <Card className={contentCardVariants({ variant: 'guide' })}>
                 <CardHeader>
-                  <div className="flex items-center space-x-2">
-                    <div className="size-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center">
+                  <div className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
+                    <div className="size-8 bg-green-500 text-white flex items-center justify-center font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center" style={{ 
+                          borderRadius: designTokens.radius.full,
+                          fontSize: designTokens.typography.fontSize.sm
+                        }}>
                       <span className="sr-only">Étape 2</span>
                     </div>
-                    <CardTitle className="flex items-center space-x-2">
+                    <CardTitle className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
                       <Target className="size-5" />
                       <span>Votre Premier Workflow</span>
                     </CardTitle>
@@ -107,16 +119,21 @@ export default function ParOuCommencerPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-muted-foreground" style={{ 
+                          fontSize: designTokens.typography.fontSize.sm,
+                          marginBottom: designTokens.spacing.lg
+                        }}>
                     Je recommande de commencer par la création de fiches de révision. C'est simple, utile,
                     et ça vous permet d'appliquer tous les concepts essentiels.
                   </p>
 
-                  <Link href="/workflows/creer-fiches-de-revision">
+                  <Link href={`/workflows/${firstWorkflow.slug}`}>
                     <Button className="w-full md:w-auto">
-                      <BookOpen className="size-4 mr-2" />
-                      Commencer avec les Fiches de Révision
-                      <ArrowRight className="size-4 ml-2" />
+                      <BookOpen className="size-4" style={{ marginRight: designTokens.spacing.sm }} />
+                      Commencer avec "
+                      {firstWorkflow.title}
+                      "
+                      <ArrowRight className="size-4" style={{ marginLeft: designTokens.spacing.sm }} />
                     </Button>
                   </Link>
                 </CardContent>
@@ -127,11 +144,14 @@ export default function ParOuCommencerPage() {
             <li className="[counter-increment:step-counter] relative">
               <Card className={contentCardVariants({ variant: 'security' })}>
                 <CardHeader>
-                  <div className="flex items-center space-x-2">
-                    <div className="size-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center">
+                  <div className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
+                    <div className="size-8 bg-red-500 text-white flex items-center justify-center font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center" style={{ 
+                          borderRadius: designTokens.radius.full,
+                          fontSize: designTokens.typography.fontSize.sm
+                        }}>
                       <span className="sr-only">Étape 3</span>
                     </div>
-                    <CardTitle className="flex items-center space-x-2">
+                    <CardTitle className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
                       <Shield className="size-5" />
                       <span>La Règle d'Or de la Sécurité</span>
                     </CardTitle>
@@ -140,7 +160,7 @@ export default function ParOuCommencerPage() {
                     CRUCIAL : ce que vous ne devez JAMAIS faire avec l'IA.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent style={{ gap: designTokens.spacing.lg }}>
                   <Alert variant="destructive">
                     <Shield className="size-4" />
                     <AlertDescription className="font-semibold">
@@ -148,34 +168,37 @@ export default function ParOuCommencerPage() {
                     </AlertDescription>
                   </Alert>
 
-                  <div className="space-y-3">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                  <div style={{ gap: designTokens.spacing.md }}>
+                    <div className="flex items-start" style={{ gap: designTokens.spacing.md }}>
+                      <div className="w-2 h-2 bg-red-500 mt-2" style={{ borderRadius: designTokens.radius.full }}></div>
                       <div>
                         <p className="font-semibold text-red-600">Jamais de données personnelles</p>
-                        <p className="text-sm text-muted-foreground">Nom, adresse, numéro de sécurité sociale...</p>
+                        <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>Nom, adresse, numéro de sécurité sociale...</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                    <div className="flex items-start" style={{ gap: designTokens.spacing.md }}>
+                      <div className="w-2 h-2 bg-red-500 mt-2" style={{ borderRadius: designTokens.radius.full }}></div>
                       <div>
                         <p className="font-semibold text-red-600">Jamais d'informations patients</p>
-                        <p className="text-sm text-muted-foreground">Même anonymisées, c'est un risque inutile</p>
+                        <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>Même anonymisées, c'est un risque inutile</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                    <div className="flex items-start" style={{ gap: designTokens.spacing.md }}>
+                      <div className="w-2 h-2 bg-red-500 mt-2" style={{ borderRadius: designTokens.radius.full }}></div>
                       <div>
                         <p className="font-semibold text-red-600">Toujours vérifier les informations médicales</p>
-                        <p className="text-sm text-muted-foreground">L'IA peut se tromper, surtout sur les dosages et interactions</p>
+                        <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>L'IA peut se tromper, surtout sur les dosages et interactions</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-muted p-4 rounded-lg">
-                    <p className="text-sm">
+                  <div className="bg-muted" style={{ 
+                        padding: designTokens.spacing.md,
+                        borderRadius: designTokens.radius.lg 
+                      }}>
+                    <p style={{ fontSize: designTokens.typography.fontSize.sm }}>
                       <strong>Ma règle personnelle :</strong>
                       {' '}
                       J'utilise exclusivement des cas fictifs
@@ -191,11 +214,14 @@ export default function ParOuCommencerPage() {
             <li className="[counter-increment:step-counter] relative">
               <Card className={contentCardVariants({ variant: 'advanced' })}>
                 <CardHeader>
-                  <div className="flex items-center space-x-2">
-                    <div className="size-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center">
+                  <div className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
+                    <div className="size-8 bg-purple-500 text-white flex items-center justify-center font-bold [&::before]:content-[counter(step-counter)] [&::before]:absolute [&::before]:inset-0 [&::before]:flex [&::before]:items-center [&::before]:justify-center" style={{ 
+                          borderRadius: designTokens.radius.full,
+                          fontSize: designTokens.typography.fontSize.sm
+                        }}>
                       <span className="sr-only">Étape 4</span>
                     </div>
-                    <CardTitle className="flex items-center space-x-2">
+                    <CardTitle className="flex items-center" style={{ gap: designTokens.spacing.sm }}>
                       <Zap className="size-5" />
                       <span>Et après ?</span>
                     </CardTitle>
@@ -205,37 +231,38 @@ export default function ParOuCommencerPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-muted-foreground" style={{ 
+                          fontSize: designTokens.typography.fontSize.sm,
+                          marginBottom: designTokens.spacing.lg
+                        }}>
                     Quand vous serez à l'aise avec votre premier workflow, explorez les autres selon vos besoins :
                   </p>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Link href="/workflows/resoudre-cas-clinique" className="block">
-                      <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
-                        <h4 className="font-semibold mb-2">Cas Cliniques</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Pour l'analyse méthodique de situations complexes
-                        </p>
-                        <Badge variant="secondary" className="mt-2">Avancé</Badge>
-                      </div>
-                    </Link>
-
-                    <Link href="/workflows/faire-recherche-bibliographique" className="block">
-                      <div className="p-4 border rounded-lg hover:bg-accent transition-colors">
-                        <h4 className="font-semibold mb-2">Recherche Biblio</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Pour structurer vos recherches académiques
-                        </p>
-                        <Badge variant="secondary" className="mt-2">Intermédiaire</Badge>
-                      </div>
-                    </Link>
+                  <div className="grid md:grid-cols-2" style={{ gap: designTokens.spacing.md }}>
+                    {advancedWorkflows.map(workflow => (
+                      <Link key={workflow.slug} href={`/workflows/${workflow.slug}`} className="block">
+                        <div className="border hover:bg-accent transition-colors" style={{ 
+                              padding: designTokens.spacing.md,
+                              borderRadius: designTokens.radius.lg 
+                            }}>
+                          <h4 className="font-semibold mb-2">{workflow.title}</h4>
+                          <p className="text-muted-foreground" style={{ fontSize: designTokens.typography.fontSize.sm }}>
+                            {workflow.description}
+                          </p>
+                          <Badge variant="secondary" className="capitalize" style={{ marginTop: designTokens.spacing.sm }}>{workflow.difficulty}</Badge>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t">
+                  <div className="border-t" style={{ 
+                        marginTop: designTokens.spacing.xl3,
+                        paddingTop: designTokens.spacing.lg
+                      }}>
                     <Link href="/workflows">
                       <Button variant="outline" className="w-full md:w-auto">
                         Voir tous les workflows
-                        <ArrowRight className="size-4 ml-2" />
+                        <ArrowRight className="size-4" style={{ marginLeft: designTokens.spacing.sm }} />
                       </Button>
                     </Link>
                   </div>
@@ -250,21 +277,27 @@ export default function ParOuCommencerPage() {
       <Section size="sm">
         <Container variant="collection">
           <div className="text-center">
-            <div className="bg-muted p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-2">Prêt à commencer ?</h3>
-              <p className="prose-personal-note mb-4">
+            <div className="bg-muted" style={{ 
+                      padding: designTokens.spacing.xl3,
+                      borderRadius: designTokens.radius.lg 
+                    }}>
+              <h3 className="font-semibold" style={{ 
+                          fontSize: designTokens.typography.fontSize.lg,
+                          marginBottom: designTokens.spacing.sm
+                        }}>Prêt à commencer ?</h3>
+              <p className="prose-personal-note" style={{ marginBottom: designTokens.spacing.lg }}>
                 Commencez par comprendre les concepts clés, puis lancez-vous dans votre premier workflow.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+              <div className="flex flex-col sm:flex-row justify-center" style={{ gap: designTokens.spacing.sm }}>
                 <Link href="/concepts">
                   <Button variant="outline">
-                    <Brain className="size-4 mr-2" />
+                    <Brain className="size-4" style={{ marginRight: designTokens.spacing.sm }} />
                     Les Concepts
                   </Button>
                 </Link>
-                <Link href="/workflows/creer-fiches-de-revision">
+                <Link href={`/workflows/${firstWorkflow.slug}`}>
                   <Button>
-                    <BookOpen className="size-4 mr-2" />
+                    <BookOpen className="size-4" style={{ marginRight: designTokens.spacing.sm }} />
                     Mon Premier Workflow
                   </Button>
                 </Link>
