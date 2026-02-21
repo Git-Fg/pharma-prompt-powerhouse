@@ -20,7 +20,8 @@
     "test:component": "vitest run tests/component/",
     "test:browser": "vitest --browser",
     "content:prepare": "node scripts/generate-valid-slugs.mjs",
-    "content:validate-links": "node scripts/validate-links.mjs"
+    "content:validate-links": "node scripts/validate-links.mjs",
+    "sync:agents": "node --import tsx/esm claudetoall_sync/src/cli.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
