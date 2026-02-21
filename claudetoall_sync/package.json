@@ -1,0 +1,17 @@
+{
+  "name": "claudetoall_sync",
+  "version": "0.1.0",
+  "description": "Sync CLAUDE.md to all other AI agents in your repo — zero config, stateless, idempotent",
+  "type": "module",
+  "bin": {
+    "claudetoall_sync": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --import tsx/esm src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

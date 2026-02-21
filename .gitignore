@@ -80,3 +80,7 @@ gha-creds-*.json
 
 # Playwright MCP
 .playwright-mcp
+
+# claudetoall_sync build output
+claudetoall_sync/dist/
+claudetoall_sync/node_modules/
